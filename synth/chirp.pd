@@ -1,4 +1,4 @@
-#N canvas 58 69 546 681 10;
+#N canvas 21 83 546 681 10;
 #X declare -path metaPdLibs;
 #X declare -path metaPdLibs/control;
 #X declare -path metaPdLibs/fx;
@@ -11,7 +11,7 @@
 #X obj 146 563 dac~;
 #X obj 118 43 r input;
 #X obj 118 65 list trim;
-#X obj 118 87 route /x /y /z;
+#X obj 116 111 route /x /y /z;
 #X obj 148 335 osc~;
 #X obj 162 429 *~ 0.5;
 #X obj 338 12 declare -path metaPdLibs;
@@ -103,9 +103,9 @@
 #X obj 406 119 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
 #X obj 308 83 metro 100;
+#X obj 116 86 t a a;
 #X connect 1 0 2 0;
-#X connect 2 0 3 0;
-#X connect 2 0 13 0;
+#X connect 2 0 29 0;
 #X connect 3 0 9 0;
 #X connect 4 0 10 0;
 #X connect 5 0 0 0;
@@ -133,3 +133,5 @@
 #X connect 26 0 24 0;
 #X connect 27 0 19 0;
 #X connect 28 0 19 0;
+#X connect 29 0 3 0;
+#X connect 29 1 13 0;

@@ -10,6 +10,7 @@
 #import "PdAudioController.h"
 #import "PdBase.h"
 #import "PdFile.h"
+#import "ChirpView.h"
 
 @interface ViewController : UIViewController <PdReceiverDelegate>
 @property (strong, nonatomic) PdAudioController *audioController;

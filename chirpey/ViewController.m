@@ -9,7 +9,7 @@
 #import "ViewController.h"
 
 @interface ViewController ()
-@property (weak, nonatomic) IBOutlet UIView *chirpeySquare;
+@property (weak, nonatomic) IBOutlet ChirpView *chirpeySquare;
 @end
 
 @implementation ViewController

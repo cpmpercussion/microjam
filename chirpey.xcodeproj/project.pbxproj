@@ -1,1210 +1,761 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>archiveVersion</key>
-	<string>1</string>
-	<key>classes</key>
-	<dict/>
-	<key>objectVersion</key>
-	<string>46</string>
-	<key>objects</key>
-	<dict>
-		<key>5669CA811DA7AAA5009EEC3B</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>5669CA8C1DA7AAA5009EEC3B</string>
-				<string>5669CAA61DA7AAA6009EEC3B</string>
-				<string>5669CAB11DA7AAA6009EEC3B</string>
-				<string>5669CA8B1DA7AAA5009EEC3B</string>
-				<string>ECD38CC913BEDFCD1C8E8868</string>
-				<string>6FD6EB5C1100142533AD884F</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CA821DA7AAA5009EEC3B</key>
-		<dict>
-			<key>attributes</key>
-			<dict>
-				<key>LastUpgradeCheck</key>
-				<string>0800</string>
-				<key>ORGANIZATIONNAME</key>
-				<string>Charles Martin</string>
-				<key>TargetAttributes</key>
-				<dict>
-					<key>5669CA891DA7AAA5009EEC3B</key>
-					<dict>
-						<key>CreatedOnToolsVersion</key>
-						<string>8.0</string>
-						<key>DevelopmentTeam</key>
-						<string>EDH387FRHA</string>
-						<key>ProvisioningStyle</key>
-						<string>Automatic</string>
-					</dict>
-					<key>5669CAA21DA7AAA6009EEC3B</key>
-					<dict>
-						<key>CreatedOnToolsVersion</key>
-						<string>8.0</string>
-						<key>DevelopmentTeam</key>
-						<string>EDH387FRHA</string>
-						<key>ProvisioningStyle</key>
-						<string>Automatic</string>
-						<key>TestTargetID</key>
-						<string>5669CA891DA7AAA5009EEC3B</string>
-					</dict>
-					<key>5669CAAD1DA7AAA6009EEC3B</key>
-					<dict>
-						<key>CreatedOnToolsVersion</key>
-						<string>8.0</string>
-						<key>DevelopmentTeam</key>
-						<string>EDH387FRHA</string>
-						<key>ProvisioningStyle</key>
-						<string>Automatic</string>
-						<key>TestTargetID</key>
-						<string>5669CA891DA7AAA5009EEC3B</string>
-					</dict>
-				</dict>
-			</dict>
-			<key>buildConfigurationList</key>
-			<string>5669CA851DA7AAA5009EEC3B</string>
-			<key>compatibilityVersion</key>
-			<string>Xcode 3.2</string>
-			<key>developmentRegion</key>
-			<string>English</string>
-			<key>hasScannedForEncodings</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXProject</string>
-			<key>knownRegions</key>
-			<array>
-				<string>en</string>
-				<string>Base</string>
-			</array>
-			<key>mainGroup</key>
-			<string>5669CA811DA7AAA5009EEC3B</string>
-			<key>productRefGroup</key>
-			<string>5669CA8B1DA7AAA5009EEC3B</string>
-			<key>projectDirPath</key>
-			<string></string>
-			<key>projectReferences</key>
-			<array/>
-			<key>projectRoot</key>
-			<string></string>
-			<key>targets</key>
-			<array>
-				<string>5669CA891DA7AAA5009EEC3B</string>
-				<string>5669CAA21DA7AAA6009EEC3B</string>
-				<string>5669CAAD1DA7AAA6009EEC3B</string>
-			</array>
-		</dict>
-		<key>5669CA851DA7AAA5009EEC3B</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>5669CAB51DA7AAA6009EEC3B</string>
-				<string>5669CAB61DA7AAA6009EEC3B</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>5669CA861DA7AAA5009EEC3B</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>5669CA951DA7AAA6009EEC3B</string>
-				<string>5669CA921DA7AAA6009EEC3B</string>
-				<string>5669CA8F1DA7AAA6009EEC3B</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>5669CA871DA7AAA5009EEC3B</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>86FD684F0B45881B83674F9A</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>5669CA881DA7AAA5009EEC3B</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>5669CA9D1DA7AAA6009EEC3B</string>
-				<string>5669CA9A1DA7AAA6009EEC3B</string>
-				<string>5669CA981DA7AAA6009EEC3B</string>
-			</array>
-			<key>isa</key>
-			<string>PBXResourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>5669CA891DA7AAA5009EEC3B</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>5669CAB71DA7AAA6009EEC3B</string>
-			<key>buildPhases</key>
-			<array>
-				<string>F01540447ACEDE32271625B0</string>
-				<string>5669CA861DA7AAA5009EEC3B</string>
-				<string>5669CA871DA7AAA5009EEC3B</string>
-				<string>5669CA881DA7AAA5009EEC3B</string>
-				<string>57C116FCD17667604EE67A1D</string>
-				<string>B7A3E36A172E78DE14B17F3A</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>chirpey</string>
-			<key>productName</key>
-			<string>chirpey</string>
-			<key>productReference</key>
-			<string>5669CA8A1DA7AAA5009EEC3B</string>
-			<key>productType</key>
-			<string>com.apple.product-type.application</string>
-		</dict>
-		<key>5669CA8A1DA7AAA5009EEC3B</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.application</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>chirpey.app</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>5669CA8B1DA7AAA5009EEC3B</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>5669CA8A1DA7AAA5009EEC3B</string>
-				<string>5669CAA31DA7AAA6009EEC3B</string>
-				<string>5669CAAE1DA7AAA6009EEC3B</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CA8C1DA7AAA5009EEC3B</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>5669CA901DA7AAA6009EEC3B</string>
-				<string>5669CA911DA7AAA6009EEC3B</string>
-				<string>5669CA931DA7AAA6009EEC3B</string>
-				<string>5669CA941DA7AAA6009EEC3B</string>
-				<string>5669CA961DA7AAA6009EEC3B</string>
-				<string>5669CA991DA7AAA6009EEC3B</string>
-				<string>5669CA9B1DA7AAA6009EEC3B</string>
-				<string>5669CA9E1DA7AAA6009EEC3B</string>
-				<string>5669CA8D1DA7AAA5009EEC3B</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>chirpey</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CA8D1DA7AAA5009EEC3B</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>5669CA8E1DA7AAA6009EEC3B</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Supporting Files</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CA8E1DA7AAA6009EEC3B</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>main.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CA8F1DA7AAA6009EEC3B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5669CA8E1DA7AAA6009EEC3B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>5669CA901DA7AAA6009EEC3B</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>AppDelegate.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CA911DA7AAA6009EEC3B</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>AppDelegate.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CA921DA7AAA6009EEC3B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5669CA911DA7AAA6009EEC3B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>5669CA931DA7AAA6009EEC3B</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>ViewController.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CA941DA7AAA6009EEC3B</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>ViewController.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CA951DA7AAA6009EEC3B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5669CA941DA7AAA6009EEC3B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>5669CA961DA7AAA6009EEC3B</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>5669CA971DA7AAA6009EEC3B</string>
-			</array>
-			<key>isa</key>
-			<string>PBXVariantGroup</string>
-			<key>name</key>
-			<string>Main.storyboard</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CA971DA7AAA6009EEC3B</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>file.storyboard</string>
-			<key>name</key>
-			<string>Base</string>
-			<key>path</key>
-			<string>Base.lproj/Main.storyboard</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CA981DA7AAA6009EEC3B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5669CA961DA7AAA6009EEC3B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>5669CA991DA7AAA6009EEC3B</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>folder.assetcatalog</string>
-			<key>path</key>
-			<string>Assets.xcassets</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CA9A1DA7AAA6009EEC3B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5669CA991DA7AAA6009EEC3B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>5669CA9B1DA7AAA6009EEC3B</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>5669CA9C1DA7AAA6009EEC3B</string>
-			</array>
-			<key>isa</key>
-			<string>PBXVariantGroup</string>
-			<key>name</key>
-			<string>LaunchScreen.storyboard</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CA9C1DA7AAA6009EEC3B</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>file.storyboard</string>
-			<key>name</key>
-			<string>Base</string>
-			<key>path</key>
-			<string>Base.lproj/LaunchScreen.storyboard</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CA9D1DA7AAA6009EEC3B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5669CA9B1DA7AAA6009EEC3B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>5669CA9E1DA7AAA6009EEC3B</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>Info.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CA9F1DA7AAA6009EEC3B</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>5669CAA81DA7AAA6009EEC3B</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>5669CAA01DA7AAA6009EEC3B</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>5669CAA11DA7AAA6009EEC3B</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXResourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>5669CAA21DA7AAA6009EEC3B</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>5669CABA1DA7AAA6009EEC3B</string>
-			<key>buildPhases</key>
-			<array>
-				<string>5669CA9F1DA7AAA6009EEC3B</string>
-				<string>5669CAA01DA7AAA6009EEC3B</string>
-				<string>5669CAA11DA7AAA6009EEC3B</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array>
-				<string>5669CAA51DA7AAA6009EEC3B</string>
-			</array>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>chirpeyTests</string>
-			<key>productName</key>
-			<string>chirpeyTests</string>
-			<key>productReference</key>
-			<string>5669CAA31DA7AAA6009EEC3B</string>
-			<key>productType</key>
-			<string>com.apple.product-type.bundle.unit-test</string>
-		</dict>
-		<key>5669CAA31DA7AAA6009EEC3B</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.cfbundle</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>chirpeyTests.xctest</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>5669CAA41DA7AAA6009EEC3B</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>5669CA821DA7AAA5009EEC3B</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>1</string>
-			<key>remoteGlobalIDString</key>
-			<string>5669CA891DA7AAA5009EEC3B</string>
-			<key>remoteInfo</key>
-			<string>chirpey</string>
-		</dict>
-		<key>5669CAA51DA7AAA6009EEC3B</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXTargetDependency</string>
-			<key>target</key>
-			<string>5669CA891DA7AAA5009EEC3B</string>
-			<key>targetProxy</key>
-			<string>5669CAA41DA7AAA6009EEC3B</string>
-		</dict>
-		<key>5669CAA61DA7AAA6009EEC3B</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>5669CAA71DA7AAA6009EEC3B</string>
-				<string>5669CAA91DA7AAA6009EEC3B</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>chirpeyTests</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CAA71DA7AAA6009EEC3B</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>chirpeyTests.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CAA81DA7AAA6009EEC3B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5669CAA71DA7AAA6009EEC3B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>5669CAA91DA7AAA6009EEC3B</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>Info.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CAAA1DA7AAA6009EEC3B</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>5669CAB31DA7AAA6009EEC3B</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>5669CAAB1DA7AAA6009EEC3B</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>5669CAAC1DA7AAA6009EEC3B</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXResourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>5669CAAD1DA7AAA6009EEC3B</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>5669CABD1DA7AAA6009EEC3B</string>
-			<key>buildPhases</key>
-			<array>
-				<string>5669CAAA1DA7AAA6009EEC3B</string>
-				<string>5669CAAB1DA7AAA6009EEC3B</string>
-				<string>5669CAAC1DA7AAA6009EEC3B</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array>
-				<string>5669CAB01DA7AAA6009EEC3B</string>
-			</array>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>chirpeyUITests</string>
-			<key>productName</key>
-			<string>chirpeyUITests</string>
-			<key>productReference</key>
-			<string>5669CAAE1DA7AAA6009EEC3B</string>
-			<key>productType</key>
-			<string>com.apple.product-type.bundle.ui-testing</string>
-		</dict>
-		<key>5669CAAE1DA7AAA6009EEC3B</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.cfbundle</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>chirpeyUITests.xctest</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>5669CAAF1DA7AAA6009EEC3B</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>5669CA821DA7AAA5009EEC3B</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>1</string>
-			<key>remoteGlobalIDString</key>
-			<string>5669CA891DA7AAA5009EEC3B</string>
-			<key>remoteInfo</key>
-			<string>chirpey</string>
-		</dict>
-		<key>5669CAB01DA7AAA6009EEC3B</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXTargetDependency</string>
-			<key>target</key>
-			<string>5669CA891DA7AAA5009EEC3B</string>
-			<key>targetProxy</key>
-			<string>5669CAAF1DA7AAA6009EEC3B</string>
-		</dict>
-		<key>5669CAB11DA7AAA6009EEC3B</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>5669CAB21DA7AAA6009EEC3B</string>
-				<string>5669CAB41DA7AAA6009EEC3B</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>chirpeyUITests</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CAB21DA7AAA6009EEC3B</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>chirpeyUITests.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CAB31DA7AAA6009EEC3B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5669CAB21DA7AAA6009EEC3B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>5669CAB41DA7AAA6009EEC3B</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>Info.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CAB51DA7AAA6009EEC3B</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>CLANG_ANALYZER_NONNULL</key>
-				<string>YES</string>
-				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
-				<string>gnu++0x</string>
-				<key>CLANG_CXX_LIBRARY</key>
-				<string>libc++</string>
-				<key>CLANG_ENABLE_MODULES</key>
-				<string>YES</string>
-				<key>CLANG_ENABLE_OBJC_ARC</key>
-				<string>YES</string>
-				<key>CLANG_WARN_BOOL_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN_DOCUMENTATION_COMMENTS</key>
-				<string>YES</string>
-				<key>CLANG_WARN_EMPTY_BODY</key>
-				<string>YES</string>
-				<key>CLANG_WARN_ENUM_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INFINITE_RECURSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN_SUSPICIOUS_MOVES</key>
-				<string>YES</string>
-				<key>CLANG_WARN_UNREACHABLE_CODE</key>
-				<string>YES</string>
-				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
-				<string>YES</string>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>NO</string>
-				<key>DEBUG_INFORMATION_FORMAT</key>
-				<string>dwarf</string>
-				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
-				<string>YES</string>
-				<key>ENABLE_TESTABILITY</key>
-				<string>YES</string>
-				<key>GCC_C_LANGUAGE_STANDARD</key>
-				<string>gnu99</string>
-				<key>GCC_DYNAMIC_NO_PIC</key>
-				<string>NO</string>
-				<key>GCC_NO_COMMON_BLOCKS</key>
-				<string>YES</string>
-				<key>GCC_OPTIMIZATION_LEVEL</key>
-				<string>0</string>
-				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
-				<array>
-					<string>DEBUG=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
-				<string>YES</string>
-				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
-				<string>YES_ERROR</string>
-				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
-				<string>YES_AGGRESSIVE</string>
-				<key>GCC_WARN_UNUSED_FUNCTION</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_VARIABLE</key>
-				<string>YES</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>10.0</string>
-				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>YES</string>
-				<key>ONLY_ACTIVE_ARCH</key>
-				<string>YES</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>TARGETED_DEVICE_FAMILY</key>
-				<string>1,2</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>5669CAB61DA7AAA6009EEC3B</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>CLANG_ANALYZER_NONNULL</key>
-				<string>YES</string>
-				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
-				<string>gnu++0x</string>
-				<key>CLANG_CXX_LIBRARY</key>
-				<string>libc++</string>
-				<key>CLANG_ENABLE_MODULES</key>
-				<string>YES</string>
-				<key>CLANG_ENABLE_OBJC_ARC</key>
-				<string>YES</string>
-				<key>CLANG_WARN_BOOL_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN_DOCUMENTATION_COMMENTS</key>
-				<string>YES</string>
-				<key>CLANG_WARN_EMPTY_BODY</key>
-				<string>YES</string>
-				<key>CLANG_WARN_ENUM_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INFINITE_RECURSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN_SUSPICIOUS_MOVES</key>
-				<string>YES</string>
-				<key>CLANG_WARN_UNREACHABLE_CODE</key>
-				<string>YES</string>
-				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
-				<string>YES</string>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>NO</string>
-				<key>DEBUG_INFORMATION_FORMAT</key>
-				<string>dwarf-with-dsym</string>
-				<key>ENABLE_NS_ASSERTIONS</key>
-				<string>NO</string>
-				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
-				<string>YES</string>
-				<key>GCC_C_LANGUAGE_STANDARD</key>
-				<string>gnu99</string>
-				<key>GCC_NO_COMMON_BLOCKS</key>
-				<string>YES</string>
-				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
-				<string>YES</string>
-				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
-				<string>YES_ERROR</string>
-				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
-				<string>YES_AGGRESSIVE</string>
-				<key>GCC_WARN_UNUSED_FUNCTION</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_VARIABLE</key>
-				<string>YES</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>10.0</string>
-				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>NO</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>TARGETED_DEVICE_FAMILY</key>
-				<string>1,2</string>
-				<key>VALIDATE_PRODUCT</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>5669CAB71DA7AAA6009EEC3B</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>5669CAB81DA7AAA6009EEC3B</string>
-				<string>5669CAB91DA7AAA6009EEC3B</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>5669CAB81DA7AAA6009EEC3B</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>BC5F345921BE4B4AE8AB02D6</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
-				<string>AppIcon</string>
-				<key>DEVELOPMENT_TEAM</key>
-				<string>EDH387FRHA</string>
-				<key>INFOPLIST_FILE</key>
-				<string>chirpey/Info.plist</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<string>$(inherited) @executable_path/Frameworks</string>
-				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
-				<string>au.com.charlesmartin.chirpey</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>5669CAB91DA7AAA6009EEC3B</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>FFD2AA8B2A0C1948CC7BA804</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
-				<string>AppIcon</string>
-				<key>DEVELOPMENT_TEAM</key>
-				<string>EDH387FRHA</string>
-				<key>INFOPLIST_FILE</key>
-				<string>chirpey/Info.plist</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<string>$(inherited) @executable_path/Frameworks</string>
-				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
-				<string>au.com.charlesmartin.chirpey</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>5669CABA1DA7AAA6009EEC3B</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>5669CABB1DA7AAA6009EEC3B</string>
-				<string>5669CABC1DA7AAA6009EEC3B</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>5669CABB1DA7AAA6009EEC3B</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>BUNDLE_LOADER</key>
-				<string>$(TEST_HOST)</string>
-				<key>DEVELOPMENT_TEAM</key>
-				<string>EDH387FRHA</string>
-				<key>INFOPLIST_FILE</key>
-				<string>chirpeyTests/Info.plist</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<string>$(inherited) @executable_path/Frameworks @loader_path/Frameworks</string>
-				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
-				<string>au.com.charlesmartin.chirpeyTests</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>TEST_HOST</key>
-				<string>$(BUILT_PRODUCTS_DIR)/chirpey.app/chirpey</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>5669CABC1DA7AAA6009EEC3B</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>BUNDLE_LOADER</key>
-				<string>$(TEST_HOST)</string>
-				<key>DEVELOPMENT_TEAM</key>
-				<string>EDH387FRHA</string>
-				<key>INFOPLIST_FILE</key>
-				<string>chirpeyTests/Info.plist</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<string>$(inherited) @executable_path/Frameworks @loader_path/Frameworks</string>
-				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
-				<string>au.com.charlesmartin.chirpeyTests</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>TEST_HOST</key>
-				<string>$(BUILT_PRODUCTS_DIR)/chirpey.app/chirpey</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>5669CABD1DA7AAA6009EEC3B</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>5669CABE1DA7AAA6009EEC3B</string>
-				<string>5669CABF1DA7AAA6009EEC3B</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>5669CABE1DA7AAA6009EEC3B</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>DEVELOPMENT_TEAM</key>
-				<string>EDH387FRHA</string>
-				<key>INFOPLIST_FILE</key>
-				<string>chirpeyUITests/Info.plist</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<string>$(inherited) @executable_path/Frameworks @loader_path/Frameworks</string>
-				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
-				<string>au.com.charlesmartin.chirpeyUITests</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>TEST_TARGET_NAME</key>
-				<string>chirpey</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>5669CABF1DA7AAA6009EEC3B</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>DEVELOPMENT_TEAM</key>
-				<string>EDH387FRHA</string>
-				<key>INFOPLIST_FILE</key>
-				<string>chirpeyUITests/Info.plist</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<string>$(inherited) @executable_path/Frameworks @loader_path/Frameworks</string>
-				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
-				<string>au.com.charlesmartin.chirpeyUITests</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>TEST_TARGET_NAME</key>
-				<string>chirpey</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>57C116FCD17667604EE67A1D</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>Embed Pods Frameworks</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>"${SRCROOT}/Pods/Target Support Files/Pods-chirpey/Pods-chirpey-frameworks.sh"
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>5D5CD479C0D4E83161A3BD3C</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>archive.ar</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>libPods-chirpey.a</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>6FD6EB5C1100142533AD884F</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>5D5CD479C0D4E83161A3BD3C</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Frameworks</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>86FD684F0B45881B83674F9A</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5D5CD479C0D4E83161A3BD3C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>B7A3E36A172E78DE14B17F3A</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>Copy Pods Resources</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>"${SRCROOT}/Pods/Target Support Files/Pods-chirpey/Pods-chirpey-resources.sh"
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>BC5F345921BE4B4AE8AB02D6</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>name</key>
-			<string>Pods-chirpey.debug.xcconfig</string>
-			<key>path</key>
-			<string>Pods/Target Support Files/Pods-chirpey/Pods-chirpey.debug.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>ECD38CC913BEDFCD1C8E8868</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>BC5F345921BE4B4AE8AB02D6</string>
-				<string>FFD2AA8B2A0C1948CC7BA804</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Pods</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>F01540447ACEDE32271625B0</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>Check Pods Manifest.lock</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>diff "${PODS_ROOT}/../Podfile.lock" "${PODS_ROOT}/Manifest.lock" &gt; /dev/null
-if [[ $? != 0 ]] ; then
-    cat &lt;&lt; EOM
-error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.
-EOM
-    exit 1
-fi
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>FFD2AA8B2A0C1948CC7BA804</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>name</key>
-			<string>Pods-chirpey.release.xcconfig</string>
-			<key>path</key>
-			<string>Pods/Target Support Files/Pods-chirpey/Pods-chirpey.release.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-	</dict>
-	<key>rootObject</key>
-	<string>5669CA821DA7AAA5009EEC3B</string>
-</dict>
-</plist>
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5669CA8F1DA7AAA6009EEC3B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5669CA8E1DA7AAA6009EEC3B /* main.m */; };
+		5669CA921DA7AAA6009EEC3B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5669CA911DA7AAA6009EEC3B /* AppDelegate.m */; };
+		5669CA951DA7AAA6009EEC3B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5669CA941DA7AAA6009EEC3B /* ViewController.m */; };
+		5669CA981DA7AAA6009EEC3B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5669CA961DA7AAA6009EEC3B /* Main.storyboard */; };
+		5669CA9A1DA7AAA6009EEC3B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5669CA991DA7AAA6009EEC3B /* Assets.xcassets */; };
+		5669CA9D1DA7AAA6009EEC3B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5669CA9B1DA7AAA6009EEC3B /* LaunchScreen.storyboard */; };
+		5669CAA81DA7AAA6009EEC3B /* chirpeyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5669CAA71DA7AAA6009EEC3B /* chirpeyTests.m */; };
+		5669CAB31DA7AAA6009EEC3B /* chirpeyUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5669CAB21DA7AAA6009EEC3B /* chirpeyUITests.m */; };
+		5669CAC41DA7CFBA009EEC3B /* ChirpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5669CAC31DA7CFBA009EEC3B /* ChirpView.m */; };
+		5669CAE11DA7D06A009EEC3B /* chirp.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CAC61DA7D06A009EEC3B /* chirp.pd */; };
+		5669CAE21DA7D06A009EEC3B /* dispatch.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CAC91DA7D06A009EEC3B /* dispatch.pd */; };
+		5669CAE31DA7D06A009EEC3B /* monopan.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CACA1DA7D06A009EEC3B /* monopan.pd */; };
+		5669CAE41DA7D06A009EEC3B /* monovol.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CACB1DA7D06A009EEC3B /* monovol.pd */; };
+		5669CAE51DA7D06A009EEC3B /* stereovol.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CACC1DA7D06A009EEC3B /* stereovol.pd */; };
+		5669CAE61DA7D06A009EEC3B /* volumeRandomise.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CACD1DA7D06A009EEC3B /* volumeRandomise.pd */; };
+		5669CAE71DA7D06A009EEC3B /* effectschain.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CACE1DA7D06A009EEC3B /* effectschain.pd */; };
+		5669CAE81DA7D06A009EEC3B /* feedbackdelay.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CAD01DA7D06A009EEC3B /* feedbackdelay.pd */; };
+		5669CAE91DA7D06A009EEC3B /* graindelay~.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CAD11DA7D06A009EEC3B /* graindelay~.pd */; };
+		5669CAEA1DA7D06A009EEC3B /* pitchshift~.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CAD21DA7D06A009EEC3B /* pitchshift~.pd */; };
+		5669CAEB1DA7D06A009EEC3B /* rev2~.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CAD31DA7D06A009EEC3B /* rev2~.pd */; };
+		5669CAEC1DA7D06A009EEC3B /* rlop~.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CAD41DA7D06A009EEC3B /* rlop~.pd */; };
+		5669CAED1DA7D06A009EEC3B /* hhm-effects-chain.mmp in Resources */ = {isa = PBXBuildFile; fileRef = 5669CAD51DA7D06A009EEC3B /* hhm-effects-chain.mmp */; };
+		5669CAEE1DA7D06A009EEC3B /* cpmlooper.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CAD71DA7D06A009EEC3B /* cpmlooper.pd */; };
+		5669CAEF1DA7D06A009EEC3B /* percsampler.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CAD81DA7D06A009EEC3B /* percsampler.pd */; };
+		5669CAF01DA7D06A009EEC3B /* slicesampler.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CAD91DA7D06A009EEC3B /* slicesampler.pd */; };
+		5669CAF11DA7D06A009EEC3B /* loadMetaPdLibs.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CADA1DA7D06A009EEC3B /* loadMetaPdLibs.pd */; };
+		5669CAF21DA7D06A009EEC3B /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 5669CADB1DA7D06A009EEC3B /* README.md */; };
+		5669CAF31DA7D06A009EEC3B /* m_lydian.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CADD1DA7D06A009EEC3B /* m_lydian.pd */; };
+		5669CAF41DA7D06A009EEC3B /* m_lydiansharp5.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CADE1DA7D06A009EEC3B /* m_lydiansharp5.pd */; };
+		5669CAF51DA7D06A009EEC3B /* m_mixolydian.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CADF1DA7D06A009EEC3B /* m_mixolydian.pd */; };
+		5669CAF61DA7D06A009EEC3B /* m_phrygian.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CAE01DA7D06A009EEC3B /* m_phrygian.pd */; };
+		86FD684F0B45881B83674F9A /* libPods-chirpey.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D5CD479C0D4E83161A3BD3C /* libPods-chirpey.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5669CAA41DA7AAA6009EEC3B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5669CA821DA7AAA5009EEC3B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5669CA891DA7AAA5009EEC3B;
+			remoteInfo = chirpey;
+		};
+		5669CAAF1DA7AAA6009EEC3B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5669CA821DA7AAA5009EEC3B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5669CA891DA7AAA5009EEC3B;
+			remoteInfo = chirpey;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		5669CA8A1DA7AAA5009EEC3B /* chirpey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chirpey.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5669CA8E1DA7AAA6009EEC3B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		5669CA901DA7AAA6009EEC3B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		5669CA911DA7AAA6009EEC3B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		5669CA931DA7AAA6009EEC3B /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		5669CA941DA7AAA6009EEC3B /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		5669CA971DA7AAA6009EEC3B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		5669CA991DA7AAA6009EEC3B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5669CA9C1DA7AAA6009EEC3B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		5669CA9E1DA7AAA6009EEC3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5669CAA31DA7AAA6009EEC3B /* chirpeyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = chirpeyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5669CAA71DA7AAA6009EEC3B /* chirpeyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = chirpeyTests.m; sourceTree = "<group>"; };
+		5669CAA91DA7AAA6009EEC3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5669CAAE1DA7AAA6009EEC3B /* chirpeyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = chirpeyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5669CAB21DA7AAA6009EEC3B /* chirpeyUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = chirpeyUITests.m; sourceTree = "<group>"; };
+		5669CAB41DA7AAA6009EEC3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5669CAC21DA7CFBA009EEC3B /* ChirpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChirpView.h; sourceTree = "<group>"; };
+		5669CAC31DA7CFBA009EEC3B /* ChirpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChirpView.m; sourceTree = "<group>"; };
+		5669CAC61DA7D06A009EEC3B /* chirp.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chirp.pd; sourceTree = "<group>"; };
+		5669CAC91DA7D06A009EEC3B /* dispatch.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dispatch.pd; sourceTree = "<group>"; };
+		5669CACA1DA7D06A009EEC3B /* monopan.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = monopan.pd; sourceTree = "<group>"; };
+		5669CACB1DA7D06A009EEC3B /* monovol.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = monovol.pd; sourceTree = "<group>"; };
+		5669CACC1DA7D06A009EEC3B /* stereovol.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stereovol.pd; sourceTree = "<group>"; };
+		5669CACD1DA7D06A009EEC3B /* volumeRandomise.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = volumeRandomise.pd; sourceTree = "<group>"; };
+		5669CACE1DA7D06A009EEC3B /* effectschain.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = effectschain.pd; sourceTree = "<group>"; };
+		5669CAD01DA7D06A009EEC3B /* feedbackdelay.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = feedbackdelay.pd; sourceTree = "<group>"; };
+		5669CAD11DA7D06A009EEC3B /* graindelay~.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "graindelay~.pd"; sourceTree = "<group>"; };
+		5669CAD21DA7D06A009EEC3B /* pitchshift~.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "pitchshift~.pd"; sourceTree = "<group>"; };
+		5669CAD31DA7D06A009EEC3B /* rev2~.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "rev2~.pd"; sourceTree = "<group>"; };
+		5669CAD41DA7D06A009EEC3B /* rlop~.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "rlop~.pd"; sourceTree = "<group>"; };
+		5669CAD51DA7D06A009EEC3B /* hhm-effects-chain.mmp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "hhm-effects-chain.mmp"; sourceTree = "<group>"; };
+		5669CAD71DA7D06A009EEC3B /* cpmlooper.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cpmlooper.pd; sourceTree = "<group>"; };
+		5669CAD81DA7D06A009EEC3B /* percsampler.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = percsampler.pd; sourceTree = "<group>"; };
+		5669CAD91DA7D06A009EEC3B /* slicesampler.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = slicesampler.pd; sourceTree = "<group>"; };
+		5669CADA1DA7D06A009EEC3B /* loadMetaPdLibs.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = loadMetaPdLibs.pd; sourceTree = "<group>"; };
+		5669CADB1DA7D06A009EEC3B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		5669CADD1DA7D06A009EEC3B /* m_lydian.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = m_lydian.pd; sourceTree = "<group>"; };
+		5669CADE1DA7D06A009EEC3B /* m_lydiansharp5.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = m_lydiansharp5.pd; sourceTree = "<group>"; };
+		5669CADF1DA7D06A009EEC3B /* m_mixolydian.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = m_mixolydian.pd; sourceTree = "<group>"; };
+		5669CAE01DA7D06A009EEC3B /* m_phrygian.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = m_phrygian.pd; sourceTree = "<group>"; };
+		5D5CD479C0D4E83161A3BD3C /* libPods-chirpey.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-chirpey.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC5F345921BE4B4AE8AB02D6 /* Pods-chirpey.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chirpey.debug.xcconfig"; path = "Pods/Target Support Files/Pods-chirpey/Pods-chirpey.debug.xcconfig"; sourceTree = "<group>"; };
+		FFD2AA8B2A0C1948CC7BA804 /* Pods-chirpey.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chirpey.release.xcconfig"; path = "Pods/Target Support Files/Pods-chirpey/Pods-chirpey.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5669CA871DA7AAA5009EEC3B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				86FD684F0B45881B83674F9A /* libPods-chirpey.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5669CAA01DA7AAA6009EEC3B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5669CAAB1DA7AAA6009EEC3B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5669CA811DA7AAA5009EEC3B = {
+			isa = PBXGroup;
+			children = (
+				5669CAC51DA7D06A009EEC3B /* synth */,
+				5669CA8C1DA7AAA5009EEC3B /* chirpey */,
+				5669CAA61DA7AAA6009EEC3B /* chirpeyTests */,
+				5669CAB11DA7AAA6009EEC3B /* chirpeyUITests */,
+				5669CA8B1DA7AAA5009EEC3B /* Products */,
+				ECD38CC913BEDFCD1C8E8868 /* Pods */,
+				6FD6EB5C1100142533AD884F /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		5669CA8B1DA7AAA5009EEC3B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5669CA8A1DA7AAA5009EEC3B /* chirpey.app */,
+				5669CAA31DA7AAA6009EEC3B /* chirpeyTests.xctest */,
+				5669CAAE1DA7AAA6009EEC3B /* chirpeyUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5669CA8C1DA7AAA5009EEC3B /* chirpey */ = {
+			isa = PBXGroup;
+			children = (
+				5669CAC21DA7CFBA009EEC3B /* ChirpView.h */,
+				5669CAC31DA7CFBA009EEC3B /* ChirpView.m */,
+				5669CA901DA7AAA6009EEC3B /* AppDelegate.h */,
+				5669CA911DA7AAA6009EEC3B /* AppDelegate.m */,
+				5669CA931DA7AAA6009EEC3B /* ViewController.h */,
+				5669CA941DA7AAA6009EEC3B /* ViewController.m */,
+				5669CA961DA7AAA6009EEC3B /* Main.storyboard */,
+				5669CA991DA7AAA6009EEC3B /* Assets.xcassets */,
+				5669CA9B1DA7AAA6009EEC3B /* LaunchScreen.storyboard */,
+				5669CA9E1DA7AAA6009EEC3B /* Info.plist */,
+				5669CA8D1DA7AAA5009EEC3B /* Supporting Files */,
+			);
+			path = chirpey;
+			sourceTree = "<group>";
+		};
+		5669CA8D1DA7AAA5009EEC3B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5669CA8E1DA7AAA6009EEC3B /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5669CAA61DA7AAA6009EEC3B /* chirpeyTests */ = {
+			isa = PBXGroup;
+			children = (
+				5669CAA71DA7AAA6009EEC3B /* chirpeyTests.m */,
+				5669CAA91DA7AAA6009EEC3B /* Info.plist */,
+			);
+			path = chirpeyTests;
+			sourceTree = "<group>";
+		};
+		5669CAB11DA7AAA6009EEC3B /* chirpeyUITests */ = {
+			isa = PBXGroup;
+			children = (
+				5669CAB21DA7AAA6009EEC3B /* chirpeyUITests.m */,
+				5669CAB41DA7AAA6009EEC3B /* Info.plist */,
+			);
+			path = chirpeyUITests;
+			sourceTree = "<group>";
+		};
+		5669CAC51DA7D06A009EEC3B /* synth */ = {
+			isa = PBXGroup;
+			children = (
+				5669CAC61DA7D06A009EEC3B /* chirp.pd */,
+				5669CAC71DA7D06A009EEC3B /* metaPdLibs */,
+			);
+			path = synth;
+			sourceTree = "<group>";
+		};
+		5669CAC71DA7D06A009EEC3B /* metaPdLibs */ = {
+			isa = PBXGroup;
+			children = (
+				5669CAC81DA7D06A009EEC3B /* control */,
+				5669CACE1DA7D06A009EEC3B /* effectschain.pd */,
+				5669CACF1DA7D06A009EEC3B /* fx */,
+				5669CAD51DA7D06A009EEC3B /* hhm-effects-chain.mmp */,
+				5669CAD61DA7D06A009EEC3B /* instruments */,
+				5669CADA1DA7D06A009EEC3B /* loadMetaPdLibs.pd */,
+				5669CADB1DA7D06A009EEC3B /* README.md */,
+				5669CADC1DA7D06A009EEC3B /* scales */,
+			);
+			path = metaPdLibs;
+			sourceTree = "<group>";
+		};
+		5669CAC81DA7D06A009EEC3B /* control */ = {
+			isa = PBXGroup;
+			children = (
+				5669CAC91DA7D06A009EEC3B /* dispatch.pd */,
+				5669CACA1DA7D06A009EEC3B /* monopan.pd */,
+				5669CACB1DA7D06A009EEC3B /* monovol.pd */,
+				5669CACC1DA7D06A009EEC3B /* stereovol.pd */,
+				5669CACD1DA7D06A009EEC3B /* volumeRandomise.pd */,
+			);
+			path = control;
+			sourceTree = "<group>";
+		};
+		5669CACF1DA7D06A009EEC3B /* fx */ = {
+			isa = PBXGroup;
+			children = (
+				5669CAD01DA7D06A009EEC3B /* feedbackdelay.pd */,
+				5669CAD11DA7D06A009EEC3B /* graindelay~.pd */,
+				5669CAD21DA7D06A009EEC3B /* pitchshift~.pd */,
+				5669CAD31DA7D06A009EEC3B /* rev2~.pd */,
+				5669CAD41DA7D06A009EEC3B /* rlop~.pd */,
+			);
+			path = fx;
+			sourceTree = "<group>";
+		};
+		5669CAD61DA7D06A009EEC3B /* instruments */ = {
+			isa = PBXGroup;
+			children = (
+				5669CAD71DA7D06A009EEC3B /* cpmlooper.pd */,
+				5669CAD81DA7D06A009EEC3B /* percsampler.pd */,
+				5669CAD91DA7D06A009EEC3B /* slicesampler.pd */,
+			);
+			path = instruments;
+			sourceTree = "<group>";
+		};
+		5669CADC1DA7D06A009EEC3B /* scales */ = {
+			isa = PBXGroup;
+			children = (
+				5669CADD1DA7D06A009EEC3B /* m_lydian.pd */,
+				5669CADE1DA7D06A009EEC3B /* m_lydiansharp5.pd */,
+				5669CADF1DA7D06A009EEC3B /* m_mixolydian.pd */,
+				5669CAE01DA7D06A009EEC3B /* m_phrygian.pd */,
+			);
+			path = scales;
+			sourceTree = "<group>";
+		};
+		6FD6EB5C1100142533AD884F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5D5CD479C0D4E83161A3BD3C /* libPods-chirpey.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		ECD38CC913BEDFCD1C8E8868 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BC5F345921BE4B4AE8AB02D6 /* Pods-chirpey.debug.xcconfig */,
+				FFD2AA8B2A0C1948CC7BA804 /* Pods-chirpey.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5669CA891DA7AAA5009EEC3B /* chirpey */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5669CAB71DA7AAA6009EEC3B /* Build configuration list for PBXNativeTarget "chirpey" */;
+			buildPhases = (
+				F01540447ACEDE32271625B0 /* Check Pods Manifest.lock */,
+				5669CA861DA7AAA5009EEC3B /* Sources */,
+				5669CA871DA7AAA5009EEC3B /* Frameworks */,
+				5669CA881DA7AAA5009EEC3B /* Resources */,
+				57C116FCD17667604EE67A1D /* Embed Pods Frameworks */,
+				B7A3E36A172E78DE14B17F3A /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = chirpey;
+			productName = chirpey;
+			productReference = 5669CA8A1DA7AAA5009EEC3B /* chirpey.app */;
+			productType = "com.apple.product-type.application";
+		};
+		5669CAA21DA7AAA6009EEC3B /* chirpeyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5669CABA1DA7AAA6009EEC3B /* Build configuration list for PBXNativeTarget "chirpeyTests" */;
+			buildPhases = (
+				5669CA9F1DA7AAA6009EEC3B /* Sources */,
+				5669CAA01DA7AAA6009EEC3B /* Frameworks */,
+				5669CAA11DA7AAA6009EEC3B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5669CAA51DA7AAA6009EEC3B /* PBXTargetDependency */,
+			);
+			name = chirpeyTests;
+			productName = chirpeyTests;
+			productReference = 5669CAA31DA7AAA6009EEC3B /* chirpeyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		5669CAAD1DA7AAA6009EEC3B /* chirpeyUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5669CABD1DA7AAA6009EEC3B /* Build configuration list for PBXNativeTarget "chirpeyUITests" */;
+			buildPhases = (
+				5669CAAA1DA7AAA6009EEC3B /* Sources */,
+				5669CAAB1DA7AAA6009EEC3B /* Frameworks */,
+				5669CAAC1DA7AAA6009EEC3B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5669CAB01DA7AAA6009EEC3B /* PBXTargetDependency */,
+			);
+			name = chirpeyUITests;
+			productName = chirpeyUITests;
+			productReference = 5669CAAE1DA7AAA6009EEC3B /* chirpeyUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5669CA821DA7AAA5009EEC3B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0800;
+				ORGANIZATIONNAME = "Charles Martin";
+				TargetAttributes = {
+					5669CA891DA7AAA5009EEC3B = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = EDH387FRHA;
+						ProvisioningStyle = Automatic;
+					};
+					5669CAA21DA7AAA6009EEC3B = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = EDH387FRHA;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 5669CA891DA7AAA5009EEC3B;
+					};
+					5669CAAD1DA7AAA6009EEC3B = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = EDH387FRHA;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 5669CA891DA7AAA5009EEC3B;
+					};
+				};
+			};
+			buildConfigurationList = 5669CA851DA7AAA5009EEC3B /* Build configuration list for PBXProject "chirpey" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 5669CA811DA7AAA5009EEC3B;
+			productRefGroup = 5669CA8B1DA7AAA5009EEC3B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5669CA891DA7AAA5009EEC3B /* chirpey */,
+				5669CAA21DA7AAA6009EEC3B /* chirpeyTests */,
+				5669CAAD1DA7AAA6009EEC3B /* chirpeyUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5669CA881DA7AAA5009EEC3B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5669CAF11DA7D06A009EEC3B /* loadMetaPdLibs.pd in Resources */,
+				5669CAEF1DA7D06A009EEC3B /* percsampler.pd in Resources */,
+				5669CAEC1DA7D06A009EEC3B /* rlop~.pd in Resources */,
+				5669CAE11DA7D06A009EEC3B /* chirp.pd in Resources */,
+				5669CAE51DA7D06A009EEC3B /* stereovol.pd in Resources */,
+				5669CAF61DA7D06A009EEC3B /* m_phrygian.pd in Resources */,
+				5669CAE21DA7D06A009EEC3B /* dispatch.pd in Resources */,
+				5669CAE31DA7D06A009EEC3B /* monopan.pd in Resources */,
+				5669CAF51DA7D06A009EEC3B /* m_mixolydian.pd in Resources */,
+				5669CAE71DA7D06A009EEC3B /* effectschain.pd in Resources */,
+				5669CAF31DA7D06A009EEC3B /* m_lydian.pd in Resources */,
+				5669CAE81DA7D06A009EEC3B /* feedbackdelay.pd in Resources */,
+				5669CAED1DA7D06A009EEC3B /* hhm-effects-chain.mmp in Resources */,
+				5669CAE91DA7D06A009EEC3B /* graindelay~.pd in Resources */,
+				5669CAF01DA7D06A009EEC3B /* slicesampler.pd in Resources */,
+				5669CAEA1DA7D06A009EEC3B /* pitchshift~.pd in Resources */,
+				5669CA9D1DA7AAA6009EEC3B /* LaunchScreen.storyboard in Resources */,
+				5669CAE61DA7D06A009EEC3B /* volumeRandomise.pd in Resources */,
+				5669CA9A1DA7AAA6009EEC3B /* Assets.xcassets in Resources */,
+				5669CAEB1DA7D06A009EEC3B /* rev2~.pd in Resources */,
+				5669CA981DA7AAA6009EEC3B /* Main.storyboard in Resources */,
+				5669CAF41DA7D06A009EEC3B /* m_lydiansharp5.pd in Resources */,
+				5669CAE41DA7D06A009EEC3B /* monovol.pd in Resources */,
+				5669CAEE1DA7D06A009EEC3B /* cpmlooper.pd in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5669CAA11DA7AAA6009EEC3B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5669CAAC1DA7AAA6009EEC3B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		57C116FCD17667604EE67A1D /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-chirpey/Pods-chirpey-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B7A3E36A172E78DE14B17F3A /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-chirpey/Pods-chirpey-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F01540447ACEDE32271625B0 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5669CA861DA7AAA5009EEC3B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5669CA951DA7AAA6009EEC3B /* ViewController.m in Sources */,
+				5669CA921DA7AAA6009EEC3B /* AppDelegate.m in Sources */,
+				5669CAF21DA7D06A009EEC3B /* README.md in Sources */,
+				5669CA8F1DA7AAA6009EEC3B /* main.m in Sources */,
+				5669CAC41DA7CFBA009EEC3B /* ChirpView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5669CA9F1DA7AAA6009EEC3B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5669CAA81DA7AAA6009EEC3B /* chirpeyTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5669CAAA1DA7AAA6009EEC3B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5669CAB31DA7AAA6009EEC3B /* chirpeyUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5669CAA51DA7AAA6009EEC3B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5669CA891DA7AAA5009EEC3B /* chirpey */;
+			targetProxy = 5669CAA41DA7AAA6009EEC3B /* PBXContainerItemProxy */;
+		};
+		5669CAB01DA7AAA6009EEC3B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5669CA891DA7AAA5009EEC3B /* chirpey */;
+			targetProxy = 5669CAAF1DA7AAA6009EEC3B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		5669CA961DA7AAA6009EEC3B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5669CA971DA7AAA6009EEC3B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		5669CA9B1DA7AAA6009EEC3B /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5669CA9C1DA7AAA6009EEC3B /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		5669CAB51DA7AAA6009EEC3B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5669CAB61DA7AAA6009EEC3B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5669CAB81DA7AAA6009EEC3B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BC5F345921BE4B4AE8AB02D6 /* Pods-chirpey.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = EDH387FRHA;
+				INFOPLIST_FILE = chirpey/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = au.com.charlesmartin.chirpey;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		5669CAB91DA7AAA6009EEC3B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FFD2AA8B2A0C1948CC7BA804 /* Pods-chirpey.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = EDH387FRHA;
+				INFOPLIST_FILE = chirpey/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = au.com.charlesmartin.chirpey;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		5669CABB1DA7AAA6009EEC3B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = EDH387FRHA;
+				INFOPLIST_FILE = chirpeyTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = au.com.charlesmartin.chirpeyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/chirpey.app/chirpey";
+			};
+			name = Debug;
+		};
+		5669CABC1DA7AAA6009EEC3B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = EDH387FRHA;
+				INFOPLIST_FILE = chirpeyTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = au.com.charlesmartin.chirpeyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/chirpey.app/chirpey";
+			};
+			name = Release;
+		};
+		5669CABE1DA7AAA6009EEC3B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = EDH387FRHA;
+				INFOPLIST_FILE = chirpeyUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = au.com.charlesmartin.chirpeyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = chirpey;
+			};
+			name = Debug;
+		};
+		5669CABF1DA7AAA6009EEC3B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = EDH387FRHA;
+				INFOPLIST_FILE = chirpeyUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = au.com.charlesmartin.chirpeyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = chirpey;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5669CA851DA7AAA5009EEC3B /* Build configuration list for PBXProject "chirpey" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5669CAB51DA7AAA6009EEC3B /* Debug */,
+				5669CAB61DA7AAA6009EEC3B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5669CAB71DA7AAA6009EEC3B /* Build configuration list for PBXNativeTarget "chirpey" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5669CAB81DA7AAA6009EEC3B /* Debug */,
+				5669CAB91DA7AAA6009EEC3B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5669CABA1DA7AAA6009EEC3B /* Build configuration list for PBXNativeTarget "chirpeyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5669CABB1DA7AAA6009EEC3B /* Debug */,
+				5669CABC1DA7AAA6009EEC3B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5669CABD1DA7AAA6009EEC3B /* Build configuration list for PBXNativeTarget "chirpeyUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5669CABE1DA7AAA6009EEC3B /* Debug */,
+				5669CABF1DA7AAA6009EEC3B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5669CA821DA7AAA5009EEC3B /* Project object */;
+}
