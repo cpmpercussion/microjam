@@ -1,0 +1,20 @@
+PODS:
+  - libpd (0.10.0)
+
+DEPENDENCIES:
+  - libpd (from `https://github.com/libpd/libpd`)
+
+EXTERNAL SOURCES:
+  libpd:
+    :git: https://github.com/libpd/libpd
+    :submodules: true
+
+CHECKOUT OPTIONS:
+  libpd:
+    :commit: 019f864802cebc531f425ba6d1be8fd49f630a3e
+    :git: https://github.com/libpd/libpd
+
+SPEC CHECKSUMS:
+  libpd: c4f8ec7be74d223200052f0736ae02e56b12b9e9
+
+COCOAPODS: 0.39.0
