@@ -1,0 +1,3 @@
+[submodule "synth/metaPdLibs"]
+	path = synth/metaPdLibs
+	url = git@github.com:cpmpercussion/metaPdLibs.git

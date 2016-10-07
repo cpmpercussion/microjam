@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PdAudioController.h"
+#import "PdBase.h"
+#import "PdFile.h"
 
-@interface ViewController : UIViewController
-
-
+@interface ViewController : UIViewController <PdReceiverDelegate>
+@property (strong, nonatomic) PdAudioController *audioController;
+@property (strong, nonatomic) PdFile *openFile;
 @end
+
 
