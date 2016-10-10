@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface ChirpView : UIView
-
+@property (strong, nonatomic) CALayer *fingerSubLayer;
 @end
