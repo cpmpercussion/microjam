@@ -10,6 +10,7 @@
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet ChirpView *chirpeySquare;
+@property (weak, nonatomic) IBOutlet UIProgressView *recordingProgress;
 @end
 
 @implementation ViewController
