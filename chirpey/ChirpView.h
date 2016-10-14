@@ -10,5 +10,7 @@
 
 @interface ChirpView : UIImageView
 @property (strong, nonatomic) CALayer *fingerSubLayer;
+@property (nonatomic) bool recording;
+- (NSMutableOrderedSet *) reset;
 @end
 

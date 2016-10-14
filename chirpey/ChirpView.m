@@ -12,6 +12,9 @@
 @interface ChirpView()
 @property (nonatomic) CGPoint lastPoint;
 @property (nonatomic) bool swiped;
+@property (nonatomic) bool started;
+@property (strong, nonatomic) NSDate *startTime;
+@property (strong, nonatomic) NSMutableOrderedSet *recordData;
 @end
 
 @implementation ChirpView
@@ -26,24 +29,36 @@
         self.multipleTouchEnabled = YES;
         self.lastPoint = CGPointZero;
         self.swiped = false;
+        self.recordData = [[NSMutableOrderedSet alloc] init];
     }
     return self;
+}
+
+- (NSMutableOrderedSet *) reset
+{
+    self.recording = NO;
+    self.started = NO;
+    self.lastPoint = CGPointZero;
+    self.swiped = false;
+    // spool out the recording data
+    NSMutableOrderedSet *output = self.recordData;
+    self.recordData = [[NSMutableOrderedSet alloc] init];
+    self.image = [[UIImage alloc] init];
+    return output;
 }
 
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    [self.superview touchesBegan:touches withEvent:event];
+    if (!self.started) {
+        self.startTime = [NSDate date];
+        self.started = YES;
+    }
     self.swiped = false;
     self.lastPoint = [(UITouch *) [touches anyObject] locationInView:self];
-    for (UITouch * touch in [touches objectEnumerator]) {
-        CGPoint point = [touch locationInView:self];
-        NSLog(@"Touch Down at: %f, %f", point.x,point.y);
-        NSNumber *x = [NSNumber numberWithFloat:(float) point.x / 300.0];
-        NSNumber *y = [NSNumber numberWithFloat:(float) point.y / 300.0];
-        NSNumber *z = [NSNumber numberWithFloat:0.0];
-        [PdBase sendList:@[@"/x",x,@"/y",y,@"/z",z] toReceiver:@"input"];
-    }
-    
+    [self makeSoundAtPoint:self.lastPoint];
+    [self recordTouchAtPoint:self.lastPoint thatWasMoving:NO];
 }
 
 -(void) touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
@@ -51,22 +66,31 @@
     self.swiped = true;
     CGPoint currentPoint = [(UITouch *) [touches anyObject] locationInView:self];
     [self drawLineFrom:self.lastPoint to:currentPoint];
-    
-    for (UITouch * touch in [touches objectEnumerator]) {
-        CGPoint point = [touch locationInView:self];
-        NSLog(@"Touch Down at: %f, %f", point.x,point.y);
-        NSNumber *x = [NSNumber numberWithFloat:(float) point.x / 300.0];
-        NSNumber *y = [NSNumber numberWithFloat:(float) point.y / 300.0];
-        NSNumber *z = @0.0;
-        [PdBase sendList:@[@"/x",x,@"/y",y,@"/z",z] toReceiver:@"input"];
-    }
-    
     self.lastPoint = currentPoint;
+    [self makeSoundAtPoint:currentPoint];
+    [self recordTouchAtPoint:currentPoint thatWasMoving:YES];
 }
 
--(void) touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    
+-(void) makeSoundAtPoint: (CGPoint) point
+{
+    NSNumber *x = [NSNumber numberWithFloat:(float) point.x / 300.0];
+    NSNumber *y = [NSNumber numberWithFloat:(float) point.y / 300.0];
+    NSNumber *z = @0.0;
+    [PdBase sendList:@[@"/x",x,@"/y",y,@"/z",z] toReceiver:@"input"];
 }
+
+-(void) recordTouchAtPoint: (CGPoint)point thatWasMoving: (bool)moving
+{
+    NSNumber *time = [NSNumber numberWithDouble:(-1.0 * [self.startTime timeIntervalSinceNow])];
+    NSNumber *x = [NSNumber numberWithFloat:(float) point.x / 300.0];
+    NSNumber *y = [NSNumber numberWithFloat:(float) point.y / 300.0];
+    NSNumber *z = @0.0;
+    NSNumber *movingObj = [NSNumber numberWithBool:moving];
+    NSArray* touchPoint = @[time, x, y, z, movingObj];
+    [self.recordData addObject:touchPoint];
+}
+
+-(void) touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {}
 
 
 - (void) drawLineFrom:(CGPoint) fromPoint to:(CGPoint) toPoint
