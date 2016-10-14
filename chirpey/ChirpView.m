@@ -15,6 +15,8 @@
 @property (nonatomic) bool started;
 @property (strong, nonatomic) NSDate *startTime;
 @property (strong, nonatomic) NSMutableOrderedSet *recordData;
+@property (nonatomic) CGColorRef recordingColour;
+@property (nonatomic) CGColorRef playbackColour;
 @end
 
 @implementation ChirpView
@@ -30,6 +32,10 @@
         self.lastPoint = CGPointZero;
         self.swiped = false;
         self.recordData = [[NSMutableOrderedSet alloc] init];
+        CGFloat red[4] = {1.0,0.0,0.0,1.0};
+        CGFloat green[4] = {0.0,1.0,0.0,1.0};
+        self.recordingColour = CGColorCreate(CGColorSpaceCreateDeviceRGB(), red);
+        self.playbackColour = CGColorCreate(CGColorSpaceCreateDeviceRGB(), green);
     }
     return self;
 }
@@ -57,6 +63,7 @@
     }
     self.swiped = false;
     self.lastPoint = [(UITouch *) [touches anyObject] locationInView:self];
+    [self drawDotAt:self.lastPoint withColour:self.recordingColour];
     [self makeSoundAtPoint:self.lastPoint];
     [self recordTouchAtPoint:self.lastPoint thatWasMoving:NO];
 }
@@ -65,7 +72,7 @@
 {
     self.swiped = true;
     CGPoint currentPoint = [(UITouch *) [touches anyObject] locationInView:self];
-    [self drawLineFrom:self.lastPoint to:currentPoint];
+    [self drawLineFrom:self.lastPoint to:currentPoint withColour:self.recordingColour];
     self.lastPoint = currentPoint;
     [self makeSoundAtPoint:currentPoint];
     [self recordTouchAtPoint:currentPoint thatWasMoving:YES];
@@ -93,7 +100,19 @@
 -(void) touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {}
 
 
-- (void) drawLineFrom:(CGPoint) fromPoint to:(CGPoint) toPoint
+- (void) drawDotAt:(CGPoint) point withColour:(CGColorRef) color
+{
+    UIGraphicsBeginImageContext(self.frame.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    [self.image drawInRect:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+    CGContextSetFillColorWithColor(context,color);
+    CGContextSetBlendMode(context, kCGBlendModeNormal);
+    CGContextFillEllipseInRect(context, CGRectMake(point.x - 5, point.y - 5, 10, 10));
+    self.image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+}
+
+- (void) drawLineFrom:(CGPoint) fromPoint to:(CGPoint) toPoint withColour:(CGColorRef) color
 {
     UIGraphicsBeginImageContext(self.frame.size);
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -103,12 +122,52 @@
     CGContextAddLineToPoint(context, toPoint.x, toPoint.y);
     CGContextSetLineCap(context, kCGLineCapRound);
     CGContextSetLineWidth(context, 10.0);
-    CGContextSetRGBStrokeColor(context, 255, 0, 0, 1.0);
+    CGContextSetFillColorWithColor(context,color);
     CGContextSetBlendMode(context, kCGBlendModeNormal);
     CGContextStrokePath(context);
     
     self.image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
+}
+
+
+-(void) playBackBegan:(CGPoint) point
+{
+    self.swiped = false;
+    self.lastPoint = point;
+    [self drawDotAt:point withColour:self.playbackColour];
+    [self makeSoundAtPoint:point];
+}
+
+-(void) playBackMoved:(CGPoint) point
+{
+    self.swiped = true;
+    [self drawLineFrom:self.lastPoint to:point withColour:self.recordingColour];
+    self.lastPoint = point;
+    [self makeSoundAtPoint:point];
+}
+
+- (void) playBackRecording: (NSMutableOrderedSet *) record
+{
+    for (NSArray *touch in record) {
+        double time = [(NSNumber *) touch[0] doubleValue];
+        [NSTimer scheduledTimerWithTimeInterval:time target:self selector:@selector(processTimedTouch:) userInfo:touch repeats:NO];
+    }
+}
+
+- (void) processTimedTouch:(NSTimer *)timer
+{
+    NSArray *touch = (NSArray *) timer.userInfo;
+    float x = 300.0 * [(NSNumber *) touch[1] floatValue];
+    float y = 300.0 * [(NSNumber *) touch[2] floatValue];
+    //float z = [(NSNumber *) touch[3] floatValue];
+    CGPoint point = CGPointMake((CGFloat) x, (CGFloat) y);
+    bool moved = [(NSNumber *) touch[4] boolValue];
+    if (moved) {
+        [self playBackMoved:point];
+    } else {
+        [self playBackBegan:point];
+    }
 }
 
 @end

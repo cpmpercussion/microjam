@@ -12,5 +12,6 @@
 @property (strong, nonatomic) CALayer *fingerSubLayer;
 @property (nonatomic) bool recording;
 - (NSMutableOrderedSet *) reset;
+- (void) playBackRecording: (NSMutableOrderedSet *) record;
 @end
 

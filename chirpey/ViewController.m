@@ -78,6 +78,7 @@
     NSMutableOrderedSet *record = [self.chirpeySquare reset];
     NSString *recordingString = [self createCSVFromOrderedSet:record];
     [self writeCSVToFile:recordingString];
+    [self.chirpeySquare playBackRecording:record];
 }
 
 - (void) updateProgressView
@@ -126,7 +127,6 @@
 
     NSError *err = nil;
     [csvString writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:&err];
-    NSLog(@"Wrote the file?");
 }
 
 @end
