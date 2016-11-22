@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5669CA8F1DA7AAA6009EEC3B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5669CA8E1DA7AAA6009EEC3B /* main.m */; };
-		5669CA921DA7AAA6009EEC3B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5669CA911DA7AAA6009EEC3B /* AppDelegate.m */; };
+		56621B0D1DE39D33009B9AB6 /* ChirpPerformance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56621B0C1DE39D33009B9AB6 /* ChirpPerformance.swift */; };
+		56621B0F1DE47376009B9AB6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56621B0E1DE47376009B9AB6 /* AppDelegate.swift */; };
+		56621B111DE47D5B009B9AB6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56621B101DE47D5B009B9AB6 /* ViewController.swift */; };
 		5669CA951DA7AAA6009EEC3B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5669CA941DA7AAA6009EEC3B /* ViewController.m */; };
 		5669CA981DA7AAA6009EEC3B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5669CA961DA7AAA6009EEC3B /* Main.storyboard */; };
 		5669CA9A1DA7AAA6009EEC3B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5669CA991DA7AAA6009EEC3B /* Assets.xcassets */; };
@@ -33,7 +34,6 @@
 		5669CAEF1DA7D06A009EEC3B /* percsampler.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CAD81DA7D06A009EEC3B /* percsampler.pd */; };
 		5669CAF01DA7D06A009EEC3B /* slicesampler.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CAD91DA7D06A009EEC3B /* slicesampler.pd */; };
 		5669CAF11DA7D06A009EEC3B /* loadMetaPdLibs.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CADA1DA7D06A009EEC3B /* loadMetaPdLibs.pd */; };
-		5669CAF21DA7D06A009EEC3B /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 5669CADB1DA7D06A009EEC3B /* README.md */; };
 		5669CAF31DA7D06A009EEC3B /* m_lydian.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CADD1DA7D06A009EEC3B /* m_lydian.pd */; };
 		5669CAF41DA7D06A009EEC3B /* m_lydiansharp5.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CADE1DA7D06A009EEC3B /* m_lydiansharp5.pd */; };
 		5669CAF51DA7D06A009EEC3B /* m_mixolydian.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CADF1DA7D06A009EEC3B /* m_mixolydian.pd */; };
@@ -59,10 +59,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		56621B091DE344E2009B9AB6 /* chirpey-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "chirpey-Bridging-Header.h"; sourceTree = "<group>"; };
+		56621B0C1DE39D33009B9AB6 /* ChirpPerformance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChirpPerformance.swift; sourceTree = "<group>"; };
+		56621B0E1DE47376009B9AB6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		56621B101DE47D5B009B9AB6 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		5669CA8A1DA7AAA5009EEC3B /* chirpey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chirpey.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		5669CA8E1DA7AAA6009EEC3B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		5669CA901DA7AAA6009EEC3B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		5669CA911DA7AAA6009EEC3B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		5669CA931DA7AAA6009EEC3B /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		5669CA941DA7AAA6009EEC3B /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		5669CA971DA7AAA6009EEC3B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -94,7 +95,6 @@
 		5669CAD81DA7D06A009EEC3B /* percsampler.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = percsampler.pd; sourceTree = "<group>"; };
 		5669CAD91DA7D06A009EEC3B /* slicesampler.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = slicesampler.pd; sourceTree = "<group>"; };
 		5669CADA1DA7D06A009EEC3B /* loadMetaPdLibs.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = loadMetaPdLibs.pd; sourceTree = "<group>"; };
-		5669CADB1DA7D06A009EEC3B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		5669CADD1DA7D06A009EEC3B /* m_lydian.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = m_lydian.pd; sourceTree = "<group>"; };
 		5669CADE1DA7D06A009EEC3B /* m_lydiansharp5.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = m_lydiansharp5.pd; sourceTree = "<group>"; };
 		5669CADF1DA7D06A009EEC3B /* m_mixolydian.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = m_mixolydian.pd; sourceTree = "<group>"; };
@@ -156,27 +156,20 @@
 		5669CA8C1DA7AAA5009EEC3B /* chirpey */ = {
 			isa = PBXGroup;
 			children = (
+				56621B0C1DE39D33009B9AB6 /* ChirpPerformance.swift */,
 				5669CAC21DA7CFBA009EEC3B /* ChirpView.h */,
 				5669CAC31DA7CFBA009EEC3B /* ChirpView.m */,
-				5669CA901DA7AAA6009EEC3B /* AppDelegate.h */,
-				5669CA911DA7AAA6009EEC3B /* AppDelegate.m */,
+				56621B0E1DE47376009B9AB6 /* AppDelegate.swift */,
+				56621B101DE47D5B009B9AB6 /* ViewController.swift */,
 				5669CA931DA7AAA6009EEC3B /* ViewController.h */,
 				5669CA941DA7AAA6009EEC3B /* ViewController.m */,
 				5669CA961DA7AAA6009EEC3B /* Main.storyboard */,
 				5669CA991DA7AAA6009EEC3B /* Assets.xcassets */,
 				5669CA9B1DA7AAA6009EEC3B /* LaunchScreen.storyboard */,
 				5669CA9E1DA7AAA6009EEC3B /* Info.plist */,
-				5669CA8D1DA7AAA5009EEC3B /* Supporting Files */,
+				56621B091DE344E2009B9AB6 /* chirpey-Bridging-Header.h */,
 			);
 			path = chirpey;
-			sourceTree = "<group>";
-		};
-		5669CA8D1DA7AAA5009EEC3B /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				5669CA8E1DA7AAA6009EEC3B /* main.m */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		5669CAA61DA7AAA6009EEC3B /* chirpeyTests */ = {
@@ -215,7 +208,6 @@
 				5669CAD51DA7D06A009EEC3B /* hhm-effects-chain.mmp */,
 				5669CAD61DA7D06A009EEC3B /* instruments */,
 				5669CADA1DA7D06A009EEC3B /* loadMetaPdLibs.pd */,
-				5669CADB1DA7D06A009EEC3B /* README.md */,
 				5669CADC1DA7D06A009EEC3B /* scales */,
 			);
 			path = metaPdLibs;
@@ -348,12 +340,13 @@
 		5669CA821DA7AAA5009EEC3B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Charles Martin";
 				TargetAttributes = {
 					5669CA891DA7AAA5009EEC3B = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = EDH387FRHA;
+						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
 					};
 					5669CAA21DA7AAA6009EEC3B = {
@@ -491,10 +484,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56621B111DE47D5B009B9AB6 /* ViewController.swift in Sources */,
+				56621B0F1DE47376009B9AB6 /* AppDelegate.swift in Sources */,
+				56621B0D1DE39D33009B9AB6 /* ChirpPerformance.swift in Sources */,
 				5669CA951DA7AAA6009EEC3B /* ViewController.m in Sources */,
-				5669CA921DA7AAA6009EEC3B /* AppDelegate.m in Sources */,
-				5669CAF21DA7D06A009EEC3B /* README.md in Sources */,
-				5669CA8F1DA7AAA6009EEC3B /* main.m in Sources */,
 				5669CAC41DA7CFBA009EEC3B /* ChirpView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -568,6 +561,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -616,6 +610,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -645,11 +640,15 @@
 			baseConfigurationReference = BC5F345921BE4B4AE8AB02D6 /* Pods-chirpey.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = EDH387FRHA;
 				INFOPLIST_FILE = chirpey/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = au.com.charlesmartin.chirpey;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "chirpey/chirpey-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -658,17 +657,21 @@
 			baseConfigurationReference = FFD2AA8B2A0C1948CC7BA804 /* Pods-chirpey.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = EDH387FRHA;
 				INFOPLIST_FILE = chirpey/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = au.com.charlesmartin.chirpey;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "chirpey/chirpey-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
 		5669CABB1DA7AAA6009EEC3B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = EDH387FRHA;
 				INFOPLIST_FILE = chirpeyTests/Info.plist;
@@ -682,6 +685,7 @@
 		5669CABC1DA7AAA6009EEC3B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = EDH387FRHA;
 				INFOPLIST_FILE = chirpeyTests/Info.plist;
@@ -695,6 +699,7 @@
 		5669CABE1DA7AAA6009EEC3B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = EDH387FRHA;
 				INFOPLIST_FILE = chirpeyUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -707,6 +712,7 @@
 		5669CABF1DA7AAA6009EEC3B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = EDH387FRHA;
 				INFOPLIST_FILE = chirpeyUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
