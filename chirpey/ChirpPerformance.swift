@@ -8,6 +8,8 @@
 
 import UIKit
 
-class ChirpPerformance: NSObject {
-
+class ChirpPerformance {
+    var performanceData: NSMutableOrderedSet?
+    
+    
 }
