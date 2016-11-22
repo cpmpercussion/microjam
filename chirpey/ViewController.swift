@@ -71,10 +71,10 @@ class ViewController: UIViewController, PdReceiverDelegate {
         self.progress = 0.0
         self.recordingProgress?.progress = 0.0
         NSLog("Timer stopped")
-        let record = self.chirpeySquare?.reset
+        let record = self.chirpeySquare?.reset()
         let recordingString = self.createCSVFromOrderedSet(set: record!);
         self.writeCSVToFile(csvString: recordingString)
-        self.chirpeySquare?.playBackRecording(record)
+        self.chirpeySquare?.playback(recording: record!)
     }
     
     func updateProgressView(_ : Timer) {
