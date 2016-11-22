@@ -17,22 +17,20 @@ class ViewController: UIViewController, PdReceiverDelegate {
     var openFile : PdFile?
     var progress = 0.0
     var progressTimer : Timer?
-    @IBOutlet weak var chirpeySquare : ChirpView?
     @IBOutlet weak var recordingProgress : UIProgressView?
+    @IBOutlet weak var chirpeySquare : ChirpView?
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.startAudioEngine()
-        self.recordingProgress?.progress = 0.0
-        // Do any additional setup after loading the view.
-        // print out documents location:
         #if TARGET_IPHONE_SIMULATOR
             // where are you?
             NSLog("Documents Directory: %@", FileManager.default.urls(
                 for: .documentDirectory,
                 in: .userDomainMask).lastObject())
         #endif
+
+        self.startAudioEngine()
+        self.recordingProgress?.progress = 0.0
     }
 
     override func didReceiveMemoryWarning() {

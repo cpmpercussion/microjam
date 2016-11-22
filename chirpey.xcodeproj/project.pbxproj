@@ -10,7 +10,6 @@
 		56621B0D1DE39D33009B9AB6 /* ChirpPerformance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56621B0C1DE39D33009B9AB6 /* ChirpPerformance.swift */; };
 		56621B0F1DE47376009B9AB6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56621B0E1DE47376009B9AB6 /* AppDelegate.swift */; };
 		56621B111DE47D5B009B9AB6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56621B101DE47D5B009B9AB6 /* ViewController.swift */; };
-		5669CA951DA7AAA6009EEC3B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5669CA941DA7AAA6009EEC3B /* ViewController.m */; };
 		5669CA981DA7AAA6009EEC3B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5669CA961DA7AAA6009EEC3B /* Main.storyboard */; };
 		5669CA9A1DA7AAA6009EEC3B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5669CA991DA7AAA6009EEC3B /* Assets.xcassets */; };
 		5669CA9D1DA7AAA6009EEC3B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5669CA9B1DA7AAA6009EEC3B /* LaunchScreen.storyboard */; };
@@ -64,8 +63,6 @@
 		56621B0E1DE47376009B9AB6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56621B101DE47D5B009B9AB6 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		5669CA8A1DA7AAA5009EEC3B /* chirpey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chirpey.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		5669CA931DA7AAA6009EEC3B /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		5669CA941DA7AAA6009EEC3B /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		5669CA971DA7AAA6009EEC3B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5669CA991DA7AAA6009EEC3B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5669CA9C1DA7AAA6009EEC3B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -161,8 +158,6 @@
 				5669CAC31DA7CFBA009EEC3B /* ChirpView.m */,
 				56621B0E1DE47376009B9AB6 /* AppDelegate.swift */,
 				56621B101DE47D5B009B9AB6 /* ViewController.swift */,
-				5669CA931DA7AAA6009EEC3B /* ViewController.h */,
-				5669CA941DA7AAA6009EEC3B /* ViewController.m */,
 				5669CA961DA7AAA6009EEC3B /* Main.storyboard */,
 				5669CA991DA7AAA6009EEC3B /* Assets.xcassets */,
 				5669CA9B1DA7AAA6009EEC3B /* LaunchScreen.storyboard */,
@@ -487,7 +482,6 @@
 				56621B111DE47D5B009B9AB6 /* ViewController.swift in Sources */,
 				56621B0F1DE47376009B9AB6 /* AppDelegate.swift in Sources */,
 				56621B0D1DE39D33009B9AB6 /* ChirpPerformance.swift in Sources */,
-				5669CA951DA7AAA6009EEC3B /* ViewController.m in Sources */,
 				5669CAC41DA7CFBA009EEC3B /* ChirpView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
