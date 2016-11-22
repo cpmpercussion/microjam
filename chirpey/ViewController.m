@@ -48,7 +48,7 @@
     //    [self openPdPatch];
     [PdBase setDelegate:self];
     [PdBase subscribe:@"toGUI"];
-    [PdBase openFile:PATCH_NAME path:[[NSBundle mainBundle] bundlePath]];
+    [PdBase openFile:PATCH_NAME path:[NSBundle mainBundle].bundlePath];
     [self.audioController setActive:YES];
     [self.audioController print];
     NSLog(@"VC: Ticks Per Buffer: %d",self.audioController.ticksPerBuffer);
@@ -108,7 +108,7 @@
 {
     NSString *output = @"time,x,y,z,moving\n";
     for (NSArray *item in set) {
-        NSString *line = [NSString stringWithFormat:@"%f, %f, %f, %f,%d\n", [(NSNumber *) item[0] floatValue], [(NSNumber *) item[1] floatValue], [(NSNumber *) item[2] floatValue], [(NSNumber *) item[3] floatValue],[(NSNumber *) item[4] intValue]];
+        NSString *line = [NSString stringWithFormat:@"%f, %f, %f, %f,%d\n", ((NSNumber *) item[0]).floatValue, ((NSNumber *) item[1]).floatValue, ((NSNumber *) item[2]).floatValue, ((NSNumber *) item[3]).floatValue,((NSNumber *) item[4]).intValue];
         output = [output stringByAppendingString:line];
     }
     //output = [output stringByAppendingString:@" \n "];
@@ -118,9 +118,9 @@
 - (void) writeCSVToFile:(NSString *)csvString
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *documentsDirectory = paths[0];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"YYYY-MM-DD-HH-mm-SS"];
+    formatter.dateFormat = @"YYYY-MM-DD-HH-mm-SS";
     NSString *dateString = [formatter stringFromDate:[NSDate date]];
     NSString *fileName = [NSString stringWithFormat:@"chirprec-%@", dateString];
     NSString *filePath =  [documentsDirectory stringByAppendingPathComponent:fileName];
