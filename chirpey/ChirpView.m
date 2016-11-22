@@ -21,7 +21,7 @@
 
 @implementation ChirpView
 
-- (id) initWithCoder:(NSCoder *)aDecoder
+- (instancetype) initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
@@ -80,19 +80,19 @@
 
 -(void) makeSoundAtPoint: (CGPoint) point
 {
-    NSNumber *x = [NSNumber numberWithFloat:(float) point.x / 300.0];
-    NSNumber *y = [NSNumber numberWithFloat:(float) point.y / 300.0];
+    NSNumber *x = @(point.x / 300.0);
+    NSNumber *y = @(point.y / 300.0);
     NSNumber *z = @0.0;
     [PdBase sendList:@[@"/x",x,@"/y",y,@"/z",z] toReceiver:@"input"];
 }
 
 -(void) recordTouchAtPoint: (CGPoint)point thatWasMoving: (bool)moving
 {
-    NSNumber *time = [NSNumber numberWithDouble:(-1.0 * [self.startTime timeIntervalSinceNow])];
+    NSNumber *time = @(-1.0 * (self.startTime).timeIntervalSinceNow);
     NSNumber *x = [NSNumber numberWithFloat:(float) point.x / 300.0];
     NSNumber *y = [NSNumber numberWithFloat:(float) point.y / 300.0];
     NSNumber *z = @0.0;
-    NSNumber *movingObj = [NSNumber numberWithBool:moving];
+    NSNumber *movingObj = @(moving);
     NSArray* touchPoint = @[time, x, y, z, movingObj];
     [self.recordData addObject:touchPoint];
 }
@@ -150,7 +150,7 @@
 - (void) playBackRecording: (NSMutableOrderedSet *) record
 {
     for (NSArray *touch in record) {
-        double time = [(NSNumber *) touch[0] doubleValue];
+        double time = ((NSNumber *) touch[0]).doubleValue;
         [NSTimer scheduledTimerWithTimeInterval:time target:self selector:@selector(processTimedTouch:) userInfo:touch repeats:NO];
     }
 }
@@ -158,11 +158,11 @@
 - (void) processTimedTouch:(NSTimer *)timer
 {
     NSArray *touch = (NSArray *) timer.userInfo;
-    float x = 300.0 * [(NSNumber *) touch[1] floatValue];
-    float y = 300.0 * [(NSNumber *) touch[2] floatValue];
+    float x = 300.0 * ((NSNumber *) touch[1]).floatValue;
+    float y = 300.0 * ((NSNumber *) touch[2]).floatValue;
     //float z = [(NSNumber *) touch[3] floatValue];
     CGPoint point = CGPointMake((CGFloat) x, (CGFloat) y);
-    bool moved = [(NSNumber *) touch[4] boolValue];
+    bool moved = ((NSNumber *) touch[4]).boolValue;
     if (moved) {
         [self playBackMoved:point];
     } else {
