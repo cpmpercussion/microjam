@@ -16,7 +16,6 @@
 		5669CA9D1DA7AAA6009EEC3B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5669CA9B1DA7AAA6009EEC3B /* LaunchScreen.storyboard */; };
 		5669CAA81DA7AAA6009EEC3B /* chirpeyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5669CAA71DA7AAA6009EEC3B /* chirpeyTests.m */; };
 		5669CAB31DA7AAA6009EEC3B /* chirpeyUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5669CAB21DA7AAA6009EEC3B /* chirpeyUITests.m */; };
-		5669CAC41DA7CFBA009EEC3B /* ChirpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5669CAC31DA7CFBA009EEC3B /* ChirpView.m */; };
 		5669CAE11DA7D06A009EEC3B /* chirp.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CAC61DA7D06A009EEC3B /* chirp.pd */; };
 		5669CAE21DA7D06A009EEC3B /* dispatch.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CAC91DA7D06A009EEC3B /* dispatch.pd */; };
 		5669CAE31DA7D06A009EEC3B /* monopan.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CACA1DA7D06A009EEC3B /* monopan.pd */; };
@@ -76,7 +75,6 @@
 		5669CAB21DA7AAA6009EEC3B /* chirpeyUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = chirpeyUITests.m; sourceTree = "<group>"; };
 		5669CAB41DA7AAA6009EEC3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5669CAC21DA7CFBA009EEC3B /* ChirpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChirpView.h; sourceTree = "<group>"; };
-		5669CAC31DA7CFBA009EEC3B /* ChirpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChirpView.m; sourceTree = "<group>"; };
 		5669CAC61DA7D06A009EEC3B /* chirp.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chirp.pd; sourceTree = "<group>"; };
 		5669CAC91DA7D06A009EEC3B /* dispatch.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dispatch.pd; sourceTree = "<group>"; };
 		5669CACA1DA7D06A009EEC3B /* monopan.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = monopan.pd; sourceTree = "<group>"; };
@@ -158,7 +156,6 @@
 				56621B0C1DE39D33009B9AB6 /* ChirpPerformance.swift */,
 				5669CAC21DA7CFBA009EEC3B /* ChirpView.h */,
 				56621B121DE4A496009B9AB6 /* ChirpView.swift */,
-				5669CAC31DA7CFBA009EEC3B /* ChirpView.m */,
 				56621B0E1DE47376009B9AB6 /* AppDelegate.swift */,
 				56621B101DE47D5B009B9AB6 /* ViewController.swift */,
 				5669CA961DA7AAA6009EEC3B /* Main.storyboard */,
@@ -486,7 +483,6 @@
 				56621B0F1DE47376009B9AB6 /* AppDelegate.swift in Sources */,
 				56621B131DE4A496009B9AB6 /* ChirpView.swift in Sources */,
 				56621B0D1DE39D33009B9AB6 /* ChirpPerformance.swift in Sources */,
-				5669CAC41DA7CFBA009EEC3B /* ChirpView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

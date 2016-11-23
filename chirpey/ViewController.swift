@@ -17,8 +17,9 @@ class ViewController: UIViewController, PdReceiverDelegate {
     var openFile : PdFile?
     var progress = 0.0
     var progressTimer : Timer?
-    @IBOutlet weak var recordingProgress : UIProgressView?
-    @IBOutlet weak var chirpeySquare : ChirpView?
+    
+    @IBOutlet weak var chirpeySquare: ChirpView!
+    @IBOutlet weak var recordingProgress: UIProgressView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +31,7 @@ class ViewController: UIViewController, PdReceiverDelegate {
         #endif
 
         self.startAudioEngine()
-        self.recordingProgress?.progress = 0.0
+        self.recordingProgress!.progress = 0.0
     }
 
     override func didReceiveMemoryWarning() {
@@ -121,11 +122,8 @@ class ViewController: UIViewController, PdReceiverDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         // start timer if not recording
         let p = touches.first?.location(in: self.chirpeySquare);
-        if ((self.chirpeySquare?.bounds)!.contains(p!))
-        {
-            if (!(self.chirpeySquare?.recording)!) {
+        if (self.chirpeySquare!.bounds.contains(p!) && !self.chirpeySquare!.recording) {
                 self.startTimer()
-            }
         }
     }
     

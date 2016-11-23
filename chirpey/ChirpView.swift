@@ -11,8 +11,8 @@ import UIKit
 class ChirpView: UIImageView {
     
     var fingerSubLayer : CALayer?
-    var recording = false
     var lastPoint : CGPoint?
+    var recording = false
     var swiped = false
     var started = false
     var startTime = Date()
@@ -29,6 +29,7 @@ class ChirpView: UIImageView {
         self.lastPoint = CG_INIT_POINT
         self.swiped = false
         self.recordData = NSMutableOrderedSet()
+        self.recording = false
     }
     
     /**/
@@ -45,7 +46,6 @@ class ChirpView: UIImageView {
     }
     
     //MARK: - touch interaction
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.superview?.touchesBegan(touches, with: event)
         if (!self.started) {
@@ -68,6 +68,9 @@ class ChirpView: UIImageView {
         self.recordTouch(at: currentPoint!, thatWasMoving: true)
     }
     
+    /**
+        Given a point in the UIImage, sends a touch point to Pd to process for sound.
+    **/
     func makeSound(at point : CGPoint) {
         let x = point.x / 300.0
         let y = point.y / 300.0
@@ -75,6 +78,10 @@ class ChirpView: UIImageView {
         PdBase.sendList(["/x",x,"/y",y,"/z",z], toReceiver: "input")
     }
     
+    /**
+        Adds a touch point to the recording data including whether it was moving
+        and the current time.
+     **/
     func recordTouch(at point : CGPoint, thatWasMoving moving : Bool) {
         let time = -1.0 * self.startTime.timeIntervalSinceNow;
         let x = point.x / 300.0
@@ -84,6 +91,9 @@ class ChirpView: UIImageView {
     }
     
     // MARK: - drawing functions
+    /**
+     Draws a dot at a given point in the UIImage.
+    **/
     func drawDot(at point : CGPoint, withColour color : CGColor) {
         UIGraphicsBeginImageContext(self.frame.size);
         let context = UIGraphicsGetCurrentContext();
@@ -95,15 +105,18 @@ class ChirpView: UIImageView {
         UIGraphicsEndImageContext();
     }
 
+    /**
+        Draws a line between two points in the UIImage.
+    **/
     func drawLine(from fromPoint : CGPoint, to toPoint : CGPoint, withColour color : CGColor) {
         UIGraphicsBeginImageContext(self.frame.size)
         let context = UIGraphicsGetCurrentContext()
         self.image?.draw(in: CGRect(x:0, y:0, width:self.frame.size.width, height:self.frame.size.height))
         context!.move(to: fromPoint)
         context!.addLine(to: toPoint)
-        context!.setLineCap(CGLineCap.round) //  kCGLineCapRound
+        context!.setLineCap(CGLineCap.round)
         context!.setLineWidth(10.0)
-        context!.setFillColor(color)
+        context!.setStrokeColor(color)
         context!.setBlendMode(CGBlendMode.normal)
         context!.strokePath()
         self.image = UIGraphicsGetImageFromCurrentImageContext();
@@ -111,14 +124,18 @@ class ChirpView: UIImageView {
     }
 
     // MARK: - playback functions
-    
+    /**
+     Mirrors touchesBegan for replayed performances.
+    **/
     func playbackBegan(_ point : CGPoint) {
         self.swiped = false;
         self.lastPoint = point;
         self.drawDot(at: point, withColour: self.playbackColour)
         self.makeSound(at: point)
     }
-    
+    /**
+     Mirrors touchesMoved for replayed performances.
+    **/
     func playbackMoved(_ point : CGPoint) {
         self.swiped = true;
         self.drawLine(from: self.lastPoint!, to: point, withColour: self.playbackColour)
@@ -126,6 +143,10 @@ class ChirpView: UIImageView {
         self.makeSound(at: point)
     }
     
+    
+    /**
+        Starts playback in the UIImage of a previously recorded performance.
+    **/
     func playback(recording record : NSMutableOrderedSet) {
         for touch in record.array as! [NSArray] {
             let time = touch[0] as! Double
@@ -133,10 +154,13 @@ class ChirpView: UIImageView {
         }
     }
     
+    /**
+     Function passed to Timers instantiated in `playback` to action touches at their scheduled time.
+    **/
     func processTimedTouch(withTimer timer : Timer) {
         let touch = timer.userInfo as! NSArray
-        let x = 300.0 * (touch[1] as! Double)
-        let y = 300.0 * (touch[2] as! Double)
+        let x = 300.0 * (touch[1] as! NSNumber).doubleValue
+        let y = 300.0 * (touch[2] as! NSNumber).doubleValue
         //float z = [(NSNumber *) touch[3] floatValue];
         let point = CGPoint(x:x, y:y)
         let moved = touch[4] as! Bool
