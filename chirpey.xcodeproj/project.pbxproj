@@ -74,7 +74,6 @@
 		5669CAAE1DA7AAA6009EEC3B /* chirpeyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = chirpeyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5669CAB21DA7AAA6009EEC3B /* chirpeyUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = chirpeyUITests.m; sourceTree = "<group>"; };
 		5669CAB41DA7AAA6009EEC3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5669CAC21DA7CFBA009EEC3B /* ChirpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChirpView.h; sourceTree = "<group>"; };
 		5669CAC61DA7D06A009EEC3B /* chirp.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chirp.pd; sourceTree = "<group>"; };
 		5669CAC91DA7D06A009EEC3B /* dispatch.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dispatch.pd; sourceTree = "<group>"; };
 		5669CACA1DA7D06A009EEC3B /* monopan.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = monopan.pd; sourceTree = "<group>"; };
@@ -154,7 +153,6 @@
 			isa = PBXGroup;
 			children = (
 				56621B0C1DE39D33009B9AB6 /* ChirpPerformance.swift */,
-				5669CAC21DA7CFBA009EEC3B /* ChirpView.h */,
 				56621B121DE4A496009B9AB6 /* ChirpView.swift */,
 				56621B0E1DE47376009B9AB6 /* AppDelegate.swift */,
 				56621B101DE47D5B009B9AB6 /* ViewController.swift */,
