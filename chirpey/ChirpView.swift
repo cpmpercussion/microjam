@@ -83,7 +83,7 @@ class ChirpView: UIImageView {
         and the current time.
      **/
     func recordTouch(at point : CGPoint, thatWasMoving moving : Bool) {
-        let time = -1.0 * self.startTime.timeIntervalSinceNow;
+        let time = -1.0 * self.startTime.timeIntervalSinceNow
         let x = point.x / 300.0
         let y = point.y / 300.0
         let z = 0.0
