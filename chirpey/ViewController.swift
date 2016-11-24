@@ -72,10 +72,9 @@ class ViewController: UIViewController, PdReceiverDelegate {
         self.progress = 0.0
         self.recordingProgress?.progress = 0.0
         NSLog("Timer stopped")
-        let record = self.chirpeySquare?.reset()
-        let recordingString = self.createCSVFromOrderedSet(set: record!);
-        self.writeCSVToFile(csvString: recordingString)
-        self.chirpeySquare?.playback(recording: record!)
+        let lastPerformance = self.chirpeySquare!.reset()
+        self.writeCSVToFile(csvString: lastPerformance.csv())
+        lastPerformance.playback(inView: self.chirpeySquare)
     }
     
     func updateProgressView(_ : Timer) {
@@ -83,28 +82,6 @@ class ViewController: UIViewController, PdReceiverDelegate {
         self.recordingProgress?.progress = Float(self.progress / 5.0)
         if (self.progress >= 5.0) {self.stopTimer()}
     }
-    
-    // MARK: - Data Processing Methods
-    // FIXME: This is really dodgy, the ordered set probably isn't very swift here.
-    func createCSVFromOrderedSet(set : NSMutableOrderedSet) -> String {
-        var output = "time,x,y,z,moving\n"
-        for item in set.array as! [[NSNumber]] {
-            let line = String(format:"%f, %f, %f, %f,%d\n", item[0], item[1], item[2], item[3], item[4])
-            output.append(line)
-        }
-        return output
-    }
-    
-//    - (NSString *) createCSVFromOrderedSet:(NSMutableOrderedSet *) set
-//    {
-//    NSString *output = @"time,x,y,z,moving\n";
-//    for (NSArray *item in set) {
-//    NSString *line = [NSString stringWithFormat:@"%f, %f, %f, %f,%d\n", ((NSNumber *) item[0]).floatValue, ((NSNumber *) item[1]).floatValue, ((NSNumber *) item[2]).floatValue, ((NSNumber *) item[3]).floatValue,((NSNumber *) item[4]).intValue];
-//    output = [output stringByAppendingString:line];
-//    }
-//    //output = [output stringByAppendingString:@" \n "];
-//    return output;
-//    }
     
     /**
      Writes a string to the documents directory with a title formed from the current date.
