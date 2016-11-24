@@ -9,10 +9,16 @@
 import UIKit
 
 class RecordingTableTableViewController: UITableViewController {
+    
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        // access the recording controller
+        recordingViewController = (self.tabBarController?.viewControllers?[1] as! ViewController)
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -28,24 +34,22 @@ class RecordingTableTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return (self.recordingViewController?.performanceRecordings.count)!
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 
         // Configure the cell...
-
+        let performance = (self.recordingViewController?.performanceRecordings[indexPath.row])! as ChirpPerformance
+        cell.textLabel?.text = performance.performer
+        cell.detailTextLabel?.text = performance.instrument
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.

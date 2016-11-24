@@ -18,11 +18,9 @@ class ViewController: UIViewController, PdReceiverDelegate {
     var openFile : PdFile?
     var progress = 0.0
     var progressTimer : Timer?
-    var performanceRecordings : [ChirpPerformance] = []
     
     @IBOutlet weak var chirpeySquare: ChirpView!
     @IBOutlet weak var recordingProgress: UIProgressView!
-    @IBOutlet weak var recordingsTable: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,7 +74,7 @@ class ViewController: UIViewController, PdReceiverDelegate {
         self.recordingProgress?.progress = 0.0
         NSLog("Timer stopped")
         let lastPerformance = self.chirpeySquare!.reset()
-        self.performanceRecordings.append(lastPerformance)
+        (UIApplication.shared.delegate as! AppDelegate).recordedPerformances.append(lastPerformance)
         self.writeCSVToFile(csvString: lastPerformance.csv())
         lastPerformance.playback(inView: self.chirpeySquare)
     }

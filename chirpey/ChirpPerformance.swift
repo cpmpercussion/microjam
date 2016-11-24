@@ -15,6 +15,9 @@ import UIKit
 class ChirpPerformance {
     /// Array of `TouchRecord`s to store performance data.
     var performanceData : [TouchRecord] = []
+    var date : Date?
+    var performer : String = ""
+    var instrument : String = ""
     let CSV_HEADER = "time,x,y,z,moving\n"
 
     /// Returns a CSV of the current performance data

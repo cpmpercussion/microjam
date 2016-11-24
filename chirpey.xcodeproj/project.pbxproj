@@ -158,12 +158,12 @@
 				56621B121DE4A496009B9AB6 /* ChirpView.swift */,
 				56621B0E1DE47376009B9AB6 /* AppDelegate.swift */,
 				56621B101DE47D5B009B9AB6 /* ViewController.swift */,
+				56621B141DE73236009B9AB6 /* RecordingTableTableViewController.swift */,
 				5669CA961DA7AAA6009EEC3B /* Main.storyboard */,
 				5669CA991DA7AAA6009EEC3B /* Assets.xcassets */,
 				5669CA9B1DA7AAA6009EEC3B /* LaunchScreen.storyboard */,
 				5669CA9E1DA7AAA6009EEC3B /* Info.plist */,
 				56621B091DE344E2009B9AB6 /* chirpey-Bridging-Header.h */,
-				56621B141DE73236009B9AB6 /* RecordingTableTableViewController.swift */,
 			);
 			path = chirpey;
 			sourceTree = "<group>";

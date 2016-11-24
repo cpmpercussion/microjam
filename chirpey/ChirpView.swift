@@ -9,8 +9,6 @@
 import UIKit
 
 class ChirpView: UIImageView {
-    
-    var fingerSubLayer : CALayer?
     var lastPoint : CGPoint?
     var recording = false
     var swiped = false
@@ -24,26 +22,27 @@ class ChirpView: UIImageView {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.fingerSubLayer = CALayer()
-        self.layer.addSublayer(self.fingerSubLayer!)
         self.isMultipleTouchEnabled = true
-        self.lastPoint = CG_INIT_POINT
-        self.swiped = false
-        self.performance = ChirpPerformance()
-        self.recording = false
+        self.startNewPerformance()
     }
     
     /// Resets the ChirpView for a new performance and returns the last performance.
     func reset() -> ChirpPerformance {
+        let output = self.performance
+        self.startNewPerformance()
+        return output!
+    }
+    
+    // Initialise the ChirpView for a new performance
+    func startNewPerformance() {
         self.recording = false
         self.started = false
         self.lastPoint = CG_INIT_POINT
         self.swiped = false
-        // spool out the recording data
-        let output = self.performance
-        self.performance = ChirpPerformance()
         self.image = UIImage()
-        return output!
+        self.performance = ChirpPerformance()
+        self.performance?.performer = "charles"
+        self.performance?.instrument = "chirp"
     }
     
     //MARK: - touch interaction
