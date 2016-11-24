@@ -13,22 +13,25 @@ class ViewController: UIViewController, PdReceiverDelegate {
     let TICKS_PER_BUFFER = 4
     let PATCH_NAME = "chirp.pd"
     
+    
     var audioController : PdAudioController?
     var openFile : PdFile?
     var progress = 0.0
     var progressTimer : Timer?
+    var performanceRecordings : [ChirpPerformance] = []
     
     @IBOutlet weak var chirpeySquare: ChirpView!
     @IBOutlet weak var recordingProgress: UIProgressView!
+    @IBOutlet weak var recordingsTable: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        #if TARGET_IPHONE_SIMULATOR
-            // where are you?
-            NSLog("Documents Directory: %@", FileManager.default.urls(
-                for: .documentDirectory,
-                in: .userDomainMask).lastObject())
-        #endif
+        //#if TARGET_IPHONE_SIMULATOR
+        // where are you?
+//        NSLog("Documents Directory: %@", FileManager.default.urls(
+//            for: .documentDirectory,
+//            in: .userDomainMask).last!)
+        //#endif
 
         self.startAudioEngine()
         self.recordingProgress!.progress = 0.0
@@ -73,6 +76,7 @@ class ViewController: UIViewController, PdReceiverDelegate {
         self.recordingProgress?.progress = 0.0
         NSLog("Timer stopped")
         let lastPerformance = self.chirpeySquare!.reset()
+        self.performanceRecordings.append(lastPerformance)
         self.writeCSVToFile(csvString: lastPerformance.csv())
         lastPerformance.playback(inView: self.chirpeySquare)
     }
