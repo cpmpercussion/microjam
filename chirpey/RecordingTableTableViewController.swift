@@ -11,14 +11,10 @@ import UIKit
 class RecordingTableTableViewController: UITableViewController {
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // access the recording controller
-        recordingViewController = (self.tabBarController?.viewControllers?[1] as! ViewController)
-        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -38,14 +34,14 @@ class RecordingTableTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (self.recordingViewController?.performanceRecordings.count)!
+        return appDelegate.recordedPerformances.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "performanceRecordingCell", for: indexPath)
 
         // Configure the cell...
-        let performance = (self.recordingViewController?.performanceRecordings[indexPath.row])! as ChirpPerformance
+        let performance = appDelegate.recordedPerformances[indexPath.row]
         cell.textLabel?.text = performance.performer
         cell.detailTextLabel?.text = performance.instrument
         return cell

@@ -12,18 +12,55 @@
  */
 import UIKit
 
-class ChirpPerformance {
+class ChirpPerformance : NSObject, NSCoding {
     /// Array of `TouchRecord`s to store performance data.
     var performanceData : [TouchRecord] = []
     var date : Date?
     var performer : String = ""
     var instrument : String = ""
-    let CSV_HEADER = "time,x,y,z,moving\n"
+
+    // Static vars
+    static let CSV_HEADER = "time,x,y,z,moving\n"
+    
+    struct PropertyKey {
+        static let performanceDataKey = "performanceData"
+        static let dateKey = "date"
+        static let performerKey = "performer"
+        static let instrumentKey = "instrument"
+    }
+    
+    /// NSCoder Encoding
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(performanceData, forKey: PropertyKey.performanceDataKey)
+        aCoder.encode(date, forKey: PropertyKey.dateKey)
+        aCoder.encode(performer, forKey: PropertyKey.performerKey)
+        aCoder.encode(instrument, forKey: PropertyKey.instrumentKey)
+        
+    }
+
+    /// NSCoder Decoding
+    required convenience init?(coder aDecoder: NSCoder) {
+        let data = aDecoder.decodeObject(forKey: PropertyKey.performanceDataKey) as! [TouchRecord]
+        let date = aDecoder.decodeObject(forKey: PropertyKey.dateKey) as? Date
+        let performer = aDecoder.decodeObject(forKey: PropertyKey.performerKey) as! String
+        let instrument = aDecoder.decodeObject(forKey: PropertyKey.instrumentKey) as! String
+        
+        self.init(data: data, date: date!, performer: performer, instrument: instrument)
+    }
+
+    init?(data: [TouchRecord], date: Date, performer: String, instrument: String) {
+        self.performanceData = data
+        self.date = date
+        self.performer = performer
+        self.instrument = instrument
+        
+        super.init()
+    }
 
     /// Returns a CSV of the current performance data
     func csv() -> String {
         var output = ""
-        output += CSV_HEADER
+        output += ChirpPerformance.CSV_HEADER
         for touch in self.performanceData {
             output += touch.csv
         }
