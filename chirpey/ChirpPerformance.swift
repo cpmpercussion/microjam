@@ -43,12 +43,13 @@ class ChirpPerformance : NSObject, NSCoding {
 
     /// NSCoder Decoding
     required convenience init?(coder aDecoder: NSCoder) {
-        let data = aDecoder.decodeObject(forKey: PropertyKey.performanceDataKey) as! [TouchRecord]
-        let date = aDecoder.decodeObject(forKey: PropertyKey.dateKey) as? Date
-        let performer = aDecoder.decodeObject(forKey: PropertyKey.performerKey) as! String
-        let instrument = aDecoder.decodeObject(forKey: PropertyKey.instrumentKey) as! String
+        guard let data = aDecoder.decodeObject(forKey: PropertyKey.performanceDataKey) as? [TouchRecord],
+            let date = aDecoder.decodeObject(forKey: PropertyKey.dateKey) as? Date,
+            let performer = aDecoder.decodeObject(forKey: PropertyKey.performerKey) as? String,
+            let instrument = aDecoder.decodeObject(forKey: PropertyKey.instrumentKey) as? String
+            else {return nil}
         
-        self.init(data: data, date: date!, performer: performer, instrument: instrument)
+        self.init(data: data, date: date, performer: performer, instrument: instrument)
     }
 
     init(data: [TouchRecord], date: Date, performer: String, instrument: String) {
@@ -69,7 +70,7 @@ class ChirpPerformance : NSObject, NSCoding {
         var output = ""
         output += ChirpPerformance.CSV_HEADER
         for touch in self.performanceData {
-            output += touch.csv
+            output += touch.csv()
         }
         return output
     }
@@ -99,7 +100,7 @@ class ChirpPerformance : NSObject, NSCoding {
  
  Includes functions to output a single CSV line representing the touch.
  */
-struct TouchRecord {
+class TouchRecord: NSObject, NSCoding {
     /// Time since the start of the recording in seconds
     var time : Double
     /// location in square in [0,1]
@@ -110,12 +111,50 @@ struct TouchRecord {
     var z : Double
     /// whether the touch was moving when recorded
     var moving : Bool
-    /// Readable string version of the touchRecord
-    var description : String {
-        return String.init(format: "%f %f %f %f %@", time,x,y,z,moving.description)
+    
+    struct PropertyKey {
+        static let time = "time"
+        static let x = "x"
+        static let y = "y"
+        static let z = "z"
+        static let moving = "moving"
     }
+    
+    init(time: Double, x: Double, y: Double, z: Double, moving: Bool) {
+        self.time = time
+        self.x = x
+        self.y = y
+        self.z = z
+        self.moving = moving
+        super.init()
+    }
+    
+//    /// Readable string version of the touchRecord
+//    func description() -> String {
+//        return String.init(format: "%f %f %f %f %@", time,x,y,z,moving.description)
+//    }
+    
     /// CSV version of the touchRecord for output to file
-    var csv : String {
+    func csv() -> String {
         return String(format:"%f, %f, %f, %f, %d\n", time, x, y, z, moving ? 0 : 1)
     }
+    
+    required convenience init?(coder aDecoder: NSCoder) {
+        guard let time = aDecoder.decodeObject(forKey: PropertyKey.time) as? Double,
+            let x = aDecoder.decodeObject(forKey: PropertyKey.x) as? Double,
+            let y = aDecoder.decodeObject(forKey: PropertyKey.y) as? Double,
+            let z = aDecoder.decodeObject(forKey: PropertyKey.z) as? Double,
+            let moving = aDecoder.decodeObject(forKey: PropertyKey.moving) as? Bool
+            else { return nil }
+        self.init(time: time, x: x, y: y, z: z, moving: moving)
+    }
+    
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(self.time, forKey: PropertyKey.time)
+        aCoder.encode(self.x, forKey: PropertyKey.x)
+        aCoder.encode(self.y, forKey: PropertyKey.y)
+        aCoder.encode(self.z, forKey: PropertyKey.z)
+        aCoder.encode(self.moving, forKey: PropertyKey.moving)
+    }
 }
+
