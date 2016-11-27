@@ -21,6 +21,9 @@ class ChirpPerformance : NSObject, NSCoding {
 
     // Static vars
     static let CSV_HEADER = "time,x,y,z,moving\n"
+    // MARK: Archiving Paths
+    static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
+    static let ArchiveURL = DocumentsDirectory.appendingPathComponent("performances")
     
     struct PropertyKey {
         static let performanceDataKey = "performanceData"
@@ -48,13 +51,17 @@ class ChirpPerformance : NSObject, NSCoding {
         self.init(data: data, date: date!, performer: performer, instrument: instrument)
     }
 
-    init?(data: [TouchRecord], date: Date, performer: String, instrument: String) {
+    init(data: [TouchRecord], date: Date, performer: String, instrument: String) {
         self.performanceData = data
         self.date = date
         self.performer = performer
         self.instrument = instrument
         
         super.init()
+    }
+    
+    convenience override init() {
+        self.init(data : [], date : Date(), performer : "", instrument : "")
     }
 
     /// Returns a CSV of the current performance data

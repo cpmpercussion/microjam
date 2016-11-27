@@ -13,7 +13,6 @@ class ViewController: UIViewController, PdReceiverDelegate {
     let TICKS_PER_BUFFER = 4
     let PATCH_NAME = "chirp.pd"
     
-    
     var audioController : PdAudioController?
     var openFile : PdFile?
     var progress = 0.0
@@ -75,8 +74,9 @@ class ViewController: UIViewController, PdReceiverDelegate {
         NSLog("Timer stopped")
         let lastPerformance = self.chirpeySquare!.reset()
         (UIApplication.shared.delegate as! AppDelegate).recordedPerformances.append(lastPerformance)
-        self.writeCSVToFile(csvString: lastPerformance.csv())
-        lastPerformance.playback(inView: self.chirpeySquare)
+        (UIApplication.shared.delegate as! AppDelegate).savePerformances()
+        //self.writeCSVToFile(csvString: lastPerformance.csv())
+        //lastPerformance.playback(inView: self.chirpeySquare) // no playback for now.
     }
     
     func updateProgressView(_ : Timer) {
