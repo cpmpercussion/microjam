@@ -38,12 +38,12 @@ class RecordingTableTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "performanceRecordingCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "perfRecCell", for: indexPath)
 
         // Configure the cell...
         let performance = appDelegate.recordedPerformances[indexPath.row]
-        cell.textLabel?.text = performance.performer
-        cell.detailTextLabel?.text = performance.instrument
+        cell.textLabel?.text = performance.dateString()
+        cell.detailTextLabel?.text = performance.performer + " " + performance.instrument
         return cell
     }
 

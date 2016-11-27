@@ -85,17 +85,6 @@ class ViewController: UIViewController, PdReceiverDelegate {
         if (self.progress >= 5.0) {self.stopTimer()}
     }
     
-    /**
-     Writes a string to the documents directory with a title formed from the current date.
-    **/
-    func writeCSVToFile(csvString : String) {
-        var filePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-        let formatter = DateFormatter()
-        formatter.dateFormat = "YYYY-MM-DD-HH-mm-SS"
-        let dateString = formatter.string(from: Date());
-        filePath.append(String(format: "chirprec-%@", dateString))
-        try! csvString.write(toFile: filePath, atomically: true, encoding: String.Encoding.utf8)
-    }
     
     // MARK: - Touch methods
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

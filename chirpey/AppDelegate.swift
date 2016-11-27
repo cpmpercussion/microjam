@@ -20,9 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         if let savedPerformances = self.loadPerformances() {
             self.recordedPerformances += savedPerformances
+            NSLog("AD: Successfully loaded %d performances", self.recordedPerformances.count)
         } else {
-            print("AD: Failed to load performances")
+            NSLog("AD: Failed to load performances")
         }
+        
         return true
     }
     

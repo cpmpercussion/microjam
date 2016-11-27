@@ -15,7 +15,7 @@ import UIKit
 class ChirpPerformance : NSObject, NSCoding {
     /// Array of `TouchRecord`s to store performance data.
     var performanceData : [TouchRecord] = []
-    var date : Date?
+    var date : Date
     var performer : String = ""
     var instrument : String = ""
 
@@ -31,6 +31,8 @@ class ChirpPerformance : NSObject, NSCoding {
         static let performerKey = "performer"
         static let instrumentKey = "instrument"
     }
+    
+
     
     /// NSCoder Encoding
     func encode(with aCoder: NSCoder) {
@@ -87,6 +89,25 @@ class ChirpPerformance : NSObject, NSCoding {
             Timer.scheduledTimer(withTimeInterval: touch.time, repeats: false, block: processor)
         }
     }
+    
+    
+    /// Writes a string to the documents directory with a title formed from the current date.
+    func writeCSVToFile(csvString : String) {
+        var filePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        let formatter = DateFormatter()
+        formatter.dateFormat = "YYYY-MM-DD-HH-mm-SS"
+        let dateString = formatter.string(from: self.date)
+        filePath.append(String(format: "chirprec-%@", dateString))
+        try! csvString.write(toFile: filePath, atomically: true, encoding: String.Encoding.utf8)
+    }
+    
+    /// Return a dateString that would work for adding to the performance list.
+    func dateString() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "YYYY-MM-DD, HH:mm:SS"
+        return formatter.string(from: self.date)
+    }
+    
 }
 
 /**
