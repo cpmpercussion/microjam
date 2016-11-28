@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		56621B0D1DE39D33009B9AB6 /* ChirpPerformance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56621B0C1DE39D33009B9AB6 /* ChirpPerformance.swift */; };
 		56621B0F1DE47376009B9AB6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56621B0E1DE47376009B9AB6 /* AppDelegate.swift */; };
-		56621B111DE47D5B009B9AB6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56621B101DE47D5B009B9AB6 /* ViewController.swift */; };
+		56621B111DE47D5B009B9AB6 /* ChirpJamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56621B101DE47D5B009B9AB6 /* ChirpJamViewController.swift */; };
 		56621B131DE4A496009B9AB6 /* ChirpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56621B121DE4A496009B9AB6 /* ChirpView.swift */; };
 		56621B151DE73236009B9AB6 /* RecordingTableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56621B141DE73236009B9AB6 /* RecordingTableTableViewController.swift */; };
 		56621B171DEC27B0009B9AB6 /* PerformanceTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56621B161DEC27B0009B9AB6 /* PerformanceTableCell.swift */; };
@@ -63,7 +63,7 @@
 		56621B091DE344E2009B9AB6 /* chirpey-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "chirpey-Bridging-Header.h"; sourceTree = "<group>"; };
 		56621B0C1DE39D33009B9AB6 /* ChirpPerformance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChirpPerformance.swift; sourceTree = "<group>"; };
 		56621B0E1DE47376009B9AB6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		56621B101DE47D5B009B9AB6 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		56621B101DE47D5B009B9AB6 /* ChirpJamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChirpJamViewController.swift; sourceTree = "<group>"; };
 		56621B121DE4A496009B9AB6 /* ChirpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChirpView.swift; sourceTree = "<group>"; };
 		56621B141DE73236009B9AB6 /* RecordingTableTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingTableTableViewController.swift; sourceTree = "<group>"; };
 		56621B161DEC27B0009B9AB6 /* PerformanceTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PerformanceTableCell.swift; sourceTree = "<group>"; };
@@ -159,7 +159,7 @@
 				56621B0C1DE39D33009B9AB6 /* ChirpPerformance.swift */,
 				56621B121DE4A496009B9AB6 /* ChirpView.swift */,
 				56621B0E1DE47376009B9AB6 /* AppDelegate.swift */,
-				56621B101DE47D5B009B9AB6 /* ViewController.swift */,
+				56621B101DE47D5B009B9AB6 /* ChirpJamViewController.swift */,
 				56621B141DE73236009B9AB6 /* RecordingTableTableViewController.swift */,
 				56621B161DEC27B0009B9AB6 /* PerformanceTableCell.swift */,
 				5669CA961DA7AAA6009EEC3B /* Main.storyboard */,
@@ -483,7 +483,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				56621B111DE47D5B009B9AB6 /* ViewController.swift in Sources */,
+				56621B111DE47D5B009B9AB6 /* ChirpJamViewController.swift in Sources */,
 				56621B0F1DE47376009B9AB6 /* AppDelegate.swift in Sources */,
 				56621B131DE4A496009B9AB6 /* ChirpView.swift in Sources */,
 				56621B0D1DE39D33009B9AB6 /* ChirpPerformance.swift in Sources */,

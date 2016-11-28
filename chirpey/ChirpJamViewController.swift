@@ -7,7 +7,7 @@
 //
 import UIKit
 
-class ViewController: UIViewController, PdReceiverDelegate {
+class ChirpJamViewController: UIViewController, PdReceiverDelegate {
     let SOUND_OUTPUT_CHANNELS = 2
     let SAMPLE_RATE = 44100
     let TICKS_PER_BUFFER = 4
