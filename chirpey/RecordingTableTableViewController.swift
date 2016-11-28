@@ -47,6 +47,7 @@ class RecordingTableTableViewController: UITableViewController {
         cell.title.text = performance.dateString()
         cell.performer.text = performance.performer
         cell.instrument.text = performance.instrument
+        cell.previewImage.image = performance.image
         return cell
     }
 

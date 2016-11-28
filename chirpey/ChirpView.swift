@@ -28,6 +28,8 @@ class ChirpView: UIImageView {
     
     /// Resets the ChirpView for a new performance and returns the last performance.
     func reset() -> ChirpPerformance {
+        self.performance?.image = self.image!
+        self.performance?.date = Date()
         let output = self.performance
         self.startNewPerformance()
         return output!
@@ -67,7 +69,6 @@ class ChirpView: UIImageView {
         self.makeSound(at: currentPoint!)
         self.recordTouch(at: currentPoint!, thatWasMoving: true)
     }
-    
     
     /// Given a point in the UIImage, sends a touch point to Pd to process for sound.
     func makeSound(at point : CGPoint) {

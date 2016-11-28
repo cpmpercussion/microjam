@@ -18,6 +18,7 @@ class ChirpPerformance : NSObject, NSCoding {
     var date : Date
     var performer : String = ""
     var instrument : String = ""
+    var image : UIImage
 
     // Static vars
     static let CSV_HEADER = "time,x,y,z,moving\n"
@@ -30,6 +31,7 @@ class ChirpPerformance : NSObject, NSCoding {
         static let dateKey = "date"
         static let performerKey = "performer"
         static let instrumentKey = "instrument"
+        static let imageKey = "image"
     }
     
 
@@ -40,6 +42,7 @@ class ChirpPerformance : NSObject, NSCoding {
         aCoder.encode(date, forKey: PropertyKey.dateKey)
         aCoder.encode(performer, forKey: PropertyKey.performerKey)
         aCoder.encode(instrument, forKey: PropertyKey.instrumentKey)
+        aCoder.encode(UIImagePNGRepresentation(image), forKey: PropertyKey.imageKey)
         
     }
 
@@ -48,23 +51,25 @@ class ChirpPerformance : NSObject, NSCoding {
         guard let data = aDecoder.decodeObject(forKey: PropertyKey.performanceDataKey) as? [TouchRecord],
             let date = aDecoder.decodeObject(forKey: PropertyKey.dateKey) as? Date,
             let performer = aDecoder.decodeObject(forKey: PropertyKey.performerKey) as? String,
-            let instrument = aDecoder.decodeObject(forKey: PropertyKey.instrumentKey) as? String
+            let instrument = aDecoder.decodeObject(forKey: PropertyKey.instrumentKey) as? String,
+            let image = UIImage(data: (aDecoder.decodeObject(forKey: PropertyKey.imageKey) as? Data)!)
             else {return nil}
         
-        self.init(data: data, date: date, performer: performer, instrument: instrument)
+        self.init(data: data, date: date, performer: performer, instrument: instrument, image: image)
     }
 
-    init(data: [TouchRecord], date: Date, performer: String, instrument: String) {
+    init(data: [TouchRecord], date: Date, performer: String, instrument: String, image: UIImage) {
         self.performanceData = data
         self.date = date
         self.performer = performer
         self.instrument = instrument
+        self.image = image
         
         super.init()
     }
     
     convenience override init() {
-        self.init(data : [], date : Date(), performer : "", instrument : "")
+        self.init(data : [], date : Date(), performer : "", instrument : "", image : UIImage())
     }
 
     /// Returns a CSV of the current performance data
@@ -104,7 +109,7 @@ class ChirpPerformance : NSObject, NSCoding {
     /// Return a dateString that would work for adding to the performance list.
     func dateString() -> String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "YYYY-MM-DD, HH:mm:SS"
+        formatter.dateFormat = "E, d MMM yyyy HH:mm:ss"
         return formatter.string(from: self.date)
     }
     
