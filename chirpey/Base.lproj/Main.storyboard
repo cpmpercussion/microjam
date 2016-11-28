@@ -12,7 +12,7 @@
         <!--Jam-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="Jam" id="BYZ-38-t0r" customClass="ViewController" customModule="chirpey" sceneMemberID="viewController">
+                <viewController title="Jam" id="BYZ-38-t0r" customClass="ChirpJamViewController" customModule="chirpey" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
