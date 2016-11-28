@@ -59,6 +59,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return loadedPerformances
 
     }
+
+    /// Add a new performance to the list and then save the list.
+    func addNew(performance : ChirpPerformance) {
+        self.recordedPerformances.append(performance)
+        self.savePerformances()
+    }
     
     
     func savePerformances() {

@@ -51,6 +51,17 @@ class RecordingTableTableViewController: UITableViewController {
         cell.previewImage.image = performance.image
         return cell
     }
+    
+    @IBAction func unwindToPerformanceList(sender: UIStoryboardSegue) {
+        if let sourceViewController = sender.source as? ChirpJamViewController, let performance = sourceViewController.loadedPerformance {
+            
+            let newIndexPath = NSIndexPath(row: appDelegate.recordedPerformances.count, section: 0)
+            appDelegate.addNew(performance: performance)
+            self.tableView.insertRows(at: [newIndexPath as IndexPath], with: .bottom)
+            
+        }
+        
+    }
 
     /*
     // Override to support conditional editing of the table view.

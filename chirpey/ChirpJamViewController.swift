@@ -27,6 +27,19 @@ class ChirpJamViewController: UIViewController, PdReceiverDelegate {
     @IBOutlet weak var instrumentLabel: UILabel!
     @IBOutlet weak var chirpeySquare: ChirpView!
     @IBOutlet weak var recordingProgress: UIProgressView!
+    @IBOutlet weak var savePerformanceButton: UIBarButtonItem!
+    
+    
+    /// MARK: - Navigation
+    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if savePerformanceButton === sender {
+            
+//            (UIApplication.shared.delegate as! AppDelegate).recordedPerformances.append(loadedPerformance)
+//            (UIApplication.shared.delegate as! AppDelegate).savePerformances()
+        } else {
+            self.loadedPerformance = nil
+        }
+    }
     
     /// MARK: - UI Interaction Functions
     @IBAction func playButtonPressed(_ sender: UIButton) {
@@ -94,8 +107,6 @@ class ChirpJamViewController: UIViewController, PdReceiverDelegate {
         self.recordingProgress?.progress = 0.0
         NSLog("JAMVC: Recording time finished, stopping recording. Now loading the recorded performance.")
         let lastPerformance = self.chirpeySquare!.reset()
-        (UIApplication.shared.delegate as! AppDelegate).recordedPerformances.append(lastPerformance)
-        (UIApplication.shared.delegate as! AppDelegate).savePerformances()
         self.load(performance: lastPerformance)
         //self.writeCSVToFile(csvString: lastPerformance.csv())
     }
