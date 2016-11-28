@@ -30,18 +30,69 @@
                                 <rect key="frame" x="37" y="336" width="300" height="2"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </progressView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O9V-pQ-Tlh">
+                                <rect key="frame" x="37" y="357" width="95" height="95"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Play"/>
+                                <connections>
+                                    <action selector="playButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dgp-Uu-Gtl"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HfI-q6-7dd">
+                                <rect key="frame" x="242" y="357" width="95" height="95"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Jam"/>
+                                <connections>
+                                    <action selector="jamButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tfY-Hj-qaX"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xh5-cz-PkR">
+                                <rect key="frame" x="140" y="357" width="95" height="95"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Rec"/>
+                                <connections>
+                                    <action selector="recButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Zlu-pH-cnt"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Status Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PBg-aK-YtU">
+                                <rect key="frame" x="37" y="460" width="300" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="performer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Mx-bs-Bwy">
+                                <rect key="frame" x="37" y="489" width="300" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="instrument" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TQa-eA-Jfx">
+                                <rect key="frame" x="37" y="518" width="300" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="favorites" id="SNw-oU-cp4"/>
                     <connections>
                         <outlet property="chirpeySquare" destination="xQz-CD-1rT" id="3D9-yP-adH"/>
+                        <outlet property="instrumentLabel" destination="TQa-eA-Jfx" id="arQ-vd-a5R"/>
+                        <outlet property="jamButton" destination="HfI-q6-7dd" id="rub-hB-VgX"/>
+                        <outlet property="performerLabel" destination="1Mx-bs-Bwy" id="E9T-t5-KvJ"/>
+                        <outlet property="playButton" destination="O9V-pQ-Tlh" id="G3q-ZV-wU4"/>
+                        <outlet property="recButton" destination="Xh5-cz-PkR" id="IfS-9p-srM"/>
                         <outlet property="recordingProgress" destination="yna-Q3-0q0" id="MIs-Qa-IgM"/>
+                        <outlet property="statusLabel" destination="PBg-aK-YtU" id="XoF-Hm-cWg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1729" y="-213"/>
+            <point key="canvasLocation" x="1728.8" y="-213.64317841079463"/>
         </scene>
         <!--Recordings-->
         <scene sceneID="aLy-Ok-N4a">
