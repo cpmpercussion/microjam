@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// View class for short touch-interaction musical performances.
 class ChirpView: UIImageView {
     var lastPoint : CGPoint?
     var recording = false
@@ -30,6 +31,7 @@ class ChirpView: UIImageView {
     /// Resets the ChirpView for a new performance and returns the last performance.
     func reset() -> ChirpPerformance {
         self.performance?.image = self.image!
+        // FIXME: overwrites the date each time a chirpview is reset.
         self.performance?.date = Date()
         let output = self.performance
         self.startNewPerformance()
@@ -153,33 +155,4 @@ class ChirpView: UIImageView {
         return playbackTouch
     }
     
-//    /**
-//        Starts playback in the UIImage of a previously recorded performance.
-//    **/
-//    func playback(recording record : NSMutableOrderedSet) {
-//        for touch in record.array as! [NSArray] {
-//            let time = touch[0] as! Double
-//            Timer.scheduledTimer(timeInterval: time, target: self, selector: #selector(processTimedTouch), userInfo: touch, repeats: false)
-//        }
-//    }
-    
-//    /**
-//     Function passed to Timers instantiated in `playback` to action touches at their scheduled time.
-//    **/
-//    func processTimedTouch(withTimer timer : Timer) {
-//        let touch = timer.userInfo as! NSArray
-//        let x = 300.0 * (touch[1] as! NSNumber).doubleValue
-//        let y = 300.0 * (touch[2] as! NSNumber).doubleValue
-//        //float z = [(NSNumber *) touch[3] floatValue];
-//        let point = CGPoint(x:x, y:y)
-//        let moved = touch[4] as! Bool
-//        if (moved) {
-//            self.playbackMoved(point)
-//        } else {
-//            self.playbackBegan(point)
-//        }
-//    }
-
-
-
 }
