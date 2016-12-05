@@ -7,18 +7,12 @@
 //
 import UIKit
 
-class ChirpJamViewController: UIViewController, PdReceiverDelegate {
-    let SOUND_OUTPUT_CHANNELS = 2
-    let SAMPLE_RATE = 44100
-    let TICKS_PER_BUFFER = 4
-    let PATCH_NAME = "chirp.pd"
-    
-    var audioController : PdAudioController?
-    var openFile : PdFile?
+class ChirpJamViewController: UIViewController {
+    let RECORDING_TIME = 5.0
     var progress = 0.0
     var progressTimer : Timer?
     var loadedPerformance : ChirpPerformance?
-    
+
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var recButton: UIButton!
     @IBOutlet weak var jamButton: UIButton!
@@ -28,8 +22,6 @@ class ChirpJamViewController: UIViewController, PdReceiverDelegate {
     @IBOutlet weak var chirpeySquare: ChirpView!
     @IBOutlet weak var recordingProgress: UIProgressView!
     @IBOutlet weak var savePerformanceButton: UIBarButtonItem!
-    
-    
     /// MARK: - Navigation
     func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if savePerformanceButton === sender {
@@ -38,6 +30,16 @@ class ChirpJamViewController: UIViewController, PdReceiverDelegate {
 //            (UIApplication.shared.delegate as! AppDelegate).savePerformances()
         } else {
             self.loadedPerformance = nil
+        }
+    }
+    
+    @IBAction func cancelPerformance(_ sender: UIBarButtonItem) {
+        print("JAMVC: Cancel Button Pressed.")
+        let isPresentingInAddPerformanceMode = presentingViewController is UINavigationController
+        if isPresentingInAddPerformanceMode {
+            dismiss(animated: true, completion: nil)
+        } else {
+            navigationController!.popViewController(animated: true)
         }
     }
     
@@ -62,8 +64,11 @@ class ChirpJamViewController: UIViewController, PdReceiverDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.startAudioEngine()
         self.recordingProgress!.progress = 0.0
+        
+        if loadedPerformance != nil {
+            self.updateUI()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -71,50 +76,49 @@ class ChirpJamViewController: UIViewController, PdReceiverDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    // MARK: - Pd Engine Functions
-    func startAudioEngine() {
-        NSLog("JAMVC: Starting Audio Engine");
-        self.audioController = PdAudioController()
-        self.audioController?.configurePlayback(withSampleRate: Int32(SAMPLE_RATE), numberChannels: Int32(SOUND_OUTPUT_CHANNELS), inputEnabled: false, mixingEnabled: true)
-        self.audioController?.configureTicksPerBuffer(Int32(TICKS_PER_BUFFER))
-        //    [self openPdPatch];
-        PdBase.setDelegate(self)
-        PdBase.subscribe("toGUI")
-        PdBase.openFile(PATCH_NAME, path: Bundle.main.bundlePath)
-        self.audioController?.isActive = true
-        //[self.audioController setActive:YES];
-        self.audioController?.print()
-        NSLog("JAMVC: Ticks Per Buffer: %d",self.audioController?.ticksPerBuffer ?? "didn't work!");
-    }
-    
-    /// Receives print messages from Pd for debugging
-    func receivePrint(_ message: String!) {
-        NSLog("Pd: %@", message)
-    }
-
     // MARK: - Recording Functions
+    /// Sets into recording mode and starts the timer.
     func startRecording() {
         if (!self.chirpeySquare!.recording) {
             NSLog("JAMVC: Starting a recording.")
-            self.progressTimer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: self.incrementRecordingProgress)
+            self.startProgressBar()
             self.chirpeySquare?.recording = true
         }
     }
     
+    
+    func startPlayback() {
+        if (!self.chirpeySquare!.playing) {
+            NSLog("JAMVC: Starting playback.")
+            self.startProgressBar()
+            self.chirpeySquare?.playing = true
+        }
+    }
+    
+    func startProgressBar() {
+        self.progressTimer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: self.incrementRecordingProgress)
+    }
+    
+    /// Automatically triggered when recording time finishes.
     func stopTimer() {
+        NSLog("JAMVC: Timer finished.")
+        self.stopRecording()
         self.progressTimer?.invalidate()
         self.progress = 0.0
         self.recordingProgress?.progress = 0.0
-        NSLog("JAMVC: Recording time finished, stopping recording. Now loading the recorded performance.")
+    }
+    
+    /// Stops the current recording.
+    func stopRecording() {
+        print("JAMVC: Stopping Recording and loading the recorded performance.")
         let lastPerformance = self.chirpeySquare!.reset()
         self.load(performance: lastPerformance)
-        //self.writeCSVToFile(csvString: lastPerformance.csv())
     }
     
     func incrementRecordingProgress(_ : Timer) {
         self.progress += 0.01;
-        self.recordingProgress?.progress = Float(self.progress / 5.0)
-        if (self.progress >= 5.0) {self.stopTimer()}
+        self.recordingProgress?.progress = Float(self.progress / self.RECORDING_TIME)
+        if (self.progress >= self.RECORDING_TIME) {self.stopTimer()}
     }
     
     // MARK: - Touch methods
@@ -126,20 +130,20 @@ class ChirpJamViewController: UIViewController, PdReceiverDelegate {
         }
     }
 
-    // MARK: - Loading Performances
     /// Load a ChirpPerformance for playback and reaction
     func load(performance: ChirpPerformance) {
         self.loadedPerformance = performance
         self.updateUI()
     }
     
-    /// Update the UI Labels to reflect the loaded performance.
+    /// Update the UI labels and image only if there is a valid performance loaded.
     func updateUI() {
-        if (self.loadedPerformance != nil) {
-            self.statusLabel.text = "Loaded: " + (self.loadedPerformance?.dateString())!
-            self.performerLabel.text = "By: " + (self.loadedPerformance?.performer)!
-            self.instrumentLabel.text = "With: " + (self.loadedPerformance?.instrument)!
-            self.chirpeySquare.image = self.loadedPerformance?.image
+        if let loadedPerformance = loadedPerformance {
+            self.navigationItem.title = loadedPerformance.dateString()
+            self.statusLabel.text = "Loaded: " + (loadedPerformance.dateString())
+            self.performerLabel.text = "By: " + (loadedPerformance.performer)
+            self.instrumentLabel.text = "With: " + (loadedPerformance.instrument)
+            self.chirpeySquare.image = loadedPerformance.image
         }
     }
 }

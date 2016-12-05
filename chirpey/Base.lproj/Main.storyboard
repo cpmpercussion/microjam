@@ -81,7 +81,11 @@
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="New Performance" id="s03-xk-IIg">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Y3a-G9-SuM"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Y3a-G9-SuM">
+                            <connections>
+                                <action selector="cancelPerformance:" destination="BYZ-38-t0r" id="lsO-Mq-Cpf"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="wbR-IC-fN1">
                             <connections>
                                 <segue destination="ysn-Br-JNc" kind="unwind" unwindAction="unwindToPerformanceListWithSender:" id="SKG-qS-wPT"/>
@@ -103,7 +107,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <exit id="ysn-Br-JNc" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3068" y="-12"/>
+            <point key="canvasLocation" x="3001" y="-12"/>
         </scene>
         <!--Recordings-->
         <scene sceneID="aLy-Ok-N4a">
@@ -153,6 +157,7 @@
                                     <outlet property="performer" destination="NEf-FN-uYe" id="BIH-ye-gME"/>
                                     <outlet property="previewImage" destination="hR6-wH-oPi" id="NWj-sB-BEx"/>
                                     <outlet property="title" destination="RBO-IN-hZb" id="FSh-py-I9y"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="ShowDetail" id="CvC-hy-feA"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -208,10 +213,13 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eyl-Pi-XeA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2220" y="-12.143928035982009"/>
+            <point key="canvasLocation" x="2191" y="340"/>
         </scene>
     </scenes>
     <resources>
         <image name="defaultRecordingImage" width="150" height="150"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="CvC-hy-feA"/>
+    </inferredMetricsTieBreakers>
 </document>

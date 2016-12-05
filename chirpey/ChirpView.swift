@@ -11,6 +11,7 @@ import UIKit
 class ChirpView: UIImageView {
     var lastPoint : CGPoint?
     var recording = false
+    var playing = false
     var swiped = false
     var started = false
     var startTime = Date()
@@ -38,6 +39,7 @@ class ChirpView: UIImageView {
     // Initialise the ChirpView for a new performance
     func startNewPerformance() {
         self.recording = false
+        self.playing = false
         self.started = false
         self.lastPoint = CG_INIT_POINT
         self.swiped = false

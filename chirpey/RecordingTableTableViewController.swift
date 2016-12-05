@@ -15,6 +15,7 @@ class RecordingTableTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.leftBarButtonItem = editButtonItem // system provided edit button.
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -29,7 +30,6 @@ class RecordingTableTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -55,33 +55,38 @@ class RecordingTableTableViewController: UITableViewController {
     @IBAction func unwindToPerformanceList(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.source as? ChirpJamViewController, let performance = sourceViewController.loadedPerformance {
             
-            let newIndexPath = NSIndexPath(row: appDelegate.recordedPerformances.count, section: 0)
-            appDelegate.addNew(performance: performance)
-            self.tableView.insertRows(at: [newIndexPath as IndexPath], with: .bottom)
-            
+            if let selectedIndexPath = tableView.indexPathForSelectedRow {
+                // Update existing performance
+                appDelegate.recordedPerformances[selectedIndexPath.row] = performance
+                tableView.reloadRows(at: [selectedIndexPath], with: .none)
+            } else {
+                // Add a new performance
+                let newIndexPath = NSIndexPath(row: appDelegate.recordedPerformances.count, section: 0)
+                appDelegate.addNew(performance: performance)
+                self.tableView.insertRows(at: [newIndexPath as IndexPath], with: .bottom)
+            }
         }
-        
     }
 
-    /*
+    
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
-    */
+    
 
-    /*
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
+            appDelegate.recordedPerformances.remove(at: indexPath.row) // delete from the data source
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
+    
 
     /*
     // Override to support rearranging the table view.
@@ -98,14 +103,22 @@ class RecordingTableTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "ShowDetail" {
+            // load up current data into a JamViewController
+            let jamDetailViewController = segue.destination as! ChirpJamViewController
+            if let selectedJamCell = sender as? PerformanceTableCell {
+                let indexPath = tableView.indexPath(for: selectedJamCell)!
+                let selectedJam = appDelegate.recordedPerformances[indexPath.row]
+                jamDetailViewController.loadedPerformance = selectedJam
+            }
+        } else if segue.identifier == "AddItem" {
+            // load up a new JamViewController
+            print("Adding a new performance")
+        }
     }
-    */
+    
 
 }
