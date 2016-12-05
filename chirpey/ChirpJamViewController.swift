@@ -45,11 +45,23 @@ class ChirpJamViewController: UIViewController {
     
     /// MARK: - UI Interaction Functions
     @IBAction func playButtonPressed(_ sender: UIButton) {
-        if (self.loadedPerformance != nil) {
-            self.loadedPerformance?.playback(inView: self.chirpeySquare)
-            self.statusLabel.text = "Playing back: " + (self.loadedPerformance?.dateString())!
+        if let loadedPerformance = loadedPerformance {
+            if (!self.chirpeySquare!.playing) {
+                print("JAMVC: Going to start playing")
+                // Start Playback
+                loadedPerformance.playback(inView: self.chirpeySquare)
+                statusLabel.text = "Playing..."
+                startProgressBar()
+                chirpeySquare?.playing = true
+                self.playButton.titleLabel?.text = "Stop"
+            } else {
+                // Cancel Playback
+                print("JAMVC: Going to stop playing")
+                self.stopTimer()
+                self.playButton.titleLabel?.text = "Play"
+            }
         } else {
-            self.statusLabel.text = "No loaded performance to be played back."
+            print("JAMVC: No loaded performance to be played back.")
         }
     }
     
@@ -86,15 +98,6 @@ class ChirpJamViewController: UIViewController {
         }
     }
     
-    
-    func startPlayback() {
-        if (!self.chirpeySquare!.playing) {
-            NSLog("JAMVC: Starting playback.")
-            self.startProgressBar()
-            self.chirpeySquare?.playing = true
-        }
-    }
-    
     func startProgressBar() {
         self.progressTimer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: self.incrementRecordingProgress)
     }
@@ -102,7 +105,13 @@ class ChirpJamViewController: UIViewController {
     /// Automatically triggered when recording time finishes.
     func stopTimer() {
         NSLog("JAMVC: Timer finished.")
-        self.stopRecording()
+        if (self.chirpeySquare!.recording) {
+            self.stopRecording()
+            self.chirpeySquare!.recording = false
+        } else {
+            self.stopPlayback()
+            self.chirpeySquare!.playing = false
+        }
         self.progressTimer?.invalidate()
         self.progress = 0.0
         self.recordingProgress?.progress = 0.0
@@ -113,6 +122,12 @@ class ChirpJamViewController: UIViewController {
         print("JAMVC: Stopping Recording and loading the recorded performance.")
         let lastPerformance = self.chirpeySquare!.reset()
         self.load(performance: lastPerformance)
+    }
+    
+    func stopPlayback() {
+        print("JAMVC: Stopping any requested playback")
+        self.chirpeySquare.performance?.cancelPlayback()
+        self.playButton.titleLabel?.text = "Play"
     }
     
     func incrementRecordingProgress(_ : Timer) {

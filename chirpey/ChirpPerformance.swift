@@ -14,10 +14,11 @@ import UIKit
 
 class ChirpPerformance : NSObject, NSCoding {
     /// Array of `TouchRecord`s to store performance data.
-    var performanceData : [TouchRecord] = []
+    var performanceData : [TouchRecord]
+    var playbackTimers : [Timer] = []
     var date : Date
-    var performer : String = ""
-    var instrument : String = ""
+    var performer : String
+    var instrument : String
     var image : UIImage
 
     // Static vars
@@ -34,27 +35,26 @@ class ChirpPerformance : NSObject, NSCoding {
         static let imageKey = "image"
     }
     
-
-    
-    /// NSCoder Encoding
     func encode(with aCoder: NSCoder) {
+        print("Performance: encoding with ", performanceData.count, "notes.", performer, instrument)
         aCoder.encode(performanceData, forKey: PropertyKey.performanceDataKey)
         aCoder.encode(date, forKey: PropertyKey.dateKey)
         aCoder.encode(performer, forKey: PropertyKey.performerKey)
         aCoder.encode(instrument, forKey: PropertyKey.instrumentKey)
         aCoder.encode(UIImagePNGRepresentation(image), forKey: PropertyKey.imageKey)
-        
     }
 
-    /// NSCoder Decoding
     required convenience init?(coder aDecoder: NSCoder) {
-        guard let data = aDecoder.decodeObject(forKey: PropertyKey.performanceDataKey) as? [TouchRecord],
+        let data = aDecoder.decodeObject(forKey: PropertyKey.performanceDataKey) as! [TouchRecord]
+        guard
+            //let data = aDecoder.decodeObject(forKey: PropertyKey.performanceDataKey) as? [TouchRecord],
             let date = aDecoder.decodeObject(forKey: PropertyKey.dateKey) as? Date,
             let performer = aDecoder.decodeObject(forKey: PropertyKey.performerKey) as? String,
             let instrument = aDecoder.decodeObject(forKey: PropertyKey.instrumentKey) as? String,
             let image = UIImage(data: (aDecoder.decodeObject(forKey: PropertyKey.imageKey) as? Data)!)
             else {return nil}
         
+        print("Performance initialising from decoder with", data.count, "notes,", performer, instrument)
         self.init(data: data, date: date, performer: performer, instrument: instrument, image: image)
     }
 
@@ -87,14 +87,28 @@ class ChirpPerformance : NSObject, NSCoding {
         self.performanceData.append(TouchRecord(time: t, x: x, y: y, z: z, moving: moving))
     }
     
+    
+    // TODO: make playback behave like "play/pause" rather than start and cancel.
+    
     /// Schedules playback of the performance in a given `ChirpView`
     func playback(inView view : ChirpView) {
+        print("Performance: Playing back in a chirpview")
         for touch in self.performanceData {
+            print("Performance: Scheduled a note.")
             let processor : (Timer) -> Void = view.makeTouchPlayerWith(touch: touch)
-            Timer.scheduledTimer(withTimeInterval: touch.time, repeats: false, block: processor)
+            let t = Timer.scheduledTimer(withTimeInterval: touch.time, repeats: false, block: processor)
+            self.playbackTimers.append(t)
         }
+        print("Performance: scheduled", self.playbackTimers.count, "notes.")
     }
     
+    /// Cancels the current playback. (Can not be un-cancelled)
+    func cancelPlayback() {
+        for t in playbackTimers {
+            t.invalidate()
+        }
+        playbackTimers = []
+    }
     
     /// Writes a string to the documents directory with a title formed from the current date.
     func writeCSVToFile(csvString : String) {
@@ -166,12 +180,13 @@ class TouchRecord: NSObject, NSCoding {
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
-        guard let time = aDecoder.decodeObject(forKey: PropertyKey.time) as? Double,
-            let x = aDecoder.decodeObject(forKey: PropertyKey.x) as? Double,
-            let y = aDecoder.decodeObject(forKey: PropertyKey.y) as? Double,
-            let z = aDecoder.decodeObject(forKey: PropertyKey.z) as? Double,
-            let moving = aDecoder.decodeObject(forKey: PropertyKey.moving) as? Bool
-            else { return nil }
+        print("TouchRecord is about to be decoded!")
+        let time = aDecoder.decodeDouble(forKey: PropertyKey.time)
+        let x = aDecoder.decodeDouble(forKey: PropertyKey.x)
+        let y = aDecoder.decodeDouble(forKey: PropertyKey.y)
+        let z = aDecoder.decodeDouble(forKey: PropertyKey.z)
+        let moving = aDecoder.decodeBool(forKey: PropertyKey.moving)
+        print("TouchRecord was decoded successfully.")
         self.init(time: time, x: x, y: y, z: z, moving: moving)
     }
     
@@ -181,6 +196,7 @@ class TouchRecord: NSObject, NSCoding {
         aCoder.encode(self.y, forKey: PropertyKey.y)
         aCoder.encode(self.z, forKey: PropertyKey.z)
         aCoder.encode(self.moving, forKey: PropertyKey.moving)
+        print("TouchRecord was encoded!")
     }
 }
 
