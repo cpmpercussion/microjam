@@ -7,8 +7,17 @@
 //
 import UIKit
 
+/// Modes for the ChirpJameViewController: either new, recording, loaded, or playing.
+struct ChirpJamModes {
+    static let new = 0
+    static let recording = 1
+    static let loaded = 2
+    static let playing = 3
+}
+
 class ChirpJamViewController: UIViewController {
     let RECORDING_TIME = 5.0
+    var state = ChirpJamModes.new
     var progress = 0.0
     var progressTimer : Timer?
     var loadedPerformance : ChirpPerformance?
@@ -91,10 +100,12 @@ class ChirpJamViewController: UIViewController {
     // MARK: - Recording Functions
     /// Sets into recording mode and starts the timer.
     func startRecording() {
-        if (!self.chirpeySquare!.recording) {
+        if (self.state == ChirpJamModes.new) {
             NSLog("JAMVC: Starting a recording.")
             self.startProgressBar()
             self.chirpeySquare?.recording = true
+            self.state = ChirpJamModes.recording
+            self.updateUI()
         }
     }
     
@@ -148,17 +159,47 @@ class ChirpJamViewController: UIViewController {
     /// Load a ChirpPerformance for playback and reaction
     func load(performance: ChirpPerformance) {
         self.loadedPerformance = performance
+        self.state = ChirpJamModes.loaded
         self.updateUI()
     }
     
     /// Update the UI labels and image only if there is a valid performance loaded.
     func updateUI() {
-        if let loadedPerformance = loadedPerformance {
-            self.navigationItem.title = loadedPerformance.dateString()
-            self.statusLabel.text = "Loaded: " + (loadedPerformance.dateString())
-            self.performerLabel.text = "By: " + (loadedPerformance.performer)
-            self.instrumentLabel.text = "With: " + (loadedPerformance.instrument)
-            self.chirpeySquare.image = loadedPerformance.image
+        let performerName = "charles"
+        let instrumentName = "chirp"
+        
+        switch self.state {
+        case ChirpJamModes.new:
+            self.navigationItem.title = "new performance"
+            self.statusLabel.text = "new performance"
+            self.performerLabel.text = performerName
+            self.instrumentLabel.text = instrumentName
+        case ChirpJamModes.recording:
+            self.navigationItem.title = "recording..."
+            self.statusLabel.text = "recording..."
+            self.performerLabel.text = performerName
+            self.instrumentLabel.text = instrumentName
+        case ChirpJamModes.playing:
+            if let loadedPerformance = loadedPerformance {
+                self.navigationItem.title = loadedPerformance.dateString()
+                self.statusLabel.text = "Playing..."
+                self.performerLabel.text = "By: " + (loadedPerformance.performer)
+                self.instrumentLabel.text = "With: " + (loadedPerformance.instrument)
+                self.chirpeySquare.image = loadedPerformance.image
+            }
+        case ChirpJamModes.loaded:
+            if let loadedPerformance = loadedPerformance {
+                self.navigationItem.title = loadedPerformance.dateString()
+                self.statusLabel.text = "Loaded: " + (loadedPerformance.dateString())
+                self.performerLabel.text = "By: " + (loadedPerformance.performer)
+                self.instrumentLabel.text = "With: " + (loadedPerformance.instrument)
+                self.chirpeySquare.image = loadedPerformance.image
+            }
+        default:
+            self.navigationItem.title = "performance"
+            self.statusLabel.text = "new"
+            self.performerLabel.text = performerName
+            self.instrumentLabel.text = instrumentName
         }
     }
 }

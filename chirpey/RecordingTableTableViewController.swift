@@ -113,6 +113,7 @@ class RecordingTableTableViewController: UITableViewController {
                 let indexPath = tableView.indexPath(for: selectedJamCell)!
                 let selectedJam = appDelegate.recordedPerformances[indexPath.row]
                 jamDetailViewController.loadedPerformance = selectedJam
+                jamDetailViewController.state = ChirpJamModes.loaded
             }
         } else if segue.identifier == "AddItem" {
             // load up a new JamViewController
