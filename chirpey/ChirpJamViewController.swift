@@ -86,9 +86,53 @@ class ChirpJamViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.recordingProgress!.progress = 0.0
+        self.updateUI()
+    }
+    
+    /// Load a ChirpPerformance for playback and reaction
+    func load(performance: ChirpPerformance) {
+        self.loadedPerformance = performance
+        self.state = ChirpJamModes.loaded
+        self.updateUI()
+    }
+    
+    /// Update the UI labels and image only if there is a valid performance loaded.
+    func updateUI() {
+        let performerName = "charles"
+        let instrumentName = "chirp"
         
-        if loadedPerformance != nil {
-            self.updateUI()
+        switch self.state {
+        case ChirpJamModes.new:
+            self.navigationItem.title = "New Performance"
+            self.statusLabel.text = "new"
+            self.performerLabel.text = performerName
+            self.instrumentLabel.text = instrumentName
+        case ChirpJamModes.recording:
+            self.navigationItem.title = "recording..."
+            self.statusLabel.text = "recording..."
+            self.performerLabel.text = performerName
+            self.instrumentLabel.text = instrumentName
+        case ChirpJamModes.playing:
+            if let loadedPerformance = loadedPerformance {
+                self.navigationItem.title = loadedPerformance.dateString()
+                self.statusLabel.text = "Playing..."
+                self.performerLabel.text = "By: " + (loadedPerformance.performer)
+                self.instrumentLabel.text = "With: " + (loadedPerformance.instrument)
+                self.chirpeySquare.image = loadedPerformance.image
+            }
+        case ChirpJamModes.loaded:
+            if let loadedPerformance = loadedPerformance {
+                self.navigationItem.title = loadedPerformance.dateString()
+                self.statusLabel.text = "Loaded: " + (loadedPerformance.dateString())
+                self.performerLabel.text = "By: " + (loadedPerformance.performer)
+                self.instrumentLabel.text = "With: " + (loadedPerformance.instrument)
+                self.chirpeySquare.image = loadedPerformance.image
+            }
+        default:
+            self.navigationItem.title = "performance"
+            self.statusLabel.text = "new"
+            self.performerLabel.text = performerName
+            self.instrumentLabel.text = instrumentName
         }
     }
 
@@ -131,14 +175,20 @@ class ChirpJamViewController: UIViewController {
     /// Stops the current recording.
     func stopRecording() {
         print("JAMVC: Stopping Recording and loading the recorded performance.")
-        let lastPerformance = self.chirpeySquare!.reset()
-        self.load(performance: lastPerformance)
+        if let lastPerformance = self.chirpeySquare!.closeRecording() {
+            self.load(performance: lastPerformance)
+            self.state = ChirpJamModes.loaded
+        }
+        self.updateUI()
     }
     
+    // StopPlayback
     func stopPlayback() {
         print("JAMVC: Stopping any requested playback")
         self.chirpeySquare.performance?.cancelPlayback()
         self.playButton.titleLabel?.text = "Play"
+        self.state = ChirpJamModes.loaded
+        self.updateUI()
     }
     
     func incrementRecordingProgress(_ : Timer) {
@@ -151,55 +201,10 @@ class ChirpJamViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         // start timer if not recording
         let p = touches.first?.location(in: self.chirpeySquare);
-        if (self.chirpeySquare!.bounds.contains(p!) && !self.chirpeySquare!.recording) {
+        if (self.chirpeySquare!.bounds.contains(p!) && self.state == ChirpJamModes.new) {
                 self.startRecording()
         }
     }
 
-    /// Load a ChirpPerformance for playback and reaction
-    func load(performance: ChirpPerformance) {
-        self.loadedPerformance = performance
-        self.state = ChirpJamModes.loaded
-        self.updateUI()
-    }
-    
-    /// Update the UI labels and image only if there is a valid performance loaded.
-    func updateUI() {
-        let performerName = "charles"
-        let instrumentName = "chirp"
-        
-        switch self.state {
-        case ChirpJamModes.new:
-            self.navigationItem.title = "new performance"
-            self.statusLabel.text = "new performance"
-            self.performerLabel.text = performerName
-            self.instrumentLabel.text = instrumentName
-        case ChirpJamModes.recording:
-            self.navigationItem.title = "recording..."
-            self.statusLabel.text = "recording..."
-            self.performerLabel.text = performerName
-            self.instrumentLabel.text = instrumentName
-        case ChirpJamModes.playing:
-            if let loadedPerformance = loadedPerformance {
-                self.navigationItem.title = loadedPerformance.dateString()
-                self.statusLabel.text = "Playing..."
-                self.performerLabel.text = "By: " + (loadedPerformance.performer)
-                self.instrumentLabel.text = "With: " + (loadedPerformance.instrument)
-                self.chirpeySquare.image = loadedPerformance.image
-            }
-        case ChirpJamModes.loaded:
-            if let loadedPerformance = loadedPerformance {
-                self.navigationItem.title = loadedPerformance.dateString()
-                self.statusLabel.text = "Loaded: " + (loadedPerformance.dateString())
-                self.performerLabel.text = "By: " + (loadedPerformance.performer)
-                self.instrumentLabel.text = "With: " + (loadedPerformance.instrument)
-                self.chirpeySquare.image = loadedPerformance.image
-            }
-        default:
-            self.navigationItem.title = "performance"
-            self.statusLabel.text = "new"
-            self.performerLabel.text = performerName
-            self.instrumentLabel.text = instrumentName
-        }
-    }
+
 }

@@ -28,6 +28,15 @@ class ChirpView: UIImageView {
         self.startNewPerformance()
     }
     
+    /// Closes the recording and returns the performance.
+    func closeRecording() -> ChirpPerformance? {
+        self.performance?.image = self.image!
+        self.performance?.date = Date()
+        self.recording = false
+        let output = self.performance
+        return output
+    }
+    
     /// Resets the ChirpView for a new performance and returns the last performance.
     func reset() -> ChirpPerformance {
         self.performance?.image = self.image!
