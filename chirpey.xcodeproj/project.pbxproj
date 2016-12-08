@@ -39,6 +39,7 @@
 		5669CAF41DA7D06A009EEC3B /* m_lydiansharp5.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CADE1DA7D06A009EEC3B /* m_lydiansharp5.pd */; };
 		5669CAF51DA7D06A009EEC3B /* m_mixolydian.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CADF1DA7D06A009EEC3B /* m_mixolydian.pd */; };
 		5669CAF61DA7D06A009EEC3B /* m_phrygian.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CAE01DA7D06A009EEC3B /* m_phrygian.pd */; };
+		568D1DC41DF995E500A2BC0B /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 568D1DC31DF995E500A2BC0B /* Settings.bundle */; };
 		86FD684F0B45881B83674F9A /* libPods-chirpey.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D5CD479C0D4E83161A3BD3C /* libPods-chirpey.a */; };
 /* End PBXBuildFile section */
 
@@ -99,6 +100,7 @@
 		5669CADE1DA7D06A009EEC3B /* m_lydiansharp5.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = m_lydiansharp5.pd; sourceTree = "<group>"; };
 		5669CADF1DA7D06A009EEC3B /* m_mixolydian.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = m_mixolydian.pd; sourceTree = "<group>"; };
 		5669CAE01DA7D06A009EEC3B /* m_phrygian.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = m_phrygian.pd; sourceTree = "<group>"; };
+		568D1DC31DF995E500A2BC0B /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		5D5CD479C0D4E83161A3BD3C /* libPods-chirpey.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-chirpey.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC5F345921BE4B4AE8AB02D6 /* Pods-chirpey.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chirpey.debug.xcconfig"; path = "Pods/Target Support Files/Pods-chirpey/Pods-chirpey.debug.xcconfig"; sourceTree = "<group>"; };
 		FFD2AA8B2A0C1948CC7BA804 /* Pods-chirpey.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chirpey.release.xcconfig"; path = "Pods/Target Support Files/Pods-chirpey/Pods-chirpey.release.xcconfig"; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 				5669CA9B1DA7AAA6009EEC3B /* LaunchScreen.storyboard */,
 				5669CA9E1DA7AAA6009EEC3B /* Info.plist */,
 				56621B091DE344E2009B9AB6 /* chirpey-Bridging-Header.h */,
+				568D1DC31DF995E500A2BC0B /* Settings.bundle */,
 			);
 			path = chirpey;
 			sourceTree = "<group>";
@@ -409,6 +412,7 @@
 				5669CAEB1DA7D06A009EEC3B /* rev2~.pd in Resources */,
 				5669CA981DA7AAA6009EEC3B /* Main.storyboard in Resources */,
 				5669CAF41DA7D06A009EEC3B /* m_lydiansharp5.pd in Resources */,
+				568D1DC41DF995E500A2BC0B /* Settings.bundle in Resources */,
 				5669CAE41DA7D06A009EEC3B /* monovol.pd in Resources */,
 				5669CAEE1DA7D06A009EEC3B /* cpmlooper.pd in Resources */,
 			);
