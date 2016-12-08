@@ -98,20 +98,18 @@ class ChirpJamViewController: UIViewController {
     
     /// Update the UI labels and image only if there is a valid performance loaded.
     func updateUI() {
-        let performerName = "charles"
-        let instrumentName = "chirp"
         
         switch self.state {
         case ChirpJamModes.new:
             self.navigationItem.title = "New Performance"
             self.statusLabel.text = "new"
-            self.performerLabel.text = performerName
-            self.instrumentLabel.text = instrumentName
+            self.performerLabel.text = UserDefaults.standard.string(forKey: SettingsKeys.performerKey)
+            self.instrumentLabel.text = ScoundSchemes.namesForKeys[UserDefaults.standard.integer(forKey: SettingsKeys.soundSchemeKey)]
         case ChirpJamModes.recording:
             self.navigationItem.title = "recording..."
             self.statusLabel.text = "recording..."
-            self.performerLabel.text = performerName
-            self.instrumentLabel.text = instrumentName
+            self.performerLabel.text = UserDefaults.standard.string(forKey: SettingsKeys.performerKey)
+            self.instrumentLabel.text = ScoundSchemes.namesForKeys[UserDefaults.standard.integer(forKey: SettingsKeys.soundSchemeKey)]
         case ChirpJamModes.playing:
             if let loadedPerformance = loadedPerformance {
                 self.navigationItem.title = loadedPerformance.dateString()
@@ -131,8 +129,8 @@ class ChirpJamViewController: UIViewController {
         default:
             self.navigationItem.title = "performance"
             self.statusLabel.text = "new"
-            self.performerLabel.text = performerName
-            self.instrumentLabel.text = instrumentName
+            self.performerLabel.text = UserDefaults.standard.string(forKey: SettingsKeys.performerKey)
+            self.instrumentLabel.text = ScoundSchemes.namesForKeys[UserDefaults.standard.integer(forKey: SettingsKeys.soundSchemeKey)]
         }
     }
 

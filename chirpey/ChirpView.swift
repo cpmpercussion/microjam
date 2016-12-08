@@ -30,11 +30,15 @@ class ChirpView: UIImageView {
     
     /// Closes the recording and returns the performance.
     func closeRecording() -> ChirpPerformance? {
-        self.performance?.image = self.image!
-        self.performance?.date = Date()
         self.recording = false
-        let output = self.performance
-        return output
+        if let output = self.performance {
+            output.image = self.image!
+            output.performer = UserDefaults.standard.string(forKey: SettingsKeys.performerKey)!
+            output.instrument = ScoundSchemes.namesForKeys[UserDefaults.standard.integer(forKey: SettingsKeys.soundSchemeKey)]!
+            output.date = Date()
+            return output
+        }
+        return nil
     }
     
     /// Resets the ChirpView for a new performance and returns the last performance.
@@ -56,8 +60,6 @@ class ChirpView: UIImageView {
         self.swiped = false
         self.image = UIImage()
         self.performance = ChirpPerformance()
-        self.performance?.performer = "charles"
-        self.performance?.instrument = "chirp"
     }
     
     //MARK: - touch interaction

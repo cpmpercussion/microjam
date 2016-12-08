@@ -8,13 +8,36 @@
 
 import UIKit
 
+struct SettingsKeys {
+    static let performerKey = "performer_name"
+    static let soundSchemeKey = "sound_scheme"
+}
+
+struct ScoundSchemes {
+    static let namesForKeys : [Int : String] = [
+        0 : "chirp",
+        1 : "keys",
+        2 : "drums",
+        3 : "strings"
+    ]
+    static let pdFilesForKeys : [Int : String] = [
+        0 : "chirp.pd",
+        1 : "keys.pd",
+        2 : "drums.pd",
+        3 : "strings.pd"
+    ]
+}
 
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
     var window: UIWindow?
     var recordedPerformances : [ChirpPerformance] = []
-    
+ 
+    static let defaultSettings : [String : Any] = [
+        SettingsKeys.performerKey:"performer",
+        SettingsKeys.soundSchemeKey: 0
+    ]
     let SOUND_OUTPUT_CHANNELS = 2
     let SAMPLE_RATE = 44100
     let TICKS_PER_BUFFER = 4
@@ -44,6 +67,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
     }
     
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+        
+        // Register defaults
+        UserDefaults.standard.register(defaults: AppDelegate.defaultSettings)
+        // Get performer name
+        // let perfName = UserDefaults.standard.string(forKey: SettingsKeys.performerKey)
+        // Load the saved performances
         if let savedPerformances = self.loadPerformances() {
             self.recordedPerformances += savedPerformances
             NSLog("AD: Successfully loaded %d performances", self.recordedPerformances.count)
