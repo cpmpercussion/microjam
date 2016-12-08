@@ -180,13 +180,11 @@ class TouchRecord: NSObject, NSCoding {
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
-        print("TouchRecord is about to be decoded!")
         let time = aDecoder.decodeDouble(forKey: PropertyKey.time)
         let x = aDecoder.decodeDouble(forKey: PropertyKey.x)
         let y = aDecoder.decodeDouble(forKey: PropertyKey.y)
         let z = aDecoder.decodeDouble(forKey: PropertyKey.z)
         let moving = aDecoder.decodeBool(forKey: PropertyKey.moving)
-        print("TouchRecord was decoded successfully.")
         self.init(time: time, x: x, y: y, z: z, moving: moving)
     }
     
@@ -196,7 +194,6 @@ class TouchRecord: NSObject, NSCoding {
         aCoder.encode(self.y, forKey: PropertyKey.y)
         aCoder.encode(self.z, forKey: PropertyKey.z)
         aCoder.encode(self.moving, forKey: PropertyKey.moving)
-        print("TouchRecord was encoded!")
     }
 }
 

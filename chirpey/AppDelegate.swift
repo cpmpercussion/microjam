@@ -13,7 +13,7 @@ struct SettingsKeys {
     static let soundSchemeKey = "sound_scheme"
 }
 
-struct ScoundSchemes {
+struct SoundSchemes {
     static let namesForKeys : [Int : String] = [
         0 : "chirp",
         1 : "keys",
@@ -41,9 +41,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
     let SOUND_OUTPUT_CHANNELS = 2
     let SAMPLE_RATE = 44100
     let TICKS_PER_BUFFER = 4
-    let PATCH_NAME = "chirp.pd"
     var audioController : PdAudioController?
     var openFile : PdFile?
+    var openFileName = ""
 
     // MARK: - Pd Engine Functions
     func startAudioEngine() {
@@ -54,12 +54,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
         //    [self openPdPatch];
         PdBase.setDelegate(self)
         PdBase.subscribe("toGUI")
-        PdBase.openFile(PATCH_NAME, path: Bundle.main.bundlePath)
+        self.openPdFile()
         self.audioController?.isActive = true
         //[self.audioController setActive:YES];
         self.audioController?.print()
         NSLog("JAMVC: Ticks Per Buffer: %d",self.audioController?.ticksPerBuffer ?? "didn't work!");
     }
+    
+    /// Check if Pd File is already open, if not,
+    func openPdFile() {
+        print("AD: Attemping to open the Pd File")
+        let fileToOpen = SoundSchemes.pdFilesForKeys[UserDefaults.standard.integer(forKey: SettingsKeys.soundSchemeKey)]! as String
+        if openFileName != fileToOpen {
+            self.openFile?.close()
+            print("AD: Opening Pd File:", fileToOpen)
+            self.openFile = PdFile.openNamed(fileToOpen, path: Bundle.main.bundlePath) as? PdFile
+            //self.openFile = (PdBase.openFile(fileToOpen, path: Bundle.main.bundlePath) as! PdFile)
+            openFileName = fileToOpen
+        }
+    }
+    
+    func openPdFile(withName name: String) {
+        print("AD: Attemping to open the Pd File with name:", name)
+        var fileToOpen = SoundSchemes.pdFilesForKeys[UserDefaults.standard.integer(forKey: SettingsKeys.soundSchemeKey)]! as String
+        // See if we can retrieve the scheme for this name.
+        if let index = SoundSchemes.namesForKeys.values.index(of: name) {
+            let key = SoundSchemes.namesForKeys.keys[index]
+            fileToOpen = SoundSchemes.pdFilesForKeys[key]! as String
+        }
+        // Open the file.
+        if openFileName != fileToOpen {
+            self.openFile?.close()
+            print("AD: Opening Pd File:", fileToOpen)
+            self.openFile = PdFile.openNamed(fileToOpen, path: Bundle.main.bundlePath) as? PdFile
+            //self.openFile = (PdBase.openFile(fileToOpen, path: Bundle.main.bundlePath) as! PdFile)
+            openFileName = fileToOpen
+        } else {
+            print("AD:", name, "was already open!")
+        }
+    }
+    
     
     /// Receives print messages from Pd for debugging
     func receivePrint(_ message: String!) {
@@ -67,11 +101,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
     }
     
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
-        
         // Register defaults
         UserDefaults.standard.register(defaults: AppDelegate.defaultSettings)
-        // Get performer name
-        // let perfName = UserDefaults.standard.string(forKey: SettingsKeys.performerKey)
         // Load the saved performances
         if let savedPerformances = self.loadPerformances() {
             self.recordedPerformances += savedPerformances

@@ -31,6 +31,8 @@ class ChirpJamViewController: UIViewController {
     @IBOutlet weak var chirpeySquare: ChirpView!
     @IBOutlet weak var recordingProgress: UIProgressView!
     @IBOutlet weak var savePerformanceButton: UIBarButtonItem!
+    
+    
     /// MARK: - Navigation
     func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if savePerformanceButton === sender {
@@ -85,6 +87,7 @@ class ChirpJamViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("JAMVC: view loaded")
         self.recordingProgress!.progress = 0.0
         self.updateUI()
     }
@@ -93,6 +96,7 @@ class ChirpJamViewController: UIViewController {
     func load(performance: ChirpPerformance) {
         self.loadedPerformance = performance
         self.state = ChirpJamModes.loaded
+        (UIApplication.shared.delegate as! AppDelegate).openPdFile(withName: performance.instrument)
         self.updateUI()
     }
     
@@ -104,12 +108,12 @@ class ChirpJamViewController: UIViewController {
             self.navigationItem.title = "New Performance"
             self.statusLabel.text = "new"
             self.performerLabel.text = UserDefaults.standard.string(forKey: SettingsKeys.performerKey)
-            self.instrumentLabel.text = ScoundSchemes.namesForKeys[UserDefaults.standard.integer(forKey: SettingsKeys.soundSchemeKey)]
+            self.instrumentLabel.text = SoundSchemes.namesForKeys[UserDefaults.standard.integer(forKey: SettingsKeys.soundSchemeKey)]
         case ChirpJamModes.recording:
             self.navigationItem.title = "recording..."
             self.statusLabel.text = "recording..."
             self.performerLabel.text = UserDefaults.standard.string(forKey: SettingsKeys.performerKey)
-            self.instrumentLabel.text = ScoundSchemes.namesForKeys[UserDefaults.standard.integer(forKey: SettingsKeys.soundSchemeKey)]
+            self.instrumentLabel.text = SoundSchemes.namesForKeys[UserDefaults.standard.integer(forKey: SettingsKeys.soundSchemeKey)]
         case ChirpJamModes.playing:
             if let loadedPerformance = loadedPerformance {
                 self.navigationItem.title = loadedPerformance.dateString()
@@ -130,7 +134,7 @@ class ChirpJamViewController: UIViewController {
             self.navigationItem.title = "performance"
             self.statusLabel.text = "new"
             self.performerLabel.text = UserDefaults.standard.string(forKey: SettingsKeys.performerKey)
-            self.instrumentLabel.text = ScoundSchemes.namesForKeys[UserDefaults.standard.integer(forKey: SettingsKeys.soundSchemeKey)]
+            self.instrumentLabel.text = SoundSchemes.namesForKeys[UserDefaults.standard.integer(forKey: SettingsKeys.soundSchemeKey)]
         }
     }
 

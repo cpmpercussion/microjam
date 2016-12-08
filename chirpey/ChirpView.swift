@@ -34,7 +34,7 @@ class ChirpView: UIImageView {
         if let output = self.performance {
             output.image = self.image!
             output.performer = UserDefaults.standard.string(forKey: SettingsKeys.performerKey)!
-            output.instrument = ScoundSchemes.namesForKeys[UserDefaults.standard.integer(forKey: SettingsKeys.soundSchemeKey)]!
+            output.instrument = SoundSchemes.namesForKeys[UserDefaults.standard.integer(forKey: SettingsKeys.soundSchemeKey)]!
             output.date = Date()
             return output
         }
