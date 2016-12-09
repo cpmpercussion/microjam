@@ -11,6 +11,10 @@
 		565143FB1DFAB79E00F56B32 /* xfade.pd in Resources */ = {isa = PBXBuildFile; fileRef = 565143F91DFAB79E00F56B32 /* xfade.pd */; };
 		565143FE1DFAF11600F56B32 /* pluck~.pd in Resources */ = {isa = PBXBuildFile; fileRef = 565143FC1DFAF11600F56B32 /* pluck~.pd */; };
 		565143FF1DFAF11600F56B32 /* stringsynth.pd in Resources */ = {isa = PBXBuildFile; fileRef = 565143FD1DFAF11600F56B32 /* stringsynth.pd */; };
+		565144041DFAF95900F56B32 /* c_ead.pd in Resources */ = {isa = PBXBuildFile; fileRef = 565144001DFAF95900F56B32 /* c_ead.pd */; };
+		565144051DFAF95900F56B32 /* e_resonzq.pd in Resources */ = {isa = PBXBuildFile; fileRef = 565144011DFAF95900F56B32 /* e_resonzq.pd */; };
+		565144061DFAF95900F56B32 /* s_drumelectro.pd in Resources */ = {isa = PBXBuildFile; fileRef = 565144021DFAF95900F56B32 /* s_drumelectro.pd */; };
+		565144071DFAF95900F56B32 /* s_pinknoise.pd in Resources */ = {isa = PBXBuildFile; fileRef = 565144031DFAF95900F56B32 /* s_pinknoise.pd */; };
 		56621B0D1DE39D33009B9AB6 /* ChirpPerformance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56621B0C1DE39D33009B9AB6 /* ChirpPerformance.swift */; };
 		56621B0F1DE47376009B9AB6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56621B0E1DE47376009B9AB6 /* AppDelegate.swift */; };
 		56621B111DE47D5B009B9AB6 /* ChirpJamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56621B101DE47D5B009B9AB6 /* ChirpJamViewController.swift */; };
@@ -72,6 +76,10 @@
 		565143F91DFAB79E00F56B32 /* xfade.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = xfade.pd; sourceTree = "<group>"; };
 		565143FC1DFAF11600F56B32 /* pluck~.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "pluck~.pd"; sourceTree = "<group>"; };
 		565143FD1DFAF11600F56B32 /* stringsynth.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stringsynth.pd; sourceTree = "<group>"; };
+		565144001DFAF95900F56B32 /* c_ead.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = c_ead.pd; sourceTree = "<group>"; };
+		565144011DFAF95900F56B32 /* e_resonzq.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = e_resonzq.pd; sourceTree = "<group>"; };
+		565144021DFAF95900F56B32 /* s_drumelectro.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = s_drumelectro.pd; sourceTree = "<group>"; };
+		565144031DFAF95900F56B32 /* s_pinknoise.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = s_pinknoise.pd; sourceTree = "<group>"; };
 		56621B091DE344E2009B9AB6 /* chirpey-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "chirpey-Bridging-Header.h"; sourceTree = "<group>"; };
 		56621B0C1DE39D33009B9AB6 /* ChirpPerformance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChirpPerformance.swift; sourceTree = "<group>"; };
 		56621B0E1DE47376009B9AB6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -211,6 +219,10 @@
 			children = (
 				565143FC1DFAF11600F56B32 /* pluck~.pd */,
 				565143FD1DFAF11600F56B32 /* stringsynth.pd */,
+				565144001DFAF95900F56B32 /* c_ead.pd */,
+				565144011DFAF95900F56B32 /* e_resonzq.pd */,
+				565144021DFAF95900F56B32 /* s_drumelectro.pd */,
+				565144031DFAF95900F56B32 /* s_pinknoise.pd */,
 				568D1DC51DF9BEDF00A2BC0B /* drums.pd */,
 				568D1DC61DF9BEDF00A2BC0B /* keys.pd */,
 				568D1DC71DF9BEDF00A2BC0B /* strings.pd */,
@@ -412,6 +424,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5669CAF11DA7D06A009EEC3B /* loadMetaPdLibs.pd in Resources */,
+				565144061DFAF95900F56B32 /* s_drumelectro.pd in Resources */,
+				565144071DFAF95900F56B32 /* s_pinknoise.pd in Resources */,
 				5669CAEF1DA7D06A009EEC3B /* percsampler.pd in Resources */,
 				5669CAEC1DA7D06A009EEC3B /* rlop~.pd in Resources */,
 				568D1DC91DF9BEDF00A2BC0B /* keys.pd in Resources */,
@@ -425,6 +439,7 @@
 				5669CAE71DA7D06A009EEC3B /* effectschain.pd in Resources */,
 				5669CAF31DA7D06A009EEC3B /* m_lydian.pd in Resources */,
 				5669CAE81DA7D06A009EEC3B /* feedbackdelay.pd in Resources */,
+				565144051DFAF95900F56B32 /* e_resonzq.pd in Resources */,
 				5669CAED1DA7D06A009EEC3B /* hhm-effects-chain.mmp in Resources */,
 				5669CAE91DA7D06A009EEC3B /* graindelay~.pd in Resources */,
 				5669CAF01DA7D06A009EEC3B /* slicesampler.pd in Resources */,
@@ -436,6 +451,7 @@
 				5669CAEB1DA7D06A009EEC3B /* rev2~.pd in Resources */,
 				5669CA981DA7AAA6009EEC3B /* Main.storyboard in Resources */,
 				568D1DCA1DF9BEDF00A2BC0B /* strings.pd in Resources */,
+				565144041DFAF95900F56B32 /* c_ead.pd in Resources */,
 				568D1DC81DF9BEDF00A2BC0B /* drums.pd in Resources */,
 				5669CAF41DA7D06A009EEC3B /* m_lydiansharp5.pd in Resources */,
 				565143FA1DFAB79E00F56B32 /* adsr.pd in Resources */,
