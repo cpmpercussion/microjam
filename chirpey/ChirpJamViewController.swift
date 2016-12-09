@@ -33,13 +33,18 @@ class ChirpJamViewController: UIViewController {
     @IBOutlet weak var savePerformanceButton: UIBarButtonItem!
     
     /// MARK: - Navigation
-    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if savePerformanceButton === sender {
-            
-//            (UIApplication.shared.delegate as! AppDelegate).recordedPerformances.append(loadedPerformance)
-//            (UIApplication.shared.delegate as! AppDelegate).savePerformances()
-        } else {
-            self.loadedPerformance = nil
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print("JAMVC: Preparing for Segue")
+        // FIXME: save the performance if the timer hasn't run out.
+        // stopRecording()
+        stopPlayback() // stop any possible playback.
+        if let barButton = sender as? UIBarButtonItem {
+            if savePerformanceButton === barButton {
+                print("JAMVC: Save button segue!")
+            } else {
+                print("JAMVC: Not jam button segue!")
+                self.loadedPerformance = nil
+            }
         }
     }
     
@@ -49,6 +54,7 @@ class ChirpJamViewController: UIViewController {
         //stopRecording()
         // FIXME: need to stop recording/playback based on the current control state
         stopPlayback() // stop any possible playback timers
+        self.loadedPerformance = nil
         if isPresentingInAddPerformanceMode {
             dismiss(animated: true, completion: nil)
         } else {
@@ -94,6 +100,10 @@ class ChirpJamViewController: UIViewController {
         print("JAMVC: view loaded")
         self.recordingProgress!.progress = 0.0
         self.updateUI()
+        if (state == ChirpJamModes.loaded) {
+            print("JAMVC: opening Pd file for loaded performance.")
+            (UIApplication.shared.delegate as! AppDelegate).openPdFile(withName: (loadedPerformance?.instrument)!)
+        }
     }
     
     /// Load a ChirpPerformance for playback and reaction
