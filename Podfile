@@ -5,6 +5,7 @@
 
 target 'chirpey' do
   pod 'libpd', :git => 'https://github.com/libpd/libpd', :submodules => true
+  pod 'InAppSettingsKit'
 end
 
 target 'chirpeyTests' do
