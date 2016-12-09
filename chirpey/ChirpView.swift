@@ -90,7 +90,8 @@ class ChirpView: UIImageView {
         let x = Double(point.x) / self.imageSize
         let y = Double(point.y) / self.imageSize
         let z = 0.0
-        PdBase.sendList(["/x",x,"/y",y,"/z",z], toReceiver: "input")
+        let list = ["/x",x,"/y",y,"/z",z] as [Any]
+        PdBase.sendList(list, toReceiver: "input")
     }
     
     /**

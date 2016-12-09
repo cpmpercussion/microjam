@@ -36,7 +36,6 @@ class ChirpPerformance : NSObject, NSCoding {
     }
     
     func encode(with aCoder: NSCoder) {
-        print("Performance: encoding with ", performanceData.count, "notes.", performer, instrument)
         aCoder.encode(performanceData, forKey: PropertyKey.performanceDataKey)
         aCoder.encode(date, forKey: PropertyKey.dateKey)
         aCoder.encode(performer, forKey: PropertyKey.performerKey)
@@ -54,7 +53,7 @@ class ChirpPerformance : NSObject, NSCoding {
             let image = UIImage(data: (aDecoder.decodeObject(forKey: PropertyKey.imageKey) as? Data)!)
             else {return nil}
         
-        print("Performance initialising from decoder with", data.count, "notes,", performer, instrument)
+        print("PERF: Decoding", data.count, "notes:", performer, instrument)
         self.init(data: data, date: date, performer: performer, instrument: instrument, image: image)
     }
 
@@ -64,7 +63,6 @@ class ChirpPerformance : NSObject, NSCoding {
         self.performer = performer
         self.instrument = instrument
         self.image = image
-        
         super.init()
     }
     
@@ -87,27 +85,25 @@ class ChirpPerformance : NSObject, NSCoding {
         self.performanceData.append(TouchRecord(time: t, x: x, y: y, z: z, moving: moving))
     }
     
-    
     // TODO: make playback behave like "play/pause" rather than start and cancel.
-    
     /// Schedules playback of the performance in a given `ChirpView`
-    func playback(inView view : ChirpView) {
-        print("Performance: Playing back in a chirpview")
+    func playback(inView view : ChirpView) -> [Timer] {
+        var timers : [Timer] = []
         for touch in self.performanceData {
-            print("Performance: Scheduled a note.")
             let processor : (Timer) -> Void = view.makeTouchPlayerWith(touch: touch)
             let t = Timer.scheduledTimer(withTimeInterval: touch.time, repeats: false, block: processor)
-            self.playbackTimers.append(t)
+            timers.append(t)
         }
-        print("Performance: scheduled", self.playbackTimers.count, "notes.")
+        print("PERF: playing back; scheduled", timers.count, "notes.")
+        return(timers)
     }
     
     /// Cancels the current playback. (Can not be un-cancelled)
-    func cancelPlayback() {
-        for t in playbackTimers {
+    func cancelPlayback(timers : [Timer]) {
+        print("PERF: Cancelling", timers.count, "timers.")
+        for t in timers {
             t.invalidate()
         }
-        playbackTimers = []
     }
     
     /// Writes a string to the documents directory with a title formed from the current date.

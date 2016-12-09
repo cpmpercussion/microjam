@@ -46,23 +46,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
     var openFileName = ""
 
     // MARK: - Pd Engine Functions
+    
+    /// Starts the Pd Audio Engine and preemptively opens a patch.
     func startAudioEngine() {
         NSLog("JAMVC: Starting Audio Engine");
         self.audioController = PdAudioController()
         self.audioController?.configurePlayback(withSampleRate: Int32(SAMPLE_RATE), numberChannels: Int32(SOUND_OUTPUT_CHANNELS), inputEnabled: false, mixingEnabled: true)
         self.audioController?.configureTicksPerBuffer(Int32(TICKS_PER_BUFFER))
-        //    [self openPdPatch];
         PdBase.setDelegate(self)
         PdBase.subscribe("toGUI")
         PdBase.subscribe("debug")
         self.openPdFile()
         self.audioController?.isActive = true
-        //[self.audioController setActive:YES];
         self.audioController?.print()
-        NSLog("JAMVC: Ticks Per Buffer: %d",self.audioController?.ticksPerBuffer ?? "didn't work!");
     }
     
-    /// Check if Pd File is already open, if not,
+    /// Opens a Pd patch according the UserDefaults, does nothing if the patch is already open.
     func openPdFile() {
         print("AD: Attemping to open the Pd File")
         let fileToOpen = SoundSchemes.pdFilesForKeys[UserDefaults.standard.integer(forKey: SettingsKeys.soundSchemeKey)]! as String
@@ -70,11 +69,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
             self.openFile?.close()
             print("AD: Opening Pd File:", fileToOpen)
             self.openFile = PdFile.openNamed(fileToOpen, path: Bundle.main.bundlePath) as? PdFile
-            //self.openFile = (PdBase.openFile(fileToOpen, path: Bundle.main.bundlePath) as! PdFile)
             openFileName = fileToOpen
         }
     }
     
+    /** 
+     Attempts to open a patch with a given name. Does nothing if the patch is already open. 
+     If the patch name can't be found, the patch listed in UserDefaults is used instead.
+     */
     func openPdFile(withName name: String) {
         print("AD: Attemping to open the Pd File with name:", name)
         var fileToOpen = SoundSchemes.pdFilesForKeys[UserDefaults.standard.integer(forKey: SettingsKeys.soundSchemeKey)]! as String
@@ -107,7 +109,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
         // Load the saved performances
         if let savedPerformances = self.loadPerformances() {
             self.recordedPerformances += savedPerformances
-            NSLog("AD: Successfully loaded %d performances", self.recordedPerformances.count)
+            NSLog("AD: Successfully loaded", self.recordedPerformances.count, "performances")
         } else {
             NSLog("AD: Failed to load performances")
         }
@@ -139,14 +141,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
         self.savePerformances()
     }
     
+    /// Load Performances from file.
     func loadPerformances() -> [ChirpPerformance]? {
-        // load the performances
-
         let loadedPerformances =  NSKeyedUnarchiver.unarchiveObject(withFile: ChirpPerformance.ArchiveURL.path) as? [ChirpPerformance]
-
-        //NSLog("AD: Loaded %d performances", loadedPerformances?.count)
         return loadedPerformances
-
     }
 
     /// Add a new performance to the list and then save the list.
@@ -155,18 +153,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
         self.savePerformances()
     }
     
-    
+    /// Save recorded performances to file.
     func savePerformances() {
-        // save the recordedPerformances
         NSLog("AD: Going to save %d performances", self.recordedPerformances.count)
-        
         let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(self.recordedPerformances, toFile: ChirpPerformance.ArchiveURL.path)
-        
         if (!isSuccessfulSave) {
             print("AD: Save was not successful.")
         } else {
-            print("AD: %d performances successfully saved.", self.recordedPerformances.count)
+            print("AD: successfully saved", self.recordedPerformances.count, "performances")
         }
     }
-
 }

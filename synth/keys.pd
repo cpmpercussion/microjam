@@ -1,4 +1,4 @@
-#N canvas 483 314 546 681 10;
+#N canvas 529 50 546 681 10;
 #X declare -path metaPdLibs;
 #X declare -path metaPdLibs/control;
 #X declare -path metaPdLibs/fx;
@@ -24,7 +24,7 @@
 #X obj 406 119 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
 #X obj 116 86 t a a;
-#N canvas 641 260 1140 735 rhodey 1;
+#N canvas 641 260 1140 735 rhodey 0;
 #N canvas 424 366 478 366 pmosc 0;
 #X obj 119 199 cos~;
 #X obj 119 167 +~;
@@ -319,12 +319,12 @@ License along with this program. If not \, see <http://www.gnu.org/licenses/>.
 #X obj 437 118 random 1000;
 #X obj 437 139 / 1000;
 #X msg 437 162 /y \$1;
-#X floatatom 243 342 5 0 0 0 - - -, f 5;
 #X obj 155 224 t f;
-#X obj 188 165 s debug;
+#X obj 78 216 t f;
 #X connect 1 0 2 0;
 #X connect 2 0 13 0;
-#X connect 3 0 19 0;
+#X connect 3 0 31 0;
+#X connect 3 1 30 0;
 #X connect 4 0 0 0;
 #X connect 4 0 0 1;
 #X connect 7 0 11 0;
@@ -346,7 +346,6 @@ License along with this program. If not \, see <http://www.gnu.org/licenses/>.
 #X connect 21 0 27 0;
 #X connect 22 0 23 0;
 #X connect 23 0 24 0;
-#X connect 23 0 30 0;
 #X connect 24 0 14 1;
 #X connect 25 0 0 0;
 #X connect 25 1 0 1;
@@ -354,4 +353,5 @@ License along with this program. If not \, see <http://www.gnu.org/licenses/>.
 #X connect 27 0 28 0;
 #X connect 28 0 29 0;
 #X connect 29 0 11 0;
-#X connect 31 0 22 0;
+#X connect 30 0 22 0;
+#X connect 31 0 19 0;

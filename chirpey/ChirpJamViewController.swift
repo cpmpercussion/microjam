@@ -32,7 +32,6 @@ class ChirpJamViewController: UIViewController {
     @IBOutlet weak var recordingProgress: UIProgressView!
     @IBOutlet weak var savePerformanceButton: UIBarButtonItem!
     
-    
     /// MARK: - Navigation
     func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if savePerformanceButton === sender {
@@ -47,6 +46,9 @@ class ChirpJamViewController: UIViewController {
     @IBAction func cancelPerformance(_ sender: UIBarButtonItem) {
         print("JAMVC: Cancel Button Pressed.")
         let isPresentingInAddPerformanceMode = presentingViewController is UINavigationController
+        //stopRecording()
+        // FIXME: need to stop recording/playback based on the current control state
+        stopPlayback() // stop any possible playback timers
         if isPresentingInAddPerformanceMode {
             dismiss(animated: true, completion: nil)
         } else {
@@ -54,13 +56,15 @@ class ChirpJamViewController: UIViewController {
         }
     }
     
+    var playbackTimers : [Timer]?
+    
     /// MARK: - UI Interaction Functions
     @IBAction func playButtonPressed(_ sender: UIButton) {
         if let loadedPerformance = loadedPerformance {
             if (!self.chirpeySquare!.playing) {
                 print("JAMVC: Going to start playing")
                 // Start Playback
-                loadedPerformance.playback(inView: self.chirpeySquare)
+                self.playbackTimers = loadedPerformance.playback(inView: self.chirpeySquare)
                 statusLabel.text = "Playing..."
                 startProgressBar()
                 chirpeySquare?.playing = true
@@ -102,6 +106,10 @@ class ChirpJamViewController: UIViewController {
     
     /// Update the UI labels and image only if there is a valid performance loaded.
     func updateUI() {
+        print("Updating UI.")
+//        print("Settings Data: ")
+//        print("Performer: ", UserDefaults.standard.string(forKey: SettingsKeys.performerKey) ?? "name could not be loaded")
+//        print("Instrument:", SoundSchemes.namesForKeys[UserDefaults.standard.integer(forKey: SettingsKeys.soundSchemeKey)] ?? "name could not be loaded")
         
         switch self.state {
         case ChirpJamModes.new:
@@ -187,7 +195,10 @@ class ChirpJamViewController: UIViewController {
     // StopPlayback
     func stopPlayback() {
         print("JAMVC: Stopping any requested playback")
-        self.chirpeySquare.performance?.cancelPlayback()
+        if playbackTimers != nil {
+            print("JAMVC: Stopping the timers")
+            self.chirpeySquare.performance?.cancelPlayback(timers: playbackTimers!)
+        }
         self.playButton.titleLabel?.text = "Play"
         self.state = ChirpJamModes.loaded
         self.updateUI()
