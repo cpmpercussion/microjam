@@ -1,0 +1,6 @@
+framework module libpd {
+  umbrella header "libpd-umbrella.h"
+
+  export *
+  module * { export * }
+}

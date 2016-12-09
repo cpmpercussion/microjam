@@ -1,0 +1,6 @@
+framework module Pods_chirpey {
+  umbrella header "Pods-chirpey-umbrella.h"
+
+  export *
+  module * { export * }
+}
