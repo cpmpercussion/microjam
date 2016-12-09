@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		565143FA1DFAB79E00F56B32 /* adsr.pd in Resources */ = {isa = PBXBuildFile; fileRef = 565143F81DFAB79E00F56B32 /* adsr.pd */; };
+		565143FB1DFAB79E00F56B32 /* xfade.pd in Resources */ = {isa = PBXBuildFile; fileRef = 565143F91DFAB79E00F56B32 /* xfade.pd */; };
 		56621B0D1DE39D33009B9AB6 /* ChirpPerformance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56621B0C1DE39D33009B9AB6 /* ChirpPerformance.swift */; };
 		56621B0F1DE47376009B9AB6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56621B0E1DE47376009B9AB6 /* AppDelegate.swift */; };
 		56621B111DE47D5B009B9AB6 /* ChirpJamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56621B101DE47D5B009B9AB6 /* ChirpJamViewController.swift */; };
@@ -64,6 +66,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		565143F81DFAB79E00F56B32 /* adsr.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = adsr.pd; sourceTree = "<group>"; };
+		565143F91DFAB79E00F56B32 /* xfade.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = xfade.pd; sourceTree = "<group>"; };
 		56621B091DE344E2009B9AB6 /* chirpey-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "chirpey-Bridging-Header.h"; sourceTree = "<group>"; };
 		56621B0C1DE39D33009B9AB6 /* ChirpPerformance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChirpPerformance.swift; sourceTree = "<group>"; };
 		56621B0E1DE47376009B9AB6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -227,6 +231,8 @@
 		5669CAC81DA7D06A009EEC3B /* control */ = {
 			isa = PBXGroup;
 			children = (
+				565143F81DFAB79E00F56B32 /* adsr.pd */,
+				565143F91DFAB79E00F56B32 /* xfade.pd */,
 				5669CAC91DA7D06A009EEC3B /* dispatch.pd */,
 				5669CACA1DA7D06A009EEC3B /* monopan.pd */,
 				5669CACB1DA7D06A009EEC3B /* monovol.pd */,
@@ -419,11 +425,13 @@
 				5669CA9D1DA7AAA6009EEC3B /* LaunchScreen.storyboard in Resources */,
 				5669CAE61DA7D06A009EEC3B /* volumeRandomise.pd in Resources */,
 				5669CA9A1DA7AAA6009EEC3B /* Assets.xcassets in Resources */,
+				565143FB1DFAB79E00F56B32 /* xfade.pd in Resources */,
 				5669CAEB1DA7D06A009EEC3B /* rev2~.pd in Resources */,
 				5669CA981DA7AAA6009EEC3B /* Main.storyboard in Resources */,
 				568D1DCA1DF9BEDF00A2BC0B /* strings.pd in Resources */,
 				568D1DC81DF9BEDF00A2BC0B /* drums.pd in Resources */,
 				5669CAF41DA7D06A009EEC3B /* m_lydiansharp5.pd in Resources */,
+				565143FA1DFAB79E00F56B32 /* adsr.pd in Resources */,
 				568D1DC41DF995E500A2BC0B /* Settings.bundle in Resources */,
 				5669CAE41DA7D06A009EEC3B /* monovol.pd in Resources */,
 				5669CAEE1DA7D06A009EEC3B /* cpmlooper.pd in Resources */,

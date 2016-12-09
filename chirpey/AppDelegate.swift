@@ -54,6 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
         //    [self openPdPatch];
         PdBase.setDelegate(self)
         PdBase.subscribe("toGUI")
+        PdBase.subscribe("debug")
         self.openPdFile()
         self.audioController?.isActive = true
         //[self.audioController setActive:YES];
