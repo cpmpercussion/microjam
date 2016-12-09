@@ -1,4 +1,4 @@
-#N canvas 55 284 546 681 10;
+#N canvas 483 314 546 681 10;
 #X declare -path metaPdLibs;
 #X declare -path metaPdLibs/control;
 #X declare -path metaPdLibs/fx;
@@ -18,13 +18,13 @@
 #X msg 309 152 /x \$1;
 #X obj 309 108 random 1000;
 #X obj 309 129 / 1000;
-#X obj 307 53 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+#X obj 307 53 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X obj 309 178 s input;
 #X obj 406 119 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
 #X obj 116 86 t a a;
-#N canvas 602 449 1140 735 rhodey 1;
+#N canvas 641 260 1140 735 rhodey 1;
 #N canvas 424 366 478 366 pmosc 0;
 #X obj 119 199 cos~;
 #X obj 119 167 +~;
@@ -193,24 +193,21 @@ License along with this program. If not \, see <http://www.gnu.org/licenses/>.
 #X obj 397 199 adsr 1 1 1500 0 40;
 #X obj 667 197 adsr 1 1 1000 0 40;
 #X obj 671 330 adsr 1 1 250 0 40;
-#X floatatom 48 254 5 0 0 0 - - -, f 5;
-#X floatatom 81 140 5 0 0 0 - - -, f 5;
-#X floatatom 158 148 5 0 0 0 - - -, f 5;
 #X obj 548 456 hsl 128 15 0 1 0 0 empty empty tone_(0...1) 20 7 1 10
--262144 -1 -1 3600 1;
+-262144 -1 -1 0 1;
 #X obj 547 477 s \$0-tone;
 #X obj 549 502 hsl 128 15 0 100 0 0 empty empty vib_freq_(0...100)
-20 7 1 10 -262144 -1 -1 200 1;
+20 7 1 10 -262144 -1 -1 0 1;
 #X obj 547 523 s \$0-vib-freq;
 #X obj 546 545 hsl 128 15 0 1 0 0 empty empty vib_depth_(0..1) 20 7
-1 10 -262144 -1 -1 7800 1;
+1 10 -262144 -1 -1 0 1;
 #X obj 548 567 s \$0-vib-depth;
 #X floatatom 758 456 5 0 0 0 - - -, f 5;
 #X obj 758 475 s \$0-mod;
 #X floatatom 759 501 5 0 0 0 - - -, f 5;
 #X obj 759 520 s \$0-adsr24;
 #X obj 550 589 hsl 128 15 0 3000 0 0 empty empty decay_(0...3000) 20
-7 1 10 -262144 -1 -1 7700 1;
+7 1 10 -262144 -1 -1 0 1;
 #X obj 548 610 s \$0-decay;
 #X obj 871 394 loadbang;
 #X msg 854 497 127;
@@ -231,7 +228,6 @@ License along with this program. If not \, see <http://www.gnu.org/licenses/>.
 #X connect 4 0 38 0;
 #X connect 4 0 43 0;
 #X connect 4 0 44 0;
-#X connect 4 0 67 0;
 #X connect 6 0 11 0;
 #X connect 7 0 14 0;
 #X connect 8 0 13 0;
@@ -251,9 +247,7 @@ License along with this program. If not \, see <http://www.gnu.org/licenses/>.
 #X connect 18 0 9 0;
 #X connect 19 0 10 0;
 #X connect 20 0 4 0;
-#X connect 20 0 68 0;
 #X connect 20 1 21 0;
-#X connect 20 1 69 0;
 #X connect 22 0 20 0;
 #X connect 35 0 56 0;
 #X connect 38 0 3 0;
@@ -285,30 +279,30 @@ License along with this program. If not \, see <http://www.gnu.org/licenses/>.
 #X connect 64 0 48 0;
 #X connect 65 0 47 0;
 #X connect 66 0 1 2;
-#X connect 70 0 71 0;
-#X connect 70 0 85 0;
-#X connect 72 0 73 0;
-#X connect 72 0 87 0;
-#X connect 72 0 90 0;
-#X connect 74 0 75 0;
-#X connect 74 0 88 0;
-#X connect 74 0 91 0;
-#X connect 76 0 77 0;
-#X connect 78 0 79 0;
-#X connect 80 0 81 0;
-#X connect 80 0 89 0;
-#X connect 82 0 83 0;
-#X connect 82 0 84 0;
-#X connect 82 0 86 0;
-#X connect 83 0 79 0;
-#X connect 84 0 77 0;
-#X connect 86 0 71 0;
-#X connect 90 0 73 0;
-#X connect 91 0 75 0;
-#X connect 92 0 81 0;
-#X connect 93 0 90 0;
-#X connect 93 0 91 0;
-#X connect 93 0 92 0;
+#X connect 67 0 68 0;
+#X connect 67 0 82 0;
+#X connect 69 0 70 0;
+#X connect 69 0 84 0;
+#X connect 69 0 87 0;
+#X connect 71 0 72 0;
+#X connect 71 0 85 0;
+#X connect 71 0 88 0;
+#X connect 73 0 74 0;
+#X connect 75 0 76 0;
+#X connect 77 0 78 0;
+#X connect 77 0 86 0;
+#X connect 79 0 80 0;
+#X connect 79 0 81 0;
+#X connect 79 0 83 0;
+#X connect 80 0 76 0;
+#X connect 81 0 74 0;
+#X connect 83 0 68 0;
+#X connect 87 0 70 0;
+#X connect 88 0 72 0;
+#X connect 89 0 78 0;
+#X connect 90 0 87 0;
+#X connect 90 0 88 0;
+#X connect 90 0 89 0;
 #X restore 88 374 pd rhodey;
 #X obj 74 295 t f b b;
 #X msg 113 316 127;
@@ -322,10 +316,15 @@ License along with this program. If not \, see <http://www.gnu.org/licenses/>.
 #X msg 163 322 decay \$1;
 #X obj 168 450 rev2~ 100 95 14400 60;
 #X obj 168 420 *~ 0.2;
+#X obj 437 118 random 1000;
+#X obj 437 139 / 1000;
+#X msg 437 162 /y \$1;
+#X floatatom 243 342 5 0 0 0 - - -, f 5;
+#X obj 155 224 t f;
+#X obj 188 165 s debug;
 #X connect 1 0 2 0;
 #X connect 2 0 13 0;
 #X connect 3 0 19 0;
-#X connect 3 1 22 0;
 #X connect 4 0 0 0;
 #X connect 4 0 0 1;
 #X connect 7 0 11 0;
@@ -344,9 +343,15 @@ License along with this program. If not \, see <http://www.gnu.org/licenses/>.
 #X connect 19 0 20 0;
 #X connect 20 0 15 0;
 #X connect 21 0 8 0;
+#X connect 21 0 27 0;
 #X connect 22 0 23 0;
 #X connect 23 0 24 0;
+#X connect 23 0 30 0;
 #X connect 24 0 14 1;
 #X connect 25 0 0 0;
 #X connect 25 1 0 1;
 #X connect 26 0 25 0;
+#X connect 27 0 28 0;
+#X connect 28 0 29 0;
+#X connect 29 0 11 0;
+#X connect 31 0 22 0;
