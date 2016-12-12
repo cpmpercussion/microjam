@@ -20,6 +20,7 @@ class ChirpPerformance : NSObject, NSCoding {
     var performer : String
     var instrument : String
     var image : UIImage
+    var csvPathURL : URL?
 
     // Static vars
     static let CSV_HEADER = "time,x,y,z,moving\n"
@@ -107,14 +108,19 @@ class ChirpPerformance : NSObject, NSCoding {
         }
     }
     
-    /// Writes a string to the documents directory with a title formed from the current date.
-    func writeCSVToFile(csvString : String) {
-        var filePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+    func title() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "YYYY-MM-DD-HH-mm-SS"
-        let dateString = formatter.string(from: self.date)
-        filePath.append(String(format: "chirprec-%@", dateString))
-        try! csvString.write(toFile: filePath, atomically: true, encoding: String.Encoding.utf8)
+        let dateString = formatter.string(from: date)
+        return String(format: "perf-%@-%@-%@", performer, instrument, dateString)
+    }
+    
+    /// Writes a string to the documents directory with a title formed from the current date. Returns the filepath.
+    func writeToFile(csv : String) -> String {
+        var filePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        filePath.append(String(format: "/%@.csv", title()))
+        try? csv.write(toFile: filePath, atomically: true, encoding: String.Encoding.utf8)
+        return filePath
     }
     
     /// Return a dateString that would work for adding to the performance list.
@@ -173,7 +179,7 @@ class TouchRecord: NSObject, NSCoding {
     
     /// CSV version of the touchRecord for output to file
     func csv() -> String {
-        return String(format:"%f, %f, %f, %f, %d\n", time, x, y, z, moving ? 0 : 1)
+        return String(format:"%f, %f, %f, %f, %d\n", time, x, y, z, moving ? 1 : 0)
     }
     
     required convenience init?(coder aDecoder: NSCoder) {

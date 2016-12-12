@@ -52,6 +52,7 @@
 		568D1DC91DF9BEDF00A2BC0B /* keys.pd in Resources */ = {isa = PBXBuildFile; fileRef = 568D1DC61DF9BEDF00A2BC0B /* keys.pd */; };
 		568D1DCA1DF9BEDF00A2BC0B /* strings.pd in Resources */ = {isa = PBXBuildFile; fileRef = 568D1DC71DF9BEDF00A2BC0B /* strings.pd */; };
 		569B92C41DFEA99C00AA257C /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569B92C31DFEA99C00AA257C /* SettingsTableViewController.swift */; };
+		56C88E801DFEFD8200406BF0 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56C88E7F1DFEFD8200406BF0 /* CloudKit.framework */; };
 		9F55D44337F4AD7A22FCC4CD /* Pods_chirpeyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7975E0FB2CEF019D9436B66 /* Pods_chirpeyTests.framework */; };
 		BD19D98E01E9059DB3D67BAB /* Pods_chirpeyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C3EEB2E7CA448001E45444B /* Pods_chirpeyUITests.framework */; };
 		E35AB9818998F7A65DEE90DE /* Pods_chirpey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD6E96BB115565C824CC385D /* Pods_chirpey.framework */; };
@@ -132,6 +133,8 @@
 		568D1DC61DF9BEDF00A2BC0B /* keys.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = keys.pd; sourceTree = "<group>"; };
 		568D1DC71DF9BEDF00A2BC0B /* strings.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = strings.pd; sourceTree = "<group>"; };
 		569B92C31DFEA99C00AA257C /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		56C88E7E1DFEFD7200406BF0 /* microjam.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = microjam.entitlements; sourceTree = "<group>"; };
+		56C88E7F1DFEFD8200406BF0 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		6BE7145BD2BCDFDABA15DF53 /* Pods-chirpey.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chirpey.debug.xcconfig"; path = "Pods/Target Support Files/Pods-chirpey/Pods-chirpey.debug.xcconfig"; sourceTree = "<group>"; };
 		A7975E0FB2CEF019D9436B66 /* Pods_chirpeyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_chirpeyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D86937856F993CCF11FFC9EE /* Pods-chirpeyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chirpeyUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-chirpeyUITests/Pods-chirpeyUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -144,6 +147,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E35AB9818998F7A65DEE90DE /* Pods_chirpey.framework in Frameworks */,
+				56C88E801DFEFD8200406BF0 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,6 +173,7 @@
 		37B82C17ADD34A6423FC8D08 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				56C88E7F1DFEFD8200406BF0 /* CloudKit.framework */,
 				FD6E96BB115565C824CC385D /* Pods_chirpey.framework */,
 				A7975E0FB2CEF019D9436B66 /* Pods_chirpeyTests.framework */,
 				2C3EEB2E7CA448001E45444B /* Pods_chirpeyUITests.framework */,
@@ -179,6 +184,7 @@
 		5669CA811DA7AAA5009EEC3B = {
 			isa = PBXGroup;
 			children = (
+				56C88E7E1DFEFD7200406BF0 /* microjam.entitlements */,
 				5669CAC51DA7D06A009EEC3B /* synth */,
 				5669CA8C1DA7AAA5009EEC3B /* chirpey */,
 				5669CAA61DA7AAA6009EEC3B /* chirpeyTests */,
@@ -407,6 +413,14 @@
 						DevelopmentTeam = EDH387FRHA;
 						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 					5669CAA21DA7AAA6009EEC3B = {
 						CreatedOnToolsVersion = 8.0;
@@ -789,6 +803,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = microjam.entitlements;
 				DEVELOPMENT_TEAM = EDH387FRHA;
 				INFOPLIST_FILE = chirpey/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -806,6 +821,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = microjam.entitlements;
 				DEVELOPMENT_TEAM = EDH387FRHA;
 				INFOPLIST_FILE = chirpey/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

@@ -15,7 +15,7 @@ struct ChirpJamModes {
     static let playing = 3
 }
 
-class ChirpJamViewController: UIViewController {
+class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerDelegate {
     let RECORDING_TIME = 5.0
     var state = ChirpJamModes.new
     var progress = 0.0
@@ -241,6 +241,26 @@ class ChirpJamViewController: UIViewController {
         if (self.chirpeySquare!.bounds.contains(p!) && self.state == ChirpJamModes.new) {
                 self.startRecording()
         }
+    }
+    
+    @IBAction func exportLoadedPerformance() {
+        if ((state == ChirpJamModes.loaded) || (state == ChirpJamModes.playing)) {
+            print("JAMVC: Exporting the loaded performance")
+            
+            if let csv = loadedPerformance?.csv() {
+                print(loadedPerformance?.title() ?? "No Title!")
+                let path = loadedPerformance?.writeToFile(csv: csv)
+                let url = URL(fileURLWithPath: path!)
+                let interactionController = UIDocumentInteractionController(url: url)
+                interactionController.delegate = self
+                let result = interactionController.presentOpenInMenu(from: self.view.frame, in: self.view, animated: true)
+                if result == false {
+                    // Fall back to "options" view:
+                    interactionController.presentOptionsMenu(from: self.view.frame, in: self.view, animated: true)
+                }
+            }
+        }
+    
     }
 
 

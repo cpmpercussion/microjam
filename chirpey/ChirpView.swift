@@ -90,7 +90,7 @@ class ChirpView: UIImageView {
         let x = Double(point.x) / self.imageSize
         let y = Double(point.y) / self.imageSize
         let z = 0.0
-        let list = ["/x",x,"/y",y,"/z",z] as [Any]
+        //let list = ["/x",x,"/y",y,"/z",z] as [Any]
         // FIXME: figure out how to get Pd to parse the list sequentially.
         PdBase.sendList(["/x",x], toReceiver: "input")
         PdBase.sendList(["/y",y], toReceiver: "input")
