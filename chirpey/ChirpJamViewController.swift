@@ -62,6 +62,18 @@ class ChirpJamViewController: UIViewController {
         }
     }
     
+    @IBAction func unwindToJamView(sender: UIStoryboardSegue) {
+        if sender.source is SettingsTableViewController {
+            // Unwinding from settings screen.
+            print("unwinding from something.")
+            if (self.state == ChirpJamModes.new) {
+                print("Unwinding from a settings screen")
+                self.updateUI()
+                (UIApplication.shared.delegate as! AppDelegate).openPdFile()
+            }
+        }
+    }
+    
     var playbackTimers : [Timer]?
     
     /// MARK: - UI Interaction Functions

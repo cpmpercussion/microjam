@@ -53,6 +53,7 @@ class RecordingTableTableViewController: UITableViewController {
     }
     
     @IBAction func unwindToPerformanceList(sender: UIStoryboardSegue) {
+        print("AD: unwinding from somewhere.")
         if let sourceViewController = sender.source as? ChirpJamViewController, let performance = sourceViewController.loadedPerformance {
             
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
