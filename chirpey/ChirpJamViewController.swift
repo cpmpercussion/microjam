@@ -37,7 +37,8 @@ class ChirpJamViewController: UIViewController {
         print("JAMVC: Preparing for Segue")
         // FIXME: save the performance if the timer hasn't run out.
         // stopRecording()
-        stopPlayback() // stop any possible playback.
+        if state == ChirpJamModes.recording {stopRecording() }
+        if state == ChirpJamModes.playing { stopPlayback() } // stop any possible playback.
         if let barButton = sender as? UIBarButtonItem {
             if savePerformanceButton === barButton {
                 print("JAMVC: Save button segue!")
@@ -65,9 +66,10 @@ class ChirpJamViewController: UIViewController {
     @IBAction func unwindToJamView(sender: UIStoryboardSegue) {
         if sender.source is SettingsTableViewController {
             // Unwinding from settings screen.
-            print("unwinding from something.")
+            print("JAMVC: unwinding from a settings screen.")
+            print("JAMVC: state",self.state)
             if (self.state == ChirpJamModes.new) {
-                print("Unwinding from a settings screen")
+                print("JAMVC: unwinding to new state so updating the Pd file.")
                 self.updateUI()
                 (UIApplication.shared.delegate as! AppDelegate).openPdFile()
             }
@@ -128,7 +130,7 @@ class ChirpJamViewController: UIViewController {
     
     /// Update the UI labels and image only if there is a valid performance loaded.
     func updateUI() {
-        print("Updating UI.")
+        print("JAMVC: Updating UI.")
 //        print("Settings Data: ")
 //        print("Performer: ", UserDefaults.standard.string(forKey: SettingsKeys.performerKey) ?? "name could not be loaded")
 //        print("Instrument:", SoundSchemes.namesForKeys[UserDefaults.standard.integer(forKey: SettingsKeys.soundSchemeKey)] ?? "name could not be loaded")
