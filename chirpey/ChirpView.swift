@@ -71,25 +71,27 @@ class ChirpView: UIImageView {
         }
         self.swiped = false
         self.lastPoint = touches.first?.location(in: self)
+        let size = touches.first?.majorRadius
         self.drawDot(at: self.lastPoint!, withColour: self.recordingColour)
-        self.makeSound(at: self.lastPoint!)
-        self.recordTouch(at: self.lastPoint!, thatWasMoving:false)
+        self.makeSound(at: self.lastPoint!, withRadius: size!)
+        self.recordTouch(at: self.lastPoint!, withRadius: size!, thatWasMoving:false)
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.swiped = true
         let currentPoint = touches.first?.location(in:self)
         self.drawLine(from:self.lastPoint!, to:currentPoint!, withColour:self.recordingColour)
-        self.lastPoint = currentPoint;
-        self.makeSound(at: currentPoint!)
-        self.recordTouch(at: currentPoint!, thatWasMoving: true)
+        self.lastPoint = currentPoint
+        let size = touches.first?.majorRadius
+        self.makeSound(at: currentPoint!, withRadius: size!)
+        self.recordTouch(at: currentPoint!, withRadius: size!, thatWasMoving: true)
     }
     
     /// Given a point in the UIImage, sends a touch point to Pd to process for sound.
-    func makeSound(at point : CGPoint) {
+    func makeSound(at point : CGPoint, withRadius radius : CGFloat) {
         let x = Double(point.x) / self.imageSize
         let y = Double(point.y) / self.imageSize
-        let z = 0.0
+        let z = Double(radius)
         //let list = ["/x",x,"/y",y,"/z",z] as [Any]
         // FIXME: figure out how to get Pd to parse the list sequentially.
         PdBase.sendList(["/x",x], toReceiver: "input")
@@ -102,11 +104,11 @@ class ChirpView: UIImageView {
         Adds a touch point to the recording data including whether it was moving
         and the current time.
      **/
-    func recordTouch(at point : CGPoint, thatWasMoving moving : Bool) {
+    func recordTouch(at point : CGPoint, withRadius radius : CGFloat, thatWasMoving moving : Bool) {
         let time = -1.0 * self.startTime.timeIntervalSinceNow
         let x = Double(point.x) / self.imageSize
         let y = Double(point.y) / self.imageSize
-        let z : Double = 0.0
+        let z = Double(radius)
         self.performance?.recordTouchAt(time: time, x: x, y: y, z: z, moving: moving)
     }
     
@@ -144,29 +146,29 @@ class ChirpView: UIImageView {
     /**
      Mirrors touchesBegan for replayed performances.
     **/
-    func playbackBegan(_ point : CGPoint) {
-        self.swiped = false;
-        self.lastPoint = point;
+    func playbackBegan(_ point : CGPoint, _ radius : CGFloat) {
+        self.swiped = false
+        self.lastPoint = point
         self.drawDot(at: point, withColour: self.playbackColour)
-        self.makeSound(at: point)
+        self.makeSound(at: point, withRadius: radius)
     }
     /**
      Mirrors touchesMoved for replayed performances.
     **/
-    func playbackMoved(_ point : CGPoint) {
+    func playbackMoved(_ point : CGPoint, _ radius : CGFloat) {
         self.swiped = true;
         self.drawLine(from: self.lastPoint!, to: point, withColour: self.playbackColour)
-        self.lastPoint = point;
-        self.makeSound(at: point)
+        self.lastPoint = point
+        self.makeSound(at: point, withRadius: radius)
     }
     
     /// Returns function for playing a `TouchRecord` at a certain time. Used for playing back touches.
     func makeTouchPlayerWith(touch: TouchRecord) -> ((Timer) -> Void) {
-        let z = touch.z
+        let z = CGFloat(touch.z)
         let point = CGPoint(x: self.imageSize * touch.x, y: self.imageSize * touch.y)
-        let playbackFunction : (CGPoint) -> Void = touch.moving ? self.playbackMoved : self.playbackBegan
+        let playbackFunction : (CGPoint, CGFloat) -> Void = touch.moving ? self.playbackMoved : self.playbackBegan
         func playbackTouch(withTimer timer: Timer) {
-            playbackFunction(point)
+            playbackFunction(point, z)
         }
         return playbackTouch
     }

@@ -245,8 +245,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     
     @IBAction func exportLoadedPerformance() {
         if ((state == ChirpJamModes.loaded) || (state == ChirpJamModes.playing)) {
-            print("JAMVC: Exporting the loaded performance")
-            
+            print("JAMVC: Exporting the loaded performance")            
             if let csv = loadedPerformance?.csv() {
                 print(loadedPerformance?.title() ?? "No Title!")
                 let path = loadedPerformance?.writeToFile(csv: csv)
