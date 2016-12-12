@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  chirpey
+//  microjam
 //
 //  Created by Charles Martin on 22/11/16.
 //  Copyright © 2016 Charles Martin. All rights reserved.
