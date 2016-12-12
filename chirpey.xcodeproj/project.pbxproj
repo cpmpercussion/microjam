@@ -1,2348 +1,919 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>archiveVersion</key>
-	<string>1</string>
-	<key>classes</key>
-	<dict/>
-	<key>objectVersion</key>
-	<string>46</string>
-	<key>objects</key>
-	<dict>
-		<key>02347CBBB82FDCB69685ADBD</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>name</key>
-			<string>Pods-chirpeyTests.debug.xcconfig</string>
-			<key>path</key>
-			<string>Pods/Target Support Files/Pods-chirpeyTests/Pods-chirpeyTests.debug.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>056BF6F9E23FE1004CCB7397</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>&#128230; Embed Pods Frameworks</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>"${SRCROOT}/Pods/Target Support Files/Pods-chirpeyTests/Pods-chirpeyTests-frameworks.sh"
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>0A0A2652E180D722C3BD7ADF</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>&#128230; Check Pods Manifest.lock</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>diff "${PODS_ROOT}/../Podfile.lock" "${PODS_ROOT}/Manifest.lock" &gt; /dev/null
-if [[ $? != 0 ]] ; then
-    cat &lt;&lt; EOM
-error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.
-EOM
-    exit 1
-fi
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>1059B2BF7A3AD25CC2E395B3</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>name</key>
-			<string>Pods-chirpeyUITests.debug.xcconfig</string>
-			<key>path</key>
-			<string>Pods/Target Support Files/Pods-chirpeyUITests/Pods-chirpeyUITests.debug.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>255CFDE2D8E87ABF92DF8FAE</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>name</key>
-			<string>Pods-chirpeyTests.release.xcconfig</string>
-			<key>path</key>
-			<string>Pods/Target Support Files/Pods-chirpeyTests/Pods-chirpeyTests.release.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>2C3EEB2E7CA448001E45444B</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.framework</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>Pods_chirpeyUITests.framework</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>30907B85536BE8323D73532C</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>name</key>
-			<string>Pods-chirpey.release.xcconfig</string>
-			<key>path</key>
-			<string>Pods/Target Support Files/Pods-chirpey/Pods-chirpey.release.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>37B82C17ADD34A6423FC8D08</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>FD6E96BB115565C824CC385D</string>
-				<string>A7975E0FB2CEF019D9436B66</string>
-				<string>2C3EEB2E7CA448001E45444B</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Frameworks</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>565143F81DFAB79E00F56B32</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>path</key>
-			<string>adsr.pd</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>565143F91DFAB79E00F56B32</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>path</key>
-			<string>xfade.pd</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>565143FA1DFAB79E00F56B32</key>
-		<dict>
-			<key>fileRef</key>
-			<string>565143F81DFAB79E00F56B32</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>565143FB1DFAB79E00F56B32</key>
-		<dict>
-			<key>fileRef</key>
-			<string>565143F91DFAB79E00F56B32</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>565143FC1DFAF11600F56B32</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>path</key>
-			<string>pluck~.pd</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>565143FD1DFAF11600F56B32</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>path</key>
-			<string>stringsynth.pd</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>565143FE1DFAF11600F56B32</key>
-		<dict>
-			<key>fileRef</key>
-			<string>565143FC1DFAF11600F56B32</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>565143FF1DFAF11600F56B32</key>
-		<dict>
-			<key>fileRef</key>
-			<string>565143FD1DFAF11600F56B32</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>565144001DFAF95900F56B32</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>path</key>
-			<string>c_ead.pd</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>565144011DFAF95900F56B32</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>path</key>
-			<string>e_resonzq.pd</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>565144021DFAF95900F56B32</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>path</key>
-			<string>s_drumelectro.pd</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>565144031DFAF95900F56B32</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>path</key>
-			<string>s_pinknoise.pd</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>565144041DFAF95900F56B32</key>
-		<dict>
-			<key>fileRef</key>
-			<string>565144001DFAF95900F56B32</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>565144051DFAF95900F56B32</key>
-		<dict>
-			<key>fileRef</key>
-			<string>565144011DFAF95900F56B32</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>565144061DFAF95900F56B32</key>
-		<dict>
-			<key>fileRef</key>
-			<string>565144021DFAF95900F56B32</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>565144071DFAF95900F56B32</key>
-		<dict>
-			<key>fileRef</key>
-			<string>565144031DFAF95900F56B32</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>56621B091DE344E2009B9AB6</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>chirpey-Bridging-Header.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>56621B0C1DE39D33009B9AB6</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>ChirpPerformance.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>56621B0D1DE39D33009B9AB6</key>
-		<dict>
-			<key>fileRef</key>
-			<string>56621B0C1DE39D33009B9AB6</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>56621B0E1DE47376009B9AB6</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>AppDelegate.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>56621B0F1DE47376009B9AB6</key>
-		<dict>
-			<key>fileRef</key>
-			<string>56621B0E1DE47376009B9AB6</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>56621B101DE47D5B009B9AB6</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>ChirpJamViewController.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>56621B111DE47D5B009B9AB6</key>
-		<dict>
-			<key>fileRef</key>
-			<string>56621B101DE47D5B009B9AB6</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>56621B121DE4A496009B9AB6</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>ChirpView.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>56621B131DE4A496009B9AB6</key>
-		<dict>
-			<key>fileRef</key>
-			<string>56621B121DE4A496009B9AB6</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>56621B141DE73236009B9AB6</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>RecordingTableTableViewController.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>56621B151DE73236009B9AB6</key>
-		<dict>
-			<key>fileRef</key>
-			<string>56621B141DE73236009B9AB6</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>56621B161DEC27B0009B9AB6</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>PerformanceTableCell.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>56621B171DEC27B0009B9AB6</key>
-		<dict>
-			<key>fileRef</key>
-			<string>56621B161DEC27B0009B9AB6</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>5669CA811DA7AAA5009EEC3B</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>5669CAC51DA7D06A009EEC3B</string>
-				<string>5669CA8C1DA7AAA5009EEC3B</string>
-				<string>5669CAA61DA7AAA6009EEC3B</string>
-				<string>5669CAB11DA7AAA6009EEC3B</string>
-				<string>5669CA8B1DA7AAA5009EEC3B</string>
-				<string>A84F68A69B4F57615CCB0C2D</string>
-				<string>37B82C17ADD34A6423FC8D08</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CA821DA7AAA5009EEC3B</key>
-		<dict>
-			<key>attributes</key>
-			<dict>
-				<key>LastUpgradeCheck</key>
-				<string>0810</string>
-				<key>ORGANIZATIONNAME</key>
-				<string>Charles Martin</string>
-				<key>TargetAttributes</key>
-				<dict>
-					<key>5669CA891DA7AAA5009EEC3B</key>
-					<dict>
-						<key>CreatedOnToolsVersion</key>
-						<string>8.0</string>
-						<key>DevelopmentTeam</key>
-						<string>EDH387FRHA</string>
-						<key>LastSwiftMigration</key>
-						<string>0810</string>
-						<key>ProvisioningStyle</key>
-						<string>Automatic</string>
-					</dict>
-					<key>5669CAA21DA7AAA6009EEC3B</key>
-					<dict>
-						<key>CreatedOnToolsVersion</key>
-						<string>8.0</string>
-						<key>DevelopmentTeam</key>
-						<string>EDH387FRHA</string>
-						<key>ProvisioningStyle</key>
-						<string>Automatic</string>
-						<key>TestTargetID</key>
-						<string>5669CA891DA7AAA5009EEC3B</string>
-					</dict>
-					<key>5669CAAD1DA7AAA6009EEC3B</key>
-					<dict>
-						<key>CreatedOnToolsVersion</key>
-						<string>8.0</string>
-						<key>DevelopmentTeam</key>
-						<string>EDH387FRHA</string>
-						<key>ProvisioningStyle</key>
-						<string>Automatic</string>
-						<key>TestTargetID</key>
-						<string>5669CA891DA7AAA5009EEC3B</string>
-					</dict>
-				</dict>
-			</dict>
-			<key>buildConfigurationList</key>
-			<string>5669CA851DA7AAA5009EEC3B</string>
-			<key>compatibilityVersion</key>
-			<string>Xcode 3.2</string>
-			<key>developmentRegion</key>
-			<string>English</string>
-			<key>hasScannedForEncodings</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXProject</string>
-			<key>knownRegions</key>
-			<array>
-				<string>en</string>
-				<string>Base</string>
-			</array>
-			<key>mainGroup</key>
-			<string>5669CA811DA7AAA5009EEC3B</string>
-			<key>productRefGroup</key>
-			<string>5669CA8B1DA7AAA5009EEC3B</string>
-			<key>projectDirPath</key>
-			<string></string>
-			<key>projectReferences</key>
-			<array/>
-			<key>projectRoot</key>
-			<string></string>
-			<key>targets</key>
-			<array>
-				<string>5669CA891DA7AAA5009EEC3B</string>
-				<string>5669CAA21DA7AAA6009EEC3B</string>
-				<string>5669CAAD1DA7AAA6009EEC3B</string>
-			</array>
-		</dict>
-		<key>5669CA851DA7AAA5009EEC3B</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>5669CAB51DA7AAA6009EEC3B</string>
-				<string>5669CAB61DA7AAA6009EEC3B</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>5669CA861DA7AAA5009EEC3B</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>56621B111DE47D5B009B9AB6</string>
-				<string>56621B0F1DE47376009B9AB6</string>
-				<string>56621B131DE4A496009B9AB6</string>
-				<string>56621B0D1DE39D33009B9AB6</string>
-				<string>56621B151DE73236009B9AB6</string>
-				<string>56621B171DEC27B0009B9AB6</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>5669CA871DA7AAA5009EEC3B</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>E35AB9818998F7A65DEE90DE</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>5669CA881DA7AAA5009EEC3B</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>5669CAF11DA7D06A009EEC3B</string>
-				<string>565144061DFAF95900F56B32</string>
-				<string>565144071DFAF95900F56B32</string>
-				<string>5669CAEF1DA7D06A009EEC3B</string>
-				<string>5669CAEC1DA7D06A009EEC3B</string>
-				<string>568D1DC91DF9BEDF00A2BC0B</string>
-				<string>565143FE1DFAF11600F56B32</string>
-				<string>5669CAE11DA7D06A009EEC3B</string>
-				<string>5669CAE51DA7D06A009EEC3B</string>
-				<string>5669CAF61DA7D06A009EEC3B</string>
-				<string>5669CAE21DA7D06A009EEC3B</string>
-				<string>5669CAE31DA7D06A009EEC3B</string>
-				<string>5669CAF51DA7D06A009EEC3B</string>
-				<string>5669CAE71DA7D06A009EEC3B</string>
-				<string>5669CAF31DA7D06A009EEC3B</string>
-				<string>5669CAE81DA7D06A009EEC3B</string>
-				<string>565144051DFAF95900F56B32</string>
-				<string>5669CAED1DA7D06A009EEC3B</string>
-				<string>5669CAE91DA7D06A009EEC3B</string>
-				<string>5669CAF01DA7D06A009EEC3B</string>
-				<string>5669CAEA1DA7D06A009EEC3B</string>
-				<string>5669CA9D1DA7AAA6009EEC3B</string>
-				<string>5669CAE61DA7D06A009EEC3B</string>
-				<string>5669CA9A1DA7AAA6009EEC3B</string>
-				<string>565143FB1DFAB79E00F56B32</string>
-				<string>5669CAEB1DA7D06A009EEC3B</string>
-				<string>5669CA981DA7AAA6009EEC3B</string>
-				<string>568D1DCA1DF9BEDF00A2BC0B</string>
-				<string>565144041DFAF95900F56B32</string>
-				<string>568D1DC81DF9BEDF00A2BC0B</string>
-				<string>5669CAF41DA7D06A009EEC3B</string>
-				<string>565143FA1DFAB79E00F56B32</string>
-				<string>568D1DC41DF995E500A2BC0B</string>
-				<string>565143FF1DFAF11600F56B32</string>
-				<string>5669CAE41DA7D06A009EEC3B</string>
-				<string>5669CAEE1DA7D06A009EEC3B</string>
-			</array>
-			<key>isa</key>
-			<string>PBXResourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>5669CA891DA7AAA5009EEC3B</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>5669CAB71DA7AAA6009EEC3B</string>
-			<key>buildPhases</key>
-			<array>
-				<string>0A0A2652E180D722C3BD7ADF</string>
-				<string>5669CA861DA7AAA5009EEC3B</string>
-				<string>5669CA871DA7AAA5009EEC3B</string>
-				<string>5669CA881DA7AAA5009EEC3B</string>
-				<string>A21D99AE4216398EA3976BE4</string>
-				<string>656B9944E165287844F8398C</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>chirpey</string>
-			<key>productName</key>
-			<string>chirpey</string>
-			<key>productReference</key>
-			<string>5669CA8A1DA7AAA5009EEC3B</string>
-			<key>productType</key>
-			<string>com.apple.product-type.application</string>
-		</dict>
-		<key>5669CA8A1DA7AAA5009EEC3B</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.application</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>chirpey.app</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>5669CA8B1DA7AAA5009EEC3B</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>5669CA8A1DA7AAA5009EEC3B</string>
-				<string>5669CAA31DA7AAA6009EEC3B</string>
-				<string>5669CAAE1DA7AAA6009EEC3B</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CA8C1DA7AAA5009EEC3B</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>56621B0C1DE39D33009B9AB6</string>
-				<string>56621B121DE4A496009B9AB6</string>
-				<string>56621B0E1DE47376009B9AB6</string>
-				<string>56621B101DE47D5B009B9AB6</string>
-				<string>56621B141DE73236009B9AB6</string>
-				<string>56621B161DEC27B0009B9AB6</string>
-				<string>5669CA961DA7AAA6009EEC3B</string>
-				<string>5669CA991DA7AAA6009EEC3B</string>
-				<string>5669CA9B1DA7AAA6009EEC3B</string>
-				<string>5669CA9E1DA7AAA6009EEC3B</string>
-				<string>56621B091DE344E2009B9AB6</string>
-				<string>568D1DC31DF995E500A2BC0B</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>chirpey</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CA961DA7AAA6009EEC3B</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>5669CA971DA7AAA6009EEC3B</string>
-			</array>
-			<key>isa</key>
-			<string>PBXVariantGroup</string>
-			<key>name</key>
-			<string>Main.storyboard</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CA971DA7AAA6009EEC3B</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>file.storyboard</string>
-			<key>name</key>
-			<string>Base</string>
-			<key>path</key>
-			<string>Base.lproj/Main.storyboard</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CA981DA7AAA6009EEC3B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5669CA961DA7AAA6009EEC3B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>5669CA991DA7AAA6009EEC3B</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>folder.assetcatalog</string>
-			<key>path</key>
-			<string>Assets.xcassets</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CA9A1DA7AAA6009EEC3B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5669CA991DA7AAA6009EEC3B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>5669CA9B1DA7AAA6009EEC3B</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>5669CA9C1DA7AAA6009EEC3B</string>
-			</array>
-			<key>isa</key>
-			<string>PBXVariantGroup</string>
-			<key>name</key>
-			<string>LaunchScreen.storyboard</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CA9C1DA7AAA6009EEC3B</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>file.storyboard</string>
-			<key>name</key>
-			<string>Base</string>
-			<key>path</key>
-			<string>Base.lproj/LaunchScreen.storyboard</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CA9D1DA7AAA6009EEC3B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5669CA9B1DA7AAA6009EEC3B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>5669CA9E1DA7AAA6009EEC3B</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>Info.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CA9F1DA7AAA6009EEC3B</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>5669CAA81DA7AAA6009EEC3B</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>5669CAA01DA7AAA6009EEC3B</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>9F55D44337F4AD7A22FCC4CD</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>5669CAA11DA7AAA6009EEC3B</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXResourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>5669CAA21DA7AAA6009EEC3B</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>5669CABA1DA7AAA6009EEC3B</string>
-			<key>buildPhases</key>
-			<array>
-				<string>9EABFC6289D6966467CB8F5D</string>
-				<string>5669CA9F1DA7AAA6009EEC3B</string>
-				<string>5669CAA01DA7AAA6009EEC3B</string>
-				<string>5669CAA11DA7AAA6009EEC3B</string>
-				<string>056BF6F9E23FE1004CCB7397</string>
-				<string>CB9C8179A6891BA8BE27164F</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array>
-				<string>5669CAA51DA7AAA6009EEC3B</string>
-			</array>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>chirpeyTests</string>
-			<key>productName</key>
-			<string>chirpeyTests</string>
-			<key>productReference</key>
-			<string>5669CAA31DA7AAA6009EEC3B</string>
-			<key>productType</key>
-			<string>com.apple.product-type.bundle.unit-test</string>
-		</dict>
-		<key>5669CAA31DA7AAA6009EEC3B</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.cfbundle</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>chirpeyTests.xctest</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>5669CAA41DA7AAA6009EEC3B</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>5669CA821DA7AAA5009EEC3B</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>1</string>
-			<key>remoteGlobalIDString</key>
-			<string>5669CA891DA7AAA5009EEC3B</string>
-			<key>remoteInfo</key>
-			<string>chirpey</string>
-		</dict>
-		<key>5669CAA51DA7AAA6009EEC3B</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXTargetDependency</string>
-			<key>target</key>
-			<string>5669CA891DA7AAA5009EEC3B</string>
-			<key>targetProxy</key>
-			<string>5669CAA41DA7AAA6009EEC3B</string>
-		</dict>
-		<key>5669CAA61DA7AAA6009EEC3B</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>5669CAA71DA7AAA6009EEC3B</string>
-				<string>5669CAA91DA7AAA6009EEC3B</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>chirpeyTests</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CAA71DA7AAA6009EEC3B</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>chirpeyTests.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CAA81DA7AAA6009EEC3B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5669CAA71DA7AAA6009EEC3B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>5669CAA91DA7AAA6009EEC3B</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>Info.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CAAA1DA7AAA6009EEC3B</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>5669CAB31DA7AAA6009EEC3B</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>5669CAAB1DA7AAA6009EEC3B</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>BD19D98E01E9059DB3D67BAB</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>5669CAAC1DA7AAA6009EEC3B</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXResourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>5669CAAD1DA7AAA6009EEC3B</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>5669CABD1DA7AAA6009EEC3B</string>
-			<key>buildPhases</key>
-			<array>
-				<string>AA973E5001E33B3F25768328</string>
-				<string>5669CAAA1DA7AAA6009EEC3B</string>
-				<string>5669CAAB1DA7AAA6009EEC3B</string>
-				<string>5669CAAC1DA7AAA6009EEC3B</string>
-				<string>577645B447972BCADCDB618D</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array>
-				<string>5669CAB01DA7AAA6009EEC3B</string>
-			</array>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>chirpeyUITests</string>
-			<key>productName</key>
-			<string>chirpeyUITests</string>
-			<key>productReference</key>
-			<string>5669CAAE1DA7AAA6009EEC3B</string>
-			<key>productType</key>
-			<string>com.apple.product-type.bundle.ui-testing</string>
-		</dict>
-		<key>5669CAAE1DA7AAA6009EEC3B</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.cfbundle</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>chirpeyUITests.xctest</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>5669CAAF1DA7AAA6009EEC3B</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>5669CA821DA7AAA5009EEC3B</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>1</string>
-			<key>remoteGlobalIDString</key>
-			<string>5669CA891DA7AAA5009EEC3B</string>
-			<key>remoteInfo</key>
-			<string>chirpey</string>
-		</dict>
-		<key>5669CAB01DA7AAA6009EEC3B</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXTargetDependency</string>
-			<key>target</key>
-			<string>5669CA891DA7AAA5009EEC3B</string>
-			<key>targetProxy</key>
-			<string>5669CAAF1DA7AAA6009EEC3B</string>
-		</dict>
-		<key>5669CAB11DA7AAA6009EEC3B</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>5669CAB21DA7AAA6009EEC3B</string>
-				<string>5669CAB41DA7AAA6009EEC3B</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>chirpeyUITests</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CAB21DA7AAA6009EEC3B</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>chirpeyUITests.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CAB31DA7AAA6009EEC3B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5669CAB21DA7AAA6009EEC3B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>5669CAB41DA7AAA6009EEC3B</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>Info.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CAB51DA7AAA6009EEC3B</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>CLANG_ANALYZER_NONNULL</key>
-				<string>YES</string>
-				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
-				<string>gnu++0x</string>
-				<key>CLANG_CXX_LIBRARY</key>
-				<string>libc++</string>
-				<key>CLANG_ENABLE_MODULES</key>
-				<string>YES</string>
-				<key>CLANG_ENABLE_OBJC_ARC</key>
-				<string>YES</string>
-				<key>CLANG_WARN_BOOL_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN_DOCUMENTATION_COMMENTS</key>
-				<string>YES</string>
-				<key>CLANG_WARN_EMPTY_BODY</key>
-				<string>YES</string>
-				<key>CLANG_WARN_ENUM_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INFINITE_RECURSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN_SUSPICIOUS_MOVE</key>
-				<string>YES</string>
-				<key>CLANG_WARN_SUSPICIOUS_MOVES</key>
-				<string>YES</string>
-				<key>CLANG_WARN_UNREACHABLE_CODE</key>
-				<string>YES</string>
-				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
-				<string>YES</string>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>NO</string>
-				<key>DEBUG_INFORMATION_FORMAT</key>
-				<string>dwarf</string>
-				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
-				<string>YES</string>
-				<key>ENABLE_TESTABILITY</key>
-				<string>YES</string>
-				<key>GCC_C_LANGUAGE_STANDARD</key>
-				<string>gnu99</string>
-				<key>GCC_DYNAMIC_NO_PIC</key>
-				<string>NO</string>
-				<key>GCC_NO_COMMON_BLOCKS</key>
-				<string>YES</string>
-				<key>GCC_OPTIMIZATION_LEVEL</key>
-				<string>0</string>
-				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
-				<array>
-					<string>DEBUG=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
-				<string>YES</string>
-				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
-				<string>YES_ERROR</string>
-				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
-				<string>YES_AGGRESSIVE</string>
-				<key>GCC_WARN_UNUSED_FUNCTION</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_VARIABLE</key>
-				<string>YES</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>10.0</string>
-				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>YES</string>
-				<key>ONLY_ACTIVE_ARCH</key>
-				<string>YES</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>TARGETED_DEVICE_FAMILY</key>
-				<string>1,2</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>5669CAB61DA7AAA6009EEC3B</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>CLANG_ANALYZER_NONNULL</key>
-				<string>YES</string>
-				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
-				<string>gnu++0x</string>
-				<key>CLANG_CXX_LIBRARY</key>
-				<string>libc++</string>
-				<key>CLANG_ENABLE_MODULES</key>
-				<string>YES</string>
-				<key>CLANG_ENABLE_OBJC_ARC</key>
-				<string>YES</string>
-				<key>CLANG_WARN_BOOL_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN_DOCUMENTATION_COMMENTS</key>
-				<string>YES</string>
-				<key>CLANG_WARN_EMPTY_BODY</key>
-				<string>YES</string>
-				<key>CLANG_WARN_ENUM_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INFINITE_RECURSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN_SUSPICIOUS_MOVE</key>
-				<string>YES</string>
-				<key>CLANG_WARN_SUSPICIOUS_MOVES</key>
-				<string>YES</string>
-				<key>CLANG_WARN_UNREACHABLE_CODE</key>
-				<string>YES</string>
-				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
-				<string>YES</string>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>NO</string>
-				<key>DEBUG_INFORMATION_FORMAT</key>
-				<string>dwarf-with-dsym</string>
-				<key>ENABLE_NS_ASSERTIONS</key>
-				<string>NO</string>
-				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
-				<string>YES</string>
-				<key>GCC_C_LANGUAGE_STANDARD</key>
-				<string>gnu99</string>
-				<key>GCC_NO_COMMON_BLOCKS</key>
-				<string>YES</string>
-				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
-				<string>YES</string>
-				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
-				<string>YES_ERROR</string>
-				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
-				<string>YES_AGGRESSIVE</string>
-				<key>GCC_WARN_UNUSED_FUNCTION</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_VARIABLE</key>
-				<string>YES</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>10.0</string>
-				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>NO</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>TARGETED_DEVICE_FAMILY</key>
-				<string>1,2</string>
-				<key>VALIDATE_PRODUCT</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>5669CAB71DA7AAA6009EEC3B</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>5669CAB81DA7AAA6009EEC3B</string>
-				<string>5669CAB91DA7AAA6009EEC3B</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>5669CAB81DA7AAA6009EEC3B</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>6BE7145BD2BCDFDABA15DF53</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
-				<string>AppIcon</string>
-				<key>CLANG_ENABLE_MODULES</key>
-				<string>YES</string>
-				<key>DEVELOPMENT_TEAM</key>
-				<string>EDH387FRHA</string>
-				<key>INFOPLIST_FILE</key>
-				<string>chirpey/Info.plist</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<string>$(inherited) @executable_path/Frameworks</string>
-				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
-				<string>au.com.charlesmartin.chirpey</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SWIFT_OBJC_BRIDGING_HEADER</key>
-				<string>chirpey/chirpey-Bridging-Header.h</string>
-				<key>SWIFT_OPTIMIZATION_LEVEL</key>
-				<string>-Onone</string>
-				<key>SWIFT_VERSION</key>
-				<string>3.0</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>5669CAB91DA7AAA6009EEC3B</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>30907B85536BE8323D73532C</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
-				<string>AppIcon</string>
-				<key>CLANG_ENABLE_MODULES</key>
-				<string>YES</string>
-				<key>DEVELOPMENT_TEAM</key>
-				<string>EDH387FRHA</string>
-				<key>INFOPLIST_FILE</key>
-				<string>chirpey/Info.plist</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<string>$(inherited) @executable_path/Frameworks</string>
-				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
-				<string>au.com.charlesmartin.chirpey</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SWIFT_OBJC_BRIDGING_HEADER</key>
-				<string>chirpey/chirpey-Bridging-Header.h</string>
-				<key>SWIFT_VERSION</key>
-				<string>3.0</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>5669CABA1DA7AAA6009EEC3B</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>5669CABB1DA7AAA6009EEC3B</string>
-				<string>5669CABC1DA7AAA6009EEC3B</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>5669CABB1DA7AAA6009EEC3B</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>02347CBBB82FDCB69685ADBD</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES</key>
-				<string>YES</string>
-				<key>BUNDLE_LOADER</key>
-				<string>$(TEST_HOST)</string>
-				<key>DEVELOPMENT_TEAM</key>
-				<string>EDH387FRHA</string>
-				<key>INFOPLIST_FILE</key>
-				<string>chirpeyTests/Info.plist</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<string>$(inherited) @executable_path/Frameworks @loader_path/Frameworks</string>
-				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
-				<string>au.com.charlesmartin.chirpeyTests</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>TEST_HOST</key>
-				<string>$(BUILT_PRODUCTS_DIR)/chirpey.app/chirpey</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>5669CABC1DA7AAA6009EEC3B</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>255CFDE2D8E87ABF92DF8FAE</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES</key>
-				<string>YES</string>
-				<key>BUNDLE_LOADER</key>
-				<string>$(TEST_HOST)</string>
-				<key>DEVELOPMENT_TEAM</key>
-				<string>EDH387FRHA</string>
-				<key>INFOPLIST_FILE</key>
-				<string>chirpeyTests/Info.plist</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<string>$(inherited) @executable_path/Frameworks @loader_path/Frameworks</string>
-				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
-				<string>au.com.charlesmartin.chirpeyTests</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>TEST_HOST</key>
-				<string>$(BUILT_PRODUCTS_DIR)/chirpey.app/chirpey</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>5669CABD1DA7AAA6009EEC3B</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>5669CABE1DA7AAA6009EEC3B</string>
-				<string>5669CABF1DA7AAA6009EEC3B</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>5669CABE1DA7AAA6009EEC3B</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>1059B2BF7A3AD25CC2E395B3</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES</key>
-				<string>YES</string>
-				<key>DEVELOPMENT_TEAM</key>
-				<string>EDH387FRHA</string>
-				<key>INFOPLIST_FILE</key>
-				<string>chirpeyUITests/Info.plist</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<string>$(inherited) @executable_path/Frameworks @loader_path/Frameworks</string>
-				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
-				<string>au.com.charlesmartin.chirpeyUITests</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>TEST_TARGET_NAME</key>
-				<string>chirpey</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>5669CABF1DA7AAA6009EEC3B</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>D86937856F993CCF11FFC9EE</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES</key>
-				<string>YES</string>
-				<key>DEVELOPMENT_TEAM</key>
-				<string>EDH387FRHA</string>
-				<key>INFOPLIST_FILE</key>
-				<string>chirpeyUITests/Info.plist</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<string>$(inherited) @executable_path/Frameworks @loader_path/Frameworks</string>
-				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
-				<string>au.com.charlesmartin.chirpeyUITests</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>TEST_TARGET_NAME</key>
-				<string>chirpey</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>5669CAC51DA7D06A009EEC3B</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>565143FC1DFAF11600F56B32</string>
-				<string>565143FD1DFAF11600F56B32</string>
-				<string>565144001DFAF95900F56B32</string>
-				<string>565144011DFAF95900F56B32</string>
-				<string>565144021DFAF95900F56B32</string>
-				<string>565144031DFAF95900F56B32</string>
-				<string>568D1DC51DF9BEDF00A2BC0B</string>
-				<string>568D1DC61DF9BEDF00A2BC0B</string>
-				<string>568D1DC71DF9BEDF00A2BC0B</string>
-				<string>5669CAC61DA7D06A009EEC3B</string>
-				<string>5669CAC71DA7D06A009EEC3B</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>synth</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CAC61DA7D06A009EEC3B</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>path</key>
-			<string>chirp.pd</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CAC71DA7D06A009EEC3B</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>5669CAC81DA7D06A009EEC3B</string>
-				<string>5669CACE1DA7D06A009EEC3B</string>
-				<string>5669CACF1DA7D06A009EEC3B</string>
-				<string>5669CAD51DA7D06A009EEC3B</string>
-				<string>5669CAD61DA7D06A009EEC3B</string>
-				<string>5669CADA1DA7D06A009EEC3B</string>
-				<string>5669CADC1DA7D06A009EEC3B</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>metaPdLibs</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CAC81DA7D06A009EEC3B</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>565143F81DFAB79E00F56B32</string>
-				<string>565143F91DFAB79E00F56B32</string>
-				<string>5669CAC91DA7D06A009EEC3B</string>
-				<string>5669CACA1DA7D06A009EEC3B</string>
-				<string>5669CACB1DA7D06A009EEC3B</string>
-				<string>5669CACC1DA7D06A009EEC3B</string>
-				<string>5669CACD1DA7D06A009EEC3B</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>control</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CAC91DA7D06A009EEC3B</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>path</key>
-			<string>dispatch.pd</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CACA1DA7D06A009EEC3B</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>path</key>
-			<string>monopan.pd</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CACB1DA7D06A009EEC3B</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>path</key>
-			<string>monovol.pd</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CACC1DA7D06A009EEC3B</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>path</key>
-			<string>stereovol.pd</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CACD1DA7D06A009EEC3B</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>path</key>
-			<string>volumeRandomise.pd</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CACE1DA7D06A009EEC3B</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>path</key>
-			<string>effectschain.pd</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CACF1DA7D06A009EEC3B</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>5669CAD01DA7D06A009EEC3B</string>
-				<string>5669CAD11DA7D06A009EEC3B</string>
-				<string>5669CAD21DA7D06A009EEC3B</string>
-				<string>5669CAD31DA7D06A009EEC3B</string>
-				<string>5669CAD41DA7D06A009EEC3B</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>fx</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CAD01DA7D06A009EEC3B</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>path</key>
-			<string>feedbackdelay.pd</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CAD11DA7D06A009EEC3B</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>path</key>
-			<string>graindelay~.pd</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CAD21DA7D06A009EEC3B</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>path</key>
-			<string>pitchshift~.pd</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CAD31DA7D06A009EEC3B</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>path</key>
-			<string>rev2~.pd</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CAD41DA7D06A009EEC3B</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>path</key>
-			<string>rlop~.pd</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CAD51DA7D06A009EEC3B</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>path</key>
-			<string>hhm-effects-chain.mmp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CAD61DA7D06A009EEC3B</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>5669CAD71DA7D06A009EEC3B</string>
-				<string>5669CAD81DA7D06A009EEC3B</string>
-				<string>5669CAD91DA7D06A009EEC3B</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>instruments</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CAD71DA7D06A009EEC3B</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>path</key>
-			<string>cpmlooper.pd</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CAD81DA7D06A009EEC3B</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>path</key>
-			<string>percsampler.pd</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CAD91DA7D06A009EEC3B</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>path</key>
-			<string>slicesampler.pd</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CADA1DA7D06A009EEC3B</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>path</key>
-			<string>loadMetaPdLibs.pd</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CADC1DA7D06A009EEC3B</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>5669CADD1DA7D06A009EEC3B</string>
-				<string>5669CADE1DA7D06A009EEC3B</string>
-				<string>5669CADF1DA7D06A009EEC3B</string>
-				<string>5669CAE01DA7D06A009EEC3B</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>scales</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CADD1DA7D06A009EEC3B</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>path</key>
-			<string>m_lydian.pd</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CADE1DA7D06A009EEC3B</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>path</key>
-			<string>m_lydiansharp5.pd</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CADF1DA7D06A009EEC3B</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>path</key>
-			<string>m_mixolydian.pd</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CAE01DA7D06A009EEC3B</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>path</key>
-			<string>m_phrygian.pd</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5669CAE11DA7D06A009EEC3B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5669CAC61DA7D06A009EEC3B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>5669CAE21DA7D06A009EEC3B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5669CAC91DA7D06A009EEC3B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>5669CAE31DA7D06A009EEC3B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5669CACA1DA7D06A009EEC3B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>5669CAE41DA7D06A009EEC3B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5669CACB1DA7D06A009EEC3B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>5669CAE51DA7D06A009EEC3B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5669CACC1DA7D06A009EEC3B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>5669CAE61DA7D06A009EEC3B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5669CACD1DA7D06A009EEC3B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>5669CAE71DA7D06A009EEC3B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5669CACE1DA7D06A009EEC3B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>5669CAE81DA7D06A009EEC3B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5669CAD01DA7D06A009EEC3B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>5669CAE91DA7D06A009EEC3B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5669CAD11DA7D06A009EEC3B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>5669CAEA1DA7D06A009EEC3B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5669CAD21DA7D06A009EEC3B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>5669CAEB1DA7D06A009EEC3B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5669CAD31DA7D06A009EEC3B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>5669CAEC1DA7D06A009EEC3B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5669CAD41DA7D06A009EEC3B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>5669CAED1DA7D06A009EEC3B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5669CAD51DA7D06A009EEC3B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>5669CAEE1DA7D06A009EEC3B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5669CAD71DA7D06A009EEC3B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>5669CAEF1DA7D06A009EEC3B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5669CAD81DA7D06A009EEC3B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>5669CAF01DA7D06A009EEC3B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5669CAD91DA7D06A009EEC3B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>5669CAF11DA7D06A009EEC3B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5669CADA1DA7D06A009EEC3B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>5669CAF31DA7D06A009EEC3B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5669CADD1DA7D06A009EEC3B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>5669CAF41DA7D06A009EEC3B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5669CADE1DA7D06A009EEC3B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>5669CAF51DA7D06A009EEC3B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5669CADF1DA7D06A009EEC3B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>5669CAF61DA7D06A009EEC3B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5669CAE01DA7D06A009EEC3B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>568D1DC31DF995E500A2BC0B</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.plug-in</string>
-			<key>path</key>
-			<string>Settings.bundle</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>568D1DC41DF995E500A2BC0B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>568D1DC31DF995E500A2BC0B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>568D1DC51DF9BEDF00A2BC0B</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>path</key>
-			<string>drums.pd</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>568D1DC61DF9BEDF00A2BC0B</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>path</key>
-			<string>keys.pd</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>568D1DC71DF9BEDF00A2BC0B</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>path</key>
-			<string>strings.pd</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>568D1DC81DF9BEDF00A2BC0B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>568D1DC51DF9BEDF00A2BC0B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>568D1DC91DF9BEDF00A2BC0B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>568D1DC61DF9BEDF00A2BC0B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>568D1DCA1DF9BEDF00A2BC0B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>568D1DC71DF9BEDF00A2BC0B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>577645B447972BCADCDB618D</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>&#128230; Copy Pods Resources</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>"${SRCROOT}/Pods/Target Support Files/Pods-chirpeyUITests/Pods-chirpeyUITests-resources.sh"
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>656B9944E165287844F8398C</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>&#128230; Copy Pods Resources</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>"${SRCROOT}/Pods/Target Support Files/Pods-chirpey/Pods-chirpey-resources.sh"
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>6BE7145BD2BCDFDABA15DF53</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>name</key>
-			<string>Pods-chirpey.debug.xcconfig</string>
-			<key>path</key>
-			<string>Pods/Target Support Files/Pods-chirpey/Pods-chirpey.debug.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>9EABFC6289D6966467CB8F5D</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>&#128230; Check Pods Manifest.lock</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>diff "${PODS_ROOT}/../Podfile.lock" "${PODS_ROOT}/Manifest.lock" &gt; /dev/null
-if [[ $? != 0 ]] ; then
-    cat &lt;&lt; EOM
-error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.
-EOM
-    exit 1
-fi
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>9F55D44337F4AD7A22FCC4CD</key>
-		<dict>
-			<key>fileRef</key>
-			<string>A7975E0FB2CEF019D9436B66</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>A21D99AE4216398EA3976BE4</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>&#128230; Embed Pods Frameworks</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>"${SRCROOT}/Pods/Target Support Files/Pods-chirpey/Pods-chirpey-frameworks.sh"
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>A7975E0FB2CEF019D9436B66</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.framework</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>Pods_chirpeyTests.framework</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>A84F68A69B4F57615CCB0C2D</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>6BE7145BD2BCDFDABA15DF53</string>
-				<string>30907B85536BE8323D73532C</string>
-				<string>02347CBBB82FDCB69685ADBD</string>
-				<string>255CFDE2D8E87ABF92DF8FAE</string>
-				<string>1059B2BF7A3AD25CC2E395B3</string>
-				<string>D86937856F993CCF11FFC9EE</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Pods</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>AA973E5001E33B3F25768328</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>&#128230; Check Pods Manifest.lock</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>diff "${PODS_ROOT}/../Podfile.lock" "${PODS_ROOT}/Manifest.lock" &gt; /dev/null
-if [[ $? != 0 ]] ; then
-    cat &lt;&lt; EOM
-error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.
-EOM
-    exit 1
-fi
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>BD19D98E01E9059DB3D67BAB</key>
-		<dict>
-			<key>fileRef</key>
-			<string>2C3EEB2E7CA448001E45444B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>CB9C8179A6891BA8BE27164F</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>&#128230; Copy Pods Resources</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>"${SRCROOT}/Pods/Target Support Files/Pods-chirpeyTests/Pods-chirpeyTests-resources.sh"
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>D86937856F993CCF11FFC9EE</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>name</key>
-			<string>Pods-chirpeyUITests.release.xcconfig</string>
-			<key>path</key>
-			<string>Pods/Target Support Files/Pods-chirpeyUITests/Pods-chirpeyUITests.release.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>E35AB9818998F7A65DEE90DE</key>
-		<dict>
-			<key>fileRef</key>
-			<string>FD6E96BB115565C824CC385D</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>FD6E96BB115565C824CC385D</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.framework</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>Pods_chirpey.framework</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-	</dict>
-	<key>rootObject</key>
-	<string>5669CA821DA7AAA5009EEC3B</string>
-</dict>
-</plist>
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		565143FA1DFAB79E00F56B32 /* adsr.pd in Resources */ = {isa = PBXBuildFile; fileRef = 565143F81DFAB79E00F56B32 /* adsr.pd */; };
+		565143FB1DFAB79E00F56B32 /* xfade.pd in Resources */ = {isa = PBXBuildFile; fileRef = 565143F91DFAB79E00F56B32 /* xfade.pd */; };
+		565143FE1DFAF11600F56B32 /* pluck~.pd in Resources */ = {isa = PBXBuildFile; fileRef = 565143FC1DFAF11600F56B32 /* pluck~.pd */; };
+		565143FF1DFAF11600F56B32 /* stringsynth.pd in Resources */ = {isa = PBXBuildFile; fileRef = 565143FD1DFAF11600F56B32 /* stringsynth.pd */; };
+		565144041DFAF95900F56B32 /* c_ead.pd in Resources */ = {isa = PBXBuildFile; fileRef = 565144001DFAF95900F56B32 /* c_ead.pd */; };
+		565144051DFAF95900F56B32 /* e_resonzq.pd in Resources */ = {isa = PBXBuildFile; fileRef = 565144011DFAF95900F56B32 /* e_resonzq.pd */; };
+		565144061DFAF95900F56B32 /* s_drumelectro.pd in Resources */ = {isa = PBXBuildFile; fileRef = 565144021DFAF95900F56B32 /* s_drumelectro.pd */; };
+		565144071DFAF95900F56B32 /* s_pinknoise.pd in Resources */ = {isa = PBXBuildFile; fileRef = 565144031DFAF95900F56B32 /* s_pinknoise.pd */; };
+		56621B0D1DE39D33009B9AB6 /* ChirpPerformance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56621B0C1DE39D33009B9AB6 /* ChirpPerformance.swift */; };
+		56621B0F1DE47376009B9AB6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56621B0E1DE47376009B9AB6 /* AppDelegate.swift */; };
+		56621B111DE47D5B009B9AB6 /* ChirpJamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56621B101DE47D5B009B9AB6 /* ChirpJamViewController.swift */; };
+		56621B131DE4A496009B9AB6 /* ChirpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56621B121DE4A496009B9AB6 /* ChirpView.swift */; };
+		56621B151DE73236009B9AB6 /* RecordingTableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56621B141DE73236009B9AB6 /* RecordingTableTableViewController.swift */; };
+		56621B171DEC27B0009B9AB6 /* PerformanceTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56621B161DEC27B0009B9AB6 /* PerformanceTableCell.swift */; };
+		5669CA981DA7AAA6009EEC3B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5669CA961DA7AAA6009EEC3B /* Main.storyboard */; };
+		5669CA9A1DA7AAA6009EEC3B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5669CA991DA7AAA6009EEC3B /* Assets.xcassets */; };
+		5669CA9D1DA7AAA6009EEC3B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5669CA9B1DA7AAA6009EEC3B /* LaunchScreen.storyboard */; };
+		5669CAA81DA7AAA6009EEC3B /* chirpeyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5669CAA71DA7AAA6009EEC3B /* chirpeyTests.m */; };
+		5669CAB31DA7AAA6009EEC3B /* chirpeyUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5669CAB21DA7AAA6009EEC3B /* chirpeyUITests.m */; };
+		5669CAE11DA7D06A009EEC3B /* chirp.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CAC61DA7D06A009EEC3B /* chirp.pd */; };
+		5669CAE21DA7D06A009EEC3B /* dispatch.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CAC91DA7D06A009EEC3B /* dispatch.pd */; };
+		5669CAE31DA7D06A009EEC3B /* monopan.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CACA1DA7D06A009EEC3B /* monopan.pd */; };
+		5669CAE41DA7D06A009EEC3B /* monovol.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CACB1DA7D06A009EEC3B /* monovol.pd */; };
+		5669CAE51DA7D06A009EEC3B /* stereovol.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CACC1DA7D06A009EEC3B /* stereovol.pd */; };
+		5669CAE61DA7D06A009EEC3B /* volumeRandomise.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CACD1DA7D06A009EEC3B /* volumeRandomise.pd */; };
+		5669CAE71DA7D06A009EEC3B /* effectschain.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CACE1DA7D06A009EEC3B /* effectschain.pd */; };
+		5669CAE81DA7D06A009EEC3B /* feedbackdelay.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CAD01DA7D06A009EEC3B /* feedbackdelay.pd */; };
+		5669CAE91DA7D06A009EEC3B /* graindelay~.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CAD11DA7D06A009EEC3B /* graindelay~.pd */; };
+		5669CAEA1DA7D06A009EEC3B /* pitchshift~.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CAD21DA7D06A009EEC3B /* pitchshift~.pd */; };
+		5669CAEB1DA7D06A009EEC3B /* rev2~.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CAD31DA7D06A009EEC3B /* rev2~.pd */; };
+		5669CAEC1DA7D06A009EEC3B /* rlop~.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CAD41DA7D06A009EEC3B /* rlop~.pd */; };
+		5669CAED1DA7D06A009EEC3B /* hhm-effects-chain.mmp in Resources */ = {isa = PBXBuildFile; fileRef = 5669CAD51DA7D06A009EEC3B /* hhm-effects-chain.mmp */; };
+		5669CAEE1DA7D06A009EEC3B /* cpmlooper.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CAD71DA7D06A009EEC3B /* cpmlooper.pd */; };
+		5669CAEF1DA7D06A009EEC3B /* percsampler.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CAD81DA7D06A009EEC3B /* percsampler.pd */; };
+		5669CAF01DA7D06A009EEC3B /* slicesampler.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CAD91DA7D06A009EEC3B /* slicesampler.pd */; };
+		5669CAF11DA7D06A009EEC3B /* loadMetaPdLibs.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CADA1DA7D06A009EEC3B /* loadMetaPdLibs.pd */; };
+		5669CAF31DA7D06A009EEC3B /* m_lydian.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CADD1DA7D06A009EEC3B /* m_lydian.pd */; };
+		5669CAF41DA7D06A009EEC3B /* m_lydiansharp5.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CADE1DA7D06A009EEC3B /* m_lydiansharp5.pd */; };
+		5669CAF51DA7D06A009EEC3B /* m_mixolydian.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CADF1DA7D06A009EEC3B /* m_mixolydian.pd */; };
+		5669CAF61DA7D06A009EEC3B /* m_phrygian.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CAE01DA7D06A009EEC3B /* m_phrygian.pd */; };
+		568D1DC41DF995E500A2BC0B /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 568D1DC31DF995E500A2BC0B /* Settings.bundle */; };
+		568D1DC81DF9BEDF00A2BC0B /* drums.pd in Resources */ = {isa = PBXBuildFile; fileRef = 568D1DC51DF9BEDF00A2BC0B /* drums.pd */; };
+		568D1DC91DF9BEDF00A2BC0B /* keys.pd in Resources */ = {isa = PBXBuildFile; fileRef = 568D1DC61DF9BEDF00A2BC0B /* keys.pd */; };
+		568D1DCA1DF9BEDF00A2BC0B /* strings.pd in Resources */ = {isa = PBXBuildFile; fileRef = 568D1DC71DF9BEDF00A2BC0B /* strings.pd */; };
+		569B92C41DFEA99C00AA257C /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569B92C31DFEA99C00AA257C /* SettingsTableViewController.swift */; };
+		9F55D44337F4AD7A22FCC4CD /* Pods_chirpeyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7975E0FB2CEF019D9436B66 /* Pods_chirpeyTests.framework */; };
+		BD19D98E01E9059DB3D67BAB /* Pods_chirpeyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C3EEB2E7CA448001E45444B /* Pods_chirpeyUITests.framework */; };
+		E35AB9818998F7A65DEE90DE /* Pods_chirpey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD6E96BB115565C824CC385D /* Pods_chirpey.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5669CAA41DA7AAA6009EEC3B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5669CA821DA7AAA5009EEC3B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5669CA891DA7AAA5009EEC3B;
+			remoteInfo = chirpey;
+		};
+		5669CAAF1DA7AAA6009EEC3B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5669CA821DA7AAA5009EEC3B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5669CA891DA7AAA5009EEC3B;
+			remoteInfo = chirpey;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		02347CBBB82FDCB69685ADBD /* Pods-chirpeyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chirpeyTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-chirpeyTests/Pods-chirpeyTests.debug.xcconfig"; sourceTree = "<group>"; };
+		1059B2BF7A3AD25CC2E395B3 /* Pods-chirpeyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chirpeyUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-chirpeyUITests/Pods-chirpeyUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		255CFDE2D8E87ABF92DF8FAE /* Pods-chirpeyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chirpeyTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-chirpeyTests/Pods-chirpeyTests.release.xcconfig"; sourceTree = "<group>"; };
+		2C3EEB2E7CA448001E45444B /* Pods_chirpeyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_chirpeyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		30907B85536BE8323D73532C /* Pods-chirpey.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chirpey.release.xcconfig"; path = "Pods/Target Support Files/Pods-chirpey/Pods-chirpey.release.xcconfig"; sourceTree = "<group>"; };
+		565143F81DFAB79E00F56B32 /* adsr.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = adsr.pd; sourceTree = "<group>"; };
+		565143F91DFAB79E00F56B32 /* xfade.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = xfade.pd; sourceTree = "<group>"; };
+		565143FC1DFAF11600F56B32 /* pluck~.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "pluck~.pd"; sourceTree = "<group>"; };
+		565143FD1DFAF11600F56B32 /* stringsynth.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stringsynth.pd; sourceTree = "<group>"; };
+		565144001DFAF95900F56B32 /* c_ead.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = c_ead.pd; sourceTree = "<group>"; };
+		565144011DFAF95900F56B32 /* e_resonzq.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = e_resonzq.pd; sourceTree = "<group>"; };
+		565144021DFAF95900F56B32 /* s_drumelectro.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = s_drumelectro.pd; sourceTree = "<group>"; };
+		565144031DFAF95900F56B32 /* s_pinknoise.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = s_pinknoise.pd; sourceTree = "<group>"; };
+		56621B091DE344E2009B9AB6 /* chirpey-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "chirpey-Bridging-Header.h"; sourceTree = "<group>"; };
+		56621B0C1DE39D33009B9AB6 /* ChirpPerformance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChirpPerformance.swift; sourceTree = "<group>"; };
+		56621B0E1DE47376009B9AB6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		56621B101DE47D5B009B9AB6 /* ChirpJamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChirpJamViewController.swift; sourceTree = "<group>"; };
+		56621B121DE4A496009B9AB6 /* ChirpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChirpView.swift; sourceTree = "<group>"; };
+		56621B141DE73236009B9AB6 /* RecordingTableTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingTableTableViewController.swift; sourceTree = "<group>"; };
+		56621B161DEC27B0009B9AB6 /* PerformanceTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PerformanceTableCell.swift; sourceTree = "<group>"; };
+		5669CA8A1DA7AAA5009EEC3B /* chirpey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chirpey.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5669CA971DA7AAA6009EEC3B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		5669CA991DA7AAA6009EEC3B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5669CA9C1DA7AAA6009EEC3B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		5669CA9E1DA7AAA6009EEC3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5669CAA31DA7AAA6009EEC3B /* chirpeyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = chirpeyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5669CAA71DA7AAA6009EEC3B /* chirpeyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = chirpeyTests.m; sourceTree = "<group>"; };
+		5669CAA91DA7AAA6009EEC3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5669CAAE1DA7AAA6009EEC3B /* chirpeyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = chirpeyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5669CAB21DA7AAA6009EEC3B /* chirpeyUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = chirpeyUITests.m; sourceTree = "<group>"; };
+		5669CAB41DA7AAA6009EEC3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5669CAC61DA7D06A009EEC3B /* chirp.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chirp.pd; sourceTree = "<group>"; };
+		5669CAC91DA7D06A009EEC3B /* dispatch.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dispatch.pd; sourceTree = "<group>"; };
+		5669CACA1DA7D06A009EEC3B /* monopan.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = monopan.pd; sourceTree = "<group>"; };
+		5669CACB1DA7D06A009EEC3B /* monovol.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = monovol.pd; sourceTree = "<group>"; };
+		5669CACC1DA7D06A009EEC3B /* stereovol.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stereovol.pd; sourceTree = "<group>"; };
+		5669CACD1DA7D06A009EEC3B /* volumeRandomise.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = volumeRandomise.pd; sourceTree = "<group>"; };
+		5669CACE1DA7D06A009EEC3B /* effectschain.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = effectschain.pd; sourceTree = "<group>"; };
+		5669CAD01DA7D06A009EEC3B /* feedbackdelay.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = feedbackdelay.pd; sourceTree = "<group>"; };
+		5669CAD11DA7D06A009EEC3B /* graindelay~.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "graindelay~.pd"; sourceTree = "<group>"; };
+		5669CAD21DA7D06A009EEC3B /* pitchshift~.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "pitchshift~.pd"; sourceTree = "<group>"; };
+		5669CAD31DA7D06A009EEC3B /* rev2~.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "rev2~.pd"; sourceTree = "<group>"; };
+		5669CAD41DA7D06A009EEC3B /* rlop~.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "rlop~.pd"; sourceTree = "<group>"; };
+		5669CAD51DA7D06A009EEC3B /* hhm-effects-chain.mmp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "hhm-effects-chain.mmp"; sourceTree = "<group>"; };
+		5669CAD71DA7D06A009EEC3B /* cpmlooper.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cpmlooper.pd; sourceTree = "<group>"; };
+		5669CAD81DA7D06A009EEC3B /* percsampler.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = percsampler.pd; sourceTree = "<group>"; };
+		5669CAD91DA7D06A009EEC3B /* slicesampler.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = slicesampler.pd; sourceTree = "<group>"; };
+		5669CADA1DA7D06A009EEC3B /* loadMetaPdLibs.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = loadMetaPdLibs.pd; sourceTree = "<group>"; };
+		5669CADD1DA7D06A009EEC3B /* m_lydian.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = m_lydian.pd; sourceTree = "<group>"; };
+		5669CADE1DA7D06A009EEC3B /* m_lydiansharp5.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = m_lydiansharp5.pd; sourceTree = "<group>"; };
+		5669CADF1DA7D06A009EEC3B /* m_mixolydian.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = m_mixolydian.pd; sourceTree = "<group>"; };
+		5669CAE01DA7D06A009EEC3B /* m_phrygian.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = m_phrygian.pd; sourceTree = "<group>"; };
+		568D1DC31DF995E500A2BC0B /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		568D1DC51DF9BEDF00A2BC0B /* drums.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = drums.pd; sourceTree = "<group>"; };
+		568D1DC61DF9BEDF00A2BC0B /* keys.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = keys.pd; sourceTree = "<group>"; };
+		568D1DC71DF9BEDF00A2BC0B /* strings.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = strings.pd; sourceTree = "<group>"; };
+		569B92C31DFEA99C00AA257C /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		6BE7145BD2BCDFDABA15DF53 /* Pods-chirpey.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chirpey.debug.xcconfig"; path = "Pods/Target Support Files/Pods-chirpey/Pods-chirpey.debug.xcconfig"; sourceTree = "<group>"; };
+		A7975E0FB2CEF019D9436B66 /* Pods_chirpeyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_chirpeyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D86937856F993CCF11FFC9EE /* Pods-chirpeyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chirpeyUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-chirpeyUITests/Pods-chirpeyUITests.release.xcconfig"; sourceTree = "<group>"; };
+		FD6E96BB115565C824CC385D /* Pods_chirpey.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_chirpey.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5669CA871DA7AAA5009EEC3B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E35AB9818998F7A65DEE90DE /* Pods_chirpey.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5669CAA01DA7AAA6009EEC3B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F55D44337F4AD7A22FCC4CD /* Pods_chirpeyTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5669CAAB1DA7AAA6009EEC3B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BD19D98E01E9059DB3D67BAB /* Pods_chirpeyUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		37B82C17ADD34A6423FC8D08 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FD6E96BB115565C824CC385D /* Pods_chirpey.framework */,
+				A7975E0FB2CEF019D9436B66 /* Pods_chirpeyTests.framework */,
+				2C3EEB2E7CA448001E45444B /* Pods_chirpeyUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5669CA811DA7AAA5009EEC3B = {
+			isa = PBXGroup;
+			children = (
+				5669CAC51DA7D06A009EEC3B /* synth */,
+				5669CA8C1DA7AAA5009EEC3B /* chirpey */,
+				5669CAA61DA7AAA6009EEC3B /* chirpeyTests */,
+				5669CAB11DA7AAA6009EEC3B /* chirpeyUITests */,
+				5669CA8B1DA7AAA5009EEC3B /* Products */,
+				A84F68A69B4F57615CCB0C2D /* Pods */,
+				37B82C17ADD34A6423FC8D08 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		5669CA8B1DA7AAA5009EEC3B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5669CA8A1DA7AAA5009EEC3B /* chirpey.app */,
+				5669CAA31DA7AAA6009EEC3B /* chirpeyTests.xctest */,
+				5669CAAE1DA7AAA6009EEC3B /* chirpeyUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5669CA8C1DA7AAA5009EEC3B /* chirpey */ = {
+			isa = PBXGroup;
+			children = (
+				56621B0C1DE39D33009B9AB6 /* ChirpPerformance.swift */,
+				56621B121DE4A496009B9AB6 /* ChirpView.swift */,
+				56621B0E1DE47376009B9AB6 /* AppDelegate.swift */,
+				56621B101DE47D5B009B9AB6 /* ChirpJamViewController.swift */,
+				56621B141DE73236009B9AB6 /* RecordingTableTableViewController.swift */,
+				56621B161DEC27B0009B9AB6 /* PerformanceTableCell.swift */,
+				5669CA961DA7AAA6009EEC3B /* Main.storyboard */,
+				5669CA991DA7AAA6009EEC3B /* Assets.xcassets */,
+				5669CA9B1DA7AAA6009EEC3B /* LaunchScreen.storyboard */,
+				5669CA9E1DA7AAA6009EEC3B /* Info.plist */,
+				56621B091DE344E2009B9AB6 /* chirpey-Bridging-Header.h */,
+				568D1DC31DF995E500A2BC0B /* Settings.bundle */,
+				569B92C31DFEA99C00AA257C /* SettingsTableViewController.swift */,
+			);
+			path = chirpey;
+			sourceTree = "<group>";
+		};
+		5669CAA61DA7AAA6009EEC3B /* chirpeyTests */ = {
+			isa = PBXGroup;
+			children = (
+				5669CAA71DA7AAA6009EEC3B /* chirpeyTests.m */,
+				5669CAA91DA7AAA6009EEC3B /* Info.plist */,
+			);
+			path = chirpeyTests;
+			sourceTree = "<group>";
+		};
+		5669CAB11DA7AAA6009EEC3B /* chirpeyUITests */ = {
+			isa = PBXGroup;
+			children = (
+				5669CAB21DA7AAA6009EEC3B /* chirpeyUITests.m */,
+				5669CAB41DA7AAA6009EEC3B /* Info.plist */,
+			);
+			path = chirpeyUITests;
+			sourceTree = "<group>";
+		};
+		5669CAC51DA7D06A009EEC3B /* synth */ = {
+			isa = PBXGroup;
+			children = (
+				565143FC1DFAF11600F56B32 /* pluck~.pd */,
+				565143FD1DFAF11600F56B32 /* stringsynth.pd */,
+				565144001DFAF95900F56B32 /* c_ead.pd */,
+				565144011DFAF95900F56B32 /* e_resonzq.pd */,
+				565144021DFAF95900F56B32 /* s_drumelectro.pd */,
+				565144031DFAF95900F56B32 /* s_pinknoise.pd */,
+				568D1DC51DF9BEDF00A2BC0B /* drums.pd */,
+				568D1DC61DF9BEDF00A2BC0B /* keys.pd */,
+				568D1DC71DF9BEDF00A2BC0B /* strings.pd */,
+				5669CAC61DA7D06A009EEC3B /* chirp.pd */,
+				5669CAC71DA7D06A009EEC3B /* metaPdLibs */,
+			);
+			path = synth;
+			sourceTree = "<group>";
+		};
+		5669CAC71DA7D06A009EEC3B /* metaPdLibs */ = {
+			isa = PBXGroup;
+			children = (
+				5669CAC81DA7D06A009EEC3B /* control */,
+				5669CACE1DA7D06A009EEC3B /* effectschain.pd */,
+				5669CACF1DA7D06A009EEC3B /* fx */,
+				5669CAD51DA7D06A009EEC3B /* hhm-effects-chain.mmp */,
+				5669CAD61DA7D06A009EEC3B /* instruments */,
+				5669CADA1DA7D06A009EEC3B /* loadMetaPdLibs.pd */,
+				5669CADC1DA7D06A009EEC3B /* scales */,
+			);
+			path = metaPdLibs;
+			sourceTree = "<group>";
+		};
+		5669CAC81DA7D06A009EEC3B /* control */ = {
+			isa = PBXGroup;
+			children = (
+				565143F81DFAB79E00F56B32 /* adsr.pd */,
+				565143F91DFAB79E00F56B32 /* xfade.pd */,
+				5669CAC91DA7D06A009EEC3B /* dispatch.pd */,
+				5669CACA1DA7D06A009EEC3B /* monopan.pd */,
+				5669CACB1DA7D06A009EEC3B /* monovol.pd */,
+				5669CACC1DA7D06A009EEC3B /* stereovol.pd */,
+				5669CACD1DA7D06A009EEC3B /* volumeRandomise.pd */,
+			);
+			path = control;
+			sourceTree = "<group>";
+		};
+		5669CACF1DA7D06A009EEC3B /* fx */ = {
+			isa = PBXGroup;
+			children = (
+				5669CAD01DA7D06A009EEC3B /* feedbackdelay.pd */,
+				5669CAD11DA7D06A009EEC3B /* graindelay~.pd */,
+				5669CAD21DA7D06A009EEC3B /* pitchshift~.pd */,
+				5669CAD31DA7D06A009EEC3B /* rev2~.pd */,
+				5669CAD41DA7D06A009EEC3B /* rlop~.pd */,
+			);
+			path = fx;
+			sourceTree = "<group>";
+		};
+		5669CAD61DA7D06A009EEC3B /* instruments */ = {
+			isa = PBXGroup;
+			children = (
+				5669CAD71DA7D06A009EEC3B /* cpmlooper.pd */,
+				5669CAD81DA7D06A009EEC3B /* percsampler.pd */,
+				5669CAD91DA7D06A009EEC3B /* slicesampler.pd */,
+			);
+			path = instruments;
+			sourceTree = "<group>";
+		};
+		5669CADC1DA7D06A009EEC3B /* scales */ = {
+			isa = PBXGroup;
+			children = (
+				5669CADD1DA7D06A009EEC3B /* m_lydian.pd */,
+				5669CADE1DA7D06A009EEC3B /* m_lydiansharp5.pd */,
+				5669CADF1DA7D06A009EEC3B /* m_mixolydian.pd */,
+				5669CAE01DA7D06A009EEC3B /* m_phrygian.pd */,
+			);
+			path = scales;
+			sourceTree = "<group>";
+		};
+		A84F68A69B4F57615CCB0C2D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6BE7145BD2BCDFDABA15DF53 /* Pods-chirpey.debug.xcconfig */,
+				30907B85536BE8323D73532C /* Pods-chirpey.release.xcconfig */,
+				02347CBBB82FDCB69685ADBD /* Pods-chirpeyTests.debug.xcconfig */,
+				255CFDE2D8E87ABF92DF8FAE /* Pods-chirpeyTests.release.xcconfig */,
+				1059B2BF7A3AD25CC2E395B3 /* Pods-chirpeyUITests.debug.xcconfig */,
+				D86937856F993CCF11FFC9EE /* Pods-chirpeyUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5669CA891DA7AAA5009EEC3B /* chirpey */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5669CAB71DA7AAA6009EEC3B /* Build configuration list for PBXNativeTarget "chirpey" */;
+			buildPhases = (
+				0A0A2652E180D722C3BD7ADF /* 📦 Check Pods Manifest.lock */,
+				5669CA861DA7AAA5009EEC3B /* Sources */,
+				5669CA871DA7AAA5009EEC3B /* Frameworks */,
+				5669CA881DA7AAA5009EEC3B /* Resources */,
+				A21D99AE4216398EA3976BE4 /* 📦 Embed Pods Frameworks */,
+				656B9944E165287844F8398C /* 📦 Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = chirpey;
+			productName = chirpey;
+			productReference = 5669CA8A1DA7AAA5009EEC3B /* chirpey.app */;
+			productType = "com.apple.product-type.application";
+		};
+		5669CAA21DA7AAA6009EEC3B /* chirpeyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5669CABA1DA7AAA6009EEC3B /* Build configuration list for PBXNativeTarget "chirpeyTests" */;
+			buildPhases = (
+				9EABFC6289D6966467CB8F5D /* 📦 Check Pods Manifest.lock */,
+				5669CA9F1DA7AAA6009EEC3B /* Sources */,
+				5669CAA01DA7AAA6009EEC3B /* Frameworks */,
+				5669CAA11DA7AAA6009EEC3B /* Resources */,
+				056BF6F9E23FE1004CCB7397 /* 📦 Embed Pods Frameworks */,
+				CB9C8179A6891BA8BE27164F /* 📦 Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5669CAA51DA7AAA6009EEC3B /* PBXTargetDependency */,
+			);
+			name = chirpeyTests;
+			productName = chirpeyTests;
+			productReference = 5669CAA31DA7AAA6009EEC3B /* chirpeyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		5669CAAD1DA7AAA6009EEC3B /* chirpeyUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5669CABD1DA7AAA6009EEC3B /* Build configuration list for PBXNativeTarget "chirpeyUITests" */;
+			buildPhases = (
+				AA973E5001E33B3F25768328 /* 📦 Check Pods Manifest.lock */,
+				5669CAAA1DA7AAA6009EEC3B /* Sources */,
+				5669CAAB1DA7AAA6009EEC3B /* Frameworks */,
+				5669CAAC1DA7AAA6009EEC3B /* Resources */,
+				577645B447972BCADCDB618D /* 📦 Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5669CAB01DA7AAA6009EEC3B /* PBXTargetDependency */,
+			);
+			name = chirpeyUITests;
+			productName = chirpeyUITests;
+			productReference = 5669CAAE1DA7AAA6009EEC3B /* chirpeyUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5669CA821DA7AAA5009EEC3B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0810;
+				ORGANIZATIONNAME = "Charles Martin";
+				TargetAttributes = {
+					5669CA891DA7AAA5009EEC3B = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = EDH387FRHA;
+						LastSwiftMigration = 0810;
+						ProvisioningStyle = Automatic;
+					};
+					5669CAA21DA7AAA6009EEC3B = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = EDH387FRHA;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 5669CA891DA7AAA5009EEC3B;
+					};
+					5669CAAD1DA7AAA6009EEC3B = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = EDH387FRHA;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 5669CA891DA7AAA5009EEC3B;
+					};
+				};
+			};
+			buildConfigurationList = 5669CA851DA7AAA5009EEC3B /* Build configuration list for PBXProject "chirpey" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 5669CA811DA7AAA5009EEC3B;
+			productRefGroup = 5669CA8B1DA7AAA5009EEC3B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5669CA891DA7AAA5009EEC3B /* chirpey */,
+				5669CAA21DA7AAA6009EEC3B /* chirpeyTests */,
+				5669CAAD1DA7AAA6009EEC3B /* chirpeyUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5669CA881DA7AAA5009EEC3B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5669CAF11DA7D06A009EEC3B /* loadMetaPdLibs.pd in Resources */,
+				565144061DFAF95900F56B32 /* s_drumelectro.pd in Resources */,
+				565144071DFAF95900F56B32 /* s_pinknoise.pd in Resources */,
+				5669CAEF1DA7D06A009EEC3B /* percsampler.pd in Resources */,
+				5669CAEC1DA7D06A009EEC3B /* rlop~.pd in Resources */,
+				568D1DC91DF9BEDF00A2BC0B /* keys.pd in Resources */,
+				565143FE1DFAF11600F56B32 /* pluck~.pd in Resources */,
+				5669CAE11DA7D06A009EEC3B /* chirp.pd in Resources */,
+				5669CAE51DA7D06A009EEC3B /* stereovol.pd in Resources */,
+				5669CAF61DA7D06A009EEC3B /* m_phrygian.pd in Resources */,
+				5669CAE21DA7D06A009EEC3B /* dispatch.pd in Resources */,
+				5669CAE31DA7D06A009EEC3B /* monopan.pd in Resources */,
+				5669CAF51DA7D06A009EEC3B /* m_mixolydian.pd in Resources */,
+				5669CAE71DA7D06A009EEC3B /* effectschain.pd in Resources */,
+				5669CAF31DA7D06A009EEC3B /* m_lydian.pd in Resources */,
+				5669CAE81DA7D06A009EEC3B /* feedbackdelay.pd in Resources */,
+				565144051DFAF95900F56B32 /* e_resonzq.pd in Resources */,
+				5669CAED1DA7D06A009EEC3B /* hhm-effects-chain.mmp in Resources */,
+				5669CAE91DA7D06A009EEC3B /* graindelay~.pd in Resources */,
+				5669CAF01DA7D06A009EEC3B /* slicesampler.pd in Resources */,
+				5669CAEA1DA7D06A009EEC3B /* pitchshift~.pd in Resources */,
+				5669CA9D1DA7AAA6009EEC3B /* LaunchScreen.storyboard in Resources */,
+				5669CAE61DA7D06A009EEC3B /* volumeRandomise.pd in Resources */,
+				5669CA9A1DA7AAA6009EEC3B /* Assets.xcassets in Resources */,
+				565143FB1DFAB79E00F56B32 /* xfade.pd in Resources */,
+				5669CAEB1DA7D06A009EEC3B /* rev2~.pd in Resources */,
+				5669CA981DA7AAA6009EEC3B /* Main.storyboard in Resources */,
+				568D1DCA1DF9BEDF00A2BC0B /* strings.pd in Resources */,
+				565144041DFAF95900F56B32 /* c_ead.pd in Resources */,
+				568D1DC81DF9BEDF00A2BC0B /* drums.pd in Resources */,
+				5669CAF41DA7D06A009EEC3B /* m_lydiansharp5.pd in Resources */,
+				565143FA1DFAB79E00F56B32 /* adsr.pd in Resources */,
+				568D1DC41DF995E500A2BC0B /* Settings.bundle in Resources */,
+				565143FF1DFAF11600F56B32 /* stringsynth.pd in Resources */,
+				5669CAE41DA7D06A009EEC3B /* monovol.pd in Resources */,
+				5669CAEE1DA7D06A009EEC3B /* cpmlooper.pd in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5669CAA11DA7AAA6009EEC3B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5669CAAC1DA7AAA6009EEC3B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		056BF6F9E23FE1004CCB7397 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-chirpeyTests/Pods-chirpeyTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		0A0A2652E180D722C3BD7ADF /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		577645B447972BCADCDB618D /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-chirpeyUITests/Pods-chirpeyUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		656B9944E165287844F8398C /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-chirpey/Pods-chirpey-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9EABFC6289D6966467CB8F5D /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A21D99AE4216398EA3976BE4 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-chirpey/Pods-chirpey-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AA973E5001E33B3F25768328 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		CB9C8179A6891BA8BE27164F /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-chirpeyTests/Pods-chirpeyTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5669CA861DA7AAA5009EEC3B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				56621B111DE47D5B009B9AB6 /* ChirpJamViewController.swift in Sources */,
+				56621B0F1DE47376009B9AB6 /* AppDelegate.swift in Sources */,
+				56621B131DE4A496009B9AB6 /* ChirpView.swift in Sources */,
+				56621B0D1DE39D33009B9AB6 /* ChirpPerformance.swift in Sources */,
+				56621B151DE73236009B9AB6 /* RecordingTableTableViewController.swift in Sources */,
+				56621B171DEC27B0009B9AB6 /* PerformanceTableCell.swift in Sources */,
+				569B92C41DFEA99C00AA257C /* SettingsTableViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5669CA9F1DA7AAA6009EEC3B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5669CAA81DA7AAA6009EEC3B /* chirpeyTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5669CAAA1DA7AAA6009EEC3B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5669CAB31DA7AAA6009EEC3B /* chirpeyUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5669CAA51DA7AAA6009EEC3B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5669CA891DA7AAA5009EEC3B /* chirpey */;
+			targetProxy = 5669CAA41DA7AAA6009EEC3B /* PBXContainerItemProxy */;
+		};
+		5669CAB01DA7AAA6009EEC3B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5669CA891DA7AAA5009EEC3B /* chirpey */;
+			targetProxy = 5669CAAF1DA7AAA6009EEC3B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		5669CA961DA7AAA6009EEC3B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5669CA971DA7AAA6009EEC3B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		5669CA9B1DA7AAA6009EEC3B /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5669CA9C1DA7AAA6009EEC3B /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		5669CAB51DA7AAA6009EEC3B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5669CAB61DA7AAA6009EEC3B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5669CAB81DA7AAA6009EEC3B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6BE7145BD2BCDFDABA15DF53 /* Pods-chirpey.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = EDH387FRHA;
+				INFOPLIST_FILE = chirpey/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = au.com.charlesmartin.chirpey;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "chirpey/chirpey-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		5669CAB91DA7AAA6009EEC3B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 30907B85536BE8323D73532C /* Pods-chirpey.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = EDH387FRHA;
+				INFOPLIST_FILE = chirpey/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = au.com.charlesmartin.chirpey;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "chirpey/chirpey-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		5669CABB1DA7AAA6009EEC3B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 02347CBBB82FDCB69685ADBD /* Pods-chirpeyTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = EDH387FRHA;
+				INFOPLIST_FILE = chirpeyTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = au.com.charlesmartin.chirpeyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/chirpey.app/chirpey";
+			};
+			name = Debug;
+		};
+		5669CABC1DA7AAA6009EEC3B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 255CFDE2D8E87ABF92DF8FAE /* Pods-chirpeyTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = EDH387FRHA;
+				INFOPLIST_FILE = chirpeyTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = au.com.charlesmartin.chirpeyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/chirpey.app/chirpey";
+			};
+			name = Release;
+		};
+		5669CABE1DA7AAA6009EEC3B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1059B2BF7A3AD25CC2E395B3 /* Pods-chirpeyUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = EDH387FRHA;
+				INFOPLIST_FILE = chirpeyUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = au.com.charlesmartin.chirpeyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = chirpey;
+			};
+			name = Debug;
+		};
+		5669CABF1DA7AAA6009EEC3B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D86937856F993CCF11FFC9EE /* Pods-chirpeyUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = EDH387FRHA;
+				INFOPLIST_FILE = chirpeyUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = au.com.charlesmartin.chirpeyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = chirpey;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5669CA851DA7AAA5009EEC3B /* Build configuration list for PBXProject "chirpey" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5669CAB51DA7AAA6009EEC3B /* Debug */,
+				5669CAB61DA7AAA6009EEC3B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5669CAB71DA7AAA6009EEC3B /* Build configuration list for PBXNativeTarget "chirpey" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5669CAB81DA7AAA6009EEC3B /* Debug */,
+				5669CAB91DA7AAA6009EEC3B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5669CABA1DA7AAA6009EEC3B /* Build configuration list for PBXNativeTarget "chirpeyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5669CABB1DA7AAA6009EEC3B /* Debug */,
+				5669CABC1DA7AAA6009EEC3B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5669CABD1DA7AAA6009EEC3B /* Build configuration list for PBXNativeTarget "chirpeyUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5669CABE1DA7AAA6009EEC3B /* Debug */,
+				5669CABF1DA7AAA6009EEC3B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5669CA821DA7AAA5009EEC3B /* Project object */;
+}

@@ -7,3 +7,5 @@
 #import "PdBase.h"
 #import "PdFile.h"
 #import "ChirpView.h"
+#import "InAppSettingsKit/IASKAppSettingsViewController.h"
+
