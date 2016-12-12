@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "5669CA891DA7AAA5009EEC3B"
-               BuildableName = "chirpey.app"
-               BlueprintName = "chirpey"
+               BuildableName = "microjam.app"
+               BlueprintName = "microjam"
                ReferencedContainer = "container:chirpey.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -53,8 +53,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5669CA891DA7AAA5009EEC3B"
-            BuildableName = "chirpey.app"
-            BlueprintName = "chirpey"
+            BuildableName = "microjam.app"
+            BlueprintName = "microjam"
             ReferencedContainer = "container:chirpey.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -76,8 +76,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5669CA891DA7AAA5009EEC3B"
-            BuildableName = "chirpey.app"
-            BlueprintName = "chirpey"
+            BuildableName = "microjam.app"
+            BlueprintName = "microjam"
             ReferencedContainer = "container:chirpey.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -102,8 +102,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5669CA891DA7AAA5009EEC3B"
-            BuildableName = "chirpey.app"
-            BlueprintName = "chirpey"
+            BuildableName = "microjam.app"
+            BlueprintName = "microjam"
             ReferencedContainer = "container:chirpey.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

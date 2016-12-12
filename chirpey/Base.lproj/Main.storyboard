@@ -12,7 +12,7 @@
         <!--Jam-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="Jam" id="BYZ-38-t0r" customClass="ChirpJamViewController" customModule="chirpey" sceneMemberID="viewController">
+                <viewController title="Jam" id="BYZ-38-t0r" customClass="ChirpJamViewController" customModule="microjam" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -21,7 +21,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xQz-CD-1rT" customClass="ChirpView" customModule="chirpey">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xQz-CD-1rT" customClass="ChirpView" customModule="microjam">
                                 <rect key="frame" x="37" y="72" width="300" height="300"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -120,7 +120,7 @@
         <!--Settings-->
         <scene sceneID="JKC-ke-Tam">
             <objects>
-                <tableViewController id="s0d-x4-1wv" customClass="SettingsTableViewController" customModule="chirpey" sceneMemberID="viewController">
+                <tableViewController id="s0d-x4-1wv" customClass="SettingsTableViewController" customModule="microjam" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="p5g-hn-j41">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -162,7 +162,7 @@
         <!--Recordings-->
         <scene sceneID="aLy-Ok-N4a">
             <objects>
-                <tableViewController title="Recordings" id="aUQ-4V-oKd" customClass="RecordingTableTableViewController" customModule="chirpey" sceneMemberID="viewController">
+                <tableViewController title="Recordings" id="aUQ-4V-oKd" customClass="RecordingTableTableViewController" customModule="microjam" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="FRc-cK-5R4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -288,6 +288,6 @@
         <image name="defaultRecordingImage" width="150" height="150"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="gEs-g0-Xrm"/>
+        <segue reference="CvC-hy-feA"/>
     </inferredMetricsTieBreakers>
 </document>

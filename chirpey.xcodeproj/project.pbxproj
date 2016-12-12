@@ -95,7 +95,7 @@
 		56621B121DE4A496009B9AB6 /* ChirpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChirpView.swift; sourceTree = "<group>"; };
 		56621B141DE73236009B9AB6 /* RecordingTableTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingTableTableViewController.swift; sourceTree = "<group>"; };
 		56621B161DEC27B0009B9AB6 /* PerformanceTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PerformanceTableCell.swift; sourceTree = "<group>"; };
-		5669CA8A1DA7AAA5009EEC3B /* chirpey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chirpey.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5669CA8A1DA7AAA5009EEC3B /* microjam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = microjam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5669CA971DA7AAA6009EEC3B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5669CA991DA7AAA6009EEC3B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5669CA9C1DA7AAA6009EEC3B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -192,7 +192,7 @@
 		5669CA8B1DA7AAA5009EEC3B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5669CA8A1DA7AAA5009EEC3B /* chirpey.app */,
+				5669CA8A1DA7AAA5009EEC3B /* microjam.app */,
 				5669CAA31DA7AAA6009EEC3B /* chirpeyTests.xctest */,
 				5669CAAE1DA7AAA6009EEC3B /* chirpeyUITests.xctest */,
 			);
@@ -332,9 +332,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5669CA891DA7AAA5009EEC3B /* chirpey */ = {
+		5669CA891DA7AAA5009EEC3B /* microjam */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5669CAB71DA7AAA6009EEC3B /* Build configuration list for PBXNativeTarget "chirpey" */;
+			buildConfigurationList = 5669CAB71DA7AAA6009EEC3B /* Build configuration list for PBXNativeTarget "microjam" */;
 			buildPhases = (
 				0A0A2652E180D722C3BD7ADF /* 📦 Check Pods Manifest.lock */,
 				5669CA861DA7AAA5009EEC3B /* Sources */,
@@ -347,9 +347,9 @@
 			);
 			dependencies = (
 			);
-			name = chirpey;
+			name = microjam;
 			productName = chirpey;
-			productReference = 5669CA8A1DA7AAA5009EEC3B /* chirpey.app */;
+			productReference = 5669CA8A1DA7AAA5009EEC3B /* microjam.app */;
 			productType = "com.apple.product-type.application";
 		};
 		5669CAA21DA7AAA6009EEC3B /* chirpeyTests */ = {
@@ -435,7 +435,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5669CA891DA7AAA5009EEC3B /* chirpey */,
+				5669CA891DA7AAA5009EEC3B /* microjam */,
 				5669CAA21DA7AAA6009EEC3B /* chirpeyTests */,
 				5669CAAD1DA7AAA6009EEC3B /* chirpeyUITests */,
 			);
@@ -661,12 +661,12 @@
 /* Begin PBXTargetDependency section */
 		5669CAA51DA7AAA6009EEC3B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 5669CA891DA7AAA5009EEC3B /* chirpey */;
+			target = 5669CA891DA7AAA5009EEC3B /* microjam */;
 			targetProxy = 5669CAA41DA7AAA6009EEC3B /* PBXContainerItemProxy */;
 		};
 		5669CAB01DA7AAA6009EEC3B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 5669CA891DA7AAA5009EEC3B /* chirpey */;
+			target = 5669CA891DA7AAA5009EEC3B /* microjam */;
 			targetProxy = 5669CAAF1DA7AAA6009EEC3B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -792,7 +792,7 @@
 				DEVELOPMENT_TEAM = EDH387FRHA;
 				INFOPLIST_FILE = chirpey/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = au.com.charlesmartin.chirpey;
+				PRODUCT_BUNDLE_IDENTIFIER = au.com.charlesmartin.microjam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "chirpey/chirpey-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -809,7 +809,7 @@
 				DEVELOPMENT_TEAM = EDH387FRHA;
 				INFOPLIST_FILE = chirpey/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = au.com.charlesmartin.chirpey;
+				PRODUCT_BUNDLE_IDENTIFIER = au.com.charlesmartin.microjam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "chirpey/chirpey-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
@@ -886,7 +886,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5669CAB71DA7AAA6009EEC3B /* Build configuration list for PBXNativeTarget "chirpey" */ = {
+		5669CAB71DA7AAA6009EEC3B /* Build configuration list for PBXNativeTarget "microjam" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5669CAB81DA7AAA6009EEC3B /* Debug */,

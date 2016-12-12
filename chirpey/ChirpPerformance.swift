@@ -44,7 +44,8 @@ class ChirpPerformance : NSObject, NSCoding {
     }
 
     required convenience init?(coder aDecoder: NSCoder) {
-        let data = aDecoder.decodeObject(forKey: PropertyKey.performanceDataKey) as! [TouchRecord]
+        guard let data = aDecoder.decodeObject(forKey: PropertyKey.performanceDataKey) as? [TouchRecord]
+            else {return nil}
         guard
             //let data = aDecoder.decodeObject(forKey: PropertyKey.performanceDataKey) as? [TouchRecord],
             let date = aDecoder.decodeObject(forKey: PropertyKey.dateKey) as? Date,
