@@ -37,6 +37,7 @@ class ChirpPerformance : NSObject, NSCoding {
         static let performerKey = "performer"
         static let instrumentKey = "instrument"
         static let imageKey = "image"
+        static let locationKey = "location"
     }
     
     func encode(with aCoder: NSCoder) {
@@ -45,6 +46,7 @@ class ChirpPerformance : NSObject, NSCoding {
         aCoder.encode(performer, forKey: PropertyKey.performerKey)
         aCoder.encode(instrument, forKey: PropertyKey.instrumentKey)
         aCoder.encode(UIImagePNGRepresentation(image), forKey: PropertyKey.imageKey)
+        aCoder.encode(location, forKey: PropertyKey.locationKey)
     }
 
     required convenience init?(coder aDecoder: NSCoder) {
@@ -57,24 +59,39 @@ class ChirpPerformance : NSObject, NSCoding {
             let instrument = aDecoder.decodeObject(forKey: PropertyKey.instrumentKey) as? String,
             let image = UIImage(data: (aDecoder.decodeObject(forKey: PropertyKey.imageKey) as? Data)!)
             else {return nil}
+        let location = (aDecoder.decodeObject(forKey: "location") as? CLLocation) ?? CLLocation.init(latitude: 60, longitude: 11)
         
         print("PERF: Decoding", data.count, "notes:", performer, instrument)
-        self.init(data: data, date: date, performer: performer, instrument: instrument, image: image)
+        self.init(data: data, date: date, performer: performer, instrument: instrument, image: image, location: location)
     }
 
-    init(data: [TouchRecord], date: Date, performer: String, instrument: String, image: UIImage) {
+    /// Main initialiser
+    init(data: [TouchRecord], date: Date, performer: String, instrument: String, image: UIImage, location: CLLocation) {
         self.performanceData = data
         self.date = date
         self.performer = performer
         self.instrument = instrument
         self.image = image
-        // FIXME: actually detect the proper location.
-        self.location = CLLocation.init(latitude: 90.0, longitude: 45.0) // total hack for now
+        self.location = location
         super.init()
     }
     
+    
+    /// Initialiser with csv of data for the TouchRecords, useful in initialising performances from CloudKit
+    convenience init?(csv: String, date: Date, performer: String, instrument: String, image: UIImage, location: CLLocation) {
+        var data : [TouchRecord] = []
+        let lines = csv.components(separatedBy: "\n")
+        // TODO: test this initialiser
+        data = lines.map({(TouchRecord.init(fromCSVLine: $0))!})
+            //.filter({$0 != nil})
+        self.init(data: data, date: date, performer: performer, instrument: instrument, image: image, location: location)
+    }
+    
+    
+    /// Convenience Initialiser for creating performance with data yet to be added.
     convenience override init() {
-        self.init(data : [], date : Date(), performer : "", instrument : "", image : UIImage())
+        // FIXME: actually detect the proper location
+        self.init(data : [], date : Date(), performer : "", instrument : "", image : UIImage(), location: CLLocation.init(latitude: 90.0, longitude: 45.0))
     }
 
     /// Returns a CSV of the current performance data
@@ -178,6 +195,20 @@ class TouchRecord: NSObject, NSCoding {
         self.z = z
         self.moving = moving
         super.init()
+    }
+    
+    /// Initialises a touchRecord from a single line of a CSV file
+    convenience init?(fromCSVLine line : String) {
+        let components = line.components(separatedBy: ",")
+        let moving = (components[4] == "1")
+        guard let time = Double(components[0]),
+            let x = Double(components[1]),
+            let y = Double(components[2]),
+            let z = Double(components[3])
+            else {
+                return nil
+            }
+        self.init(time: time, x: x, y: y, z: z, moving: moving)
     }
     
 //    /// Readable string version of the touchRecord
