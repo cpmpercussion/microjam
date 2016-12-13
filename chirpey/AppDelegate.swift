@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CloudKit
 
 struct SettingsKeys {
     static let performerKey = "performer_name"
@@ -151,6 +152,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
     func addNew(performance : ChirpPerformance) {
         self.recordedPerformances.append(performance)
         self.savePerformances()
+        self.upload(performance: performance)
     }
     
     /// Save recorded performances to file.
@@ -162,5 +164,65 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
         } else {
             print("AD: successfully saved", self.recordedPerformances.count, "performances")
         }
+    }
+    
+    struct PerfCloudKeys {
+        static let type = "Performance"
+        static let date = "Date"
+        static let image = "Image"
+        static let instrument = "Instrument"
+        static let location = "PerformedAt"
+        static let performer = "Performer"
+        static let replyto = "ReplyTo"
+        static let touches = "Touches"
+    }
+    
+    func tempURL() -> URL {
+        let filename = ProcessInfo.processInfo.globallyUniqueString + ".png"
+        return URL.init(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(filename)
+    }
+    
+    func upload(performance : ChirpPerformance) {
+        
+        // Setup the record
+        print("ADCK: Saving the performance:", performance.title())
+        print("ADCK: Setting up the record...")
+        let performanceID = CKRecordID(recordName: performance.title())
+        let performanceRecord = CKRecord(recordType: PerfCloudKeys.type,recordID: performanceID)
+        performanceRecord[PerfCloudKeys.date] = performance.date as CKRecordValue
+        performanceRecord[PerfCloudKeys.performer] = performance.performer as CKRecordValue
+        performanceRecord[PerfCloudKeys.instrument] = performance.instrument as CKRecordValue
+        performanceRecord[PerfCloudKeys.touches] = performance.csv() as CKRecordValue
+        performanceRecord[PerfCloudKeys.replyto] = "" as CKRecordValue
+        performanceRecord[PerfCloudKeys.location] = performance.location as! CKRecordValue
+        
+        do {
+            print("ADCK: Saving the image...")
+            let imageURL = tempURL()
+            let imageData = UIImagePNGRepresentation(performance.image)!
+            try imageData.write(to: imageURL, options: .atomicWrite)
+            let asset = CKAsset(fileURL: imageURL)
+            performanceRecord[PerfCloudKeys.image] = asset
+        }
+        catch {
+            print("ADCK: Error writing image data:", error)
+        }
+        
+        // Upload to the container
+        print("ADCK: Attempting to save to CloudKit")
+        let container = CKContainer.default()
+        let publicDatabase = container.publicCloudDatabase
+//        let privateDatabase = container.privateCloudDatabase
+        publicDatabase.save(performanceRecord, completionHandler: {(record, error) -> Void in
+            if (error != nil) {
+                print("ADCK: Error saving to the database")
+                print(error ?? "")
+            }
+            print("ADCK: Saved to cloudkit! phew.")
+            OperationQueue.main.addOperation({ 
+                // Do some clean up stuff to express the finishedness of the upload...
+                print("ADCK: Doing the cloudkit upload cleanup")
+            })
+        })
     }
 }

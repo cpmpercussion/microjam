@@ -11,6 +11,7 @@
  Data is stored as an array of `TouchRecord`.
  */
 import UIKit
+import CoreLocation
 
 class ChirpPerformance : NSObject, NSCoding {
     /// Array of `TouchRecord`s to store performance data.
@@ -18,9 +19,11 @@ class ChirpPerformance : NSObject, NSCoding {
     var playbackTimers : [Timer] = []
     var date : Date
     var performer : String
+    var replyto : String = ""
     var instrument : String
     var image : UIImage
     var csvPathURL : URL?
+    var location : CLLocation?
 
     // Static vars
     static let CSV_HEADER = "time,x,y,z,moving\n"
@@ -65,6 +68,8 @@ class ChirpPerformance : NSObject, NSCoding {
         self.performer = performer
         self.instrument = instrument
         self.image = image
+        // FIXME: actually detect the proper location.
+        self.location = CLLocation.init(latitude: 90.0, longitude: 45.0) // total hack for now
         super.init()
     }
     
@@ -81,6 +86,8 @@ class ChirpPerformance : NSObject, NSCoding {
         }
         return output
     }
+    
+
     
     /// Appends one touch datum to the current performance
     func recordTouchAt(time t : Double, x : Double, y : Double, z : Double, moving : Bool) {
@@ -108,6 +115,7 @@ class ChirpPerformance : NSObject, NSCoding {
         }
     }
     
+    /// A uniqueish string title for the performance
     func title() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "YYYY-MM-DD-HH-mm-SS"

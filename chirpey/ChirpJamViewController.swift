@@ -259,8 +259,5 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
                 }
             }
         }
-    
     }
-
-
 }
