@@ -101,10 +101,10 @@
 		5669CA991DA7AAA6009EEC3B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5669CA9C1DA7AAA6009EEC3B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5669CA9E1DA7AAA6009EEC3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5669CAA31DA7AAA6009EEC3B /* chirpeyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = chirpeyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5669CAA31DA7AAA6009EEC3B /* microjamTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = microjamTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5669CAA71DA7AAA6009EEC3B /* chirpeyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = chirpeyTests.m; sourceTree = "<group>"; };
 		5669CAA91DA7AAA6009EEC3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5669CAAE1DA7AAA6009EEC3B /* chirpeyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = chirpeyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5669CAAE1DA7AAA6009EEC3B /* microjamUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = microjamUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5669CAB21DA7AAA6009EEC3B /* chirpeyUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = chirpeyUITests.m; sourceTree = "<group>"; };
 		5669CAB41DA7AAA6009EEC3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5669CAC61DA7D06A009EEC3B /* chirp.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chirp.pd; sourceTree = "<group>"; };
@@ -199,8 +199,8 @@
 			isa = PBXGroup;
 			children = (
 				5669CA8A1DA7AAA5009EEC3B /* microjam.app */,
-				5669CAA31DA7AAA6009EEC3B /* chirpeyTests.xctest */,
-				5669CAAE1DA7AAA6009EEC3B /* chirpeyUITests.xctest */,
+				5669CAA31DA7AAA6009EEC3B /* microjamTests.xctest */,
+				5669CAAE1DA7AAA6009EEC3B /* microjamUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -358,9 +358,9 @@
 			productReference = 5669CA8A1DA7AAA5009EEC3B /* microjam.app */;
 			productType = "com.apple.product-type.application";
 		};
-		5669CAA21DA7AAA6009EEC3B /* chirpeyTests */ = {
+		5669CAA21DA7AAA6009EEC3B /* microjamTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5669CABA1DA7AAA6009EEC3B /* Build configuration list for PBXNativeTarget "chirpeyTests" */;
+			buildConfigurationList = 5669CABA1DA7AAA6009EEC3B /* Build configuration list for PBXNativeTarget "microjamTests" */;
 			buildPhases = (
 				9EABFC6289D6966467CB8F5D /* 📦 Check Pods Manifest.lock */,
 				5669CA9F1DA7AAA6009EEC3B /* Sources */,
@@ -374,14 +374,14 @@
 			dependencies = (
 				5669CAA51DA7AAA6009EEC3B /* PBXTargetDependency */,
 			);
-			name = chirpeyTests;
+			name = microjamTests;
 			productName = chirpeyTests;
-			productReference = 5669CAA31DA7AAA6009EEC3B /* chirpeyTests.xctest */;
+			productReference = 5669CAA31DA7AAA6009EEC3B /* microjamTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		5669CAAD1DA7AAA6009EEC3B /* chirpeyUITests */ = {
+		5669CAAD1DA7AAA6009EEC3B /* microjamUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5669CABD1DA7AAA6009EEC3B /* Build configuration list for PBXNativeTarget "chirpeyUITests" */;
+			buildConfigurationList = 5669CABD1DA7AAA6009EEC3B /* Build configuration list for PBXNativeTarget "microjamUITests" */;
 			buildPhases = (
 				AA973E5001E33B3F25768328 /* 📦 Check Pods Manifest.lock */,
 				5669CAAA1DA7AAA6009EEC3B /* Sources */,
@@ -394,9 +394,9 @@
 			dependencies = (
 				5669CAB01DA7AAA6009EEC3B /* PBXTargetDependency */,
 			);
-			name = chirpeyUITests;
+			name = microjamUITests;
 			productName = chirpeyUITests;
-			productReference = 5669CAAE1DA7AAA6009EEC3B /* chirpeyUITests.xctest */;
+			productReference = 5669CAAE1DA7AAA6009EEC3B /* microjamUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -436,7 +436,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 5669CA851DA7AAA5009EEC3B /* Build configuration list for PBXProject "chirpey" */;
+			buildConfigurationList = 5669CA851DA7AAA5009EEC3B /* Build configuration list for PBXProject "microjam" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -450,8 +450,8 @@
 			projectRoot = "";
 			targets = (
 				5669CA891DA7AAA5009EEC3B /* microjam */,
-				5669CAA21DA7AAA6009EEC3B /* chirpeyTests */,
-				5669CAAD1DA7AAA6009EEC3B /* chirpeyUITests */,
+				5669CAA21DA7AAA6009EEC3B /* microjamTests */,
+				5669CAAD1DA7AAA6009EEC3B /* microjamUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -843,7 +843,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = au.com.charlesmartin.chirpeyTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/chirpey.app/chirpey";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/microjam.app/microjam";
 			};
 			name = Debug;
 		};
@@ -858,7 +858,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = au.com.charlesmartin.chirpeyTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/chirpey.app/chirpey";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/microjam.app/microjam";
 			};
 			name = Release;
 		};
@@ -893,7 +893,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5669CA851DA7AAA5009EEC3B /* Build configuration list for PBXProject "chirpey" */ = {
+		5669CA851DA7AAA5009EEC3B /* Build configuration list for PBXProject "microjam" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5669CAB51DA7AAA6009EEC3B /* Debug */,
@@ -911,7 +911,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5669CABA1DA7AAA6009EEC3B /* Build configuration list for PBXNativeTarget "chirpeyTests" */ = {
+		5669CABA1DA7AAA6009EEC3B /* Build configuration list for PBXNativeTarget "microjamTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5669CABB1DA7AAA6009EEC3B /* Debug */,
@@ -920,7 +920,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5669CABD1DA7AAA6009EEC3B /* Build configuration list for PBXNativeTarget "chirpeyUITests" */ = {
+		5669CABD1DA7AAA6009EEC3B /* Build configuration list for PBXNativeTarget "microjamUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5669CABE1DA7AAA6009EEC3B /* Debug */,
