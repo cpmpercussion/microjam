@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '8CB67190F0A60F7A033A3E515965C86F'
-               BlueprintName = 'InAppSettingsKit'
+               BlueprintIdentifier = '69E8FDAB6ADAA5D2A770155AED22770D'
+               BlueprintName = 'Pods-microjamUITests'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'InAppSettingsKit.framework'>
+               BuildableName = 'Pods-microjamUITests.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
