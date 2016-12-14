@@ -3,15 +3,15 @@ platform :ios, '8.0'
 # Uncomment this line if you're using Swift
 use_frameworks!
 
-target 'chirpey' do
+target 'microjam' do
   pod 'libpd', :git => 'https://github.com/libpd/libpd', :submodules => true
   pod 'InAppSettingsKit'
 end
 
-target 'chirpeyTests' do
+target 'microjamTests' do
 
 end
 
-target 'chirpeyUITests' do
+target 'microjamUITests' do
 
 end
