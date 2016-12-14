@@ -54,11 +54,8 @@
 		569B92C41DFEA99C00AA257C /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569B92C31DFEA99C00AA257C /* SettingsTableViewController.swift */; };
 		56C88E801DFEFD8200406BF0 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56C88E7F1DFEFD8200406BF0 /* CloudKit.framework */; };
 		8F3915C13FF03F107657824F /* Pods_microjamTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42CE2F48E6FBBAB7D9FE8154 /* Pods_microjamTests.framework */; };
-		9F55D44337F4AD7A22FCC4CD /* Pods_chirpeyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7975E0FB2CEF019D9436B66 /* Pods_chirpeyTests.framework */; };
 		A591934F0E6DBF442840B92D /* Pods_microjamUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B13AB481CE730AD3191B2CE /* Pods_microjamUITests.framework */; };
 		B978AB8318CDB645A873BBC1 /* Pods_microjam.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 243039FFF234CB53DB756596 /* Pods_microjam.framework */; };
-		BD19D98E01E9059DB3D67BAB /* Pods_chirpeyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C3EEB2E7CA448001E45444B /* Pods_chirpeyUITests.framework */; };
-		E35AB9818998F7A65DEE90DE /* Pods_chirpey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD6E96BB115565C824CC385D /* Pods_chirpey.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,7 +82,6 @@
 		22EF216AB0EBA76631614175 /* Pods-microjamTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-microjamTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-microjamTests/Pods-microjamTests.debug.xcconfig"; sourceTree = "<group>"; };
 		243039FFF234CB53DB756596 /* Pods_microjam.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_microjam.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		255CFDE2D8E87ABF92DF8FAE /* Pods-chirpeyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chirpeyTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-chirpeyTests/Pods-chirpeyTests.release.xcconfig"; sourceTree = "<group>"; };
-		2C3EEB2E7CA448001E45444B /* Pods_chirpeyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_chirpeyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		30907B85536BE8323D73532C /* Pods-chirpey.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chirpey.release.xcconfig"; path = "Pods/Target Support Files/Pods-chirpey/Pods-chirpey.release.xcconfig"; sourceTree = "<group>"; };
 		42CE2F48E6FBBAB7D9FE8154 /* Pods_microjamTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_microjamTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B8432CAAE36EBBE2D19F96D /* Pods-microjamUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-microjamUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-microjamUITests/Pods-microjamUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -147,9 +143,7 @@
 		6BE7145BD2BCDFDABA15DF53 /* Pods-chirpey.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chirpey.debug.xcconfig"; path = "Pods/Target Support Files/Pods-chirpey/Pods-chirpey.debug.xcconfig"; sourceTree = "<group>"; };
 		7E59A152461FB44F2E21DD12 /* Pods-microjamUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-microjamUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-microjamUITests/Pods-microjamUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		9B13AB481CE730AD3191B2CE /* Pods_microjamUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_microjamUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A7975E0FB2CEF019D9436B66 /* Pods_chirpeyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_chirpeyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D86937856F993CCF11FFC9EE /* Pods-chirpeyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chirpeyUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-chirpeyUITests/Pods-chirpeyUITests.release.xcconfig"; sourceTree = "<group>"; };
-		FD6E96BB115565C824CC385D /* Pods_chirpey.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_chirpey.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE829FC465E73CC5B1EA0153 /* Pods-microjam.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-microjam.debug.xcconfig"; path = "Pods/Target Support Files/Pods-microjam/Pods-microjam.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -158,7 +152,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E35AB9818998F7A65DEE90DE /* Pods_chirpey.framework in Frameworks */,
 				56C88E801DFEFD8200406BF0 /* CloudKit.framework in Frameworks */,
 				B978AB8318CDB645A873BBC1 /* Pods_microjam.framework in Frameworks */,
 			);
@@ -168,7 +161,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9F55D44337F4AD7A22FCC4CD /* Pods_chirpeyTests.framework in Frameworks */,
 				8F3915C13FF03F107657824F /* Pods_microjamTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -177,7 +169,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BD19D98E01E9059DB3D67BAB /* Pods_chirpeyUITests.framework in Frameworks */,
 				A591934F0E6DBF442840B92D /* Pods_microjamUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -189,9 +180,6 @@
 			isa = PBXGroup;
 			children = (
 				56C88E7F1DFEFD8200406BF0 /* CloudKit.framework */,
-				FD6E96BB115565C824CC385D /* Pods_chirpey.framework */,
-				A7975E0FB2CEF019D9436B66 /* Pods_chirpeyTests.framework */,
-				2C3EEB2E7CA448001E45444B /* Pods_chirpeyUITests.framework */,
 				243039FFF234CB53DB756596 /* Pods_microjam.framework */,
 				42CE2F48E6FBBAB7D9FE8154 /* Pods_microjamTests.framework */,
 				9B13AB481CE730AD3191B2CE /* Pods_microjamUITests.framework */,
@@ -841,10 +829,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FE829FC465E73CC5B1EA0153 /* Pods-microjam.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = microjam.entitlements;
 				DEVELOPMENT_TEAM = EDH387FRHA;
+				HEADER_SEARCH_PATHS = "$(PODS_ROOT)/**";
 				INFOPLIST_FILE = chirpey/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = au.com.charlesmartin.microjam;
@@ -860,10 +851,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 00573D39F924B0D7657A9E03 /* Pods-microjam.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = microjam.entitlements;
 				DEVELOPMENT_TEAM = EDH387FRHA;
+				HEADER_SEARCH_PATHS = "$(PODS_ROOT)/**";
 				INFOPLIST_FILE = chirpey/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = au.com.charlesmartin.microjam;
@@ -878,7 +872,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 22EF216AB0EBA76631614175 /* Pods-microjamTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = EDH387FRHA;
 				INFOPLIST_FILE = chirpeyTests/Info.plist;
@@ -893,7 +887,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 542B447A7B9AE8AC7B6CE3BB /* Pods-microjamTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = EDH387FRHA;
 				INFOPLIST_FILE = chirpeyTests/Info.plist;
@@ -908,8 +902,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7E59A152461FB44F2E21DD12 /* Pods-microjamUITests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				DEVELOPMENT_TEAM = EDH387FRHA;
+				HEADER_SEARCH_PATHS = "$(PODS_ROOT)/**";
 				INFOPLIST_FILE = chirpeyUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = au.com.charlesmartin.chirpeyUITests;
@@ -922,8 +918,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4B8432CAAE36EBBE2D19F96D /* Pods-microjamUITests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				DEVELOPMENT_TEAM = EDH387FRHA;
+				HEADER_SEARCH_PATHS = "$(PODS_ROOT)/**";
 				INFOPLIST_FILE = chirpeyUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = au.com.charlesmartin.chirpeyUITests;
