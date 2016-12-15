@@ -903,9 +903,9 @@
 			baseConfigurationReference = 7E59A152461FB44F2E21DD12 /* Pods-microjamUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
-				ALWAYS_SEARCH_USER_PATHS = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				DEVELOPMENT_TEAM = EDH387FRHA;
-				HEADER_SEARCH_PATHS = "$(PODS_ROOT)/**";
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = chirpeyUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = au.com.charlesmartin.chirpeyUITests;
@@ -919,9 +919,9 @@
 			baseConfigurationReference = 4B8432CAAE36EBBE2D19F96D /* Pods-microjamUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
-				ALWAYS_SEARCH_USER_PATHS = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				DEVELOPMENT_TEAM = EDH387FRHA;
-				HEADER_SEARCH_PATHS = "$(PODS_ROOT)/**";
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = chirpeyUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = au.com.charlesmartin.chirpeyUITests;
