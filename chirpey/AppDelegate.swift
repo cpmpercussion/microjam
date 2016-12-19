@@ -46,6 +46,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
     var openFile : PdFile?
     var openFileName = ""
 
+    // iCloud stuff
+    let container: CKContainer
+    let publicDB: CKDatabase
+    let privateDB: CKDatabase
+
     // MARK: - Pd Engine Functions
     
     /// Starts the Pd Audio Engine and preemptively opens a patch.
@@ -115,6 +120,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
             NSLog("AD: Failed to load performances")
         }
         
+        // iCloud inits
+        container = CKContainer.defaultContainer()
+        publicDB = container.publicCloudDatabase
+        privateDB = container.privateCloudDatabase
+        
         self.startAudioEngine() // start Pd
         
         return true
@@ -180,6 +190,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
     func tempURL() -> URL {
         let filename = ProcessInfo.processInfo.globallyUniqueString + ".png"
         return URL.init(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(filename)
+    }
+    
+    var worldJams : [ChirpPerformance] = []
+    
+    func fetchWorldJamsFromCloud() {
+        let numberOfRecords = 100
+        let predicate = NSPredicate(format: "", numberOfRecords)
+        let query = CKQuery(recordType: PerfCloudKeys.type, predicate: predicate)
+        publicDB.perform(query, inZoneWith: nil) {[unowned self] results, error in
+            if let error = error {
+                DispatchQueue.main.async {
+                    //self.delegate?.errorUpdating(error as Error)
+                    print("ADCK: Cloud Query error:\(error)")
+                }
+                return
+            }
+            self.worldJams.removeAll(keepingCapacity: true)
+            // FIXME: make this work.
+            results?.forEach({ (record: CKRecord) in
+                self.worldJams.append(
+                    ChirpPerformance(csv: record.object(forKey: PerfCloudKeys.touches) as! String,
+                                    date: record.object(forKey: PerfCloudKeys.date) as! Date,
+                                    performer: record.object(forKey: PerfCloudKeys.performer) as! String,
+                                    instrument: record.object(forKey: PerfCloudKeys.instrument) as! String,
+                                    image: record.object(forKey: PerfCloudKeys.image) as! UIImage,
+                                    location: record.object(forKey: PerfCloudKeys.location) as! CLLocation)!)
+            })
+            // updated!
+            // FIXME: make sure any of this works.
     }
     
     func upload(performance : ChirpPerformance) {

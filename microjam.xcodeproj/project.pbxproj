@@ -47,6 +47,7 @@
 		5669CAF41DA7D06A009EEC3B /* m_lydiansharp5.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CADE1DA7D06A009EEC3B /* m_lydiansharp5.pd */; };
 		5669CAF51DA7D06A009EEC3B /* m_mixolydian.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CADF1DA7D06A009EEC3B /* m_mixolydian.pd */; };
 		5669CAF61DA7D06A009EEC3B /* m_phrygian.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CAE01DA7D06A009EEC3B /* m_phrygian.pd */; };
+		567286661E05E0AF0024A515 /* MicrojamTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567286651E05E0AF0024A515 /* MicrojamTabBarController.swift */; };
 		568D1DC41DF995E500A2BC0B /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 568D1DC31DF995E500A2BC0B /* Settings.bundle */; };
 		568D1DC81DF9BEDF00A2BC0B /* drums.pd in Resources */ = {isa = PBXBuildFile; fileRef = 568D1DC51DF9BEDF00A2BC0B /* drums.pd */; };
 		568D1DC91DF9BEDF00A2BC0B /* keys.pd in Resources */ = {isa = PBXBuildFile; fileRef = 568D1DC61DF9BEDF00A2BC0B /* keys.pd */; };
@@ -133,6 +134,7 @@
 		5669CADE1DA7D06A009EEC3B /* m_lydiansharp5.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = m_lydiansharp5.pd; sourceTree = "<group>"; };
 		5669CADF1DA7D06A009EEC3B /* m_mixolydian.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = m_mixolydian.pd; sourceTree = "<group>"; };
 		5669CAE01DA7D06A009EEC3B /* m_phrygian.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = m_phrygian.pd; sourceTree = "<group>"; };
+		567286651E05E0AF0024A515 /* MicrojamTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MicrojamTabBarController.swift; sourceTree = "<group>"; };
 		568D1DC31DF995E500A2BC0B /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		568D1DC51DF9BEDF00A2BC0B /* drums.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = drums.pd; sourceTree = "<group>"; };
 		568D1DC61DF9BEDF00A2BC0B /* keys.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = keys.pd; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 				56621B161DEC27B0009B9AB6 /* PerformanceTableCell.swift */,
 				569B92C31DFEA99C00AA257C /* SettingsTableViewController.swift */,
 				5669CA961DA7AAA6009EEC3B /* Main.storyboard */,
+				567286651E05E0AF0024A515 /* MicrojamTabBarController.swift */,
 				5669CA991DA7AAA6009EEC3B /* Assets.xcassets */,
 				5669CA9B1DA7AAA6009EEC3B /* LaunchScreen.storyboard */,
 				5669CA9E1DA7AAA6009EEC3B /* Info.plist */,
@@ -418,7 +421,7 @@
 		5669CA821DA7AAA5009EEC3B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Charles Martin";
 				TargetAttributes = {
 					5669CA891DA7AAA5009EEC3B = {
@@ -675,6 +678,7 @@
 				56621B111DE47D5B009B9AB6 /* ChirpJamViewController.swift in Sources */,
 				56621B0F1DE47376009B9AB6 /* AppDelegate.swift in Sources */,
 				56621B131DE4A496009B9AB6 /* ChirpView.swift in Sources */,
+				567286661E05E0AF0024A515 /* MicrojamTabBarController.swift in Sources */,
 				56621B0D1DE39D33009B9AB6 /* ChirpPerformance.swift in Sources */,
 				56621B151DE73236009B9AB6 /* RecordingTableTableViewController.swift in Sources */,
 				56621B171DEC27B0009B9AB6 /* PerformanceTableCell.swift in Sources */,
@@ -820,6 +824,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
