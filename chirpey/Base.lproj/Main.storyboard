@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="z8b-cn-TNb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C68" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="z8b-cn-TNb">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -148,7 +148,7 @@
                             <outlet property="delegate" destination="s0d-x4-1wv" id="2mq-Kl-3Wd"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" systemItem="more" id="dBN-0O-gIF"/>
+                    <tabBarItem key="tabBarItem" title="settings" image="settingsTabIcon" id="dBN-0O-gIF"/>
                     <navigationItem key="navigationItem" title="Settings" id="wga-Ky-LkZ">
                         <barButtonItem key="leftBarButtonItem" title="Back" id="VNH-bN-ahx">
                             <connections>
@@ -181,7 +181,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gcn-gn-WZ5" id="sXd-HP-H6B">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="89"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="defaultRecordingImage" translatesAutoresizingMaskIntoConstraints="NO" id="C1Y-wG-D7P">
@@ -293,11 +293,11 @@
             </objects>
             <point key="canvasLocation" x="2269.5999999999999" y="-12.143928035982009"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--jams-->
         <scene sceneID="pxq-yu-huV">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vIe-H4-AUR" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="contacts" id="e2p-ff-do7"/>
+                    <tabBarItem key="tabBarItem" title="jams" image="localjamsTabIcon" id="e2p-ff-do7"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="uJB-kD-SaZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -336,6 +336,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="z8b-cn-TNb" customClass="MicrojamTabBarController" customModule="microjam" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="ELH-Dd-FpQ">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
@@ -349,11 +350,11 @@
             </objects>
             <point key="canvasLocation" x="250" y="416"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--world-->
         <scene sceneID="kzA-nM-xvC">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Bey-kK-l91" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="featured" id="4Kg-3T-GGP"/>
+                    <tabBarItem key="tabBarItem" title="world" image="remotejamsTabIcon" id="4Kg-3T-GGP"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ppF-24-uDs">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -371,6 +372,9 @@
     </scenes>
     <resources>
         <image name="defaultRecordingImage" width="150" height="150"/>
+        <image name="localjamsTabIcon" width="37" height="37"/>
+        <image name="remotejamsTabIcon" width="37" height="37"/>
+        <image name="settingsTabIcon" width="37" height="37"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="CvC-hy-feA"/>

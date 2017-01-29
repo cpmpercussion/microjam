@@ -47,9 +47,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
     var openFileName = ""
 
     // iCloud stuff
-    let container: CKContainer
-    let publicDB: CKDatabase
-    let privateDB: CKDatabase
+    let container: CKContainer = CKContainer.default()
+    let publicDB: CKDatabase = CKContainer.default().publicCloudDatabase
+    let privateDB: CKDatabase = CKContainer.default().privateCloudDatabase
+    
+//    // iCloud inits
+//    container = CKContainer.default()
+//    publicDB = container.publicCloudDatabase
+//    privateDB = container.privateCloudDatabase
+    
+    var worldJams : [ChirpPerformance] = []
 
     // MARK: - Pd Engine Functions
     
@@ -120,11 +127,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
             NSLog("AD: Failed to load performances")
         }
         
-        // iCloud inits
-        container = CKContainer.defaultContainer()
-        publicDB = container.publicCloudDatabase
-        privateDB = container.privateCloudDatabase
-        
         self.startAudioEngine() // start Pd
         
         return true
@@ -192,7 +194,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
         return URL.init(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(filename)
     }
     
-    var worldJams : [ChirpPerformance] = []
     
     func fetchWorldJamsFromCloud() {
         let numberOfRecords = 100
@@ -219,10 +220,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
             })
             // updated!
             // FIXME: make sure any of this works.
+        }
     }
     
     func upload(performance : ChirpPerformance) {
-        
         // Setup the record
         print("ADCK: Saving the performance:", performance.title())
         print("ADCK: Setting up the record...")
@@ -233,7 +234,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
         performanceRecord[PerfCloudKeys.instrument] = performance.instrument as CKRecordValue
         performanceRecord[PerfCloudKeys.touches] = performance.csv() as CKRecordValue
         performanceRecord[PerfCloudKeys.replyto] = "" as CKRecordValue
-        performanceRecord[PerfCloudKeys.location] = performance.location as! CKRecordValue
+        performanceRecord[PerfCloudKeys.location] = (performance.location as! CKRecordValue)
         
         do {
             print("ADCK: Saving the image...")
@@ -264,4 +265,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
             })
         })
     }
+        
+        
 }
