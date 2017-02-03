@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C68" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="z8b-cn-TNb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="z8b-cn-TNb">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -125,10 +125,10 @@
             </objects>
             <point key="canvasLocation" x="3932" y="-12.143928035982009"/>
         </scene>
-        <!--Settings-->
+        <!--settings-->
         <scene sceneID="JKC-ke-Tam">
             <objects>
-                <tableViewController id="s0d-x4-1wv" customClass="SettingsTableViewController" customModule="microjam" sceneMemberID="viewController">
+                <tableViewController title="settings" id="s0d-x4-1wv" customClass="SettingsTableViewController" customModule="microjam" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="p5g-hn-j41">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -148,17 +148,7 @@
                             <outlet property="delegate" destination="s0d-x4-1wv" id="2mq-Kl-3Wd"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="settings" image="settingsTabIcon" id="dBN-0O-gIF"/>
-                    <navigationItem key="navigationItem" title="Settings" id="wga-Ky-LkZ">
-                        <barButtonItem key="leftBarButtonItem" title="Back" id="VNH-bN-ahx">
-                            <connections>
-                                <segue destination="ft5-bU-KaW" kind="unwind" unwindAction="unwindToJamViewWithSender:" id="7vr-NW-fnU"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="showDoneButton" value="NO"/>
-                    </userDefinedRuntimeAttributes>
+                    <navigationItem key="navigationItem" title="settings" id="AAK-cJ-Aeo"/>
                     <connections>
                         <segue destination="ft5-bU-KaW" kind="unwind" identifier="UnwindFromSettings" unwindAction="unwindToJamViewWithSender:" id="HGd-FH-PZt"/>
                     </connections>
@@ -166,22 +156,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cMg-wk-IJi" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="ft5-bU-KaW" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1329" y="766"/>
+            <point key="canvasLocation" x="2268" y="765.96701649175418"/>
         </scene>
         <!--Microjams!-->
         <scene sceneID="fqF-zj-n21">
             <objects>
-                <tableViewController id="EVE-Cq-utu" sceneMemberID="viewController">
+                <tableViewController id="EVE-Cq-utu" customClass="WorldJamsTableViewController" customModule="microjam" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Dms-qf-PhV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="worldJamCell" rowHeight="90" id="gcn-gn-WZ5">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="worldJamCell" rowHeight="90" id="gcn-gn-WZ5" customClass="PerformanceTableCell" customModule="microjam" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gcn-gn-WZ5" id="sXd-HP-H6B">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="89"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="defaultRecordingImage" translatesAutoresizingMaskIntoConstraints="NO" id="C1Y-wG-D7P">
@@ -237,7 +227,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RhZ-Nz-BT5" id="8cT-9a-d75">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="89"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="defaultRecordingImage" translatesAutoresizingMaskIntoConstraints="NO" id="hR6-wH-oPi">
@@ -328,7 +318,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eyl-Pi-XeA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3092" y="338.68065967016497"/>
+            <point key="canvasLocation" x="3114" y="415"/>
         </scene>
         <!--Microjam Tab Bar Controller-->
         <scene sceneID="lii-EM-GUf">
@@ -343,7 +333,7 @@
                     <connections>
                         <segue destination="Bey-kK-l91" kind="relationship" relationship="viewControllers" id="JBU-M3-rG5"/>
                         <segue destination="vIe-H4-AUR" kind="relationship" relationship="viewControllers" id="q8E-IA-Mhd"/>
-                        <segue destination="s0d-x4-1wv" kind="relationship" relationship="viewControllers" id="HvA-mY-kCb"/>
+                        <segue destination="rVf-dj-cV1" kind="relationship" relationship="viewControllers" id="HvA-mY-kCb"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v3b-Zm-w9T" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -369,6 +359,25 @@
             </objects>
             <point key="canvasLocation" x="1329" y="-760"/>
         </scene>
+        <!--settings-->
+        <scene sceneID="Z9L-iS-2Tn">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rVf-dj-cV1" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="settings" image="settingsTabIcon" id="dBN-0O-gIF"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1k3-Wa-myT">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="s0d-x4-1wv" kind="relationship" relationship="rootViewController" id="jnV-id-EjF"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kq2-ai-bve" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1328.8" y="765.96701649175418"/>
+        </scene>
     </scenes>
     <resources>
         <image name="defaultRecordingImage" width="150" height="150"/>
@@ -377,6 +386,6 @@
         <image name="settingsTabIcon" width="37" height="37"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="CvC-hy-feA"/>
+        <segue reference="gEs-g0-Xrm"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -128,6 +128,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
         }
         
         self.startAudioEngine() // start Pd
+        self.fetchWorldJamsFromCloud() // try to get jams from iCloud.
         
         return true
     }
@@ -196,9 +197,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
     
     
     func fetchWorldJamsFromCloud() {
-        let numberOfRecords = 100
-        let predicate = NSPredicate(format: "", numberOfRecords)
+        print("ADCK: Attempting to fetch World Jams from Cloud.")
+        let predicate = NSPredicate(value: true)
+        print("ADCK: Made a predicate")
         let query = CKQuery(recordType: PerfCloudKeys.type, predicate: predicate)
+        print("ADCK: Made a query")
         publicDB.perform(query, inZoneWith: nil) {[unowned self] results, error in
             if let error = error {
                 DispatchQueue.main.async {
@@ -209,17 +212,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
             }
             self.worldJams.removeAll(keepingCapacity: true)
             // FIXME: make this work.
+            // TODO: Need protection against empty fields
+            
+            print("ADCK: Going to parse the Jam Records.")
             results?.forEach({ (record: CKRecord) in
-                self.worldJams.append(
-                    ChirpPerformance(csv: record.object(forKey: PerfCloudKeys.touches) as! String,
-                                    date: record.object(forKey: PerfCloudKeys.date) as! Date,
-                                    performer: record.object(forKey: PerfCloudKeys.performer) as! String,
-                                    instrument: record.object(forKey: PerfCloudKeys.instrument) as! String,
-                                    image: record.object(forKey: PerfCloudKeys.image) as! UIImage,
-                                    location: record.object(forKey: PerfCloudKeys.location) as! CLLocation)!)
+                let touches = record.object(forKey: PerfCloudKeys.touches) as! String
+                let date = record.object(forKey: PerfCloudKeys.date) as! Date
+                let performer = record.object(forKey: PerfCloudKeys.performer) as! String
+                let instrument = record.object(forKey: PerfCloudKeys.instrument) as! String
+                let location = record.object(forKey: PerfCloudKeys.location) as! CLLocation
+                let imageAsset = record.object(forKey: PerfCloudKeys.image) as! CKAsset
+                let image = UIImage(contentsOfFile: imageAsset.fileURL.path)!
+                self.worldJams.append(ChirpPerformance(csv: touches, date: date, performer: performer, instrument: instrument, image: image, location: location)!)
             })
-            // updated!
-            // FIXME: make sure any of this works.
+            print("ADCK: worldjams collected - ", self.worldJams.count)
         }
     }
     

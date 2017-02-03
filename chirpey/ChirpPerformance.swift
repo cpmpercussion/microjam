@@ -82,8 +82,7 @@ class ChirpPerformance : NSObject, NSCoding {
         var data : [TouchRecord] = []
         let lines = csv.components(separatedBy: "\n")
         // TODO: test this initialiser
-        data = lines.map({(TouchRecord.init(fromCSVLine: $0))!})
-            //.filter({$0 != nil})
+        data = lines.flatMap {TouchRecord.init(fromCSVLine: $0)}
         self.init(data: data, date: date, performer: performer, instrument: instrument, image: image, location: location)
     }
     
@@ -199,15 +198,16 @@ class TouchRecord: NSObject, NSCoding {
     
     /// Initialises a touchRecord from a single line of a CSV file
     convenience init?(fromCSVLine line : String) {
-        let components = line.components(separatedBy: ",")
-        let moving = (components[4] == "1")
+        let components = line.replacingOccurrences(of: " ", with: "").components(separatedBy: ",")
         guard let time = Double(components[0]),
             let x = Double(components[1]),
             let y = Double(components[2]),
-            let z = Double(components[3])
+            let z = Double(components[3]),
+            let mov = Double(components[4])
             else {
                 return nil
             }
+        let moving = (mov == 1)
         self.init(time: time, x: x, y: y, z: z, moving: moving)
     }
     
