@@ -14,6 +14,11 @@ struct SettingsKeys {
     static let soundSchemeKey = "sound_scheme"
 }
 
+protocol ModelDelegate {
+    func errorUpdating(error: NSError)
+    func modelUpdated()
+}
+
 struct SoundSchemes {
     static let namesForKeys : [Int : String] = [
         0 : "chirp",
@@ -34,7 +39,6 @@ struct SoundSchemes {
 class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
     var window: UIWindow?
     var recordedPerformances : [ChirpPerformance] = []
- 
     static let defaultSettings : [String : Any] = [
         SettingsKeys.performerKey:"performer",
         SettingsKeys.soundSchemeKey: 0
@@ -50,6 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
     let container: CKContainer = CKContainer.default()
     let publicDB: CKDatabase = CKContainer.default().publicCloudDatabase
     let privateDB: CKDatabase = CKContainer.default().privateCloudDatabase
+    var delegate : ModelDelegate?
     
 //    // iCloud inits
 //    container = CKContainer.default()
@@ -205,7 +210,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
         publicDB.perform(query, inZoneWith: nil) {[unowned self] results, error in
             if let error = error {
                 DispatchQueue.main.async {
-                    //self.delegate?.errorUpdating(error as Error)
+                    self.delegate?.errorUpdating(error: error as NSError)
                     print("ADCK: Cloud Query error:\(error)")
                 }
                 return
@@ -226,6 +231,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
                 self.worldJams.append(ChirpPerformance(csv: touches, date: date, performer: performer, instrument: instrument, image: image, location: location)!)
             })
             print("ADCK: worldjams collected - ", self.worldJams.count)
+            DispatchQueue.main.async {
+                self.delegate?.modelUpdated()
+            }
         }
     }
     

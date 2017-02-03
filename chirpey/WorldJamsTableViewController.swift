@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WorldJamsTableViewController: UITableViewController {
+class WorldJamsTableViewController: UITableViewController, ModelDelegate {
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let worldJamCellIdentifier = "worldJamCell"
@@ -22,6 +22,7 @@ class WorldJamsTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         self.tableView.rowHeight = 90
+        self.appDelegate.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,6 +30,29 @@ class WorldJamsTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    // borrowed so far from https://www.raywenderlich.com/134694/cloudkit-tutorial-getting-started
+    func modelUpdated() {
+        refreshControl?.endRefreshing()
+        tableView.reloadData()
+    }
+    
+    // borrowed so far from https://www.raywenderlich.com/134694/cloudkit-tutorial-getting-started
+    func errorUpdating(error: NSError) {
+        let message: String
+        if error.code == 1 {
+            message = "Log into iCloud on your device and make sure the iCloud drive is turned on for this app."
+        } else {
+            message = error.localizedDescription
+        }
+        let alertController = UIAlertController(title: nil,
+                                                message: message,
+                                                preferredStyle: .alert)
+        
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
