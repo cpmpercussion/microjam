@@ -12,6 +12,7 @@
  */
 import UIKit
 import CoreLocation
+import UIColor_Hex_Swift
 
 class ChirpPerformance : NSObject, NSCoding {
     /// Array of `TouchRecord`s to store performance data.
@@ -24,6 +25,7 @@ class ChirpPerformance : NSObject, NSCoding {
     var image : UIImage
     var csvPathURL : URL?
     var location : CLLocation?
+    var colour : UIColor = UIColor.blue
 
     // Static vars
     static let CSV_HEADER = "time,x,y,z,moving\n"
@@ -38,6 +40,7 @@ class ChirpPerformance : NSObject, NSCoding {
         static let instrumentKey = "instrument"
         static let imageKey = "image"
         static let locationKey = "location"
+        static let colourKey = "colour"
     }
     
     func encode(with aCoder: NSCoder) {
@@ -47,49 +50,50 @@ class ChirpPerformance : NSObject, NSCoding {
         aCoder.encode(instrument, forKey: PropertyKey.instrumentKey)
         aCoder.encode(UIImagePNGRepresentation(image), forKey: PropertyKey.imageKey)
         aCoder.encode(location, forKey: PropertyKey.locationKey)
+        aCoder.encode(colour.hexString(), forKey: PropertyKey.colourKey)
     }
 
     required convenience init?(coder aDecoder: NSCoder) {
         guard let data = aDecoder.decodeObject(forKey: PropertyKey.performanceDataKey) as? [TouchRecord]
             else {return nil}
         guard
-            //let data = aDecoder.decodeObject(forKey: PropertyKey.performanceDataKey) as? [TouchRecord],
             let date = aDecoder.decodeObject(forKey: PropertyKey.dateKey) as? Date,
             let performer = aDecoder.decodeObject(forKey: PropertyKey.performerKey) as? String,
             let instrument = aDecoder.decodeObject(forKey: PropertyKey.instrumentKey) as? String,
-            let image = UIImage(data: (aDecoder.decodeObject(forKey: PropertyKey.imageKey) as? Data)!)
+            let image = UIImage(data: (aDecoder.decodeObject(forKey: PropertyKey.imageKey) as? Data)!),
+            let colour = aDecoder.decodeObject(forKey: PropertyKey.colourKey) as? String
             else {return nil}
         let location = (aDecoder.decodeObject(forKey: "location") as? CLLocation) ?? CLLocation.init(latitude: 60, longitude: 11)
-        
         print("PERF: Decoding", data.count, "notes:", performer, instrument)
-        self.init(data: data, date: date, performer: performer, instrument: instrument, image: image, location: location)
+        self.init(data: data, date: date, performer: performer, instrument: instrument, image: image, location: location, colour: colour)
     }
 
     /// Main initialiser
-    init(data: [TouchRecord], date: Date, performer: String, instrument: String, image: UIImage, location: CLLocation) {
+    init(data: [TouchRecord], date: Date, performer: String, instrument: String, image: UIImage, location: CLLocation, colour: String) {
         self.performanceData = data
         self.date = date
         self.performer = performer
         self.instrument = instrument
         self.image = image
         self.location = location
+        self.colour = UIColor(colour)
         super.init()
     }
     
     /// Initialiser with csv of data for the TouchRecords, useful in initialising performances from CloudKit
-    convenience init?(csv: String, date: Date, performer: String, instrument: String, image: UIImage, location: CLLocation) {
+    convenience init?(csv: String, date: Date, performer: String, instrument: String, image: UIImage, location: CLLocation, colour: String) {
         var data : [TouchRecord] = []
         let lines = csv.components(separatedBy: "\n")
         // TODO: test this initialiser
         data = lines.flatMap {TouchRecord.init(fromCSVLine: $0)}
-        self.init(data: data, date: date, performer: performer, instrument: instrument, image: image, location: location)
+        self.init(data: data, date: date, performer: performer, instrument: instrument, image: image, location: location, colour: colour)
     }
     
     
     /// Convenience Initialiser for creating performance with data yet to be added.
     convenience override init() {
         // FIXME: actually detect the proper location
-        self.init(data : [], date : Date(), performer : "", instrument : "", image : UIImage(), location: CLLocation.init(latitude: 90.0, longitude: 45.0))
+        self.init(data : [], date : Date(), performer : "", instrument : "", image : UIImage(), location: CLLocation.init(latitude: 90.0, longitude: 45.0), colour: "#0000FF")
     }
 
     /// Returns a CSV of the current performance data
