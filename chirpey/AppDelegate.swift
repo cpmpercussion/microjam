@@ -131,10 +131,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
         } else {
             NSLog("AD: Failed to load performances")
         }
-        
         self.startAudioEngine() // start Pd
         self.fetchWorldJamsFromCloud() // try to get jams from iCloud.
-        
         return true
     }
     
@@ -160,7 +158,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
         self.savePerformances()
     }
     
-    /// Load Performances from file.
+    /// Load Local Performances from file.
     func loadPerformances() -> [ChirpPerformance]? {
         let loadedPerformances =  NSKeyedUnarchiver.unarchiveObject(withFile: ChirpPerformance.ArchiveURL.path) as? [ChirpPerformance]
         return loadedPerformances
@@ -184,6 +182,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
         }
     }
     
+    /// Keys for performance data in CloudKit Storage
     struct PerfCloudKeys {
         static let type = "Performance"
         static let date = "Date"
@@ -195,18 +194,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
         static let touches = "Touches"
     }
     
+    /// Returns a temporary file path for png images
     func tempURL() -> URL {
         let filename = ProcessInfo.processInfo.globallyUniqueString + ".png"
         return URL.init(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(filename)
     }
     
-    
+    /// Refresh list of world jams from CloudKit and then update in world jam table view.
     func fetchWorldJamsFromCloud() {
         print("ADCK: Attempting to fetch World Jams from Cloud.")
         let predicate = NSPredicate(value: true)
-        print("ADCK: Made a predicate")
         let query = CKQuery(recordType: PerfCloudKeys.type, predicate: predicate)
-        print("ADCK: Made a query")
         publicDB.perform(query, inZoneWith: nil) {[unowned self] results, error in
             if let error = error {
                 DispatchQueue.main.async {
@@ -216,10 +214,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
                 return
             }
             self.worldJams.removeAll(keepingCapacity: true)
-            // FIXME: make this work.
-            // TODO: Need protection against empty fields
-            
-            print("ADCK: Going to parse the Jam Records.")
+            // TODO: Need protection against empty fields?
             results?.forEach({ (record: CKRecord) in
                 let touches = record.object(forKey: PerfCloudKeys.touches) as! String
                 let date = (record.object(forKey: PerfCloudKeys.date) as! NSDate) as Date
@@ -228,22 +223,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
                 let location = record.object(forKey: PerfCloudKeys.location) as! CLLocation
                 let imageAsset = record.object(forKey: PerfCloudKeys.image) as! CKAsset
                 let image = UIImage(contentsOfFile: imageAsset.fileURL.path)!
-                
-                print("ADCK: Parsed a Jam Record")
-                print("performer: ", performer)
-                print("instrument: ", instrument)
-                print("date: ", date)
-                //print("touches: ", touches)
-                
                 self.worldJams.append(ChirpPerformance(csv: touches, date: date, performer: performer, instrument: instrument, image: image, location: location)!)
             })
-            print("ADCK: worldjams collected - ", self.worldJams.count)
+            print("ADCK: ", self.worldJams.count, " world jams collected.")
             DispatchQueue.main.async {
                 self.delegate?.modelUpdated()
             }
         }
     }
     
+    /// Upload a saved jam to CloudKit
     func upload(performance : ChirpPerformance) {
         // Setup the record
         print("ADCK: Saving the performance:", performance.title())
@@ -270,20 +259,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
         }
         
         // Upload to the container
-        print("ADCK: Attempting to save to CloudKit")
+        print("ADCK: Attempting to save to CloudKit.")
         let container = CKContainer.default()
         let publicDatabase = container.publicCloudDatabase
-//        let privateDatabase = container.privateCloudDatabase
+        //        let privateDatabase = container.privateCloudDatabase
         publicDatabase.save(performanceRecord, completionHandler: {(record, error) -> Void in
             if (error != nil) {
-                print("ADCK: Error saving to the database")
+                print("ADCK: Error saving to the database.")
                 print(error ?? "")
             }
             print("ADCK: Saved to cloudkit! phew.")
-            OperationQueue.main.addOperation({ 
-                // Do some clean up stuff to express the finishedness of the upload...
-                print("ADCK: Doing the cloudkit upload cleanup")
-            })
+//            OperationQueue.main.addOperation({ 
+//                // could do some cleanup here.
+//            })
         })
     }
         

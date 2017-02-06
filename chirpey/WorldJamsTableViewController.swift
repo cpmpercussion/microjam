@@ -54,7 +54,6 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
     }
     
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -64,22 +63,13 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
         return appDelegate.worldJams.count
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: worldJamCellIdentifier, for: indexPath) as! PerformanceTableCell
-        cell.title.text = "Performance Cells are Working"
-        
-        
         let performance = appDelegate.worldJams[indexPath.row]
-        print("Setting up a cell:")
-        print(performance.performer)
-        print(performance.dateString())
-        print(performance.instrument)
-        
-        //cell.title.text = performance.dateString()
-        //cell.performer.text = performance.performer
-        //cell.instrument.text = performance.instrument
-        //cell.previewImage.image = performance.image
+        cell.title.text = performance.dateString()
+        cell.performer.text = performance.performer
+        cell.instrument.text = performance.instrument
+        cell.previewImage.image = performance.image
         return cell
     }
 
