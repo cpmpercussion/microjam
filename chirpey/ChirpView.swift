@@ -17,9 +17,10 @@ class ChirpView: UIImageView {
     var started = false
     var startTime = Date()
     var performance : ChirpPerformance?
-    let recordingColour : CGColor = UIColor.red.cgColor
+    let defaultRecordingColour : CGColor = UIColor.red.cgColor
+    var recordingColour : CGColor?
     let defaultPlaybackColour : CGColor = UIColor.green.cgColor
-    var definedPlaybackColour : CGColor?
+    var playbackColour : CGColor?
     let CG_INIT_POINT = CGPoint(x:0,y:0)
     let imageSize : Double = 300.0
     
@@ -61,6 +62,7 @@ class ChirpView: UIImageView {
         self.swiped = false
         self.image = UIImage()
         self.performance = ChirpPerformance()
+        self.recordingColour = self.performance?.colour.cgColor ?? defaultRecordingColour
     }
     
     //MARK: - touch interaction
@@ -73,7 +75,7 @@ class ChirpView: UIImageView {
         self.swiped = false
         self.lastPoint = touches.first?.location(in: self)
         let size = touches.first?.majorRadius
-        self.drawDot(at: self.lastPoint!, withColour: self.recordingColour)
+        self.drawDot(at: self.lastPoint!, withColour: self.recordingColour ?? self.defaultRecordingColour)
         self.makeSound(at: self.lastPoint!, withRadius: size!)
         self.recordTouch(at: self.lastPoint!, withRadius: size!, thatWasMoving:false)
     }
@@ -81,7 +83,7 @@ class ChirpView: UIImageView {
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.swiped = true
         let currentPoint = touches.first?.location(in:self)
-        self.drawLine(from:self.lastPoint!, to:currentPoint!, withColour:self.recordingColour)
+        self.drawLine(from:self.lastPoint!, to:currentPoint!, withColour:self.recordingColour ?? self.defaultRecordingColour)
         self.lastPoint = currentPoint
         let size = touches.first?.majorRadius
         self.makeSound(at: currentPoint!, withRadius: size!)
@@ -150,7 +152,7 @@ class ChirpView: UIImageView {
     func playbackBegan(_ point : CGPoint, _ radius : CGFloat) {
         self.swiped = false
         self.lastPoint = point
-        self.drawDot(at: point, withColour: self.definedPlaybackColour ?? self.defaultPlaybackColour)
+        self.drawDot(at: point, withColour: self.playbackColour ?? self.defaultPlaybackColour)
         self.makeSound(at: point, withRadius: radius)
     }
     /**
@@ -158,7 +160,7 @@ class ChirpView: UIImageView {
     **/
     func playbackMoved(_ point : CGPoint, _ radius : CGFloat) {
         self.swiped = true;
-        self.drawLine(from: self.lastPoint!, to: point, withColour: self.definedPlaybackColour ?? self.defaultPlaybackColour)
+        self.drawLine(from: self.lastPoint!, to: point, withColour: self.playbackColour ?? self.defaultPlaybackColour)
         self.lastPoint = point
         self.makeSound(at: point, withRadius: radius)
     }

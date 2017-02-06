@@ -11,6 +11,8 @@ import CloudKit
 
 struct SettingsKeys {
     static let performerKey = "performer_name"
+    static let performerColourKey = "performer_colour"
+    static let backgroundColourKey = "background_colour"
     static let soundSchemeKey = "sound_scheme"
 }
 
@@ -41,6 +43,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
     var recordedPerformances : [ChirpPerformance] = []
     static let defaultSettings : [String : Any] = [
         SettingsKeys.performerKey:"performer",
+        SettingsKeys.performerColourKey: 0.5,
+        SettingsKeys.backgroundColourKey: 0.2,
         SettingsKeys.soundSchemeKey: 0
     ]
     let SOUND_OUTPUT_CHANNELS = 2

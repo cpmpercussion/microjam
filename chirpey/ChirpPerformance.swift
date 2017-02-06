@@ -26,6 +26,7 @@ class ChirpPerformance : NSObject, NSCoding {
     var csvPathURL : URL?
     var location : CLLocation?
     var colour : UIColor = UIColor.blue
+    //    var backgroundColour : UIColor = UIColor.gray
 
     // Static vars
     static let CSV_HEADER = "time,x,y,z,moving\n"
@@ -93,7 +94,8 @@ class ChirpPerformance : NSObject, NSCoding {
     /// Convenience Initialiser for creating performance with data yet to be added.
     convenience override init() {
         // FIXME: actually detect the proper location
-        self.init(data : [], date : Date(), performer : "", instrument : "", image : UIImage(), location: CLLocation.init(latitude: 90.0, longitude: 45.0), colour: "#0000FF")
+        let perfColour : UIColor = UIColor(hue: CGFloat(UserDefaults.standard.float(forKey: SettingsKeys.performerColourKey)), saturation: 1.0, brightness: 0.7, alpha: 1.0)
+        self.init(data : [], date : Date(), performer : "", instrument : "", image : UIImage(), location: CLLocation.init(latitude: 90.0, longitude: 45.0), colour: perfColour.hexString())
     }
 
     /// Returns a CSV of the current performance data
@@ -114,7 +116,7 @@ class ChirpPerformance : NSObject, NSCoding {
     // TODO: make playback behave like "play/pause" rather than start and cancel.
     /// Schedules playback of the performance in a given `ChirpView`
     func playback(inView view : ChirpView) -> [Timer] {
-        view.definedPlaybackColour = self.colour.cgColor // make sure colour is set before playback.
+        view.playbackColour = self.colour.brighterColor.cgColor // make sure colour is set before playback.
         var timers : [Timer] = []
         for touch in self.performanceData {
             let processor : (Timer) -> Void = view.makeTouchPlayerWith(touch: touch)
@@ -246,3 +248,20 @@ class TouchRecord: NSObject, NSCoding {
     }
 }
 
+
+/// Makes a brighter version of UIColors for the playback version.
+extension UIColor {
+    
+    /// return a brighter version of the UIColor
+    var brighterColor: UIColor {
+        var h: CGFloat = 0
+        var s: CGFloat = 0
+        var b: CGFloat = 0
+        var a: CGFloat = 0
+        
+        guard getHue(&h, saturation: &s, brightness: &b, alpha: &a)
+            else {return self}
+        
+        return UIColor(hue: h, saturation: s, brightness: min(1.3*b,1.0), alpha: a)
+    }
+}
