@@ -222,12 +222,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
             print("ADCK: Going to parse the Jam Records.")
             results?.forEach({ (record: CKRecord) in
                 let touches = record.object(forKey: PerfCloudKeys.touches) as! String
-                let date = record.object(forKey: PerfCloudKeys.date) as! Date
+                let date = (record.object(forKey: PerfCloudKeys.date) as! NSDate) as Date
                 let performer = record.object(forKey: PerfCloudKeys.performer) as! String
                 let instrument = record.object(forKey: PerfCloudKeys.instrument) as! String
                 let location = record.object(forKey: PerfCloudKeys.location) as! CLLocation
                 let imageAsset = record.object(forKey: PerfCloudKeys.image) as! CKAsset
                 let image = UIImage(contentsOfFile: imageAsset.fileURL.path)!
+                
+                print("ADCK: Parsed a Jam Record")
+                print("performer: ", performer)
+                print("instrument: ", instrument)
+                print("date: ", date)
+                //print("touches: ", touches)
+                
                 self.worldJams.append(ChirpPerformance(csv: touches, date: date, performer: performer, instrument: instrument, image: image, location: location)!)
             })
             print("ADCK: worldjams collected - ", self.worldJams.count)

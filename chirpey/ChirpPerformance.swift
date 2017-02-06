@@ -76,7 +76,6 @@ class ChirpPerformance : NSObject, NSCoding {
         super.init()
     }
     
-    
     /// Initialiser with csv of data for the TouchRecords, useful in initialising performances from CloudKit
     convenience init?(csv: String, date: Date, performer: String, instrument: String, image: UIImage, location: CLLocation) {
         var data : [TouchRecord] = []

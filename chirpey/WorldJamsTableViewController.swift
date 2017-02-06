@@ -67,12 +67,19 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: worldJamCellIdentifier, for: indexPath) as! PerformanceTableCell
-
+        cell.title.text = "Performance Cells are Working"
+        
+        
         let performance = appDelegate.worldJams[indexPath.row]
-        cell.title.text = performance.dateString()
-        cell.performer.text = performance.performer
-        cell.instrument.text = performance.instrument
-        cell.previewImage.image = performance.image
+        print("Setting up a cell:")
+        print(performance.performer)
+        print(performance.dateString())
+        print(performance.instrument)
+        
+        //cell.title.text = performance.dateString()
+        //cell.performer.text = performance.performer
+        //cell.instrument.text = performance.instrument
+        //cell.previewImage.image = performance.image
         return cell
     }
 
