@@ -192,6 +192,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
         static let performer = "Performer"
         static let replyto = "ReplyTo"
         static let touches = "Touches"
+        static let colour = "Colour"
     }
     
     /// Returns a temporary file path for png images
@@ -221,9 +222,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
                 let performer = record.object(forKey: PerfCloudKeys.performer) as! String
                 let instrument = record.object(forKey: PerfCloudKeys.instrument) as! String
                 let location = record.object(forKey: PerfCloudKeys.location) as! CLLocation
+                let colour = record.object(forKey: PerfCloudKeys.colour) as! String
                 let imageAsset = record.object(forKey: PerfCloudKeys.image) as! CKAsset
                 let image = UIImage(contentsOfFile: imageAsset.fileURL.path)!
-                self.worldJams.append(ChirpPerformance(csv: touches, date: date, performer: performer, instrument: instrument, image: image, location: location)!)
+                self.worldJams.append(ChirpPerformance(csv: touches, date: date, performer: performer, instrument: instrument, image: image, location: location, colour: colour)!)
             })
             print("ADCK: ", self.worldJams.count, " world jams collected.")
             DispatchQueue.main.async {
@@ -245,7 +247,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
         performanceRecord[PerfCloudKeys.touches] = performance.csv() as CKRecordValue
         performanceRecord[PerfCloudKeys.replyto] = "" as CKRecordValue
         performanceRecord[PerfCloudKeys.location] = (performance.location as! CKRecordValue)
-        
+        performanceRecord[PerfCloudKeys.colour] = performance.colourString() as CKRecordValue
+
         do {
             print("ADCK: Saving the image...")
             let imageURL = tempURL()

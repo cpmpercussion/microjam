@@ -106,8 +106,6 @@ class ChirpPerformance : NSObject, NSCoding {
         return output
     }
     
-
-    
     /// Appends one touch datum to the current performance
     func recordTouchAt(time t : Double, x : Double, y : Double, z : Double, moving : Bool) {
         self.performanceData.append(TouchRecord(time: t, x: x, y: y, z: z, moving: moving))
@@ -116,6 +114,7 @@ class ChirpPerformance : NSObject, NSCoding {
     // TODO: make playback behave like "play/pause" rather than start and cancel.
     /// Schedules playback of the performance in a given `ChirpView`
     func playback(inView view : ChirpView) -> [Timer] {
+        view.definedPlaybackColour = self.colour.cgColor // make sure colour is set before playback.
         var timers : [Timer] = []
         for touch in self.performanceData {
             let processor : (Timer) -> Void = view.makeTouchPlayerWith(touch: touch)
@@ -157,6 +156,11 @@ class ChirpPerformance : NSObject, NSCoding {
         return formatter.string(from: self.date)
     }
     
+    
+    /// Returns the hex string for the performance's playback colour.
+    func colourString() -> String {
+        return self.colour.hexString()
+    }
 }
 
 /**
