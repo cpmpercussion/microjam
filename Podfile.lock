@@ -1,10 +1,12 @@
 PODS:
   - InAppSettingsKit (2.8.1)
   - libpd (0.10.0)
+  - UIColor_Hex_Swift (3.0.2)
 
 DEPENDENCIES:
   - InAppSettingsKit
   - libpd (from `https://github.com/libpd/libpd`)
+  - UIColor_Hex_Swift (~> 3.0.2)
 
 EXTERNAL SOURCES:
   libpd:
@@ -20,7 +22,8 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   InAppSettingsKit: 94d2fba3ccd700fc4e32c6d09fabcc0af2426744
   libpd: c4f8ec7be74d223200052f0736ae02e56b12b9e9
+  UIColor_Hex_Swift: 95f718452092a3efc8a827dffd2c04d3237be02d
 
-PODFILE CHECKSUM: 98036655d334ec5ad3f99146615bf1a4fe5712ca
+PODFILE CHECKSUM: 1ff924a8c3e83ee11e9c2cc6e89410cca336a8f1
 
 COCOAPODS: 1.2.0

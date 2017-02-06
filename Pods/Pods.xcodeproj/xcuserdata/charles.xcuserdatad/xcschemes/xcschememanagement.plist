@@ -29,6 +29,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>UIColor_Hex_Swift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>libpd.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -42,7 +47,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>45298BBB0EB19D7D6D5BB58362B9A6B8</key>
+		<key>5754C853D3AEA9775C8CD63692C1B2A3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6640CA257ED3C3364F0ECFC85B9EA5CC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
