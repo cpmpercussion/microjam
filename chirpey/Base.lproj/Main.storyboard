@@ -206,6 +206,7 @@
                                     <outlet property="performer" destination="Zm0-8q-7kP" id="THh-XF-Quf"/>
                                     <outlet property="previewImage" destination="C1Y-wG-D7P" id="aqE-Qq-Xr4"/>
                                     <outlet property="title" destination="RbJ-Tv-ySY" id="qjK-yS-wAq"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="ShowDetail" id="A2V-33-R8N"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -392,6 +393,6 @@
         <image name="settingsTabIcon" width="37" height="37"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="gEs-g0-Xrm"/>
+        <segue reference="A2V-33-R8N"/>
     </inferredMetricsTieBreakers>
 </document>

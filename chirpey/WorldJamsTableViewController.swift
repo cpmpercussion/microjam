@@ -117,5 +117,22 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
         // Pass the selected object to the new view controller.
     }
     */
-
+    
+    // MARK: - Navigation
+    
+    /// Segue to view loaded jams.
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowDetail" {
+            // load up current data into a JamViewController
+            let jamDetailViewController = segue.destination as! ChirpJamViewController
+            if let selectedJamCell = sender as? PerformanceTableCell {
+                let indexPath = tableView.indexPath(for: selectedJamCell)!
+                let selectedJam = appDelegate.worldJams[indexPath.row]
+                jamDetailViewController.loadedPerformance = selectedJam
+                jamDetailViewController.state = ChirpJamModes.loaded
+            }
+        }
+    }
+    
+    
 }
