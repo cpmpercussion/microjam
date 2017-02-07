@@ -150,16 +150,16 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             if let loadedPerformance = loadedPerformance {
                 self.navigationItem.title = loadedPerformance.dateString()
                 self.statusLabel.text = "Playing..."
-                self.performerLabel.text = "By: " + (loadedPerformance.performer)
-                self.instrumentLabel.text = "With: " + (loadedPerformance.instrument)
+                self.performerLabel.text = loadedPerformance.performer
+                self.instrumentLabel.text = loadedPerformance.instrument
                 self.chirpeySquare.image = loadedPerformance.image
             }
         case ChirpJamModes.loaded:
             if let loadedPerformance = loadedPerformance {
                 self.navigationItem.title = loadedPerformance.dateString()
                 self.statusLabel.text = "Loaded: " + (loadedPerformance.dateString())
-                self.performerLabel.text = "By: " + (loadedPerformance.performer)
-                self.instrumentLabel.text = "With: " + (loadedPerformance.instrument)
+                self.performerLabel.text = loadedPerformance.performer
+                self.instrumentLabel.text = loadedPerformance.instrument
                 self.chirpeySquare.image = loadedPerformance.image
             }
         default:
