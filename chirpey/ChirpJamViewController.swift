@@ -37,6 +37,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     /// MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         print("JAMVC: Preparing for Segue")
+        print("State: ", state)
         // FIXME: save the performance if the timer hasn't run out.
         // stopRecording()
         if state == ChirpJamModes.recording {stopRecording() }
@@ -88,12 +89,14 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
                 statusLabel.text = "Playing..."
                 startProgressBar()
                 chirpeySquare?.playing = true
+                self.state = ChirpJamModes.playing
                 self.playButton.titleLabel?.text = "Stop"
             } else {
                 // Cancel Playback
                 print("JAMVC: Going to stop playing")
                 self.stopTimer()
                 self.playButton.titleLabel?.text = "Play"
+                self.state = ChirpJamModes.loaded
             }
         } else {
             print("JAMVC: No loaded performance to be played back.")
@@ -194,6 +197,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     
     /// Automatically triggered when recording time finishes.
     func stopTimer() {
+        /// FIXME: Incorporate this method with stopPlayback?
         NSLog("JAMVC: Timer finished.")
         if (self.chirpeySquare!.recording) {
             self.stopRecording()
