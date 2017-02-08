@@ -5,6 +5,9 @@ import json
 from StringIO import StringIO
 import urllib
 
+KEY_ID = "da1eaedabe00e50036abcce7fb4deafc8e4cca4d4e53c1b5339519a3f95b27c6"
+KEY_FILE = "/Users/charles/src/microjam/research-data-downloader/eckey.pem"
+API_BASE_URL = "https://api.apple-cloudkit.com/database/1/iCloud.au.com.charlesmartin.microjam/development/"
 IMAGES = True # download images as PNG files.
 
 def save_record_touches(record):
@@ -29,8 +32,8 @@ def main():
     Downloads all data from the MicroJam CloudKit database and saves touch records as text files.
     """
     print("Going to download data from CloudKit")
-    auth = CloudKitAuth(key_id="da1eaedabe00e50036abcce7fb4deafc8e4cca4d4e53c1b5339519a3f95b27c6", key_file_name="/Users/charles/src/microjam/research-data-downloader/eckey.pem")
-    CloudKit = RestMapper("https://api.apple-cloudkit.com/database/1/iCloud.au.com.charlesmartin.microjam/development/")
+    auth = CloudKitAuth(key_id=KEY_ID, key_file_name=KEY_FILE)
+    CloudKit = RestMapper(API_BASE_URL)
     cloudkit = CloudKit(auth=auth)
     query = {'recordType':'Performance'}
     data = {
