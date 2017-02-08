@@ -21,6 +21,8 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     var progress = 0.0
     var progressTimer : Timer?
     var loadedPerformance : ChirpPerformance?
+    /// An array of timers for each note in the scheduled playback.
+    var playbackTimers : [Timer]?
 
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var recButton: UIButton!
@@ -76,8 +78,6 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         }
     }
     
-    var playbackTimers : [Timer]?
-    
     /// MARK: - UI Interaction Functions
     @IBAction func playButtonPressed(_ sender: UIButton) {
         if let loadedPerformance = loadedPerformance {
@@ -100,12 +100,15 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         }
     }
     
+    /// IBAction for the record button - starts the recording without a tap.
     @IBAction func recButtonPressed(_ sender: UIButton) {
         self.startRecording()
     }
     
+    /// IBAction for the Jam Button
     @IBAction func jamButtonPressed(_ sender: UIButton) {
         /// TODO: implement some kind of generative performing here!
+        /// FIXME: as an in-between measure, maybe loop playback?
         self.statusLabel.text = "Doesn't work yet!"
     }
     
@@ -114,10 +117,6 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         print("JAMVC: view loaded")
         self.recordingProgress!.progress = 0.0
         self.updateUI()
-        if (state == ChirpJamModes.loaded) {
-            print("JAMVC: opening Pd file for loaded performance.")
-            (UIApplication.shared.delegate as! AppDelegate).openPdFile(withName: (loadedPerformance?.instrument)!)
-        }
     }
     
     /// Load a ChirpPerformance for playback and reaction
@@ -131,16 +130,14 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     /// Update the UI labels and image only if there is a valid performance loaded.
     func updateUI() {
         print("JAMVC: Updating UI.")
-//        print("Settings Data: ")
-//        print("Performer: ", UserDefaults.standard.string(forKey: SettingsKeys.performerKey) ?? "name could not be loaded")
-//        print("Instrument:", SoundSchemes.namesForKeys[UserDefaults.standard.integer(forKey: SettingsKeys.soundSchemeKey)] ?? "name could not be loaded")
-        
         switch self.state {
         case ChirpJamModes.new:
             self.navigationItem.title = "New Performance"
             self.statusLabel.text = "new"
             self.performerLabel.text = UserDefaults.standard.string(forKey: SettingsKeys.performerKey)
             self.instrumentLabel.text = SoundSchemes.namesForKeys[UserDefaults.standard.integer(forKey: SettingsKeys.soundSchemeKey)]
+            print("JAMVC: opening Pd file for new performance.")
+            (UIApplication.shared.delegate as! AppDelegate).openPdFile(withName: self.instrumentLabel.text!)
         case ChirpJamModes.recording:
             self.navigationItem.title = "recording..."
             self.statusLabel.text = "recording..."
@@ -161,6 +158,8 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
                 self.performerLabel.text = loadedPerformance.performer
                 self.instrumentLabel.text = loadedPerformance.instrument
                 self.chirpeySquare.image = loadedPerformance.image
+                print("JAMVC: opening Pd file for loaded performance.")
+                (UIApplication.shared.delegate as! AppDelegate).openPdFile(withName: loadedPerformance.instrument)
             }
         default:
             self.navigationItem.title = "performance"
@@ -170,6 +169,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         }
     }
 
+    ///
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -187,6 +187,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         }
     }
     
+    /// Starts a recurring timer that increments the progress bar.
     func startProgressBar() {
         self.progressTimer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: self.incrementRecordingProgress)
     }
@@ -216,7 +217,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         self.updateUI()
     }
     
-    // StopPlayback
+    /// Stop playback and cancel timers.
     func stopPlayback() {
         print("JAMVC: Stopping any requested playback")
         if playbackTimers != nil {
@@ -228,6 +229,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         self.updateUI()
     }
     
+    /// Increment the recording progress bar by 10ms; called automatically by timers.
     func incrementRecordingProgress(_ : Timer) {
         self.progress += 0.01;
         self.recordingProgress?.progress = Float(self.progress / self.RECORDING_TIME)
@@ -235,6 +237,8 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     }
     
     // MARK: - Touch methods
+    
+    /// touchesBegan method starts a recording if this is the first touch in a new microjam.
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         // start timer if not recording
         let p = touches.first?.location(in: self.chirpeySquare);
@@ -243,7 +247,9 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         }
     }
     
+    /// Exports a loaded performance via share-sheets. Ultimately not very useful!
     @IBAction func exportLoadedPerformance() {
+        // TODO: Delete this function if not used soon.
         if ((state == ChirpJamModes.loaded) || (state == ChirpJamModes.playing)) {
             print("JAMVC: Exporting the loaded performance")            
             if let csv = loadedPerformance?.csv() {
