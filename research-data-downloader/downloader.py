@@ -6,7 +6,7 @@ from StringIO import StringIO
 import urllib
 
 KEY_ID = "da1eaedabe00e50036abcce7fb4deafc8e4cca4d4e53c1b5339519a3f95b27c6"
-KEY_FILE = "/Users/charles/src/microjam/research-data-downloader/eckey.pem"
+KEY_FILE = "/Users/charles/Documents/keys/microjam-eckey.pem"
 API_BASE_URL = "https://api.apple-cloudkit.com/database/1/iCloud.au.com.charlesmartin.microjam/development/"
 IMAGES = True # download images as PNG files.
 
