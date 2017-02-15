@@ -30,8 +30,8 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     /// An array of timers for each note in the scheduled playback.
     var playbackTimers : [Timer]?
 
+    @IBOutlet weak var replyButton: UIButton!
     @IBOutlet weak var playButton: UIButton!
-    @IBOutlet weak var recButton: UIButton!
     @IBOutlet weak var jamButton: UIButton!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var performerLabel: UILabel!
@@ -110,16 +110,15 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         }
     }
     
-    /// IBAction for the record button - starts the recording without a tap.
-    @IBAction func recButtonPressed(_ sender: UIButton) {
-        self.startRecording()
+
+    @IBAction func replyButtonPressed(_ sender: Any) {
+        /// TODO: Implement some kind of reply system.
     }
+    
     
     /// IBAction for the Jam Button
     @IBAction func jamButtonPressed(_ sender: UIButton) {
         /// TODO: implement some kind of generative performing here!
-        /// FIXME: as an in-between measure, maybe loop playback?
-        self.statusLabel.text = "Doesn't work yet!"
         if (self.jamming) {
             // Stop Jamming
             self.jamButton.setTitle("jam", for: UIControlState.normal)
@@ -160,12 +159,18 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             self.navigationItem.title = "New Performance"
             self.statusLabel.text = "new"
             self.performerLabel.text = UserDefaults.standard.string(forKey: SettingsKeys.performerKey)
+            self.playButton.isEnabled = false
+            self.jamButton.isEnabled = false
+            self.replyButton.isEnabled = false
             self.instrumentLabel.text = SoundSchemes.namesForKeys[UserDefaults.standard.integer(forKey: SettingsKeys.soundSchemeKey)]
             print("JAMVC: opening Pd file for new performance.")
             (UIApplication.shared.delegate as! AppDelegate).openPdFile(withName: self.instrumentLabel.text!)
         case ChirpJamModes.recording:
             self.navigationItem.title = "recording..."
             self.statusLabel.text = "recording..."
+            self.playButton.isEnabled = false
+            self.jamButton.isEnabled = false
+            self.replyButton.isEnabled = false
             self.performerLabel.text = UserDefaults.standard.string(forKey: SettingsKeys.performerKey)
             self.instrumentLabel.text = SoundSchemes.namesForKeys[UserDefaults.standard.integer(forKey: SettingsKeys.soundSchemeKey)]
         case ChirpJamModes.playing:
@@ -175,6 +180,9 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
                 self.performerLabel.text = loadedPerformance.performer
                 self.instrumentLabel.text = loadedPerformance.instrument
                 self.chirpeySquare.image = loadedPerformance.image
+                self.playButton.isEnabled = true
+                self.jamButton.isEnabled = true
+                self.replyButton.isEnabled = true
             }
         case ChirpJamModes.loaded:
             if let loadedPerformance = loadedPerformance {
@@ -190,12 +198,18 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
                 self.performerLabel.text = loadedPerformance.performer
                 self.instrumentLabel.text = loadedPerformance.instrument
                 self.chirpeySquare.image = loadedPerformance.image
+                self.playButton.isEnabled = true
+                self.jamButton.isEnabled = true
+                self.replyButton.isEnabled = true
                 print("JAMVC: opening Pd file for loaded performance.")
                 (UIApplication.shared.delegate as! AppDelegate).openPdFile(withName: loadedPerformance.instrument)
             }
         default:
             self.navigationItem.title = "performance"
             self.statusLabel.text = "new"
+            self.playButton.isEnabled = false
+            self.jamButton.isEnabled = false
+            self.replyButton.isEnabled = false
             self.performerLabel.text = UserDefaults.standard.string(forKey: SettingsKeys.performerKey)
             self.instrumentLabel.text = SoundSchemes.namesForKeys[UserDefaults.standard.integer(forKey: SettingsKeys.soundSchemeKey)]
         }
