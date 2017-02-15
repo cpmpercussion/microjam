@@ -7,17 +7,23 @@
 //
 import UIKit
 
+/// TODO: how to tell between loaded and saved and just loaded?
+
 /// Modes for the ChirpJameViewController: either new, recording, loaded, or playing.
 struct ChirpJamModes {
     static let new = 0
     static let recording = 1
-    static let loaded = 2
-    static let playing = 3
+    static let loadedAndUnsaved = 2
+    static let loadedAndSaved = 3
+    static let loaded = 4
+    static let playing = 5
 }
 
 class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerDelegate {
     let RECORDING_TIME = 5.0
     var state = ChirpJamModes.new
+    var newPerformance : Bool = true
+    var jamming : Bool = false
     var progress = 0.0
     var progressTimer : Timer?
     var loadedPerformance : ChirpPerformance?
@@ -85,18 +91,19 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             if (!self.chirpeySquare!.playing) {
                 print("JAMVC: Going to start playing")
                 // Start Playback
-                self.playbackTimers = loadedPerformance.playback(inView: self.chirpeySquare)
                 statusLabel.text = "Playing..."
-                startProgressBar()
+                self.playButton.setTitle("stop", for: UIControlState.normal)
                 chirpeySquare?.playing = true
                 self.state = ChirpJamModes.playing
-                self.playButton.titleLabel?.text = "Stop"
+                startProgressBar()
+                self.playbackTimers = loadedPerformance.playback(inView: self.chirpeySquare)
             } else {
                 // Cancel Playback
                 print("JAMVC: Going to stop playing")
-                self.stopTimer()
-                self.playButton.titleLabel?.text = "Play"
+                self.jamming = false
+                self.playButton.setTitle("play", for: UIControlState.normal)
                 self.state = ChirpJamModes.loaded
+                self.stopTimer()
             }
         } else {
             print("JAMVC: No loaded performance to be played back.")
@@ -113,6 +120,21 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         /// TODO: implement some kind of generative performing here!
         /// FIXME: as an in-between measure, maybe loop playback?
         self.statusLabel.text = "Doesn't work yet!"
+        if (self.jamming) {
+            // Stop Jamming
+            self.jamButton.setTitle("jam", for: UIControlState.normal)
+            self.jamming = false
+            if (self.chirpeySquare!.playing) {
+                self.playButtonPressed(self.playButton) // stop playing if already playing.
+            }
+        } else {
+            // Start Jamming
+            self.jamButton.setTitle("no jam", for: UIControlState.normal)
+            self.jamming = true
+            if (!self.chirpeySquare!.playing) {
+                self.playButtonPressed(self.playButton) // start playing if not already playing.
+            }
+        }
     }
     
     override func viewDidLoad() {
@@ -157,6 +179,13 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         case ChirpJamModes.loaded:
             if let loadedPerformance = loadedPerformance {
                 self.navigationItem.title = loadedPerformance.dateString()
+                if (!self.newPerformance) {
+                    // disable the save button, only if it's a loaded performance (not a new one)
+                    self.navigationItem.rightBarButtonItem?.isEnabled = false
+                    print("Not a new performance, so disabling the save button.")
+                } else {
+                    self.navigationItem.rightBarButtonItem?.isEnabled = true
+                }
                 self.statusLabel.text = "Loaded: " + (loadedPerformance.dateString())
                 self.performerLabel.text = loadedPerformance.performer
                 self.instrumentLabel.text = loadedPerformance.instrument
@@ -209,6 +238,17 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         self.progressTimer?.invalidate()
         self.progress = 0.0
         self.recordingProgress?.progress = 0.0
+        if (self.jamming) {
+            // start the playback again!
+            print("JAMVC: Restarting playback for the jam.")
+            // Start Playback
+            statusLabel.text = "Playing..."
+            self.playButton.setTitle("stop", for: UIControlState.normal)
+            chirpeySquare?.playing = true
+            self.state = ChirpJamModes.playing
+            startProgressBar()
+            self.playbackTimers = loadedPerformance?.playback(inView: self.chirpeySquare)
+        }
     }
     
     /// Stops the current recording.
@@ -228,7 +268,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             print("JAMVC: Stopping the timers")
             self.chirpeySquare.performance?.cancelPlayback(timers: playbackTimers!)
         }
-        self.playButton.titleLabel?.text = "Play"
+        self.playButton.setTitle("play", for: UIControlState.normal)
         self.state = ChirpJamModes.loaded
         self.updateUI()
     }

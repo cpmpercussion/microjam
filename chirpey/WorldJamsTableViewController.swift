@@ -130,6 +130,7 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
                 let selectedJam = appDelegate.worldJams[indexPath.row]
                 jamDetailViewController.loadedPerformance = selectedJam
                 jamDetailViewController.state = ChirpJamModes.loaded
+                jamDetailViewController.newPerformance = false
             }
         }
     }

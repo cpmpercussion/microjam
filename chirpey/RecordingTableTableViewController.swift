@@ -9,9 +9,8 @@
 import UIKit
 
 class RecordingTableTableViewController: UITableViewController {
-    
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    
+    let recordingCellIdentifier = "perfRecCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,8 +37,6 @@ class RecordingTableTableViewController: UITableViewController {
         return appDelegate.recordedPerformances.count
     }
 
-    let recordingCellIdentifier = "perfRecCell"
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: recordingCellIdentifier, for: indexPath) as! PerformanceTableCell
         
@@ -55,7 +52,6 @@ class RecordingTableTableViewController: UITableViewController {
     @IBAction func unwindToPerformanceList(sender: UIStoryboardSegue) {
         print("AD: unwinding from somewhere.")
         if let sourceViewController = sender.source as? ChirpJamViewController, let performance = sourceViewController.loadedPerformance {
-            
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
                 // Update existing performance
                 appDelegate.recordedPerformances[selectedIndexPath.row] = performance
@@ -69,14 +65,11 @@ class RecordingTableTableViewController: UITableViewController {
         }
     }
 
-    
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
-    
-
     
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
@@ -88,11 +81,9 @@ class RecordingTableTableViewController: UITableViewController {
         }    
     }
     
-
     /*
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
     }
     */
 
@@ -115,12 +106,14 @@ class RecordingTableTableViewController: UITableViewController {
                 let selectedJam = appDelegate.recordedPerformances[indexPath.row]
                 jamDetailViewController.loadedPerformance = selectedJam
                 jamDetailViewController.state = ChirpJamModes.loaded
+                jamDetailViewController.newPerformance = false
             }
         } else if segue.identifier == "AddItem" {
             // load up a new JamViewController
-            print("Adding a new performance")
+            print("Local Jam Table View: Setting up a new performance")
+            let newJamController = segue.destination as! ChirpJamViewController
+            newJamController.state = ChirpJamModes.new
+            newJamController.newPerformance = true
         }
     }
-    
-
 }
