@@ -209,6 +209,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
     func fetchWorldJamsFromCloud() {
         print("ADCK: Attempting to fetch World Jams from Cloud.")
         let predicate = NSPredicate(value: true)
+        /// FIXME: predicate should only download latest 100 jams from the last month or something.
         let query = CKQuery(recordType: PerfCloudKeys.type, predicate: predicate)
         publicDB.perform(query, inZoneWith: nil) {[unowned self] results, error in
             if let error = error {
@@ -229,7 +230,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
                 let colour = record.object(forKey: PerfCloudKeys.colour) as! String
                 let imageAsset = record.object(forKey: PerfCloudKeys.image) as! CKAsset
                 let image = UIImage(contentsOfFile: imageAsset.fileURL.path)!
-                self.worldJams.append(ChirpPerformance(csv: touches, date: date, performer: performer, instrument: instrument, image: image, location: location, colour: colour)!)
+                let replyto = record.object(forKey: PerfCloudKeys.replyto) as! String
+                self.worldJams.append(ChirpPerformance(csv: touches, date: date, performer: performer, instrument: instrument, image: image, location: location, colour: colour, replyto: replyto)!)
             })
             print("ADCK: ", self.worldJams.count, " world jams collected.")
             DispatchQueue.main.async {
@@ -249,7 +251,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
         performanceRecord[PerfCloudKeys.performer] = performance.performer as CKRecordValue
         performanceRecord[PerfCloudKeys.instrument] = performance.instrument as CKRecordValue
         performanceRecord[PerfCloudKeys.touches] = performance.csv() as CKRecordValue
-        performanceRecord[PerfCloudKeys.replyto] = "" as CKRecordValue
+        performanceRecord[PerfCloudKeys.replyto] = performance.replyto as CKRecordValue
         performanceRecord[PerfCloudKeys.location] = (performance.location as! CKRecordValue)
         performanceRecord[PerfCloudKeys.colour] = performance.colourString() as CKRecordValue
 
