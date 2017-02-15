@@ -42,6 +42,7 @@ class ChirpPerformance : NSObject, NSCoding {
         static let imageKey = "image"
         static let locationKey = "location"
         static let colourKey = "colour"
+        static let replyToKey = "replyto"
     }
     
     func encode(with aCoder: NSCoder) {
@@ -52,6 +53,7 @@ class ChirpPerformance : NSObject, NSCoding {
         aCoder.encode(UIImagePNGRepresentation(image), forKey: PropertyKey.imageKey)
         aCoder.encode(location, forKey: PropertyKey.locationKey)
         aCoder.encode(colour.hexString(), forKey: PropertyKey.colourKey)
+        aCoder.encode(replyto, forKey: PropertyKey.replyToKey)
     }
 
     required convenience init?(coder aDecoder: NSCoder) {
@@ -62,15 +64,16 @@ class ChirpPerformance : NSObject, NSCoding {
             let performer = aDecoder.decodeObject(forKey: PropertyKey.performerKey) as? String,
             let instrument = aDecoder.decodeObject(forKey: PropertyKey.instrumentKey) as? String,
             let image = UIImage(data: (aDecoder.decodeObject(forKey: PropertyKey.imageKey) as? Data)!),
-            let colour = aDecoder.decodeObject(forKey: PropertyKey.colourKey) as? String
+            let colour = aDecoder.decodeObject(forKey: PropertyKey.colourKey) as? String,
+            let replyto = aDecoder.decodeObject(forKey: PropertyKey.replyToKey) as? String
             else {return nil}
         let location = (aDecoder.decodeObject(forKey: "location") as? CLLocation) ?? CLLocation.init(latitude: 60, longitude: 11)
         print("PERF: Decoding", data.count, "notes:", performer, instrument)
-        self.init(data: data, date: date, performer: performer, instrument: instrument, image: image, location: location, colour: colour)
+        self.init(data: data, date: date, performer: performer, instrument: instrument, image: image, location: location, colour: colour, replyto: replyto)
     }
 
     /// Main initialiser
-    init(data: [TouchRecord], date: Date, performer: String, instrument: String, image: UIImage, location: CLLocation, colour: String) {
+    init(data: [TouchRecord], date: Date, performer: String, instrument: String, image: UIImage, location: CLLocation, colour: String, replyto: String) {
         self.performanceData = data
         self.date = date
         self.performer = performer
@@ -78,16 +81,17 @@ class ChirpPerformance : NSObject, NSCoding {
         self.image = image
         self.location = location
         self.colour = UIColor(colour)
+        self.replyto = replyto
         super.init()
     }
     
     /// Initialiser with csv of data for the TouchRecords, useful in initialising performances from CloudKit
-    convenience init?(csv: String, date: Date, performer: String, instrument: String, image: UIImage, location: CLLocation, colour: String) {
+    convenience init?(csv: String, date: Date, performer: String, instrument: String, image: UIImage, location: CLLocation, colour: String, replyto: String) {
         var data : [TouchRecord] = []
         let lines = csv.components(separatedBy: "\n")
         // TODO: test this initialiser
         data = lines.flatMap {TouchRecord.init(fromCSVLine: $0)}
-        self.init(data: data, date: date, performer: performer, instrument: instrument, image: image, location: location, colour: colour)
+        self.init(data: data, date: date, performer: performer, instrument: instrument, image: image, location: location, colour: colour, replyto: replyto)
     }
     
     
@@ -95,7 +99,7 @@ class ChirpPerformance : NSObject, NSCoding {
     convenience override init() {
         // FIXME: actually detect the proper location
         let perfColour : UIColor = UIColor(hue: CGFloat(UserDefaults.standard.float(forKey: SettingsKeys.performerColourKey)), saturation: 1.0, brightness: 0.7, alpha: 1.0)
-        self.init(data : [], date : Date(), performer : "", instrument : "", image : UIImage(), location: CLLocation.init(latitude: 90.0, longitude: 45.0), colour: perfColour.hexString())
+        self.init(data : [], date : Date(), performer : "", instrument : "", image : UIImage(), location: CLLocation.init(latitude: 90.0, longitude: 45.0), colour: perfColour.hexString(), replyto: "")
     }
 
     /// Returns a CSV of the current performance data
@@ -135,7 +139,7 @@ class ChirpPerformance : NSObject, NSCoding {
         }
     }
     
-    /// A uniqueish string title for the performance
+    /// A uniqueish string title for the performance - used for CloudKit records and reply system.
     func title() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "YYYY-MM-DD-HH-mm-SS"
