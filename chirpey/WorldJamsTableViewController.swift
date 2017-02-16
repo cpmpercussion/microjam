@@ -118,7 +118,7 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
     }
     */
     
-    // MARK: - Navigation
+    /// MARK: - Navigation
     
     /// Segue to view loaded jams.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
