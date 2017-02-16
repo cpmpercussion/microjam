@@ -216,18 +216,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
                 return
             }
             self.storedPerformances.removeAll(keepingCapacity: true) // deletes all storedPerformances
-            // TODO: Need protection against empty fields?
             results?.forEach({ (record: CKRecord) in
-                let touches = record.object(forKey: PerfCloudKeys.touches) as! String
-                let date = (record.object(forKey: PerfCloudKeys.date) as! NSDate) as Date
-                let performer = record.object(forKey: PerfCloudKeys.performer) as! String
-                let instrument = record.object(forKey: PerfCloudKeys.instrument) as! String
-                let location = record.object(forKey: PerfCloudKeys.location) as! CLLocation
-                let colour = record.object(forKey: PerfCloudKeys.colour) as! String
-                let imageAsset = record.object(forKey: PerfCloudKeys.image) as! CKAsset
-                let image = UIImage(contentsOfFile: imageAsset.fileURL.path)!
-                let replyto = record.object(forKey: PerfCloudKeys.replyto) as! String
-                self.storedPerformances.append(ChirpPerformance(csv: touches, date: date, performer: performer, instrument: instrument, image: image, location: location, colour: colour, replyto: replyto)!)
+                let perf = self.performanceFrom(record: record)
+                self.storedPerformances.append(perf)
             })
             print("ADCK: ", self.storedPerformances.count, " world jams collected.")
             DispatchQueue.main.async {
