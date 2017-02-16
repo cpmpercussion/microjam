@@ -40,7 +40,7 @@ struct SoundSchemes {
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
     var window: UIWindow?
-    var recordedPerformances : [ChirpPerformance] = []
+    var storedPerformances : [ChirpPerformance] = []
     static let defaultSettings : [String : Any] = [
         SettingsKeys.performerKey:"performer",
         SettingsKeys.performerColourKey: 0.5,
@@ -60,12 +60,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
     let privateDB: CKDatabase = CKContainer.default().privateCloudDatabase
     var delegate : ModelDelegate?
     
-//    // iCloud inits
-//    container = CKContainer.default()
-//    publicDB = container.publicCloudDatabase
-//    privateDB = container.privateCloudDatabase
+
     
-    var worldJams : [ChirpPerformance] = []
 
     // MARK: - Pd Engine Functions
     
@@ -130,8 +126,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
         UserDefaults.standard.register(defaults: AppDelegate.defaultSettings)
         // Load the saved performances
         if let savedPerformances = self.loadPerformances() {
-            self.recordedPerformances += savedPerformances
-            NSLog("AD: Successfully loaded", self.recordedPerformances.count, "performances")
+            self.storedPerformances += savedPerformances
+            NSLog("AD: Successfully loaded", self.storedPerformances.count, "performances")
         } else {
             NSLog("AD: Failed to load performances")
         }
@@ -170,19 +166,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
 
     /// Add a new performance to the list and then save the list.
     func addNew(performance : ChirpPerformance) {
-        self.recordedPerformances.append(performance)
+        self.storedPerformances.append(performance)
         self.savePerformances()
         self.upload(performance: performance)
     }
     
     /// Save recorded performances to file.
     func savePerformances() {
-        NSLog("AD: Going to save %d performances", self.recordedPerformances.count)
-        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(self.recordedPerformances, toFile: ChirpPerformance.ArchiveURL.path)
+        NSLog("AD: Going to save %d performances", self.storedPerformances.count)
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(self.storedPerformances, toFile: ChirpPerformance.ArchiveURL.path)
         if (!isSuccessfulSave) {
             print("AD: Save was not successful.")
         } else {
-            print("AD: successfully saved", self.recordedPerformances.count, "performances")
+            print("AD: successfully saved", self.storedPerformances.count, "performances")
         }
     }
     
@@ -219,7 +215,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
                 }
                 return
             }
-            self.worldJams.removeAll(keepingCapacity: true)
+            self.storedPerformances.removeAll(keepingCapacity: true) // deletes all storedPerformances
             // TODO: Need protection against empty fields?
             results?.forEach({ (record: CKRecord) in
                 let touches = record.object(forKey: PerfCloudKeys.touches) as! String
@@ -231,20 +227,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
                 let imageAsset = record.object(forKey: PerfCloudKeys.image) as! CKAsset
                 let image = UIImage(contentsOfFile: imageAsset.fileURL.path)!
                 let replyto = record.object(forKey: PerfCloudKeys.replyto) as! String
-                self.worldJams.append(ChirpPerformance(csv: touches, date: date, performer: performer, instrument: instrument, image: image, location: location, colour: colour, replyto: replyto)!)
+                self.storedPerformances.append(ChirpPerformance(csv: touches, date: date, performer: performer, instrument: instrument, image: image, location: location, colour: colour, replyto: replyto)!)
             })
-            print("ADCK: ", self.worldJams.count, " world jams collected.")
+            print("ADCK: ", self.storedPerformances.count, " world jams collected.")
             DispatchQueue.main.async {
                 self.delegate?.modelUpdated()
             }
         }
     }
     
+    /// Returns a ChirpPerformance from a CKRecord of a performance
+    func performanceFrom(record: CKRecord) -> ChirpPerformance {
+        // TODO: Need some kind of protection against failure here.
+        let touches = record.object(forKey: PerfCloudKeys.touches) as! String
+        let date = (record.object(forKey: PerfCloudKeys.date) as! NSDate) as Date
+        let performer = record.object(forKey: PerfCloudKeys.performer) as! String
+        let instrument = record.object(forKey: PerfCloudKeys.instrument) as! String
+        let location = record.object(forKey: PerfCloudKeys.location) as! CLLocation
+        let colour = record.object(forKey: PerfCloudKeys.colour) as! String
+        let imageAsset = record.object(forKey: PerfCloudKeys.image) as! CKAsset
+        let image = UIImage(contentsOfFile: imageAsset.fileURL.path)!
+        let replyto = record.object(forKey: PerfCloudKeys.replyto) as! String
+        let perf = ChirpPerformance(csv: touches, date: date, performer: performer,
+                                    instrument: instrument, image: image, location: location,
+                                    colour: colour, replyto: replyto)!
+        return perf
+    }
+    
+    
     /// Upload a saved jam to CloudKit
     func upload(performance : ChirpPerformance) {
         // Setup the record
         print("ADCK: Saving the performance:", performance.title())
-        print("ADCK: Setting up the record...")
         let performanceID = CKRecordID(recordName: performance.title())
         let performanceRecord = CKRecord(recordType: PerfCloudKeys.type,recordID: performanceID)
         performanceRecord[PerfCloudKeys.date] = performance.date as CKRecordValue
@@ -252,11 +266,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
         performanceRecord[PerfCloudKeys.instrument] = performance.instrument as CKRecordValue
         performanceRecord[PerfCloudKeys.touches] = performance.csv() as CKRecordValue
         performanceRecord[PerfCloudKeys.replyto] = performance.replyto as CKRecordValue
-        performanceRecord[PerfCloudKeys.location] = (performance.location as! CKRecordValue)
+        performanceRecord[PerfCloudKeys.location] = performance.location!
         performanceRecord[PerfCloudKeys.colour] = performance.colourString() as CKRecordValue
 
-        do {
-            print("ADCK: Saving the image...")
+        do { // Saving image data
             let imageURL = tempURL()
             let imageData = UIImagePNGRepresentation(performance.image)!
             try imageData.write(to: imageURL, options: .atomicWrite)
@@ -268,7 +281,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
         }
         
         // Upload to the container
-        print("ADCK: Attempting to save to CloudKit.")
         let container = CKContainer.default()
         let publicDatabase = container.publicCloudDatabase
         //        let privateDatabase = container.privateCloudDatabase
@@ -277,10 +289,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
                 print("ADCK: Error saving to the database.")
                 print(error ?? "")
             }
-            print("ADCK: Saved to cloudkit! phew.")
-//            OperationQueue.main.addOperation({ 
-//                // could do some cleanup here.
-//            })
+            print("ADCK: Saved to cloudkit:", performance.title()) // runs when upload is complete
         })
     }
         

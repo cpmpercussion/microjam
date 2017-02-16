@@ -29,14 +29,14 @@ class RecordingTableTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return appDelegate.recordedPerformances.count
+        return appDelegate.storedPerformances.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: recordingCellIdentifier, for: indexPath) as! PerformanceTableCell
         
         // Configure the cell...
-        let performance = appDelegate.recordedPerformances[indexPath.row]
+        let performance = appDelegate.storedPerformances[indexPath.row]
         cell.title.text = performance.dateString()
         cell.performer.text = performance.performer
         cell.instrument.text = performance.instrument
@@ -49,11 +49,11 @@ class RecordingTableTableViewController: UITableViewController {
         if let sourceViewController = sender.source as? ChirpJamViewController, let performance = sourceViewController.loadedPerformance {
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
                 // Update existing performance
-                appDelegate.recordedPerformances[selectedIndexPath.row] = performance
+                appDelegate.storedPerformances[selectedIndexPath.row] = performance
                 tableView.reloadRows(at: [selectedIndexPath], with: .none)
             } else {
                 // Add a new performance
-                let newIndexPath = NSIndexPath(row: appDelegate.recordedPerformances.count, section: 0)
+                let newIndexPath = NSIndexPath(row: appDelegate.storedPerformances.count, section: 0)
                 appDelegate.addNew(performance: performance)
                 self.tableView.insertRows(at: [newIndexPath as IndexPath], with: .bottom)
             }
@@ -69,7 +69,7 @@ class RecordingTableTableViewController: UITableViewController {
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            appDelegate.recordedPerformances.remove(at: indexPath.row) // delete from the data source
+            appDelegate.storedPerformances.remove(at: indexPath.row) // delete from the data source
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
@@ -83,7 +83,7 @@ class RecordingTableTableViewController: UITableViewController {
             let jamDetailViewController = segue.destination as! ChirpJamViewController
             if let selectedJamCell = sender as? PerformanceTableCell {
                 let indexPath = tableView.indexPath(for: selectedJamCell)!
-                let selectedJam = appDelegate.recordedPerformances[indexPath.row]
+                let selectedJam = appDelegate.storedPerformances[indexPath.row]
                 jamDetailViewController.loadedPerformance = selectedJam
                 jamDetailViewController.state = ChirpJamModes.loaded
                 jamDetailViewController.newPerformance = false

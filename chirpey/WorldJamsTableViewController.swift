@@ -60,12 +60,12 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return appDelegate.worldJams.count
+        return appDelegate.storedPerformances.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: worldJamCellIdentifier, for: indexPath) as! PerformanceTableCell
-        let performance = appDelegate.worldJams[indexPath.row]
+        let performance = appDelegate.storedPerformances[indexPath.row]
         cell.title.text = performance.dateString()
         cell.performer.text = performance.performer
         cell.instrument.text = performance.instrument
@@ -127,7 +127,7 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
             let jamDetailViewController = segue.destination as! ChirpJamViewController
             if let selectedJamCell = sender as? PerformanceTableCell {
                 let indexPath = tableView.indexPath(for: selectedJamCell)!
-                let selectedJam = appDelegate.worldJams[indexPath.row]
+                let selectedJam = appDelegate.storedPerformances[indexPath.row]
                 jamDetailViewController.loadedPerformance = selectedJam
                 jamDetailViewController.state = ChirpJamModes.loaded
                 jamDetailViewController.newPerformance = false
@@ -138,19 +138,19 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
     /// Segue back to the World Jam Table
     @IBAction func unwindToJamList(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.source as? ChirpJamViewController, let performance = sourceViewController.loadedPerformance {
-            print("Unwound to the World Jam List, found a performance:")
-            print(performance.description)
-            
-//            if let selectedIndexPath = tableView.indexPathForSelectedRow {
-//                // Update existing performance
-//                appDelegate.recordedPerformances[selectedIndexPath.row] = performance
-//                tableView.reloadRows(at: [selectedIndexPath], with: .none)
-//            } else {
-//                // Add a new performance
-//                let newIndexPath = NSIndexPath(row: appDelegate.recordedPerformances.count, section: 0)
-//                appDelegate.addNew(performance: performance)
-//                self.tableView.insertRows(at: [newIndexPath as IndexPath], with: .bottom)
-//            }
+            print("WJTVC: Unwound, found a performance:", performance.title())
+            if let selectedIndexPath = tableView.indexPathForSelectedRow { // passes if a row had been selected.
+                // Update existing performance
+                print("WJTVC: Unwound to a selected row:",selectedIndexPath.description)
+                //appDelegate.recordedPerformances[selectedIndexPath.row] = performance
+                //tableView.reloadRows(at: [selectedIndexPath], with: .none)
+            } else {
+                // Add a new performance
+                print("WJTVC: Unwound with a new performance to save:", performance.title())
+                let newIndexPath = NSIndexPath(row: appDelegate.storedPerformances.count, section: 0)
+                appDelegate.addNew(performance: performance)
+                self.tableView.insertRows(at: [newIndexPath as IndexPath], with: .top)
+            }
         }
     }
     
