@@ -127,6 +127,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
         // Load the saved performances
         if let savedPerformances = self.loadPerformances() {
             self.storedPerformances += savedPerformances
+            self.sortStoredPerformances()
             NSLog("AD: Successfully loaded", self.storedPerformances.count, "performances")
         } else {
             NSLog("AD: Failed to load performances")
@@ -166,7 +167,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
 
     /// Add a new performance to the list and then save the list.
     func addNew(performance : ChirpPerformance) {
-        self.storedPerformances.append(performance)
+        self.storedPerformances.insert(performance, at: 0)//
         self.savePerformances()
         self.upload(performance: performance)
     }
@@ -218,13 +219,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
             self.storedPerformances.removeAll(keepingCapacity: true) // deletes all storedPerformances
             results?.forEach({ (record: CKRecord) in
                 let perf = self.performanceFrom(record: record)
-                self.storedPerformances.append(perf)
+                self.storedPerformances.insert(perf, at: 0)
             })
+            self.sortStoredPerformances()
             print("ADCK: ", self.storedPerformances.count, " world jams collected.")
             DispatchQueue.main.async {
                 self.delegate?.modelUpdated()
             }
         }
+    }
+    
+    /// Sorts the stored performances by date
+    func sortStoredPerformances() {
+        self.storedPerformances.sort(by: {(rec1: ChirpPerformance, rec2: ChirpPerformance) -> Bool in
+            rec1.date > rec2.date
+        })
     }
     
     /// Returns a ChirpPerformance from a CKRecord of a performance

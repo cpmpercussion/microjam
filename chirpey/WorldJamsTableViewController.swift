@@ -59,7 +59,6 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return appDelegate.storedPerformances.count
     }
 
@@ -93,32 +92,8 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
     }
     */
 
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
 
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
-    /// MARK: - Navigation
     
     /// Segue to view loaded jams.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -147,7 +122,7 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
             } else {
                 // Add a new performance
                 print("WJTVC: Unwound with a new performance to save:", performance.title())
-                let newIndexPath = NSIndexPath(row: appDelegate.storedPerformances.count, section: 0)
+                let newIndexPath = NSIndexPath(row: 0, section: 0)
                 appDelegate.addNew(performance: performance)
                 self.tableView.insertRows(at: [newIndexPath as IndexPath], with: .top)
             }
