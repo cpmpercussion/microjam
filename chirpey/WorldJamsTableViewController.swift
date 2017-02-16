@@ -135,5 +135,24 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
         }
     }
     
+    /// Segue back to the World Jam Table
+    @IBAction func unwindToJamList(sender: UIStoryboardSegue) {
+        if let sourceViewController = sender.source as? ChirpJamViewController, let performance = sourceViewController.loadedPerformance {
+            print("Unwound to the World Jam List, found a performance:")
+            print(performance.description)
+            
+//            if let selectedIndexPath = tableView.indexPathForSelectedRow {
+//                // Update existing performance
+//                appDelegate.recordedPerformances[selectedIndexPath.row] = performance
+//                tableView.reloadRows(at: [selectedIndexPath], with: .none)
+//            } else {
+//                // Add a new performance
+//                let newIndexPath = NSIndexPath(row: appDelegate.recordedPerformances.count, section: 0)
+//                appDelegate.addNew(performance: performance)
+//                self.tableView.insertRows(at: [newIndexPath as IndexPath], with: .bottom)
+//            }
+        }
+    }
+    
     
 }
