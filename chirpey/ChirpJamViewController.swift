@@ -95,8 +95,8 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             // Unwinding from settings screen.
             print("JAMVC: unwinding from a settings screen.")
             print("JAMVC: state",self.state)
-            if (self.state == ChirpJamModes.new) {
-                print("JAMVC: unwinding to new state so updating the Pd file.")
+            if (self.state == ChirpJamModes.new) { // if it's still a new jam, update the sound scheme
+                print("JAMVC: updating the Pd file.")
                 self.updateUI()
                 (UIApplication.shared.delegate as! AppDelegate).openPdFile()
             }
