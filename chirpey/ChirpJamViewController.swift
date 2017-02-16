@@ -19,6 +19,12 @@ struct ChirpJamModes {
     static let playing = 5
 }
 
+struct JamViewSegueIdentifiers {
+    static let replyToSegue = "ReplyToPerformance"
+    static let addNewSegue = "AddPerformance"
+    static let showDetailSegue = "ShowDetail"
+}
+
 class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerDelegate {
     let RECORDING_TIME = 5.0
     var state = ChirpJamModes.new
@@ -27,6 +33,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     var progress = 0.0
     var progressTimer : Timer?
     var loadedPerformance : ChirpPerformance?
+    var replyto : String = ""
     /// An array of timers for each note in the scheduled playback.
     var playbackTimers : [Timer]?
 
@@ -45,7 +52,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         print("JAMVC: Preparing for Segue")
         print("State: ", state)
         // FIXME: save the performance if the timer hasn't run out.
-        // stopRecording()
+        self.jamming = false // stop jamming.
         if state == ChirpJamModes.recording {stopRecording() }
         if state == ChirpJamModes.playing { stopPlayback() } // stop any possible playback.
         if let barButton = sender as? UIBarButtonItem {
@@ -56,6 +63,17 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
                 self.loadedPerformance = nil
             }
         }
+        
+        // FIXME: make sure this works.
+//        if segue.identifier == JamViewSegueIdentifiers.replyToSegue {
+//            // load up a new JamViewController as a reply!
+//            print("Local Jam Table View: Setting up a new performance")
+//            let newJamController = segue.destination as! ChirpJamViewController
+//            newJamController.state = ChirpJamModes.new
+//            newJamController.newPerformance = true
+//            
+//        }
+
     }
     
     @IBAction func cancelPerformance(_ sender: UIBarButtonItem) {
@@ -182,7 +200,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
                 self.chirpeySquare.image = loadedPerformance.image
                 self.playButton.isEnabled = true
                 self.jamButton.isEnabled = true
-                self.replyButton.isEnabled = true
+                self.replyButton.isEnabled = false /// FIXME: enable this for development.
             }
         case ChirpJamModes.loaded:
             if let loadedPerformance = loadedPerformance {
@@ -200,7 +218,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
                 self.chirpeySquare.image = loadedPerformance.image
                 self.playButton.isEnabled = true
                 self.jamButton.isEnabled = true
-                self.replyButton.isEnabled = true
+                self.replyButton.isEnabled = false /// FIXME: enable this for development.
                 print("JAMVC: opening Pd file for loaded performance.")
                 (UIApplication.shared.delegate as! AppDelegate).openPdFile(withName: loadedPerformance.instrument)
             }
@@ -269,6 +287,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     func stopRecording() {
         print("JAMVC: Stopping Recording and loading the recorded performance.")
         if let lastPerformance = self.chirpeySquare!.closeRecording() {
+            lastPerformance.replyto = self.replyto
             self.load(performance: lastPerformance)
             self.state = ChirpJamModes.loaded
         }
@@ -324,4 +343,5 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             }
         }
     }
+
 }

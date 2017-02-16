@@ -98,7 +98,7 @@ class RecordingTableTableViewController: UITableViewController {
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShowDetail" {
+        if segue.identifier == JamViewSegueIdentifiers.showDetailSegue {
             // load up current data into a JamViewController
             let jamDetailViewController = segue.destination as! ChirpJamViewController
             if let selectedJamCell = sender as? PerformanceTableCell {
@@ -108,12 +108,13 @@ class RecordingTableTableViewController: UITableViewController {
                 jamDetailViewController.state = ChirpJamModes.loaded
                 jamDetailViewController.newPerformance = false
             }
-        } else if segue.identifier == "AddItem" {
+        } else if segue.identifier == JamViewSegueIdentifiers.addNewSegue {
             // load up a new JamViewController
-            print("Local Jam Table View: Setting up a new performance")
-            let newJamController = segue.destination as! ChirpJamViewController
-            newJamController.state = ChirpJamModes.new
-            newJamController.newPerformance = true
+            /// FIXME: get this working.
+//            print("Local Jam Table View: Setting up a new performance")
+//            let newJamController = segue.destination as! ChirpJamViewController
+//            newJamController.state = ChirpJamModes.new
+//            newJamController.newPerformance = true
         }
     }
 }

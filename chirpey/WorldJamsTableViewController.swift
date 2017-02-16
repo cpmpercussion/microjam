@@ -122,7 +122,7 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
     
     /// Segue to view loaded jams.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShowDetail" {
+        if segue.identifier == JamViewSegueIdentifiers.showDetailSegue {
             // load up current data into a JamViewController
             let jamDetailViewController = segue.destination as! ChirpJamViewController
             if let selectedJamCell = sender as? PerformanceTableCell {

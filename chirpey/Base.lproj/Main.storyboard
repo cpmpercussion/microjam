@@ -58,6 +58,7 @@
                                 <state key="normal" title="reply"/>
                                 <connections>
                                     <action selector="replyButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UCv-rQ-qeE"/>
+                                    <segue destination="G2U-fW-eFC" kind="presentation" identifier="ReplyToPerformance" id="Oh6-81-6dN"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PBg-aK-YtU">
@@ -154,7 +155,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <exit id="ysn-Br-JNc" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4024.21875" y="-441.796875"/>
+            <point key="canvasLocation" x="3991" y="-580"/>
         </scene>
         <!--settings-->
         <scene sceneID="JKC-ke-Tam">
@@ -424,6 +425,7 @@
         <image name="settingsTabIcon" width="37" height="37"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="A2V-33-R8N"/>
+        <segue reference="Oh6-81-6dN"/>
+        <segue reference="gEs-g0-Xrm"/>
     </inferredMetricsTieBreakers>
 </document>
