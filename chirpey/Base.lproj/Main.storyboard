@@ -58,7 +58,6 @@
                                 <state key="normal" title="reply"/>
                                 <connections>
                                     <action selector="replyButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UCv-rQ-qeE"/>
-                                    <segue destination="G2U-fW-eFC" kind="presentation" identifier="ReplyToPerformance" id="Oh6-81-6dN"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PBg-aK-YtU">
@@ -136,7 +135,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="wbR-IC-fN1">
                             <connections>
-                                <segue destination="ysn-Br-JNc" kind="unwind" unwindAction="unwindToPerformanceListWithSender:" id="SKG-qS-wPT"/>
+                                <segue destination="ysn-Br-JNc" kind="unwind" unwindAction="unwindToJamListWithSender:" id="IDB-mW-w6F"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -155,7 +154,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <exit id="ysn-Br-JNc" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3991" y="-580"/>
+            <point key="canvasLocation" x="3216" y="-408"/>
         </scene>
         <!--settings-->
         <scene sceneID="JKC-ke-Tam">
@@ -167,10 +166,10 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="settingstablecell" id="Cvd-cG-I3p">
-                                <rect key="frame" x="0.0" y="55" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="55.5" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Cvd-cG-I3p" id="nxe-Y1-Sgh">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -203,7 +202,7 @@
                                 <rect key="frame" x="0.0" y="28" width="414" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gcn-gn-WZ5" id="sXd-HP-H6B">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="90"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="89.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="defaultRecordingImage" translatesAutoresizingMaskIntoConstraints="NO" id="C1Y-wG-D7P">
@@ -247,7 +246,13 @@
                             <outlet property="delegate" destination="EVE-Cq-utu" id="8S8-yK-1vC"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Microjams!" id="CQY-5h-CEH"/>
+                    <navigationItem key="navigationItem" title="Microjams!" id="CQY-5h-CEH">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="yea-KT-fdv">
+                            <connections>
+                                <segue destination="BYZ-38-t0r" kind="show" identifier="AddPerformance" id="Hyh-JE-FSE"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GGA-FO-Uq4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -266,7 +271,7 @@
                                 <rect key="frame" x="0.0" y="28" width="414" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RhZ-Nz-BT5" id="8cT-9a-d75">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="90"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="89.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="defaultRecordingImage" translatesAutoresizingMaskIntoConstraints="NO" id="hR6-wH-oPi">
@@ -301,7 +306,6 @@
                                     <outlet property="performer" destination="NEf-FN-uYe" id="BIH-ye-gME"/>
                                     <outlet property="previewImage" destination="hR6-wH-oPi" id="NWj-sB-BEx"/>
                                     <outlet property="title" destination="RBO-IN-hZb" id="FSh-py-I9y"/>
-                                    <segue destination="BYZ-38-t0r" kind="show" identifier="ShowDetail" id="CvC-hy-feA"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -311,22 +315,18 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Recordings" id="Ez3-gx-KKy">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="gZm-ah-VUh">
-                            <connections>
-                                <segue destination="G2U-fW-eFC" kind="presentation" identifier="AddPerformance" id="KcC-xM-5KR"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="gZm-ah-VUh"/>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mhU-kn-nFF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2269.5999999999999" y="-12.143928035982009"/>
+            <point key="canvasLocation" x="5481" y="342"/>
         </scene>
-        <!--jams-->
+        <!--jam!-->
         <scene sceneID="pxq-yu-huV">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vIe-H4-AUR" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="jams" image="localjamsTabIcon" id="e2p-ff-do7"/>
+                    <tabBarItem key="tabBarItem" title="jam!" image="localjamsTabIcon" id="e2p-ff-do7"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="uJB-kD-SaZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -334,7 +334,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="aUQ-4V-oKd" kind="relationship" relationship="rootViewController" id="ZBh-qe-Y7I"/>
+                        <segue destination="G2U-fW-eFC" kind="relationship" relationship="rootViewController" id="sCM-1q-jvR"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GaW-rb-oVK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -346,6 +346,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="G2U-fW-eFC" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="2p2-57-7dp"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="XHz-FY-wL5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -357,7 +358,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eyl-Pi-XeA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3210" y="182"/>
+            <point key="canvasLocation" x="2267" y="-12"/>
         </scene>
         <!--Microjam Tab Bar Controller-->
         <scene sceneID="lii-EM-GUf">
@@ -377,7 +378,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v3b-Zm-w9T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="250" y="416"/>
+            <point key="canvasLocation" x="-29" y="395"/>
         </scene>
         <!--world-->
         <scene sceneID="kzA-nM-xvC">
@@ -425,7 +426,6 @@
         <image name="settingsTabIcon" width="37" height="37"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Oh6-81-6dN"/>
         <segue reference="gEs-g0-Xrm"/>
     </inferredMetricsTieBreakers>
 </document>
