@@ -25,6 +25,12 @@ struct JamViewSegueIdentifiers {
     static let showDetailSegue = "ShowDetail"
 }
 
+struct TabBarItemTitles {
+    static let worldTab = "World"
+    static let jamTab = "Jam"
+    static let settingsTab = "Settings"
+}
+
 class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerDelegate {
     let RECORDING_TIME = 5.0
     var state = ChirpJamModes.new
@@ -79,13 +85,20 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     @IBAction func cancelPerformance(_ sender: UIBarButtonItem) {
         print("JAMVC: Cancel Button Pressed.")
         let isPresentingInAddPerformanceMode = presentingViewController is UINavigationController
+        stopTimer() // Stopping all Timers
         //stopRecording()
-        // FIXME: need to stop recording/playback based on the current control state
         stopPlayback() // stop any possible playback timers
         self.loadedPerformance = nil
+        if (tabBarItem?.title == TabBarItemTitles.jamTab) {
+            print("This is the jam tab so do Jam Actions")
+            self.new() // Just load with a new performance.
+        }
+        // FIXME: need to stop recording/playback based on the current control state
         if isPresentingInAddPerformanceMode {
+            print("JAMVC: Dismissing")
             dismiss(animated: true, completion: nil)
         } else {
+            print("JAMVC: Popping")
             navigationController!.popViewController(animated: true)
         }
     }
@@ -158,6 +171,32 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         super.viewDidLoad()
         print("JAMVC: view loaded")
         self.recordingProgress!.progress = 0.0
+        self.updateUI()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print("JAMVC: appeared.")
+        // what tab is this view under? can I figure that out?
+        if (tabBarItem.title == TabBarItemTitles.jamTab) { // onlyrun this stuff in the jam tab
+            (UIApplication.shared.delegate as! AppDelegate).openPdFile() // Make sure the correct Pd File is open
+        }
+        self.updateUI()
+    }
+    
+    /// Resets to a new performance state.
+    func new() {
+        if playbackTimers != nil {
+            self.chirpeySquare.performance?.cancelPlayback(timers: playbackTimers!)
+        }
+        self.chirpeySquare.startNewPerformance() // throwing away the current performance (if any)
+        self.recordingProgress!.progress = 0.0
+        self.jamming = false
+        self.progress = 0.0
+        self.state = ChirpJamModes.new
+        self.loadedPerformance = nil
+        self.newPerformance = true
+        (UIApplication.shared.delegate as! AppDelegate).openPdFile() // open pd file.
         self.updateUI()
     }
     
@@ -259,7 +298,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     /// Automatically triggered when recording time finishes.
     func stopTimer() {
         /// FIXME: Incorporate this method with stopPlayback?
-        NSLog("JAMVC: Timer finished.")
+        NSLog("JAMVC: Stop Timer Called (either finished or cancelled).")
         if (self.chirpeySquare!.recording) {
             self.stopRecording()
             self.chirpeySquare!.recording = false
@@ -320,6 +359,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         // start timer if not recording
         let p = touches.first?.location(in: self.chirpeySquare);
         if (self.chirpeySquare!.bounds.contains(p!) && self.state == ChirpJamModes.new) {
+                print("JAMVC: Starting a Recording")
                 self.startRecording()
         }
     }

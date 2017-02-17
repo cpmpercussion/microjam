@@ -45,6 +45,7 @@ class ChirpView: UIImageView {
     
     /// Resets the ChirpView for a new performance and returns the last performance.
     func reset() -> ChirpPerformance {
+        print("ChirpView: Reset Called")
         self.performance?.image = self.image!
         // FIXME: overwrites the date each time a chirpview is reset.
         self.performance?.date = Date()
@@ -55,6 +56,7 @@ class ChirpView: UIImageView {
     
     // Initialise the ChirpView for a new performance
     func startNewPerformance() {
+        print("ChirpView: New Performance")
         self.recording = false
         self.playing = false
         self.started = false

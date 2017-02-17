@@ -125,6 +125,7 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
                 let newIndexPath = NSIndexPath(row: 0, section: 0)
                 appDelegate.addNew(performance: performance)
                 self.tableView.insertRows(at: [newIndexPath as IndexPath], with: .top)
+                sourceViewController.new() // resets the performance after saving it.
             }
         }
     }
