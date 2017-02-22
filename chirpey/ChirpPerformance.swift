@@ -172,11 +172,11 @@ class ChirpPerformance : NSObject, NSCoding {
 /**
  Contains the data from a single touch in the interaction square.
  
- - Time: time since the start of the recording in seconds.
+ - time: time since the start of the recording in seconds.
  - x: location in square in [0,1]
  - y: location in square in [0,1]
  - z: pressure/size of touch in [0,1] (so far unused)
- - moving: whether the touch was moving when recorded
+ - moving: whether the touch was moving when recorded (Bool represented as 0 or 1).
  
  Includes functions to output a single CSV line representing the touch.
  */
@@ -223,11 +223,6 @@ class TouchRecord: NSObject, NSCoding {
         let moving = (mov == 1)
         self.init(time: time, x: x, y: y, z: z, moving: moving)
     }
-    
-//    /// Readable string version of the touchRecord
-//    func description() -> String {
-//        return String.init(format: "%f %f %f %f %@", time,x,y,z,moving.description)
-//    }
     
     /// CSV version of the touchRecord for output to file
     func csv() -> String {

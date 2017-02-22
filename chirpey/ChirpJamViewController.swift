@@ -26,9 +26,9 @@ struct JamViewSegueIdentifiers {
 }
 
 struct TabBarItemTitles {
-    static let worldTab = "World"
-    static let jamTab = "Jam"
-    static let settingsTab = "Settings"
+    static let worldTab = "world"
+    static let jamTab = "jam!"
+    static let settingsTab = "settings"
 }
 
 class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerDelegate {
@@ -42,6 +42,9 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     var replyto : String = ""
     /// An array of timers for each note in the scheduled playback.
     var playbackTimers : [Timer]?
+    /// App delegate - in case we need to upload a performance.
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+
 
     @IBOutlet weak var replyButton: UIButton!
     @IBOutlet weak var playButton: UIButton!
@@ -71,29 +74,43 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         }
         
         // FIXME: make sure this works.
-//        if segue.identifier == JamViewSegueIdentifiers.replyToSegue {
-//            // load up a new JamViewController as a reply!
+        if segue.identifier == JamViewSegueIdentifiers.replyToSegue {
+            print("JAMVC: Preparing for a replyto segue.")
 //            print("Local Jam Table View: Setting up a new performance")
 //            let newJamController = segue.destination as! ChirpJamViewController
 //            newJamController.state = ChirpJamModes.new
 //            newJamController.newPerformance = true
 //            
-//        }
+        }
 
     }
     
     @IBAction func cancelPerformance(_ sender: UIBarButtonItem) {
         print("JAMVC: Cancel Button Pressed.")
         let isPresentingInAddPerformanceMode = presentingViewController is UINavigationController
+        let presentedVC = UIApplication.shared.delegate?.window??.rootViewController as! UITabBarController // get the root VC (tabbarcontroller)
+        //let presentedVC = UIApplication.shared.keyWindow?.rootViewController as! UITabBarController // get the root VC (tabbarcontroller)
+        //print("CURRENT TAB: ", presentedVC.tabBar.selectedItem?.title ?? "none")
+        
+        // Stop current actions
         stopTimer() // Stopping all Timers
         //stopRecording()
         stopPlayback() // stop any possible playback timers
+        let possiblePerf : ChirpPerformance? = self.loadedPerformance
         self.loadedPerformance = nil
-        if (tabBarItem?.title == TabBarItemTitles.jamTab) {
-            print("This is the jam tab so do Jam Actions")
+        
+        // If it's in a Jam tab, need to reset viewcontroller.
+        if (presentedVC.tabBar.selectedItem?.title == TabBarItemTitles.jamTab) { // check if we're in the Jam! tab.
+            print("JAMVC: Cancel pressed from jam tab so do Jam Actions")
+            /// FIXME: Remove this after initial testing: uploads cancelled performances as well.
+            if let perf = possiblePerf { // only runs if there is a loadedPerformance.
+                print("JAMVC: There is a performance loaded... saving before cancelling.")
+                appDelegate.upload(performance: perf)
+            }
             self.new() // Just load with a new performance.
         }
-        // FIXME: need to stop recording/playback based on the current control state
+        
+        // Finally Dismissing the performance.
         if isPresentingInAddPerformanceMode {
             print("JAMVC: Dismissing")
             dismiss(animated: true, completion: nil)
@@ -239,7 +256,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
                 self.chirpeySquare.image = loadedPerformance.image
                 self.playButton.isEnabled = true
                 self.jamButton.isEnabled = true
-                self.replyButton.isEnabled = false /// FIXME: enable this for development.
+                self.replyButton.isEnabled = true // reply button enabled in loaded jams.
             }
         case ChirpJamModes.loaded:
             if let loadedPerformance = loadedPerformance {
@@ -257,7 +274,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
                 self.chirpeySquare.image = loadedPerformance.image
                 self.playButton.isEnabled = true
                 self.jamButton.isEnabled = true
-                self.replyButton.isEnabled = false /// FIXME: enable this for development.
+                self.replyButton.isEnabled = true // reply button enabled in loaded jams.
                 print("JAMVC: opening Pd file for loaded performance.")
                 (UIApplication.shared.delegate as! AppDelegate).openPdFile(withName: loadedPerformance.instrument)
             }
