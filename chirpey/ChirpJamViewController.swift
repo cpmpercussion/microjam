@@ -74,15 +74,17 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         }
         
         // FIXME: make sure this works.
+        // Handling Starting a Reply
         if segue.identifier == JamViewSegueIdentifiers.replyToSegue {
             print("JAMVC: Preparing for a replyto segue.")
-//            print("Local Jam Table View: Setting up a new performance")
-//            let newJamController = segue.destination as! ChirpJamViewController
-//            newJamController.state = ChirpJamModes.new
-//            newJamController.newPerformance = true
-//            
+            if segue.destination is ChirpJamViewController {
+                let newJamViewController = segue.destination as! ChirpJamViewController
+                if let newreplyto = self.loadedPerformance?.title() {
+                    print("JAMVC: destination jam will be a reply to: ", newreplyto)
+                    newJamViewController.replyto = newreplyto
+                }
+            }
         }
-
     }
     
     @IBAction func cancelPerformance(_ sender: UIBarButtonItem) {
