@@ -117,18 +117,25 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
             if let selectedIndexPath = tableView.indexPathForSelectedRow { // passes if a row had been selected.
                 // Update existing performance
                 print("WJTVC: Unwound to a selected row:",selectedIndexPath.description)
-                //appDelegate.recordedPerformances[selectedIndexPath.row] = performance
-                //tableView.reloadRows(at: [selectedIndexPath], with: .none)
+                
+                if (appDelegate.storedPerformances[selectedIndexPath.row].title() != performance.title()) { // check if it's actually a reply.
+                    print("WJTVC: Found a reply performance:", performance.title())
+                    self.addNew(performance: performance) // add it.
+                }
             } else {
                 // Add a new performance
-                print("WJTVC: Unwound with a new performance to save:", performance.title())
-                let newIndexPath = NSIndexPath(row: 0, section: 0)
-                appDelegate.addNew(performance: performance)
-                self.tableView.insertRows(at: [newIndexPath as IndexPath], with: .top)
+                print("WJTVC: Unwound with a new performance:", performance.title())
+                self.addNew(performance: performance)
                 sourceViewController.new() // resets the performance after saving it.
             }
         }
     }
     
+    /// Adds a new ChirpPerformance to the top of the list and saves it in the data source.
+    func addNew(performance: ChirpPerformance) {
+        let newIndexPath = NSIndexPath(row: 0, section: 0)
+        appDelegate.addNew(performance: performance)
+        self.tableView.insertRows(at: [newIndexPath as IndexPath], with: .top)
+    }
     
 }

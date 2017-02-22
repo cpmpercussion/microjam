@@ -39,6 +39,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     var progress = 0.0
     var progressTimer : Timer?
     var loadedPerformance : ChirpPerformance?
+    var replyToPerformance : ChirpPerformance?
     var replyto : String = ""
     /// An array of timers for each note in the scheduled playback.
     var playbackTimers : [Timer]?
@@ -79,9 +80,10 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             print("JAMVC: Preparing for a replyto segue.")
             if segue.destination is ChirpJamViewController {
                 let newJamViewController = segue.destination as! ChirpJamViewController
-                if let newreplyto = self.loadedPerformance?.title() {
-                    print("JAMVC: destination jam will be a reply to: ", newreplyto)
-                    newJamViewController.replyto = newreplyto
+                if let newreplytoperf = self.loadedPerformance {
+                    print("JAMVC: destination jam will be a reply to: ", newreplytoperf.title())
+                    newJamViewController.replyto = newreplytoperf.title()
+                    newJamViewController.replyToPerformance = newreplytoperf
                 }
             }
         }
