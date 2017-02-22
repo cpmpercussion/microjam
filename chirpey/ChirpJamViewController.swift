@@ -91,7 +91,6 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         print("JAMVC: Cancel Button Pressed.")
         let isPresentingInAddPerformanceMode = presentingViewController is UINavigationController
         let presentedVC = UIApplication.shared.delegate?.window??.rootViewController as! UITabBarController // get the root VC (tabbarcontroller)
-        //let presentedVC = UIApplication.shared.keyWindow?.rootViewController as! UITabBarController // get the root VC (tabbarcontroller)
         //print("CURRENT TAB: ", presentedVC.tabBar.selectedItem?.title ?? "none")
         
         // Stop current actions
@@ -233,7 +232,11 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         switch self.state {
         case ChirpJamModes.new:
             self.navigationItem.title = "New Performance"
-            self.statusLabel.text = "new"
+            if (self.replyto == "") {
+                self.statusLabel.text = "new" // new performance only.
+            } else {
+                self.statusLabel.text = "reply to: " + self.replyto // setting reply to text
+            }
             self.performerLabel.text = UserDefaults.standard.string(forKey: SettingsKeys.performerKey)
             self.playButton.isEnabled = false
             self.jamButton.isEnabled = false

@@ -61,11 +61,11 @@
                                     <segue destination="BYZ-38-t0r" kind="show" identifier="ReplyToPerformance" id="cVb-4d-aB6"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PBg-aK-YtU">
-                                <rect key="frame" x="57" y="551" width="300" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="status" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PBg-aK-YtU">
+                                <rect key="frame" x="57" y="551" width="300" height="63"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="DY5-1d-Mhi"/>
-                                    <constraint firstAttribute="height" constant="21" id="Fqt-WN-ZCH"/>
+                                    <constraint firstAttribute="height" constant="63" id="Fqt-WN-ZCH"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
