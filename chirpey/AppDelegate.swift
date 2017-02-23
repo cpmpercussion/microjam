@@ -36,6 +36,9 @@ struct SoundSchemes {
     ]
 }
 
+/// Maximum number of jams to download at a time from CloudKit
+let max_jams_to_fetch = 25
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
@@ -202,13 +205,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
         return URL.init(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(filename)
     }
     
+    
     /// Refresh list of world jams from CloudKit and then update in world jam table view.
     func fetchWorldJamsFromCloud() {
         print("ADCK: Attempting to fetch World Jams from Cloud.")
+        var fetchedPerformances = [ChirpPerformance]()
         let predicate = NSPredicate(value: true)
+        let sort = NSSortDescriptor(key: PerfCloudKeys.date, ascending: false)
         /// FIXME: predicate should only download latest 100 jams from the last month or something.
         let query = CKQuery(recordType: PerfCloudKeys.type, predicate: predicate)
-        publicDB.perform(query, inZoneWith: nil) {[unowned self] results, error in
+        query.sortDescriptors = [sort]
+        let operation = CKQueryOperation(query: query)
+        operation.resultsLimit = max_jams_to_fetch
+        operation.recordFetchedBlock = { record in
+            let perf = self.performanceFrom(record: record)
+            fetchedPerformances.append(perf)
+        } // Appends fetched records to the array of Performances
+        
+        operation.queryCompletionBlock = { [unowned self] (cursor, error) in
+            // Handle possible error.
             if let error = error {
                 DispatchQueue.main.async {
                     self.delegate?.errorUpdating(error: error as NSError)
@@ -216,17 +231,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
                 }
                 return
             }
-            self.storedPerformances.removeAll(keepingCapacity: true) // deletes all storedPerformances
-            results?.forEach({ (record: CKRecord) in
-                let perf = self.performanceFrom(record: record)
-                self.storedPerformances.insert(perf, at: 0)
-            })
-            self.sortStoredPerformances()
+            self.storedPerformances = fetchedPerformances // update the stored performances
             print("ADCK: ", self.storedPerformances.count, " world jams collected.")
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { // give the delegate the trigger to update the table.
                 self.delegate?.modelUpdated()
             }
         }
+        
+        publicDB.add(operation) // perform the operation.
+        
+        // TODO: Define a more sensible way of downloading the performances
+        // Downloaded performances should augment existing data, not overwrite it.
     }
     
     /// Sorts the stored performances by date
