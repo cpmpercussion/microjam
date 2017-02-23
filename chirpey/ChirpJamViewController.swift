@@ -123,6 +123,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         }
     }
     
+    /// TODO: I don't think this function is ever actually called.
     @IBAction func unwindToJamView(sender: UIStoryboardSegue) {
         if sender.source is SettingsTableViewController {
             // Unwinding from settings screen.
@@ -189,14 +190,14 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("JAMVC: view loaded")
-        self.recordingProgress!.progress = 0.0
-        self.updateUI()
+        print("JAMVC: viewDidLoad")
+        self.recordingProgress!.progress = 0.0 // need to initialise the recording progress at zero.
+        //self.updateUI() // just update UI on view did appear.
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        print("JAMVC: appeared.")
+        print("JAMVC: viewDidAppear.")
         // what tab is this view under? can I figure that out?
         if (tabBarItem.title == TabBarItemTitles.jamTab) { // onlyrun this stuff in the jam tab
             (UIApplication.shared.delegate as! AppDelegate).openPdFile() // Make sure the correct Pd File is open
@@ -220,11 +221,10 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         self.updateUI()
     }
     
-    /// Load a ChirpPerformance for playback and reaction
+    /// Load a ChirpPerformance for playback and reaction (most processing is done in updateUI).
     func load(performance: ChirpPerformance) {
         self.loadedPerformance = performance
         self.state = ChirpJamModes.loaded
-        (UIApplication.shared.delegate as! AppDelegate).openPdFile(withName: performance.instrument)
         self.updateUI()
     }
     
@@ -244,8 +244,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             self.jamButton.isEnabled = false
             self.replyButton.isEnabled = false
             self.instrumentLabel.text = SoundSchemes.namesForKeys[UserDefaults.standard.integer(forKey: SettingsKeys.soundSchemeKey)]
-            print("JAMVC: opening Pd file for new performance.")
-            (UIApplication.shared.delegate as! AppDelegate).openPdFile(withName: self.instrumentLabel.text!)
+            (UIApplication.shared.delegate as! AppDelegate).openPdFile()
         case ChirpJamModes.recording:
             self.navigationItem.title = "recording..."
             self.statusLabel.text = "recording..."
@@ -283,7 +282,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
                 self.jamButton.isEnabled = true
                 self.replyButton.isEnabled = true // reply button enabled in loaded jams.
                 print("JAMVC: opening Pd file for loaded performance.")
-                (UIApplication.shared.delegate as! AppDelegate).openPdFile(withName: loadedPerformance.instrument)
+                (UIApplication.shared.delegate as! AppDelegate).openPdFile(withName: loadedPerformance.instrument) // open Pd File.
             }
         default:
             self.navigationItem.title = "performance"
@@ -348,13 +347,11 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     
     /// Stops the current recording.
     func stopRecording() {
-        print("JAMVC: Stopping Recording and loading the recorded performance.")
+        print("JAMVC: Stopping recording; now loading the recorded performance.")
         if let lastPerformance = self.chirpeySquare!.closeRecording() {
             lastPerformance.replyto = self.replyto
             self.load(performance: lastPerformance)
-            self.state = ChirpJamModes.loaded
         }
-        self.updateUI()
     }
     
     /// Stop playback and cancel timers.

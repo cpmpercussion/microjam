@@ -77,14 +77,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
         PdBase.setDelegate(self)
         PdBase.subscribe("toGUI")
         PdBase.subscribe("debug")
-        self.openPdFile()
+//        self.openPdFile()
         self.audioController?.isActive = true
         self.audioController?.print()
     }
     
     /// Opens a Pd patch according the UserDefaults, does nothing if the patch is already open.
     func openPdFile() {
-        print("AD: Attemping to open the Pd File")
+        print("AD: Attemping to open the Pd File from settings.")
         let fileToOpen = SoundSchemes.pdFilesForKeys[UserDefaults.standard.integer(forKey: SettingsKeys.soundSchemeKey)]! as String
         if openFileName != fileToOpen {
             self.openFile?.close()
@@ -109,12 +109,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
         // Open the file.
         if openFileName != fileToOpen {
             self.openFile?.close()
-            print("AD: Opening Pd File:", fileToOpen)
+//            print("AD: Opening Pd File:", fileToOpen)
             self.openFile = PdFile.openNamed(fileToOpen, path: Bundle.main.bundlePath) as? PdFile
             //self.openFile = (PdBase.openFile(fileToOpen, path: Bundle.main.bundlePath) as! PdFile)
             openFileName = fileToOpen
         } else {
-            print("AD:", name, "was already open!")
+//            print("AD:", name, "was already open!")
         }
     }
     
