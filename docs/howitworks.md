@@ -13,16 +13,16 @@ MicroJam is an ultra-simple social app for making music. There's three screens: 
 
 You can browse other jams that have been uploaded or hit the "Jam!" tab to start a new one.
 
-![Browse the world of jams, or start a new one.](/images/microjam-demo-jam-list.png)
+![Browse the world of jams, or start a new one.]({{ site.baseurl }}/images/microjam-demo-jam-list.png)
 
 ### Step 2: Perform something.
 
 Tap, swirl, or swipe in the blue square to make your own tiny performance! Afterwards, hit "play" to hear what you've created.
 
-![Tap, swirl, or swipe in the performance are to create your jam.](/images/microjam-demo-images-recording.png)
+![Tap, swirl, or swipe in the performance are to create your jam.]({{ site.baseurl }}/images/microjam-demo-images-recording.png)
 
 ### Step 3: Change sound
 
 Try changing the "sound scheme" in settings. Each sound-scheme in MicroJam is just a Pd patch - submissions are welcome!
 
-![Try changing sound in the settings tab](/images/microjam-demo-images-settings.png)
+![Try changing sound in the settings tab]({{ site.baseurl }}/images/microjam-demo-images-settings.png)
