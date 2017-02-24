@@ -1,5 +1,7 @@
 # MicroJam
 
+![MicroJam in action](/assets/images/microjam.gif)
+
 ![MicroJam allows users to record and share very short musical
 performances on a touch screen. This user is recording a reply over a
 previously saved
