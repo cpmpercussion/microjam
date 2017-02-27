@@ -69,10 +69,8 @@ class ChirpView: UIImageView {
         self.image = UIImage()
         self.performance = ChirpPerformance()
         self.recordingColour = self.performance?.colour.cgColor ?? defaultRecordingColour
-        
+        self.reloadPatch()
     }
-    
-
     
     //MARK: - touch interaction
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
