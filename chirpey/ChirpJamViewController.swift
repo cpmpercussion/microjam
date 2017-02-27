@@ -132,7 +132,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             if (self.state == ChirpJamModes.new) { // if it's still a new jam, update the sound scheme
                 print("JAMVC: updating the Pd file.")
                 self.updateUI()
-                (UIApplication.shared.delegate as! AppDelegate).openPdFile()
+                self.chirpeySquare.reloadPatch() // could be openPdFile()
             }
         }
     }
@@ -200,7 +200,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         print("JAMVC: viewDidAppear.")
         // what tab is this view under? can I figure that out?
         if (tabBarItem.title == TabBarItemTitles.jamTab) { // onlyrun this stuff in the jam tab
-            (UIApplication.shared.delegate as! AppDelegate).openPdFile() // Make sure the correct Pd File is open
+            self.chirpeySquare.openPdFile() // Make sure the correct Pd File is open
         }
         self.updateUI()
     }
@@ -210,14 +210,13 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         if playbackTimers != nil {
             self.chirpeySquare.performance?.cancelPlayback(timers: playbackTimers!)
         }
-        self.chirpeySquare.startNewPerformance() // throwing away the current performance (if any)
+        self.chirpeySquare.startNewPerformance() // throwing away the current performance (if any) // also loads patch
         self.recordingProgress!.progress = 0.0
         self.jamming = false
         self.progress = 0.0
         self.state = ChirpJamModes.new
         self.loadedPerformance = nil
         self.newPerformance = true
-        (UIApplication.shared.delegate as! AppDelegate).openPdFile() // open pd file.
         self.updateUI()
     }
     
@@ -244,7 +243,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             self.jamButton.isEnabled = false
             self.replyButton.isEnabled = false
             self.instrumentLabel.text = SoundSchemes.namesForKeys[UserDefaults.standard.integer(forKey: SettingsKeys.soundSchemeKey)]
-            (UIApplication.shared.delegate as! AppDelegate).openPdFile()
+            self.chirpeySquare.openPdFile()
         case ChirpJamModes.recording:
             self.navigationItem.title = "recording..."
             self.statusLabel.text = "recording..."
@@ -282,7 +281,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
                 self.jamButton.isEnabled = true
                 self.replyButton.isEnabled = true // reply button enabled in loaded jams.
                 print("JAMVC: opening Pd file for loaded performance.")
-                (UIApplication.shared.delegate as! AppDelegate).openPdFile(withName: loadedPerformance.instrument) // open Pd File.
+                self.chirpeySquare.openPdFile(withName: loadedPerformance.instrument) // open Pd File.
             }
         default:
             self.navigationItem.title = "performance"
