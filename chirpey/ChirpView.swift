@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+
 /// View class for short touch-interaction musical performances.
 class ChirpView: UIImageView {
     var lastPoint : CGPoint?
@@ -102,12 +104,12 @@ class ChirpView: UIImageView {
         let x = Double(point.x) / self.imageSize
         let y = Double(point.y) / self.imageSize
         let z = Double(radius)
+        let receiver : String = "\(self.openPatchDollarZero ?? Int32(0))" + PdConstants.receiverPostFix
         //let list = ["/x",x,"/y",y,"/z",z] as [Any]
         // FIXME: figure out how to get Pd to parse the list sequentially.
-        PdBase.sendList(["/x",x], toReceiver: "input")
-        PdBase.sendList(["/y",y], toReceiver: "input")
-        PdBase.sendList(["/z",z], toReceiver: "input")
-        // print("Sent to Pd: ", list)
+        PdBase.sendList(["/x",x], toReceiver: receiver)
+        PdBase.sendList(["/y",y], toReceiver: receiver)
+        PdBase.sendList(["/z",z], toReceiver: receiver)
     }
     
     /**
@@ -195,6 +197,7 @@ class ChirpView: UIImageView {
             print("ChirpView: Loading the settings specified patch (i.e., new performance)")
             self.openPdFile()
         }
+        print("ChirpView: DollarZero is: ", self.openPatchDollarZero ?? "not available!")
     }
     
     /// Opens a Pd patch according the UserDefaults, does nothing if the patch is already open.

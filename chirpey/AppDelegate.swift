@@ -36,6 +36,13 @@ struct SoundSchemes {
     ]
 }
 
+/// Contains constants related to communication with Pd.
+struct PdConstants {
+    static let toGUILabel = "toGUI"
+    static let debugLabel = "debug"
+    static let receiverPostFix = "-input"
+}
+
 /// Maximum number of jams to download at a time from CloudKit
 let max_jams_to_fetch = 25
 
@@ -70,8 +77,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
         self.audioController?.configurePlayback(withSampleRate: Int32(SAMPLE_RATE), numberChannels: Int32(SOUND_OUTPUT_CHANNELS), inputEnabled: false, mixingEnabled: true)
         self.audioController?.configureTicksPerBuffer(Int32(TICKS_PER_BUFFER))
         PdBase.setDelegate(self)
-        PdBase.subscribe("toGUI")
-        PdBase.subscribe("debug")
+        PdBase.subscribe(PdConstants.toGUILabel)
+        PdBase.subscribe(PdConstants.debugLabel)
         self.audioController?.isActive = true
         self.audioController?.print()
     }
