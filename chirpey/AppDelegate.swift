@@ -54,19 +54,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
     let SAMPLE_RATE = 44100
     let TICKS_PER_BUFFER = 4
     var audioController : PdAudioController?
-//    var openFile : PdFile?
-//    var openFileName = ""
 
-    // iCloud stuff
+    // MARK: - CloudKit definitions
     let container: CKContainer = CKContainer.default()
     let publicDB: CKDatabase = CKContainer.default().publicCloudDatabase
     let privateDB: CKDatabase = CKContainer.default().privateCloudDatabase
     var delegate : ModelDelegate?
     
-
-    
-
-    // MARK: - Pd Engine Functions
+    // MARK: - Pd Engine Initialisation
     
     /// Starts the Pd Audio Engine and preemptively opens a patch.
     func startAudioEngine() {
@@ -80,43 +75,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
         self.audioController?.isActive = true
         self.audioController?.print()
     }
-    
-//    /// Opens a Pd patch according the UserDefaults, does nothing if the patch is already open.
-//    func openPdFile() {
-//        print("AD: Attemping to open the Pd File from settings.")
-//        let fileToOpen = SoundSchemes.pdFilesForKeys[UserDefaults.standard.integer(forKey: SettingsKeys.soundSchemeKey)]! as String
-//        if openFileName != fileToOpen {
-//            self.openFile?.close()
-//            print("AD: Opening Pd File:", fileToOpen)
-//            self.openFile = PdFile.openNamed(fileToOpen, path: Bundle.main.bundlePath) as? PdFile
-//            openFileName = fileToOpen
-//        }
-//    }
-//    
-//    /** 
-//     Attempts to open a patch with a given name. Does nothing if the patch is already open. 
-//     If the patch name can't be found, the patch listed in UserDefaults is used instead.
-//     */
-//    func openPdFile(withName name: String) {
-//        print("AD: Attemping to open the Pd File with name:", name)
-//        var fileToOpen = SoundSchemes.pdFilesForKeys[UserDefaults.standard.integer(forKey: SettingsKeys.soundSchemeKey)]! as String
-//        // See if we can retrieve the scheme for this name.
-//        if let index = SoundSchemes.namesForKeys.values.index(of: name) {
-//            let key = SoundSchemes.namesForKeys.keys[index]
-//            fileToOpen = SoundSchemes.pdFilesForKeys[key]! as String
-//        }
-//        // Open the file.
-//        if openFileName != fileToOpen {
-//            self.openFile?.close()
-////            print("AD: Opening Pd File:", fileToOpen)
-//            self.openFile = PdFile.openNamed(fileToOpen, path: Bundle.main.bundlePath) as? PdFile
-//            //self.openFile = (PdBase.openFile(fileToOpen, path: Bundle.main.bundlePath) as! PdFile)
-//            openFileName = fileToOpen
-//        } else {
-////            print("AD:", name, "was already open!")
-//        }
-//    }
-    
     
     /// Receives print messages from Pd for debugging
     func receivePrint(_ message: String!) {
