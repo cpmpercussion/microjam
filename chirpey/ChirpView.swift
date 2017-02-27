@@ -23,6 +23,10 @@ class ChirpView: UIImageView {
     var playbackColour : CGColor?
     let CG_INIT_POINT = CGPoint(x:0,y:0)
     let imageSize : Double = 300.0
+    // Pd File Vars
+    var openPatch : PdFile?
+    var openPatchDollarZero : Int32?
+    var openPatchName = ""
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -65,7 +69,10 @@ class ChirpView: UIImageView {
         self.image = UIImage()
         self.performance = ChirpPerformance()
         self.recordingColour = self.performance?.colour.cgColor ?? defaultRecordingColour
+        
     }
+    
+
     
     //MARK: - touch interaction
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -178,4 +185,46 @@ class ChirpView: UIImageView {
         return playbackTouch
     }
     
+    // MARK: - Pd Patch Managing Functions.
+    
+    /// Loads the Pd Patch for this ChirpView. If patch name is not set in the ChirpPerformance, the user settings are used.
+    func reloadPatch() {
+        // Opening the Pd File.
+        if let performancePatchName = self.performance?.instrument, performancePatchName != "" {
+            print("ChirpView: Loading a patch from performance: ", performancePatchName)
+            self.openPdFile(withName: performancePatchName)
+        } else {
+            print("ChirpView: Loading the settings specified patch (i.e., new performance)")
+            self.openPdFile()
+        }
+    }
+    
+    /// Opens a Pd patch according the UserDefaults, does nothing if the patch is already open.
+    func openPdFile() {
+        let fileToOpen = SoundSchemes.pdFilesForKeys[UserDefaults.standard.integer(forKey: SettingsKeys.soundSchemeKey)]! as String
+        if openPatchName != fileToOpen {
+            self.openPatch?.close()
+            print("ChirpView: Opening Pd File:", fileToOpen)
+            self.openPatch = PdFile.openNamed(fileToOpen, path: Bundle.main.bundlePath) as? PdFile
+            self.openPatchDollarZero = self.openPatch?.dollarZero
+            openPatchName = fileToOpen
+        }
+    }
+    
+    /**
+     Attempts to open a patch with a given name. Does nothing if the patch is already open.
+     */
+    func openPdFile(withName name: String) {
+        print("ChirpView: Attemping to open the Pd File with name:", name)
+        if let index = SoundSchemes.namesForKeys.values.index(of: name) {
+            let fileToOpen = SoundSchemes.pdFilesForKeys[SoundSchemes.namesForKeys.keys[index]]! as String
+            if openPatchName != fileToOpen {
+                print("ChirpView: Opening Pd File:", fileToOpen)
+                self.openPatch?.close()
+                self.openPatch = PdFile.openNamed(fileToOpen, path: Bundle.main.bundlePath) as? PdFile
+                self.openPatchName = fileToOpen
+                self.openPatchDollarZero = self.openPatch?.dollarZero
+            }
+        }
+    }
 }
