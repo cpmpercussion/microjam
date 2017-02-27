@@ -9,7 +9,7 @@
 #X declare -path instrument;
 #X declare -path scales;
 #X obj 72 643 dac~;
-#X obj 34 13 r input;
+#X obj 34 13 r \$0-input;
 #X obj 34 35 list trim;
 #X obj 33 80 route /x /y /z;
 #X obj 74 568 *~ 0.5;
