@@ -36,6 +36,18 @@ class ChirpView: UIImageView {
         self.startNewPerformance()
     }
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    /// Convenience Initialiser only used when loading performances for playback only. Touch is disabled!
+    convenience init(frame: CGRect, performance: ChirpPerformance){
+        self.init(frame: frame)
+        self.isMultipleTouchEnabled = false
+        self.isUserInteractionEnabled = false
+        self.loadPerformance(performance: performance)
+    }
+    
     /// Closes the recording and returns the performance.
     func closeRecording() -> ChirpPerformance? {
         self.recording = false
@@ -60,7 +72,7 @@ class ChirpView: UIImageView {
         return output!
     }
     
-    // Initialise the ChirpView for a new performance
+    /// Initialise the ChirpView for a new performance
     func startNewPerformance() {
         print("ChirpView: New Performance")
         self.recording = false
@@ -71,6 +83,21 @@ class ChirpView: UIImageView {
         self.image = UIImage()
         self.performance = ChirpPerformance()
         self.recordingColour = self.performance?.colour.cgColor ?? defaultRecordingColour
+        self.reloadPatch()
+    }
+    
+    /// Initialise the ChirpView with a loaded performance
+    func loadPerformance(performance: ChirpPerformance) {
+        print("ChirpView: Loading existing performance")
+        self.recording = false
+        self.playing = false
+        self.started = false
+        self.lastPoint = CG_INIT_POINT
+        self.swiped = false
+        self.image = performance.image
+        self.recordingColour = performance.colour.cgColor
+        self.playbackColour = performance.colour.cgColor
+        self.performance = performance
         self.reloadPatch()
     }
     

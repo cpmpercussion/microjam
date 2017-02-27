@@ -40,12 +40,13 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     var progressTimer : Timer?
     var loadedPerformance : ChirpPerformance?
     var replyToPerformance : ChirpPerformance?
-    var replyto : String = ""
+//    var performanceViews : [ChirpView] = [ChirpView]() // empty view array for now.
+    var replyToPerformanceView : ChirpView?
+    var replyto : String?
     /// An array of timers for each note in the scheduled playback.
     var playbackTimers : [Timer]?
     /// App delegate - in case we need to upload a performance.
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
-
 
     @IBOutlet weak var replyButton: UIButton!
     @IBOutlet weak var playButton: UIButton!
@@ -93,8 +94,6 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         print("JAMVC: Cancel Button Pressed.")
         let isPresentingInAddPerformanceMode = presentingViewController is UINavigationController
         let presentedVC = UIApplication.shared.delegate?.window??.rootViewController as! UITabBarController // get the root VC (tabbarcontroller)
-        //print("CURRENT TAB: ", presentedVC.tabBar.selectedItem?.title ?? "none")
-        
         // Stop current actions
         stopTimer() // Stopping all Timers
         //stopRecording()
@@ -148,7 +147,9 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
                 chirpeySquare?.playing = true
                 self.state = ChirpJamModes.playing
                 startProgressBar()
+                
                 self.playbackTimers = loadedPerformance.playback(inView: self.chirpeySquare)
+                self.playbackReplyToPerformance() // attempt to playback the reply to performance
             } else {
                 // Cancel Playback
                 print("JAMVC: Going to stop playing")
@@ -162,6 +163,21 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         }
     }
     
+    func playbackReplyToPerformance() {
+        // playback reply as well (if necessary).
+        if let replyPerf = self.replyToPerformance, let replyView = self.replyToPerformanceView {
+            print("JAMVC: Playing back the replyto")
+            var timers = [Timer]()
+            for timer in replyPerf.playback(inView: replyView) {
+                timers.append(timer)
+            }
+            
+            if let existingTimers = self.playbackTimers {
+                timers.append(contentsOf: existingTimers)
+            }
+            self.playbackTimers = timers
+        }
+    }
 
     @IBAction func replyButtonPressed(_ sender: Any) {
         /// TODO: Implement some kind of reply system.
@@ -193,6 +209,16 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         print("JAMVC: viewDidLoad")
         self.recordingProgress!.progress = 0.0 // need to initialise the recording progress at zero.
         //self.updateUI() // just update UI on view did appear.
+        
+        // If it's a reply, setup the other performance(s) as subviews.
+        if let originalPerformance = replyToPerformance {
+            let replyView : ChirpView = ChirpView(frame: self.chirpeySquare.frame, performance: originalPerformance)
+            replyView.backgroundColor = self.chirpeySquare.backgroundColor
+            self.chirpeySquare.backgroundColor = UIColor.clear
+            self.view.addSubview(replyView)
+            self.view.sendSubview(toBack: replyView)
+            self.replyToPerformanceView = replyView
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -233,10 +259,10 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         switch self.state {
         case ChirpJamModes.new:
             self.navigationItem.title = "New Performance"
-            if (self.replyto == "") {
-                self.statusLabel.text = "new" // new performance only.
+            if let replytext = self.replyto {
+                self.statusLabel.text = "reply to: " + replytext // setting reply to text
             } else {
-                self.statusLabel.text = "reply to: " + self.replyto // setting reply to text
+                self.statusLabel.text = "new" // new performance only.
             }
             self.performerLabel.text = UserDefaults.standard.string(forKey: SettingsKeys.performerKey)
             self.playButton.isEnabled = false
@@ -309,6 +335,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             self.chirpeySquare?.recording = true
             self.state = ChirpJamModes.recording
             self.updateUI()
+            self.playbackReplyToPerformance()
         }
     }
     
@@ -348,7 +375,9 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     func stopRecording() {
         print("JAMVC: Stopping recording; now loading the recorded performance.")
         if let lastPerformance = self.chirpeySquare!.closeRecording() {
-            lastPerformance.replyto = self.replyto
+            if let replytext = self.replyto {
+                lastPerformance.replyto = replytext
+            }
             self.load(performance: lastPerformance)
         }
     }
