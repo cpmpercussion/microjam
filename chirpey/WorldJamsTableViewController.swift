@@ -23,6 +23,7 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         self.tableView.rowHeight = 90
         self.appDelegate.delegate = self
+        self.refreshControl?.addTarget(appDelegate, action: #selector(appDelegate.fetchWorldJamsFromCloud), for: UIControlEvents.valueChanged)
     }
 
     override func didReceiveMemoryWarning() {
