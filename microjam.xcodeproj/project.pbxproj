@@ -56,6 +56,7 @@
 		569B92C41DFEA99C00AA257C /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569B92C31DFEA99C00AA257C /* SettingsTableViewController.swift */; };
 		56B329E51E44834E001345DC /* WorldJamsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B329E41E44834D001345DC /* WorldJamsTableViewController.swift */; };
 		56C88E801DFEFD8200406BF0 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56C88E7F1DFEFD8200406BF0 /* CloudKit.framework */; };
+		56D2C6EE1E65ADE100E3D14F /* UserNameChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D2C6ED1E65ADE100E3D14F /* UserNameChooserViewController.swift */; };
 		798119EB716DF4238044D3D4 /* Pods_microjam.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63C4E84624B83BA18A354CA2 /* Pods_microjam.framework */; };
 		A09F5669ECC4CFA6138A6CB1 /* Pods_microjamTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29CA87DDE5853DCDE258268C /* Pods_microjamTests.framework */; };
 /* End PBXBuildFile section */
@@ -139,6 +140,7 @@
 		56B329E41E44834D001345DC /* WorldJamsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldJamsTableViewController.swift; sourceTree = "<group>"; };
 		56C88E7E1DFEFD7200406BF0 /* microjam.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = microjam.entitlements; sourceTree = "<group>"; };
 		56C88E7F1DFEFD8200406BF0 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		56D2C6ED1E65ADE100E3D14F /* UserNameChooserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNameChooserViewController.swift; sourceTree = "<group>"; };
 		63C4E84624B83BA18A354CA2 /* Pods_microjam.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_microjam.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E59A152461FB44F2E21DD12 /* Pods-microjamUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-microjamUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-microjamUITests/Pods-microjamUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		F790C94F468F8D8ACE1123FE /* Pods_microjamUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_microjamUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -215,6 +217,7 @@
 				56621B0C1DE39D33009B9AB6 /* ChirpPerformance.swift */,
 				56621B121DE4A496009B9AB6 /* ChirpView.swift */,
 				56621B0E1DE47376009B9AB6 /* AppDelegate.swift */,
+				56D2C6ED1E65ADE100E3D14F /* UserNameChooserViewController.swift */,
 				56621B101DE47D5B009B9AB6 /* ChirpJamViewController.swift */,
 				56621B141DE73236009B9AB6 /* RecordingTableTableViewController.swift */,
 				56B329E41E44834D001345DC /* WorldJamsTableViewController.swift */,
@@ -667,6 +670,7 @@
 			files = (
 				56621B111DE47D5B009B9AB6 /* ChirpJamViewController.swift in Sources */,
 				56621B0F1DE47376009B9AB6 /* AppDelegate.swift in Sources */,
+				56D2C6EE1E65ADE100E3D14F /* UserNameChooserViewController.swift in Sources */,
 				56621B131DE4A496009B9AB6 /* ChirpView.swift in Sources */,
 				567286661E05E0AF0024A515 /* MicrojamTabBarController.swift in Sources */,
 				56B329E51E44834E001345DC /* WorldJamsTableViewController.swift in Sources */,

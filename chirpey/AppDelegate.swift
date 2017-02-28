@@ -120,6 +120,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
         //
     }
     
+    func applicationDidFinishLaunching(_ application: UIApplication) {
+        if (UserDefaults.standard.string(forKey: SettingsKeys.performerKey) == AppDelegate.defaultSettings[SettingsKeys.performerKey] as? String) {
+            // Still set to default name, prompt to change setting!
+            print("AD: Name still set to default, ask user to change")
+//            if let viewcontroller = window?.rootViewController {
+//                viewcontroller.performSegue(withIdentifier:"username", sender: viewcontroller)
+//            }
+            perform(#selector(presentUserNameChooserController), with: nil, afterDelay: 0)
+        }
+    }
+
+    func presentUserNameChooserController() {
+        if let usernamecontroller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "UserNameChooser") as? UserNameChooserViewController {
+            if let window = self.window, let rootViewController = window.rootViewController {
+                var currentController = rootViewController
+                
+                while let presentedController = currentController.presentedViewController {
+                    currentController = presentedController
+                }
+                currentController.present(usernamecontroller, animated: true, completion: nil)
+            }
+        }
+    }
+    
     func applicationWillTerminate(_ application: UIApplication) {
         //
         print("AD: Application will terminate")
@@ -206,6 +230,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
         
         // TODO: Define a more sensible way of downloading the performances
         // Downloaded performances should augment existing data, not overwrite it.
+    }
+    
+    /// Retrieves a ChirpPerformance from a given title string.
+    func fetchPerformanceFrom(title: String) -> ChirpPerformance? {
+        var perf: ChirpPerformance?
+        for chirpPerformance in self.storedPerformances {
+            if (chirpPerformance.title() == title) {
+                perf = chirpPerformance
+            }
+        }
+        return perf
     }
     
     /// Sorts the stored performances by date

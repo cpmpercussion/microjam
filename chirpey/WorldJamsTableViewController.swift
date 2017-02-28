@@ -106,6 +106,11 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
                 jamDetailViewController.loadedPerformance = selectedJam
                 jamDetailViewController.state = ChirpJamModes.loaded
                 jamDetailViewController.newPerformance = false
+                if (selectedJam.replyto != "") { // setup the replyto jam if necessary.
+                    print("WJTVC: Loading the replyto performance as well: ", selectedJam.replyto)
+                    jamDetailViewController.replyto = selectedJam.replyto
+                    jamDetailViewController.replyToPerformance = appDelegate.fetchPerformanceFrom(title: selectedJam.replyto)
+                }
             }
         }
     }
