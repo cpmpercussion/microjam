@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="z8b-cn-TNb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12113" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="z8b-cn-TNb">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12078"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -167,10 +168,10 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="settingstablecell" id="Cvd-cG-I3p">
-                                <rect key="frame" x="0.0" y="55" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="55.5" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Cvd-cG-I3p" id="nxe-Y1-Sgh">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -203,7 +204,7 @@
                                 <rect key="frame" x="0.0" y="28" width="414" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gcn-gn-WZ5" id="sXd-HP-H6B">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="90"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="89.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="defaultRecordingImage" translatesAutoresizingMaskIntoConstraints="NO" id="C1Y-wG-D7P">
@@ -317,6 +318,69 @@
             </objects>
             <point key="canvasLocation" x="1329" y="-760"/>
         </scene>
+        <!--userNameChoice-->
+        <scene sceneID="HQE-ec-RFd">
+            <objects>
+                <viewController storyboardIdentifier="UserNameChooser" id="dZm-9s-Gmj" userLabel="userNameChoice" customClass="UserNameChooserViewController" customModule="microjam" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="b5Y-MI-JbV"/>
+                        <viewControllerLayoutGuide type="bottom" id="Koz-2M-iPQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="OMx-Lr-dck">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please choose a username..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M76-gY-stP">
+                                <rect key="frame" x="98" y="575" width="219" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="16m-hO-BOl">
+                                <rect key="frame" x="107.66666666666669" y="606" width="200" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="vrX-cO-joW"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="frs-a0-rlf">
+                                <rect key="frame" x="157" y="646" width="101" height="30"/>
+                                <state key="normal" title="Start jamming!"/>
+                                <connections>
+                                    <action selector="userNameChoiceButtonPushed:" destination="dZm-9s-Gmj" eventType="touchUpInside" id="lCs-5K-6y3"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="microjamTitleLogo" translatesAutoresizingMaskIntoConstraints="NO" id="hMu-Vy-hw6">
+                                <rect key="frame" x="0.0" y="161" width="414" height="414"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="hMu-Vy-hw6" secondAttribute="height" multiplier="1:1" id="veJ-gt-qPB"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="M76-gY-stP" firstAttribute="top" secondItem="hMu-Vy-hw6" secondAttribute="bottom" id="64T-re-c3x"/>
+                            <constraint firstItem="hMu-Vy-hw6" firstAttribute="centerY" secondItem="OMx-Lr-dck" secondAttribute="centerY" id="Jjd-jZ-Yu0"/>
+                            <constraint firstItem="hMu-Vy-hw6" firstAttribute="leading" secondItem="OMx-Lr-dck" secondAttribute="leading" id="KGi-Po-6SR"/>
+                            <constraint firstItem="16m-hO-BOl" firstAttribute="centerX" secondItem="OMx-Lr-dck" secondAttribute="centerX" id="bXl-02-9vy"/>
+                            <constraint firstAttribute="trailing" secondItem="hMu-Vy-hw6" secondAttribute="trailing" id="cMe-bU-gjD"/>
+                            <constraint firstItem="16m-hO-BOl" firstAttribute="top" secondItem="M76-gY-stP" secondAttribute="bottom" constant="10" id="cbh-YO-SQ0"/>
+                            <constraint firstItem="frs-a0-rlf" firstAttribute="top" secondItem="16m-hO-BOl" secondAttribute="bottom" constant="10" id="hnD-bM-W36"/>
+                            <constraint firstItem="M76-gY-stP" firstAttribute="centerX" secondItem="OMx-Lr-dck" secondAttribute="centerX" id="kV1-Kk-2E0"/>
+                            <constraint firstItem="frs-a0-rlf" firstAttribute="centerX" secondItem="OMx-Lr-dck" secondAttribute="centerX" id="uWG-1k-D7k"/>
+                            <constraint firstItem="hMu-Vy-hw6" firstAttribute="centerX" secondItem="OMx-Lr-dck" secondAttribute="centerX" id="vTg-rB-vl8"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="userNameTextField" destination="16m-hO-BOl" id="5XO-6N-KwG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tYQ-9R-Pu9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-30.434782608695656" y="1131.521739130435"/>
+        </scene>
         <!--settings-->
         <scene sceneID="Z9L-iS-2Tn">
             <objects>
@@ -340,6 +404,7 @@
     <resources>
         <image name="defaultRecordingImage" width="150" height="150"/>
         <image name="localjamsTabIcon" width="37" height="37"/>
+        <image name="microjamTitleLogo" width="600" height="600"/>
         <image name="remotejamsTabIcon" width="37" height="37"/>
         <image name="settingsTabIcon" width="37" height="37"/>
     </resources>
