@@ -6,12 +6,12 @@
 	<string>Root</string>
 	<key>PreferenceSpecifiers</key>
 	<array>
-        <dict>
-            <key>Type</key>
-            <string>PSGroupSpecifier</string>
-            <key>Title</key>
-            <string>Profile</string>
-        </dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Profile</string>
+		</dict>
 		<dict>
 			<key>Type</key>
 			<string>PSTextFieldSpecifier</string>
@@ -30,48 +30,48 @@
 			<key>AutocorrectionType</key>
 			<string>No</string>
 		</dict>
-        <dict>
-            <key>Type</key>
-            <string>PSGroupSpecifier</string>
-            <key>Title</key>
-            <string>MicroJam Colour</string>
-        </dict>
-        <dict>
-            <key>Type</key>
-            <string>PSSliderSpecifier</string>
-            <key>Key</key>
-            <string>performer_colour</string>
-            <key>DefaultValue</key>
-            <real>0.5</real>
-            <key>MinimumValue</key>
-            <integer>0</integer>
-            <key>MaximumValue</key>
-            <real>1</real>
-        </dict>
-        <dict>
-            <key>Type</key>
-            <string>PSGroupSpecifier</string>
-            <key>Title</key>
-            <string>Background Colour</string>
-        </dict>
-        <dict>
-            <key>Type</key>
-            <string>PSSliderSpecifier</string>
-            <key>Key</key>
-            <string>background_colour</string>
-            <key>DefaultValue</key>
-            <real>0.2</real>
-            <key>MinimumValue</key>
-            <integer>0</integer>
-            <key>MaximumValue</key>
-            <real>1</real>
-        </dict>
-        <dict>
-            <key>Type</key>
-            <string>PSGroupSpecifier</string>
-            <key>Title</key>
-            <string>Sound Settings</string>
-        </dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>MicroJam Colour</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSSliderSpecifier</string>
+			<key>Key</key>
+			<string>performer_colour</string>
+			<key>DefaultValue</key>
+			<real>0.5</real>
+			<key>MinimumValue</key>
+			<integer>0</integer>
+			<key>MaximumValue</key>
+			<real>1</real>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Background Colour</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSSliderSpecifier</string>
+			<key>Key</key>
+			<string>background_colour</string>
+			<key>DefaultValue</key>
+			<real>0.2</real>
+			<key>MinimumValue</key>
+			<integer>0</integer>
+			<key>MaximumValue</key>
+			<real>1</real>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Sound Settings</string>
+		</dict>
 		<dict>
 			<key>Type</key>
 			<string>PSMultiValueSpecifier</string>
@@ -87,6 +87,7 @@
 				<integer>1</integer>
 				<integer>2</integer>
 				<integer>3</integer>
+				<string>4</string>
 			</array>
 			<key>Titles</key>
 			<array>
@@ -94,6 +95,7 @@
 				<string>keys</string>
 				<string>drums</string>
 				<string>strings</string>
+				<string>quack</string>
 			</array>
 		</dict>
 	</array>

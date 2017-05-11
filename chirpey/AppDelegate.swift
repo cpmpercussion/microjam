@@ -26,13 +26,15 @@ struct SoundSchemes {
         0 : "chirp",
         1 : "keys",
         2 : "drums",
-        3 : "strings"
+        3 : "strings",
+        4 : "quack"
     ]
     static let pdFilesForKeys : [Int : String] = [
         0 : "chirp.pd",
         1 : "keys.pd",
         2 : "drums.pd",
-        3 : "strings.pd"
+        3 : "strings.pd",
+        4 : "quack.pd"
     ]
 }
 
