@@ -24,7 +24,7 @@ class ChirpView: UIImageView {
     let defaultPlaybackColour : CGColor = UIColor.green.cgColor
     var playbackColour : CGColor?
     let CG_INIT_POINT = CGPoint(x:0,y:0)
-    let imageSize : Double = 300.0
+    
     // Pd File Vars
     var openPatch : PdFile?
     var openPatchDollarZero : Int32?
@@ -128,8 +128,8 @@ class ChirpView: UIImageView {
     
     /// Given a point in the UIImage, sends a touch point to Pd to process for sound.
     func makeSound(at point : CGPoint, withRadius radius : CGFloat, thatWasMoving moving: Bool) {
-        let x = Double(point.x) / self.imageSize
-        let y = Double(point.y) / self.imageSize
+        let x = Double(point.x) / Double(self.frame.width)
+        let y = Double(point.y) / Double(self.frame.width)
         let z = Double(radius)
         let m = moving ? 0.0 : 1.0
         let receiver : String = "\(self.openPatchDollarZero ?? Int32(0))" + PdConstants.receiverPostFix
@@ -147,8 +147,8 @@ class ChirpView: UIImageView {
      **/
     func recordTouch(at point : CGPoint, withRadius radius : CGFloat, thatWasMoving moving : Bool) {
         let time = -1.0 * self.startTime.timeIntervalSinceNow
-        let x = Double(point.x) / self.imageSize
-        let y = Double(point.y) / self.imageSize
+        let x = Double(point.x) / Double(self.frame.width)
+        let y = Double(point.y) / Double(self.frame.width)
         let z = Double(radius)
         self.performance?.recordTouchAt(time: time, x: x, y: y, z: z, moving: moving)
     }
@@ -206,7 +206,7 @@ class ChirpView: UIImageView {
     /// Returns function for playing a `TouchRecord` at a certain time. Used for playing back touches.
     func makeTouchPlayerWith(touch: TouchRecord) -> ((Timer) -> Void) {
         let z = CGFloat(touch.z)
-        let point = CGPoint(x: self.imageSize * touch.x, y: self.imageSize * touch.y)
+        let point = CGPoint(x: Double(self.frame.width) * touch.x, y: Double(self.frame.width) * touch.y)
         let playbackFunction : (CGPoint, CGFloat) -> Void = touch.moving ? self.playbackMoved : self.playbackBegan
         func playbackTouch(withTimer timer: Timer) {
             playbackFunction(point, z)
