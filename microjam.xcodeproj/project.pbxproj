@@ -20,7 +20,6 @@
 		56621B0F1DE47376009B9AB6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56621B0E1DE47376009B9AB6 /* AppDelegate.swift */; };
 		56621B111DE47D5B009B9AB6 /* ChirpJamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56621B101DE47D5B009B9AB6 /* ChirpJamViewController.swift */; };
 		56621B131DE4A496009B9AB6 /* ChirpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56621B121DE4A496009B9AB6 /* ChirpView.swift */; };
-		56621B151DE73236009B9AB6 /* RecordingTableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56621B141DE73236009B9AB6 /* RecordingTableTableViewController.swift */; };
 		56621B171DEC27B0009B9AB6 /* PerformanceTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56621B161DEC27B0009B9AB6 /* PerformanceTableCell.swift */; };
 		5669CA981DA7AAA6009EEC3B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5669CA961DA7AAA6009EEC3B /* Main.storyboard */; };
 		5669CA9A1DA7AAA6009EEC3B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5669CA991DA7AAA6009EEC3B /* Assets.xcassets */; };
@@ -97,7 +96,6 @@
 		56621B0E1DE47376009B9AB6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56621B101DE47D5B009B9AB6 /* ChirpJamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChirpJamViewController.swift; sourceTree = "<group>"; };
 		56621B121DE4A496009B9AB6 /* ChirpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChirpView.swift; sourceTree = "<group>"; };
-		56621B141DE73236009B9AB6 /* RecordingTableTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingTableTableViewController.swift; sourceTree = "<group>"; };
 		56621B161DEC27B0009B9AB6 /* PerformanceTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PerformanceTableCell.swift; sourceTree = "<group>"; };
 		5669CA8A1DA7AAA5009EEC3B /* microjam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = microjam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5669CA971DA7AAA6009EEC3B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -219,7 +217,6 @@
 				56621B0E1DE47376009B9AB6 /* AppDelegate.swift */,
 				56D2C6ED1E65ADE100E3D14F /* UserNameChooserViewController.swift */,
 				56621B101DE47D5B009B9AB6 /* ChirpJamViewController.swift */,
-				56621B141DE73236009B9AB6 /* RecordingTableTableViewController.swift */,
 				56B329E41E44834D001345DC /* WorldJamsTableViewController.swift */,
 				56621B161DEC27B0009B9AB6 /* PerformanceTableCell.swift */,
 				569B92C31DFEA99C00AA257C /* SettingsTableViewController.swift */,
@@ -675,7 +672,6 @@
 				567286661E05E0AF0024A515 /* MicrojamTabBarController.swift in Sources */,
 				56B329E51E44834E001345DC /* WorldJamsTableViewController.swift in Sources */,
 				56621B0D1DE39D33009B9AB6 /* ChirpPerformance.swift in Sources */,
-				56621B151DE73236009B9AB6 /* RecordingTableTableViewController.swift in Sources */,
 				56621B171DEC27B0009B9AB6 /* PerformanceTableCell.swift in Sources */,
 				569B92C41DFEA99C00AA257C /* SettingsTableViewController.swift in Sources */,
 			);

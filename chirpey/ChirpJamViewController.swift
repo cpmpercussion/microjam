@@ -215,7 +215,31 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             let replyView : ChirpView = ChirpView(frame: self.chirpeySquare.frame, performance: originalPerformance)
             replyView.backgroundColor = self.chirpeySquare.backgroundColor
             self.chirpeySquare.backgroundColor = UIColor.clear
+            replyView.translatesAutoresizingMaskIntoConstraints = false
+
             self.view.addSubview(replyView)
+            let horizontalConstraint = NSLayoutConstraint(item: replyView,
+                                                          attribute: NSLayoutAttribute.centerX,
+                                                          relatedBy: NSLayoutRelation.equal,
+                                                          toItem: chirpeySquare,
+                                                          attribute: NSLayoutAttribute.centerX,
+                                                          multiplier: 1,
+                                                          constant: 0)
+            let verticalConstraint = NSLayoutConstraint(item: replyView,
+                                                          attribute: NSLayoutAttribute.centerY,
+                                                          relatedBy: NSLayoutRelation.equal,
+                                                          toItem: chirpeySquare,
+                                                          attribute: NSLayoutAttribute.centerY,
+                                                          multiplier: 1,
+                                                          constant: 0)
+            let chirpHoriz = NSLayoutConstraint(item: chirpeySquare,
+                                                          attribute: NSLayoutAttribute.centerX,
+                                                          relatedBy: NSLayoutRelation.equal,
+                                                          toItem: self.view,
+                                                          attribute: NSLayoutAttribute.centerX,
+                                                          multiplier: 1,
+                                                          constant: 0)
+            self.view.addConstraints([horizontalConstraint,verticalConstraint,chirpHoriz])
             self.view.sendSubview(toBack: replyView)
             self.replyToPerformanceView = replyView
         }

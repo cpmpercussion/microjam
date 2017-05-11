@@ -112,7 +112,7 @@ class ChirpView: UIImageView {
         self.lastPoint = touches.first?.location(in: self)
         let size = touches.first?.majorRadius
         self.drawDot(at: self.lastPoint!, withColour: self.recordingColour ?? self.defaultRecordingColour)
-        self.makeSound(at: self.lastPoint!, withRadius: size!)
+        self.makeSound(at: self.lastPoint!, withRadius: size!, thatWasMoving: false)
         self.recordTouch(at: self.lastPoint!, withRadius: size!, thatWasMoving:false)
     }
     
@@ -122,21 +122,23 @@ class ChirpView: UIImageView {
         self.drawLine(from:self.lastPoint!, to:currentPoint!, withColour:self.recordingColour ?? self.defaultRecordingColour)
         self.lastPoint = currentPoint
         let size = touches.first?.majorRadius
-        self.makeSound(at: currentPoint!, withRadius: size!)
+        self.makeSound(at: currentPoint!, withRadius: size!, thatWasMoving: true)
         self.recordTouch(at: currentPoint!, withRadius: size!, thatWasMoving: true)
     }
     
     /// Given a point in the UIImage, sends a touch point to Pd to process for sound.
-    func makeSound(at point : CGPoint, withRadius radius : CGFloat) {
+    func makeSound(at point : CGPoint, withRadius radius : CGFloat, thatWasMoving moving: Bool) {
         let x = Double(point.x) / self.imageSize
         let y = Double(point.y) / self.imageSize
         let z = Double(radius)
+        let m = moving ? 0.0 : 1.0
         let receiver : String = "\(self.openPatchDollarZero ?? Int32(0))" + PdConstants.receiverPostFix
         //let list = ["/x",x,"/y",y,"/z",z] as [Any]
         // FIXME: figure out how to get Pd to parse the list sequentially.
         PdBase.sendList(["/x",x], toReceiver: receiver)
         PdBase.sendList(["/y",y], toReceiver: receiver)
         PdBase.sendList(["/z",z], toReceiver: receiver)
+        PdBase.sendList(["/m",m], toReceiver: receiver)
     }
     
     /**
@@ -189,16 +191,16 @@ class ChirpView: UIImageView {
         self.swiped = false
         self.lastPoint = point
         self.drawDot(at: point, withColour: self.playbackColour ?? self.defaultPlaybackColour)
-        self.makeSound(at: point, withRadius: radius)
+        self.makeSound(at: point, withRadius: radius, thatWasMoving: false)
     }
     /**
      Mirrors touchesMoved for replayed performances.
     **/
     func playbackMoved(_ point : CGPoint, _ radius : CGFloat) {
-        self.swiped = true;
+        self.swiped = true
         self.drawLine(from: self.lastPoint!, to: point, withColour: self.playbackColour ?? self.defaultPlaybackColour)
         self.lastPoint = point
-        self.makeSound(at: point, withRadius: radius)
+        self.makeSound(at: point, withRadius: radius, thatWasMoving: true)
     }
     
     /// Returns function for playing a `TouchRecord` at a certain time. Used for playing back touches.
