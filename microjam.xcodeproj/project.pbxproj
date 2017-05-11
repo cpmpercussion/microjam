@@ -16,6 +16,7 @@
 		565144051DFAF95900F56B32 /* e_resonzq.pd in Resources */ = {isa = PBXBuildFile; fileRef = 565144011DFAF95900F56B32 /* e_resonzq.pd */; };
 		565144061DFAF95900F56B32 /* s_drumelectro.pd in Resources */ = {isa = PBXBuildFile; fileRef = 565144021DFAF95900F56B32 /* s_drumelectro.pd */; };
 		565144071DFAF95900F56B32 /* s_pinknoise.pd in Resources */ = {isa = PBXBuildFile; fileRef = 565144031DFAF95900F56B32 /* s_pinknoise.pd */; };
+		5653B9981EC4A05D00A90162 /* quack.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5653B9971EC4A05D00A90162 /* quack.pd */; };
 		56621B0D1DE39D33009B9AB6 /* ChirpPerformance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56621B0C1DE39D33009B9AB6 /* ChirpPerformance.swift */; };
 		56621B0F1DE47376009B9AB6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56621B0E1DE47376009B9AB6 /* AppDelegate.swift */; };
 		56621B111DE47D5B009B9AB6 /* ChirpJamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56621B101DE47D5B009B9AB6 /* ChirpJamViewController.swift */; };
@@ -91,6 +92,7 @@
 		565144011DFAF95900F56B32 /* e_resonzq.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = e_resonzq.pd; sourceTree = "<group>"; };
 		565144021DFAF95900F56B32 /* s_drumelectro.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = s_drumelectro.pd; sourceTree = "<group>"; };
 		565144031DFAF95900F56B32 /* s_pinknoise.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = s_pinknoise.pd; sourceTree = "<group>"; };
+		5653B9971EC4A05D00A90162 /* quack.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = quack.pd; sourceTree = "<group>"; };
 		56621B091DE344E2009B9AB6 /* chirpey-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "chirpey-Bridging-Header.h"; sourceTree = "<group>"; };
 		56621B0C1DE39D33009B9AB6 /* ChirpPerformance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChirpPerformance.swift; sourceTree = "<group>"; };
 		56621B0E1DE47376009B9AB6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 				565144031DFAF95900F56B32 /* s_pinknoise.pd */,
 				568D1DC51DF9BEDF00A2BC0B /* drums.pd */,
 				568D1DC61DF9BEDF00A2BC0B /* keys.pd */,
+				5653B9971EC4A05D00A90162 /* quack.pd */,
 				568D1DC71DF9BEDF00A2BC0B /* strings.pd */,
 				5669CAC61DA7D06A009EEC3B /* chirp.pd */,
 				5669CAC71DA7D06A009EEC3B /* metaPdLibs */,
@@ -492,6 +495,7 @@
 				5669CAE61DA7D06A009EEC3B /* volumeRandomise.pd in Resources */,
 				5669CA9A1DA7AAA6009EEC3B /* Assets.xcassets in Resources */,
 				565143FB1DFAB79E00F56B32 /* xfade.pd in Resources */,
+				5653B9981EC4A05D00A90162 /* quack.pd in Resources */,
 				5669CAEB1DA7D06A009EEC3B /* rev2~.pd in Resources */,
 				5669CA981DA7AAA6009EEC3B /* Main.storyboard in Resources */,
 				568D1DCA1DF9BEDF00A2BC0B /* strings.pd in Resources */,
