@@ -43,6 +43,8 @@ class ChirpView: UIImageView {
     /// Convenience Initialiser only used when loading performances for playback only. Touch is disabled!
     convenience init(frame: CGRect, performance: ChirpPerformance){
         self.init(frame: frame)
+        print(self.frame)
+        print(self.bounds)
         self.isMultipleTouchEnabled = false
         self.isUserInteractionEnabled = false
         self.loadPerformance(performance: performance)

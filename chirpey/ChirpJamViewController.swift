@@ -212,6 +212,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         
         // If it's a reply, setup the other performance(s) as subviews.
         if let originalPerformance = replyToPerformance {
+            
             let replyView : ChirpView = ChirpView(frame: self.chirpeySquare.frame, performance: originalPerformance)
             replyView.backgroundColor = self.chirpeySquare.backgroundColor
             self.chirpeySquare.backgroundColor = UIColor.clear

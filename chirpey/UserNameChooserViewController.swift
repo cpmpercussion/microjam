@@ -10,7 +10,7 @@
 
 import UIKit
 
-class UserNameChooserViewController: UIViewController {
+class UserNameChooserViewController: UIViewController, UITextFieldDelegate {
 
 
     @IBOutlet weak var userNameTextField: UITextField!
@@ -22,6 +22,23 @@ class UserNameChooserViewController: UIViewController {
         }
         // dismiss
         dismiss(animated: true, completion: nil)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        userNameTextField.delegate = self
+    }
+    
+
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {  //delegate method
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {   //delegate method
+        textField.resignFirstResponder()
+        self.userNameChoiceButtonPushed(sender: self) // accept the user name
+        return true
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
