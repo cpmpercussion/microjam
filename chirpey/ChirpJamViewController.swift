@@ -233,6 +233,34 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
                                                           attribute: NSLayoutAttribute.centerY,
                                                           multiplier: 1,
                                                           constant: 0)
+            let leftConstraint = NSLayoutConstraint(item: replyView,
+                                                  attribute: NSLayoutAttribute.left,
+                                                  relatedBy: NSLayoutRelation.equal,
+                                                  toItem: chirpeySquare,
+                                                  attribute: NSLayoutAttribute.left,
+                                                  multiplier: 1,
+                                                  constant: 0)
+            let rightConstraint = NSLayoutConstraint(item: replyView,
+                                                   attribute: NSLayoutAttribute.right,
+                                                   relatedBy: NSLayoutRelation.equal,
+                                                   toItem: chirpeySquare,
+                                                   attribute: NSLayoutAttribute.right,
+                                                   multiplier: 1,
+                                                   constant: 0)
+            let topConstraint = NSLayoutConstraint(item: replyView,
+                                                   attribute: NSLayoutAttribute.top,
+                                                   relatedBy: NSLayoutRelation.equal,
+                                                   toItem: chirpeySquare,
+                                                   attribute: NSLayoutAttribute.top,
+                                                   multiplier: 1,
+                                                   constant: 0)
+            let bottomConstraint = NSLayoutConstraint(item: replyView,
+                                                  attribute: NSLayoutAttribute.bottom,
+                                                  relatedBy: NSLayoutRelation.equal,
+                                                  toItem: chirpeySquare,
+                                                  attribute: NSLayoutAttribute.bottom,
+                                                  multiplier: 1,
+                                                  constant: 0)
             let chirpHoriz = NSLayoutConstraint(item: chirpeySquare,
                                                           attribute: NSLayoutAttribute.centerX,
                                                           relatedBy: NSLayoutRelation.equal,
@@ -240,10 +268,22 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
                                                           attribute: NSLayoutAttribute.centerX,
                                                           multiplier: 1,
                                                           constant: 0)
-            self.view.addConstraints([horizontalConstraint,verticalConstraint,chirpHoriz])
+            self.view.addConstraints([horizontalConstraint,verticalConstraint,chirpHoriz,leftConstraint,rightConstraint,topConstraint,bottomConstraint])
             self.view.sendSubview(toBack: replyView)
+            replyView.contentMode = .scaleToFill
             self.replyToPerformanceView = replyView
+            
+            
+            print("JAMVC: Main ChirpView frame:", self.chirpeySquare.frame.size)
+            print("JAMVC:Reply ChirpView frame:", self.replyToPerformanceView?.frame.size ?? "None Available")
         }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        print("Laid Out Subviews.")
+        print("JAMVC: Main ChirpView frame:", self.chirpeySquare.frame.size)
+        print("JAMVC:Reply ChirpView frame:", self.replyToPerformanceView?.frame.size ?? "None Available")
+        print("JAMVC:Reply ChirpView comod:", self.replyToPerformanceView?.contentMode ?? "None Available")
     }
     
     override func viewDidAppear(_ animated: Bool) {

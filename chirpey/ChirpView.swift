@@ -43,11 +43,12 @@ class ChirpView: UIImageView {
     /// Convenience Initialiser only used when loading performances for playback only. Touch is disabled!
     convenience init(frame: CGRect, performance: ChirpPerformance){
         self.init(frame: frame)
-        print(self.frame)
-        print(self.bounds)
         self.isMultipleTouchEnabled = false
         self.isUserInteractionEnabled = false
         self.loadPerformance(performance: performance)
+        
+        print("Loading programmatic ChirpView with frame: ", self.frame)
+        self.contentMode = .scaleToFill
     }
     
     /// Closes the recording and returns the performance.
@@ -130,8 +131,8 @@ class ChirpView: UIImageView {
     
     /// Given a point in the UIImage, sends a touch point to Pd to process for sound.
     func makeSound(at point : CGPoint, withRadius radius : CGFloat, thatWasMoving moving: Bool) {
-        let x = Double(point.x) / Double(self.frame.width)
-        let y = Double(point.y) / Double(self.frame.width)
+        let x = Double(point.x) / Double(self.frame.size.width)
+        let y = Double(point.y) / Double(self.frame.size.width)
         let z = Double(radius)
         let m = moving ? 0.0 : 1.0
         let receiver : String = "\(self.openPatchDollarZero ?? Int32(0))" + PdConstants.receiverPostFix
@@ -149,8 +150,8 @@ class ChirpView: UIImageView {
      **/
     func recordTouch(at point : CGPoint, withRadius radius : CGFloat, thatWasMoving moving : Bool) {
         let time = -1.0 * self.startTime.timeIntervalSinceNow
-        let x = Double(point.x) / Double(self.frame.width)
-        let y = Double(point.y) / Double(self.frame.width)
+        let x = Double(point.x) / Double(self.frame.size.width)
+        let y = Double(point.y) / Double(self.frame.size.width)
         let z = Double(radius)
         self.performance?.recordTouchAt(time: time, x: x, y: y, z: z, moving: moving)
     }
@@ -208,7 +209,7 @@ class ChirpView: UIImageView {
     /// Returns function for playing a `TouchRecord` at a certain time. Used for playing back touches.
     func makeTouchPlayerWith(touch: TouchRecord) -> ((Timer) -> Void) {
         let z = CGFloat(touch.z)
-        let point = CGPoint(x: Double(self.frame.width) * touch.x, y: Double(self.frame.width) * touch.y)
+        let point = CGPoint(x: Double(self.frame.size.width) * touch.x, y: Double(self.frame.size.width) * touch.y)
         let playbackFunction : (CGPoint, CGFloat) -> Void = touch.moving ? self.playbackMoved : self.playbackBegan
         func playbackTouch(withTimer timer: Timer) {
             playbackFunction(point, z)
