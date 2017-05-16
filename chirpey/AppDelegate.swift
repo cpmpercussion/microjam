@@ -199,6 +199,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
     /// Refresh list of world jams from CloudKit and then update in world jam table view.
     func fetchWorldJamsFromCloud() {
         print("ADCK: Attempting to fetch World Jams from Cloud.")
+        print("ADCK: Container is: ", container)
         var fetchedPerformances = [ChirpPerformance]()
         let predicate = NSPredicate(value: true)
         let sort = NSSortDescriptor(key: PerfCloudKeys.date, ascending: false)
@@ -218,20 +219,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
                 DispatchQueue.main.async {
                     self.delegate?.errorUpdating(error: error as NSError)
                     print("ADCK: Cloud Query error:\(error)")
+                    self.delegate?.modelUpdated() // stop spinner
                 }
                 return
             }
-            self.storedPerformances = fetchedPerformances // update the stored performances
-            print("ADCK: ", self.storedPerformances.count, " world jams collected.")
+            print("ADCK: ", fetchedPerformances.count, " performances downloaded.")
+            self.addToStored(performances: fetchedPerformances) // update the stored performances
+            //self.storedPerformances = fetchedPerformances // update the stored performances
+            print("ADCK: ", self.storedPerformances.count, " total world jams.")
             DispatchQueue.main.async { // give the delegate the trigger to update the table.
                 self.delegate?.modelUpdated()
             }
         }
         
         publicDB.add(operation) // perform the operation.
-        
         // TODO: Define a more sensible way of downloading the performances
-        // Downloaded performances should augment existing data, not overwrite it.
+    }
+    
+    /// Add a list of performances into the currently stored performances.
+    func addToStored(performances: [ChirpPerformance]) {
+        print("ADCK: Adding performances to stored list")
+        //self.storedPerformances = performances // update the stored performances // old
+        let titles = self.storedPerformances.map{$0.title()}
+        var countPerfsAdded = 0
+        for perf in performances {
+            if !titles.contains(perf.title()) {
+                self.storedPerformances.append(perf)
+                countPerfsAdded += 1
+            }
+        }
+        print("ADCK: ", countPerfsAdded, " perfs added to stored world jams.")
+        self.sortStoredPerformances()
     }
     
     /// Retrieves a ChirpPerformance from a given title string.
@@ -297,10 +315,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
         }
         
         // Upload to the container
-        let container = CKContainer.default()
-        let publicDatabase = container.publicCloudDatabase
-        //        let privateDatabase = container.privateCloudDatabase
-        publicDatabase.save(performanceRecord, completionHandler: {(record, error) -> Void in
+        publicDB.save(performanceRecord, completionHandler: {(record, error) -> Void in
             if (error != nil) {
                 print("ADCK: Error saving to the database.")
                 print(error ?? "")
