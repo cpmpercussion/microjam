@@ -17,8 +17,8 @@ title: MicroJam
 email: cpm@charlesmartin.com.au
 description: > # this means to ignore newlines until "baseurl:"
   MicroJam is an app for experimenting with tiny touch-screen performances.
-baseurl: "/microjam" # the subpath of your site, e.g. /blog
-url: "https://cpmpercussion.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "http://microjam.info" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: cpmpercussion
 github_username:  cpmpercussion
 
