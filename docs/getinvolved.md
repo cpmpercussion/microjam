@@ -3,7 +3,7 @@ layout: page
 title: Get Involved
 ---
 
-![Recording a reply in MicroJam](https://github.com/cpmpercussion/microjam/raw/master/images/microjam-action-small.jpg)
+![Recording a reply in MicroJam]({{ site.baseurl }}/images/microjam-action.jpg)
 
 ### Try out the beta
 
