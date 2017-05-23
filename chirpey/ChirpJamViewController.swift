@@ -154,6 +154,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
                 // Cancel Playback
                 print("JAMVC: Going to stop playing")
                 self.jamming = false
+                self.jamButton.setTitle("jam", for: UIControlState.normal)
                 self.playButton.setTitle("play", for: UIControlState.normal)
                 self.state = ChirpJamModes.loaded
                 self.stopTimer()
@@ -426,13 +427,9 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         if (self.jamming) {
             // start the playback again!
             print("JAMVC: Restarting playback for the jam.")
-            // Start Playback
-            statusLabel.text = "Playing..."
-            self.playButton.setTitle("stop", for: UIControlState.normal)
-            chirpeySquare?.playing = true
-            self.state = ChirpJamModes.playing
-            startProgressBar()
-            self.playbackTimers = loadedPerformance?.playback(inView: self.chirpeySquare)
+            if (!self.chirpeySquare!.playing) {
+                self.playButtonPressed(self.playButton) // start playing if not already playing.
+            }
         }
     }
     

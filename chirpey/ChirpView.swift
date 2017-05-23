@@ -153,7 +153,9 @@ class ChirpView: UIImageView {
         let x = Double(point.x) / Double(self.frame.size.width)
         let y = Double(point.y) / Double(self.frame.size.width)
         let z = Double(radius)
-        self.performance?.recordTouchAt(time: time, x: x, y: y, z: z, moving: moving)
+        if self.recording { // only record when recording.
+            self.performance?.recordTouchAt(time: time, x: x, y: y, z: z, moving: moving)
+        }
     }
     
     // MARK: - drawing functions
