@@ -33,4 +33,4 @@ subscribe [via RSS]({{ "/feed.xml" | relative_url }})
 
 ## Demo Video
 
-{% include_relative extras/youtubePlayer.html id=page.demovideo %}
+{% include youtubePlayer.html id=page.demovideo %}
