@@ -14,4 +14,4 @@ This performance was notable as it emphasised simultaneous ensemble improvisatio
 
 Great to perform to an appreciative audience of researchers, artists, and students and hope to play at Escape again soon! Here's the performance from the event:
 
-{% include_relative extras/youtubePlayer.html id=page.demovideo %}
+<!-- {% include_relative extras/youtubePlayer.html id=page.demovideo %} -->
