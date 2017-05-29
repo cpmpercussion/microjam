@@ -5,7 +5,7 @@ date:   2017-05-16 17:50:00 +0100
 categories: microjam nime demo
 ---
 
-![MicroJam Demo]({{ site.baseurl }}/images/microjam-demo.jpg)
+![MicroJam Demo]({{ site.baseurl }}/images/microjam-demo.jpg){: class="fit image"}
 
 This week we’re presenting a demo of MicroJam at NIME2017 in Copenhagen! 
 

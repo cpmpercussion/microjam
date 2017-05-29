@@ -6,7 +6,7 @@ categories: microjam ensemble performance
 demovideo: 0THPLC1cygs
 ---
 
-![Performing with MicroJam at IFI]({{ site.baseurl }}/images/musictechevent-microjam.jpg)
+![Performing with MicroJam at IFI]({{ site.baseurl }}/images/musictechevent-microjam.jpg){: class="fit image"}
 
 Last week we presented MicroJam at a [music technology event at the University of Oslo's Department of Informatics](http://www.mn.uio.no/ifi/english/research/projects/epec/news/2017-05-29-music-tech-event.html). While Maria Finkelmeier (Boston, USA) and Christina Hopgood were on hand to perform as an iPad/Percussion ensemble, we played a short improvisation with MicroJam to explore how the beta version could be used in live performance!
 

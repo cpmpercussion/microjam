@@ -3,7 +3,7 @@ layout: page
 title: Get Involved
 ---
 
-![Recording a reply in MicroJam]({{ site.baseurl }}/images/microjam-action.jpg)
+![Recording a reply in MicroJam]({{ site.baseurl }}/images/microjam-action.jpg){: class="fit image"}
 
 ### Try out the beta
 

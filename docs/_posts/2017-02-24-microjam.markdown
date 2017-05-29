@@ -5,7 +5,7 @@ date:   2017-02-24 10:35:21 +0100
 categories: microjam beta release
 ---
 
-<!-- ![MicroJam](/assets/images/microjam-demo-jam-list.png) -->
+![MicroJam]({{ site.baseurl }}/images/microjam-demo-jam-list.png){: class="fit image"}
 
 I'm happy to announce that the first beta of MicroJam is out! I'm looking for a a few testers to make some tiny performances with this app so that we can explore what kind of music is possible with this interface.
 
