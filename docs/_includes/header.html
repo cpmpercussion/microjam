@@ -4,13 +4,16 @@
     <nav id="nav">
         <ul>
             <li><a href="{{ site.baseurl }}/">Home</a></li>
-            <li><a href="{{ site.baseurl }}/blog.html">Blog</a></li>            
-            {% for page in site.pages %}
+            <li><a href="{{ site.baseurl }}/blog.html">Blog</a></li>
+            <li><a href="{{ site.baseurl }}/index.html#howitworks">How it works</a></li>
+            <li><a href="{{ site.baseurl }}/index.html#video">Video</a></li>
+            <li><a href="{{ site.baseurl }}/index.html#about">About</a></li>
+<!--             {% for page in site.pages %}
                   {% if page.title %}
                     <li><a class="page-link" href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a></li>
                   {% endif %}
-            {% endfor %}
-            <li><a href="#" class="button special">Sign Up</a></li>
+            {% endfor %} -->
+            <li><a href="https://goo.gl/forms/MUXMH4SxEW87c1tv1" class="button special">Join the beta</a></li>
         </ul>
     </nav>
 </header>

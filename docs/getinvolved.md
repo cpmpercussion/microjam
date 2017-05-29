@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Get Involved
+title: Try it out
 ---
 
 ![Recording a reply in MicroJam]({{ site.baseurl }}/images/microjam-action.jpg){: class="fit image"}

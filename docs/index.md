@@ -13,7 +13,7 @@ demovideo: SkUjjQd13KU
 			<div class="4u">
 				<section class="special box">
 					<img src="{{ site.baseurl }}/images/microjam-demo-jam-list.png" class="image fit">
-					<h3>Start a new jam</h3>
+					<h3>Listen</h3>
 					<p>You can browse other jams that have been uploaded or hit the "Jam!" tab to start a new one.</p>
 				</section>
 			</div>
@@ -26,7 +26,7 @@ demovideo: SkUjjQd13KU
 			</div>
 			<div class="4u">
 				<section class="special box">
-					<img src="{{ site.baseurl }}/images/microjam-demo-jam-list.png" class="image fit">
+					<img src="{{ site.baseurl }}/images/microjam-demo-images-reply-playback.png" class="image fit">
 					<h3>Reply</h3>
 					<p>Hit reply to record a new layer on top of a friend's jam, start a band or contribute to massive online performances!</p>
 				</section>
