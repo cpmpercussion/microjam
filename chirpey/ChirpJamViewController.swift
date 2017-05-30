@@ -369,6 +369,10 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
                 self.performerLabel.text = loadedPerformance.performer
                 self.instrumentLabel.text = loadedPerformance.instrument
                 self.chirpeySquare.image = loadedPerformance.image
+                /// FIXME: Better way to reset images for ChirpViews.
+                if let replySquare = self.replyToPerformanceView { // reset image for reply performance view.
+                    replySquare.image = replyToPerformance?.image
+                }
                 self.playButton.isEnabled = true
                 self.jamButton.isEnabled = true
                 self.replyButton.isEnabled = true // reply button enabled in loaded jams.
@@ -413,6 +417,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     /// Automatically triggered when recording time finishes.
     func stopTimer() {
         /// FIXME: Incorporate this method with stopPlayback?
+        /// FIXME: Make sure that the reply performances are reset as well as the main performance.
         NSLog("JAMVC: Stop Timer Called (either finished or cancelled).")
         if (self.chirpeySquare!.recording) {
             self.stopRecording()
@@ -421,11 +426,13 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             self.stopPlayback()
             self.chirpeySquare!.playing = false
         }
+        if let replySquare = self.replyToPerformanceView {replySquare.playing = false} // either way, set the replySquare to stopped.
         self.progressTimer?.invalidate()
         self.progress = 0.0
         self.recordingProgress?.progress = 0.0
+        
+        // Restart Playback in Jam Mode.
         if (self.jamming) {
-            // start the playback again!
             print("JAMVC: Restarting playback for the jam.")
             if (!self.chirpeySquare!.playing) {
                 self.playButtonPressed(self.playButton) // start playing if not already playing.
