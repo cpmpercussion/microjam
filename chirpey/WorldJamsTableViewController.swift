@@ -21,7 +21,7 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        self.tableView.rowHeight = 90
+        self.tableView.rowHeight = 365
         self.appDelegate.delegate = self
         self.refreshControl?.addTarget(appDelegate, action: #selector(appDelegate.fetchWorldJamsFromCloud), for: UIControlEvents.valueChanged)
     }
