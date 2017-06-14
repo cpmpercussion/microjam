@@ -70,7 +70,25 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
         cell.performer.text = performance.performer
         cell.instrument.text = performance.instrument
         cell.previewImage.image = performance.image
+        
+        if performance.replyto != "" {
+            if let replyPerf = appDelegate.fetchPerformanceFrom(title: performance.replyto) {
+                cell.previewImage.image = addImageToImage(img: replyPerf.image, img2: performance.image)
+            }
+        }
         return cell
+    }
+    
+    /// Add two images together; used to layer reply images.
+    func addImageToImage(img: UIImage, img2: UIImage ) -> UIImage {
+        let size = img.size
+        UIGraphicsBeginImageContext(size)
+        let areaSize = CGRect(x: 0, y: 0, width:size.width, height: size.height)
+        img2.draw(in: areaSize)
+        img.draw(in: areaSize, blendMode: CGBlendMode.normal, alpha: 1.0)
+        let outImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        return outImage
     }
 
     /*

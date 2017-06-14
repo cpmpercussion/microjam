@@ -89,12 +89,16 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "$BUILT_PRODUCTS_DIR/DateToolsSwift/DateToolsSwift.framework"
   install_framework "$BUILT_PRODUCTS_DIR/InAppSettingsKit/InAppSettingsKit.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/NSDate+TimeAgo/NSDate_TimeAgo.framework"
   install_framework "$BUILT_PRODUCTS_DIR/UIColor_Hex_Swift/UIColor_Hex_Swift.framework"
   install_framework "$BUILT_PRODUCTS_DIR/libpd/libpd.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "$BUILT_PRODUCTS_DIR/DateToolsSwift/DateToolsSwift.framework"
   install_framework "$BUILT_PRODUCTS_DIR/InAppSettingsKit/InAppSettingsKit.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/NSDate+TimeAgo/NSDate_TimeAgo.framework"
   install_framework "$BUILT_PRODUCTS_DIR/UIColor_Hex_Swift/UIColor_Hex_Swift.framework"
   install_framework "$BUILT_PRODUCTS_DIR/libpd/libpd.framework"
 fi

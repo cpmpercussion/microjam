@@ -13,6 +13,7 @@
 import UIKit
 import CoreLocation
 import UIColor_Hex_Swift
+import DateToolsSwift
 
 class ChirpPerformance : NSObject, NSCoding {
     /// Array of `TouchRecord`s to store performance data.
@@ -157,9 +158,7 @@ class ChirpPerformance : NSObject, NSCoding {
     
     /// Return a dateString that would work for adding to the performance list.
     func dateString() -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "E, d MMM yyyy HH:mm:ss"
-        return formatter.string(from: self.date)
+        return self.date.timeAgoSinceNow
     }
     
     

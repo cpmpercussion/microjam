@@ -4,12 +4,22 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>DateToolsSwift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>InAppSettingsKit-InAppSettingsKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>InAppSettingsKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>NSDate+TimeAgo.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -42,17 +52,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>10D95B1D160740B6D72C48530CED6231</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>2B8E7CB5910C4EB6D7422EA95981A8D9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5754C853D3AEA9775C8CD63692C1B2A3</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>6640CA257ED3C3364F0ECFC85B9EA5CC</key>
+		<key>56AB5EE59603402880C5365E2518AD11</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -68,6 +78,16 @@
 			<true/>
 		</dict>
 		<key>8CB67190F0A60F7A033A3E515965C86F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9A664FD395EC4C1AFB9459F3A6BFF753</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E89CFD99B895BCC6E8EDC2F95A03500C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
