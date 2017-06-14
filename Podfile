@@ -9,6 +9,7 @@ target 'microjam' do
   pod 'libpd', :git => 'https://github.com/libpd/libpd', :submodules => true
   pod 'InAppSettingsKit'
   pod 'UIColor_Hex_Swift'
+  pod 'NSDate+TimeAgo'
 
   target 'microjamTests' do
     inherit! :search_paths
