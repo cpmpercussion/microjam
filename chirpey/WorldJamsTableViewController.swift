@@ -70,9 +70,11 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
         cell.performer.text = performance.performer
         cell.instrument.text = performance.instrument
         cell.previewImage.image = performance.image
+        cell.context.text = nonCreditString()
         
         if performance.replyto != "" {
             if let replyPerf = appDelegate.fetchPerformanceFrom(title: performance.replyto) {
+                cell.context.text = creditString(originalPerformer: replyPerf.performer)
                 cell.previewImage.image = addImageToImage(img: replyPerf.image, img2: performance.image)
             }
         }
@@ -90,6 +92,21 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
         UIGraphicsEndImageContext()
         return outImage
     }
+    
+    /// credit reply string
+    func creditString(originalPerformer: String) -> String {
+        let output = "replied to " + originalPerformer
+        return output
+    }
+    
+    func nonCreditString() -> String {
+        return "rides again."
+    }
+    
+    // x replied to y
+    // x added to a thread
+    // x took the stage
+    // x rides again
 
     /*
     // Override to support conditional editing of the table view.

@@ -73,10 +73,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="performer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Mx-bs-Bwy">
-                                <rect key="frame" x="37.5" y="101" width="150" height="22"/>
+                                <rect key="frame" x="37.5" y="101" width="77" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="5SF-PQ-ScA"/>
-                                    <constraint firstAttribute="width" constant="150" id="vJN-Yc-d9c"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -229,8 +228,8 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date and time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RbJ-Tv-ySY">
-                                            <rect key="frame" x="37" y="337.5" width="88.5" height="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="date and time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RbJ-Tv-ySY" userLabel="Date">
+                                            <rect key="frame" x="210" y="338" width="127" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -241,19 +240,28 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="took the stage" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8qM-fi-pVE" userLabel="context">
+                                            <rect key="frame" x="37" y="337" width="93" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="6dJ-ZF-dqm" firstAttribute="top" secondItem="Zm0-8q-7kP" secondAttribute="top" id="4oZ-Hm-fnM"/>
+                                        <constraint firstItem="6dJ-ZF-dqm" firstAttribute="trailing" secondItem="RbJ-Tv-ySY" secondAttribute="trailing" id="E4Y-KI-q4h"/>
+                                        <constraint firstItem="8qM-fi-pVE" firstAttribute="top" secondItem="Zm0-8q-7kP" secondAttribute="bottom" constant="8" id="Epq-6v-WqN"/>
                                         <constraint firstItem="Zm0-8q-7kP" firstAttribute="leading" secondItem="C1Y-wG-D7P" secondAttribute="leading" id="G9u-zp-kdH"/>
                                         <constraint firstItem="6dJ-ZF-dqm" firstAttribute="trailing" secondItem="C1Y-wG-D7P" secondAttribute="trailing" id="SsS-JO-wIu"/>
                                         <constraint firstItem="C1Y-wG-D7P" firstAttribute="centerX" secondItem="sXd-HP-H6B" secondAttribute="centerX" id="VCh-Mz-385"/>
-                                        <constraint firstItem="RbJ-Tv-ySY" firstAttribute="leading" secondItem="Zm0-8q-7kP" secondAttribute="leading" id="Wnf-iZ-w0s"/>
                                         <constraint firstItem="C1Y-wG-D7P" firstAttribute="top" secondItem="sXd-HP-H6B" secondAttribute="top" id="cf6-vr-fwK"/>
-                                        <constraint firstItem="RbJ-Tv-ySY" firstAttribute="top" secondItem="Zm0-8q-7kP" secondAttribute="bottom" constant="8" id="eRp-9T-ueF"/>
+                                        <constraint firstItem="RbJ-Tv-ySY" firstAttribute="top" secondItem="6dJ-ZF-dqm" secondAttribute="bottom" constant="8" id="icl-aw-w2a"/>
+                                        <constraint firstItem="8qM-fi-pVE" firstAttribute="leading" secondItem="Zm0-8q-7kP" secondAttribute="leading" id="kCl-4D-n4z"/>
                                         <constraint firstItem="Zm0-8q-7kP" firstAttribute="top" secondItem="C1Y-wG-D7P" secondAttribute="bottom" constant="8" id="moR-6v-FFY"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="context" destination="8qM-fi-pVE" id="bR9-dG-bkW"/>
                                     <outlet property="instrument" destination="6dJ-ZF-dqm" id="0qa-jE-Cxt"/>
                                     <outlet property="performer" destination="Zm0-8q-7kP" id="THh-XF-Quf"/>
                                     <outlet property="previewImage" destination="C1Y-wG-D7P" id="aqE-Qq-Xr4"/>

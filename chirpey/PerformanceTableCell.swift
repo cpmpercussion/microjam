@@ -14,6 +14,7 @@ class PerformanceTableCell: UITableViewCell {
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var performer: UILabel!
     @IBOutlet weak var instrument: UILabel!
+    @IBOutlet weak var context: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
