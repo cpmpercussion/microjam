@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>DropDown.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>InAppSettingsKit-InAppSettingsKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -52,17 +57,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>10D95B1D160740B6D72C48530CED6231</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>2B8E7CB5910C4EB6D7422EA95981A8D9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>56AB5EE59603402880C5365E2518AD11</key>
+		<key>5168099F2EBFC99A707C03C9EADE01A5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -83,6 +83,16 @@
 			<true/>
 		</dict>
 		<key>9A664FD395EC4C1AFB9459F3A6BFF753</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9F7498848F701D5E45959C0A0D8D7600</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A9A796B97091C50BF6C508A4C21D8722</key>
 		<dict>
 			<key>primary</key>
 			<true/>

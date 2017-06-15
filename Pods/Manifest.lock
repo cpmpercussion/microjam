@@ -1,5 +1,6 @@
 PODS:
   - DateToolsSwift (2.0.3)
+  - DropDown (2)
   - InAppSettingsKit (2.8.1)
   - libpd (0.10.0)
   - NSDate+TimeAgo (1.0.6)
@@ -7,6 +8,7 @@ PODS:
 
 DEPENDENCIES:
   - DateToolsSwift
+  - DropDown
   - InAppSettingsKit
   - libpd (from `https://github.com/libpd/libpd`)
   - NSDate+TimeAgo
@@ -25,11 +27,12 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   DateToolsSwift: bf69bf9056d9e53c5c03f06e51f219b9b8b02f9e
+  DropDown: 744784d9c9aa505100e942c16acd05430cbb2f0a
   InAppSettingsKit: 94d2fba3ccd700fc4e32c6d09fabcc0af2426744
   libpd: c4f8ec7be74d223200052f0736ae02e56b12b9e9
   NSDate+TimeAgo: 35601c619b2d59290055e4fe76e61d97677a2360
   UIColor_Hex_Swift: 95f718452092a3efc8a827dffd2c04d3237be02d
 
-PODFILE CHECKSUM: ef4c1e2a2dcfaf87436d55c8945339f438680ed9
+PODFILE CHECKSUM: 7e04097e7340aff53bd7219c2677136a949b6477
 
 COCOAPODS: 1.2.0

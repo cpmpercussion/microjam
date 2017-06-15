@@ -1,9 +1,9 @@
 ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES
-FRAMEWORK_SEARCH_PATHS = $(inherited) "$PODS_CONFIGURATION_BUILD_DIR/DateToolsSwift" "$PODS_CONFIGURATION_BUILD_DIR/InAppSettingsKit" "$PODS_CONFIGURATION_BUILD_DIR/NSDate+TimeAgo" "$PODS_CONFIGURATION_BUILD_DIR/UIColor_Hex_Swift" "$PODS_CONFIGURATION_BUILD_DIR/libpd"
+FRAMEWORK_SEARCH_PATHS = $(inherited) "$PODS_CONFIGURATION_BUILD_DIR/DateToolsSwift" "$PODS_CONFIGURATION_BUILD_DIR/DropDown" "$PODS_CONFIGURATION_BUILD_DIR/InAppSettingsKit" "$PODS_CONFIGURATION_BUILD_DIR/NSDate+TimeAgo" "$PODS_CONFIGURATION_BUILD_DIR/UIColor_Hex_Swift" "$PODS_CONFIGURATION_BUILD_DIR/libpd"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
 LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
-OTHER_CFLAGS = $(inherited) -iquote "$PODS_CONFIGURATION_BUILD_DIR/DateToolsSwift/DateToolsSwift.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/InAppSettingsKit/InAppSettingsKit.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/NSDate+TimeAgo/NSDate_TimeAgo.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/UIColor_Hex_Swift/UIColor_Hex_Swift.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/libpd/libpd.framework/Headers"
-OTHER_LDFLAGS = $(inherited) -framework "DateToolsSwift" -framework "InAppSettingsKit" -framework "NSDate_TimeAgo" -framework "UIColor_Hex_Swift" -framework "libpd"
+OTHER_CFLAGS = $(inherited) -iquote "$PODS_CONFIGURATION_BUILD_DIR/DateToolsSwift/DateToolsSwift.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/DropDown/DropDown.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/InAppSettingsKit/InAppSettingsKit.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/NSDate+TimeAgo/NSDate_TimeAgo.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/UIColor_Hex_Swift/UIColor_Hex_Swift.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/libpd/libpd.framework/Headers"
+OTHER_LDFLAGS = $(inherited) -framework "DateToolsSwift" -framework "DropDown" -framework "InAppSettingsKit" -framework "NSDate_TimeAgo" -framework "UIColor_Hex_Swift" -framework "libpd"
 OTHER_SWIFT_FLAGS = $(inherited) "-D" "COCOAPODS"
 PODS_BUILD_DIR = $BUILD_DIR
 PODS_CONFIGURATION_BUILD_DIR = $PODS_BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)

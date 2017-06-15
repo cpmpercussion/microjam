@@ -13,6 +13,8 @@
         <!--New Performance-->
         <scene sceneID="tne-QT-ifu">
             <objects>
+                <exit id="ysn-Br-JNc" userLabel="Exit" sceneMemberID="exit"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <viewController id="BYZ-38-t0r" customClass="ChirpJamViewController" customModule="microjam" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
@@ -81,16 +83,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="instrument" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TQa-eA-Jfx">
-                                <rect key="frame" x="187.5" y="101" width="150" height="22"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="22" id="WxM-3E-tJf"/>
-                                    <constraint firstAttribute="width" constant="150" id="ezP-ki-eA4"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view autoresizesSubviews="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xQz-CD-1rT" customClass="ChirpView" customModule="microjam">
                                 <rect key="frame" x="37.5" y="130" width="300" height="300"/>
                                 <color key="backgroundColor" red="0.59487018602307074" green="0.7976250858479812" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -102,13 +94,23 @@
                                     </constraint>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="right" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PVn-2h-cdI">
+                                <rect key="frame" x="254" y="95.5" width="83" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="instrument">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="soundSchemeTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8og-Nf-5lO"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.97367788460000004" green="0.97367788460000004" blue="0.97367788460000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="PBg-aK-YtU" firstAttribute="width" secondItem="xQz-CD-1rT" secondAttribute="width" id="0Ff-OY-Nam"/>
                             <constraint firstItem="PBg-aK-YtU" firstAttribute="leading" secondItem="1Mx-bs-Bwy" secondAttribute="leading" id="3RV-yi-sfW"/>
+                            <constraint firstItem="PVn-2h-cdI" firstAttribute="centerY" secondItem="1Mx-bs-Bwy" secondAttribute="centerY" id="8Iq-9T-GfU"/>
                             <constraint firstItem="O9V-pQ-Tlh" firstAttribute="top" secondItem="yna-Q3-0q0" secondAttribute="bottom" constant="8" symbolic="YES" id="B3B-GR-Hnm"/>
-                            <constraint firstItem="TQa-eA-Jfx" firstAttribute="trailing" secondItem="xQz-CD-1rT" secondAttribute="trailing" id="Bgj-oL-kf1"/>
                             <constraint firstItem="O9V-pQ-Tlh" firstAttribute="leading" secondItem="1Mx-bs-Bwy" secondAttribute="leading" id="Brv-h0-RCo"/>
                             <constraint firstItem="yna-Q3-0q0" firstAttribute="centerX" secondItem="Xh5-cz-PkR" secondAttribute="centerX" id="Czl-IL-NCD"/>
                             <constraint firstItem="xQz-CD-1rT" firstAttribute="trailing" secondItem="yna-Q3-0q0" secondAttribute="trailing" id="GqI-cg-v52"/>
@@ -117,7 +119,6 @@
                             <constraint firstItem="yna-Q3-0q0" firstAttribute="trailing" secondItem="HfI-q6-7dd" secondAttribute="trailing" id="Q8F-7M-e1Q"/>
                             <constraint firstItem="O9V-pQ-Tlh" firstAttribute="top" secondItem="Xh5-cz-PkR" secondAttribute="top" id="RaL-0d-Au2"/>
                             <constraint firstItem="Xh5-cz-PkR" firstAttribute="top" secondItem="HfI-q6-7dd" secondAttribute="top" id="SG6-bL-bFM"/>
-                            <constraint firstItem="TQa-eA-Jfx" firstAttribute="centerY" secondItem="1Mx-bs-Bwy" secondAttribute="centerY" id="Zjl-Su-cva"/>
                             <constraint firstItem="Xh5-cz-PkR" firstAttribute="leading" secondItem="O9V-pQ-Tlh" secondAttribute="trailing" constant="8" symbolic="YES" id="a8w-5t-aLP">
                                 <variation key="widthClass=regular" constant="10"/>
                             </constraint>
@@ -131,7 +132,7 @@
                             <constraint firstItem="Xh5-cz-PkR" firstAttribute="centerY" secondItem="O9V-pQ-Tlh" secondAttribute="centerY" id="ocI-8v-uTe"/>
                             <constraint firstItem="1Mx-bs-Bwy" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="37" id="qAR-wM-PdU"/>
                             <constraint firstItem="yna-Q3-0q0" firstAttribute="top" secondItem="xQz-CD-1rT" secondAttribute="bottom" constant="8" symbolic="YES" id="sCA-fh-uvA"/>
-                            <constraint firstItem="TQa-eA-Jfx" firstAttribute="centerY" secondItem="1Mx-bs-Bwy" secondAttribute="centerY" id="vcs-Ky-AeT"/>
+                            <constraint firstItem="PVn-2h-cdI" firstAttribute="trailing" secondItem="xQz-CD-1rT" secondAttribute="trailing" id="sj5-ph-I4z"/>
                             <constraint firstItem="HfI-q6-7dd" firstAttribute="trailing" secondItem="PBg-aK-YtU" secondAttribute="trailing" id="wQJ-S7-8k3"/>
                             <constraint firstItem="HfI-q6-7dd" firstAttribute="centerY" secondItem="O9V-pQ-Tlh" secondAttribute="centerY" id="xAV-kS-zT1"/>
                             <constraint firstItem="PBg-aK-YtU" firstAttribute="top" secondItem="Xh5-cz-PkR" secondAttribute="bottom" constant="8" id="xyp-zx-F94"/>
@@ -151,7 +152,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="chirpeySquare" destination="xQz-CD-1rT" id="3D9-yP-adH"/>
-                        <outlet property="instrumentLabel" destination="TQa-eA-Jfx" id="arQ-vd-a5R"/>
+                        <outlet property="instrumentButton" destination="PVn-2h-cdI" id="Csn-nR-9Zq"/>
                         <outlet property="jamButton" destination="HfI-q6-7dd" id="rub-hB-VgX"/>
                         <outlet property="performerLabel" destination="1Mx-bs-Bwy" id="E9T-t5-KvJ"/>
                         <outlet property="playButton" destination="O9V-pQ-Tlh" id="G3q-ZV-wU4"/>
@@ -161,10 +162,8 @@
                         <outlet property="statusLabel" destination="PBg-aK-YtU" id="XoF-Hm-cWg"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <exit id="ysn-Br-JNc" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3216" y="-408"/>
+            <point key="canvasLocation" x="3215.1999999999998" y="-408.84557721139436"/>
         </scene>
         <!--settings-->
         <scene sceneID="JKC-ke-Tam">
@@ -423,6 +422,6 @@
         <image name="settingsTabIcon" width="37" height="37"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Hyh-JE-FSE"/>
+        <segue reference="fbe-LH-T5z"/>
     </inferredMetricsTieBreakers>
 </document>

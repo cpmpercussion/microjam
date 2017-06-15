@@ -11,6 +11,7 @@ target 'microjam' do
   pod 'UIColor_Hex_Swift'
   pod 'NSDate+TimeAgo'
   pod 'DateToolsSwift'
+  pod 'DropDown'
 
   target 'microjamTests' do
     inherit! :search_paths
