@@ -13,8 +13,6 @@
         <!--New Performance-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <exit id="ysn-Br-JNc" userLabel="Exit" sceneMemberID="exit"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <viewController id="BYZ-38-t0r" customClass="ChirpJamViewController" customModule="microjam" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
@@ -162,6 +160,8 @@
                         <outlet property="statusLabel" destination="PBg-aK-YtU" id="XoF-Hm-cWg"/>
                     </connections>
                 </viewController>
+                <exit id="ysn-Br-JNc" userLabel="Exit" sceneMemberID="exit"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3215.1999999999998" y="-408.84557721139436"/>
         </scene>

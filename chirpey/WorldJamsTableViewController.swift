@@ -8,6 +8,20 @@
 
 import UIKit
 
+struct PerformanceLabels {
+    static let solo : [String] = [
+        "rides again.",
+        "goes forth.",
+        "takes the stage.",
+        "rocked out.",
+        "rings a bell.",
+        "hit the right note.",
+        "struck a chord.",
+        "played out.",
+        "played it again."
+    ]
+}
+
 class WorldJamsTableViewController: UITableViewController, ModelDelegate {
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -100,13 +114,10 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
     }
     
     func nonCreditString() -> String {
-        return "rides again."
+        let ind : Int = Int(arc4random_uniform(UInt32(PerformanceLabels.solo.count)))
+        return PerformanceLabels.solo[ind]
     }
-    
-    // x replied to y
-    // x added to a thread
-    // x took the stage
-    // x rides again
+
 
     /*
     // Override to support conditional editing of the table view.
