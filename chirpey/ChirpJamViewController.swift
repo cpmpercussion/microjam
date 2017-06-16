@@ -71,13 +71,13 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print("JAMVC: Preparing for Segue")
-        print("State: ", state)
+        print("JAMVC: Preparing for Segue. Current state:", self.state)
         // FIXME: save the performance if the timer hasn't run out.
         self.jamming = false // stop jamming.
         if state == ChirpJamModes.recording {stopRecording() }
         if state == ChirpJamModes.playing { stopPlayback() } // stop any possible playback.
         if let barButton = sender as? UIBarButtonItem {
+            // TODO: Is this check actually used?
             if savePerformanceButton === barButton {
                 print("JAMVC: Save button segue!")
             } else {
@@ -86,8 +86,8 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             }
         }
         
-        // FIXME: make sure this works.
         // Handling Starting a Reply
+        // FIXME: make sure this works.
         if segue.identifier == JamViewSegueIdentifiers.replyToSegue {
             print("JAMVC: Preparing for a replyto segue.")
             if segue.destination is ChirpJamViewController {
@@ -138,8 +138,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         // FIXME: I don't think this function is ever actually called. Find out and delete if necessary.
         if sender.source is SettingsTableViewController {
             // Unwinding from settings screen.
-            print("JAMVC: unwinding from a settings screen.")
-            print("JAMVC: state",self.state)
+            print("JAMVC: unwinding from a settings screen. Current state:", self.state)
             if (self.state == ChirpJamModes.new) { // if it's still a new jam, update the sound scheme
                 print("JAMVC: updating the Pd file.")
                 self.updateUI()
@@ -199,9 +198,6 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         // TODO: should there be some kind of change in loaded mode? Like changing the user's layer sound, or adjusting the previous performers' sound?
         if self.state == ChirpJamModes.new {
             let (canDisplay, _) = soundSchemeDropDown.show()
-            print("JAMVC: tapped SoundScheme button, DropDown display:", canDisplay)
-        } else {
-            print("JAMVC: tapped SoundScheme button, no dropdown in mode", self.state)
         }
     }
     
@@ -309,11 +305,6 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         soundSchemeDropDown.anchorView = self.instrumentButton // anchor dropdown to intrument button
         soundSchemeDropDown.dataSource = Array(SoundSchemes.namesForKeys.values) // set dropdown datasource to available SoundSchemes
         soundSchemeDropDown.direction = .bottom
-        //soundSchemeDropDown.width = 100.0
-        
-        soundSchemeDropDown.cancelAction = {() -> Void in
-            print("DropDown was closed.")
-        }
         
         // Action triggered on selection
         soundSchemeDropDown.selectionAction = {(index: Int, item: String) -> Void in
@@ -324,17 +315,17 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         }
     }
     
-    override func viewDidLayoutSubviews() {
-        print("Laid Out Subviews.")
-        print("JAMVC: Main ChirpView frame:", self.chirpeySquare.frame.size)
-        print("JAMVC:Reply ChirpView frame:", self.replyToPerformanceView?.frame.size ?? "None Available")
-        print("JAMVC:Reply ChirpView comod:", self.replyToPerformanceView?.contentMode ?? "None Available")
-    }
+//    override func viewDidLayoutSubviews() {
+//        print("Laid Out Subviews.")
+//        print("JAMVC: Main ChirpView frame:", self.chirpeySquare.frame.size)
+//        print("JAMVC:Reply ChirpView frame:", self.replyToPerformanceView?.frame.size ?? "None Available")
+//        print("JAMVC:Reply ChirpView comod:", self.replyToPerformanceView?.contentMode ?? "None Available")
+//    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         print("JAMVC: viewDidAppear.")
-        // what tab is this view under? can I figure that out?
+        // Check what tab the VC exists under and re-open patch if necessary.
         if (tabBarItem.title == TabBarItemTitles.jamTab) { // onlyrun this stuff in the jam tab
             self.chirpeySquare.openPdFile() // Make sure the correct Pd File is open
         }
