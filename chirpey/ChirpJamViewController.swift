@@ -184,8 +184,9 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
 
     @IBAction func soundSchemeTapped(_ sender: Any) {
         // TODO: some check about state?
+        print("tapped SoundScheme button")
         soundSchemeDropDown.show()
-        updateUI()
+        //updateUI()
     }
     
     @IBAction func replyButtonPressed(_ sender: Any) {
@@ -213,11 +214,15 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateUI()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print("JAMVC: viewDidLoad")
         self.recordingProgress!.progress = 0.0 // need to initialise the recording progress at zero.
-        //self.updateUI() // just update UI on view did appear.
         
         // If it's a reply, setup the other performance(s) as subviews.
         if let originalPerformance = replyToPerformance {
@@ -283,17 +288,16 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             self.replyToPerformanceView = replyView
             
             // Soundscheme Dropdown initialisation.
-            soundSchemeDropDown.anchorView = self.instrumentButton
-            soundSchemeDropDown.dataSource = Array(SoundSchemes.namesForKeys.values)
+            soundSchemeDropDown.anchorView = self.instrumentButton // anchor dropdown to intrument button
+            soundSchemeDropDown.dataSource = Array(SoundSchemes.namesForKeys.values) // set dropdown datasource to available SoundSchemes
             
             // Action triggered on selection
             soundSchemeDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-                UserDefaults.standard.set(index, forKey: SettingsKeys.soundSchemeKey)
+                print("DropDown selected:", index, item)
+                UserDefaults.standard.set(SoundSchemes.keysForNames[item], forKey: SettingsKeys.soundSchemeKey)
+                UserDefaults.standard.synchronize()
             }
-
             
-            print("JAMVC: Main ChirpView frame:", self.chirpeySquare.frame.size)
-            print("JAMVC:Reply ChirpView frame:", self.replyToPerformanceView?.frame.size ?? "None Available")
         }
     }
     
@@ -374,15 +378,16 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             }
         case ChirpJamModes.loaded:
             if let loadedPerformance = loadedPerformance {
-                self.navigationItem.title = loadedPerformance.dateString()
+                let perfDate : String = loadedPerformance.dateString()
+                self.navigationItem.title = perfDate
                 if (!self.newPerformance) {
                     // disable the save button, only if it's a loaded performance (not a new one)
                     self.navigationItem.rightBarButtonItem?.isEnabled = false
-                    print("Not a new performance, so disabling the save button.")
+                    print("JAMVC: Not a new performance, so disabling the save button.")
                 } else {
                     self.navigationItem.rightBarButtonItem?.isEnabled = true
                 }
-                self.statusLabel.text = "Loaded: " + (loadedPerformance.dateString())
+                self.statusLabel.text = "Loaded: " + perfDate
                 self.performerLabel.text = loadedPerformance.performer
                 self.instrumentButton.setTitle(loadedPerformance.instrument, for: .normal)
                 self.chirpeySquare.image = loadedPerformance.image
