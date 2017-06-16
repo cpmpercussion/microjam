@@ -167,7 +167,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     }
     
     func playbackReplyToPerformance() {
-        // playback reply as well (if necessary).
+        /// Starts playback of the reply to a performance as well (if possible).
         if let replyPerf = self.replyToPerformance, let replyView = self.replyToPerformanceView {
             print("JAMVC: Playing back the replyto")
             var timers = [Timer]()
@@ -183,10 +183,13 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     }
 
     @IBAction func soundSchemeTapped(_ sender: Any) {
-        // TODO: some check about state?
-        print("tapped SoundScheme button")
-        soundSchemeDropDown.show()
-        //updateUI()
+        // TODO: should there be some kind of change in loaded mode? Like changing the user's layer sound, or adjusting the previous performers' sound?
+        if self.state == ChirpJamModes.new {
+            let (canDisplay, _) = soundSchemeDropDown.show()
+            print("JAMVC: tapped SoundScheme button, DropDown display:", canDisplay)
+        } else {
+            print("JAMVC: tapped SoundScheme button, no dropdown in mode", self.state)
+        }
     }
     
     @IBAction func replyButtonPressed(_ sender: Any) {
@@ -196,7 +199,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     
     /// IBAction for the Jam Button
     @IBAction func jamButtonPressed(_ sender: UIButton) {
-        /// TODO: implement some kind of generative performing here!
+        // TODO: implement some kind of generative performing here!
         if (self.jamming) {
             // Stop Jamming
             self.jamButton.setTitle("jam", for: UIControlState.normal)
@@ -286,18 +289,25 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             self.view.sendSubview(toBack: replyView)
             replyView.contentMode = .scaleToFill
             self.replyToPerformanceView = replyView
-            
-            // Soundscheme Dropdown initialisation.
-            soundSchemeDropDown.anchorView = self.instrumentButton // anchor dropdown to intrument button
-            soundSchemeDropDown.dataSource = Array(SoundSchemes.namesForKeys.values) // set dropdown datasource to available SoundSchemes
-            
-            // Action triggered on selection
-            soundSchemeDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-                print("DropDown selected:", index, item)
-                UserDefaults.standard.set(SoundSchemes.keysForNames[item], forKey: SettingsKeys.soundSchemeKey)
-                UserDefaults.standard.synchronize()
-            }
-            
+        }
+        
+        // Soundscheme Dropdown initialisation.
+        // FIXME: make sure dropdown is working.
+        soundSchemeDropDown.anchorView = self.instrumentButton // anchor dropdown to intrument button
+        soundSchemeDropDown.dataSource = Array(SoundSchemes.namesForKeys.values) // set dropdown datasource to available SoundSchemes
+        soundSchemeDropDown.direction = .bottom
+        //soundSchemeDropDown.width = 100.0
+        
+        soundSchemeDropDown.cancelAction = {() -> Void in
+            print("DropDown was closed.")
+        }
+        
+        // Action triggered on selection
+        soundSchemeDropDown.selectionAction = {(index: Int, item: String) -> Void in
+            print("DropDown selected:", index, item)
+            UserDefaults.standard.set(SoundSchemes.keysForNames[item], forKey: SettingsKeys.soundSchemeKey)
+            UserDefaults.standard.synchronize()
+            self.updateUI()
         }
     }
     

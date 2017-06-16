@@ -18,7 +18,9 @@ struct PerformanceLabels {
         "hit the right note.",
         "struck a chord.",
         "played out.",
-        "played it again."
+        "played it again.",
+        "hit the stage.",
+        "played like they meant it."
     ]
 }
 
