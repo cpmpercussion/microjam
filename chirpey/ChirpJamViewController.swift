@@ -8,7 +8,7 @@
 import UIKit
 import DropDown
 
-/// TODO: how to tell between loaded and saved and just loaded?
+// TODO: how to tell between loaded and saved and just loaded?
 
 /// Modes for the ChirpJameViewController: either new, recording, loaded, or playing.
 struct ChirpJamModes {
@@ -20,12 +20,14 @@ struct ChirpJamModes {
     static let playing = 5
 }
 
+/// Identifiers for different segues used in the storyboard.
 struct JamViewSegueIdentifiers {
     static let replyToSegue = "ReplyToPerformance"
     static let addNewSegue = "AddPerformance"
     static let showDetailSegue = "ShowDetail"
 }
 
+/// Titles for the TabBar items.
 struct TabBarItemTitles {
     static let worldTab = "world"
     static let jamTab = "jam!"
@@ -33,21 +35,27 @@ struct TabBarItemTitles {
 }
 
 class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerDelegate {
+    /// Maximum allowed recording time.
     let RECORDING_TIME = 5.0
     var state = ChirpJamModes.new
     var newPerformance : Bool = true
     var jamming : Bool = false
     var progress = 0.0
+    /// Timer for progress in recording and playback.
     var progressTimer : Timer?
+    /// Storage of loaded performance (if any)
     var loadedPerformance : ChirpPerformance?
+    /// Storage of the original performance for a reply.
     var replyToPerformance : ChirpPerformance?
-//    var performanceViews : [ChirpView] = [ChirpView]() // empty view array for now.
+    //    var performanceViews : [ChirpView] = [ChirpView]() // empty view array for now.
+    /// Addition ChirpView for storage of the original performance for a reply.
     var replyToPerformanceView : ChirpView?
     var replyto : String?
     /// An array of timers for each note in the scheduled playback.
     var playbackTimers : [Timer]?
     /// App delegate - in case we need to upload a performance.
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    /// Dropdown menu for selecting SoundScheme
     let soundSchemeDropDown = DropDown() // dropdown menu for soundscheme
 
     @IBOutlet weak var replyButton: UIButton!
@@ -60,7 +68,8 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     @IBOutlet weak var savePerformanceButton: UIBarButtonItem!
     @IBOutlet weak var instrumentButton: UIButton!
     
-    /// MARK: - Navigation
+    // MARK: - Navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         print("JAMVC: Preparing for Segue")
         print("State: ", state)
@@ -92,6 +101,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         }
     }
     
+    /// IBAction for Cancel (bar) button. stops playback/recording and dismisses present performance.
     @IBAction func cancelPerformance(_ sender: UIBarButtonItem) {
         print("JAMVC: Cancel Button Pressed.")
         let isPresentingInAddPerformanceMode = presentingViewController is UINavigationController
@@ -106,7 +116,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         // If it's in a Jam tab, need to reset viewcontroller.
         if (presentedVC.tabBar.selectedItem?.title == TabBarItemTitles.jamTab) { // check if we're in the Jam! tab.
             print("JAMVC: Cancel pressed from jam tab so do Jam Actions")
-            /// FIXME: Remove this after initial testing: uploads cancelled performances as well.
+            // FIXME: Remove this after initial testing: uploads cancelled performances as well.
             if let perf = possiblePerf { // only runs if there is a loadedPerformance.
                 print("JAMVC: There is a performance loaded... saving before cancelling.")
                 appDelegate.upload(performance: perf)
@@ -124,8 +134,8 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         }
     }
     
-    /// TODO: I don't think this function is ever actually called.
     @IBAction func unwindToJamView(sender: UIStoryboardSegue) {
+        // FIXME: I don't think this function is ever actually called. Find out and delete if necessary.
         if sender.source is SettingsTableViewController {
             // Unwinding from settings screen.
             print("JAMVC: unwinding from a settings screen.")
@@ -138,7 +148,9 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         }
     }
     
-    /// MARK: - UI Interaction Functions
+    // MARK: - UI Interaction Functions
+    
+    /// IBAction for the play button. Starts playback of performance and replies iff in loaded mode. Stops if already playing.
     @IBAction func playButtonPressed(_ sender: UIButton) {
         if let loadedPerformance = loadedPerformance {
             if (!self.chirpeySquare!.playing) {
@@ -166,8 +178,8 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         }
     }
     
+    /// Starts playback of the reply to a performance (if possible).
     func playbackReplyToPerformance() {
-        /// Starts playback of the reply to a performance as well (if possible).
         if let replyPerf = self.replyToPerformance, let replyView = self.replyToPerformanceView {
             print("JAMVC: Playing back the replyto")
             var timers = [Timer]()
@@ -182,6 +194,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         }
     }
 
+    /// IBAction for the SoundScheme label. Opens a dropdown menu for selection when in "new" state.
     @IBAction func soundSchemeTapped(_ sender: Any) {
         // TODO: should there be some kind of change in loaded mode? Like changing the user's layer sound, or adjusting the previous performers' sound?
         if self.state == ChirpJamModes.new {
@@ -193,7 +206,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     }
     
     @IBAction func replyButtonPressed(_ sender: Any) {
-        /// TODO: Implement some kind of reply system.
+        // TODO: Implement some kind of reply system.
     }
     
     
@@ -401,7 +414,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
                 self.performerLabel.text = loadedPerformance.performer
                 self.instrumentButton.setTitle(loadedPerformance.instrument, for: .normal)
                 self.chirpeySquare.image = loadedPerformance.image
-                /// FIXME: Better way to reset images for ChirpViews.
+                // FIXME: Better way to reset images for ChirpViews.
                 if let replySquare = self.replyToPerformanceView { // reset image for reply performance view.
                     replySquare.image = replyToPerformance?.image
                 }
@@ -422,7 +435,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         }
     }
 
-    ///
+    /// Memory warning.
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -448,8 +461,8 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     
     /// Automatically triggered when recording time finishes.
     func stopTimer() {
-        /// FIXME: Incorporate this method with stopPlayback?
-        /// FIXME: Make sure that the reply performances are reset as well as the main performance.
+        // FIXME: Incorporate this method with stopPlayback?
+        // FIXME: Make sure that the reply performances are reset as well as the main performance.
         NSLog("JAMVC: Stop Timer Called (either finished or cancelled).")
         if (self.chirpeySquare!.recording) {
             self.stopRecording()
