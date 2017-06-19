@@ -138,10 +138,10 @@ class ChirpView: UIImageView {
         let receiver : String = "\(self.openPatchDollarZero ?? Int32(0))" + PdConstants.receiverPostFix
         //let list = ["/x",x,"/y",y,"/z",z] as [Any]
         // FIXME: figure out how to get Pd to parse the list sequentially.
-        PdBase.sendList(["/x",x], toReceiver: receiver)
-        PdBase.sendList(["/y",y], toReceiver: receiver)
-        PdBase.sendList(["/z",z], toReceiver: receiver)
         PdBase.sendList(["/m",m], toReceiver: receiver)
+        PdBase.sendList(["/z",z], toReceiver: receiver)
+        PdBase.sendList(["/y",y], toReceiver: receiver)
+        PdBase.sendList(["/x",x], toReceiver: receiver)
     }
     
     /**

@@ -27,21 +27,24 @@ struct SoundSchemes {
         1 : "keys",
         2 : "drums",
         3 : "strings",
-        4 : "quack"
+        4 : "quack",
+        5 : "wub"
     ]
     static let keysForNames : [String : Int] = [
         "chirp" : 0,
         "keys" : 1,
         "drums" : 2,
         "strings" : 3,
-        "quack" : 4
+        "quack" : 4,
+        "wub" : 5
     ]
     static let pdFilesForKeys : [Int : String] = [
         0 : "chirp.pd",
         1 : "keys.pd",
         2 : "drums.pd",
         3 : "strings.pd",
-        4 : "quack.pd"
+        4 : "quack.pd",
+        5 : "wub.pd"
     ]
 }
 

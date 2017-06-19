@@ -1,4 +1,4 @@
-#N canvas 373 183 546 681 10;
+#N canvas 308 207 546 681 10;
 #X declare -path metaPdLibs;
 #X obj 146 563 dac~;
 #X obj 120 37 list trim;

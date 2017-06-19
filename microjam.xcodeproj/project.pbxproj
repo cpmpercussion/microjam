@@ -48,6 +48,7 @@
 		5669CAF41DA7D06A009EEC3B /* m_lydiansharp5.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CADE1DA7D06A009EEC3B /* m_lydiansharp5.pd */; };
 		5669CAF51DA7D06A009EEC3B /* m_mixolydian.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CADF1DA7D06A009EEC3B /* m_mixolydian.pd */; };
 		5669CAF61DA7D06A009EEC3B /* m_phrygian.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CAE01DA7D06A009EEC3B /* m_phrygian.pd */; };
+		5669E7A61EF88FD400DEB77D /* wub.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669E7A51EF88FD400DEB77D /* wub.pd */; };
 		567286661E05E0AF0024A515 /* MicrojamTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567286651E05E0AF0024A515 /* MicrojamTabBarController.swift */; };
 		568D1DC41DF995E500A2BC0B /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 568D1DC31DF995E500A2BC0B /* Settings.bundle */; };
 		568D1DC81DF9BEDF00A2BC0B /* drums.pd in Resources */ = {isa = PBXBuildFile; fileRef = 568D1DC51DF9BEDF00A2BC0B /* drums.pd */; };
@@ -131,6 +132,7 @@
 		5669CADE1DA7D06A009EEC3B /* m_lydiansharp5.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = m_lydiansharp5.pd; sourceTree = "<group>"; };
 		5669CADF1DA7D06A009EEC3B /* m_mixolydian.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = m_mixolydian.pd; sourceTree = "<group>"; };
 		5669CAE01DA7D06A009EEC3B /* m_phrygian.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = m_phrygian.pd; sourceTree = "<group>"; };
+		5669E7A51EF88FD400DEB77D /* wub.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wub.pd; sourceTree = "<group>"; };
 		567286651E05E0AF0024A515 /* MicrojamTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MicrojamTabBarController.swift; sourceTree = "<group>"; };
 		568D1DC31DF995E500A2BC0B /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		568D1DC51DF9BEDF00A2BC0B /* drums.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = drums.pd; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 		5669CAC51DA7D06A009EEC3B /* synth */ = {
 			isa = PBXGroup;
 			children = (
+				5669E7A51EF88FD400DEB77D /* wub.pd */,
 				565143FC1DFAF11600F56B32 /* pluck~.pd */,
 				565143FD1DFAF11600F56B32 /* stringsynth.pd */,
 				565144001DFAF95900F56B32 /* c_ead.pd */,
@@ -500,6 +503,7 @@
 				5669CA981DA7AAA6009EEC3B /* Main.storyboard in Resources */,
 				568D1DCA1DF9BEDF00A2BC0B /* strings.pd in Resources */,
 				565144041DFAF95900F56B32 /* c_ead.pd in Resources */,
+				5669E7A61EF88FD400DEB77D /* wub.pd in Resources */,
 				568D1DC81DF9BEDF00A2BC0B /* drums.pd in Resources */,
 				5669CAF41DA7D06A009EEC3B /* m_lydiansharp5.pd in Resources */,
 				565143FA1DFAB79E00F56B32 /* adsr.pd in Resources */,
