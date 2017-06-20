@@ -1,0 +1,12 @@
+---
+layout: post
+title:  "MicroJam demo at Boost 2017"
+date:   2017-06-20 17:30:00 +0100
+categories: microjam conference demo
+---
+
+![Demostrating MicroJam at Boost]({{ site.baseurl }}/images/microjam-boost-7.jpg){: class="fit image"}
+
+We presented MicroJam today at the [Boost Technology and Equality in Music Conference](http://www.boost2017.com) at Sentralen, Oslo. The conference arranged a Tech Showcase session in _Hvelvet_, Sentralen's old bank vault with developers of music apps, synthesisers, robots and education software. I was joined by two master's students from the UiO Department of Informatics, Benedikte and Henrik who helped to demonstrated MicroJam to the many participants - thanks guys!
+
+It was wonderful to meet so many wonderful teachers, musicians, and developers from around the region and the world, looking forward to getting the app out to them as soon as we can!
