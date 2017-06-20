@@ -1,6 +1,6 @@
-#N canvas 350 252 690 562 10;
+#N canvas 1419 140 957 568 10;
 #X declare -path metaPdLibs;
-#X obj 146 563 dac~;
+#X obj 241 514 dac~;
 #X obj 118 43 r \$0-input;
 #X obj 118 65 list trim;
 #X obj 338 12 declare -path metaPdLibs;
@@ -8,7 +8,7 @@
 #X msg 309 152 /x \$1;
 #X obj 309 108 random 1000;
 #X obj 309 129 / 1000;
-#X obj 307 53 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+#X obj 307 53 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X obj 406 119 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
@@ -23,13 +23,13 @@
 #X obj 163 278 * 2000;
 #X obj 163 300 + 25;
 #X msg 163 322 decay \$1;
-#X obj 168 450 rev2~ 100 95 14400 60;
+#X obj 269 474 rev2~ 100 95 14400 60;
 #X obj 437 118 random 1000;
 #X obj 437 139 / 1000;
 #X msg 437 162 /y \$1;
 #X obj 155 224 t f;
 #X obj 78 216 t f;
-#N canvas 608 153 1140 735 bass 1;
+#N canvas 466 92 1140 735 bass 0;
 #X obj 579 23 inlet;
 #X obj 19 271 osc~;
 #X obj 51 226 *~;
@@ -175,12 +175,19 @@
 #X obj 370 57 s \$0-Glide;
 #X obj 769 52 inlet;
 #X obj 25 742 *~;
-#X obj 43 701 r \$0-bass;
-#X obj 43 722 lop~ 10;
+#X obj 150 634 r \$0-bass;
+#X obj 150 655 lop~ 10;
 #X obj 770 130 s \$0-bass;
 #X obj 740 83 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X floatatom 827 75 5 0 0 0 - - -, f 5;
+#X obj 970 70 s \$0-env;
+#X obj 249 687 vline~;
+#X msg 256 642 1 25 \, 0 350 25;
+#X obj 360 644 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 263 586 r \$0-env;
+#X obj 970 48 inlet;
 #X connect 0 0 69 0;
 #X connect 1 0 7 0;
 #X connect 2 0 4 1;
@@ -261,9 +268,13 @@
 #X connect 73 0 79 0;
 #X connect 74 0 56 0;
 #X connect 75 0 76 0;
-#X connect 76 0 74 1;
 #X connect 78 0 77 0;
-#X restore 88 374 pd bass;
+#X connect 81 0 74 1;
+#X connect 82 0 81 0;
+#X connect 82 0 83 0;
+#X connect 84 0 82 0;
+#X connect 85 0 80 0;
+#X restore 223 420 pd bass;
 #X obj 309 178 s \$0-input;
 #X floatatom 400 202 5 0 0 0 - - -, f 5;
 #X floatatom 464 201 5 0 0 0 - - -, f 5;
@@ -272,17 +283,30 @@
 #X obj 226 241 + 0.2;
 #X floatatom 237 273 5 0 0 0 - - -, f 5;
 #X obj 116 111 route /x /y /z /m;
-#X obj 117 429 *~ 0.6;
-#X obj 168 420 *~ 0.05;
-#X obj 335 363 t a;
-#X msg 321 306 1;
-#X msg 372 333 0;
-#X obj 378 272 t b;
-#X obj 289 337 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+#X obj 218 453 *~ 0.6;
+#X obj 269 444 *~ 0.05;
+#N canvas 562 427 450 300 onoffenv 1;
+#X obj 208 216 t a;
+#X msg 208 124 1;
+#X msg 219 191 0;
+#X obj 219 147 t b;
+#X obj 189 217 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X obj 421 341 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+#X obj 234 217 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X obj 372 306 delay 800;
+#X obj 219 170 delay 800;
+#X obj 192 37 inlet;
+#X obj 194 264 outlet;
+#X connect 0 0 8 0;
+#X connect 1 0 0 0;
+#X connect 1 0 3 0;
+#X connect 1 0 4 0;
+#X connect 2 0 0 0;
+#X connect 2 0 5 0;
+#X connect 3 0 6 0;
+#X connect 6 0 2 0;
+#X connect 7 0 1 0;
+#X restore 354 300 pd onoffenv;
 #X connect 1 0 2 0;
 #X connect 2 0 10 0;
 #X connect 5 0 28 0;
@@ -291,7 +315,8 @@
 #X connect 7 0 29 0;
 #X connect 8 0 17 0;
 #X connect 9 0 6 0;
-#X connect 10 0 39 0;
+#X connect 10 0 38 0;
+#X connect 10 0 27 4;
 #X connect 10 1 35 0;
 #X connect 11 0 13 0;
 #X connect 11 1 12 0;
@@ -326,11 +351,3 @@
 #X connect 36 0 0 0;
 #X connect 36 0 0 1;
 #X connect 37 0 21 0;
-#X connect 38 0 27 3;
-#X connect 39 0 38 0;
-#X connect 39 0 41 0;
-#X connect 39 0 42 0;
-#X connect 40 0 38 0;
-#X connect 40 0 43 0;
-#X connect 41 0 44 0;
-#X connect 44 0 40 0;
