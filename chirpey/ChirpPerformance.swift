@@ -5,36 +5,48 @@
 //  Created by Charles Martin on 21/11/16.
 //
 //
-
-/**
- Contains the data from a single chirp performance.
- Data is stored as an array of `TouchRecord`.
- */
 import UIKit
 import CoreLocation
 import UIColor_Hex_Swift
 import DateToolsSwift
 
+/**
+ Contains the data from a single chirp performance.
+ Data is stored as an array of `TouchRecord`.
+ */
 class ChirpPerformance : NSObject, NSCoding {
     /// Array of `TouchRecord`s to store performance data.
     var performanceData : [TouchRecord]
+    /// Array of Timers scheduled to play back each TouchRecord
     var playbackTimers : [Timer] = []
+    /// Date of the MicroJam performance
     var date : Date
+    /// Performer of the MicroJam performance
     var performer : String
+    /// Title of the MicroJam performance that this replies to, empty string if it is not a reply.
     var replyto : String = ""
+    /// Name of the SoundScheme used to record this performance.
     var instrument : String
+    /// UIImage of completed performance touch trace.
     var image : UIImage
+    /// Location of CSV file storing this performance's TouchRecords.
     var csvPathURL : URL?
+    /// Location where performances was recorded (unused).
     var location : CLLocation?
+    /// Colour used for touch trace of this recording.
     var colour : UIColor = UIColor.blue
     //    var backgroundColour : UIColor = UIColor.gray
 
-    // Static vars
+    // MARK: Archiving Paths and TouchRecord header.
+
+    /// Header line for performance CSVs.
     static let CSV_HEADER = "time,x,y,z,moving\n"
-    // MARK: Archiving Paths
+    /// URL of local documents directory.
     static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
+    /// URL of performance storage directory.
     static let ArchiveURL = DocumentsDirectory.appendingPathComponent("performances")
     
+    /// Keys for performances stored in NSCoders.
     struct PropertyKey {
         static let performanceDataKey = "performanceData"
         static let dateKey = "date"
@@ -119,6 +131,7 @@ class ChirpPerformance : NSObject, NSCoding {
     }
     
     // TODO: make playback behave like "play/pause" rather than start and cancel.
+    
     /// Schedules playback of the performance in a given `ChirpView`
     func playback(inView view : ChirpView) -> [Timer] {
         view.playbackColour = self.colour.brighterColor.cgColor // make sure colour is set before playback.
@@ -168,6 +181,8 @@ class ChirpPerformance : NSObject, NSCoding {
     }
 }
 
+// MARK: Extra classes and extensions.
+
 /**
  Contains the data from a single touch in the interaction square.
  
@@ -178,6 +193,7 @@ class ChirpPerformance : NSObject, NSCoding {
  - moving: whether the touch was moving when recorded (Bool represented as 0 or 1).
  
  Includes functions to output a single CSV line representing the touch.
+ Must be a class so that TouchRecords can be encoded as NSCoders.
  */
 class TouchRecord: NSObject, NSCoding {
     /// Time since the start of the recording in seconds
@@ -191,6 +207,7 @@ class TouchRecord: NSObject, NSCoding {
     /// whether the touch was moving when recorded
     var moving : Bool
     
+    /// Keys for NSCoder encoded contents.
     struct PropertyKey {
         static let time = "time"
         static let x = "x"
@@ -228,6 +245,7 @@ class TouchRecord: NSObject, NSCoding {
         return String(format:"%f, %f, %f, %f, %d\n", time, x, y, z, moving ? 1 : 0)
     }
     
+    /// Initialise a TouchRecord from an NSCoder.
     required convenience init?(coder aDecoder: NSCoder) {
         let time = aDecoder.decodeDouble(forKey: PropertyKey.time)
         let x = aDecoder.decodeDouble(forKey: PropertyKey.x)
@@ -237,6 +255,7 @@ class TouchRecord: NSObject, NSCoding {
         self.init(time: time, x: x, y: y, z: z, moving: moving)
     }
     
+    /// Encode a TouchRecord as an NSCoder.
     func encode(with aCoder: NSCoder) {
         aCoder.encode(self.time, forKey: PropertyKey.time)
         aCoder.encode(self.x, forKey: PropertyKey.x)

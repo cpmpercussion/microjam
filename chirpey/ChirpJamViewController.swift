@@ -10,30 +10,6 @@ import DropDown
 
 // TODO: how to tell between loaded and saved and just loaded?
 
-/// Modes for the ChirpJameViewController: either new, recording, loaded, or playing.
-struct ChirpJamModes {
-    static let new = 0
-    static let recording = 1
-    static let loadedAndUnsaved = 2
-    static let loadedAndSaved = 3
-    static let loaded = 4
-    static let playing = 5
-}
-
-/// Identifiers for different segues used in the storyboard.
-struct JamViewSegueIdentifiers {
-    static let replyToSegue = "ReplyToPerformance"
-    static let addNewSegue = "AddPerformance"
-    static let showDetailSegue = "ShowDetail"
-}
-
-/// Titles for the TabBar items.
-struct TabBarItemTitles {
-    static let worldTab = "world"
-    static let jamTab = "jam!"
-    static let settingsTab = "settings"
-}
-
 class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerDelegate {
     /// Maximum allowed recording time.
     let RECORDING_TIME = 5.0
@@ -197,14 +173,13 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     @IBAction func soundSchemeTapped(_ sender: Any) {
         // TODO: should there be some kind of change in loaded mode? Like changing the user's layer sound, or adjusting the previous performers' sound?
         if self.state == ChirpJamModes.new {
-            let (canDisplay, _) = soundSchemeDropDown.show()
+            soundSchemeDropDown.show()
         }
     }
     
     @IBAction func replyButtonPressed(_ sender: Any) {
         // TODO: Implement some kind of reply system.
     }
-    
     
     /// IBAction for the Jam Button
     @IBAction func jamButtonPressed(_ sender: UIButton) {
@@ -537,5 +512,4 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             }
         }
     }
-
 }

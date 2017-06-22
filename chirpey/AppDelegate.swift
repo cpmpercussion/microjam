@@ -9,55 +9,13 @@
 import UIKit
 import CloudKit
 
-struct SettingsKeys {
-    static let performerKey = "performer_name"
-    static let performerColourKey = "performer_colour"
-    static let backgroundColourKey = "background_colour"
-    static let soundSchemeKey = "sound_scheme"
-}
-
 protocol ModelDelegate {
     func errorUpdating(error: NSError)
     func modelUpdated()
 }
 
-struct SoundSchemes {
-    static let namesForKeys : [Int : String] = [
-        0 : "chirp",
-        1 : "keys",
-        2 : "drums",
-        3 : "strings",
-        4 : "quack",
-        5 : "wub"
-    ]
-    static let keysForNames : [String : Int] = [
-        "chirp" : 0,
-        "keys" : 1,
-        "drums" : 2,
-        "strings" : 3,
-        "quack" : 4,
-        "wub" : 5
-    ]
-    static let pdFilesForKeys : [Int : String] = [
-        0 : "chirp.pd",
-        1 : "keys.pd",
-        2 : "drums.pd",
-        3 : "strings.pd",
-        4 : "quack.pd",
-        5 : "wub.pd"
-    ]
-}
-
-/// Contains constants related to communication with Pd.
-struct PdConstants {
-    static let toGUILabel = "toGUI"
-    static let debugLabel = "debug"
-    static let receiverPostFix = "-input"
-}
-
 /// Maximum number of jams to download at a time from CloudKit
 let max_jams_to_fetch = 25
-
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
@@ -75,6 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
     var audioController : PdAudioController?
 
     // MARK: - CloudKit definitions
+    
     let container: CKContainer = CKContainer.default()
     let publicDB: CKDatabase = CKContainer.default().publicCloudDatabase
     let privateDB: CKDatabase = CKContainer.default().privateCloudDatabase
@@ -186,25 +145,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
         }
     }
     
-    /// Keys for performance data in CloudKit Storage
-    struct PerfCloudKeys {
-        static let type = "Performance"
-        static let date = "Date"
-        static let image = "Image"
-        static let instrument = "Instrument"
-        static let location = "PerformedAt"
-        static let performer = "Performer"
-        static let replyto = "ReplyTo"
-        static let touches = "Touches"
-        static let colour = "Colour"
-    }
-    
     /// Returns a temporary file path for png images
     func tempURL() -> URL {
         let filename = ProcessInfo.processInfo.globallyUniqueString + ".png"
         return URL.init(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(filename)
     }
-    
     
     /// Refresh list of world jams from CloudKit and then update in world jam table view.
     func fetchWorldJamsFromCloud() {
@@ -297,7 +242,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
                                     colour: colour, replyto: replyto)!
         return perf
     }
-    
     
     /// Upload a saved jam to CloudKit
     func upload(performance : ChirpPerformance) {
