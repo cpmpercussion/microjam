@@ -20,12 +20,17 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     /// Timer for progress in recording and playback.
     var progressTimer : Timer?
     /// Storage of loaded performance (if any)
-    var loadedPerformance : ChirpPerformance?
+        //var loadedPerformance : ChirpPerformance?
+    
+    var currentPerformance : ChirpPerformance
+    var currentPerfView : ChirpView
+    
+    var previousPerformances : [ChirpPerformance] = [ChirpPerformance]()
     /// Storage of the original performance for a reply.
-    var replyToPerformance : ChirpPerformance?
-    //    var performanceViews : [ChirpView] = [ChirpView]() // empty view array for now.
+        //var replyToPerformance : ChirpPerformance?
+    var previousPerfViews : [ChirpView] = [ChirpView]() // empty view array for now.
     /// Addition ChirpView for storage of the original performance for a reply.
-    var replyToPerformanceView : ChirpView?
+        //var replyToPerformanceView : ChirpView?
     var replyto : String?
     /// An array of timers for each note in the scheduled playback.
     var playbackTimers : [Timer]?
@@ -64,17 +69,17 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         
         // Handling Starting a Reply
         // FIXME: make sure this works.
-        if segue.identifier == JamViewSegueIdentifiers.replyToSegue {
-            print("JAMVC: Preparing for a replyto segue.")
-            if segue.destination is ChirpJamViewController {
-                let newJamViewController = segue.destination as! ChirpJamViewController
-                if let newreplytoperf = self.loadedPerformance {
-                    print("JAMVC: destination jam will be a reply to: ", newreplytoperf.title())
-                    newJamViewController.replyto = newreplytoperf.title()
-                    newJamViewController.replyToPerformance = newreplytoperf
-                }
-            }
-        }
+//        if segue.identifier == JamViewSegueIdentifiers.replyToSegue {
+//            print("JAMVC: Preparing for a replyto segue.")
+//            if segue.destination is ChirpJamViewController {
+//                let newJamViewController = segue.destination as! ChirpJamViewController
+//                if let newreplytoperf = self.loadedPerformance {
+//                    print("JAMVC: destination jam will be a reply to: ", newreplytoperf.title())
+//                    newJamViewController.replyto = newreplytoperf.title()
+//                    newJamViewController.replyToPerformance = newreplytoperf
+//                }
+//            }
+//        }
     }
     
     /// IBAction for Cancel (bar) button. stops playback/recording and dismisses present performance.
@@ -86,8 +91,8 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         stopTimer() // Stopping all Timers
         //stopRecording()
         stopPlayback() // stop any possible playback timers
-        let possiblePerf : ChirpPerformance? = self.loadedPerformance
-        self.loadedPerformance = nil
+        let possiblePerf : ChirpPerformance? = self.currentPerformance
+        self.currentPerformance = nil
         
         // If it's in a Jam tab, need to reset viewcontroller.
         if (presentedVC.tabBar.selectedItem?.title == TabBarItemTitles.jamTab) { // check if we're in the Jam! tab.
@@ -154,19 +159,39 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     }
     
     /// Starts playback of the reply to a performance (if possible).
+//    func playbackReplyToPerformance() {
+//        if let replyPerf = self.replyToPerformance, let replyView = self.replyToPerformanceView {
+//            print("JAMVC: Playing back the replyto")
+//            var timers = [Timer]()
+//            for timer in replyPerf.playback(inView: replyView) {
+//                timers.append(timer)
+//            }
+//            
+//            if let existingTimers = self.playbackTimers {
+//                timers.append(contentsOf: existingTimers)
+//            }
+//            self.playbackTimers = timers
+//        }
+//    }
+    
     func playbackReplyToPerformance() {
-        if let replyPerf = self.replyToPerformance, let replyView = self.replyToPerformanceView {
-            print("JAMVC: Playing back the replyto")
-            var timers = [Timer]()
-            for timer in replyPerf.playback(inView: replyView) {
+        
+        print("JAMVC: Playing back the replyto")
+        var timers = [Timer]()
+        
+        for (perf, view) in zip(self.previousPerformances, self.previousPerfViews) {
+            
+            for timer in perf.playback(inView: view) {
                 timers.append(timer)
             }
-            
-            if let existingTimers = self.playbackTimers {
-                timers.append(contentsOf: existingTimers)
-            }
-            self.playbackTimers = timers
         }
+        
+        if let existingTimers = self.playbackTimers {
+            timers.append(contentsOf: existingTimers)
+        }
+        
+        self.playbackTimers = timers
+        
     }
 
     /// IBAction for the SoundScheme label. Opens a dropdown menu for selection when in "new" state.
@@ -179,6 +204,15 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     
     @IBAction func replyButtonPressed(_ sender: Any) {
         // TODO: Implement some kind of reply system.
+        print("JAMVC: Reply button pressed");
+        
+        self.previousPerformances.append(self.currentPerformance)
+        self.previousPerfViews.append(self.currentPerfView)
+        
+        self.currentPerformance = ChirpPerformance()
+        self.currentPerfView = ChirpView(chirpeySquare.frame)
+        
+        
     }
     
     /// IBAction for the Jam Button
