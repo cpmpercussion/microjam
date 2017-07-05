@@ -98,7 +98,9 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     //        print("JAMVC:Reply ChirpView frame:", self.replyToPerformanceView?.frame.size ?? "None Available")
     //        print("JAMVC:Reply ChirpView comod:", self.replyToPerformanceView?.contentMode ?? "None Available")
     //    }
-
+    
+    
+    // Reset some params and sets the state
     func resetToState(state : Int) {
         self.recordingProgress!.progress = 0.0
         self.jamming = false
@@ -110,6 +112,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     /// Resets to a new performance state.
     func newRecordView() {
         
+        // Creating a new ChirpView
         let newView = ChirpView(frame: self.recordView!.frame)
         newView.isUserInteractionEnabled = true
         newView.backgroundColor = UIColor.clear
@@ -190,6 +193,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         
         var timers = [Timer]()
         
+        // Getting the timers from all performances, should we use these for something in this class?
         for view in self.performanceViews {
             
             if let perfTimers = view.performance?.playback(inView: view) {
@@ -242,6 +246,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         }
     }
     
+    // Adds the chirpView to superview, and adds constraints
     func add(chirpView : ChirpView) {
         
         self.view.addSubview(chirpView)
