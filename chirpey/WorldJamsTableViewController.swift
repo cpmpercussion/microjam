@@ -136,14 +136,14 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
             if let selectedJamCell = sender as? PerformanceTableCell {
                 let indexPath = tableView.indexPath(for: selectedJamCell)!
                 let selectedJam = appDelegate.storedPerformances[indexPath.row]
-                jamDetailViewController.loadedPerformance = selectedJam
+                //jamDetailViewController.loadedPerformance = selectedJam
                 jamDetailViewController.state = ChirpJamModes.loaded
                 jamDetailViewController.newPerformance = false
                 
                 if (selectedJam.replyto != "") { // setup the replyto jam if necessary.
                     print("WJTVC: Loading the replyto performance as well: ", selectedJam.replyto)
                     jamDetailViewController.replyto = selectedJam.replyto
-                    jamDetailViewController.replyToPerformance = appDelegate.fetchPerformanceFrom(title: selectedJam.replyto)
+                    //jamDetailViewController.replyToPerformance = appDelegate.fetchPerformanceFrom(title: selectedJam.replyto)
                 }
             }
         }
@@ -151,23 +151,23 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
     
     /// Segue back to the World Jam Table
     @IBAction func unwindToJamList(sender: UIStoryboardSegue) {
-        if let sourceViewController = sender.source as? ChirpJamViewController, let performance = sourceViewController.loadedPerformance {
-            print("WJTVC: Unwound, found a performance:", performance.title())
-            if let selectedIndexPath = tableView.indexPathForSelectedRow { // passes if a row had been selected.
-                // Update existing performance
-                print("WJTVC: Unwound to a selected row:",selectedIndexPath.description)
-                
-                if (appDelegate.storedPerformances[selectedIndexPath.row].title() != performance.title()) { // check if it's actually a reply.
-                    print("WJTVC: Found a reply performance:", performance.title())
-                    self.addNew(performance: performance) // add it.
-                }
-            } else {
-                // Add a new performance
-                print("WJTVC: Unwound with a new performance:", performance.title())
-                self.addNew(performance: performance)
-                sourceViewController.new() // resets the performance after saving it.
-            }
-        }
+//        if let sourceViewController = sender.source as? ChirpJamViewController, let performance = sourceViewController.loadedPerformance {
+//            print("WJTVC: Unwound, found a performance:", performance.title())
+//            if let selectedIndexPath = tableView.indexPathForSelectedRow { // passes if a row had been selected.
+//                // Update existing performance
+//                print("WJTVC: Unwound to a selected row:",selectedIndexPath.description)
+//                
+//                if (appDelegate.storedPerformances[selectedIndexPath.row].title() != performance.title()) { // check if it's actually a reply.
+//                    print("WJTVC: Found a reply performance:", performance.title())
+//                    self.addNew(performance: performance) // add it.
+//                }
+//            } else {
+//                // Add a new performance
+//                print("WJTVC: Unwound with a new performance:", performance.title())
+//                self.addNew(performance: performance)
+//                sourceViewController.new() // resets the performance after saving it.
+//            }
+//        }
     }
     
     /// Adds a new ChirpPerformance to the top of the list and saves it in the data source.
