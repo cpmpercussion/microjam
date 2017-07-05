@@ -38,6 +38,8 @@ class ChirpView: UIImageView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.performance = ChirpPerformance()
+        self.image = UIImage()
     }
     
     /// Convenience Initialiser only used when loading performances for playback only. Touch is disabled!

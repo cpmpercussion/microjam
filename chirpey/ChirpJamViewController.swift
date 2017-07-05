@@ -16,11 +16,12 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     var state = ChirpJamModes.new
     var newPerformance : Bool = true
     var jamming : Bool = false
+    var recordFrame : CGRect?
     var progress = 0.0
     /// Timer for progress in recording and playback.
     var progressTimer : Timer?
     /// Storage of the original performance for a reply.
-    var previousPerfViews : [ChirpView] = [ChirpView]() // empty view array for now.
+    var performanceViews : [ChirpView] = [ChirpView]() // empty view array for now.
     /// Addition ChirpView for storage of the original performance for a reply.
     var replyto : String?
     /// App delegate - in case we need to upload a performance.
@@ -33,7 +34,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     @IBOutlet weak var jamButton: UIButton!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var performerLabel: UILabel!
-    @IBOutlet weak var chirpeySquare: ChirpView!
+    @IBOutlet weak var recordView: ChirpView!
     @IBOutlet weak var recordingProgress: UIProgressView!
     @IBOutlet weak var savePerformanceButton: UIBarButtonItem!
     @IBOutlet weak var instrumentButton: UIButton!
@@ -66,14 +67,18 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         stopTimer() // Stopping all Timers
         //stopRecording()
         stopPlayback() // stop any possible playback timers
-//        let possiblePerf : ChirpPerformance? = self.loadedPerformance
-//        self.loadedPerformance = nil
+        
+        if self.recordView == self.performanceViews.last {
+            let lastPerf = self.performanceViews.popLast()
+            self.new()
+            lastPerf?.removeFromSuperview()
+        }
         
         // If it's in a Jam tab, need to reset viewcontroller.
         if (presentedVC.tabBar.selectedItem?.title == TabBarItemTitles.jamTab) { // check if we're in the Jam! tab.
             print("JAMVC: Cancel pressed from jam tab so do Jam Actions")
             // FIXME: Remove this after initial testing: uploads cancelled performances as well.
-            self.new() // Just load with a new performance.
+            // self.new() // Just load with a new performance.
         }
         
         // Finally Dismissing the performance.
@@ -94,7 +99,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             if (self.state == ChirpJamModes.new) { // if it's still a new jam, update the sound scheme
                 print("JAMVC: updating the Pd file.")
                 self.updateUI()
-                self.chirpeySquare.reloadPatch() // could be openPdFile()
+                self.recordView.reloadPatch() // could be openPdFile()
             }
         }
     }
@@ -105,6 +110,22 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     @IBAction func playButtonPressed(_ sender: UIButton) {
         
         // TODO: Implement playbutton
+        
+        self.recordingProgress!.progress = 0.0
+        self.jamming = false
+        self.progress = 0.0
+        self.state = ChirpJamModes.playing
+        self.updateUI()
+        self.startProgressBar()
+        
+        var timers = [Timer]()
+        
+        for view in self.performanceViews {
+            
+            if let perfTimers = view.performance?.playback(inView: view) {
+                timers += perfTimers
+            }
+        }
     }
 
     /// IBAction for the SoundScheme label. Opens a dropdown menu for selection when in "new" state.
@@ -119,24 +140,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         // TODO: Implement some kind of reply system.
         print("JAMVC: Reply button pressed");
         
-        if  self.state != ChirpJamModes.recording {
-            
-            self.chirpeySquare.isUserInteractionEnabled = false
-            self.previousPerfViews.append(self.chirpeySquare)
-            let replyView = ChirpView(frame: self.chirpeySquare.frame)
-            replyView.backgroundColor = UIColor.clear
-            replyView.translatesAutoresizingMaskIntoConstraints = false
-            self.add(chirpView: replyView)
-
-            self.chirpeySquare = replyView
-            
-            self.recordingProgress!.progress = 0.0
-            self.jamming = false
-            self.progress = 0.0
-            self.state = ChirpJamModes.new
-            self.newPerformance = true
-            self.updateUI()
-        }
+        self.new()
     }
     
     /// IBAction for the Jam Button
@@ -146,14 +150,14 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             // Stop Jamming
             self.jamButton.setTitle("jam", for: UIControlState.normal)
             self.jamming = false
-            if (self.chirpeySquare!.playing) {
+            if (self.recordView!.playing) {
                 self.playButtonPressed(self.playButton) // stop playing if already playing.
             }
         } else {
             // Start Jamming
             self.jamButton.setTitle("no jam", for: UIControlState.normal)
             self.jamming = true
-            if (!self.chirpeySquare!.playing) {
+            if (!self.recordView!.playing) {
                 self.playButtonPressed(self.playButton) // start playing if not already playing.
             }
         }
@@ -165,46 +169,46 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         let horizontalConstraint = NSLayoutConstraint(item: chirpView,
                                                       attribute: NSLayoutAttribute.centerX,
                                                       relatedBy: NSLayoutRelation.equal,
-                                                      toItem: chirpeySquare,
+                                                      toItem: recordView,
                                                       attribute: NSLayoutAttribute.centerX,
                                                       multiplier: 1,
                                                       constant: 0)
         let verticalConstraint = NSLayoutConstraint(item: chirpView,
                                                     attribute: NSLayoutAttribute.centerY,
                                                     relatedBy: NSLayoutRelation.equal,
-                                                    toItem: chirpeySquare,
+                                                    toItem: recordView,
                                                     attribute: NSLayoutAttribute.centerY,
                                                     multiplier: 1,
                                                     constant: 0)
         let leftConstraint = NSLayoutConstraint(item: chirpView,
                                                 attribute: NSLayoutAttribute.left,
                                                 relatedBy: NSLayoutRelation.equal,
-                                                toItem: chirpeySquare,
+                                                toItem: recordView,
                                                 attribute: NSLayoutAttribute.left,
                                                 multiplier: 1,
                                                 constant: 0)
         let rightConstraint = NSLayoutConstraint(item: chirpView,
                                                  attribute: NSLayoutAttribute.right,
                                                  relatedBy: NSLayoutRelation.equal,
-                                                 toItem: chirpeySquare,
+                                                 toItem: recordView,
                                                  attribute: NSLayoutAttribute.right,
                                                  multiplier: 1,
                                                  constant: 0)
         let topConstraint = NSLayoutConstraint(item: chirpView,
                                                attribute: NSLayoutAttribute.top,
                                                relatedBy: NSLayoutRelation.equal,
-                                               toItem: chirpeySquare,
+                                               toItem: recordView,
                                                attribute: NSLayoutAttribute.top,
                                                multiplier: 1,
                                                constant: 0)
         let bottomConstraint = NSLayoutConstraint(item: chirpView,
                                                   attribute: NSLayoutAttribute.bottom,
                                                   relatedBy: NSLayoutRelation.equal,
-                                                  toItem: chirpeySquare,
+                                                  toItem: recordView,
                                                   attribute: NSLayoutAttribute.bottom,
                                                   multiplier: 1,
                                                   constant: 0)
-        let chirpHoriz = NSLayoutConstraint(item: chirpeySquare,
+        let chirpHoriz = NSLayoutConstraint(item: recordView,
                                             attribute: NSLayoutAttribute.centerX,
                                             relatedBy: NSLayoutRelation.equal,
                                             toItem: self.view,
@@ -224,6 +228,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         super.viewDidLoad()
         print("JAMVC: viewDidLoad")
         self.recordingProgress!.progress = 0.0 // need to initialise the recording progress at zero.
+        self.recordFrame = self.recordView.frame
         
         // Soundscheme Dropdown initialisation.
         // FIXME: make sure dropdown is working.
@@ -252,14 +257,23 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         print("JAMVC: viewDidAppear.")
         // Check what tab the VC exists under and re-open patch if necessary.
         if (tabBarItem.title == TabBarItemTitles.jamTab) { // onlyrun this stuff in the jam tab
-            self.chirpeySquare.openPdFile() // Make sure the correct Pd File is open
+            self.recordView.openPdFile() // Make sure the correct Pd File is open
         }
         self.updateUI()
     }
     
     /// Resets to a new performance state.
     func new() {
-        self.chirpeySquare.startNewPerformance() // throwing away the current performance (if any) // also loads patch
+        
+        print("RecordFrame:\n")
+        print(self.recordFrame!)
+        let newView = ChirpView(frame: self.recordFrame!)
+        newView.isUserInteractionEnabled = true
+        newView.backgroundColor = UIColor.clear
+        newView.recordingColour = UIColor.orange.cgColor
+        self.add(chirpView: newView)
+        self.recordView = newView
+        
         self.recordingProgress!.progress = 0.0
         self.jamming = false
         self.progress = 0.0
@@ -293,7 +307,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             self.jamButton.isEnabled = false
             self.replyButton.isEnabled = false
             self.instrumentButton.setTitle(SoundSchemes.namesForKeys[UserDefaults.standard.integer(forKey: SettingsKeys.soundSchemeKey)], for: .normal)
-            self.chirpeySquare.openPdFile()
+            self.recordView.openPdFile()
             
         case ChirpJamModes.recording:
             
@@ -365,7 +379,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         if (self.state == ChirpJamModes.new) {
             NSLog("JAMVC: Starting a recording.")
             self.startProgressBar()
-            self.chirpeySquare?.recording = true
+            self.recordView?.recording = true
             self.state = ChirpJamModes.recording
             self.updateUI()
         }
@@ -381,17 +395,13 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         // FIXME: Incorporate this method with stopPlayback?
         // FIXME: Make sure that the reply performances are reset as well as the main performance.
         NSLog("JAMVC: Stop Timer Called (either finished or cancelled).")
-        if (self.chirpeySquare!.recording) {
+        if (self.recordView!.recording) {
             self.stopRecording()
-            self.chirpeySquare!.recording = false
         } else {
             self.stopPlayback()
-            self.chirpeySquare!.playing = false
+            //self.recordView!.playing = false
         }
         //if let replySquare = self.replyToPerformanceView {replySquare.playing = false} // either way, set the replySquare to stopped.
-        for replyView in self.previousPerfViews {
-            replyView.playing = false
-        }
         self.progressTimer?.invalidate()
         self.progress = 0.0
         self.recordingProgress?.progress = 0.0
@@ -399,7 +409,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         // Restart Playback in Jam Mode.
         if (self.jamming) {
             print("JAMVC: Restarting playback for the jam.")
-            if (!self.chirpeySquare!.playing) {
+            if (!self.recordView!.playing) {
                 self.playButtonPressed(self.playButton) // start playing if not already playing.
             }
         }
@@ -408,10 +418,12 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     /// Stops the current recording.
     func stopRecording() {
         print("JAMVC: Stopping recording; now loading the recorded performance.")
-        if let lastPerformance = self.chirpeySquare!.closeRecording() {
+        if let lastPerformance = self.recordView!.closeRecording() {
             if let replytext = self.replyto {
                 lastPerformance.replyto = replytext
             }
+            self.recordView.isUserInteractionEnabled = false
+            self.performanceViews.append(self.recordView)
             self.load(performance: lastPerformance)
         }
     }
@@ -436,8 +448,8 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     /// touchesBegan method starts a recording if this is the first touch in a new microjam.
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         // start timer if not recording
-        let p = touches.first?.location(in: self.chirpeySquare);
-        if (self.chirpeySquare!.bounds.contains(p!) && self.state == ChirpJamModes.new) {
+        let p = touches.first?.location(in: self.recordView);
+        if (self.recordView!.bounds.contains(p!) && self.state == ChirpJamModes.new) {
                 print("JAMVC: Starting a Recording")
                 self.startRecording()
         }
