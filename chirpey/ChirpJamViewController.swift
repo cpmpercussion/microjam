@@ -27,6 +27,8 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     /// Dropdown menu for selecting SoundScheme
     let soundSchemeDropDown = DropDown() // dropdown menu for soundscheme
+    
+    var loadedPerformance : ChirpPerformance?
 
     @IBOutlet weak var replyButton: UIButton!
     @IBOutlet weak var playButton: UIButton!
@@ -77,7 +79,9 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         print("JAMVC: viewDidLoad")
         self.recordingProgress!.progress = 0.0 // need to initialise the recording progress at zero.
         
-        if (self.performanceViews.isEmpty) {
+        if let loadedPer = self.loadedPerformance {
+            self.newViewWith(performance: loadedPer)
+        } else {
             self.newRecordView()
         }
         
@@ -111,9 +115,25 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         self.progress = 0.0
     }
     
+    func newViewWith(performance : ChirpPerformance) {
+        
+        let newView = ChirpView(frame: self.referenceView!.frame, performance: performance)
+        newView.isUserInteractionEnabled = true
+        newView.backgroundColor = UIColor.clear
+        newView.openPdFile()
+        self.performanceViews.append(newView)
+        self.add(chirpView: newView)
+        
+        self.newPerformance = false
+        self.state = ChirpJamModes.loaded
+        self.resetProgress()
+        self.updateUI()
+    }
+    
     /// Resets to a new performance state.
     func newRecordView() {
         
+        //print(self.referenceView!.frame)
         // Creating a new ChirpView
         let newView = ChirpView(frame: self.referenceView!.frame)
         newView.isUserInteractionEnabled = true
@@ -137,7 +157,6 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         stopTimer() // Stopping all Timers
         //stopRecording()
         stopPlayback() // stop any possible playback
-        print(self.performanceViews)
         
         if let currentView = self.performanceViews.popLast() {
             currentView.removeFromSuperview()
@@ -148,8 +167,6 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
                 self.updateUI()
             }
         }
-
-        
         self.updateUI()
         
 //        // If it's in a Jam tab, need to reset viewcontroller.

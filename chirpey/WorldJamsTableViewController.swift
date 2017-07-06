@@ -136,15 +136,13 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
             if let selectedJamCell = sender as? PerformanceTableCell {
                 let indexPath = tableView.indexPath(for: selectedJamCell)!
                 let selectedJam = appDelegate.storedPerformances[indexPath.row]
-                //jamDetailViewController.loadedPerformance = selectedJam
-                jamDetailViewController.state = ChirpJamModes.loaded
-                jamDetailViewController.newPerformance = false
+                jamDetailViewController.loadedPerformance = selectedJam
                 
-                if (selectedJam.replyto != "") { // setup the replyto jam if necessary.
-                    print("WJTVC: Loading the replyto performance as well: ", selectedJam.replyto)
-                    jamDetailViewController.replyto = selectedJam.replyto
-                    //jamDetailViewController.replyToPerformance = appDelegate.fetchPerformanceFrom(title: selectedJam.replyto)
-                }
+//                if (selectedJam.replyto != "") { // setup the replyto jam if necessary.
+//                    print("WJTVC: Loading the replyto performance as well: ", selectedJam.replyto)
+//                    jamDetailViewController.replyto = selectedJam.replyto
+//                    //jamDetailViewController.replyToPerformance = appDelegate.fetchPerformanceFrom(title: selectedJam.replyto)
+//                }
             }
         }
     }
