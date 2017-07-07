@@ -175,7 +175,7 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="settingstablecell" id="Cvd-cG-I3p">
-                                <rect key="frame" x="0.0" y="56" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Cvd-cG-I3p" id="nxe-Y1-Sgh">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -211,7 +211,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="365"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gcn-gn-WZ5" id="sXd-HP-H6B">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="365"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="364.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultRecordingImage" translatesAutoresizingMaskIntoConstraints="NO" id="C1Y-wG-D7P">
@@ -361,7 +361,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="choose a stage name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="16m-hO-BOl">
-                                <rect key="frame" x="37.5" y="440" width="300" height="80"/>
+                                <rect key="frame" x="37.5" y="120" width="300" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="NrN-BG-xWL"/>
                                     <constraint firstAttribute="width" constant="300" id="vrX-cO-joW"/>
@@ -370,20 +370,11 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="continue"/>
                             </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="microjamTitleLogo" translatesAutoresizingMaskIntoConstraints="NO" id="hMu-Vy-hw6">
-                                <rect key="frame" x="-12.5" y="70" width="400" height="400"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="400" id="EEc-iB-U4K"/>
-                                    <constraint firstAttribute="width" secondItem="hMu-Vy-hw6" secondAttribute="height" multiplier="1:1" id="veJ-gt-qPB"/>
-                                </constraints>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.97367788460000004" green="0.97367788460000004" blue="0.97367788460000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="16m-hO-BOl" firstAttribute="top" secondItem="hMu-Vy-hw6" secondAttribute="bottom" constant="-30" id="DTa-RS-wpP"/>
-                            <constraint firstItem="hMu-Vy-hw6" firstAttribute="top" secondItem="b5Y-MI-JbV" secondAttribute="bottom" constant="50" id="Pns-ZF-2YB"/>
+                            <constraint firstItem="16m-hO-BOl" firstAttribute="top" secondItem="b5Y-MI-JbV" secondAttribute="bottom" constant="100" id="D1c-Wa-LUV"/>
                             <constraint firstItem="16m-hO-BOl" firstAttribute="centerX" secondItem="OMx-Lr-dck" secondAttribute="centerX" id="bXl-02-9vy"/>
-                            <constraint firstItem="hMu-Vy-hw6" firstAttribute="centerX" secondItem="OMx-Lr-dck" secondAttribute="centerX" id="vTg-rB-vl8"/>
                         </constraints>
                     </view>
                     <connections>
@@ -417,7 +408,6 @@
     <resources>
         <image name="defaultRecordingImage" width="150" height="150"/>
         <image name="localjamsTabIcon" width="37" height="37"/>
-        <image name="microjamTitleLogo" width="600" height="600"/>
         <image name="remotejamsTabIcon" width="37" height="37"/>
         <image name="settingsTabIcon" width="37" height="37"/>
     </resources>
