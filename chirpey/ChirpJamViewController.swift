@@ -20,7 +20,8 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     /// Timer for progress in recording and playback.
     var progressTimer : Timer?
     /// Storage of the original performance for a reply.
-    var performanceViews : [ChirpView] = [ChirpView]() // empty view array for now.
+    var performanceViews : [ChirpView] = [ChirpView]() // Previous performances, should be populated if this is a reply
+    var recordView : ChirpView? //
     /// Addition ChirpView for storage of the original performance for a reply.
     var replyto : String?
     /// App delegate - in case we need to upload a performance.
@@ -85,6 +86,8 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             self.newRecordView()
         }
         
+        self.referenceView!.isUserInteractionEnabled = false
+        
         // Soundscheme Dropdown initialisation.
         // FIXME: make sure dropdown is working.
         soundSchemeDropDown.anchorView = self.instrumentButton // anchor dropdown to intrument button
@@ -108,7 +111,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     //    }
     
     
-    // Reset some params and sets the state
+    // Reset some params
     func resetProgress() {
         self.recordingProgress!.progress = 0.0
         self.jamming = false
@@ -118,7 +121,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     func newViewWith(performance : ChirpPerformance) {
         
         let newView = ChirpView(frame: self.referenceView!.frame, performance: performance)
-        newView.isUserInteractionEnabled = true
+        newView.isUserInteractionEnabled = false
         newView.backgroundColor = UIColor.clear
         newView.openPdFile()
         self.performanceViews.append(newView)
@@ -133,19 +136,34 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     /// Resets to a new performance state.
     func newRecordView() {
         
-        //print(self.referenceView!.frame)
-        // Creating a new ChirpView
-        let newView = ChirpView(frame: self.referenceView!.frame)
-        newView.isUserInteractionEnabled = true
-        newView.backgroundColor = UIColor.clear
-        newView.openPdFile()
-        self.performanceViews.append(newView)
-        self.add(chirpView: newView)
+        if let recordView = self.recordView {
+            // Creating a new ChirpView
+            let newView = ChirpView(frame: self.referenceView!.frame)
+            newView.isUserInteractionEnabled = true
+            newView.backgroundColor = UIColor.clear
+            newView.openPdFile()
+            
+            // Removing current ChirpView
+            recordView.removeFromSuperview()
+            
+            // Adding new view to screen
+            self.recordView = newView
+            self.add(chirpView: newView)
+        
+        } else {
+            self.recordView = ChirpView(frame: self.referenceView!.frame)
+            self.recordView!.isUserInteractionEnabled = true
+            self.recordView!.backgroundColor = UIColor.clear
+            self.recordView!.openPdFile()
+            
+            self.add(chirpView: self.recordView!)
+        }
         
         self.newPerformance = true
         self.state = ChirpJamModes.new
         self.resetProgress()
         self.updateUI()
+        
     }
     
     /// IBAction for Cancel (bar) button. stops playback/recording and dismisses present performance.
@@ -158,16 +176,14 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         //stopRecording()
         stopPlayback() // stop any possible playback
         
-        if let currentView = self.performanceViews.popLast() {
-            currentView.removeFromSuperview()
-            
-            if (self.performanceViews.isEmpty) {
-                self.state = ChirpJamModes.new
-                self.newRecordView()
-                self.updateUI()
-            }
+        if let recordView = self.recordView {
+            recordView.removeFromSuperview()
+            self.replyButton.setTitle("Reply", for: .normal)
+            self.newPerformance = false
+            self.state = ChirpJamModes.loaded
+            self.resetProgress()
+            self.updateUI()
         }
-        self.updateUI()
         
 //        // If it's in a Jam tab, need to reset viewcontroller.
 //        if (presentedVC.tabBar.selectedItem?.title == TabBarItemTitles.jamTab) { // check if we're in the Jam! tab.
@@ -199,28 +215,22 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         }
     }
     
-    func playBackPerformances(recordView : ChirpView?) {
-        
-        self.startProgressBar()
+    func playBackPerformances() {
         
         var timers = [Timer]()
         
-        if let rView = recordView {
-            // Getting the timers from all performances, should we use these for something in this class?
-            for view in self.performanceViews {
-                // Don't play the performance of the view we are recording. Maybe not neccessary!
-                if rView == view {
-                    continue
-                }
-                if let perfTimers = view.performance?.playback(inView: view) {
-                    timers += perfTimers
-                }
+        // Play every performance in the stack
+        for view in self.performanceViews {
+            if let performance = view.performance {
+                timers += performance.playback(inView: view)
             }
-        } else {
-            // Play every performance in the stack
-            for view in self.performanceViews {
-                if let perfTimers = view.performance?.playback(inView: view) {
-                    timers += perfTimers
+        }
+        
+        // Playback recorded performence
+        if self.state != ChirpJamModes.recording {
+            if let recordView = self.recordView {
+                if let performance = recordView.performance {
+                    timers += performance.playback(inView: self.recordView!)
                 }
             }
         }
@@ -235,7 +245,8 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         self.state = ChirpJamModes.playing
         self.resetProgress()
         self.updateUI()
-        self.playBackPerformances(recordView: nil)
+        self.startProgressBar()
+        self.playBackPerformances()
     }
 
     /// IBAction for the SoundScheme label. Opens a dropdown menu for selection when in "new" state.
@@ -249,6 +260,9 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     @IBAction func replyButtonPressed(_ sender: Any) {
         // TODO: Implement some kind of reply system.
         print("JAMVC: Reply button pressed");
+        
+        self.replyButton!.setTitle("Reset", for: .normal)
+        self.stopTimer()
         self.newRecordView()
     }
     
@@ -390,6 +404,9 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             for view in self.performanceViews {
                 view.image = view.performance?.image
             }
+            if let recordView = self.recordView {
+                recordView.image = recordView.performance?.image
+            }
             self.playButton.isEnabled = true
             self.jamButton.isEnabled = true
             self.replyButton.isEnabled = true // reply button enabled in loaded jams.
@@ -419,14 +436,14 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     /// Load a ChirpPerformance for playback and reaction (most processing is done in updateUI).
     func load(performance: ChirpPerformance) {
         self.state = ChirpJamModes.loaded
-        self.performanceViews.last!.isUserInteractionEnabled = false
+        self.recordView!.isUserInteractionEnabled = false
         self.updateUI()
     }
     
     /// Stops the current recording.
     func stopRecording() {
         print("JAMVC: Stopping recording; now loading the recorded performance.")
-        if let lastPerformance = self.performanceViews.last!.closeRecording() {
+        if let lastPerformance = self.recordView!.closeRecording() {
             if let replytext = self.replyto {
                 lastPerformance.replyto = replytext
             }
@@ -439,14 +456,16 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         // FIXME: Incorporate this method with stopPlayback?
         // FIXME: Make sure that the reply performances are reset as well as the main performance.
         NSLog("JAMVC: Stop Timer Called (either finished or cancelled).")
-        if let recordView = self.performanceViews.last {
-            if (recordView.recording) {
+        if let recordView = self.recordView {
+            if recordView.recording {
                 self.stopRecording()
                 recordView.recording = false
             } else {
                 self.stopPlayback()
                 recordView.playing = false
             }
+        } else {
+            self.stopPlayback()
         }
         
         for view in self.performanceViews {
@@ -483,11 +502,12 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     func startRecording() {
         if (self.state == ChirpJamModes.new) {
             NSLog("JAMVC: Starting a recording.")
-            self.performanceViews.last!.recording = true
+            self.recordView!.recording = true
             self.state = ChirpJamModes.recording
             self.resetProgress()
             self.updateUI()
-            self.playBackPerformances(recordView: self.performanceViews.last!)
+            self.startProgressBar()
+            self.playBackPerformances()
         }
     }
     
@@ -496,7 +516,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     /// touchesBegan method starts a recording if this is the first touch in a new microjam.
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         // start timer if not recording
-        if let recordView = self.performanceViews.last {
+        if let recordView = self.recordView {
             let p = touches.first?.location(in: recordView);
             if (recordView.bounds.contains(p!) && self.state == ChirpJamModes.new) {
                 print("JAMVC: Starting a Recording")
