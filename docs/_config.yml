@@ -21,6 +21,7 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://microjam.info" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: cpmpercussion
 github_username:  cpmpercussion
+signup_form: https://goo.gl/forms/voANy3EZzRqPJVLG3
 
 # Build settings
 markdown: kramdown
