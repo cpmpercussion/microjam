@@ -9,11 +9,6 @@
 import UIKit
 import CloudKit
 
-protocol ModelDelegate {
-    func errorUpdating(error: NSError)
-    func modelUpdated()
-}
-
 /// Maximum number of jams to download at a time from CloudKit
 let max_jams_to_fetch = 25
 
