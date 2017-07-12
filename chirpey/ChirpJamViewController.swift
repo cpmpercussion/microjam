@@ -53,6 +53,11 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             // TODO: Is this check actually used?
             if savePerformanceButton === barButton {
                 print("JAMVC: Save button segue!")
+                if let recordView = self.recordView {
+                    if let performance = recordView.performance {
+                        appDelegate.addNew(performance: performance)
+                    }
+                }
             } else {
                 print("JAMVC: Not jam button segue!")
                 // MARK: Put something here
@@ -80,8 +85,16 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         print("JAMVC: viewDidLoad")
         self.recordingProgress!.progress = 0.0 // need to initialise the recording progress at zero.
         
-        if let loadedPer = self.loadedPerformance {
-            self.newViewWith(performance: loadedPer)
+        if !self.performanceViews.isEmpty {
+            for view in self.performanceViews {
+                view.frame = self.referenceView.frame
+                self.add(chirpView: view)
+            }
+            
+            self.replyto = self.performanceViews.first?.performance?.title()
+            self.newPerformance = false
+            self.state = ChirpJamModes.loaded
+            self.updateUI()
         } else {
             self.newRecordView()
         }
@@ -111,25 +124,13 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     //    }
     
     
-    // Reset some params
-    func resetProgress() {
-        self.recordingProgress!.progress = 0.0
-        self.progress = 0.0
-    }
-    
     func newViewWith(performance : ChirpPerformance) {
         
-        let newView = ChirpView(frame: self.referenceView!.frame, performance: performance)
+        let newView = ChirpView(frame: CGRect.zero, performance: performance)
         newView.isUserInteractionEnabled = false // Not used for recording
         newView.backgroundColor = UIColor.clear
         newView.openPdFile()
         self.performanceViews.append(newView)
-        self.add(chirpView: newView)
-        
-        self.newPerformance = false
-        self.state = ChirpJamModes.loaded
-        self.resetProgress()
-        self.updateUI()
     }
     
     /// Resets to a new performance state.
@@ -161,7 +162,8 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         self.newPerformance = true
         self.jamming = false
         self.state = ChirpJamModes.new
-        self.resetProgress()
+        self.recordingProgress!.progress = 0.0
+        self.progress = 0.0
         self.updateUI()
         
     }
@@ -182,7 +184,8 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             self.newPerformance = false
             self.state = ChirpJamModes.loaded
             self.jamming = false
-            self.resetProgress()
+            self.recordingProgress!.progress = 0.0
+            self.progress = 0.0
             self.updateUI()
         }
         
@@ -252,7 +255,8 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             }
             self.state = ChirpJamModes.playing
             self.updateUI()
-            self.resetProgress()
+            self.recordingProgress!.progress = 0.0
+            self.progress = 0.0
             self.startProgressBar()
             self.playBackPerformances()
         }
@@ -372,7 +376,9 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             self.jamButton.isEnabled = false
             self.replyButton.isEnabled = false
             self.instrumentButton.setTitle(SoundSchemes.namesForKeys[UserDefaults.standard.integer(forKey: SettingsKeys.soundSchemeKey)], for: .normal)
-            //self.recordView.openPdFile()
+            if let recordView = self.recordView {
+                recordView.openPdFile()
+            }
             
         case ChirpJamModes.recording:
             
@@ -539,7 +545,8 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             self.recordView!.recording = true
             self.state = ChirpJamModes.recording
             self.jamming = false
-            self.resetProgress()
+            self.recordingProgress!.progress = 0.0
+            self.progress = 0.0
             self.updateUI()
             self.startProgressBar()
             self.playBackPerformances()

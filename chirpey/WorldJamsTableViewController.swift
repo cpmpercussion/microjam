@@ -72,13 +72,36 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
         cell.previewImage.image = performance.image
         cell.context.text = nonCreditString()
         
-        if performance.replyto != "" {
-            if let replyPerf = appDelegate.fetchPerformanceFrom(title: performance.replyto) {
+        var temp = performance
+        var images = [performance.image]
+        
+        // Get the image from every reply
+        while temp.replyto != "" {
+            if let replyPerf = appDelegate.fetchPerformanceFrom(title: temp.replyto) {
                 cell.context.text = creditString(originalPerformer: replyPerf.performer)
-                cell.previewImage.image = addImageToImage(img: replyPerf.image, img2: performance.image)
+                images.append(replyPerf.image)
+                temp = replyPerf
             }
         }
+        
+        // Display all the images as one image
+        cell.previewImage.image = self.createImageFrom(images: images)
         return cell
+    }
+    
+    // Add multiple images on top of each other
+    func createImageFrom(images : [UIImage]) -> UIImage? {
+        if let size = images.first?.size {
+            UIGraphicsBeginImageContext(size)
+            let areaSize = CGRect(x: 0, y: 0, width:size.width, height: size.height)
+            for image in images {
+                image.draw(in: areaSize, blendMode: CGBlendMode.normal, alpha: 1.0)
+            }
+            let outImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+            UIGraphicsEndImageContext()
+            return outImage
+        }
+        return nil
     }
     
     /// Add two images together; used to layer reply images.
@@ -135,14 +158,17 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
             let jamDetailViewController = segue.destination as! ChirpJamViewController
             if let selectedJamCell = sender as? PerformanceTableCell {
                 let indexPath = tableView.indexPath(for: selectedJamCell)!
-                let selectedJam = appDelegate.storedPerformances[indexPath.row]
-                jamDetailViewController.loadedPerformance = selectedJam
+                var selectedJam = appDelegate.storedPerformances[indexPath.row]
+                jamDetailViewController.newViewWith(performance: selectedJam)
                 
-//                if (selectedJam.replyto != "") { // setup the replyto jam if necessary.
-//                    print("WJTVC: Loading the replyto performance as well: ", selectedJam.replyto)
-//                    jamDetailViewController.replyto = selectedJam.replyto
-//                    //jamDetailViewController.replyToPerformance = appDelegate.fetchPerformanceFrom(title: selectedJam.replyto)
-//                }
+                while selectedJam.replyto != "" {
+                    
+                    if let reply = appDelegate.fetchPerformanceFrom(title: selectedJam.replyto) {
+                        
+                        jamDetailViewController.newViewWith(performance: reply)
+                        selectedJam = reply
+                    }
+                }
             }
         }
     }
