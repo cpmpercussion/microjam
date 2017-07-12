@@ -171,8 +171,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     /// IBAction for Cancel (bar) button. stops playback/recording and dismisses present performance.
     @IBAction func cancelPerformance(_ sender: UIBarButtonItem) {
         print("JAMVC: Cancel Button Pressed.")
-        //let isPresentingInAddPerformanceMode = presentingViewController is UINavigationController
-        //let presentedVC = UIApplication.shared.delegate?.window??.rootViewController as! UITabBarController // get the root VC (tabbarcontroller)
+        
         // Stop current actions
         stopTimer() // Stopping all Timers
         //stopRecording()
@@ -180,6 +179,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         
         if let recordView = self.recordView {
             recordView.removeFromSuperview()
+            self.recordView = nil
             self.replyButton.setTitle("Reply", for: .normal)
             self.newPerformance = false
             self.state = ChirpJamModes.loaded
@@ -187,23 +187,9 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             self.recordingProgress!.progress = 0.0
             self.progress = 0.0
             self.updateUI()
+        } else {
+            navigationController!.popViewController(animated: true)
         }
-        
-//        // If it's in a Jam tab, need to reset viewcontroller.
-//        if (presentedVC.tabBar.selectedItem?.title == TabBarItemTitles.jamTab) { // check if we're in the Jam! tab.
-//            print("JAMVC: Cancel pressed from jam tab so do Jam Actions")
-//            // FIXME: Remove this after initial testing: uploads cancelled performances as well.
-//            // self.new() // Just load with a new performance.
-//        }
-//        
-//        // Finally Dismissing the performance.
-//        if isPresentingInAddPerformanceMode {
-//            print("JAMVC: Dismissing")
-//            dismiss(animated: true, completion: nil)
-//        } else {
-//            print("JAMVC: Popping")
-//            navigationController!.popViewController(animated: true)
-//        }
     }
     
     @IBAction func unwindToJamView(sender: UIStoryboardSegue) {
