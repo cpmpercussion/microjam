@@ -89,12 +89,12 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
         return cell
     }
     
-    // Add multiple images on top of each other
+    /// Adds multiple images on top of each other
     func createImageFrom(images : [UIImage]) -> UIImage? {
         if let size = images.first?.size {
             UIGraphicsBeginImageContext(size)
             let areaSize = CGRect(x: 0, y: 0, width:size.width, height: size.height)
-            for image in images {
+            for image in images.reversed() {
                 image.draw(in: areaSize, blendMode: CGBlendMode.normal, alpha: 1.0)
             }
             let outImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()!
@@ -103,7 +103,7 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
         }
         return nil
     }
-        
+    
     /// credit reply string
     func creditString(originalPerformer: String) -> String {
         let output = "replied to " + originalPerformer
