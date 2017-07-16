@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		077DC2A7E15F1081FBECA3E5 /* Pods_microjamUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F790C94F468F8D8ACE1123FE /* Pods_microjamUITests.framework */; };
 		563E06101EFBE71700F0D471 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563E060F1EFBE71700F0D471 /* Constants.swift */; };
+		564A18B41F1B6E650012131E /* MicrojamUITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564A18B31F1B6E650012131E /* MicrojamUITest.swift */; };
 		565143FA1DFAB79E00F56B32 /* adsr.pd in Resources */ = {isa = PBXBuildFile; fileRef = 565143F81DFAB79E00F56B32 /* adsr.pd */; };
 		565143FB1DFAB79E00F56B32 /* xfade.pd in Resources */ = {isa = PBXBuildFile; fileRef = 565143F91DFAB79E00F56B32 /* xfade.pd */; };
 		565143FE1DFAF11600F56B32 /* pluck~.pd in Resources */ = {isa = PBXBuildFile; fileRef = 565143FC1DFAF11600F56B32 /* pluck~.pd */; };
@@ -27,7 +28,6 @@
 		5669CA9A1DA7AAA6009EEC3B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5669CA991DA7AAA6009EEC3B /* Assets.xcassets */; };
 		5669CA9D1DA7AAA6009EEC3B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5669CA9B1DA7AAA6009EEC3B /* LaunchScreen.storyboard */; };
 		5669CAA81DA7AAA6009EEC3B /* chirpeyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5669CAA71DA7AAA6009EEC3B /* chirpeyTests.m */; };
-		5669CAB31DA7AAA6009EEC3B /* chirpeyUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5669CAB21DA7AAA6009EEC3B /* chirpeyUITests.m */; };
 		5669CAE11DA7D06A009EEC3B /* chirp.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CAC61DA7D06A009EEC3B /* chirp.pd */; };
 		5669CAE21DA7D06A009EEC3B /* dispatch.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CAC91DA7D06A009EEC3B /* dispatch.pd */; };
 		5669CAE31DA7D06A009EEC3B /* monopan.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5669CACA1DA7D06A009EEC3B /* monopan.pd */; };
@@ -87,6 +87,7 @@
 		4B8432CAAE36EBBE2D19F96D /* Pods-microjamUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-microjamUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-microjamUITests/Pods-microjamUITests.release.xcconfig"; sourceTree = "<group>"; };
 		542B447A7B9AE8AC7B6CE3BB /* Pods-microjamTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-microjamTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-microjamTests/Pods-microjamTests.release.xcconfig"; sourceTree = "<group>"; };
 		563E060F1EFBE71700F0D471 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		564A18B31F1B6E650012131E /* MicrojamUITest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MicrojamUITest.swift; sourceTree = "<group>"; };
 		565143F81DFAB79E00F56B32 /* adsr.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = adsr.pd; sourceTree = "<group>"; };
 		565143F91DFAB79E00F56B32 /* xfade.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = xfade.pd; sourceTree = "<group>"; };
 		565143FC1DFAF11600F56B32 /* pluck~.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "pluck~.pd"; sourceTree = "<group>"; };
@@ -111,7 +112,6 @@
 		5669CAA71DA7AAA6009EEC3B /* chirpeyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = chirpeyTests.m; sourceTree = "<group>"; };
 		5669CAA91DA7AAA6009EEC3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5669CAAE1DA7AAA6009EEC3B /* microjamUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = microjamUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5669CAB21DA7AAA6009EEC3B /* chirpeyUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = chirpeyUITests.m; sourceTree = "<group>"; };
 		5669CAB41DA7AAA6009EEC3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5669CAC61DA7D06A009EEC3B /* chirp.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chirp.pd; sourceTree = "<group>"; };
 		5669CAC91DA7D06A009EEC3B /* dispatch.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dispatch.pd; sourceTree = "<group>"; };
@@ -250,7 +250,7 @@
 		5669CAB11DA7AAA6009EEC3B /* chirpeyUITests */ = {
 			isa = PBXGroup;
 			children = (
-				5669CAB21DA7AAA6009EEC3B /* chirpeyUITests.m */,
+				564A18B31F1B6E650012131E /* MicrojamUITest.swift */,
 				5669CAB41DA7AAA6009EEC3B /* Info.plist */,
 			);
 			path = chirpeyUITests;
@@ -446,6 +446,7 @@
 					5669CAAD1DA7AAA6009EEC3B = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = EDH387FRHA;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 5669CA891DA7AAA5009EEC3B;
 					};
@@ -701,7 +702,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5669CAB31DA7AAA6009EEC3B /* chirpeyUITests.m in Sources */,
+				564A18B41F1B6E650012131E /* MicrojamUITest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -912,12 +913,15 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = EDH387FRHA;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = chirpeyUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = au.com.charlesmartin.chirpeyUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = chirpey;
 			};
 			name = Debug;
@@ -928,12 +932,14 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = EDH387FRHA;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = chirpeyUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = au.com.charlesmartin.chirpeyUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = chirpey;
 			};
 			name = Release;

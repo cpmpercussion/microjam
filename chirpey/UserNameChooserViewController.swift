@@ -10,6 +10,9 @@
 
 import UIKit
 
+/// Controls the user name choosing onboarding view.
+/// Only displayed on initial startup or if user has no
+/// performer name set.
 class UserNameChooserViewController: UIViewController, UITextFieldDelegate {
 
 
@@ -26,10 +29,9 @@ class UserNameChooserViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.accessibilityIdentifier = "usernamechoosingview"
         userNameTextField.delegate = self
     }
-    
-
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {  //delegate method
         return true

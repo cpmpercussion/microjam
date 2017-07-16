@@ -60,6 +60,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
     }
     
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+        // Check for testing
+        if CommandLine.arguments.contains("--uitesting") {
+            resetState()
+        }
         // Register defaults
         UserDefaults.standard.register(defaults: AppDelegate.defaultSettings)
         // Load the saved performances
@@ -73,6 +77,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
         self.startAudioEngine() // start Pd
         self.fetchWorldJamsFromCloud() // try to get jams from iCloud.
         return true
+    }
+    
+    /// Reset app state to first open. Only used for UITesting.
+    func resetState() {
+        let defaultsName = Bundle.main.bundleIdentifier!
+        UserDefaults.standard.removePersistentDomain(forName: defaultsName)
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
