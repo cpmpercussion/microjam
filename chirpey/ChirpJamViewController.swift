@@ -178,16 +178,24 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         stopPlayback() // stop any possible playback
         
         if let recordView = self.recordView {
-            recordView.removeFromSuperview()
-            self.recordView = nil
-            self.replyButton.setTitle("Reply", for: .normal)
-            self.newPerformance = false
-            self.state = ChirpJamModes.loaded
-            self.jamming = false
-            self.recordingProgress!.progress = 0.0
-            self.progress = 0.0
-            self.updateUI()
+            if self.performanceViews.isEmpty {
+                // No loaded performances means we're in the jam tab, just reset to a new record view
+                self.replyButton.setTitle("Reply", for: .normal)
+                self.newRecordView()
+            } else {
+                // Reset back to the loaded performances
+                recordView.removeFromSuperview()
+                self.recordView = nil
+                self.replyButton.setTitle("Reply", for: .normal)
+                self.newPerformance = false
+                self.state = ChirpJamModes.loaded
+                self.jamming = false
+                self.recordingProgress!.progress = 0.0
+                self.progress = 0.0
+                self.updateUI()
+            }
         } else {
+            // No record view means we have loaded performances, but haven't recorded anything yet. Just return to world table view
             navigationController!.popViewController(animated: true)
         }
     }
