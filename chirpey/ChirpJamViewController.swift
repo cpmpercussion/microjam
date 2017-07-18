@@ -392,7 +392,12 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             self.instrumentButton.setTitle(loadedPerformance?.instrument, for: .normal)
             self.playButton.isEnabled = true
             self.jamButton.isEnabled = true
-            self.replyButton.isEnabled = true // reply button enabled in loaded jams.
+            
+            if self.newPerformance {
+                self.replyButton.isEnabled = false // Should not be able to reply to your own performance
+            } else {
+                self.replyButton.isEnabled = true // reply button enabled in loaded jams.
+            }
             
         case ChirpJamModes.loaded:
             
@@ -408,9 +413,12 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             if (!self.newPerformance) {
                 // disable the save button, only if it's a loaded performance (not a new one)
                 self.navigationItem.rightBarButtonItem?.isEnabled = false
+                self.replyButton.isEnabled = true // reply button enabled in loaded jams.
                 print("JAMVC: Not a new performance, so disabling the save button.")
             } else {
                 self.navigationItem.rightBarButtonItem?.isEnabled = true
+                self.replyButton.isEnabled = false // reply button enabled in loaded jams.
+
             }
             self.statusLabel.text = "Loaded: "
             self.performerLabel.text = loadedPerformance?.performer
@@ -424,7 +432,6 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             }
             self.playButton.isEnabled = true
             self.jamButton.isEnabled = true
-            self.replyButton.isEnabled = true // reply button enabled in loaded jams.
             print("JAMVC: opening Pd file for loaded performance.")
             //self.chirpeySquare.openPdFile(withName: loadedPerformance.instrument) // open Pd File.
             
