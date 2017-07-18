@@ -129,7 +129,6 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         let newView = ChirpView(frame: CGRect.zero, performance: performance)
         newView.isUserInteractionEnabled = false // Not used for recording
         newView.backgroundColor = UIColor.clear
-        newView.openPdFile()
         self.performanceViews.append(newView)
     }
     
