@@ -29,8 +29,6 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     /// Dropdown menu for selecting SoundScheme
     let soundSchemeDropDown = DropDown() // dropdown menu for soundscheme
     
-    var loadedPerformance : ChirpPerformance?
-
     @IBOutlet weak var replyButton: UIButton!
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var jamButton: UIButton!
@@ -239,10 +237,12 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         // TODO: Implement playbutton
         
         if self.state == ChirpJamModes.playing || self.state == ChirpJamModes.recording {
+            // Stop playback
             self.playButton.setTitle("play", for: .normal)
             self.stopTimer()
         
         } else {
+            // Start playback
             if !self.jamming {
                 self.playButton.setTitle("stop", for: .normal)
             }
@@ -267,6 +267,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         // TODO: Implement some kind of reply system.
         print("JAMVC: Reply button pressed");
         
+        // Reply button is only enabled if it is a new performance
         self.replyButton!.setTitle("Reset", for: .normal)
         self.stopTimer()
         self.newRecordView()
