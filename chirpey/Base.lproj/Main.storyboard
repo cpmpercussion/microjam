@@ -60,7 +60,6 @@
                                 <state key="normal" title="reply"/>
                                 <connections>
                                     <action selector="replyButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UCv-rQ-qeE"/>
-                                    <segue destination="BYZ-38-t0r" kind="show" identifier="ReplyToPerformance" id="cVb-4d-aB6"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="status" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PBg-aK-YtU">
@@ -149,12 +148,12 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="chirpeySquare" destination="xQz-CD-1rT" id="3D9-yP-adH"/>
                         <outlet property="instrumentButton" destination="PVn-2h-cdI" id="Csn-nR-9Zq"/>
                         <outlet property="jamButton" destination="HfI-q6-7dd" id="rub-hB-VgX"/>
                         <outlet property="performerLabel" destination="1Mx-bs-Bwy" id="E9T-t5-KvJ"/>
                         <outlet property="playButton" destination="O9V-pQ-Tlh" id="G3q-ZV-wU4"/>
                         <outlet property="recordingProgress" destination="yna-Q3-0q0" id="MIs-Qa-IgM"/>
+                        <outlet property="referenceView" destination="xQz-CD-1rT" id="AHs-Yc-zay"/>
                         <outlet property="replyButton" destination="Xh5-cz-PkR" id="Rz0-nT-OUe"/>
                         <outlet property="savePerformanceButton" destination="wbR-IC-fN1" id="CRU-Eg-9kn"/>
                         <outlet property="statusLabel" destination="PBg-aK-YtU" id="XoF-Hm-cWg"/>
@@ -215,32 +214,32 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultRecordingImage" translatesAutoresizingMaskIntoConstraints="NO" id="C1Y-wG-D7P">
-                                            <rect key="frame" x="37" y="0.0" width="300" height="300"/>
+                                            <rect key="frame" x="37.5" y="0.0" width="300" height="300"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="300" id="eVU-sA-MbW"/>
                                                 <constraint firstAttribute="width" constant="300" id="vJy-yG-JPW"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="performername" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zm0-8q-7kP">
-                                            <rect key="frame" x="37" y="308" width="126.5" height="21.5"/>
+                                            <rect key="frame" x="37.5" y="308" width="126.5" height="21.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date and time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RbJ-Tv-ySY" userLabel="Date">
-                                            <rect key="frame" x="248.5" y="338" width="88.5" height="17"/>
+                                            <rect key="frame" x="249" y="338" width="88.5" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="instrument" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6dJ-ZF-dqm">
-                                            <rect key="frame" x="250" y="308" width="87" height="21.5"/>
+                                            <rect key="frame" x="250.5" y="308" width="87" height="21.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="took the stage" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8qM-fi-pVE" userLabel="context">
-                                            <rect key="frame" x="37" y="337" width="93" height="17"/>
+                                            <rect key="frame" x="37.5" y="337" width="93" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -412,6 +411,6 @@
         <image name="settingsTabIcon" width="37" height="37"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Hyh-JE-FSE"/>
+        <segue reference="fbe-LH-T5z"/>
     </inferredMetricsTieBreakers>
 </document>

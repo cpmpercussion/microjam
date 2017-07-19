@@ -133,7 +133,7 @@ class ChirpPerformance : NSObject, NSCoding {
     // TODO: make playback behave like "play/pause" rather than start and cancel.
     
     /// Schedules playback of the performance in a given `ChirpView`
-    func playback(inView view : ChirpView) -> [Timer] {
+    func playback(inView view : ChirpView) {
         view.playbackColour = self.colour.brighterColor.cgColor // make sure colour is set before playback.
         var timers : [Timer] = []
         for touch in self.performanceData {
@@ -142,13 +142,13 @@ class ChirpPerformance : NSObject, NSCoding {
             timers.append(t)
         }
         print("PERF: playing back; scheduled", timers.count, "notes.")
-        return(timers)
+        self.playbackTimers = timers
     }
     
     /// Cancels the current playback. (Can not be un-cancelled)
-    func cancelPlayback(timers : [Timer]) {
-        print("PERF: Cancelling", timers.count, "timers.")
-        for t in timers {
+    func cancelPlayback() {
+        print("PERF: Cancelling", self.playbackTimers.count, "timers.")
+        for t in self.playbackTimers {
             t.invalidate()
         }
     }

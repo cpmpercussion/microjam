@@ -72,25 +72,36 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
         cell.previewImage.image = performance.image
         cell.context.text = nonCreditString()
         
-        if performance.replyto != "" {
-            if let replyPerf = appDelegate.fetchPerformanceFrom(title: performance.replyto) {
+        var temp = performance
+        var images = [performance.image]
+        
+        // Get the image from every reply
+        while temp.replyto != "" {
+            if let replyPerf = appDelegate.fetchPerformanceFrom(title: temp.replyto) {
                 cell.context.text = creditString(originalPerformer: replyPerf.performer)
-                cell.previewImage.image = addImageToImage(img: replyPerf.image, img2: performance.image)
+                images.append(replyPerf.image)
+                temp = replyPerf
             }
         }
+        
+        // Display all the images as one image
+        cell.previewImage.image = self.createImageFrom(images: images)
         return cell
     }
     
-    /// Add two images together; used to layer reply images.
-    func addImageToImage(img: UIImage, img2: UIImage ) -> UIImage {
-        let size = img.size
-        UIGraphicsBeginImageContext(size)
-        let areaSize = CGRect(x: 0, y: 0, width:size.width, height: size.height)
-        img2.draw(in: areaSize)
-        img.draw(in: areaSize, blendMode: CGBlendMode.normal, alpha: 1.0)
-        let outImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
-        return outImage
+    /// Adds multiple images on top of each other
+    func createImageFrom(images : [UIImage]) -> UIImage? {
+        if let size = images.first?.size {
+            UIGraphicsBeginImageContext(size)
+            let areaSize = CGRect(x: 0, y: 0, width:size.width, height: size.height)
+            for image in images.reversed() {
+                image.draw(in: areaSize, blendMode: CGBlendMode.normal, alpha: 1.0)
+            }
+            let outImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+            UIGraphicsEndImageContext()
+            return outImage
+        }
+        return nil
     }
     
     /// credit reply string
@@ -135,15 +146,16 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
             let jamDetailViewController = segue.destination as! ChirpJamViewController
             if let selectedJamCell = sender as? PerformanceTableCell {
                 let indexPath = tableView.indexPath(for: selectedJamCell)!
-                let selectedJam = appDelegate.storedPerformances[indexPath.row]
-                jamDetailViewController.loadedPerformance = selectedJam
-                jamDetailViewController.state = ChirpJamModes.loaded
-                jamDetailViewController.newPerformance = false
+                var selectedJam = appDelegate.storedPerformances[indexPath.row]
+                jamDetailViewController.newViewWith(performance: selectedJam)
                 
-                if (selectedJam.replyto != "") { // setup the replyto jam if necessary.
-                    print("WJTVC: Loading the replyto performance as well: ", selectedJam.replyto)
-                    jamDetailViewController.replyto = selectedJam.replyto
-                    jamDetailViewController.replyToPerformance = appDelegate.fetchPerformanceFrom(title: selectedJam.replyto)
+                while selectedJam.replyto != "" {
+                    
+                    if let reply = appDelegate.fetchPerformanceFrom(title: selectedJam.replyto) {
+                        
+                        jamDetailViewController.newViewWith(performance: reply)
+                        selectedJam = reply
+                    }
                 }
             }
         }
@@ -151,23 +163,23 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
     
     /// Segue back to the World Jam Table
     @IBAction func unwindToJamList(sender: UIStoryboardSegue) {
-        if let sourceViewController = sender.source as? ChirpJamViewController, let performance = sourceViewController.loadedPerformance {
-            print("WJTVC: Unwound, found a performance:", performance.title())
-            if let selectedIndexPath = tableView.indexPathForSelectedRow { // passes if a row had been selected.
-                // Update existing performance
-                print("WJTVC: Unwound to a selected row:",selectedIndexPath.description)
-                
-                if (appDelegate.storedPerformances[selectedIndexPath.row].title() != performance.title()) { // check if it's actually a reply.
-                    print("WJTVC: Found a reply performance:", performance.title())
-                    self.addNew(performance: performance) // add it.
-                }
-            } else {
-                // Add a new performance
-                print("WJTVC: Unwound with a new performance:", performance.title())
-                self.addNew(performance: performance)
-                sourceViewController.new() // resets the performance after saving it.
-            }
-        }
+//        if let sourceViewController = sender.source as? ChirpJamViewController, let performance = sourceViewController.loadedPerformance {
+//            print("WJTVC: Unwound, found a performance:", performance.title())
+//            if let selectedIndexPath = tableView.indexPathForSelectedRow { // passes if a row had been selected.
+//                // Update existing performance
+//                print("WJTVC: Unwound to a selected row:",selectedIndexPath.description)
+//                
+//                if (appDelegate.storedPerformances[selectedIndexPath.row].title() != performance.title()) { // check if it's actually a reply.
+//                    print("WJTVC: Found a reply performance:", performance.title())
+//                    self.addNew(performance: performance) // add it.
+//                }
+//            } else {
+//                // Add a new performance
+//                print("WJTVC: Unwound with a new performance:", performance.title())
+//                self.addNew(performance: performance)
+//                sourceViewController.new() // resets the performance after saving it.
+//            }
+//        }
     }
     
     /// Adds a new ChirpPerformance to the top of the list and saves it in the data source.
