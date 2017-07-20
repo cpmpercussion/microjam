@@ -97,11 +97,11 @@
 		565144031DFAF95900F56B32 /* s_pinknoise.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = s_pinknoise.pd; sourceTree = "<group>"; };
 		5653B9971EC4A05D00A90162 /* quack.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = quack.pd; sourceTree = "<group>"; };
 		56621B091DE344E2009B9AB6 /* chirpey-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "chirpey-Bridging-Header.h"; sourceTree = "<group>"; };
-		56621B0C1DE39D33009B9AB6 /* ChirpPerformance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChirpPerformance.swift; sourceTree = "<group>"; };
+		56621B0C1DE39D33009B9AB6 /* ChirpPerformance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChirpPerformance.swift; path = chirpey/ChirpPerformance.swift; sourceTree = "<group>"; };
 		56621B0E1DE47376009B9AB6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		56621B101DE47D5B009B9AB6 /* ChirpJamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChirpJamViewController.swift; sourceTree = "<group>"; };
-		56621B121DE4A496009B9AB6 /* ChirpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChirpView.swift; sourceTree = "<group>"; };
-		56621B161DEC27B0009B9AB6 /* PerformanceTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PerformanceTableCell.swift; sourceTree = "<group>"; };
+		56621B101DE47D5B009B9AB6 /* ChirpJamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChirpJamViewController.swift; path = chirpey/ChirpJamViewController.swift; sourceTree = "<group>"; };
+		56621B121DE4A496009B9AB6 /* ChirpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChirpView.swift; path = chirpey/ChirpView.swift; sourceTree = "<group>"; };
+		56621B161DEC27B0009B9AB6 /* PerformanceTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PerformanceTableCell.swift; path = chirpey/PerformanceTableCell.swift; sourceTree = "<group>"; };
 		5669CA8A1DA7AAA5009EEC3B /* microjam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = microjam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5669CA971DA7AAA6009EEC3B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5669CA991DA7AAA6009EEC3B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -135,16 +135,16 @@
 		5669CADF1DA7D06A009EEC3B /* m_mixolydian.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = m_mixolydian.pd; sourceTree = "<group>"; };
 		5669CAE01DA7D06A009EEC3B /* m_phrygian.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = m_phrygian.pd; sourceTree = "<group>"; };
 		5669E7A51EF88FD400DEB77D /* wub.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wub.pd; sourceTree = "<group>"; };
-		567286651E05E0AF0024A515 /* MicrojamTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MicrojamTabBarController.swift; sourceTree = "<group>"; };
+		567286651E05E0AF0024A515 /* MicrojamTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MicrojamTabBarController.swift; path = chirpey/MicrojamTabBarController.swift; sourceTree = "<group>"; };
 		568D1DC31DF995E500A2BC0B /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		568D1DC51DF9BEDF00A2BC0B /* drums.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = drums.pd; sourceTree = "<group>"; };
 		568D1DC61DF9BEDF00A2BC0B /* keys.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = keys.pd; sourceTree = "<group>"; };
 		568D1DC71DF9BEDF00A2BC0B /* strings.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = strings.pd; sourceTree = "<group>"; };
-		569B92C31DFEA99C00AA257C /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
-		56B329E41E44834D001345DC /* WorldJamsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldJamsTableViewController.swift; sourceTree = "<group>"; };
+		569B92C31DFEA99C00AA257C /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsTableViewController.swift; path = chirpey/SettingsTableViewController.swift; sourceTree = "<group>"; };
+		56B329E41E44834D001345DC /* WorldJamsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WorldJamsTableViewController.swift; path = chirpey/WorldJamsTableViewController.swift; sourceTree = "<group>"; };
 		56C88E7E1DFEFD7200406BF0 /* microjam.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = microjam.entitlements; sourceTree = "<group>"; };
 		56C88E7F1DFEFD8200406BF0 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
-		56D2C6ED1E65ADE100E3D14F /* UserNameChooserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNameChooserViewController.swift; sourceTree = "<group>"; };
+		56D2C6ED1E65ADE100E3D14F /* UserNameChooserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserNameChooserViewController.swift; path = chirpey/UserNameChooserViewController.swift; sourceTree = "<group>"; };
 		63C4E84624B83BA18A354CA2 /* Pods_microjam.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_microjam.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E59A152461FB44F2E21DD12 /* Pods-microjamUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-microjamUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-microjamUITests/Pods-microjamUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		F790C94F468F8D8ACE1123FE /* Pods_microjamUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_microjamUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -191,14 +191,54 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		560772DA1F206F10000D862D /* models */ = {
+			isa = PBXGroup;
+			children = (
+				56621B0C1DE39D33009B9AB6 /* ChirpPerformance.swift */,
+			);
+			name = models;
+			sourceTree = "<group>";
+		};
+		560772DB1F206F1B000D862D /* views */ = {
+			isa = PBXGroup;
+			children = (
+				56621B121DE4A496009B9AB6 /* ChirpView.swift */,
+				56621B161DEC27B0009B9AB6 /* PerformanceTableCell.swift */,
+			);
+			name = views;
+			sourceTree = "<group>";
+		};
+		560772DC1F206F3B000D862D /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				56D2C6ED1E65ADE100E3D14F /* UserNameChooserViewController.swift */,
+				56621B101DE47D5B009B9AB6 /* ChirpJamViewController.swift */,
+				56B329E41E44834D001345DC /* WorldJamsTableViewController.swift */,
+				569B92C31DFEA99C00AA257C /* SettingsTableViewController.swift */,
+				567286651E05E0AF0024A515 /* MicrojamTabBarController.swift */,
+			);
+			name = controllers;
+			sourceTree = "<group>";
+		};
+		560772DD1F206F93000D862D /* stores */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = stores;
+			sourceTree = "<group>";
+		};
 		5669CA811DA7AAA5009EEC3B = {
 			isa = PBXGroup;
 			children = (
 				56C88E7E1DFEFD7200406BF0 /* microjam.entitlements */,
+				560772DD1F206F93000D862D /* stores */,
+				560772DC1F206F3B000D862D /* controllers */,
+				560772DB1F206F1B000D862D /* views */,
+				560772DA1F206F10000D862D /* models */,
 				5669CAC51DA7D06A009EEC3B /* synth */,
-				5669CA8C1DA7AAA5009EEC3B /* chirpey */,
-				5669CAA61DA7AAA6009EEC3B /* chirpeyTests */,
-				5669CAB11DA7AAA6009EEC3B /* chirpeyUITests */,
+				5669CA8C1DA7AAA5009EEC3B /* microjam */,
+				5669CAA61DA7AAA6009EEC3B /* microjamTests */,
+				5669CAB11DA7AAA6009EEC3B /* microjamUITests */,
 				5669CA8B1DA7AAA5009EEC3B /* Products */,
 				A84F68A69B4F57615CCB0C2D /* Pods */,
 				37B82C17ADD34A6423FC8D08 /* Frameworks */,
@@ -215,19 +255,11 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		5669CA8C1DA7AAA5009EEC3B /* chirpey */ = {
+		5669CA8C1DA7AAA5009EEC3B /* microjam */ = {
 			isa = PBXGroup;
 			children = (
-				56621B0C1DE39D33009B9AB6 /* ChirpPerformance.swift */,
-				56621B121DE4A496009B9AB6 /* ChirpView.swift */,
 				56621B0E1DE47376009B9AB6 /* AppDelegate.swift */,
-				56D2C6ED1E65ADE100E3D14F /* UserNameChooserViewController.swift */,
-				56621B101DE47D5B009B9AB6 /* ChirpJamViewController.swift */,
-				56B329E41E44834D001345DC /* WorldJamsTableViewController.swift */,
-				56621B161DEC27B0009B9AB6 /* PerformanceTableCell.swift */,
-				569B92C31DFEA99C00AA257C /* SettingsTableViewController.swift */,
 				5669CA961DA7AAA6009EEC3B /* Main.storyboard */,
-				567286651E05E0AF0024A515 /* MicrojamTabBarController.swift */,
 				5669CA991DA7AAA6009EEC3B /* Assets.xcassets */,
 				5669CA9B1DA7AAA6009EEC3B /* LaunchScreen.storyboard */,
 				5669CA9E1DA7AAA6009EEC3B /* Info.plist */,
@@ -235,24 +267,27 @@
 				568D1DC31DF995E500A2BC0B /* Settings.bundle */,
 				563E060F1EFBE71700F0D471 /* Constants.swift */,
 			);
+			name = microjam;
 			path = chirpey;
 			sourceTree = "<group>";
 		};
-		5669CAA61DA7AAA6009EEC3B /* chirpeyTests */ = {
+		5669CAA61DA7AAA6009EEC3B /* microjamTests */ = {
 			isa = PBXGroup;
 			children = (
 				5669CAA71DA7AAA6009EEC3B /* chirpeyTests.m */,
 				5669CAA91DA7AAA6009EEC3B /* Info.plist */,
 			);
+			name = microjamTests;
 			path = chirpeyTests;
 			sourceTree = "<group>";
 		};
-		5669CAB11DA7AAA6009EEC3B /* chirpeyUITests */ = {
+		5669CAB11DA7AAA6009EEC3B /* microjamUITests */ = {
 			isa = PBXGroup;
 			children = (
 				5669CAB21DA7AAA6009EEC3B /* chirpeyUITests.m */,
 				5669CAB41DA7AAA6009EEC3B /* Info.plist */,
 			);
+			name = microjamUITests;
 			path = chirpeyUITests;
 			sourceTree = "<group>";
 		};
