@@ -53,7 +53,13 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
                 print("JAMVC: Save button segue!")
                 if let recordView = self.recordView {
                     if let performance = recordView.performance {
+                        // Adding performance to clouad
                         appDelegate.addNew(performance: performance)
+                        // Reset view controller
+                        self.newRecordView()
+                        
+                        // MARK: Maybe it is best to delete the view controller to save memory?
+                        
                     }
                 }
             } else {
