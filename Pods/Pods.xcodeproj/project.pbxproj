@@ -16,6 +16,7 @@
 		065FA2D01609108D8F1B1F6631D4AC0E /* g_all_guis.h in Headers */ = {isa = PBXBuildFile; fileRef = DDB591F8A3F65D4F2923C1360679B173 /* g_all_guis.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		08A05ED0D0B83F3BABAD697B2BECFAFA /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E4A69388B43FED893171245EF4AE85 /* UIColorExtension.swift */; };
 		098F056D90AF9CD3FD60D8A81DF043B6 /* DropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5C66FCEE2439EBB0F3EADE789A875F /* DropDownCell.swift */; };
+		0C36381E688B18157E6C2DACCC447B0F /* Pods-microjamTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 979D3AA8634AE0D8C2F224186C81DE12 /* Pods-microjamTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0E028803FBD1D31D2EAC62B20E6934B1 /* d_arithmetic.c in Sources */ = {isa = PBXBuildFile; fileRef = CF62960A0CD6BE5EDD425AC89B004476 /* d_arithmetic.c */; settings = {COMPILER_FLAGS = "-DPD -DUSEAPI_DUMMY -DHAVE_UNISTD_H -DLIBPD_EXTRA -fcommon -fno-objc-arc"; }; };
 		0E82DF407D25944DFE4D90E29ECC1BC8 /* d_misc.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C9B9169D97E989232B4044D79300354 /* d_misc.c */; settings = {COMPILER_FLAGS = "-DPD -DUSEAPI_DUMMY -DHAVE_UNISTD_H -DLIBPD_EXTRA -fcommon -fno-objc-arc"; }; };
 		0F46CA6332C6700F53FE1C59A9EBC624 /* libpd-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E856CD4DCF7DEF512CC22259D33AC203 /* libpd-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -40,7 +41,6 @@
 		290AC75719B7EC009FE2BE3850A5615E /* g_text.c in Sources */ = {isa = PBXBuildFile; fileRef = 9B9E61FB0E804EF5DF14A8DDE157C8A1 /* g_text.c */; settings = {COMPILER_FLAGS = "-DPD -DUSEAPI_DUMMY -DHAVE_UNISTD_H -DLIBPD_EXTRA -fcommon -fno-objc-arc"; }; };
 		2BC39A33E21B7A8820E4B2FE48723FB5 /* DateToolsSwift-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A8E9EDAFC50FD141352B6B8A99324FAD /* DateToolsSwift-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2CE19EB59E7F5B2A8EEBEB7A5EA126A2 /* tr.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 20217386569F94C53B6FF359AE3D64CF /* tr.lproj */; };
-		2D314845DB2F98E5442853D5DCBBF9D9 /* Pods-microjam-microjamTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C0435FA2695DA500D1AE757F611872CC /* Pods-microjam-microjamTests-dummy.m */; };
 		2D7D03048DBFF4379F7D011925B2FEF4 /* IASKTextViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = F064F2C99C923541BB44BCAB718613BA /* IASKTextViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2DC5677162B90461C43C2649E9E31CC4 /* PdDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = CF1ACC2FA6958D9CDD0E3AD85C0ABD6D /* PdDispatcher.m */; settings = {COMPILER_FLAGS = "-DPD -DUSEAPI_DUMMY -DHAVE_UNISTD_H -DLIBPD_EXTRA -fcommon -fno-objc-arc"; }; };
 		2E5672438828D252A3797CDFA5D130E4 /* ringbuffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 7714FFF5F26B0122F9B5C0DEAA72378A /* ringbuffer.c */; settings = {COMPILER_FLAGS = "-DPD -DUSEAPI_DUMMY -DHAVE_UNISTD_H -DLIBPD_EXTRA -fcommon -fno-objc-arc"; }; };
@@ -62,10 +62,12 @@
 		3A092E87C33AEFE16AA5784AC08BA9E9 /* th.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 237C1B52F592B00C0438C5BCE8509E07 /* th.lproj */; };
 		3C560925089B44DD89690FB90C7B49A1 /* d_filter.c in Sources */ = {isa = PBXBuildFile; fileRef = A33BF9F6BF86749F1E438F2E90C55F3A /* d_filter.c */; settings = {COMPILER_FLAGS = "-DPD -DUSEAPI_DUMMY -DHAVE_UNISTD_H -DLIBPD_EXTRA -fcommon -fno-objc-arc"; }; };
 		3EA196A3EFF73CCC8DF48447E0DCFCFD /* m_class.c in Sources */ = {isa = PBXBuildFile; fileRef = CCF94322D78EE31AEF87E2B9D413A865 /* m_class.c */; settings = {COMPILER_FLAGS = "-DPD -DUSEAPI_DUMMY -DHAVE_UNISTD_H -DLIBPD_EXTRA -fcommon -fno-objc-arc"; }; };
-		3EBB3C78395EDE687EE31447786EC800 /* Pods-microjam-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2163C5D18D0B3E29EE7F5B817D3D0A22 /* Pods-microjam-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3EBB3C78395EDE687EE31447786EC800 /* Pods-microjam-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A0669A074A0D78B944FA2179BDC5496B /* Pods-microjam-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3F0593CC3BF53E2E576DA4789F596A47 /* s_inter.c in Sources */ = {isa = PBXBuildFile; fileRef = C2B274DFAC2C0459AC62FF9221DADF05 /* s_inter.c */; settings = {COMPILER_FLAGS = "-DPD -DUSEAPI_DUMMY -DHAVE_UNISTD_H -DLIBPD_EXTRA -fcommon -fno-objc-arc"; }; };
 		3F6F0DD6EC51DA07A1958B4432C5E064 /* s_stuff.h in Headers */ = {isa = PBXBuildFile; fileRef = C09AB96CC2ECDB94F44C96FD7C7AE449 /* s_stuff.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3FCF183D1A755A0BDD3A6E761BB3C4E6 /* x_arithmetic.c in Sources */ = {isa = PBXBuildFile; fileRef = 32F1EAE36BEEBAC3D9BB9E1C73BE63A5 /* x_arithmetic.c */; settings = {COMPILER_FLAGS = "-DPD -DUSEAPI_DUMMY -DHAVE_UNISTD_H -DLIBPD_EXTRA -fcommon -fno-objc-arc"; }; };
+		3FF8F6156A89F157BFB481786247E748 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7EBBE983C76A6075D65ABD3C085AD69 /* Foundation.framework */; };
+		4089BCD7C31903195FD35808D7ECAF36 /* Pods-microjamUITests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C35A8A3DE191A2FA8F968321AD9BE15 /* Pods-microjamUITests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		419CAA9405DD3DE29BD3278A9B54DB99 /* IASKViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0ECA52C95810F1E95466FA27BCF53D69 /* IASKViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		41CC9CEF8F7542AA7699EAE9C705FD1C /* z_queued.h in Headers */ = {isa = PBXBuildFile; fileRef = F3EFB4373EB77B47CF3525974B63D76A /* z_queued.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		42FE84DA02ED5089A5126BEF584B4CB1 /* IASKTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = 33F50ED200223E26E8BB02B2F9A2684D /* IASKTextField.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -91,10 +93,11 @@
 		518C67E28C05669BE3E0FB7DA7C914E6 /* x_gui.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F886BA04D3E2108615EB3002E0373F4 /* x_gui.c */; settings = {COMPILER_FLAGS = "-DPD -DUSEAPI_DUMMY -DHAVE_UNISTD_H -DLIBPD_EXTRA -fcommon -fno-objc-arc"; }; };
 		53743C3E8DF7BD97E3612E09B191184C /* g_all_guis.c in Sources */ = {isa = PBXBuildFile; fileRef = 5B160EB8FA411E0343703CFB3D5E4ED6 /* g_all_guis.c */; settings = {COMPILER_FLAGS = "-DPD -DUSEAPI_DUMMY -DHAVE_UNISTD_H -DLIBPD_EXTRA -fcommon -fno-objc-arc"; }; };
 		538E3D762166B71A00202E68057991DA /* IASKAppSettingsWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C1A87C45D6CE119200CAD18960CC83 /* IASKAppSettingsWebViewController.m */; };
+		54662AD2C40D36A909C33ACEB5A365AE /* Pods-microjamTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2787058BF1747A0E8050C4DF941A170E /* Pods-microjamTests-dummy.m */; };
 		551267314E4B8236E9166BB48BE68B36 /* IASKPSSliderSpecifierViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AB3D3346E4E56E2807F308F5AD122580 /* IASKPSSliderSpecifierViewCell.m */; };
 		5522CC4F310DC2DD0C7498E99A659568 /* nl.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 31A2ACF49632B364927865394CBD4D20 /* nl.lproj */; };
 		563A18A4003D535DE5E75AA05B342ADB /* DateToolsSwift-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD5AC0EEF2B13796FD9038E18BB5914 /* DateToolsSwift-dummy.m */; };
-		5847492053BDD98CFE0A176D946C786E /* Pods-microjam-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 29E4174E11EFE45E30021FFD1F55B146 /* Pods-microjam-dummy.m */; };
+		5847492053BDD98CFE0A176D946C786E /* Pods-microjam-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = CB372493DA531D5BD49A1755D4620B00 /* Pods-microjam-dummy.m */; };
 		5A37C0E670CE31F4F72B06726487C432 /* x_vexp.c in Sources */ = {isa = PBXBuildFile; fileRef = D940E56F4264BA8E9A7B766C3B827D16 /* x_vexp.c */; settings = {COMPILER_FLAGS = "-DPD -DUSEAPI_DUMMY -DHAVE_UNISTD_H -DLIBPD_EXTRA -fcommon -fno-objc-arc"; }; };
 		5AF5F15244B25E1A2A8AE15D166679B6 /* loop~.c in Sources */ = {isa = PBXBuildFile; fileRef = 20BBC509CCBDAD9780AE54C7F02F8AE9 /* loop~.c */; settings = {COMPILER_FLAGS = "-DPD -DUSEAPI_DUMMY -DHAVE_UNISTD_H -DLIBPD_EXTRA -fcommon -fno-objc-arc"; }; };
 		5B509C41B853605E46A3C0D345B42FD0 /* x_misc.c in Sources */ = {isa = PBXBuildFile; fileRef = 25E67C64FF3FA2E157A8380A3F011176 /* x_misc.c */; settings = {COMPILER_FLAGS = "-DPD -DUSEAPI_DUMMY -DHAVE_UNISTD_H -DLIBPD_EXTRA -fcommon -fno-objc-arc"; }; };
@@ -109,10 +112,9 @@
 		6345831D358028F0DF9FA8558BB33FDE /* stdout.c in Sources */ = {isa = PBXBuildFile; fileRef = 84825BDE15DF50F4E7A50D23183A5438 /* stdout.c */; settings = {COMPILER_FLAGS = "-DPD -DUSEAPI_DUMMY -DHAVE_UNISTD_H -DLIBPD_EXTRA -fcommon -fno-objc-arc"; }; };
 		640BC8A436935F54C54089B28D56852C /* z_hooks.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D2A6AC2ADA6BA2068DE005A0BF3C90E /* z_hooks.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		64263CF35D99272EF4520639F715CD5F /* NSDate+TimeAgo-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 41FF9A0D545E1F6FCBBDFC74003631CB /* NSDate+TimeAgo-dummy.m */; };
-		64BE6352F1569BBDF017768BB040076D /* Pods-microjam-microjamTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 001C2597D5045F729954351F4034BA08 /* Pods-microjam-microjamTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		64C9F4903A26546EA0BB3B3A899CF915 /* Date+Comparators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0F43A78179CF2C66A86F376B12F9B2 /* Date+Comparators.swift */; };
 		65355A27A181B094D8FBA6ED29A6D897 /* x_vexp_fun.c in Sources */ = {isa = PBXBuildFile; fileRef = E86DE2F704387C57FAE61FAE3618C9AC /* x_vexp_fun.c */; settings = {COMPILER_FLAGS = "-DPD -DUSEAPI_DUMMY -DHAVE_UNISTD_H -DLIBPD_EXTRA -fcommon -fno-objc-arc"; }; };
-		65ACE282418027E1EAC0F5BBCD97EC63 /* InAppSettingsKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 693A43B04B6920CE5D4A9B62BCBBABF8 /* InAppSettingsKit.bundle */; };
+		65ACE282418027E1EAC0F5BBCD97EC63 /* InAppSettingsKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F6859A9A6B5D084A114BD5086F79B2A9 /* InAppSettingsKit.bundle */; };
 		65B36E7DC0A4807134288E0015A805CF /* z_print_util.h in Headers */ = {isa = PBXBuildFile; fileRef = 15CE853068E787613F300B2E6D5C26F2 /* z_print_util.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		661D7B9E41755FE4FB983FE783A7F881 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7EBBE983C76A6075D65ABD3C085AD69 /* Foundation.framework */; };
 		6622595A38D22163D16FB5015136080D /* InAppSettingsKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D7BC00B6772A0BE65E12159F258660C /* InAppSettingsKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -133,6 +135,7 @@
 		72A0AAEF5DFC21535D630C3185726ABD /* IASKSwitch.h in Headers */ = {isa = PBXBuildFile; fileRef = 71EA9FEB539A901DF3C89182753639D6 /* IASKSwitch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		739599A7E7B3EEC92276D9E3A9E8A78D /* g_editor.c in Sources */ = {isa = PBXBuildFile; fileRef = A4AFEA391908C35161444F6DB76C72BF /* g_editor.c */; settings = {COMPILER_FLAGS = "-DPD -DUSEAPI_DUMMY -DHAVE_UNISTD_H -DLIBPD_EXTRA -fcommon -fno-objc-arc"; }; };
 		752F12ADB0C81FC7E2CD7AD2669C6A6A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7EBBE983C76A6075D65ABD3C085AD69 /* Foundation.framework */; };
+		79285C38807754C40B59B0D6364588B3 /* Pods-microjamUITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2794C954A55A88937BD00A94908FC142 /* Pods-microjamUITests-dummy.m */; };
 		7A250A1D32EB958623B7CFDD05321FF4 /* x_vexp.h in Headers */ = {isa = PBXBuildFile; fileRef = A4C2F028E8D123B12362340AF73AFE46 /* x_vexp.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7DD6D31A0BCB279C1C1D4B8C5F339E92 /* x_list.c in Sources */ = {isa = PBXBuildFile; fileRef = EF3B1180241E25D7A7E4764200DA4D35 /* x_list.c */; settings = {COMPILER_FLAGS = "-DPD -DUSEAPI_DUMMY -DHAVE_UNISTD_H -DLIBPD_EXTRA -fcommon -fno-objc-arc"; }; };
 		81BC3590CFF1F3FC3D984A91A2185B47 /* m_binbuf.c in Sources */ = {isa = PBXBuildFile; fileRef = D914019E8A227F4641D5F3E8605DB00C /* m_binbuf.c */; settings = {COMPILER_FLAGS = "-DPD -DUSEAPI_DUMMY -DHAVE_UNISTD_H -DLIBPD_EXTRA -fcommon -fno-objc-arc"; }; };
@@ -144,7 +147,6 @@
 		8A1AF2FD6EF7346640B6EDFC01EF3EB3 /* g_io.c in Sources */ = {isa = PBXBuildFile; fileRef = 08ACA7EB19185E53A97D88B1F018FC30 /* g_io.c */; settings = {COMPILER_FLAGS = "-DPD -DUSEAPI_DUMMY -DHAVE_UNISTD_H -DLIBPD_EXTRA -fcommon -fno-objc-arc"; }; };
 		8AEEB110D7FAB8DEC047D3EC54E15C7B /* x_interface.c in Sources */ = {isa = PBXBuildFile; fileRef = EA71D5791B9ACAA15C0B7A1BFBDC5746 /* x_interface.c */; settings = {COMPILER_FLAGS = "-DPD -DUSEAPI_DUMMY -DHAVE_UNISTD_H -DLIBPD_EXTRA -fcommon -fno-objc-arc"; }; };
 		8CAF7DB2E1C45E9637AB82F09680F952 /* s_main.c in Sources */ = {isa = PBXBuildFile; fileRef = CD93B0D00EAB9ED5912E35D0BFCFF2F0 /* s_main.c */; settings = {COMPILER_FLAGS = "-DPD -DUSEAPI_DUMMY -DHAVE_UNISTD_H -DLIBPD_EXTRA -fcommon -fno-objc-arc"; }; };
-		8D5A0C77720C9910B4F9CFBD2FE84BAE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7EBBE983C76A6075D65ABD3C085AD69 /* Foundation.framework */; };
 		8DDF49E2AC6603769380FBF6F9DE1804 /* IASKAppSettingsViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A5A2FCED2A9F265A4394F2CCC79A478 /* IASKAppSettingsViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8E1280CE142EAE5FCCA8A68326F43F8E /* IASKSettingsReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BBF6A78C716622C6BE37427F9633066 /* IASKSettingsReader.m */; };
 		8E9EB88FC32BD9C6355D29D8D88CDC26 /* fr.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 1653EF7BECC1FDB90CCCA83FA41CC45F /* fr.lproj */; };
@@ -154,7 +156,6 @@
 		9D0221E27E37CDA9DF26DD3CFA56D75B /* DPDKeyboardListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5163397E2EA4BAD2335BA02EC1823E6 /* DPDKeyboardListener.swift */; };
 		9F76E28C973A31CBC3855AA11AC2EA98 /* IASKSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 33086B9B22B6B345BA24B64649DCA4A2 /* IASKSlider.m */; };
 		A0DAF2298F625766B95615062F347F95 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2203E9C2948ECBF12F0541C21D45BD4 /* UIKit.framework */; };
-		A2B56AA302A743F9B8FF268FAF142A4F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7EBBE983C76A6075D65ABD3C085AD69 /* Foundation.framework */; };
 		A3C492A7D50BE330021315850E72A5F9 /* d_math.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B094C6E4EFD54FB0FE9FE669F4C7017 /* d_math.c */; settings = {COMPILER_FLAGS = "-DPD -DUSEAPI_DUMMY -DHAVE_UNISTD_H -DLIBPD_EXTRA -fcommon -fno-objc-arc"; }; };
 		A3D976D421FCD2D692BFBF9960DE54C2 /* m_glob.c in Sources */ = {isa = PBXBuildFile; fileRef = DD0ABE6E1CD1FFCB3613DC7B6004284F /* m_glob.c */; settings = {COMPILER_FLAGS = "-DPD -DUSEAPI_DUMMY -DHAVE_UNISTD_H -DLIBPD_EXTRA -fcommon -fno-objc-arc"; }; };
 		A401CF18D15DF246F40FAC4E8F06CBC7 /* DPDUIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098BCDC95D42D1F26A323D925643BEA2 /* DPDUIView+Extension.swift */; };
@@ -175,10 +176,10 @@
 		B3845B93D653982E563718D55C0FAF2B /* m_conf.c in Sources */ = {isa = PBXBuildFile; fileRef = 0A5A345F6A3DC5478A6B63D0875353C2 /* m_conf.c */; settings = {COMPILER_FLAGS = "-DPD -DUSEAPI_DUMMY -DHAVE_UNISTD_H -DLIBPD_EXTRA -fcommon -fno-objc-arc"; }; };
 		B3E75D660583E02B00CF425621D0B7F4 /* x_time.c in Sources */ = {isa = PBXBuildFile; fileRef = 17400C93FD695A4EAB6C42C88E51F1FF /* x_time.c */; settings = {COMPILER_FLAGS = "-DPD -DUSEAPI_DUMMY -DHAVE_UNISTD_H -DLIBPD_EXTRA -fcommon -fno-objc-arc"; }; };
 		B53B41706BB15D1F2C73C1A5908EC2C3 /* s_audio.c in Sources */ = {isa = PBXBuildFile; fileRef = 1AF8AD942C8708D06212E72A0206C7D1 /* s_audio.c */; settings = {COMPILER_FLAGS = "-DPD -DUSEAPI_DUMMY -DHAVE_UNISTD_H -DLIBPD_EXTRA -fcommon -fno-objc-arc"; }; };
+		B54AC195822AFBFE94A3E7E3532BB485 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7EBBE983C76A6075D65ABD3C085AD69 /* Foundation.framework */; };
 		B5DB7374AAEDF974CB10780DBA6F092C /* z_libpd.h in Headers */ = {isa = PBXBuildFile; fileRef = 70F4A22AB01EE2ADCCE93EDF97E64BD2 /* z_libpd.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B6B2C3551F0A0CD3194E4E6E0431C2E3 /* m_obj.c in Sources */ = {isa = PBXBuildFile; fileRef = 1E43D5395C4C91721B24C2ED32EA7DD2 /* m_obj.c */; settings = {COMPILER_FLAGS = "-DPD -DUSEAPI_DUMMY -DHAVE_UNISTD_H -DLIBPD_EXTRA -fcommon -fno-objc-arc"; }; };
 		B77982F0AD7125FC2D1C947B32CE2FDC /* m_sched.c in Sources */ = {isa = PBXBuildFile; fileRef = 3EC7AAB4BD493104C16534A898868F7F /* m_sched.c */; settings = {COMPILER_FLAGS = "-DPD -DUSEAPI_DUMMY -DHAVE_UNISTD_H -DLIBPD_EXTRA -fcommon -fno-objc-arc"; }; };
-		B927E617296CCC7828A0E0AF4E817BC9 /* Pods-microjamUITests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C280F3A3BC80663B0C7F682302C5BC45 /* Pods-microjamUITests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B98888B1FC6D226827543B1E1BDCF00C /* g_scalar.c in Sources */ = {isa = PBXBuildFile; fileRef = F0697321E101D9BDC4E68242C6456B3F /* g_scalar.c */; settings = {COMPILER_FLAGS = "-DPD -DUSEAPI_DUMMY -DHAVE_UNISTD_H -DLIBPD_EXTRA -fcommon -fno-objc-arc"; }; };
 		BA605DE9DAC3AE71C477ED604E11978E /* es.lproj in Resources */ = {isa = PBXBuildFile; fileRef = B1F1141C7A8D6EDAFBB8F48B003CFAC7 /* es.lproj */; };
 		BA72A2D732B0342CD1CC69FF1FB07F74 /* bob~.c in Sources */ = {isa = PBXBuildFile; fileRef = 10B9B7600844B84892CFEE62D42929A5 /* bob~.c */; settings = {COMPILER_FLAGS = "-DPD -DUSEAPI_DUMMY -DHAVE_UNISTD_H -DLIBPD_EXTRA -fcommon -fno-objc-arc"; }; };
@@ -208,7 +209,6 @@
 		DB02A444F6954169A8DBC77D2EE52FF8 /* g_mycanvas.c in Sources */ = {isa = PBXBuildFile; fileRef = D5DF366116C252A9F759E004800F6650 /* g_mycanvas.c */; settings = {COMPILER_FLAGS = "-DPD -DUSEAPI_DUMMY -DHAVE_UNISTD_H -DLIBPD_EXTRA -fcommon -fno-objc-arc"; }; };
 		DB6257CDA73706A0690D2C15AB82ACA1 /* IASKSpecifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 72F114E916335E6895BC7F7CFDEBBEF2 /* IASKSpecifier.m */; };
 		DBF27D4C03D05211E415E7C1FF0AEF98 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7EBBE983C76A6075D65ABD3C085AD69 /* Foundation.framework */; };
-		DC80DB485C2D748EADBA1445F1EBFD84 /* Pods-microjamUITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC229404B0AA06E5BEBC8C975113648 /* Pods-microjamUITests-dummy.m */; };
 		DFF1957B63D91AF9BDDE95C5F9B56CE6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6018114B88CB6EECAAD9360DA38BF0F6 /* Constants.swift */; };
 		E04419BE6223FD6096100B004DF030AD /* UIColor_Hex_Swift-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 245423021CC566768D52839163441A4B /* UIColor_Hex_Swift-dummy.m */; };
 		E0B64A2CC6A8F21281C591413E9F9781 /* g_clone.c in Sources */ = {isa = PBXBuildFile; fileRef = 594DF6DD767632185AFEB853A7AAB810 /* g_clone.c */; settings = {COMPILER_FLAGS = "-DPD -DUSEAPI_DUMMY -DHAVE_UNISTD_H -DLIBPD_EXTRA -fcommon -fno-objc-arc"; }; };
@@ -236,12 +236,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		0BD0CB590AC2E1A6A35D8987F2853B5A /* PBXContainerItemProxy */ = {
+		0D1E6427E121D1E4BD79972AF0D8A71C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = A9A796B97091C50BF6C508A4C21D8722;
-			remoteInfo = UIColor_Hex_Swift;
+			remoteGlobalIDString = 5168099F2EBFC99A707C03C9EADE01A5;
+			remoteInfo = DropDown;
+		};
+		11EC268C0B69C2626E2A14A4A0615E01 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E89CFD99B895BCC6E8EDC2F95A03500C;
+			remoteInfo = DateToolsSwift;
 		};
 		265DD33C20174FACCB70647D741C90B6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -257,6 +264,13 @@
 			remoteGlobalIDString = 9A664FD395EC4C1AFB9459F3A6BFF753;
 			remoteInfo = "NSDate+TimeAgo";
 		};
+		2D94711525464682DA668031925EEE46 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5168099F2EBFC99A707C03C9EADE01A5;
+			remoteInfo = DropDown;
+		};
 		32D2D80C5C1D2EA667D41F256F791D51 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
@@ -264,33 +278,33 @@
 			remoteGlobalIDString = E89CFD99B895BCC6E8EDC2F95A03500C;
 			remoteInfo = DateToolsSwift;
 		};
-		56EF443E45C651EC5932AE981B672C11 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 9A664FD395EC4C1AFB9459F3A6BFF753;
-			remoteInfo = "NSDate+TimeAgo";
-		};
-		7970476C34BAAD38E90BD9B9E674D50F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6BD8B0250148E8A607574294B1658EA7;
-			remoteInfo = libpd;
-		};
-		7DD4D211545C61DC5706849C4107CB74 /* PBXContainerItemProxy */ = {
+		33D2C7D73E8762436233A6F1947A6023 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 8CB67190F0A60F7A033A3E515965C86F;
 			remoteInfo = InAppSettingsKit;
 		};
-		905259ED10D261FB9621063C19C3439A /* PBXContainerItemProxy */ = {
+		44AF349C97870C1942C52AF5AF66840D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 5168099F2EBFC99A707C03C9EADE01A5;
-			remoteInfo = DropDown;
+			remoteGlobalIDString = 6BD8B0250148E8A607574294B1658EA7;
+			remoteInfo = libpd;
+		};
+		4FE9E93579958024910B880443C49877 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9A664FD395EC4C1AFB9459F3A6BFF753;
+			remoteInfo = "NSDate+TimeAgo";
+		};
+		9F3583FFF0AC0346C1351ECA280A01F5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9A796B97091C50BF6C508A4C21D8722;
+			remoteInfo = UIColor_Hex_Swift;
 		};
 		A78EB969449395D63C592257A83D55BB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -299,7 +313,7 @@
 			remoteGlobalIDString = A9A796B97091C50BF6C508A4C21D8722;
 			remoteInfo = UIColor_Hex_Swift;
 		};
-		BE6FDAD1B5F47088897E5FA157440878 /* PBXContainerItemProxy */ = {
+		A8EA7226626965F7F968340E10D60E5A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
@@ -313,12 +327,33 @@
 			remoteGlobalIDString = 8CB67190F0A60F7A033A3E515965C86F;
 			remoteInfo = InAppSettingsKit;
 		};
+		E2A26F6D86B2DD58372AA9F6F8EC9B13 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8CB67190F0A60F7A033A3E515965C86F;
+			remoteInfo = InAppSettingsKit;
+		};
+		E6A5DBE51A64225006BE8557915DC62B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9A664FD395EC4C1AFB9459F3A6BFF753;
+			remoteInfo = "NSDate+TimeAgo";
+		};
 		E6DE0B8A50E0A96FC8949E6C7A5A6311 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 6BD8B0250148E8A607574294B1658EA7;
 			remoteInfo = libpd;
+		};
+		EF0832B2A0861B93BA066A6D840CFDB6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9A796B97091C50BF6C508A4C21D8722;
+			remoteInfo = UIColor_Hex_Swift;
 		};
 		FBE0D4BA15D301BB7ADD8451BC93EAA7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -327,61 +362,59 @@
 			remoteGlobalIDString = FA416ED70FC7E091F479F65D981FE8FC;
 			remoteInfo = "InAppSettingsKit-InAppSettingsKit";
 		};
+		FF2CBD1F5FFE0260B1C1506539C12031 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6BD8B0250148E8A607574294B1658EA7;
+			remoteInfo = libpd;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		001C2597D5045F729954351F4034BA08 /* Pods-microjam-microjamTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-microjam-microjamTests-umbrella.h"; sourceTree = "<group>"; };
 		0264D17448626EFF44EF78FAD69CA6FD /* Date+Manipulations.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Date+Manipulations.swift"; path = "DateToolsSwift/DateTools/Date+Manipulations.swift"; sourceTree = "<group>"; };
-		0381017C458F7A8432A86F7A0E38F784 /* Pods-microjam.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-microjam.debug.xcconfig"; sourceTree = "<group>"; };
-		04B10B7042ACB2E8B4C277C95740BB6A /* Pods-microjamUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-microjamUITests.release.xcconfig"; sourceTree = "<group>"; };
+		03D1BBD2CAD680C9A53668734C285250 /* Pods-microjamUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-microjamUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		052ED06786715B2B6888FB2F3E311BFA /* Pods-microjam-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-microjam-resources.sh"; sourceTree = "<group>"; };
 		054166E090F47472FDE18C475C41DE3C /* z_print_util.c */ = {isa = PBXFileReference; includeInIndex = 1; name = z_print_util.c; path = libpd_wrapper/util/z_print_util.c; sourceTree = "<group>"; };
-		05BA3C61CC15BFCB3D47C4432033CB06 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		056F7773BF908BAD12464DDA005A9EFF /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		06B05DA78D9948D7F6F12C9A85812C73 /* libpd.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = libpd.xcconfig; sourceTree = "<group>"; };
+		06F0C06009921740A1A8B68B37A53D03 /* Pods-microjam-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-microjam-frameworks.sh"; sourceTree = "<group>"; };
 		08ACA7EB19185E53A97D88B1F018FC30 /* g_io.c */ = {isa = PBXFileReference; includeInIndex = 1; name = g_io.c; path = "pure-data/src/g_io.c"; sourceTree = "<group>"; };
 		096E105EE2FFE290B332EB423491725A /* Enums.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Enums.swift; path = DateToolsSwift/DateTools/Enums.swift; sourceTree = "<group>"; };
 		098BCDC95D42D1F26A323D925643BEA2 /* DPDUIView+Extension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "DPDUIView+Extension.swift"; path = "DropDown/helpers/DPDUIView+Extension.swift"; sourceTree = "<group>"; };
 		0A5A345F6A3DC5478A6B63D0875353C2 /* m_conf.c */ = {isa = PBXFileReference; includeInIndex = 1; name = m_conf.c; path = "pure-data/src/m_conf.c"; sourceTree = "<group>"; };
 		0A618F3D67D95C090232B6FD0C126B2A /* PdBase.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PdBase.m; path = objc/PdBase.m; sourceTree = "<group>"; };
+		0CF7CAB86442731338EF667382EBEC24 /* Pods-microjamTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-microjamTests-acknowledgements.plist"; sourceTree = "<group>"; };
+		0D17C405C7B27D4D31C08CA3B453991A /* Pods_microjamUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_microjamUITests.framework; path = "Pods-microjamUITests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0D3620BD8D64F9C6998521D32AE3AA67 /* Pods-microjamUITests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-microjamUITests.modulemap"; sourceTree = "<group>"; };
 		0D73426760880C660F0D6CEFB3A8BD14 /* IASKSettingsReader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = IASKSettingsReader.h; path = InAppSettingsKit/Models/IASKSettingsReader.h; sourceTree = "<group>"; };
 		0D7B4F49562A984FD3EB1076B5619420 /* m_imp.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = m_imp.h; path = "pure-data/src/m_imp.h"; sourceTree = "<group>"; };
 		0ECA52C95810F1E95466FA27BCF53D69 /* IASKViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = IASKViewController.h; path = InAppSettingsKit/Controllers/IASKViewController.h; sourceTree = "<group>"; };
-		0F7617920650F4846B29B0CF68A51E11 /* Pods_microjam_microjamTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_microjam_microjamTests.framework; path = "Pods-microjam-microjamTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1005D985741190905B09001C97666B50 /* DropDownCell.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = DropDownCell.xib; path = DropDown/resources/DropDownCell.xib; sourceTree = "<group>"; };
 		1083430897EDF4C1F881A0CC7B252AB3 /* x_connective.c */ = {isa = PBXFileReference; includeInIndex = 1; name = x_connective.c; path = "pure-data/src/x_connective.c"; sourceTree = "<group>"; };
 		10B9B7600844B84892CFEE62D42929A5 /* bob~.c */ = {isa = PBXFileReference; includeInIndex = 1; name = "bob~.c"; path = "pure-data/extra/bob~/bob~.c"; sourceTree = "<group>"; };
-		138856F71D4CCD6A118E6D7A13612056 /* Pods-microjam-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-microjam-frameworks.sh"; sourceTree = "<group>"; };
 		151CB6977C41B7218532C447D9AE570B /* TimePeriod.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TimePeriod.swift; path = DateToolsSwift/DateTools/TimePeriod.swift; sourceTree = "<group>"; };
 		15CE853068E787613F300B2E6D5C26F2 /* z_print_util.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = z_print_util.h; path = libpd_wrapper/util/z_print_util.h; sourceTree = "<group>"; };
 		1653EF7BECC1FDB90CCCA83FA41CC45F /* fr.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = fr.lproj; path = InAppSettingsKit/Resources/fr.lproj; sourceTree = "<group>"; };
 		17400C93FD695A4EAB6C42C88E51F1FF /* x_time.c */ = {isa = PBXFileReference; includeInIndex = 1; name = x_time.c; path = "pure-data/src/x_time.c"; sourceTree = "<group>"; };
 		17A4A1F1C7874561B3EA901310B8BE83 /* g_hdial.c */ = {isa = PBXFileReference; includeInIndex = 1; name = g_hdial.c; path = "pure-data/src/g_hdial.c"; sourceTree = "<group>"; };
-		1856E9321416BD8F003465C63CF7381A /* Pods-microjamUITests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-microjamUITests-frameworks.sh"; sourceTree = "<group>"; };
 		1893A9455E4F922125E1D9F4A94BF3F7 /* d_osc.c */ = {isa = PBXFileReference; includeInIndex = 1; name = d_osc.c; path = "pure-data/src/d_osc.c"; sourceTree = "<group>"; };
-		18FF68A1076DE537B1B2AAA4038B096B /* Pods-microjam-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-microjam-resources.sh"; sourceTree = "<group>"; };
-		192D865237846F41178F429295F16B67 /* Pods-microjam.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-microjam.release.xcconfig"; sourceTree = "<group>"; };
-		1A3D06C2FAFDBF169979C8604FCC5739 /* Pods-microjam-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-microjam-acknowledgements.plist"; sourceTree = "<group>"; };
 		1AF8AD942C8708D06212E72A0206C7D1 /* s_audio.c */ = {isa = PBXFileReference; includeInIndex = 1; name = s_audio.c; path = "pure-data/src/s_audio.c"; sourceTree = "<group>"; };
-		1BF03ECCC00E8AE1229374C3F193F9D1 /* Pods-microjam-microjamTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-microjam-microjamTests-resources.sh"; sourceTree = "<group>"; };
 		1C59BB990DBBE00DD6A4D9925C751A8E /* NSDate+TimeAgo-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSDate+TimeAgo-umbrella.h"; sourceTree = "<group>"; };
 		1E43D5395C4C91721B24C2ED32EA7DD2 /* m_obj.c */ = {isa = PBXFileReference; includeInIndex = 1; name = m_obj.c; path = "pure-data/src/m_obj.c"; sourceTree = "<group>"; };
 		1F489B548DE8625E876F81D4194D7FCD /* Date+Inits.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Date+Inits.swift"; path = "DateToolsSwift/DateTools/Date+Inits.swift"; sourceTree = "<group>"; };
 		1FAB140FF2CDD7C4140F0B85E10BFF70 /* IASKTextViewCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = IASKTextViewCell.m; path = InAppSettingsKit/Views/IASKTextViewCell.m; sourceTree = "<group>"; };
 		20217386569F94C53B6FF359AE3D64CF /* tr.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = tr.lproj; path = InAppSettingsKit/Resources/tr.lproj; sourceTree = "<group>"; };
 		20BBC509CCBDAD9780AE54C7F02F8AE9 /* loop~.c */ = {isa = PBXFileReference; includeInIndex = 1; name = "loop~.c"; path = "pure-data/extra/loop~/loop~.c"; sourceTree = "<group>"; };
-		2163C5D18D0B3E29EE7F5B817D3D0A22 /* Pods-microjam-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-microjam-umbrella.h"; sourceTree = "<group>"; };
-		229EE32039AA13DE634A57D331263616 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22F5ABF27547DF4303F044478886EE5B /* InAppSettingsKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "InAppSettingsKit-dummy.m"; sourceTree = "<group>"; };
 		237C1B52F592B00C0438C5BCE8509E07 /* th.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = th.lproj; path = InAppSettingsKit/Resources/th.lproj; sourceTree = "<group>"; };
 		245423021CC566768D52839163441A4B /* UIColor_Hex_Swift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIColor_Hex_Swift-dummy.m"; sourceTree = "<group>"; };
-		25A22DE7A0BC16C88051E2DFEDE6D944 /* InAppSettingsKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = InAppSettingsKit.framework; path = InAppSettingsKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		25E67C64FF3FA2E157A8380A3F011176 /* x_misc.c */ = {isa = PBXFileReference; includeInIndex = 1; name = x_misc.c; path = "pure-data/src/x_misc.c"; sourceTree = "<group>"; };
-		26ACF2A94B6A5D808C29F51E99AF7261 /* DropDown.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = DropDown.framework; path = DropDown.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		271560B508D700CE0255FA6D78DB7D23 /* pt.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = pt.lproj; path = InAppSettingsKit/Resources/pt.lproj; sourceTree = "<group>"; };
 		274634F766599D2ACF894F5AC35390C6 /* pt-PT.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = "pt-PT.lproj"; path = "InAppSettingsKit/Resources/pt-PT.lproj"; sourceTree = "<group>"; };
 		2771A7E2372313CE731477FEEC23F93B /* PdMidiDispatcher.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PdMidiDispatcher.h; path = objc/PdMidiDispatcher.h; sourceTree = "<group>"; };
-		29E4174E11EFE45E30021FFD1F55B146 /* Pods-microjam-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-microjam-dummy.m"; sourceTree = "<group>"; };
-		2AAB6B99E10782CC6BF88B6B64BD27D6 /* Pods-microjam-microjamTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-microjam-microjamTests.modulemap"; sourceTree = "<group>"; };
-		2B27E8961566C9FFD35ADCAA96403A3F /* libpd.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = libpd.framework; path = libpd.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2787058BF1747A0E8050C4DF941A170E /* Pods-microjamTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-microjamTests-dummy.m"; sourceTree = "<group>"; };
+		2794C954A55A88937BD00A94908FC142 /* Pods-microjamUITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-microjamUITests-dummy.m"; sourceTree = "<group>"; };
 		2B46C512E177512DAD217063D7DEADC8 /* NSDate+TimeAgo.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "NSDate+TimeAgo.modulemap"; sourceTree = "<group>"; };
 		2B71D179BFE5194B8D3FB1F19622649F /* sigmund~.c */ = {isa = PBXFileReference; includeInIndex = 1; name = "sigmund~.c"; path = "pure-data/extra/sigmund~/sigmund~.c"; sourceTree = "<group>"; };
 		2C30EF6D8F71CD900A3040CEA326DEA1 /* IASKTextField.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = IASKTextField.m; path = InAppSettingsKit/Views/IASKTextField.m; sourceTree = "<group>"; };
@@ -389,6 +422,7 @@
 		2D9A69A410268332C5616A0B74288997 /* UIColor_Hex_Swift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = UIColor_Hex_Swift.modulemap; sourceTree = "<group>"; };
 		2ED550D9C61264F7264E96CA08750B1E /* m_pd.c */ = {isa = PBXFileReference; includeInIndex = 1; name = m_pd.c; path = "pure-data/src/m_pd.c"; sourceTree = "<group>"; };
 		2F0C4EAF3F564F10BC9BF5493998CA24 /* el.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = el.lproj; path = InAppSettingsKit/Resources/el.lproj; sourceTree = "<group>"; };
+		2F617A82388C44930D45598C97200EE4 /* Pods-microjamTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-microjamTests-resources.sh"; sourceTree = "<group>"; };
 		2FC2904451D9F07C230FBE8EB6A6EA79 /* InAppSettingsKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "InAppSettingsKit-prefix.pch"; sourceTree = "<group>"; };
 		30CA04C98C83D38E2EA7577ADA0D4BBD /* PdAudioUnit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PdAudioUnit.h; path = objc/PdAudioUnit.h; sourceTree = "<group>"; };
 		31A2ACF49632B364927865394CBD4D20 /* nl.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = nl.lproj; path = InAppSettingsKit/Resources/nl.lproj; sourceTree = "<group>"; };
@@ -397,11 +431,15 @@
 		33F50ED200223E26E8BB02B2F9A2684D /* IASKTextField.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = IASKTextField.h; path = InAppSettingsKit/Views/IASKTextField.h; sourceTree = "<group>"; };
 		35927D8E103D0503C89BB7980E44BED1 /* ja.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = ja.lproj; path = InAppSettingsKit/Resources/ja.lproj; sourceTree = "<group>"; };
 		35D08BE4000DD12DB844F70E9B7FE104 /* m_atom.c */ = {isa = PBXFileReference; includeInIndex = 1; name = m_atom.c; path = "pure-data/src/m_atom.c"; sourceTree = "<group>"; };
+		36A62ED71D82143FCD3F91A522886A1D /* Pods-microjamUITests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-microjamUITests-resources.sh"; sourceTree = "<group>"; };
 		36B2DF3104F6990515C1F35E0C4AAB99 /* PdFile.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PdFile.h; path = objc/PdFile.h; sourceTree = "<group>"; };
 		372231FF39440F2DF9A5C6AE7C15F12C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
+		3726F51E51D54F3392E8E146566774FB /* DateToolsSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = DateToolsSwift.framework; path = DateToolsSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37BC1B35AD5B581BC190E0BB91F2DA7D /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		396D75602EAB9E796A7E057A571A23AD /* g_rtext.c */ = {isa = PBXFileReference; includeInIndex = 1; name = g_rtext.c; path = "pure-data/src/g_rtext.c"; sourceTree = "<group>"; };
+		39AEA66D73D03B6E742521ECC73A0E90 /* Pods_microjamTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_microjamTests.framework; path = "Pods-microjamTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A8C3992A00DA1E2BEEDD412CC99A7A7 /* UIColor_Hex_Swift.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = UIColor_Hex_Swift.xcconfig; sourceTree = "<group>"; };
+		3B9063B91693F3688063047921B4BFEE /* Pods-microjam.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-microjam.debug.xcconfig"; sourceTree = "<group>"; };
 		3BA497070E93ED2BDBD2F33CF71958C1 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3DE34DDBA67A389B1D606E5C7E2BDECF /* s_loader.c */ = {isa = PBXFileReference; includeInIndex = 1; name = s_loader.c; path = "pure-data/src/s_loader.c"; sourceTree = "<group>"; };
 		3EC7AAB4BD493104C16534A898868F7F /* m_sched.c */ = {isa = PBXFileReference; includeInIndex = 1; name = m_sched.c; path = "pure-data/src/m_sched.c"; sourceTree = "<group>"; };
@@ -423,10 +461,13 @@
 		467342189E14D53B29EF5C482237607D /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
 		4712DA52F3ACE67E2391EACE15D7EEB9 /* g_toggle.c */ = {isa = PBXFileReference; includeInIndex = 1; name = g_toggle.c; path = "pure-data/src/g_toggle.c"; sourceTree = "<group>"; };
 		4828990EB8D4573291A48F2CA0DC5FBE /* DateTools.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = DateTools.bundle; path = DateToolsSwift/DateTools/DateTools.bundle; sourceTree = "<group>"; };
+		49EABEEB17695B92E83189985D2E3736 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4AB40C204E7CAD672FCC4A79FA4A2BC4 /* Pods-microjam.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-microjam.release.xcconfig"; sourceTree = "<group>"; };
 		4B0D4512987318667EE9F5F995DC8B97 /* Date+TimeAgo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Date+TimeAgo.swift"; path = "DateToolsSwift/DateTools/Date+TimeAgo.swift"; sourceTree = "<group>"; };
 		4B5C66FCEE2439EBB0F3EADE789A875F /* DropDownCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DropDownCell.swift; path = DropDown/src/DropDownCell.swift; sourceTree = "<group>"; };
 		4B85152182D7B7C60A36A780B831279B /* HEXColor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HEXColor.h; path = HEXColor/HEXColor.h; sourceTree = "<group>"; };
 		4B97998254BD1AFCCDD1FF53BDDF8723 /* PdMidiDispatcher.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PdMidiDispatcher.m; path = objc/PdMidiDispatcher.m; sourceTree = "<group>"; };
+		4C35A8A3DE191A2FA8F968321AD9BE15 /* Pods-microjamUITests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-microjamUITests-umbrella.h"; sourceTree = "<group>"; };
 		4D358D1DA27DBC13E45F29F35BAD8AC8 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4D75A4F5DD1B0B5DDBEB55ED5459EA7B /* d_resample.c */ = {isa = PBXFileReference; includeInIndex = 1; name = d_resample.c; path = "pure-data/src/d_resample.c"; sourceTree = "<group>"; };
 		4D7BC00B6772A0BE65E12159F258660C /* InAppSettingsKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "InAppSettingsKit-umbrella.h"; sourceTree = "<group>"; };
@@ -434,7 +475,9 @@
 		51B1EB9771419017FA70DC233CA8A8F9 /* g_readwrite.c */ = {isa = PBXFileReference; includeInIndex = 1; name = g_readwrite.c; path = "pure-data/src/g_readwrite.c"; sourceTree = "<group>"; };
 		51D02B6D223ECFF201FB77F7D89DAADD /* IASKPSTextFieldSpecifierViewCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = IASKPSTextFieldSpecifierViewCell.h; path = InAppSettingsKit/Views/IASKPSTextFieldSpecifierViewCell.h; sourceTree = "<group>"; };
 		52C9C7832123DBEA4DFF66DBAF17F586 /* g_canvas.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = g_canvas.h; path = "pure-data/src/g_canvas.h"; sourceTree = "<group>"; };
+		5335899D41384702E95AD279B00E4333 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		534683A93696DDE8451B15C4C6361575 /* PdAudioController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PdAudioController.h; path = objc/PdAudioController.h; sourceTree = "<group>"; };
+		541AD8319EFA19B0DE11C3A78D9DCED0 /* InAppSettingsKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = InAppSettingsKit.framework; path = InAppSettingsKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		549DB0BC1AF7E40707F3778971C06737 /* DateToolsSwift-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DateToolsSwift-prefix.pch"; sourceTree = "<group>"; };
 		552E7A8725F22BAC89D73CA36846F98B /* PdFile.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PdFile.m; path = objc/PdFile.m; sourceTree = "<group>"; };
 		55BA3140F3B6875636B347B63ED650F5 /* libpd-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "libpd-dummy.m"; sourceTree = "<group>"; };
@@ -455,65 +498,63 @@
 		63A4BC5D2B05DEF83F82E79150D552D2 /* g_template.c */ = {isa = PBXFileReference; includeInIndex = 1; name = g_template.c; path = "pure-data/src/g_template.c"; sourceTree = "<group>"; };
 		63C32B8FC32695BC6CD9608F580D04BB /* pd~.c */ = {isa = PBXFileReference; includeInIndex = 1; name = "pd~.c"; path = "pure-data/extra/pd~/pd~.c"; sourceTree = "<group>"; };
 		668D0C1199BD68206032A36284403AC1 /* s_utf8.c */ = {isa = PBXFileReference; includeInIndex = 1; name = s_utf8.c; path = "pure-data/src/s_utf8.c"; sourceTree = "<group>"; };
-		6792F8F2178D132B6CD41DC93903CE16 /* Pods-microjamUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-microjamUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		6857AAAA6CAC4ECF1F1660C4D1E9E312 /* en.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = en.lproj; path = InAppSettingsKit/Resources/en.lproj; sourceTree = "<group>"; };
-		693A43B04B6920CE5D4A9B62BCBBABF8 /* InAppSettingsKit.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = InAppSettingsKit.bundle; path = InAppSettingsKit.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		6BBD915353EBC2903162B14FC7E484A0 /* Pods-microjamUITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-microjamUITests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		6C0314F22CC23F02FBF80442A4BF66E3 /* Date+Bundle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Date+Bundle.swift"; path = "DateToolsSwift/DateTools/Date+Bundle.swift"; sourceTree = "<group>"; };
 		6C4103B742DDF55E86BDB97D24C26728 /* NSDate+TimeAgo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSDate+TimeAgo.h"; sourceTree = "<group>"; };
 		6D20E03641EED54B108A94F55AB865C3 /* d_dac.c */ = {isa = PBXFileReference; includeInIndex = 1; name = d_dac.c; path = "pure-data/src/d_dac.c"; sourceTree = "<group>"; };
+		6D75AC5306EDA9203E873D71D392FE7A /* Pods-microjamUITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-microjamUITests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		6D8589BBB9526F23729B001B8F4E2C3A /* d_fft_fftsg.c */ = {isa = PBXFileReference; includeInIndex = 1; name = d_fft_fftsg.c; path = "pure-data/src/d_fft_fftsg.c"; sourceTree = "<group>"; };
+		6ECF8FD231576A4752DB355C28EC553C /* UIColor_Hex_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = UIColor_Hex_Swift.framework; path = UIColor_Hex_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FC0CC7555DDB5C05A8B6168892B55FC /* IASKMultipleValueSelection.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = IASKMultipleValueSelection.h; path = InAppSettingsKit/Controllers/IASKMultipleValueSelection.h; sourceTree = "<group>"; };
 		701763FD96C1CECEE7F6E468F9E3FF86 /* DateToolsSwift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = DateToolsSwift.modulemap; sourceTree = "<group>"; };
+		704F5F0FBF14DB972E4CF6DB787186F4 /* DropDown.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = DropDown.framework; path = DropDown.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		70C1A87C45D6CE119200CAD18960CC83 /* IASKAppSettingsWebViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = IASKAppSettingsWebViewController.m; path = InAppSettingsKit/Controllers/IASKAppSettingsWebViewController.m; sourceTree = "<group>"; };
 		70F4A22AB01EE2ADCCE93EDF97E64BD2 /* z_libpd.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = z_libpd.h; path = libpd_wrapper/z_libpd.h; sourceTree = "<group>"; };
 		71EA9FEB539A901DF3C89182753639D6 /* IASKSwitch.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = IASKSwitch.h; path = InAppSettingsKit/Views/IASKSwitch.h; sourceTree = "<group>"; };
 		72F114E916335E6895BC7F7CFDEBBEF2 /* IASKSpecifier.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = IASKSpecifier.m; path = InAppSettingsKit/Models/IASKSpecifier.m; sourceTree = "<group>"; };
+		74711DA0D7A16A0CCCF635EEF9CCE769 /* Pods-microjam-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-microjam-acknowledgements.plist"; sourceTree = "<group>"; };
 		7714FFF5F26B0122F9B5C0DEAA72378A /* ringbuffer.c */ = {isa = PBXFileReference; includeInIndex = 1; name = ringbuffer.c; path = libpd_wrapper/util/ringbuffer.c; sourceTree = "<group>"; };
 		7825A9FC5BE21C6494F500199FF8E93A /* DPDConstants.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DPDConstants.swift; path = DropDown/helpers/DPDConstants.swift; sourceTree = "<group>"; };
 		7A5A2FCED2A9F265A4394F2CCC79A478 /* IASKAppSettingsViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = IASKAppSettingsViewController.h; path = InAppSettingsKit/Controllers/IASKAppSettingsViewController.h; sourceTree = "<group>"; };
-		7BAE71A7F6E217B2123058A2E0886814 /* Pods-microjam-microjamTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-microjam-microjamTests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		7BF5902FAE55EC9BA63C1943BCA4205C /* TimeChunk.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TimeChunk.swift; path = DateToolsSwift/DateTools/TimeChunk.swift; sourceTree = "<group>"; };
 		7C58A5BD5311301815D386936E7C0821 /* IASKTextView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = IASKTextView.h; path = InAppSettingsKit/Views/IASKTextView.h; sourceTree = "<group>"; };
 		7DC9466847F4EB682FFA487B0D4CCA2C /* g_vumeter.c */ = {isa = PBXFileReference; includeInIndex = 1; name = g_vumeter.c; path = "pure-data/src/g_vumeter.c"; sourceTree = "<group>"; };
-		8208969252C57EEC954266EA453CBAFA /* Pods-microjam-microjamTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-microjam-microjamTests.debug.xcconfig"; sourceTree = "<group>"; };
 		82D7813D35AF38C9316E8161E7A462D5 /* ResourceBundle-InAppSettingsKit-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-InAppSettingsKit-Info.plist"; sourceTree = "<group>"; };
 		84825BDE15DF50F4E7A50D23183A5438 /* stdout.c */ = {isa = PBXFileReference; includeInIndex = 1; name = stdout.c; path = "pure-data/extra/stdout/stdout.c"; sourceTree = "<group>"; };
 		859D53A04A4FF58D78A82C2FC2E826B6 /* g_vslider.c */ = {isa = PBXFileReference; includeInIndex = 1; name = g_vslider.c; path = "pure-data/src/g_vslider.c"; sourceTree = "<group>"; };
 		86EDB74A31C8A44B835FB308D9A75CD8 /* TimePeriodGroup.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TimePeriodGroup.swift; path = DateToolsSwift/DateTools/TimePeriodGroup.swift; sourceTree = "<group>"; };
 		878E8F4E83E6EA6967035546FBF7E690 /* sv.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = sv.lproj; path = InAppSettingsKit/Resources/sv.lproj; sourceTree = "<group>"; };
-		87D934D8209551A7BBD2A1CDE64AFF26 /* Pods-microjamUITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-microjamUITests-acknowledgements.plist"; sourceTree = "<group>"; };
 		8B094C6E4EFD54FB0FE9FE669F4C7017 /* d_math.c */ = {isa = PBXFileReference; includeInIndex = 1; name = d_math.c; path = "pure-data/src/d_math.c"; sourceTree = "<group>"; };
 		8B2330DCABE2FD1BA59ECFD1EFF610B4 /* s_path.c */ = {isa = PBXFileReference; includeInIndex = 1; name = s_path.c; path = "pure-data/src/s_path.c"; sourceTree = "<group>"; };
 		8BBF6A78C716622C6BE37427F9633066 /* IASKSettingsReader.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = IASKSettingsReader.m; path = InAppSettingsKit/Models/IASKSettingsReader.m; sourceTree = "<group>"; };
 		8C9B9169D97E989232B4044D79300354 /* d_misc.c */ = {isa = PBXFileReference; includeInIndex = 1; name = d_misc.c; path = "pure-data/src/d_misc.c"; sourceTree = "<group>"; };
 		8D2A6AC2ADA6BA2068DE005A0BF3C90E /* z_hooks.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = z_hooks.h; path = libpd_wrapper/z_hooks.h; sourceTree = "<group>"; };
 		8D3F1F9583F36D6B517CF86BF2375B34 /* IASKSettingsStore.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = IASKSettingsStore.m; path = InAppSettingsKit/Models/IASKSettingsStore.m; sourceTree = "<group>"; };
-		8D89D0DE4D961219397DBDD18022B58C /* UIColor_Hex_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = UIColor_Hex_Swift.framework; path = UIColor_Hex_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E1517DA8CBB091D0F87F1815353B4BB /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		906C2A84C0D6F734DC4A4DED905ADDF2 /* x_midi.c */ = {isa = PBXFileReference; includeInIndex = 1; name = x_midi.c; path = "pure-data/src/x_midi.c"; sourceTree = "<group>"; };
 		92F0FB8398E8E2B547B29BF53ADE20B5 /* DropDown.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = DropDown.xcconfig; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		94DFDCA48CF190288FA3799F3A1AD6EA /* Pods-microjam-microjamTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-microjam-microjamTests-acknowledgements.plist"; sourceTree = "<group>"; };
-		97A1DCC8C354907AEFD5442419E559F0 /* Pods-microjamUITests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-microjamUITests-resources.sh"; sourceTree = "<group>"; };
+		979D3AA8634AE0D8C2F224186C81DE12 /* Pods-microjamTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-microjamTests-umbrella.h"; sourceTree = "<group>"; };
 		99CD28DDDD4AAD245170DBC333708A72 /* IASKSettingsStoreFile.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = IASKSettingsStoreFile.m; path = InAppSettingsKit/Models/IASKSettingsStoreFile.m; sourceTree = "<group>"; };
 		9A8C537CD427109F1108BB3BB365DF03 /* g_canvas.c */ = {isa = PBXFileReference; includeInIndex = 1; name = g_canvas.c; path = "pure-data/src/g_canvas.c"; sourceTree = "<group>"; };
 		9B65CC2D4E63FE498CA45FA597FAB172 /* x_libpdreceive.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = x_libpdreceive.h; path = libpd_wrapper/x_libpdreceive.h; sourceTree = "<group>"; };
 		9B9E61FB0E804EF5DF14A8DDE157C8A1 /* g_text.c */ = {isa = PBXFileReference; includeInIndex = 1; name = g_text.c; path = "pure-data/src/g_text.c"; sourceTree = "<group>"; };
 		9C2B4BAD11A1DA450FBFAD3824F1FBF1 /* Date+Format.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Date+Format.swift"; path = "DateToolsSwift/DateTools/Date+Format.swift"; sourceTree = "<group>"; };
-		9C740AF3504B8F8770B93D9A0631BCB1 /* Pods-microjamUITests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-microjamUITests.modulemap"; sourceTree = "<group>"; };
 		9D65DFD00F0E94FA45F317923E266A8C /* DropDown-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "DropDown-dummy.m"; sourceTree = "<group>"; };
 		9D6750A286AE383C2EE4069C80D15DC7 /* DateToolsSwift.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = DateToolsSwift.xcconfig; sourceTree = "<group>"; };
 		9E0F43A78179CF2C66A86F376B12F9B2 /* Date+Comparators.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Date+Comparators.swift"; path = "DateToolsSwift/DateTools/Date+Comparators.swift"; sourceTree = "<group>"; };
-		9F5C2D9B3134758416FB039A88BB9249 /* Pods-microjam-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-microjam-acknowledgements.markdown"; sourceTree = "<group>"; };
+		9F698D42F1473DF36194B7019D1A8EAF /* Pods-microjamTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-microjamTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9F788259FFD14AEC9A36696F642ED2EC /* TimePeriodChain.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TimePeriodChain.swift; path = DateToolsSwift/DateTools/TimePeriodChain.swift; sourceTree = "<group>"; };
 		9F886BA04D3E2108615EB3002E0373F4 /* x_gui.c */ = {isa = PBXFileReference; includeInIndex = 1; name = x_gui.c; path = "pure-data/src/x_gui.c"; sourceTree = "<group>"; };
 		9FA4A0580FED4DF09A36F1FA8F985572 /* DropDown.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = DropDown.modulemap; sourceTree = "<group>"; };
 		A0365FFEF9F4251523B5F2F9034E2DA9 /* IASKAppSettingsViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = IASKAppSettingsViewController.m; path = InAppSettingsKit/Controllers/IASKAppSettingsViewController.m; sourceTree = "<group>"; };
+		A0669A074A0D78B944FA2179BDC5496B /* Pods-microjam-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-microjam-umbrella.h"; sourceTree = "<group>"; };
+		A13483CD18A6D8DD8E5E5ACC07B38FDB /* Pods-microjam-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-microjam-acknowledgements.markdown"; sourceTree = "<group>"; };
 		A33BF9F6BF86749F1E438F2E90C55F3A /* d_filter.c */ = {isa = PBXFileReference; includeInIndex = 1; name = d_filter.c; path = "pure-data/src/d_filter.c"; sourceTree = "<group>"; };
 		A3F507DAE14E15EA0B207DC9236E0DB8 /* IASKSettingsStore.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = IASKSettingsStore.h; path = InAppSettingsKit/Models/IASKSettingsStore.h; sourceTree = "<group>"; };
 		A4AFEA391908C35161444F6DB76C72BF /* g_editor.c */ = {isa = PBXFileReference; includeInIndex = 1; name = g_editor.c; path = "pure-data/src/g_editor.c"; sourceTree = "<group>"; };
 		A4C2F028E8D123B12362340AF73AFE46 /* x_vexp.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = x_vexp.h; path = "pure-data/src/x_vexp.h"; sourceTree = "<group>"; };
+		A63E35CDFA639858F27B0F44C82F41A5 /* Pods-microjamUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-microjamUITests.release.xcconfig"; sourceTree = "<group>"; };
 		A8978F757FCEA6E867E187E626294738 /* libpd-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "libpd-prefix.pch"; sourceTree = "<group>"; };
 		A8E9EDAFC50FD141352B6B8A99324FAD /* DateToolsSwift-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DateToolsSwift-umbrella.h"; sourceTree = "<group>"; };
 		AB0ED3FCA1891B534D726EF1A121F710 /* d_soundfile.c */ = {isa = PBXFileReference; includeInIndex = 1; name = d_soundfile.c; path = "pure-data/src/d_soundfile.c"; sourceTree = "<group>"; };
@@ -522,37 +563,35 @@
 		AC16620FF124CF19D1DF124CD3F1B391 /* d_ctl.c */ = {isa = PBXFileReference; includeInIndex = 1; name = d_ctl.c; path = "pure-data/src/d_ctl.c"; sourceTree = "<group>"; };
 		ADB70F9DBA846A4277B36E2A5928BC1E /* x_acoustics.c */ = {isa = PBXFileReference; includeInIndex = 1; name = x_acoustics.c; path = "pure-data/src/x_acoustics.c"; sourceTree = "<group>"; };
 		ADD915980631E1539386EBC8967EFBD9 /* AudioHelpers.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AudioHelpers.m; path = objc/AudioHelpers.m; sourceTree = "<group>"; };
+		AE30D931B2D31A63644E937E823F2F20 /* Pods-microjamTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-microjamTests-frameworks.sh"; sourceTree = "<group>"; };
 		AF2325C22D6F76744461660B9348F49D /* lrshift~.c */ = {isa = PBXFileReference; includeInIndex = 1; name = "lrshift~.c"; path = "pure-data/extra/lrshift~/lrshift~.c"; sourceTree = "<group>"; };
 		B0720091707AEBD720CC169DD0FBFD8E /* PdBase.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PdBase.h; path = objc/PdBase.h; sourceTree = "<group>"; };
 		B12E2607E3792F2F0C55D5076650EE43 /* z_hooks.c */ = {isa = PBXFileReference; includeInIndex = 1; name = z_hooks.c; path = libpd_wrapper/z_hooks.c; sourceTree = "<group>"; };
 		B14DA1CB435041AFA872B168183F9B38 /* g_guiconnect.c */ = {isa = PBXFileReference; includeInIndex = 1; name = g_guiconnect.c; path = "pure-data/src/g_guiconnect.c"; sourceTree = "<group>"; };
 		B1F1141C7A8D6EDAFBB8F48B003CFAC7 /* es.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = es.lproj; path = InAppSettingsKit/Resources/es.lproj; sourceTree = "<group>"; };
-		B2239C12D6080A41DB92A1CA245555DC /* NSDate_TimeAgo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = NSDate_TimeAgo.framework; path = "NSDate+TimeAgo.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2B4F2B4ACF7F241D3418FBC15C86868 /* Pods-microjamTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-microjamTests.release.xcconfig"; sourceTree = "<group>"; };
 		B422E416A7255108CD6B1D9491376713 /* fiddle~.c */ = {isa = PBXFileReference; includeInIndex = 1; name = "fiddle~.c"; path = "pure-data/extra/fiddle~/fiddle~.c"; sourceTree = "<group>"; };
 		B64435ADD8C3118903CC24090EE67B44 /* it.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = it.lproj; path = InAppSettingsKit/Resources/it.lproj; sourceTree = "<group>"; };
-		B6443DC8E760F32C59F7499D16962A41 /* DateToolsSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = DateToolsSwift.framework; path = DateToolsSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6587CB21232E3E902EF52A87F95E3BA /* ru.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = ru.lproj; path = InAppSettingsKit/Resources/ru.lproj; sourceTree = "<group>"; };
 		B7D72910679B80CCF01E107230CD0FFA /* DropDown-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DropDown-umbrella.h"; sourceTree = "<group>"; };
 		B7F23C9B48705E1D87DE26493BBC2180 /* IASKSpecifierValuesViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = IASKSpecifierValuesViewController.h; path = InAppSettingsKit/Controllers/IASKSpecifierValuesViewController.h; sourceTree = "<group>"; };
 		BB214F8EE5306F7C202BDDD3132BC7F3 /* IASKAppSettingsWebViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = IASKAppSettingsWebViewController.h; path = InAppSettingsKit/Controllers/IASKAppSettingsWebViewController.h; sourceTree = "<group>"; };
-		C0435FA2695DA500D1AE757F611872CC /* Pods-microjam-microjamTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-microjam-microjamTests-dummy.m"; sourceTree = "<group>"; };
 		C09AB96CC2ECDB94F44C96FD7C7AE449 /* s_stuff.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = s_stuff.h; path = "pure-data/src/s_stuff.h"; sourceTree = "<group>"; };
 		C1CF737B7581FDBDA9BACCE17A668DD5 /* PdDispatcher.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PdDispatcher.h; path = objc/PdDispatcher.h; sourceTree = "<group>"; };
 		C1F7B4E404ED37D4AE51A84F701995E2 /* ringbuffer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ringbuffer.h; path = libpd_wrapper/util/ringbuffer.h; sourceTree = "<group>"; };
 		C2203E9C2948ECBF12F0541C21D45BD4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		C25E310F83E8D80EC698EE44893750E0 /* IASKSpecifierValuesViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = IASKSpecifierValuesViewController.m; path = InAppSettingsKit/Controllers/IASKSpecifierValuesViewController.m; sourceTree = "<group>"; };
 		C27A09A2E144EA5DF823E5A57E0392F2 /* g_array.c */ = {isa = PBXFileReference; includeInIndex = 1; name = g_array.c; path = "pure-data/src/g_array.c"; sourceTree = "<group>"; };
-		C280F3A3BC80663B0C7F682302C5BC45 /* Pods-microjamUITests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-microjamUITests-umbrella.h"; sourceTree = "<group>"; };
 		C28675383DE421AFC849CB958511B27C /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C2B274DFAC2C0459AC62FF9221DADF05 /* s_inter.c */ = {isa = PBXFileReference; includeInIndex = 1; name = s_inter.c; path = "pure-data/src/s_inter.c"; sourceTree = "<group>"; };
-		C2BAC4036ED11A49677D3408C05AFCA1 /* Pods-microjam-microjamTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-microjam-microjamTests-frameworks.sh"; sourceTree = "<group>"; };
 		C3DE0B660778E0A3F2C228B56637460D /* IASKPSSliderSpecifierViewCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = IASKPSSliderSpecifierViewCell.h; path = InAppSettingsKit/Views/IASKPSSliderSpecifierViewCell.h; sourceTree = "<group>"; };
 		C6BB48B8B9FB8C86100946023ECCCFC6 /* InAppSettingsKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = InAppSettingsKit.xcconfig; sourceTree = "<group>"; };
-		C70389AE6D9FB12F75C0C0CFED18D037 /* Pods_microjamUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_microjamUITests.framework; path = "Pods-microjamUITests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7E4A69388B43FED893171245EF4AE85 /* UIColorExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UIColorExtension.swift; path = HEXColor/UIColorExtension.swift; sourceTree = "<group>"; };
 		C844D051D400FB42FB643D8AAA9744D4 /* Integer+DateTools.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Integer+DateTools.swift"; path = "DateToolsSwift/DateTools/Integer+DateTools.swift"; sourceTree = "<group>"; };
 		CA46DB97DFD808078CC4F251CAD20ED7 /* g_hslider.c */ = {isa = PBXFileReference; includeInIndex = 1; name = g_hslider.c; path = "pure-data/src/g_hslider.c"; sourceTree = "<group>"; };
+		CB372493DA531D5BD49A1755D4620B00 /* Pods-microjam-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-microjam-dummy.m"; sourceTree = "<group>"; };
 		CBAB4E665350F479637756B738BE1B3D /* g_graph.c */ = {isa = PBXFileReference; includeInIndex = 1; name = g_graph.c; path = "pure-data/src/g_graph.c"; sourceTree = "<group>"; };
+		CC0D9D7DDE49C129BE19C03D94057018 /* Pods-microjamTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-microjamTests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		CC25798F61D98E8DB5BD9F615C897EB3 /* z_queued.c */ = {isa = PBXFileReference; includeInIndex = 1; name = z_queued.c; path = libpd_wrapper/util/z_queued.c; sourceTree = "<group>"; };
 		CCF94322D78EE31AEF87E2B9D413A865 /* m_class.c */ = {isa = PBXFileReference; includeInIndex = 1; name = m_class.c; path = "pure-data/src/m_class.c"; sourceTree = "<group>"; };
 		CD93B0D00EAB9ED5912E35D0BFCFF2F0 /* s_main.c */ = {isa = PBXFileReference; includeInIndex = 1; name = s_main.c; path = "pure-data/src/s_main.c"; sourceTree = "<group>"; };
@@ -573,14 +612,14 @@
 		D933BE5D59FEE155432B12F6B01166B0 /* IASKMultipleValueSelection.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = IASKMultipleValueSelection.m; path = InAppSettingsKit/Controllers/IASKMultipleValueSelection.m; sourceTree = "<group>"; };
 		D940E56F4264BA8E9A7B766C3B827D16 /* x_vexp.c */ = {isa = PBXFileReference; includeInIndex = 1; name = x_vexp.c; path = "pure-data/src/x_vexp.c"; sourceTree = "<group>"; };
 		DAD5AC0EEF2B13796FD9038E18BB5914 /* DateToolsSwift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "DateToolsSwift-dummy.m"; sourceTree = "<group>"; };
-		DC5A02AE4988CFC452F658B0A5AAB545 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DD0ABE6E1CD1FFCB3613DC7B6004284F /* m_glob.c */ = {isa = PBXFileReference; includeInIndex = 1; name = m_glob.c; path = "pure-data/src/m_glob.c"; sourceTree = "<group>"; };
 		DDB591F8A3F65D4F2923C1360679B173 /* g_all_guis.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = g_all_guis.h; path = "pure-data/src/g_all_guis.h"; sourceTree = "<group>"; };
+		DF6BC882062C536FD3DCE7BEF64AF0E0 /* Pods-microjamTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-microjamTests.modulemap"; sourceTree = "<group>"; };
+		DF95A0AA611509A347CF697364A1381A /* Pods_microjam.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_microjam.framework; path = "Pods-microjam.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E31BB6DF45CDB79DFFC8C323534F602D /* NSDate+TimeAgo.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "NSDate+TimeAgo.xcconfig"; sourceTree = "<group>"; };
-		E50F02ECACDDAD1CF57DDC5B5FFD3A2F /* Pods-microjam-microjamTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-microjam-microjamTests.release.xcconfig"; sourceTree = "<group>"; };
 		E616CD6EB02578EE741A51F20B13DFED /* IASKSwitch.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = IASKSwitch.m; path = InAppSettingsKit/Views/IASKSwitch.m; sourceTree = "<group>"; };
 		E67FE893E3E6E1876D0E3591A7304C37 /* UIColor_Hex_Swift-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIColor_Hex_Swift-prefix.pch"; sourceTree = "<group>"; };
-		E7191A44855EF4386A9BBADCD87A2836 /* Pods-microjam.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-microjam.modulemap"; sourceTree = "<group>"; };
+		E69B88CDD4028C460711DEDABED969B5 /* Pods-microjamUITests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-microjamUITests-frameworks.sh"; sourceTree = "<group>"; };
 		E79DE97AD7883BF3F048FB7B0F70DC42 /* g_vdial.c */ = {isa = PBXFileReference; includeInIndex = 1; name = g_vdial.c; path = "pure-data/src/g_vdial.c"; sourceTree = "<group>"; };
 		E7EBBE983C76A6075D65ABD3C085AD69 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		E856CD4DCF7DEF512CC22259D33AC203 /* libpd-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "libpd-umbrella.h"; sourceTree = "<group>"; };
@@ -588,20 +627,23 @@
 		E86DE2F704387C57FAE61FAE3618C9AC /* x_vexp_fun.c */ = {isa = PBXFileReference; includeInIndex = 1; name = x_vexp_fun.c; path = "pure-data/src/x_vexp_fun.c"; sourceTree = "<group>"; };
 		E97FB0EC1FC3586E518F1054F54CDDEA /* g_traversal.c */ = {isa = PBXFileReference; includeInIndex = 1; name = g_traversal.c; path = "pure-data/src/g_traversal.c"; sourceTree = "<group>"; };
 		EA71D5791B9ACAA15C0B7A1BFBDC5746 /* x_interface.c */ = {isa = PBXFileReference; includeInIndex = 1; name = x_interface.c; path = "pure-data/src/x_interface.c"; sourceTree = "<group>"; };
+		ECE4332CB4C8AD1DD3A6FE0CA2F6AD25 /* Pods-microjamUITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-microjamUITests-acknowledgements.plist"; sourceTree = "<group>"; };
 		ED5F3C902FC10C12CD6B877838182823 /* x_net.c */ = {isa = PBXFileReference; includeInIndex = 1; name = x_net.c; path = "pure-data/src/x_net.c"; sourceTree = "<group>"; };
-		EEC229404B0AA06E5BEBC8C975113648 /* Pods-microjamUITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-microjamUITests-dummy.m"; sourceTree = "<group>"; };
+		EE8424E81C331542779E92F3F057335E /* Pods-microjam.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-microjam.modulemap"; sourceTree = "<group>"; };
 		EF3B1180241E25D7A7E4764200DA4D35 /* x_list.c */ = {isa = PBXFileReference; includeInIndex = 1; name = x_list.c; path = "pure-data/src/x_list.c"; sourceTree = "<group>"; };
 		EF698D78F3419507757EE83F824CD92E /* TimePeriodCollection.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TimePeriodCollection.swift; path = DateToolsSwift/DateTools/TimePeriodCollection.swift; sourceTree = "<group>"; };
 		F064F2C99C923541BB44BCAB718613BA /* IASKTextViewCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = IASKTextViewCell.h; path = InAppSettingsKit/Views/IASKTextViewCell.h; sourceTree = "<group>"; };
 		F0697321E101D9BDC4E68242C6456B3F /* g_scalar.c */ = {isa = PBXFileReference; includeInIndex = 1; name = g_scalar.c; path = "pure-data/src/g_scalar.c"; sourceTree = "<group>"; };
-		F08EACFA3E57CFB5410C9290053C30D6 /* Pods_microjam.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_microjam.framework; path = "Pods-microjam.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1A5725658768C87580809DF61854CD3 /* IASKPSTextFieldSpecifierViewCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = IASKPSTextFieldSpecifierViewCell.m; path = InAppSettingsKit/Views/IASKPSTextFieldSpecifierViewCell.m; sourceTree = "<group>"; };
 		F2793F26D88D9599C67C15F228F0E7EA /* IASKSpecifier.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = IASKSpecifier.h; path = InAppSettingsKit/Models/IASKSpecifier.h; sourceTree = "<group>"; };
 		F2EEBCB335306FDE917C0D7FBAD6DEC0 /* d_array.c */ = {isa = PBXFileReference; includeInIndex = 1; name = d_array.c; path = "pure-data/src/d_array.c"; sourceTree = "<group>"; };
 		F3EFB4373EB77B47CF3525974B63D76A /* z_queued.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = z_queued.h; path = libpd_wrapper/util/z_queued.h; sourceTree = "<group>"; };
 		F444055D51F11503AE308CDF97C79174 /* de.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = de.lproj; path = InAppSettingsKit/Resources/de.lproj; sourceTree = "<group>"; };
+		F47A7322619B2F71E8AECC14BA82DBE8 /* NSDate_TimeAgo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = NSDate_TimeAgo.framework; path = "NSDate+TimeAgo.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5847B008762BA73EAC3C2A25594CA57 /* d_fft.c */ = {isa = PBXFileReference; includeInIndex = 1; name = d_fft.c; path = "pure-data/src/d_fft.c"; sourceTree = "<group>"; };
+		F6859A9A6B5D084A114BD5086F79B2A9 /* InAppSettingsKit.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = InAppSettingsKit.bundle; path = InAppSettingsKit.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAF63E64B224679734F1FB9CC95B32F1 /* m_memory.c */ = {isa = PBXFileReference; includeInIndex = 1; name = m_memory.c; path = "pure-data/src/m_memory.c"; sourceTree = "<group>"; };
+		FBEEE43EF13B2765D0C47A178B4D11E2 /* libpd.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = libpd.framework; path = libpd.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC2A2FCE5A776F247C83E22E748B4DB9 /* PdAudioUnit.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PdAudioUnit.m; path = objc/PdAudioUnit.m; sourceTree = "<group>"; };
 		FC6970AB6C2ADA7DF8D71BE07248F21C /* m_pd.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = m_pd.h; path = "pure-data/src/m_pd.h"; sourceTree = "<group>"; };
 		FD75BA0F57452846E2921ADE214BE11B /* PdAudioController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PdAudioController.m; path = objc/PdAudioController.m; sourceTree = "<group>"; };
@@ -609,19 +651,19 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		15BDE45975454368AF15DACE6F79EAA0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3FF8F6156A89F157BFB481786247E748 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3FE28484C632D94C9779E4E74AE0BD29 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				2E9CD6F441E6B30601549781F5DB2D12 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4D26D52C068CF52CE7B7C86878B9CBF9 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8D5A0C77720C9910B4F9CFBD2FE84BAE /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -641,20 +683,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5346D31572FAB96A33A7AEFDCCE4F30C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A2B56AA302A743F9B8FF268FAF142A4F /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		680CBB3BDA0B3C7B27FD5F708BBA4BE7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				DBF27D4C03D05211E415E7C1FF0AEF98 /* Foundation.framework in Frameworks */,
 				A0DAF2298F625766B95615062F347F95 /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8192F49DF0E23FCF295CED1444A4F247 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B54AC195822AFBFE94A3E7E3532BB485 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -739,21 +781,14 @@
 			path = InAppSettingsKit;
 			sourceTree = "<group>";
 		};
-		14F578DC1A47B6500D6D933867D05E67 /* Products */ = {
+		00DF265A3FC199668A1EC687ED97F79A /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				B6443DC8E760F32C59F7499D16962A41 /* DateToolsSwift.framework */,
-				26ACF2A94B6A5D808C29F51E99AF7261 /* DropDown.framework */,
-				693A43B04B6920CE5D4A9B62BCBBABF8 /* InAppSettingsKit.bundle */,
-				25A22DE7A0BC16C88051E2DFEDE6D944 /* InAppSettingsKit.framework */,
-				2B27E8961566C9FFD35ADCAA96403A3F /* libpd.framework */,
-				B2239C12D6080A41DB92A1CA245555DC /* NSDate_TimeAgo.framework */,
-				F08EACFA3E57CFB5410C9290053C30D6 /* Pods_microjam.framework */,
-				0F7617920650F4846B29B0CF68A51E11 /* Pods_microjam_microjamTests.framework */,
-				C70389AE6D9FB12F75C0C0CFED18D037 /* Pods_microjamUITests.framework */,
-				8D89D0DE4D961219397DBDD18022B58C /* UIColor_Hex_Swift.framework */,
+				9C80CE5666FDEFD943E9A0C0490FEE60 /* Pods-microjam */,
+				A739E9FC31573D605F878FFB5425852F /* Pods-microjamTests */,
+				EA7A0C53F4CD54805D3C39E62748A9A2 /* Pods-microjamUITests */,
 			);
-			name = Products;
+			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
 		167BFEE41327394F49376CE2A6A0A92D /* libpd */ = {
@@ -930,24 +965,6 @@
 			path = "../Target Support Files/InAppSettingsKit";
 			sourceTree = "<group>";
 		};
-		443213880DD34C1ACA22C794E6591D97 /* Pods-microjamUITests */ = {
-			isa = PBXGroup;
-			children = (
-				DC5A02AE4988CFC452F658B0A5AAB545 /* Info.plist */,
-				9C740AF3504B8F8770B93D9A0631BCB1 /* Pods-microjamUITests.modulemap */,
-				6BBD915353EBC2903162B14FC7E484A0 /* Pods-microjamUITests-acknowledgements.markdown */,
-				87D934D8209551A7BBD2A1CDE64AFF26 /* Pods-microjamUITests-acknowledgements.plist */,
-				EEC229404B0AA06E5BEBC8C975113648 /* Pods-microjamUITests-dummy.m */,
-				1856E9321416BD8F003465C63CF7381A /* Pods-microjamUITests-frameworks.sh */,
-				97A1DCC8C354907AEFD5442419E559F0 /* Pods-microjamUITests-resources.sh */,
-				C280F3A3BC80663B0C7F682302C5BC45 /* Pods-microjamUITests-umbrella.h */,
-				6792F8F2178D132B6CD41DC93903CE16 /* Pods-microjamUITests.debug.xcconfig */,
-				04B10B7042ACB2E8B4C277C95740BB6A /* Pods-microjamUITests.release.xcconfig */,
-			);
-			name = "Pods-microjamUITests";
-			path = "Target Support Files/Pods-microjamUITests";
-			sourceTree = "<group>";
-		};
 		47EBC927404EC1C9BD9C7A009B23E0BF /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -976,22 +993,21 @@
 			path = "../Target Support Files/DateToolsSwift";
 			sourceTree = "<group>";
 		};
-		5DC425D89BBAB48F29093CE479667B45 /* Pods-microjam */ = {
+		6D34E7CCB2BFC0AD3990D779AFAA4ADB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				05BA3C61CC15BFCB3D47C4432033CB06 /* Info.plist */,
-				E7191A44855EF4386A9BBADCD87A2836 /* Pods-microjam.modulemap */,
-				9F5C2D9B3134758416FB039A88BB9249 /* Pods-microjam-acknowledgements.markdown */,
-				1A3D06C2FAFDBF169979C8604FCC5739 /* Pods-microjam-acknowledgements.plist */,
-				29E4174E11EFE45E30021FFD1F55B146 /* Pods-microjam-dummy.m */,
-				138856F71D4CCD6A118E6D7A13612056 /* Pods-microjam-frameworks.sh */,
-				18FF68A1076DE537B1B2AAA4038B096B /* Pods-microjam-resources.sh */,
-				2163C5D18D0B3E29EE7F5B817D3D0A22 /* Pods-microjam-umbrella.h */,
-				0381017C458F7A8432A86F7A0E38F784 /* Pods-microjam.debug.xcconfig */,
-				192D865237846F41178F429295F16B67 /* Pods-microjam.release.xcconfig */,
+				3726F51E51D54F3392E8E146566774FB /* DateToolsSwift.framework */,
+				704F5F0FBF14DB972E4CF6DB787186F4 /* DropDown.framework */,
+				F6859A9A6B5D084A114BD5086F79B2A9 /* InAppSettingsKit.bundle */,
+				541AD8319EFA19B0DE11C3A78D9DCED0 /* InAppSettingsKit.framework */,
+				FBEEE43EF13B2765D0C47A178B4D11E2 /* libpd.framework */,
+				F47A7322619B2F71E8AECC14BA82DBE8 /* NSDate_TimeAgo.framework */,
+				DF95A0AA611509A347CF697364A1381A /* Pods_microjam.framework */,
+				39AEA66D73D03B6E742521ECC73A0E90 /* Pods_microjamTests.framework */,
+				0D17C405C7B27D4D31C08CA3B453991A /* Pods_microjamUITests.framework */,
+				6ECF8FD231576A4752DB355C28EC553C /* UIColor_Hex_Swift.framework */,
 			);
-			name = "Pods-microjam";
-			path = "Target Support Files/Pods-microjam";
+			name = Products;
 			sourceTree = "<group>";
 		};
 		773D8B1F03655413F8C06D40802AEBEA /* Resources */ = {
@@ -1022,8 +1038,8 @@
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
 				20B56609144CE204DFA8221F742B2D76 /* Frameworks */,
 				B77B79B22B910CDC22D460D12A9BA9B8 /* Pods */,
-				14F578DC1A47B6500D6D933867D05E67 /* Products */,
-				FC6F3A594A6D327D8EDC897B60F44249 /* Targets Support Files */,
+				6D34E7CCB2BFC0AD3990D779AFAA4ADB /* Products */,
+				00DF265A3FC199668A1EC687ED97F79A /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1050,6 +1066,42 @@
 			);
 			name = UIColor_Hex_Swift;
 			path = UIColor_Hex_Swift;
+			sourceTree = "<group>";
+		};
+		9C80CE5666FDEFD943E9A0C0490FEE60 /* Pods-microjam */ = {
+			isa = PBXGroup;
+			children = (
+				056F7773BF908BAD12464DDA005A9EFF /* Info.plist */,
+				EE8424E81C331542779E92F3F057335E /* Pods-microjam.modulemap */,
+				A13483CD18A6D8DD8E5E5ACC07B38FDB /* Pods-microjam-acknowledgements.markdown */,
+				74711DA0D7A16A0CCCF635EEF9CCE769 /* Pods-microjam-acknowledgements.plist */,
+				CB372493DA531D5BD49A1755D4620B00 /* Pods-microjam-dummy.m */,
+				06F0C06009921740A1A8B68B37A53D03 /* Pods-microjam-frameworks.sh */,
+				052ED06786715B2B6888FB2F3E311BFA /* Pods-microjam-resources.sh */,
+				A0669A074A0D78B944FA2179BDC5496B /* Pods-microjam-umbrella.h */,
+				3B9063B91693F3688063047921B4BFEE /* Pods-microjam.debug.xcconfig */,
+				4AB40C204E7CAD672FCC4A79FA4A2BC4 /* Pods-microjam.release.xcconfig */,
+			);
+			name = "Pods-microjam";
+			path = "Target Support Files/Pods-microjam";
+			sourceTree = "<group>";
+		};
+		A739E9FC31573D605F878FFB5425852F /* Pods-microjamTests */ = {
+			isa = PBXGroup;
+			children = (
+				5335899D41384702E95AD279B00E4333 /* Info.plist */,
+				DF6BC882062C536FD3DCE7BEF64AF0E0 /* Pods-microjamTests.modulemap */,
+				CC0D9D7DDE49C129BE19C03D94057018 /* Pods-microjamTests-acknowledgements.markdown */,
+				0CF7CAB86442731338EF667382EBEC24 /* Pods-microjamTests-acknowledgements.plist */,
+				2787058BF1747A0E8050C4DF941A170E /* Pods-microjamTests-dummy.m */,
+				AE30D931B2D31A63644E937E823F2F20 /* Pods-microjamTests-frameworks.sh */,
+				2F617A82388C44930D45598C97200EE4 /* Pods-microjamTests-resources.sh */,
+				979D3AA8634AE0D8C2F224186C81DE12 /* Pods-microjamTests-umbrella.h */,
+				9F698D42F1473DF36194B7019D1A8EAF /* Pods-microjamTests.debug.xcconfig */,
+				B2B4F2B4ACF7F241D3418FBC15C86868 /* Pods-microjamTests.release.xcconfig */,
+			);
+			name = "Pods-microjamTests";
+			path = "Target Support Files/Pods-microjamTests";
 			sourceTree = "<group>";
 		};
 		A834EE03901C54053010D51A68CA4D8F /* Resources */ = {
@@ -1129,6 +1181,24 @@
 			path = "../Target Support Files/NSDate+TimeAgo";
 			sourceTree = "<group>";
 		};
+		EA7A0C53F4CD54805D3C39E62748A9A2 /* Pods-microjamUITests */ = {
+			isa = PBXGroup;
+			children = (
+				49EABEEB17695B92E83189985D2E3736 /* Info.plist */,
+				0D3620BD8D64F9C6998521D32AE3AA67 /* Pods-microjamUITests.modulemap */,
+				6D75AC5306EDA9203E873D71D392FE7A /* Pods-microjamUITests-acknowledgements.markdown */,
+				ECE4332CB4C8AD1DD3A6FE0CA2F6AD25 /* Pods-microjamUITests-acknowledgements.plist */,
+				2794C954A55A88937BD00A94908FC142 /* Pods-microjamUITests-dummy.m */,
+				E69B88CDD4028C460711DEDABED969B5 /* Pods-microjamUITests-frameworks.sh */,
+				36A62ED71D82143FCD3F91A522886A1D /* Pods-microjamUITests-resources.sh */,
+				4C35A8A3DE191A2FA8F968321AD9BE15 /* Pods-microjamUITests-umbrella.h */,
+				03D1BBD2CAD680C9A53668734C285250 /* Pods-microjamUITests.debug.xcconfig */,
+				A63E35CDFA639858F27B0F44C82F41A5 /* Pods-microjamUITests.release.xcconfig */,
+			);
+			name = "Pods-microjamUITests";
+			path = "Target Support Files/Pods-microjamUITests";
+			sourceTree = "<group>";
+		};
 		F1FCDFDBCF743AEE0E7D02B519B2FB61 /* DropDown */ = {
 			isa = PBXGroup;
 			children = (
@@ -1155,34 +1225,6 @@
 			);
 			name = "NSDate+TimeAgo";
 			path = "NSDate+TimeAgo";
-			sourceTree = "<group>";
-		};
-		FC6F3A594A6D327D8EDC897B60F44249 /* Targets Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				5DC425D89BBAB48F29093CE479667B45 /* Pods-microjam */,
-				FFEE234E5AD3F86805448714E21C2023 /* Pods-microjam-microjamTests */,
-				443213880DD34C1ACA22C794E6591D97 /* Pods-microjamUITests */,
-			);
-			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		FFEE234E5AD3F86805448714E21C2023 /* Pods-microjam-microjamTests */ = {
-			isa = PBXGroup;
-			children = (
-				229EE32039AA13DE634A57D331263616 /* Info.plist */,
-				2AAB6B99E10782CC6BF88B6B64BD27D6 /* Pods-microjam-microjamTests.modulemap */,
-				7BAE71A7F6E217B2123058A2E0886814 /* Pods-microjam-microjamTests-acknowledgements.markdown */,
-				94DFDCA48CF190288FA3799F3A1AD6EA /* Pods-microjam-microjamTests-acknowledgements.plist */,
-				C0435FA2695DA500D1AE757F611872CC /* Pods-microjam-microjamTests-dummy.m */,
-				C2BAC4036ED11A49677D3408C05AFCA1 /* Pods-microjam-microjamTests-frameworks.sh */,
-				1BF03ECCC00E8AE1229374C3F193F9D1 /* Pods-microjam-microjamTests-resources.sh */,
-				001C2597D5045F729954351F4034BA08 /* Pods-microjam-microjamTests-umbrella.h */,
-				8208969252C57EEC954266EA453CBAFA /* Pods-microjam-microjamTests.debug.xcconfig */,
-				E50F02ECACDDAD1CF57DDC5B5FFD3A2F /* Pods-microjam-microjamTests.release.xcconfig */,
-			);
-			name = "Pods-microjam-microjamTests";
-			path = "Target Support Files/Pods-microjam-microjamTests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1241,28 +1283,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		401E9E650F847CF23956E99604B24886 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				64BE6352F1569BBDF017768BB040076D /* Pods-microjam-microjamTests-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		49388C9393A647DA673C3FE6D0198485 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B927E617296CCC7828A0E0AF4E817BC9 /* Pods-microjamUITests-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		7795567941BCB2479887A905B1854DD4 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				C2012AEC97C094A8521BDB35FCE290B1 /* HEXColor.h in Headers */,
 				BCE162C061C5FBAC6E2265C9990A5B86 /* UIColor_Hex_Swift-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		858936604786040E246A6A55CE6483A1 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0C36381E688B18157E6C2DACCC447B0F /* Pods-microjamTests-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1299,9 +1333,40 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E22EF2ED43B660B5F1F27D372155C501 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4089BCD7C31903195FD35808D7ECAF36 /* Pods-microjamUITests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		0557F6860912D25EE24BCCD54CA66DD4 /* Pods-microjamTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0F13503FBE95C3FC60DBBB1EA161D42E /* Build configuration list for PBXNativeTarget "Pods-microjamTests" */;
+			buildPhases = (
+				59458DFC3A844C6457FF5BF45AAA9D1E /* Sources */,
+				8192F49DF0E23FCF295CED1444A4F247 /* Frameworks */,
+				858936604786040E246A6A55CE6483A1 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1FEF89ACDEF40E23A70A2C51F835644D /* PBXTargetDependency */,
+				68F4D9058DBDBF01C61614843D35A64C /* PBXTargetDependency */,
+				6BDA4FE0992440D8E3F18B2F9BE0A91F /* PBXTargetDependency */,
+				6020DEE526465EFF0DDE97053976FCC0 /* PBXTargetDependency */,
+				85DA14178D6FAADE384FDD1ED66FAAAA /* PBXTargetDependency */,
+				3AA978A306307624B00C937FC8697144 /* PBXTargetDependency */,
+			);
+			name = "Pods-microjamTests";
+			productName = "Pods-microjamTests";
+			productReference = 39AEA66D73D03B6E742521ECC73A0E90 /* Pods_microjamTests.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		5168099F2EBFC99A707C03C9EADE01A5 /* DropDown */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 45143614893062803984DA50AB90C1D5 /* Build configuration list for PBXNativeTarget "DropDown" */;
@@ -1317,24 +1382,7 @@
 			);
 			name = DropDown;
 			productName = DropDown;
-			productReference = 26ACF2A94B6A5D808C29F51E99AF7261 /* DropDown.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		69E8FDAB6ADAA5D2A770155AED22770D /* Pods-microjamUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D97E7969EFEB15F02392B0656F56EE22 /* Build configuration list for PBXNativeTarget "Pods-microjamUITests" */;
-			buildPhases = (
-				CE73D287D3AEC5752B099EE6377EF928 /* Sources */,
-				5346D31572FAB96A33A7AEFDCCE4F30C /* Frameworks */,
-				49388C9393A647DA673C3FE6D0198485 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Pods-microjamUITests";
-			productName = "Pods-microjamUITests";
-			productReference = C70389AE6D9FB12F75C0C0CFED18D037 /* Pods_microjamUITests.framework */;
+			productReference = 704F5F0FBF14DB972E4CF6DB787186F4 /* DropDown.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		6BD8B0250148E8A607574294B1658EA7 /* libpd */ = {
@@ -1351,30 +1399,7 @@
 			);
 			name = libpd;
 			productName = libpd;
-			productReference = 2B27E8961566C9FFD35ADCAA96403A3F /* libpd.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		6EECCCB57CD92C09841A4D21C8829209 /* Pods-microjam-microjamTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E6041A299451C338C583250940B084DD /* Build configuration list for PBXNativeTarget "Pods-microjam-microjamTests" */;
-			buildPhases = (
-				60E702DA5911575D854380D45992DAD6 /* Sources */,
-				4D26D52C068CF52CE7B7C86878B9CBF9 /* Frameworks */,
-				401E9E650F847CF23956E99604B24886 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				93EF18A62EB732BA2853F579CD404245 /* PBXTargetDependency */,
-				02672100F300EBD9F4707FF09CBF85F5 /* PBXTargetDependency */,
-				440977584A1C798660BBEC4D4C07FFA8 /* PBXTargetDependency */,
-				615CEE4F7FE35F61D9CC95FB452F76B7 /* PBXTargetDependency */,
-				95FECDD54625FDB73584D5CFD54E05DD /* PBXTargetDependency */,
-				B1FD21D57270F4619830E01FACBBA526 /* PBXTargetDependency */,
-			);
-			name = "Pods-microjam-microjamTests";
-			productName = "Pods-microjam-microjamTests";
-			productReference = 0F7617920650F4846B29B0CF68A51E11 /* Pods_microjam_microjamTests.framework */;
+			productReference = FBEEE43EF13B2765D0C47A178B4D11E2 /* libpd.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		8CB67190F0A60F7A033A3E515965C86F /* InAppSettingsKit */ = {
@@ -1393,7 +1418,7 @@
 			);
 			name = InAppSettingsKit;
 			productName = InAppSettingsKit;
-			productReference = 25A22DE7A0BC16C88051E2DFEDE6D944 /* InAppSettingsKit.framework */;
+			productReference = 541AD8319EFA19B0DE11C3A78D9DCED0 /* InAppSettingsKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		9A664FD395EC4C1AFB9459F3A6BFF753 /* NSDate+TimeAgo */ = {
@@ -1411,7 +1436,7 @@
 			);
 			name = "NSDate+TimeAgo";
 			productName = "NSDate+TimeAgo";
-			productReference = B2239C12D6080A41DB92A1CA245555DC /* NSDate_TimeAgo.framework */;
+			productReference = F47A7322619B2F71E8AECC14BA82DBE8 /* NSDate_TimeAgo.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		9F7498848F701D5E45959C0A0D8D7600 /* Pods-microjam */ = {
@@ -1434,7 +1459,7 @@
 			);
 			name = "Pods-microjam";
 			productName = "Pods-microjam";
-			productReference = F08EACFA3E57CFB5410C9290053C30D6 /* Pods_microjam.framework */;
+			productReference = DF95A0AA611509A347CF697364A1381A /* Pods_microjam.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		A9A796B97091C50BF6C508A4C21D8722 /* UIColor_Hex_Swift */ = {
@@ -1451,7 +1476,30 @@
 			);
 			name = UIColor_Hex_Swift;
 			productName = UIColor_Hex_Swift;
-			productReference = 8D89D0DE4D961219397DBDD18022B58C /* UIColor_Hex_Swift.framework */;
+			productReference = 6ECF8FD231576A4752DB355C28EC553C /* UIColor_Hex_Swift.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		C869813736349C253BDB8E84C6622B39 /* Pods-microjamUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 724A8903F058AB38353719B7BF4CB322 /* Build configuration list for PBXNativeTarget "Pods-microjamUITests" */;
+			buildPhases = (
+				FF50E4FEFDB98C1F544E02A0CB8B8F68 /* Sources */,
+				15BDE45975454368AF15DACE6F79EAA0 /* Frameworks */,
+				E22EF2ED43B660B5F1F27D372155C501 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				07CC645783E47FC6E09A6FDEC532AFED /* PBXTargetDependency */,
+				3EA501BEF7B139171E7740840AF62B2E /* PBXTargetDependency */,
+				E22E02BEE7BED176E1569469D9C3B04C /* PBXTargetDependency */,
+				29225D11CCAD3CF1F6F161584A42CC6F /* PBXTargetDependency */,
+				B6EE6FD370A0053524BF6468B90D88F2 /* PBXTargetDependency */,
+				811528641019DA0F7BA21950CED89D8F /* PBXTargetDependency */,
+			);
+			name = "Pods-microjamUITests";
+			productName = "Pods-microjamUITests";
+			productReference = 0D17C405C7B27D4D31C08CA3B453991A /* Pods_microjamUITests.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		E89CFD99B895BCC6E8EDC2F95A03500C /* DateToolsSwift */ = {
@@ -1469,7 +1517,7 @@
 			);
 			name = DateToolsSwift;
 			productName = DateToolsSwift;
-			productReference = B6443DC8E760F32C59F7499D16962A41 /* DateToolsSwift.framework */;
+			productReference = 3726F51E51D54F3392E8E146566774FB /* DateToolsSwift.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		FA416ED70FC7E091F479F65D981FE8FC /* InAppSettingsKit-InAppSettingsKit */ = {
@@ -1486,7 +1534,7 @@
 			);
 			name = "InAppSettingsKit-InAppSettingsKit";
 			productName = "InAppSettingsKit-InAppSettingsKit";
-			productReference = 693A43B04B6920CE5D4A9B62BCBBABF8 /* InAppSettingsKit.bundle */;
+			productReference = F6859A9A6B5D084A114BD5086F79B2A9 /* InAppSettingsKit.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -1506,7 +1554,7 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = 14F578DC1A47B6500D6D933867D05E67 /* Products */;
+			productRefGroup = 6D34E7CCB2BFC0AD3990D779AFAA4ADB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -1517,8 +1565,8 @@
 				6BD8B0250148E8A607574294B1658EA7 /* libpd */,
 				9A664FD395EC4C1AFB9459F3A6BFF753 /* NSDate+TimeAgo */,
 				9F7498848F701D5E45959C0A0D8D7600 /* Pods-microjam */,
-				6EECCCB57CD92C09841A4D21C8829209 /* Pods-microjam-microjamTests */,
-				69E8FDAB6ADAA5D2A770155AED22770D /* Pods-microjamUITests */,
+				0557F6860912D25EE24BCCD54CA66DD4 /* Pods-microjamTests */,
+				C869813736349C253BDB8E84C6622B39 /* Pods-microjamUITests */,
 				A9A796B97091C50BF6C508A4C21D8722 /* UIColor_Hex_Swift */,
 			);
 		};
@@ -1615,11 +1663,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		60E702DA5911575D854380D45992DAD6 /* Sources */ = {
+		59458DFC3A844C6457FF5BF45AAA9D1E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2D314845DB2F98E5442853D5DCBBF9D9 /* Pods-microjam-microjamTests-dummy.m in Sources */,
+				54662AD2C40D36A909C33ACEB5A365AE /* Pods-microjamTests-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1775,14 +1823,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CE73D287D3AEC5752B099EE6377EF928 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DC80DB485C2D748EADBA1445F1EBFD84 /* Pods-microjamUITests-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		ED45CA897A4B81CB8204042001D7AEE8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1797,26 +1837,52 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FF50E4FEFDB98C1F544E02A0CB8B8F68 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				79285C38807754C40B59B0D6364588B3 /* Pods-microjamUITests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		02672100F300EBD9F4707FF09CBF85F5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = DropDown;
-			target = 5168099F2EBFC99A707C03C9EADE01A5 /* DropDown */;
-			targetProxy = 905259ED10D261FB9621063C19C3439A /* PBXContainerItemProxy */;
-		};
 		07AE3E03473839FC9A93C20F496CE22C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = DropDown;
 			target = 5168099F2EBFC99A707C03C9EADE01A5 /* DropDown */;
 			targetProxy = 265DD33C20174FACCB70647D741C90B6 /* PBXContainerItemProxy */;
 		};
-		440977584A1C798660BBEC4D4C07FFA8 /* PBXTargetDependency */ = {
+		07CC645783E47FC6E09A6FDEC532AFED /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = InAppSettingsKit;
-			target = 8CB67190F0A60F7A033A3E515965C86F /* InAppSettingsKit */;
-			targetProxy = 7DD4D211545C61DC5706849C4107CB74 /* PBXContainerItemProxy */;
+			name = DateToolsSwift;
+			target = E89CFD99B895BCC6E8EDC2F95A03500C /* DateToolsSwift */;
+			targetProxy = A8EA7226626965F7F968340E10D60E5A /* PBXContainerItemProxy */;
+		};
+		1FEF89ACDEF40E23A70A2C51F835644D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = DateToolsSwift;
+			target = E89CFD99B895BCC6E8EDC2F95A03500C /* DateToolsSwift */;
+			targetProxy = 11EC268C0B69C2626E2A14A4A0615E01 /* PBXContainerItemProxy */;
+		};
+		29225D11CCAD3CF1F6F161584A42CC6F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "NSDate+TimeAgo";
+			target = 9A664FD395EC4C1AFB9459F3A6BFF753 /* NSDate+TimeAgo */;
+			targetProxy = E6A5DBE51A64225006BE8557915DC62B /* PBXContainerItemProxy */;
+		};
+		3AA978A306307624B00C937FC8697144 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = libpd;
+			target = 6BD8B0250148E8A607574294B1658EA7 /* libpd */;
+			targetProxy = FF2CBD1F5FFE0260B1C1506539C12031 /* PBXContainerItemProxy */;
+		};
+		3EA501BEF7B139171E7740840AF62B2E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = DropDown;
+			target = 5168099F2EBFC99A707C03C9EADE01A5 /* DropDown */;
+			targetProxy = 2D94711525464682DA668031925EEE46 /* PBXContainerItemProxy */;
 		};
 		46BFB87777D00DB6F497F1926803994C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1830,11 +1896,23 @@
 			target = 6BD8B0250148E8A607574294B1658EA7 /* libpd */;
 			targetProxy = E6DE0B8A50E0A96FC8949E6C7A5A6311 /* PBXContainerItemProxy */;
 		};
-		615CEE4F7FE35F61D9CC95FB452F76B7 /* PBXTargetDependency */ = {
+		6020DEE526465EFF0DDE97053976FCC0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "NSDate+TimeAgo";
 			target = 9A664FD395EC4C1AFB9459F3A6BFF753 /* NSDate+TimeAgo */;
-			targetProxy = 56EF443E45C651EC5932AE981B672C11 /* PBXContainerItemProxy */;
+			targetProxy = 4FE9E93579958024910B880443C49877 /* PBXContainerItemProxy */;
+		};
+		68F4D9058DBDBF01C61614843D35A64C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = DropDown;
+			target = 5168099F2EBFC99A707C03C9EADE01A5 /* DropDown */;
+			targetProxy = 0D1E6427E121D1E4BD79972AF0D8A71C /* PBXContainerItemProxy */;
+		};
+		6BDA4FE0992440D8E3F18B2F9BE0A91F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = InAppSettingsKit;
+			target = 8CB67190F0A60F7A033A3E515965C86F /* InAppSettingsKit */;
+			targetProxy = 33D2C7D73E8762436233A6F1947A6023 /* PBXContainerItemProxy */;
 		};
 		7B16116A957AFB28A93F84090C780C75 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1842,35 +1920,41 @@
 			target = A9A796B97091C50BF6C508A4C21D8722 /* UIColor_Hex_Swift */;
 			targetProxy = A78EB969449395D63C592257A83D55BB /* PBXContainerItemProxy */;
 		};
+		811528641019DA0F7BA21950CED89D8F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = libpd;
+			target = 6BD8B0250148E8A607574294B1658EA7 /* libpd */;
+			targetProxy = 44AF349C97870C1942C52AF5AF66840D /* PBXContainerItemProxy */;
+		};
+		85DA14178D6FAADE384FDD1ED66FAAAA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = UIColor_Hex_Swift;
+			target = A9A796B97091C50BF6C508A4C21D8722 /* UIColor_Hex_Swift */;
+			targetProxy = EF0832B2A0861B93BA066A6D840CFDB6 /* PBXContainerItemProxy */;
+		};
 		8B85A75C95D945DF6A59FFBD01F86445 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "InAppSettingsKit-InAppSettingsKit";
 			target = FA416ED70FC7E091F479F65D981FE8FC /* InAppSettingsKit-InAppSettingsKit */;
 			targetProxy = FBE0D4BA15D301BB7ADD8451BC93EAA7 /* PBXContainerItemProxy */;
 		};
-		93EF18A62EB732BA2853F579CD404245 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = DateToolsSwift;
-			target = E89CFD99B895BCC6E8EDC2F95A03500C /* DateToolsSwift */;
-			targetProxy = BE6FDAD1B5F47088897E5FA157440878 /* PBXContainerItemProxy */;
-		};
-		95FECDD54625FDB73584D5CFD54E05DD /* PBXTargetDependency */ = {
+		B6EE6FD370A0053524BF6468B90D88F2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = UIColor_Hex_Swift;
 			target = A9A796B97091C50BF6C508A4C21D8722 /* UIColor_Hex_Swift */;
-			targetProxy = 0BD0CB590AC2E1A6A35D8987F2853B5A /* PBXContainerItemProxy */;
-		};
-		B1FD21D57270F4619830E01FACBBA526 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = libpd;
-			target = 6BD8B0250148E8A607574294B1658EA7 /* libpd */;
-			targetProxy = 7970476C34BAAD38E90BD9B9E674D50F /* PBXContainerItemProxy */;
+			targetProxy = 9F3583FFF0AC0346C1351ECA280A01F5 /* PBXContainerItemProxy */;
 		};
 		DAA28F68FC10394D26325477CCE5C239 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = InAppSettingsKit;
 			target = 8CB67190F0A60F7A033A3E515965C86F /* InAppSettingsKit */;
 			targetProxy = E14864106587EC68772645D9AED5412C /* PBXContainerItemProxy */;
+		};
+		E22E02BEE7BED176E1569469D9C3B04C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = InAppSettingsKit;
+			target = 8CB67190F0A60F7A033A3E515965C86F /* InAppSettingsKit */;
+			targetProxy = E2A26F6D86B2DD58372AA9F6F8EC9B13 /* PBXContainerItemProxy */;
 		};
 		E70F544754435F326B27498875528F91 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2019,6 +2103,45 @@
 			};
 			name = Debug;
 		};
+		1F2433C5590D9F06B5CD1496D909A30C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9F698D42F1473DF36194B7019D1A8EAF /* Pods-microjamTests.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-microjamTests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-microjamTests/Pods-microjamTests.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_microjamTests;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 		5072F58011BFF4686AF3948524E789C2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C6BB48B8B9FB8C86100946023ECCCFC6 /* InAppSettingsKit.xcconfig */;
@@ -2033,6 +2156,44 @@
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+		56891317ABDEA7AFFA485BF7CF2F61A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2B4F2B4ACF7F241D3418FBC15C86868 /* Pods-microjamTests.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-microjamTests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-microjamTests/Pods-microjamTests.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_microjamTests;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -2087,6 +2248,44 @@
 			};
 			name = Release;
 		};
+		653494A3B17B63FF1C28AEFC2414487D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A63E35CDFA639858F27B0F44C82F41A5 /* Pods-microjamUITests.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-microjamUITests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-microjamUITests/Pods-microjamUITests.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_microjamUITests;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		75320EDA1A50BD543A9E2C48348EEC36 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C6BB48B8B9FB8C86100946023ECCCFC6 /* InAppSettingsKit.xcconfig */;
@@ -2121,42 +2320,6 @@
 			};
 			name = Debug;
 		};
-		7AD0AC67094DA8415161D2DBC56AEABA /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 04B10B7042ACB2E8B4C277C95740BB6A /* Pods-microjamUITests.release.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-microjamUITests/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-microjamUITests/Pods-microjamUITests.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_microjamUITests;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		7BFB8DDB4FE401D36BCE4B647043166E /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E31BB6DF45CDB79DFFC8C323534F602D /* NSDate+TimeAgo.xcconfig */;
@@ -2184,44 +2347,6 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		886D8F5D88577C28F8C29027449240BA /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = E50F02ECACDDAD1CF57DDC5B5FFD3A2F /* Pods-microjam-microjamTests.release.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-microjam-microjamTests/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-microjam-microjamTests/Pods-microjam-microjamTests.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_microjam_microjamTests;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -2498,7 +2623,7 @@
 		};
 		DF077BA10ADED1C323036234D8FED65F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 192D865237846F41178F429295F16B67 /* Pods-microjam.release.xcconfig */;
+			baseConfigurationReference = 4AB40C204E7CAD672FCC4A79FA4A2BC4 /* Pods-microjam.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -2534,45 +2659,9 @@
 			};
 			name = Release;
 		};
-		EB7256A4046314EE649BB83CB8921AC8 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6792F8F2178D132B6CD41DC93903CE16 /* Pods-microjamUITests.debug.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-microjamUITests/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-microjamUITests/Pods-microjamUITests.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_microjamUITests;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		F41A27981CA6E33DCD160376D02CD0CD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0381017C458F7A8432A86F7A0E38F784 /* Pods-microjam.debug.xcconfig */;
+			baseConfigurationReference = 3B9063B91693F3688063047921B4BFEE /* Pods-microjam.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -2609,9 +2698,9 @@
 			};
 			name = Debug;
 		};
-		FC5CB400425BBE5C5AFBD55D2EB87F16 /* Debug */ = {
+		F5D5FCA1748180BF9836DB2B6D949A4D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8208969252C57EEC954266EA453CBAFA /* Pods-microjam-microjamTests.debug.xcconfig */;
+			baseConfigurationReference = 03D1BBD2CAD680C9A53668734C285250 /* Pods-microjamUITests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -2625,18 +2714,18 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-microjam-microjamTests/Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-microjamUITests/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-microjam-microjamTests/Pods-microjam-microjamTests.modulemap";
+				MODULEMAP_FILE = "Target Support Files/Pods-microjamUITests/Pods-microjamUITests.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_microjam_microjamTests;
+				PRODUCT_NAME = Pods_microjamUITests;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -2651,6 +2740,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0F13503FBE95C3FC60DBBB1EA161D42E /* Build configuration list for PBXNativeTarget "Pods-microjamTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1F2433C5590D9F06B5CD1496D909A30C /* Debug */,
+				56891317ABDEA7AFFA485BF7CF2F61A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -2674,6 +2772,15 @@
 			buildConfigurations = (
 				B3894E3C244F655C9E7A79130039AE1D /* Debug */,
 				AB3AA26AF0C5C1AF4BFF0D2ACDC8B982 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		724A8903F058AB38353719B7BF4CB322 /* Build configuration list for PBXNativeTarget "Pods-microjamUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F5D5FCA1748180BF9836DB2B6D949A4D /* Debug */,
+				653494A3B17B63FF1C28AEFC2414487D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2710,24 +2817,6 @@
 			buildConfigurations = (
 				5B34DBB4495EA020B8CFB66DFD50ED19 /* Debug */,
 				5072F58011BFF4686AF3948524E789C2 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D97E7969EFEB15F02392B0656F56EE22 /* Build configuration list for PBXNativeTarget "Pods-microjamUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				EB7256A4046314EE649BB83CB8921AC8 /* Debug */,
-				7AD0AC67094DA8415161D2DBC56AEABA /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		E6041A299451C338C583250940B084DD /* Build configuration list for PBXNativeTarget "Pods-microjam-microjamTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				FC5CB400425BBE5C5AFBD55D2EB87F16 /* Debug */,
-				886D8F5D88577C28F8C29027449240BA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

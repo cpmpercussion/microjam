@@ -153,6 +153,7 @@
 		56C88E7E1DFEFD7200406BF0 /* microjam.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = microjam.entitlements; sourceTree = "<group>"; };
 		56C88E7F1DFEFD8200406BF0 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		56D2C6ED1E65ADE100E3D14F /* UserNameChooserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserNameChooserViewController.swift; path = chirpey/UserNameChooserViewController.swift; sourceTree = "<group>"; };
+		56D94A371F208155003C4139 /* test-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "test-Bridging-Header.h"; sourceTree = "<group>"; };
 		56E94AB21F20751B0049442A /* microjamTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = microjamTests.swift; sourceTree = "<group>"; };
 		56E94AB41F20753E0049442A /* microjamUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = microjamUITests.swift; sourceTree = "<group>"; };
 		56E94ABA1F20793F0049442A /* microjamExtraTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = microjamExtraTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -302,6 +303,7 @@
 			children = (
 				5669CAA91DA7AAA6009EEC3B /* Info.plist */,
 				56E94AB21F20751B0049442A /* microjamTests.swift */,
+				56D94A371F208155003C4139 /* test-Bridging-Header.h */,
 			);
 			name = microjamTests;
 			path = chirpeyTests;
@@ -646,7 +648,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-microjam-microjamTests/Pods-microjam-microjamTests-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-microjamTests/Pods-microjamTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/DateToolsSwift/DateToolsSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework",
 				"${BUILT_PRODUCTS_DIR}/InAppSettingsKit/InAppSettingsKit.framework",
@@ -665,7 +667,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-microjam-microjamTests/Pods-microjam-microjamTests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-microjamTests/Pods-microjamTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		0A0A2652E180D722C3BD7ADF /* [CP] Check Pods Manifest.lock */ = {
@@ -727,7 +729,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-microjam-microjamTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-microjamTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -792,7 +794,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-microjam-microjamTests/Pods-microjam-microjamTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-microjamTests/Pods-microjamTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FEAF0C809C4FF566B1993F02 /* [CP] Embed Pods Frameworks */ = {
@@ -801,9 +803,22 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-microjamUITests/Pods-microjamUITests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/DateToolsSwift/DateToolsSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework",
+				"${BUILT_PRODUCTS_DIR}/InAppSettingsKit/InAppSettingsKit.framework",
+				"${BUILT_PRODUCTS_DIR}/NSDate+TimeAgo/NSDate_TimeAgo.framework",
+				"${BUILT_PRODUCTS_DIR}/UIColor_Hex_Swift/UIColor_Hex_Swift.framework",
+				"${BUILT_PRODUCTS_DIR}/libpd/libpd.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DateToolsSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DropDown.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/InAppSettingsKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NSDate_TimeAgo.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIColor_Hex_Swift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/libpd.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1032,12 +1047,13 @@
 		};
 		5669CABB1DA7AAA6009EEC3B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 65C97DCF3688EF691BBB543B /* Pods-microjam-microjamTests.debug.xcconfig */;
+			baseConfigurationReference = 22EF216AB0EBA76631614175 /* Pods-microjamTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = EDH387FRHA;
+				"HEADER_SEARCH_PATHS[arch=*]" = "${PODS_ROOT}/**";
 				INFOPLIST_FILE = chirpeyTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = au.com.charlesmartin.chirpeyTests;
@@ -1050,12 +1066,13 @@
 		};
 		5669CABC1DA7AAA6009EEC3B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 467C19C9B42601CE5131E5AC /* Pods-microjam-microjamTests.release.xcconfig */;
+			baseConfigurationReference = 542B447A7B9AE8AC7B6CE3BB /* Pods-microjamTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = EDH387FRHA;
+				"HEADER_SEARCH_PATHS[arch=*]" = "${PODS_ROOT}/**";
 				INFOPLIST_FILE = chirpeyTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = au.com.charlesmartin.chirpeyTests;
@@ -1182,6 +1199,7 @@
 				56E94AC31F20793F0049442A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
