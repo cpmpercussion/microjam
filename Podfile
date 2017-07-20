@@ -14,7 +14,7 @@ target 'microjam' do
   pod 'DropDown'
 
   target 'microjamTests' do
-    inherit! :search_paths
+    inherit! :complete
     # Pods for testing
   end
 

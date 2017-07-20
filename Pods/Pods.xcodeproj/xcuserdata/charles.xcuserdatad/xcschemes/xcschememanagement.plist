@@ -29,12 +29,12 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-microjam.xcscheme</key>
+		<key>Pods-microjam-microjamTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-microjamTests.xcscheme</key>
+		<key>Pods-microjam.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -57,11 +57,6 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>2B8E7CB5910C4EB6D7422EA95981A8D9</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>5168099F2EBFC99A707C03C9EADE01A5</key>
 		<dict>
 			<key>primary</key>
@@ -73,6 +68,11 @@
 			<true/>
 		</dict>
 		<key>6BD8B0250148E8A607574294B1658EA7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6EECCCB57CD92C09841A4D21C8829209</key>
 		<dict>
 			<key>primary</key>
 			<true/>
