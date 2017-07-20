@@ -39,6 +39,7 @@ class ChirpView: UIImageView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.performance = ChirpPerformance()
+        self.recordingColour = self.performance?.colour.cgColor
         self.image = UIImage()
     }
     

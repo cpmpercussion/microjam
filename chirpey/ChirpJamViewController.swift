@@ -377,6 +377,9 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             self.replyButton.isEnabled = false
             self.instrumentButton.setTitle(SoundSchemes.namesForKeys[UserDefaults.standard.integer(forKey: SettingsKeys.soundSchemeKey)], for: .normal)
             if let recordView = self.recordView {
+                // Updating the color of the performance based on the user defaults.
+                recordView.performance?.colour = UIColor(hue: CGFloat(UserDefaults.standard.float(forKey: SettingsKeys.performerColourKey)), saturation: 1.0, brightness: 0.7, alpha: 1.0)
+                recordView.recordingColour = recordView.performance?.colour.cgColor
                 recordView.openPdFile()
             }
             
