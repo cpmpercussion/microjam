@@ -101,6 +101,17 @@
                                     <action selector="soundSchemeTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8og-Nf-5lO"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="right" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eAN-yn-9XI">
+                                <rect key="frame" x="157" y="95" width="61" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="add jam">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="soundSchemeTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hth-Ys-KLx"/>
+                                    <segue destination="E9E-EE-7xz" kind="presentation" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="eIg-Bq-91p"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.97367788460000004" green="0.97367788460000004" blue="0.97367788460000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -125,8 +136,10 @@
                                 <variation key="widthClass=compact" constant="7"/>
                                 <variation key="widthClass=regular" constant="10"/>
                             </constraint>
+                            <constraint firstItem="eAN-yn-9XI" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="j8x-hu-bMR"/>
                             <constraint firstItem="xQz-CD-1rT" firstAttribute="leading" secondItem="yna-Q3-0q0" secondAttribute="leading" id="lUh-Ca-yub"/>
                             <constraint firstItem="Xh5-cz-PkR" firstAttribute="centerY" secondItem="O9V-pQ-Tlh" secondAttribute="centerY" id="ocI-8v-uTe"/>
+                            <constraint firstItem="eAN-yn-9XI" firstAttribute="centerY" secondItem="1Mx-bs-Bwy" secondAttribute="centerY" id="onX-LY-NYH"/>
                             <constraint firstItem="1Mx-bs-Bwy" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="37" id="qAR-wM-PdU"/>
                             <constraint firstItem="yna-Q3-0q0" firstAttribute="top" secondItem="xQz-CD-1rT" secondAttribute="bottom" constant="8" symbolic="YES" id="sCA-fh-uvA"/>
                             <constraint firstItem="PVn-2h-cdI" firstAttribute="trailing" secondItem="xQz-CD-1rT" secondAttribute="trailing" id="sj5-ph-I4z"/>
@@ -148,6 +161,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addJamButton" destination="eAN-yn-9XI" id="Giw-0P-NXI"/>
                         <outlet property="instrumentButton" destination="PVn-2h-cdI" id="Csn-nR-9Zq"/>
                         <outlet property="jamButton" destination="HfI-q6-7dd" id="rub-hB-VgX"/>
                         <outlet property="performerLabel" destination="1Mx-bs-Bwy" id="E9T-t5-KvJ"/>
@@ -164,6 +178,55 @@
             </objects>
             <point key="canvasLocation" x="3215.1999999999998" y="-408.84557721139436"/>
         </scene>
+        <!--Add Jam View Controller-->
+        <scene sceneID="rws-AL-vH7">
+            <objects>
+                <viewController id="E9E-EE-7xz" customClass="AddJamViewController" customModule="microjam" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1TV-9Q-bXJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="xW8-kM-aot"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="79q-Jc-XIi">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cwR-K5-oBU">
+                                <rect key="frame" x="32" y="84" width="311" height="519"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="tnC-Ad-hqT">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Urf-9W-l4C">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="cwR-K5-oBU" secondAttribute="trailing" constant="32" id="9ak-tH-TZI"/>
+                            <constraint firstItem="cwR-K5-oBU" firstAttribute="top" secondItem="1TV-9Q-bXJ" secondAttribute="bottom" constant="64" id="C2L-TF-xli"/>
+                            <constraint firstItem="cwR-K5-oBU" firstAttribute="leading" secondItem="79q-Jc-XIi" secondAttribute="leading" constant="32" id="RqA-Xe-UVi"/>
+                            <constraint firstItem="xW8-kM-aot" firstAttribute="top" secondItem="cwR-K5-oBU" secondAttribute="bottom" constant="64" id="ZiO-3q-jyQ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="cwR-K5-oBU" id="igF-gv-g3Y"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uJS-dt-G2s" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4064.8000000000002" y="-408.84557721139436"/>
+        </scene>
         <!--settings-->
         <scene sceneID="JKC-ke-Tam">
             <objects>
@@ -177,7 +240,7 @@
                                 <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Cvd-cG-I3p" id="nxe-Y1-Sgh">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -210,7 +273,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="365"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gcn-gn-WZ5" id="sXd-HP-H6B">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="364.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="365"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultRecordingImage" translatesAutoresizingMaskIntoConstraints="NO" id="C1Y-wG-D7P">

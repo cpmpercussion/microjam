@@ -38,6 +38,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     @IBOutlet weak var recordingProgress: UIProgressView!
     @IBOutlet weak var savePerformanceButton: UIBarButtonItem!
     @IBOutlet weak var instrumentButton: UIButton!
+    @IBOutlet weak var addJamButton: UIButton!
     
     // MARK: - Navigation
     
