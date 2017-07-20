@@ -10,11 +10,12 @@ import XCTest
 @testable import microjam
 
 class microjamTests: XCTestCase {
-    var performanceUnderTest: ChirpPerformance
+    var performanceUnderTest: ChirpPerformance!
     
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        performanceUnderTest = ChirpPerformance()
     }
     
     override func tearDown() {
@@ -22,16 +23,16 @@ class microjamTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testPerformanceCreated() {
+        XCTAssertEqual(performanceUnderTest.performanceData.count,0,"Performance data is not empty.")
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func testRecordTouchData() {
+        performanceUnderTest.recordTouchAt(time: 0.5, x: 0.5, y: 0.5, z: 0.5, moving: false)
+        performanceUnderTest.recordTouchAt(time: 0.6, x: 0.6, y: 0.6, z: 0.6, moving: true)
+        performanceUnderTest.recordTouchAt(time: 0.7, x: 0.7, y: 0.7, z: 0.7, moving: false)
+        
+        XCTAssertEqual(performanceUnderTest.performanceData.count, 3,"Performance data was not recorded.")
     }
     
 }
