@@ -38,7 +38,12 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     @IBOutlet weak var recordingProgress: UIProgressView!
     @IBOutlet weak var savePerformanceButton: UIBarButtonItem!
     @IBOutlet weak var instrumentButton: UIButton!
+    
+    // Views for adding single performances. Composing
+    var composing = false
     @IBOutlet weak var addJamButton: UIButton!
+    @IBOutlet weak var addJamView: UIView!
+    @IBOutlet weak var collectionView: UICollectionView!
     
     // MARK: - Navigation
     
@@ -72,6 +77,8 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.addJamView.isHidden = true
+        print("AddJamViewHidden? ", self.addJamView.isHidden)
         updateUI()
     }
     
@@ -88,6 +95,10 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     override func viewDidLoad() {
         super.viewDidLoad()
         print("JAMVC: viewDidLoad")
+        
+        self.collectionView.delegate = self
+        self.collectionView.dataSource = self
+        
         self.recordingProgress!.progress = 0.0 // need to initialise the recording progress at zero.
         
         if !self.performanceViews.isEmpty {
@@ -128,10 +139,18 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     //        print("JAMVC:Reply ChirpView comod:", self.replyToPerformanceView?.contentMode ?? "None Available")
     //    }
     
-    
-    func newViewWith(performance : ChirpPerformance) {
+    func newViewWith(performance : ChirpPerformance, withFrame frame : CGRect?) {
         
-        let newView = ChirpView(frame: CGRect.zero, performance: performance)
+        var newView : ChirpView!
+        
+        if let f = frame {
+            newView = ChirpView(frame: f, performance: performance)
+            self.add(chirpView: newView)
+        } else {
+            // This is the case if we add performances before the view is displayed. no reference!
+            newView = ChirpView(frame: CGRect.zero, performance: performance)
+        }
+
         newView.isUserInteractionEnabled = false // Not used for recording
         newView.backgroundColor = UIColor.clear
         self.performanceViews.append(newView)
@@ -172,6 +191,36 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         
     }
     
+    
+    
+    @IBAction func addJam(_ sender: UIButton) {
+        
+        self.view.bringSubview(toFront: self.addJamView) // Make sure addJamView is in front so the blur works as it should
+        self.composing = true
+        
+        // Disable all button except the cancel button
+        self.recordView?.isUserInteractionEnabled = false
+        self.addJamButton.isEnabled = false
+        self.playButton.isEnabled = false
+        self.replyButton.isEnabled = false
+        self.jamButton.isEnabled = false
+        self.savePerformanceButton.isEnabled = false
+        self.addJamView.isHidden = false // Make sure to display the addJamView
+    }
+    
+    func hideAddJamView() {
+        
+        self.addJamView.isHidden = true // Hide the addJamView
+        
+        // Enable all the buttons
+        self.addJamButton.isEnabled = true
+        self.playButton.isEnabled = true
+        self.replyButton.isEnabled = true
+        self.jamButton.isEnabled = true
+        self.savePerformanceButton.isEnabled = true
+    }
+    
+    
     /// IBAction for Cancel (bar) button. stops playback/recording and dismisses present performance.
     @IBAction func cancelPerformance(_ sender: UIBarButtonItem) {
         print("JAMVC: Cancel Button Pressed.")
@@ -180,6 +229,11 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         stopTimer() // Stopping all Timers
         //stopRecording()
         stopPlayback() // stop any possible playback
+        
+        if !self.addJamView.isHidden {
+            self.hideAddJamView()
+            return
+        }
         
         if let recordView = self.recordView {
             if self.performanceViews.isEmpty {
@@ -192,7 +246,14 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
                 self.recordView = nil
                 self.replyButton.setTitle("Reply", for: .normal)
                 self.newPerformance = false
-                self.state = ChirpJamModes.loaded
+                
+                if composing {
+                    self.state = ChirpJamModes.new
+                    self.newRecordView()
+                } else {
+                    self.state = ChirpJamModes.loaded
+                }
+            
                 self.jamming = false
                 self.recordingProgress!.progress = 0.0
                 self.progress = 0.0
@@ -373,7 +434,19 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
                 self.statusLabel.text = "new" // new performance only.
             }
             self.performerLabel.text = UserDefaults.standard.string(forKey: SettingsKeys.performerKey)
-            self.playButton.isEnabled = false
+            
+            if !self.performanceViews.isEmpty {
+                self.playButton.isEnabled = true // Make sure we can play the performances. Used for composing
+                
+                // Reset images for the performances
+                for view in self.performanceViews {
+                    view.image = view.performance?.image
+                }
+                
+            } else {
+                self.playButton.isEnabled = false
+            }
+            
             self.jamButton.isEnabled = false
             self.replyButton.isEnabled = false
             self.instrumentButton.setTitle(SoundSchemes.namesForKeys[UserDefaults.standard.integer(forKey: SettingsKeys.soundSchemeKey)], for: .normal)
@@ -441,6 +514,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             self.statusLabel.text = "Loaded: "
             self.performerLabel.text = loadedPerformance?.performer
             self.instrumentButton.setTitle(loadedPerformance?.instrument, for: .normal)
+            
             // FIXME: Better way to reset images for ChirpViews
             for view in self.performanceViews {
                 view.image = view.performance?.image
@@ -448,6 +522,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             if let recordView = self.recordView {
                 recordView.image = recordView.performance?.image
             }
+            
             self.playButton.isEnabled = true
             self.jamButton.isEnabled = true
             print("JAMVC: opening Pd file for loaded performance.")
@@ -520,7 +595,13 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         }
         
         self.playButton.setTitle("play", for: UIControlState.normal)
-        self.state = ChirpJamModes.loaded
+        
+        if composing {
+            self.state = ChirpJamModes.new
+        } else {
+            self.state = ChirpJamModes.loaded
+        }
+        
         self.updateUI()
         
         self.progressTimer?.invalidate()
@@ -584,3 +665,51 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         // Dispose of any resources that can be recreated.
     }
 }
+
+// Handeling the collection view in the AddJamView
+
+extension ChirpJamViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        print("Selected item: ", indexPath.row)
+        self.newViewWith(performance: appDelegate.storedPerformances[indexPath.row], withFrame: self.referenceView.frame)
+        self.hideAddJamView()
+        self.newRecordView()
+    }
+    
+}
+
+extension ChirpJamViewController: UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 25
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let viewCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "addJamCell", for: indexPath)
+        
+        let imageView = viewCell.contentView.subviews.first as! UIImageView
+        imageView.image = appDelegate.storedPerformances[indexPath.row].image
+        
+        return viewCell
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
