@@ -7,7 +7,7 @@
     "777E083A4F971ACBF639D63D8344BAE77752E915" : 9223372036854775807,
     "E92D265595D6FCFF23F817AF6192A4864182339E" : 9223372036854775807
   },
-  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "DFCD7AC2-AC81-4316-BB62-528AA6848F0D",
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "EC5FAA32-2CE3-4959-86BF-62696E423A22",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
     "777E083A4F971ACBF639D63D8344BAE77752E915" : "microjam\/",
     "E92D265595D6FCFF23F817AF6192A4864182339E" : "microjam\/synth\/metaPdLibs\/"
@@ -17,12 +17,12 @@
   "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "microjam.xcworkspace",
   "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
     {
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:cpmpercussion\/chirpey.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:cpmpercussion\/microjam.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "777E083A4F971ACBF639D63D8344BAE77752E915"
     },
     {
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:cpmpercussion\/metaPdLibs.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/cpmpercussion\/metaPdLibs.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "E92D265595D6FCFF23F817AF6192A4864182339E"
     }

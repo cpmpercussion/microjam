@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		077DC2A7E15F1081FBECA3E5 /* Pods_microjamUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F790C94F468F8D8ACE1123FE /* Pods_microjamUITests.framework */; };
 		3FD8FFE12146D66CF89B8F2F /* Pods_microjam_microjamTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FDD96ACEB14ECDFF2CA2B2F /* Pods_microjam_microjamTests.framework */; };
+		5613ABF01F20E3890074B347 /* microjamExtraUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5613ABEF1F20E3890074B347 /* microjamExtraUITests.swift */; };
 		563E06101EFBE71700F0D471 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563E060F1EFBE71700F0D471 /* Constants.swift */; };
 		565143FA1DFAB79E00F56B32 /* adsr.pd in Resources */ = {isa = PBXBuildFile; fileRef = 565143F81DFAB79E00F56B32 /* adsr.pd */; };
 		565143FB1DFAB79E00F56B32 /* xfade.pd in Resources */ = {isa = PBXBuildFile; fileRef = 565143F91DFAB79E00F56B32 /* xfade.pd */; };
@@ -66,6 +67,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		5613ABF21F20E3890074B347 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5669CA821DA7AAA5009EEC3B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5669CA891DA7AAA5009EEC3B;
+			remoteInfo = microjam;
+		};
 		5669CAA41DA7AAA6009EEC3B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5669CA821DA7AAA5009EEC3B /* Project object */;
@@ -96,6 +104,9 @@
 		467C19C9B42601CE5131E5AC /* Pods-microjam-microjamTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-microjam-microjamTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-microjam-microjamTests/Pods-microjam-microjamTests.release.xcconfig"; sourceTree = "<group>"; };
 		4B8432CAAE36EBBE2D19F96D /* Pods-microjamUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-microjamUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-microjamUITests/Pods-microjamUITests.release.xcconfig"; sourceTree = "<group>"; };
 		542B447A7B9AE8AC7B6CE3BB /* Pods-microjamTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-microjamTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-microjamTests/Pods-microjamTests.release.xcconfig"; sourceTree = "<group>"; };
+		5613ABED1F20E3890074B347 /* microjamExtraUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = microjamExtraUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5613ABEF1F20E3890074B347 /* microjamExtraUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = microjamExtraUITests.swift; sourceTree = "<group>"; };
+		5613ABF11F20E3890074B347 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		563E060F1EFBE71700F0D471 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		565143F81DFAB79E00F56B32 /* adsr.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = adsr.pd; sourceTree = "<group>"; };
 		565143F91DFAB79E00F56B32 /* xfade.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = xfade.pd; sourceTree = "<group>"; };
@@ -168,6 +179,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		5613ABEA1F20E3890074B347 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5669CA871DA7AAA5009EEC3B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -252,6 +270,15 @@
 			name = stores;
 			sourceTree = "<group>";
 		};
+		5613ABEE1F20E3890074B347 /* microjamExtraUITests */ = {
+			isa = PBXGroup;
+			children = (
+				5613ABEF1F20E3890074B347 /* microjamExtraUITests.swift */,
+				5613ABF11F20E3890074B347 /* Info.plist */,
+			);
+			path = microjamExtraUITests;
+			sourceTree = "<group>";
+		};
 		5669CA811DA7AAA5009EEC3B = {
 			isa = PBXGroup;
 			children = (
@@ -265,6 +292,7 @@
 				5669CAA61DA7AAA6009EEC3B /* microjamTests */,
 				5669CAB11DA7AAA6009EEC3B /* microjamUITests */,
 				56E94ABB1F20793F0049442A /* microjamExtraTests */,
+				5613ABEE1F20E3890074B347 /* microjamExtraUITests */,
 				5669CA8B1DA7AAA5009EEC3B /* Products */,
 				A84F68A69B4F57615CCB0C2D /* Pods */,
 				37B82C17ADD34A6423FC8D08 /* Frameworks */,
@@ -278,6 +306,7 @@
 				5669CAA31DA7AAA6009EEC3B /* microjamTests.xctest */,
 				5669CAAE1DA7AAA6009EEC3B /* microjamUITests.xctest */,
 				56E94ABA1F20793F0049442A /* microjamExtraTests.xctest */,
+				5613ABED1F20E3890074B347 /* microjamExtraUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -427,6 +456,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		5613ABEC1F20E3890074B347 /* microjamExtraUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5613ABF41F20E38A0074B347 /* Build configuration list for PBXNativeTarget "microjamExtraUITests" */;
+			buildPhases = (
+				5613ABE91F20E3890074B347 /* Sources */,
+				5613ABEA1F20E3890074B347 /* Frameworks */,
+				5613ABEB1F20E3890074B347 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5613ABF31F20E3890074B347 /* PBXTargetDependency */,
+			);
+			name = microjamExtraUITests;
+			productName = microjamExtraUITests;
+			productReference = 5613ABED1F20E3890074B347 /* microjamExtraUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		5669CA891DA7AAA5009EEC3B /* microjam */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5669CAB71DA7AAA6009EEC3B /* Build configuration list for PBXNativeTarget "microjam" */;
@@ -517,6 +564,11 @@
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Charles Martin";
 				TargetAttributes = {
+					5613ABEC1F20E3890074B347 = {
+						CreatedOnToolsVersion = 8.3.3;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 5669CA891DA7AAA5009EEC3B;
+					};
 					5669CA891DA7AAA5009EEC3B = {
 						CreatedOnToolsVersion = 8.0;
 						LastSwiftMigration = 0810;
@@ -568,11 +620,19 @@
 				5669CAA21DA7AAA6009EEC3B /* microjamTests */,
 				5669CAAD1DA7AAA6009EEC3B /* microjamUITests */,
 				56E94AB91F20793F0049442A /* microjamExtraTests */,
+				5613ABEC1F20E3890074B347 /* microjamExtraUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		5613ABEB1F20E3890074B347 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5669CA881DA7AAA5009EEC3B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -649,19 +709,11 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-microjamTests/Pods-microjamTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/DateToolsSwift/DateToolsSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework",
-				"${BUILT_PRODUCTS_DIR}/InAppSettingsKit/InAppSettingsKit.framework",
-				"${BUILT_PRODUCTS_DIR}/NSDate+TimeAgo/NSDate_TimeAgo.framework",
 				"${BUILT_PRODUCTS_DIR}/UIColor_Hex_Swift/UIColor_Hex_Swift.framework",
 				"${BUILT_PRODUCTS_DIR}/libpd/libpd.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DateToolsSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DropDown.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/InAppSettingsKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NSDate_TimeAgo.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIColor_Hex_Swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/libpd.framework",
 			);
@@ -804,19 +856,11 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-microjamUITests/Pods-microjamUITests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/DateToolsSwift/DateToolsSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework",
-				"${BUILT_PRODUCTS_DIR}/InAppSettingsKit/InAppSettingsKit.framework",
-				"${BUILT_PRODUCTS_DIR}/NSDate+TimeAgo/NSDate_TimeAgo.framework",
 				"${BUILT_PRODUCTS_DIR}/UIColor_Hex_Swift/UIColor_Hex_Swift.framework",
 				"${BUILT_PRODUCTS_DIR}/libpd/libpd.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DateToolsSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DropDown.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/InAppSettingsKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NSDate_TimeAgo.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIColor_Hex_Swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/libpd.framework",
 			);
@@ -828,6 +872,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		5613ABE91F20E3890074B347 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5613ABF01F20E3890074B347 /* microjamExtraUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5669CA861DA7AAA5009EEC3B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -872,6 +924,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		5613ABF31F20E3890074B347 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5669CA891DA7AAA5009EEC3B /* microjam */;
+			targetProxy = 5613ABF21F20E3890074B347 /* PBXContainerItemProxy */;
+		};
 		5669CAA51DA7AAA6009EEC3B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 5669CA891DA7AAA5009EEC3B /* microjam */;
@@ -909,6 +966,38 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		5613ABF51F20E38A0074B347 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				DEVELOPMENT_TEAM = EDH387FRHA;
+				INFOPLIST_FILE = microjamExtraUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = au.com.charlesmartin.microjamExtraUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = microjam;
+			};
+			name = Debug;
+		};
+		5613ABF61F20E38A0074B347 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				DEVELOPMENT_TEAM = EDH387FRHA;
+				INFOPLIST_FILE = microjamExtraUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = au.com.charlesmartin.microjamExtraUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = microjam;
+			};
+			name = Release;
+		};
 		5669CAB51DA7AAA6009EEC3B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1113,9 +1202,10 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = au.com.charlesmartin.chirpeyUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
-				TEST_TARGET_NAME = chirpey;
+				TEST_TARGET_NAME = microjam;
 			};
 			name = Debug;
 		};
@@ -1132,8 +1222,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = au.com.charlesmartin.chirpeyUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 3.0;
-				TEST_TARGET_NAME = chirpey;
+				TEST_TARGET_NAME = microjam;
 			};
 			name = Release;
 		};
@@ -1174,6 +1265,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		5613ABF41F20E38A0074B347 /* Build configuration list for PBXNativeTarget "microjamExtraUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5613ABF51F20E38A0074B347 /* Debug */,
+				5613ABF61F20E38A0074B347 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		5669CA851DA7AAA5009EEC3B /* Build configuration list for PBXProject "microjam" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
