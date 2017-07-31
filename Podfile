@@ -18,13 +18,11 @@ target 'microjam' do
 
   target 'microjamTests' do
     inherit! :search_paths
-    shared_pods
     # Pods for testing
   end
 
   target 'microjamUITests' do
     inherit! :search_paths
-    shared_pods
     # Pods for testing
   end
 
