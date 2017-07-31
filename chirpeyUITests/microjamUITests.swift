@@ -47,10 +47,49 @@ class microjamUITests: XCTestCase {
         let app = XCUIApplication()
         print(app.tabBars.buttons)
         app.tabBars.buttons["jam!"].tap()
-        app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .image).element(boundBy: 0).swipeRight()
+        let element = app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element
+        let image = element.children(matching: .image).element(boundBy: 0)
+        image.swipeRight()
+        image.swipeDown()
+        image.swipeLeft()
+        image.swipeUp()
         app.buttons["play"].tap()
-        app.navigationBars["7 seconds ago"].buttons["Save"].tap()
-        //        app.tabBars.buttons["world"].tap()
+        app.navigationBars.buttons["Save"].tap()
+    }
+    
+    /// Tests that changing an instrument and recording works.
+    func testSetInstrument() {
+        let app = XCUIApplication()
+        app.tabBars.buttons["jam!"].tap()
+        app.buttons["instrumentChooser"].tap()
+        app.tables.staticTexts["strings"].tap()
+        
+        let element = app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element
+        let image = element.children(matching: .image).element(boundBy: 0)
+        image.tap()
+        image.swipeDown()
+        image.tap()
+        image.swipeRight()
+        image.tap()
+        image.swipeLeft()
+        app.navigationBars.buttons["Save"].tap()
+    }
+    
+    func testPlayback() {
+        let app = XCUIApplication()
+        app.navigationBars["Microjams!"].buttons["Add"].tap()
+        
+        let image = app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .image).element(boundBy: 0)
+        image.tap()
+        image.swipeDown()
+        image.tap()
+        image.swipeRight()
+        image.tap()
+        image.swipeLeft()
+        image.tap()
+        app.buttons["playButton"].tap()
+        app.navigationBars.buttons["Cancel"].tap()
+        XCTAssert(app.navigationBars["New Performance"].exists)
     }
     
     /// Tests procession through
@@ -63,30 +102,4 @@ class microjamUITests: XCTestCase {
         app.typeText("\n")
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
-    
-    /// Tests that changing an instrument works.
-    func testSetInstrument() {
-        let app = XCUIApplication()
-        app.tabBars.buttons["jam!"].tap()
-        app.tables.staticTexts["drums"].tap()
-        
-        let element = app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element
-        let image = element.children(matching: .image).element(boundBy: 1)
-        image.tap()
-        image.tap()
-        image.tap()
-        image.tap()
-        image.tap()
-        image.tap()
-        image.tap()
-        image.swipeDown()
-        element.tap()
-        element.swipeDown()
-        element.tap()
-        app.navigationBars["Just now"].buttons["Save"].tap()
-        
-    }
-    
-
-    
 }
