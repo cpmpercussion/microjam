@@ -67,6 +67,7 @@ class microjamUITests: XCTestCase {
     /// Tests that changing an instrument works.
     func testSetInstrument() {
         let app = XCUIApplication()
+        app.tabBars.buttons["jam!"].tap()
         app.tables.staticTexts["drums"].tap()
         
         let element = app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element
