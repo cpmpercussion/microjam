@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="z8b-cn-TNb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="z8b-cn-TNb">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -28,6 +28,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O9V-pQ-Tlh">
                                 <rect key="frame" x="37.5" y="448" width="95" height="95"/>
                                 <color key="backgroundColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <accessibility key="accessibilityConfiguration" identifier="playButton"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="95" id="0Aa-JJ-aWV">
                                         <variation key="widthClass=compact" constant="95"/>
@@ -43,6 +44,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HfI-q6-7dd">
                                 <rect key="frame" x="241.5" y="448" width="96" height="95"/>
                                 <color key="backgroundColor" red="0.80000001190000003" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <accessibility key="accessibilityConfiguration" identifier="jamButton"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="95" id="tHF-Ir-nMX"/>
                                 </constraints>
@@ -54,6 +56,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xh5-cz-PkR" userLabel="Reply Button">
                                 <rect key="frame" x="140.5" y="448" width="94" height="95"/>
                                 <color key="backgroundColor" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <accessibility key="accessibilityConfiguration" identifier="replyButton"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="95" id="r4b-gK-99t"/>
                                 </constraints>
@@ -64,6 +67,7 @@
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="status" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PBg-aK-YtU">
                                 <rect key="frame" x="37.5" y="551" width="300" height="63"/>
+                                <accessibility key="accessibilityConfiguration" identifier="statusLabel"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="63" id="Fqt-WN-ZCH"/>
                                 </constraints>
@@ -73,6 +77,7 @@
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="performer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Mx-bs-Bwy">
                                 <rect key="frame" x="37.5" y="101" width="77" height="22"/>
+                                <accessibility key="accessibilityConfiguration" identifier="performerLabel"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="5SF-PQ-ScA"/>
                                 </constraints>
@@ -93,6 +98,7 @@
                             </view>
                             <button opaque="NO" contentMode="right" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PVn-2h-cdI">
                                 <rect key="frame" x="254" y="95.5" width="83" height="33"/>
+                                <accessibility key="accessibilityConfiguration" identifier="instrumentChooser"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="instrument">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
