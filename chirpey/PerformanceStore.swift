@@ -14,14 +14,22 @@ let max_jams_to_fetch = 25
 
 /// Classes implementing this protocol have can be notified of success or failure of updates from the `PerformanceStore`'s cloud backend.
 protocol ModelDelegate {
+<<<<<<< HEAD
 
     /// Called when the `PerformanceStore` fails to update for some reason.
     func errorUpdating(error: NSError)
 
+=======
+    
+    /// Called when the `PerformanceStore` fails to update for some reason.
+    func errorUpdating(error: NSError)
+    
+>>>>>>> origin/adding-store-to-mvc
     /// Called when the `PerformanceStore` successfully updates from the cloud backend.
     func modelUpdated()
 }
 
+<<<<<<< HEAD
 /**
  Contains stored performances and handles saving these to the local storage and synchronising with the cloud backend on CloudKit.
 */
@@ -31,11 +39,26 @@ class PerformanceStore: NSObject {
 
     // MARK: - CloudKit definitions
 
+=======
+/** 
+ Contains stored performances and handles saving these to the local storage and synchronising with the cloud backend on CloudKit.
+*/
+class PerformanceStore: NSObject {
+    
+    var storedPerformances : [ChirpPerformance] = []
+    
+    // MARK: - CloudKit definitions
+    
+>>>>>>> origin/adding-store-to-mvc
     let container: CKContainer = CKContainer.default()
     let publicDB: CKDatabase = CKContainer.default().publicCloudDatabase
     let privateDB: CKDatabase = CKContainer.default().privateCloudDatabase
     var delegate : ModelDelegate?
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> origin/adding-store-to-mvc
     /// Loads saved performances and then updates from cloud backend.
     override init() {
         super.init()
@@ -48,20 +71,32 @@ class PerformanceStore: NSObject {
         }
         fetchWorldJamsFromCloud() // get jams from CloudKit
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> origin/adding-store-to-mvc
     /// Load Local Performances from file.
     func loadPerformances() -> [ChirpPerformance]? {
         let loadedPerformances =  NSKeyedUnarchiver.unarchiveObject(withFile: ChirpPerformance.ArchiveURL.path) as? [ChirpPerformance]
         return loadedPerformances
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> origin/adding-store-to-mvc
     /// Add a new performance to the list and then save the list.
     func addNew(performance : ChirpPerformance) {
         self.storedPerformances.insert(performance, at: 0)//
         self.savePerformances()
         self.upload(performance: performance)
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> origin/adding-store-to-mvc
     /// Save recorded performances to file.
     func savePerformances() {
         NSLog("AD: Going to save %d performances", self.storedPerformances.count)
@@ -72,13 +107,21 @@ class PerformanceStore: NSObject {
             print("AD: successfully saved", self.storedPerformances.count, "performances")
         }
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> origin/adding-store-to-mvc
     /// Returns a temporary file path for png images
     func tempURL() -> URL {
         let filename = ProcessInfo.processInfo.globallyUniqueString + ".png"
         return URL.init(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(filename)
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> origin/adding-store-to-mvc
     /// Refresh list of world jams from CloudKit and then update in world jam table view.
     func fetchWorldJamsFromCloud() {
         print("ADCK: Attempting to fetch World Jams from Cloud.")
@@ -95,7 +138,11 @@ class PerformanceStore: NSObject {
             let perf = self.performanceFrom(record: record)
             fetchedPerformances.append(perf)
         } // Appends fetched records to the array of Performances
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> origin/adding-store-to-mvc
         operation.queryCompletionBlock = { [unowned self] (cursor, error) in
             // Handle possible error.
             if let error = error {
@@ -114,11 +161,19 @@ class PerformanceStore: NSObject {
                 self.delegate?.modelUpdated()
             }
         }
+<<<<<<< HEAD
 
         publicDB.add(operation) // perform the operation.
         // TODO: Define a more sensible way of downloading the performances
     }
 
+=======
+        
+        publicDB.add(operation) // perform the operation.
+        // TODO: Define a more sensible way of downloading the performances
+    }
+    
+>>>>>>> origin/adding-store-to-mvc
     /// Add a list of performances into the currently stored performances.
     func addToStored(performances: [ChirpPerformance]) {
         print("ADCK: Adding performances to stored list")
@@ -134,7 +189,11 @@ class PerformanceStore: NSObject {
         print("ADCK: ", countPerfsAdded, " perfs added to stored world jams.")
         self.sortStoredPerformances()
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> origin/adding-store-to-mvc
     /// Retrieves a ChirpPerformance from a given title string.
     func fetchPerformanceFrom(title: String) -> ChirpPerformance? {
         var perf: ChirpPerformance?
@@ -145,14 +204,22 @@ class PerformanceStore: NSObject {
         }
         return perf
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> origin/adding-store-to-mvc
     /// Sorts the stored performances by date
     func sortStoredPerformances() {
         self.storedPerformances.sort(by: {(rec1: ChirpPerformance, rec2: ChirpPerformance) -> Bool in
             rec1.date > rec2.date
         })
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> origin/adding-store-to-mvc
     /// Returns a ChirpPerformance from a CKRecord of a performance
     func performanceFrom(record: CKRecord) -> ChirpPerformance {
         // TODO: Need some kind of protection against failure here.
@@ -170,7 +237,11 @@ class PerformanceStore: NSObject {
                                     colour: colour, replyto: replyto)!
         return perf
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> origin/adding-store-to-mvc
     /// Upload a saved jam to CloudKit
     func upload(performance : ChirpPerformance) {
         // Setup the record
@@ -184,7 +255,11 @@ class PerformanceStore: NSObject {
         performanceRecord[PerfCloudKeys.replyto] = performance.replyto as CKRecordValue
         performanceRecord[PerfCloudKeys.location] = performance.location!
         performanceRecord[PerfCloudKeys.colour] = performance.colourString() as CKRecordValue
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> origin/adding-store-to-mvc
         do { // Saving image data
             let imageURL = tempURL()
             let imageData = UIImagePNGRepresentation(performance.image)!
@@ -195,7 +270,11 @@ class PerformanceStore: NSObject {
         catch {
             print("ADCK: Error writing image data:", error)
         }
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> origin/adding-store-to-mvc
         // Upload to the container
         publicDB.save(performanceRecord, completionHandler: {(record, error) -> Void in
             if (error != nil) {
