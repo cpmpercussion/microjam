@@ -75,13 +75,19 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
         var temp = performance
         var images = [performance.image]
         
+        // TODO: Maybe better to use dispatch async on some of these reply loading operations so that scrolling in the table view is snappy.
+        
         // Get the image from every reply
         while temp.replyto != "" {
             if let replyPerf = appDelegate.fetchPerformanceFrom(title: temp.replyto) {
                 cell.context.text = creditString(originalPerformer: replyPerf.performer)
                 images.append(replyPerf.image)
                 temp = replyPerf
+            } else {
+                break
             }
+            // FIXME: This goes into an infinite loop under some circumstances.
+            print("loaded a reply:")
         }
         
         // Display all the images as one image

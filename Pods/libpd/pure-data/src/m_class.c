@@ -218,7 +218,19 @@ EXTERN void pdinstance_free(t_pdinstance *x)
         while ((s = x->pd_symhash[i]))
         {
             x->pd_symhash[i] = s->s_next;
-            freebytes(s, sizeof(*s));
+            if(s != &x->pd_s_pointer &&
+               s != &x->pd_s_float &&
+               s != &x->pd_s_symbol &&
+               s != &x->pd_s_bang &&
+               s != &x->pd_s_list &&
+               s != &x->pd_s_anything &&
+               s != &x->pd_s_signal &&
+               s != &x->pd_s__N &&
+               s != &x->pd_s__X &&
+               s != &x->pd_s_x &&
+               s != &x->pd_s_y &&
+               s != &x->pd_s_)
+                freebytes(s, sizeof(*s));
         }
     }
     freebytes(x->pd_symhash, SYMTABHASHSIZE * sizeof (*x->pd_symhash));
@@ -669,7 +681,6 @@ void class_set_extern_dir(t_symbol *s)
 
 char *class_gethelpdir(t_class *c)
 {
-    post("externdir %x, name %s", c->c_externdir, c->c_externdir->s_name);
     return (c->c_externdir->s_name);
 }
 
