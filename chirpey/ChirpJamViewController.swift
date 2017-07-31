@@ -34,7 +34,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     @IBOutlet weak var jamButton: UIButton!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var performerLabel: UILabel!
-    @IBOutlet weak var referenceView: ChirpView!
+    @IBOutlet weak var chirpViewContainer: UIView!
     @IBOutlet weak var recordingProgress: UIProgressView!
     @IBOutlet weak var savePerformanceButton: UIBarButtonItem!
     @IBOutlet weak var instrumentButton: UIButton!
@@ -91,8 +91,8 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         
         if !self.performanceViews.isEmpty {
             for view in self.performanceViews {
-                view.frame = self.referenceView.frame
-                self.add(chirpView: view)
+                view.frame = self.chirpViewContainer.bounds
+                self.chirpViewContainer.addSubview(view)
             }
             
             self.replyto = self.performanceViews.first?.performance?.title()
@@ -103,7 +103,6 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             self.newRecordView()
         }
         
-        self.referenceView!.isUserInteractionEnabled = false
         
         // Soundscheme Dropdown initialisation.
         // FIXME: make sure dropdown is working.
@@ -140,29 +139,18 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     func newRecordView() {
         
         if let recordView = self.recordView {
-            // Creating a new ChirpView
-            let newView = ChirpView(frame: self.referenceView!.frame)
-            newView.isUserInteractionEnabled = true
-            newView.backgroundColor = UIColor.clear
-            newView.openPdFile()
-            
             // Removing current ChirpView
             recordView.removeFromSuperview()
-            
-            // Adding new view to screen
-            self.recordView = newView
-            self.referenceView.addSubview(newView)
-            //self.add(chirpView: newView)
-        
-        } else {
-            self.recordView = ChirpView(frame: self.referenceView!.frame)
-            self.recordView!.isUserInteractionEnabled = true
-            self.recordView!.backgroundColor = UIColor.clear
-            self.recordView!.openPdFile()
-            
-            self.referenceView.addSubview(self.recordView!)
-            //self.add(chirpView: self.recordView!)
         }
+        
+        // Creating a new ChirpView
+        let newView = ChirpView(frame: self.chirpViewContainer!.bounds)
+        newView.isUserInteractionEnabled = true
+        newView.backgroundColor = UIColor.clear
+        newView.openPdFile()
+        
+        self.recordView = newView
+        self.chirpViewContainer.addSubview(newView)
         
         self.newPerformance = true
         self.jamming = false
@@ -299,63 +287,6 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
                 self.playButtonPressed(self.playButton) // start playing if not already playing.
             }
         }
-    }
-    
-    // Adds the chirpView to superview, and adds constraints
-    func add(chirpView : ChirpView) {
-        
-        self.view.addSubview(chirpView)
-        let horizontalConstraint = NSLayoutConstraint(item: chirpView,
-                                                      attribute: NSLayoutAttribute.centerX,
-                                                      relatedBy: NSLayoutRelation.equal,
-                                                      toItem: referenceView,
-                                                      attribute: NSLayoutAttribute.centerX,
-                                                      multiplier: 1,
-                                                      constant: 0)
-        let verticalConstraint = NSLayoutConstraint(item: chirpView,
-                                                    attribute: NSLayoutAttribute.centerY,
-                                                    relatedBy: NSLayoutRelation.equal,
-                                                    toItem: referenceView,
-                                                    attribute: NSLayoutAttribute.centerY,
-                                                    multiplier: 1,
-                                                    constant: 0)
-        let leftConstraint = NSLayoutConstraint(item: chirpView,
-                                                attribute: NSLayoutAttribute.left,
-                                                relatedBy: NSLayoutRelation.equal,
-                                                toItem: referenceView,
-                                                attribute: NSLayoutAttribute.left,
-                                                multiplier: 1,
-                                                constant: 0)
-        let rightConstraint = NSLayoutConstraint(item: chirpView,
-                                                 attribute: NSLayoutAttribute.right,
-                                                 relatedBy: NSLayoutRelation.equal,
-                                                 toItem: referenceView,
-                                                 attribute: NSLayoutAttribute.right,
-                                                 multiplier: 1,
-                                                 constant: 0)
-        let topConstraint = NSLayoutConstraint(item: chirpView,
-                                               attribute: NSLayoutAttribute.top,
-                                               relatedBy: NSLayoutRelation.equal,
-                                               toItem: referenceView,
-                                               attribute: NSLayoutAttribute.top,
-                                               multiplier: 1,
-                                               constant: 0)
-        let bottomConstraint = NSLayoutConstraint(item: chirpView,
-                                                  attribute: NSLayoutAttribute.bottom,
-                                                  relatedBy: NSLayoutRelation.equal,
-                                                  toItem: referenceView,
-                                                  attribute: NSLayoutAttribute.bottom,
-                                                  multiplier: 1,
-                                                  constant: 0)
-        let chirpHoriz = NSLayoutConstraint(item: referenceView,
-                                            attribute: NSLayoutAttribute.centerX,
-                                            relatedBy: NSLayoutRelation.equal,
-                                            toItem: self.view,
-                                            attribute: NSLayoutAttribute.centerX,
-                                            multiplier: 1,
-                                            constant: 0)
-        self.view.addConstraints([horizontalConstraint,verticalConstraint,chirpHoriz,leftConstraint,rightConstraint,topConstraint,bottomConstraint])
-        chirpView.contentMode = .scaleToFill
     }
     
     
@@ -572,11 +503,36 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         // start timer if not recording
         if let recordView = self.recordView {
             let p = touches.first?.location(in: recordView);
-            if (recordView.bounds.contains(p!) && self.state == ChirpJamModes.new) {
+            if (recordView.bounds.contains(p!)) {
                 print("JAMVC: Starting a Recording")
-                self.startRecording()
+                
+                if (!recordView.started) {
+                    recordView.startTime = Date()
+                    recordView.started = true
+                    self.startRecording()
+                }
+                
+                recordView.swiped = false
+                recordView.lastPoint = p!
+                let size = touches.first?.majorRadius
+                recordView.drawDot(at: recordView.lastPoint!, withColour: recordView.recordingColour ?? recordView.defaultRecordingColour)
+                recordView.makeSound(at: recordView.lastPoint!, withRadius: size!, thatWasMoving: false)
+                recordView.recordTouch(at: recordView.lastPoint!, withRadius: size!, thatWasMoving:false)
             }
         }
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let recordView = self.recordView {
+            recordView.swiped = true
+            let currentPoint = touches.first?.location(in:recordView)
+            recordView.drawLine(from:recordView.lastPoint!, to:currentPoint!, withColour:recordView.recordingColour ?? recordView.defaultRecordingColour)
+            recordView.lastPoint = currentPoint
+            let size = touches.first?.majorRadius
+            recordView.makeSound(at: currentPoint!, withRadius: size!, thatWasMoving: true)
+            recordView.recordTouch(at: currentPoint!, withRadius: size!, thatWasMoving: true)
+        }
+        
     }
     
     /// Memory warning.

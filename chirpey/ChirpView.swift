@@ -108,23 +108,23 @@ class ChirpView: UIImageView {
     }
     
     //MARK: - touch interaction
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.superview?.touchesBegan(touches, with: event)
-        if (!self.started) {
-            self.startTime = Date()
-            self.started = true
-        }
-        self.swiped = false
-        self.lastPoint = touches.first?.location(in: self)
-        let size = touches.first?.majorRadius
-        self.drawDot(at: self.lastPoint!, withColour: self.recordingColour ?? self.defaultRecordingColour)
-        self.makeSound(at: self.lastPoint!, withRadius: size!, thatWasMoving: false)
-        self.recordTouch(at: self.lastPoint!, withRadius: size!, thatWasMoving:false)
-    }
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        //self.superview?.touchesBegan(touches, with: event)
+//        if (!self.started) {
+//            self.startTime = Date()
+//            self.started = true
+//        }
+//        self.swiped = false
+//        self.lastPoint = touches.first?.location(in: self.superview!)
+//        let size = touches.first?.majorRadius
+//        self.drawDot(at: self.lastPoint!, withColour: self.recordingColour ?? self.defaultRecordingColour)
+//        self.makeSound(at: self.lastPoint!, withRadius: size!, thatWasMoving: false)
+//        self.recordTouch(at: self.lastPoint!, withRadius: size!, thatWasMoving:false)
+//    }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.swiped = true
-        let currentPoint = touches.first?.location(in:self)
+        let currentPoint = touches.first?.location(in:self.superview!)
         self.drawLine(from:self.lastPoint!, to:currentPoint!, withColour:self.recordingColour ?? self.defaultRecordingColour)
         self.lastPoint = currentPoint
         let size = touches.first?.majorRadius
