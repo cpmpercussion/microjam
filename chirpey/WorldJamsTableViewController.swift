@@ -72,10 +72,8 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
         cell.previewImage.image = performance.image
         cell.context.text = nonCreditString()
         
-        var temp = performance
-        var images = [performance.image]
-        
-        // TODO: Maybe better to use dispatch async on some of these reply loading operations so that scrolling in the table view is snappy.
+        var temp = performance // used to store replies as we fetch them.
+        var images = [performance.image] // the stack of reply images.
         
         // Get the image from every reply
         while temp.replyto != "" {
@@ -84,13 +82,14 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
                 images.append(replyPerf.image)
                 temp = replyPerf
             } else {
+                // break if the replyPerf can't be found.
+                // TODO: in this case, the performance should be fetched from the cloud. but there isn't functionality in the store for this yet.
                 break
             }
-            // FIXME: This goes into an infinite loop under some circumstances.
-            print("loaded a reply:")
+            print("WJTVC: loaded a reply.")
         }
         
-        // Display all the images as one image
+        // Sum all the images into one and display
         cell.previewImage.image = self.createImageFrom(images: images)
         return cell
     }
@@ -110,12 +109,13 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
         return nil
     }
     
-    /// credit reply string
+    /// Loads a string crediting the original performer
     func creditString(originalPerformer: String) -> String {
         let output = "replied to " + originalPerformer
         return output
     }
     
+    /// Loads a credit string for a solo performance
     func nonCreditString() -> String {
         let ind : Int = Int(arc4random_uniform(UInt32(PerformanceLabels.solo.count)))
         return PerformanceLabels.solo[ind]
