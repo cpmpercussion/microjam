@@ -101,7 +101,6 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             self.newRecordView()
         }
         
-        
         // Soundscheme Dropdown initialisation.
         // FIXME: make sure dropdown is working.
         soundSchemeDropDown.anchorView = self.instrumentButton // anchor dropdown to intrument button
@@ -379,12 +378,9 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             }
             if let recordView = self.recordView {
                 recordView.image = recordView.performance?.image
-                recordView.isUserInteractionEnabled = false
             }
             self.playButton.isEnabled = true
             self.jamButton.isEnabled = true
-            
-            self.chirpViewContainer.isUserInteractionEnabled = false
             
             print("JAMVC: opening Pd file for loaded performance.")
             //self.chirpeySquare.openPdFile(withName: loadedPerformance.instrument) // open Pd File.
@@ -419,6 +415,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     /// Load a ChirpPerformance for playback and reaction (most processing is done in updateUI).
     func load(performance: ChirpPerformance) {
         self.state = ChirpJamModes.loaded
+        self.recordView?.isUserInteractionEnabled = false
         self.updateUI()
     }
     
@@ -506,36 +503,11 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         // start timer if not recording
         if let recordView = self.recordView {
             let p = touches.first?.location(in: recordView);
-            if (recordView.bounds.contains(p!)) {
+            if (recordView.bounds.contains(p!) && self.state == ChirpJamModes.new) {
                 print("JAMVC: Starting a Recording")
-                
-                if (!recordView.started) {
-                    recordView.startTime = Date()
-                    recordView.started = true
-                    self.startRecording()
-                }
-                
-                recordView.swiped = false
-                recordView.lastPoint = p!
-                let size = touches.first?.majorRadius
-                recordView.drawDot(at: recordView.lastPoint!, withColour: recordView.recordingColour ?? recordView.defaultRecordingColour)
-                recordView.makeSound(at: recordView.lastPoint!, withRadius: size!, thatWasMoving: false)
-                recordView.recordTouch(at: recordView.lastPoint!, withRadius: size!, thatWasMoving:false)
+                self.startRecording()
             }
         }
-    }
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let recordView = self.recordView {
-            recordView.swiped = true
-            let currentPoint = touches.first?.location(in:recordView)
-            recordView.drawLine(from:recordView.lastPoint!, to:currentPoint!, withColour:recordView.recordingColour ?? recordView.defaultRecordingColour)
-            recordView.lastPoint = currentPoint
-            let size = touches.first?.majorRadius
-            recordView.makeSound(at: currentPoint!, withRadius: size!, thatWasMoving: true)
-            recordView.recordTouch(at: currentPoint!, withRadius: size!, thatWasMoving: true)
-        }
-        
     }
     
     /// Memory warning.
