@@ -151,7 +151,8 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             
             // Adding new view to screen
             self.recordView = newView
-            self.add(chirpView: newView)
+            self.referenceView.addSubview(newView)
+            //self.add(chirpView: newView)
         
         } else {
             self.recordView = ChirpView(frame: self.referenceView!.frame)
@@ -159,7 +160,8 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             self.recordView!.backgroundColor = UIColor.clear
             self.recordView!.openPdFile()
             
-            self.add(chirpView: self.recordView!)
+            self.referenceView.addSubview(self.recordView!)
+            //self.add(chirpView: self.recordView!)
         }
         
         self.newPerformance = true
