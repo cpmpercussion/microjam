@@ -71,7 +71,6 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        updateUI()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -81,7 +80,6 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         if (tabBarItem.title == TabBarItemTitles.jamTab) { // onlyrun this stuff in the jam tab
             //self.recordView.openPdFile() // Make sure the correct Pd File is open
         }
-        self.updateUI()
     }
     
     override func viewDidLoad() {
@@ -212,6 +210,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         for view in self.performanceViews {
             if let performance = view.performance {
                 performance.playback(inView: view)
+                view.playing = true
             }
         }
         
@@ -220,6 +219,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             if let recordView = self.recordView {
                 if let performance = recordView.performance {
                     performance.playback(inView: self.recordView!)
+                    recordView.playing = true
                 }
             }
         }
@@ -367,7 +367,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
                 print("JAMVC: Not a new performance, so disabling the save button.")
             } else {
                 self.navigationItem.rightBarButtonItem?.isEnabled = true
-                self.replyButton.isEnabled = false // reply button enabled in loaded jams.
+                self.replyButton.isEnabled = false // reply button disabled in loaded jams.
 
             }
             self.statusLabel.text = "Loaded: "
@@ -379,9 +379,13 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             }
             if let recordView = self.recordView {
                 recordView.image = recordView.performance?.image
+                recordView.isUserInteractionEnabled = false
             }
             self.playButton.isEnabled = true
             self.jamButton.isEnabled = true
+            
+            self.chirpViewContainer.isUserInteractionEnabled = false
+            
             print("JAMVC: opening Pd file for loaded performance.")
             //self.chirpeySquare.openPdFile(withName: loadedPerformance.instrument) // open Pd File.
             
@@ -415,7 +419,6 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     /// Load a ChirpPerformance for playback and reaction (most processing is done in updateUI).
     func load(performance: ChirpPerformance) {
         self.state = ChirpJamModes.loaded
-        self.recordView!.isUserInteractionEnabled = false
         self.updateUI()
     }
     

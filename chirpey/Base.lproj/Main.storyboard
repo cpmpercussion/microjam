@@ -108,9 +108,18 @@
                         </subviews>
                         <color key="backgroundColor" red="0.97367788460000004" green="0.97367788460000004" blue="0.97367788460000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="zD1-ua-tDc" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="16" id="IiA-37-WR0"/>
-                            <constraint firstItem="zD1-ua-tDc" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="WPh-Pv-i5A"/>
-                            <constraint firstAttribute="trailing" secondItem="zD1-ua-tDc" secondAttribute="trailing" constant="16" id="nOG-zW-wvI"/>
+                            <constraint firstItem="zD1-ua-tDc" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="16" id="IiA-37-WR0">
+                                <variation key="heightClass=regular-widthClass=compact" constant="16"/>
+                                <variation key="heightClass=regular-widthClass=regular" constant="128"/>
+                            </constraint>
+                            <constraint firstItem="zD1-ua-tDc" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="WPh-Pv-i5A">
+                                <variation key="heightClass=regular-widthClass=compact" constant="8"/>
+                                <variation key="heightClass=regular-widthClass=regular" constant="64"/>
+                            </constraint>
+                            <constraint firstAttribute="trailing" secondItem="zD1-ua-tDc" secondAttribute="trailing" constant="16" id="nOG-zW-wvI">
+                                <variation key="heightClass=regular-widthClass=compact" constant="16"/>
+                                <variation key="heightClass=regular-widthClass=regular" constant="128"/>
+                            </constraint>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="New Performance" id="s03-xk-IIg">
@@ -152,10 +161,10 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="settingstablecell" id="Cvd-cG-I3p">
-                                <rect key="frame" x="0.0" y="56" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Cvd-cG-I3p" id="nxe-Y1-Sgh">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -188,7 +197,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="365"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gcn-gn-WZ5" id="sXd-HP-H6B">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="365"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="364.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultRecordingImage" translatesAutoresizingMaskIntoConstraints="NO" id="C1Y-wG-D7P">
