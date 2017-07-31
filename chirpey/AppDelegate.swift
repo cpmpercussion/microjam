@@ -96,7 +96,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
     
     func applicationWillTerminate(_ application: UIApplication) {
         print("AD: Application will terminate")
-        performanceStore.savePerformances()
+        performanceStore!.savePerformances()
     }
 
 }

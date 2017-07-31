@@ -22,8 +22,8 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         self.tableView.rowHeight = 365
-        self.appDelegate.delegate = self
-        self.refreshControl?.addTarget(appDelegate, action: #selector(appDelegate.fetchWorldJamsFromCloud), for: UIControlEvents.valueChanged)
+        self.appDelegate.performanceStore!.delegate = self
+        self.refreshControl?.addTarget(appDelegate, action: #selector(appDelegate.performanceStore!.fetchWorldJamsFromCloud), for: UIControlEvents.valueChanged)
     }
 
     override func didReceiveMemoryWarning() {
@@ -77,7 +77,7 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
         
         // Get the image from every reply
         while temp.replyto != "" {
-            if let replyPerf = appDelegate.fetchPerformanceFrom(title: temp.replyto) {
+            if let replyPerf = appDelegate.performanceStore?.fetchPerformanceFrom(title: temp.replyto) {
                 cell.context.text = creditString(originalPerformer: replyPerf.performer)
                 images.append(replyPerf.image)
                 temp = replyPerf
@@ -150,9 +150,7 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
                 jamDetailViewController.newViewWith(performance: selectedJam)
                 
                 while selectedJam.replyto != "" {
-                    
-                    if let reply = appDelegate.fetchPerformanceFrom(title: selectedJam.replyto) {
-                        
+                    if let reply = appDelegate.performanceStore?.fetchPerformanceFrom(title: selectedJam.replyto) {
                         jamDetailViewController.newViewWith(performance: reply)
                         selectedJam = reply
                     }
@@ -185,7 +183,7 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
     /// Adds a new ChirpPerformance to the top of the list and saves it in the data source.
     func addNew(performance: ChirpPerformance) {
         let newIndexPath = NSIndexPath(row: 0, section: 0)
-        appDelegate.addNew(performance: performance)
+        appDelegate.performanceStore!.addNew(performance: performance)
         self.tableView.insertRows(at: [newIndexPath as IndexPath], with: .top)
     }
     
