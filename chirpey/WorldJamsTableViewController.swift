@@ -83,9 +83,11 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
                 cell.context.text = creditString(originalPerformer: replyPerf.performer)
                 images.append(replyPerf.image)
                 temp = replyPerf
+            } else {
+                break
             }
             // FIXME: This goes into an infinite loop under some circumstances.
-            print("loaded a reply")
+            print("loaded a reply:")
         }
         
         // Display all the images as one image
