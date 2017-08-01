@@ -42,6 +42,8 @@ class PerformanceStore: NSObject {
     /// Loads saved performances and then updates from cloud backend.
     override init() {
         super.init()
+        print("Store: Initialising")
+        print("Store: Loading saved performances...")
         if let savedPerformances = loadPerformances() {
             storedPerformances += savedPerformances
             sortStoredPerformances()

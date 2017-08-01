@@ -11,7 +11,7 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
     var window: UIWindow?
-    var performanceStore: PerformanceStore?
+    let performanceStore = PerformanceStore()
     var storedPerformances : [ChirpPerformance] = [] // FIXME delete these
     static let defaultSettings : [String : Any] = [
         SettingsKeys.performerKey:"performer",
@@ -49,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         // Register defaults
         UserDefaults.standard.register(defaults: AppDelegate.defaultSettings)
-        performanceStore = PerformanceStore() // Init the PerformanceStore
+//        performanceStore = PerformanceStore() // Init the PerformanceStore
         self.startAudioEngine() // start Pd
         return true
     }
@@ -96,7 +96,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
     
     func applicationWillTerminate(_ application: UIApplication) {
         print("AD: Application will terminate")
-        performanceStore!.savePerformances()
+        performanceStore.savePerformances()
     }
 
 }

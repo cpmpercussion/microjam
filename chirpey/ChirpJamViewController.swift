@@ -54,7 +54,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
                 if let recordView = self.recordView {
                     if let performance = recordView.performance {
                         // Adding performance to clouad
-                        appDelegate.performanceStore!.addNew(performance: performance)
+                        appDelegate.performanceStore.addNew(performance: performance)
                         // Reset view controller
                         self.newRecordView()
                         
