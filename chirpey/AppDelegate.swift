@@ -45,11 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
     }
     
     // MARK: Application Lifecycle
-<<<<<<< HEAD
-
-=======
     
->>>>>>> origin/adding-store-to-mvc
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         // Register defaults
         UserDefaults.standard.register(defaults: AppDelegate.defaultSettings)
@@ -100,11 +96,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
     
     func applicationWillTerminate(_ application: UIApplication) {
         print("AD: Application will terminate")
-<<<<<<< HEAD
         performanceStore!.savePerformances()
-=======
-        performanceStore.savePerformances()
->>>>>>> origin/adding-store-to-mvc
     }
 
 }
