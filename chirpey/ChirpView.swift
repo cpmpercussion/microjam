@@ -115,7 +115,7 @@ class ChirpView: UIImageView {
             self.started = true
         }
         self.swiped = false
-        self.lastPoint = touches.first?.location(in: self)
+        self.lastPoint = touches.first?.location(in: self.superview!)
         let size = touches.first?.majorRadius
         self.drawDot(at: self.lastPoint!, withColour: self.recordingColour ?? self.defaultRecordingColour)
         self.makeSound(at: self.lastPoint!, withRadius: size!, thatWasMoving: false)
@@ -123,13 +123,15 @@ class ChirpView: UIImageView {
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.swiped = true
-        let currentPoint = touches.first?.location(in:self)
-        self.drawLine(from:self.lastPoint!, to:currentPoint!, withColour:self.recordingColour ?? self.defaultRecordingColour)
-        self.lastPoint = currentPoint
-        let size = touches.first?.majorRadius
-        self.makeSound(at: currentPoint!, withRadius: size!, thatWasMoving: true)
-        self.recordTouch(at: currentPoint!, withRadius: size!, thatWasMoving: true)
+        if self.recording {
+            self.swiped = true
+            let currentPoint = touches.first?.location(in:self.superview!)
+            self.drawLine(from:self.lastPoint!, to:currentPoint!, withColour:self.recordingColour ?? self.defaultRecordingColour)
+            self.lastPoint = currentPoint
+            let size = touches.first?.majorRadius
+            self.makeSound(at: currentPoint!, withRadius: size!, thatWasMoving: true)
+            self.recordTouch(at: currentPoint!, withRadius: size!, thatWasMoving: true)
+        }
     }
     
     /// Given a point in the UIImage, sends a touch point to Pd to process for sound.

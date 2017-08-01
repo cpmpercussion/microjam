@@ -34,7 +34,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     @IBOutlet weak var jamButton: UIButton!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var performerLabel: UILabel!
-    @IBOutlet weak var referenceView: ChirpView!
+    @IBOutlet weak var chirpViewContainer: UIView!
     @IBOutlet weak var recordingProgress: UIProgressView!
     @IBOutlet weak var savePerformanceButton: UIBarButtonItem!
     @IBOutlet weak var instrumentButton: UIButton!
@@ -71,7 +71,6 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        updateUI()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -81,18 +80,12 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         if (tabBarItem.title == TabBarItemTitles.jamTab) { // onlyrun this stuff in the jam tab
             //self.recordView.openPdFile() // Make sure the correct Pd File is open
         }
-        self.updateUI()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        print("JAMVC: viewDidLoad")
-        self.recordingProgress!.progress = 0.0 // need to initialise the recording progress at zero.
         
         if !self.performanceViews.isEmpty {
             for view in self.performanceViews {
-                view.frame = self.referenceView.frame
-                self.add(chirpView: view)
+                view.frame = self.chirpViewContainer.bounds
+                //view.contentMode = .scaleToFill
+                self.chirpViewContainer.addSubview(view)
             }
             
             self.replyto = self.performanceViews.first?.performance?.title()
@@ -102,8 +95,12 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         } else {
             self.newRecordView()
         }
-        
-        self.referenceView!.isUserInteractionEnabled = false
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        print("JAMVC: viewDidLoad")
+        self.recordingProgress!.progress = 0.0 // need to initialise the recording progress at zero.
         
         // Soundscheme Dropdown initialisation.
         // FIXME: make sure dropdown is working.
@@ -140,27 +137,18 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     func newRecordView() {
         
         if let recordView = self.recordView {
-            // Creating a new ChirpView
-            let newView = ChirpView(frame: self.referenceView!.frame)
-            newView.isUserInteractionEnabled = true
-            newView.backgroundColor = UIColor.clear
-            newView.openPdFile()
-            
             // Removing current ChirpView
             recordView.removeFromSuperview()
-            
-            // Adding new view to screen
-            self.recordView = newView
-            self.add(chirpView: newView)
-        
-        } else {
-            self.recordView = ChirpView(frame: self.referenceView!.frame)
-            self.recordView!.isUserInteractionEnabled = true
-            self.recordView!.backgroundColor = UIColor.clear
-            self.recordView!.openPdFile()
-            
-            self.add(chirpView: self.recordView!)
         }
+        
+        // Creating a new ChirpView
+        let newView = ChirpView(frame: self.chirpViewContainer!.bounds)
+        newView.isUserInteractionEnabled = true
+        newView.backgroundColor = UIColor.clear
+        newView.openPdFile()
+        
+        self.recordView = newView
+        self.chirpViewContainer.addSubview(newView)
         
         self.newPerformance = true
         self.jamming = false
@@ -222,6 +210,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         for view in self.performanceViews {
             if let performance = view.performance {
                 performance.playback(inView: view)
+                view.playing = true
             }
         }
         
@@ -230,6 +219,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             if let recordView = self.recordView {
                 if let performance = recordView.performance {
                     performance.playback(inView: self.recordView!)
+                    recordView.playing = true
                 }
             }
         }
@@ -297,63 +287,6 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
                 self.playButtonPressed(self.playButton) // start playing if not already playing.
             }
         }
-    }
-    
-    // Adds the chirpView to superview, and adds constraints
-    func add(chirpView : ChirpView) {
-        
-        self.view.addSubview(chirpView)
-        let horizontalConstraint = NSLayoutConstraint(item: chirpView,
-                                                      attribute: NSLayoutAttribute.centerX,
-                                                      relatedBy: NSLayoutRelation.equal,
-                                                      toItem: referenceView,
-                                                      attribute: NSLayoutAttribute.centerX,
-                                                      multiplier: 1,
-                                                      constant: 0)
-        let verticalConstraint = NSLayoutConstraint(item: chirpView,
-                                                    attribute: NSLayoutAttribute.centerY,
-                                                    relatedBy: NSLayoutRelation.equal,
-                                                    toItem: referenceView,
-                                                    attribute: NSLayoutAttribute.centerY,
-                                                    multiplier: 1,
-                                                    constant: 0)
-        let leftConstraint = NSLayoutConstraint(item: chirpView,
-                                                attribute: NSLayoutAttribute.left,
-                                                relatedBy: NSLayoutRelation.equal,
-                                                toItem: referenceView,
-                                                attribute: NSLayoutAttribute.left,
-                                                multiplier: 1,
-                                                constant: 0)
-        let rightConstraint = NSLayoutConstraint(item: chirpView,
-                                                 attribute: NSLayoutAttribute.right,
-                                                 relatedBy: NSLayoutRelation.equal,
-                                                 toItem: referenceView,
-                                                 attribute: NSLayoutAttribute.right,
-                                                 multiplier: 1,
-                                                 constant: 0)
-        let topConstraint = NSLayoutConstraint(item: chirpView,
-                                               attribute: NSLayoutAttribute.top,
-                                               relatedBy: NSLayoutRelation.equal,
-                                               toItem: referenceView,
-                                               attribute: NSLayoutAttribute.top,
-                                               multiplier: 1,
-                                               constant: 0)
-        let bottomConstraint = NSLayoutConstraint(item: chirpView,
-                                                  attribute: NSLayoutAttribute.bottom,
-                                                  relatedBy: NSLayoutRelation.equal,
-                                                  toItem: referenceView,
-                                                  attribute: NSLayoutAttribute.bottom,
-                                                  multiplier: 1,
-                                                  constant: 0)
-        let chirpHoriz = NSLayoutConstraint(item: referenceView,
-                                            attribute: NSLayoutAttribute.centerX,
-                                            relatedBy: NSLayoutRelation.equal,
-                                            toItem: self.view,
-                                            attribute: NSLayoutAttribute.centerX,
-                                            multiplier: 1,
-                                            constant: 0)
-        self.view.addConstraints([horizontalConstraint,verticalConstraint,chirpHoriz,leftConstraint,rightConstraint,topConstraint,bottomConstraint])
-        chirpView.contentMode = .scaleToFill
     }
     
     
@@ -434,7 +367,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
                 print("JAMVC: Not a new performance, so disabling the save button.")
             } else {
                 self.navigationItem.rightBarButtonItem?.isEnabled = true
-                self.replyButton.isEnabled = false // reply button enabled in loaded jams.
+                self.replyButton.isEnabled = false // reply button disabled in loaded jams.
 
             }
             self.statusLabel.text = "Loaded: "
@@ -449,6 +382,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             }
             self.playButton.isEnabled = true
             self.jamButton.isEnabled = true
+            
             print("JAMVC: opening Pd file for loaded performance.")
             //self.chirpeySquare.openPdFile(withName: loadedPerformance.instrument) // open Pd File.
             
@@ -482,7 +416,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     /// Load a ChirpPerformance for playback and reaction (most processing is done in updateUI).
     func load(performance: ChirpPerformance) {
         self.state = ChirpJamModes.loaded
-        self.recordView!.isUserInteractionEnabled = false
+        self.recordView?.isUserInteractionEnabled = false
         self.updateUI()
     }
     
