@@ -158,7 +158,7 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
                 while selectedJam.replyto != "" { // load up all replies.
                     // FIXME: fetching replies fails if they have not been downloaded from cloud.
                     if let reply = appDelegate.fetchPerformanceFrom(title: selectedJam.replyto) {
-                        jamDetailViewController.newViewWith(performance: reply)
+                        jamDetailViewController.newViewWith(performance: reply, withFrame: nil)
                         selectedJam = reply
                         print("WJTVC: cued a reply")
                     } else {

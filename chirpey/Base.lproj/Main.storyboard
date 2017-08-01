@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="z8b-cn-TNb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="z8b-cn-TNb">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -29,19 +29,30 @@
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="performer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Mx-bs-Bwy">
-                                                <rect key="frame" x="0.0" y="0.0" width="165" height="44"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="119.5" height="44"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="right" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PVn-2h-cdI">
-                                                <rect key="frame" x="165" y="0.0" width="178" height="44"/>
+                                            <button opaque="NO" contentMode="right" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PVn-2h-cdI">
+                                                <rect key="frame" x="119.5" y="0.0" width="94.5" height="44"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <state key="normal" title="add jam">
+                                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="addJam:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Zna-bh-aMV"/>
+                                                    <action selector="soundSchemeTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8og-Nf-5lO"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="right" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZY3-BC-5OF">
+                                                <rect key="frame" x="214" y="0.0" width="129" height="44"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <state key="normal" title="instrument">
                                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="soundSchemeTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8og-Nf-5lO"/>
+                                                    <action selector="soundSchemeTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DJy-q9-slM"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -121,11 +132,6 @@
                                 <variation key="heightClass=regular-widthClass=regular" constant="128"/>
                             </constraint>
                         </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="AGz-iD-Uae"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="New Performance" id="s03-xk-IIg">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Y3a-G9-SuM">
@@ -140,8 +146,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addJamButton" destination="PVn-2h-cdI" id="bdT-cP-vq8"/>
                         <outlet property="chirpViewContainer" destination="xQz-CD-1rT" id="XZB-k8-oGW"/>
-                        <outlet property="instrumentButton" destination="PVn-2h-cdI" id="Csn-nR-9Zq"/>
+                        <outlet property="instrumentButton" destination="ZY3-BC-5OF" id="unF-Xi-IZM"/>
                         <outlet property="jamButton" destination="HfI-q6-7dd" id="rub-hB-VgX"/>
                         <outlet property="performerLabel" destination="1Mx-bs-Bwy" id="E9T-t5-KvJ"/>
                         <outlet property="playButton" destination="O9V-pQ-Tlh" id="G3q-ZV-wU4"/>
@@ -155,6 +162,61 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3215.1999999999998" y="-408.84557721139436"/>
+        </scene>
+        <!--Add Jam View Controller-->
+        <scene sceneID="Hb4-ld-fDb">
+            <objects>
+                <viewController id="t1d-0Z-yNO" customClass="AddJamViewController" customModule="microjam" customModuleProvider="target" sceneMemberID="viewController">
+                    <visualEffectView key="view" opaque="NO" contentMode="scaleToFill" id="GXB-Tp-nc0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="YVg-5X-AsZ">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WmJ-Gg-sEG">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </button>
+                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.5" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jnK-cT-KFu">
+                                    <rect key="frame" x="32" y="128" width="311" height="411"/>
+                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="4" minimumInteritemSpacing="4" id="tfa-oj-tEb">
+                                        <size key="itemSize" width="96" height="96"/>
+                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                        <inset key="sectionInset" minX="4" minY="4" maxX="4" maxY="4"/>
+                                    </collectionViewFlowLayout>
+                                    <cells>
+                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.5" contentMode="center" reuseIdentifier="addJamCell" id="6qk-Vk-M9X">
+                                            <rect key="frame" x="4" y="4" width="96" height="96"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                                <rect key="frame" x="0.0" y="0.0" width="96" height="96"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                            </view>
+                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </collectionViewCell>
+                                    </cells>
+                                </collectionView>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="jnK-cT-KFu" secondAttribute="trailing" constant="32" id="XlR-mL-0v8"/>
+                                <constraint firstItem="jnK-cT-KFu" firstAttribute="top" secondItem="YVg-5X-AsZ" secondAttribute="top" constant="128" id="gNE-8u-kA0"/>
+                                <constraint firstItem="jnK-cT-KFu" firstAttribute="leading" secondItem="YVg-5X-AsZ" secondAttribute="leading" constant="32" id="hQw-9Y-0FD"/>
+                                <constraint firstAttribute="bottom" secondItem="jnK-cT-KFu" secondAttribute="bottom" constant="128" id="ymd-6n-I6S"/>
+                            </constraints>
+                        </view>
+                        <blurEffect style="light"/>
+                    </visualEffectView>
+                    <connections>
+                        <outlet property="collectionView" destination="jnK-cT-KFu" id="tXB-hW-jgE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dg7-nn-urT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3922.4000000000001" y="-408.84557721139436"/>
         </scene>
         <!--settings-->
         <scene sceneID="JKC-ke-Tam">

@@ -42,8 +42,6 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     // Views for adding single performances. Composing
     var composing = false
     @IBOutlet weak var addJamButton: UIButton!
-    @IBOutlet weak var addJamView: UIView!
-    @IBOutlet weak var collectionView: UICollectionView!
 
     // MARK: - Navigation
 
@@ -107,7 +105,9 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         super.viewDidLoad()
         print("JAMVC: viewDidLoad")
         self.recordingProgress!.progress = 0.0 // need to initialise the recording progress at zero.
-
+        
+        print(self)
+        
         // Soundscheme Dropdown initialisation.
         // FIXME: make sure dropdown is working.
         soundSchemeDropDown.anchorView = self.instrumentButton // anchor dropdown to intrument button
@@ -136,7 +136,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
 
         if let f = frame {
             newView = ChirpView(frame: f, performance: performance)
-            self.add(chirpView: newView)
+            self.chirpViewContainer.addSubview(newView)
         } else {
             // This is the case if we add performances before the view is displayed. no reference!
             newView = ChirpView(frame: CGRect.zero, performance: performance)
@@ -174,35 +174,6 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     }
 
 
-
-    @IBAction func addJam(_ sender: UIButton) {
-
-        self.view.bringSubview(toFront: self.addJamView) // Make sure addJamView is in front so the blur works as it should
-        self.composing = true
-
-        // Disable all button except the cancel button
-        self.recordView?.isUserInteractionEnabled = false
-        self.addJamButton.isEnabled = false
-        self.playButton.isEnabled = false
-        self.replyButton.isEnabled = false
-        self.jamButton.isEnabled = false
-        self.savePerformanceButton.isEnabled = false
-        self.addJamView.isHidden = false // Make sure to display the addJamView
-    }
-
-    func hideAddJamView() {
-
-        self.addJamView.isHidden = true // Hide the addJamView
-
-        // Enable all the buttons
-        self.addJamButton.isEnabled = true
-        self.playButton.isEnabled = true
-        self.replyButton.isEnabled = true
-        self.jamButton.isEnabled = true
-        self.savePerformanceButton.isEnabled = true
-    }
-
-
     /// IBAction for Cancel (bar) button. stops playback/recording and dismisses present performance.
     @IBAction func cancelPerformance(_ sender: UIBarButtonItem) {
         print("JAMVC: Cancel Button Pressed.")
@@ -211,11 +182,6 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         stopTimer() // Stopping all Timers
         //stopRecording()
         stopPlayback() // stop any possible playback
-
-        if !self.addJamView.isHidden {
-            self.hideAddJamView()
-            return
-        }
 
         if let recordView = self.recordView {
             if self.performanceViews.isEmpty {
@@ -283,6 +249,11 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
 
     // MARK: - UI Interaction Functions
 
+    @IBAction func addJam(_ sender: UIButton) {
+        
+        self.present(, animated: <#T##Bool#>, completion: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
+        
+    }
     /// IBAction for the play button. Starts playback of performance and replies iff in loaded mode. Stops if already playing.
     @IBAction func playButtonPressed(_ sender: UIButton) {
 
@@ -594,33 +565,3 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     }
 }
 
-// Handeling the collection view in the AddJamView
-
-extension ChirpJamViewController: UICollectionViewDelegate {
-
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
-        print("Selected item: ", indexPath.row)
-        self.newViewWith(performance: appDelegate.storedPerformances[indexPath.row], withFrame: self.referenceView.frame)
-        self.hideAddJamView()
-        self.newRecordView()
-    }
-
-}
-
-extension ChirpJamViewController: UICollectionViewDataSource {
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 25
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
-        let viewCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "addJamCell", for: indexPath)
-
-        let imageView = viewCell.contentView.subviews.first as! UIImageView
-        imageView.image = appDelegate.storedPerformances[indexPath.row].image
-
-        return viewCell
-    }
-}
