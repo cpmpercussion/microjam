@@ -118,6 +118,7 @@ class PerformanceStore: NSObject {
             DispatchQueue.main.async { // give the delegate the trigger to update the table.
                 self.delegate?.modelUpdated()
             }
+            print("Store: Successfully updated from cloud")
         }
 
         publicDB.add(operation) // perform the operation.
