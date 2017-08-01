@@ -45,4 +45,8 @@ class microjamTests: XCTestCase {
         XCTAssertEqual(performanceUnderTest.performanceData.count, 3,"Performance data was not recorded.")
     }
     
+    func testDecodeChirpPerformanceWithBadImageData() {
+        
+    }
+    
 }

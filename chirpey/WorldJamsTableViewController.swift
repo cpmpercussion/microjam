@@ -72,8 +72,8 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
         cell.previewImage.image = performance.image
         cell.context.text = nonCreditString()
         
-        var temp = performance
-        var images = [performance.image]
+        var temp = performance // used to store replies as we fetch them.
+        var images = [performance.image] // the stack of reply images.
         
         // Get the image from every reply
         while temp.replyto != "" {
@@ -81,10 +81,15 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
                 cell.context.text = creditString(originalPerformer: replyPerf.performer)
                 images.append(replyPerf.image)
                 temp = replyPerf
+            } else {
+                // break if the replyPerf can't be found.
+                // TODO: in this case, the performance should be fetched from the cloud. but there isn't functionality in the store for this yet.
+                break
             }
+            print("WJTVC: loaded a reply.")
         }
         
-        // Display all the images as one image
+        // Sum all the images into one and display
         cell.previewImage.image = self.createImageFrom(images: images)
         return cell
     }
@@ -104,12 +109,13 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
         return nil
     }
     
-    /// credit reply string
+    /// Loads a string crediting the original performer
     func creditString(originalPerformer: String) -> String {
         let output = "replied to " + originalPerformer
         return output
     }
     
+    /// Loads a credit string for a solo performance
     func nonCreditString() -> String {
         let ind : Int = Int(arc4random_uniform(UInt32(PerformanceLabels.solo.count)))
         return PerformanceLabels.solo[ind]
@@ -141,7 +147,7 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
     
     /// Segue to view loaded jams.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == JamViewSegueIdentifiers.showDetailSegue {
+        if segue.identifier == JamViewSegueIdentifiers.showDetailSegue { // view a performance.
             // load up current data into a JamViewController
             let jamDetailViewController = segue.destination as! ChirpJamViewController
             if let selectedJamCell = sender as? PerformanceTableCell {
@@ -149,10 +155,14 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
                 var selectedJam = appDelegate.storedPerformances[indexPath.row]
                 jamDetailViewController.newViewWith(performance: selectedJam)
                 
-                while selectedJam.replyto != "" {
+                while selectedJam.replyto != "" { // load up all replies.
+                    // FIXME: fetching replies fails if they have not been downloaded from cloud.
                     if let reply = appDelegate.performanceStore?.fetchPerformanceFrom(title: selectedJam.replyto) {
                         jamDetailViewController.newViewWith(performance: reply)
                         selectedJam = reply
+                        print("WJTVC: cued a reply")
+                    } else {
+                        break // if a reply can't be found, stop loading the thread.
                     }
                 }
             }
