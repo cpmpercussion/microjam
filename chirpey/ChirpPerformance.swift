@@ -76,7 +76,8 @@ class ChirpPerformance : NSObject, NSCoding {
             let date = aDecoder.decodeObject(forKey: PropertyKey.dateKey) as? Date,
             let performer = aDecoder.decodeObject(forKey: PropertyKey.performerKey) as? String,
             let instrument = aDecoder.decodeObject(forKey: PropertyKey.instrumentKey) as? String,
-            let image = UIImage(data: (aDecoder.decodeObject(forKey: PropertyKey.imageKey) as? Data)!),
+            let imageData = aDecoder.decodeObject(forKey: PropertyKey.imageKey) as? Data,
+            let image = UIImage(data: imageData),
             let colour = aDecoder.decodeObject(forKey: PropertyKey.colourKey) as? String,
             let replyto = aDecoder.decodeObject(forKey: PropertyKey.replyToKey) as? String
             else {return nil}
