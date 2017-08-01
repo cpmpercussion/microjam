@@ -56,6 +56,18 @@ class microjamUITests: XCTestCase {
 
     }
     
+    /// Test Scroll Down in world screen
+    func testWorldScreenScrollDown() {
+        let app = XCUIApplication()
+        XCTAssert(app.navigationBars["Microjams!"].exists) // we are on the world screen.
+        for _ in 1..<10 {
+            let child = app.tables.children(matching:.any).element(boundBy: 1)
+            child.swipeUp()
+            child.swipeUp()
+        }
+
+    }
+    
     /// Testing Recordinga and Saving in Jam Tab
     func testRecordAndSaveJam() {
         let app = XCUIApplication()
