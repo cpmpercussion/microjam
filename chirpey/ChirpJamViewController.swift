@@ -80,16 +80,11 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         if (tabBarItem.title == TabBarItemTitles.jamTab) { // onlyrun this stuff in the jam tab
             //self.recordView.openPdFile() // Make sure the correct Pd File is open
         }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        print("JAMVC: viewDidLoad")
-        self.recordingProgress!.progress = 0.0 // need to initialise the recording progress at zero.
         
         if !self.performanceViews.isEmpty {
             for view in self.performanceViews {
                 view.frame = self.chirpViewContainer.bounds
+                //view.contentMode = .scaleToFill
                 self.chirpViewContainer.addSubview(view)
             }
             
@@ -100,6 +95,12 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         } else {
             self.newRecordView()
         }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        print("JAMVC: viewDidLoad")
+        self.recordingProgress!.progress = 0.0 // need to initialise the recording progress at zero.
         
         // Soundscheme Dropdown initialisation.
         // FIXME: make sure dropdown is working.
