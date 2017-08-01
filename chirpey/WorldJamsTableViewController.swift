@@ -10,7 +10,7 @@ import UIKit
 
 class WorldJamsTableViewController: UITableViewController, ModelDelegate {
     
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    let performanceStore = (UIApplication.shared.delegate as! AppDelegate).performanceStore
     let worldJamCellIdentifier = "worldJamCell"
 
     override func viewDidLoad() {
@@ -21,9 +21,9 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        self.tableView.rowHeight = 365
-        self.appDelegate.performanceStore.delegate = self
-        self.refreshControl?.addTarget(appDelegate, action: #selector(appDelegate.performanceStore.fetchWorldJamsFromCloud), for: UIControlEvents.valueChanged)
+        tableView.rowHeight = 365
+        performanceStore.delegate = self
+        self.refreshControl?.addTarget(performanceStore, action: #selector(performanceStore.fetchWorldJamsFromCloud), for: UIControlEvents.valueChanged)
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,12 +61,12 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return appDelegate.performanceStore.storedPerformances.count
+        return performanceStore.storedPerformances.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: worldJamCellIdentifier, for: indexPath) as! PerformanceTableCell
-        let performance = appDelegate.performanceStore.storedPerformances[indexPath.row]
+        let performance = performanceStore.storedPerformances[indexPath.row]
         cell.title.text = performance.dateString()
         cell.performer.text = performance.performer
         cell.instrument.text = performance.instrument
@@ -78,7 +78,7 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
         
         // Get the image from every reply
         while temp.replyto != "" {
-            if let replyPerf = appDelegate.performanceStore.fetchPerformanceFrom(title: temp.replyto) {
+            if let replyPerf = performanceStore.fetchPerformanceFrom(title: temp.replyto) {
                 cell.context.text = creditString(originalPerformer: replyPerf.performer)
                 images.append(replyPerf.image)
                 temp = replyPerf
@@ -153,12 +153,12 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
             let jamDetailViewController = segue.destination as! ChirpJamViewController
             if let selectedJamCell = sender as? PerformanceTableCell {
                 let indexPath = tableView.indexPath(for: selectedJamCell)!
-                var selectedJam = appDelegate.performanceStore.storedPerformances[indexPath.row]
+                var selectedJam = performanceStore.storedPerformances[indexPath.row]
                 jamDetailViewController.newViewWith(performance: selectedJam)
                 
                 while selectedJam.replyto != "" { // load up all replies.
                     // FIXME: fetching replies fails if they have not been downloaded from cloud.
-                    if let reply = appDelegate.performanceStore.fetchPerformanceFrom(title: selectedJam.replyto) {
+                    if let reply = performanceStore.fetchPerformanceFrom(title: selectedJam.replyto) {
                         jamDetailViewController.newViewWith(performance: reply)
                         selectedJam = reply
                         print("WJTVC: cued a reply")
@@ -194,7 +194,7 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
     /// Adds a new ChirpPerformance to the top of the list and saves it in the data source.
     func addNew(performance: ChirpPerformance) {
         let newIndexPath = NSIndexPath(row: 0, section: 0)
-        appDelegate.performanceStore.addNew(performance: performance)
+        performanceStore.addNew(performance: performance)
         self.tableView.insertRows(at: [newIndexPath as IndexPath], with: .top)
     }
     
