@@ -3,9 +3,7 @@ layout: page
 title: privacy policy
 ---
 
-# Privacy Policy
-
-## Last updated: August 01, 2017
+### Last updated: August 01, 2017
 
 microjam ("us", "we", or "our") operates the microjam.info website and the microjam app available on the Apple iTunes App Store (the "Service").
 
@@ -51,4 +49,4 @@ You are advised to review this Privacy Policy periodically for any changes. Chan
 
 ## Contact Us
 
-If you have any questions about this Privacy Policy, please contact us.
+If you have any questions about this Privacy Policy, please contact Charles Martin at [http://www.mn.uio.no/ifi/english/people/aca/charlepm/](http://www.mn.uio.no/ifi/english/people/aca/charlepm/).
