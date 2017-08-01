@@ -33,6 +33,7 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
 
     // borrowed so far from https://www.raywenderlich.com/134694/cloudkit-tutorial-getting-started
     func modelUpdated() {
+        print("WJTVC: Model updated, reloading data")
         refreshControl?.endRefreshing()
         tableView.reloadData()
     }
@@ -60,12 +61,12 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return appDelegate.storedPerformances.count
+        return appDelegate.performanceStore.storedPerformances.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: worldJamCellIdentifier, for: indexPath) as! PerformanceTableCell
-        let performance = appDelegate.storedPerformances[indexPath.row]
+        let performance = appDelegate.performanceStore.storedPerformances[indexPath.row]
         cell.title.text = performance.dateString()
         cell.performer.text = performance.performer
         cell.instrument.text = performance.instrument
@@ -152,7 +153,7 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
             let jamDetailViewController = segue.destination as! ChirpJamViewController
             if let selectedJamCell = sender as? PerformanceTableCell {
                 let indexPath = tableView.indexPath(for: selectedJamCell)!
-                var selectedJam = appDelegate.storedPerformances[indexPath.row]
+                var selectedJam = appDelegate.performanceStore.storedPerformances[indexPath.row]
                 jamDetailViewController.newViewWith(performance: selectedJam)
                 
                 while selectedJam.replyto != "" { // load up all replies.
