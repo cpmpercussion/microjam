@@ -42,6 +42,17 @@ class microjamUITests: XCTestCase {
         XCTAssert(app.navigationBars["Microjams!"].exists)
     }
     
+    /// Test that a the pull to refresh control works    
+    func testPullToRefresh() {
+        let app = XCUIApplication()
+        XCTAssert(app.navigationBars["Microjams!"].exists) // we are on the world screen.
+        let firstChild = app.tables.children(matching:.any).element(boundBy: 0)
+        if firstChild.exists {
+            firstChild.swipeDown() // swipe down on first cell
+        }
+        XCTAssert(app.navigationBars["Microjams!"].exists) // we are back on the world screen.
+    }
+    
     /// Test that a jam can be opened and closed from the World screen.
     func testOpenCloseJam() {
         let app = XCUIApplication()
