@@ -58,6 +58,7 @@ class ChirpPerformance : NSObject, NSCoding {
         static let replyToKey = "replyto"
     }
     
+    /// Function for encoding as NSCoder, used for saving performances on app close.
     func encode(with aCoder: NSCoder) {
         aCoder.encode(performanceData, forKey: PropertyKey.performanceDataKey)
         aCoder.encode(date, forKey: PropertyKey.dateKey)
@@ -69,14 +70,17 @@ class ChirpPerformance : NSObject, NSCoding {
         aCoder.encode(replyto, forKey: PropertyKey.replyToKey)
     }
 
+    /// Initialiser from NSCoder, used when reopening saved performances on app launch
     required convenience init?(coder aDecoder: NSCoder) {
+        // TODO: write unit test to
         guard let data = aDecoder.decodeObject(forKey: PropertyKey.performanceDataKey) as? [TouchRecord]
             else {return nil}
         guard
             let date = aDecoder.decodeObject(forKey: PropertyKey.dateKey) as? Date,
             let performer = aDecoder.decodeObject(forKey: PropertyKey.performerKey) as? String,
             let instrument = aDecoder.decodeObject(forKey: PropertyKey.instrumentKey) as? String,
-            let image = UIImage(data: (aDecoder.decodeObject(forKey: PropertyKey.imageKey) as? Data)!),
+            let imageData = aDecoder.decodeObject(forKey: PropertyKey.imageKey) as? Data,
+            let image = UIImage(data: imageData),
             let colour = aDecoder.decodeObject(forKey: PropertyKey.colourKey) as? String,
             let replyto = aDecoder.decodeObject(forKey: PropertyKey.replyToKey) as? String
             else {return nil}
@@ -106,7 +110,6 @@ class ChirpPerformance : NSObject, NSCoding {
         data = lines.flatMap {TouchRecord.init(fromCSVLine: $0)}
         self.init(data: data, date: date, performer: performer, instrument: instrument, image: image, location: location, colour: colour, replyto: replyto)
     }
-    
     
     /// Convenience Initialiser for creating performance with data yet to be added.
     convenience override init() {
