@@ -147,7 +147,7 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
     
     /// Segue to view loaded jams.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == JamViewSegueIdentifiers.showDetailSegue {
+        if segue.identifier == JamViewSegueIdentifiers.showDetailSegue { // view a performance.
             // load up current data into a JamViewController
             let jamDetailViewController = segue.destination as! ChirpJamViewController
             if let selectedJamCell = sender as? PerformanceTableCell {
@@ -155,12 +155,14 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
                 var selectedJam = appDelegate.storedPerformances[indexPath.row]
                 jamDetailViewController.newViewWith(performance: selectedJam)
                 
-                while selectedJam.replyto != "" {
-                    
+                while selectedJam.replyto != "" { // load up all replies.
+                    // FIXME: fetching replies fails if they have not been downloaded from cloud.
                     if let reply = appDelegate.fetchPerformanceFrom(title: selectedJam.replyto) {
-                        
                         jamDetailViewController.newViewWith(performance: reply)
                         selectedJam = reply
+                        print("WJTVC: cued a reply")
+                    } else {
+                        break // if a reply can't be found, stop loading the thread.
                     }
                 }
             }
