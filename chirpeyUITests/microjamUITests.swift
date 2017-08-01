@@ -42,6 +42,20 @@ class microjamUITests: XCTestCase {
         XCTAssert(app.navigationBars["Microjams!"].exists)
     }
     
+    /// Test that a jam can be opened and closed from the World screen.
+    func testOpenCloseJam() {
+        let app = XCUIApplication()
+        XCTAssert(app.navigationBars["Microjams!"].exists) // we are on the world screen.
+        let firstChild = app.tables.children(matching:.any).element(boundBy: 0)
+        if firstChild.exists {
+            firstChild.tap() // tap first cell
+        }
+        XCTAssert(app.buttons["playButton"].exists) // we are on a performance screen
+        app.navigationBars.buttons["Cancel"].tap() // tap cancel
+        XCTAssert(app.navigationBars["Microjams!"].exists) // we are back on the world screen.
+
+    }
+    
     /// Testing Recordinga and Saving in Jam Tab
     func testRecordAndSaveJam() {
         let app = XCUIApplication()
