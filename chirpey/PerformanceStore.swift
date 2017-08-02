@@ -9,6 +9,16 @@
 import UIKit
 import CloudKit
 
+/// Exposes CloudKit container to all UIViewControllers
+extension UIViewController {
+    
+    /// Default Container (visible to all UIViewControllers)
+    var container: CKContainer {
+        return CKContainer.default()
+    }
+    
+}
+
 /// Maximum number of jams to download at a time from CloudKit
 let max_jams_to_fetch = 25
 
@@ -30,8 +40,7 @@ class PerformanceStore: NSObject {
     /// Internally stored performances
     var storedPerformances : [ChirpPerformance] = []
 
-    /// Default Container
-    let container: CKContainer = CKContainer.default()
+
     /// Public CloudKit Database
     let publicDB: CKDatabase = CKContainer.default().publicCloudDatabase
     /// Private CloudKit Database
@@ -87,7 +96,6 @@ class PerformanceStore: NSObject {
     /// Refresh list of world jams from CloudKit and then update in world jam table view.
     func fetchWorldJamsFromCloud() {
         print("Store: Attempting to fetch World Jams from Cloud.")
-        print("Store: Container is: ", container)
         var fetchedPerformances = [ChirpPerformance]()
         let predicate = NSPredicate(value: true)
         let sort = NSSortDescriptor(key: PerfCloudKeys.date, ascending: false)

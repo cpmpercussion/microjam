@@ -20,6 +20,8 @@ class MicrojamTabBarController: UITabBarController {
         if let userSettingsViewController = UserSettingsViewController.storyboardInstance() {
         userSettingsViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .downloads, tag: 2)
             viewControllers?.append(userSettingsViewController)
+        } else {
+            print("TABVC: User Settings Tab could not be initialised.")
         }
     }
 
