@@ -274,15 +274,19 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     func didReturnWithoutSelected() {
         
         if self.performanceViews.isEmpty {
+            // No performances are selected, just return to a new state
             self.state = ChirpJamModes.new
             self.updateUI()
         }
         
+        // No change to the state of the app, just dismiss add jam controller
         self.dismiss(animated: true, completion: nil)
     }
     
     func didSelectJamAt(index : Int) {
         print("Delegate returned index: ", index)
+        
+        // Adding the selected jam to the view and dismissing the add jam controller
         
         let performance = appDelegate.performanceStore.storedPerformances[index]
         self.newViewWith(performance: performance, withFrame: self.chirpViewContainer.bounds)
@@ -296,6 +300,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
 
     @IBAction func addJam(_ sender: UIButton) {
         
+        // Displaying the add jam view controller
         self.state = ChirpJamModes.composing
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
