@@ -116,7 +116,8 @@ class microjamUITests: XCTestCase {
         let app = XCUIApplication()
         app.navigationBars["Microjams!"].buttons["Add"].tap()
         
-        let image = app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .image).element(boundBy: 0)
+        let image = XCUIApplication().children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element(boundBy: 1).children(matching: .image).element
+        
         image.tap()
         image.swipeDown()
         image.tap()

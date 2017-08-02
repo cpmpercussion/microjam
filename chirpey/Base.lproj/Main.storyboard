@@ -34,8 +34,9 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="right" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PVn-2h-cdI">
-                                                <rect key="frame" x="119.5" y="0.0" width="94.5" height="44"/>
+                                            <button opaque="NO" contentMode="right" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PVn-2h-cdI">
+                                                <rect key="frame" x="165" y="0.0" width="178" height="44"/>
+                                                <accessibility key="accessibilityConfiguration" hint="Tap here to choose a different sound." identifier="instrumentChooser" label="Instrument Menu"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <state key="normal" title="add jam">
                                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -79,6 +80,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O9V-pQ-Tlh">
                                                 <rect key="frame" x="0.0" y="0.0" width="114.5" height="44"/>
                                                 <color key="backgroundColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="playButton" label="Play"/>
                                                 <state key="normal" title="play"/>
                                                 <connections>
                                                     <action selector="playButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dgp-Uu-Gtl"/>
@@ -87,6 +89,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xh5-cz-PkR" userLabel="Reply Button">
                                                 <rect key="frame" x="114.5" y="0.0" width="114" height="44"/>
                                                 <color key="backgroundColor" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="replyButton" label="Reply"/>
                                                 <state key="normal" title="reply"/>
                                                 <connections>
                                                     <action selector="replyButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UCv-rQ-qeE"/>
@@ -95,6 +98,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HfI-q6-7dd">
                                                 <rect key="frame" x="228.5" y="0.0" width="114.5" height="44"/>
                                                 <color key="backgroundColor" red="0.80000001190000003" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="jamButton" label="Jam"/>
                                                 <state key="normal" title="jam"/>
                                                 <connections>
                                                     <action selector="jamButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tfY-Hj-qaX"/>
@@ -228,10 +232,10 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="settingstablecell" id="Cvd-cG-I3p">
-                                <rect key="frame" x="0.0" y="56" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Cvd-cG-I3p" id="nxe-Y1-Sgh">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -264,7 +268,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="365"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gcn-gn-WZ5" id="sXd-HP-H6B">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="365"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="364.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultRecordingImage" translatesAutoresizingMaskIntoConstraints="NO" id="C1Y-wG-D7P">

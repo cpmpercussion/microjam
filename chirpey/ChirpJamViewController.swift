@@ -58,11 +58,11 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
                 if let recordView = self.recordView {
                     if let performance = recordView.performance {
                         // Adding performance to clouad
-                        appDelegate.addNew(performance: performance)
+                        appDelegate.performanceStore.addNew(performance: performance)
                         // Reset view controller
                         self.newRecordView()
 
-                        // MARK: Maybe it is best to delete the view controller to save memory?
+                        // TODO: Maybe it is best to delete the view controller to save memory?
 
                     }
                 }
@@ -84,7 +84,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         if (tabBarItem.title == TabBarItemTitles.jamTab) { // onlyrun this stuff in the jam tab
             //self.recordView.openPdFile() // Make sure the correct Pd File is open
         }
-        
+
         if !self.performanceViews.isEmpty {
             for view in self.performanceViews {
                 view.frame = self.chirpViewContainer.bounds
@@ -105,9 +105,9 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         super.viewDidLoad()
         print("JAMVC: viewDidLoad")
         self.recordingProgress!.progress = 0.0 // need to initialise the recording progress at zero.
-        
+
         print(self)
-        
+
         // Soundscheme Dropdown initialisation.
         // FIXME: make sure dropdown is working.
         soundSchemeDropDown.anchorView = self.instrumentButton // anchor dropdown to intrument button
@@ -250,9 +250,9 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     // MARK: - UI Interaction Functions
 
     @IBAction func addJam(_ sender: UIButton) {
-        
+
         self.present(, animated: <#T##Bool#>, completion: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
-        
+
     }
     /// IBAction for the play button. Starts playback of performance and replies iff in loaded mode. Stops if already playing.
     @IBAction func playButtonPressed(_ sender: UIButton) {
@@ -564,4 +564,3 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         // Dispose of any resources that can be recreated.
     }
 }
-
