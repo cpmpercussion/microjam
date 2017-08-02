@@ -54,6 +54,21 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             // TODO: Is this check actually used?
             if savePerformanceButton === barButton {
                 print("JAMVC: Save button segue!")
+                
+                if self.state == ChirpJamModes.composing {
+                    
+                    // TODO: Store composing performances
+                    print("Need implementation for storing compositions...")
+                    
+                    while let perf = self.performanceViews.popLast() {
+                        perf.removeFromSuperview()
+                    }
+                    
+                    self.newRecordView()
+                    
+                    return
+                }
+                
                 if let recordView = self.recordView {
                     if let performance = recordView.performance {
                         // Adding performance to clouad
@@ -181,7 +196,21 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         stopTimer() // Stopping all Timers
         //stopRecording()
         stopPlayback() // stop any possible playback
-
+        
+        if self.state == ChirpJamModes.composing {
+            if let perf = self.performanceViews.popLast() {
+                perf.removeFromSuperview()
+            }
+            
+            if self.performanceViews.isEmpty {
+                self.state = ChirpJamModes.new
+                self.updateUI()
+                return
+            }
+            
+            return
+        }
+        
         if let recordView = self.recordView {
             if self.performanceViews.isEmpty {
                 // No loaded performances means we're in the jam tab, just reset to a new record view
@@ -193,13 +222,6 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
                 self.recordView = nil
                 self.replyButton.setTitle("Reply", for: .normal)
                 self.newPerformance = false
-
-                if composing {
-                    self.state = ChirpJamModes.new
-                    self.newRecordView()
-                } else {
-                    self.state = ChirpJamModes.loaded
-                }
 
                 self.jamming = false
                 self.recordingProgress!.progress = 0.0
@@ -250,6 +272,12 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     // Mark: AddJamDelegate methods
     
     func didReturnWithoutSelected() {
+        
+        if self.performanceViews.isEmpty {
+            self.state = ChirpJamModes.new
+            self.updateUI()
+        }
+        
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -259,7 +287,6 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         let performance = appDelegate.performanceStore.storedPerformances[index]
         self.newViewWith(performance: performance, withFrame: self.chirpViewContainer.bounds)
         
-        self.state = ChirpJamModes.loaded
         self.updateUI()
         
         self.dismiss(animated: true, completion: nil)
@@ -268,6 +295,8 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     // MARK: - UI Interaction Functions
 
     @IBAction func addJam(_ sender: UIButton) {
+        
+        self.state = ChirpJamModes.composing
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "addJamViewController") as! AddJamViewController
@@ -293,7 +322,10 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             if !self.jamming {
                 self.playButton.setTitle("stop", for: .normal)
             }
-            self.state = ChirpJamModes.playing
+            
+            if self.state != ChirpJamModes.composing {
+                self.state = ChirpJamModes.playing
+            }
             self.updateUI()
             self.recordingProgress!.progress = 0.0
             self.progress = 0.0
@@ -340,6 +372,15 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         }
     }
 
+    func resetPerformanceImages() {
+        // FIXME: Better way to reset images for ChirpViews
+        for view in self.performanceViews {
+            view.image = view.performance?.image
+        }
+        if let recordView = self.recordView {
+            recordView.image = recordView.performance?.image
+        }
+    }
 
     /// Update the UI labels and image only if there is a valid performance loaded.
     func updateUI() {
@@ -437,20 +478,24 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             self.performerLabel.text = loadedPerformance?.performer
             self.instrumentButton.setTitle(loadedPerformance?.instrument, for: .normal)
 
-            // FIXME: Better way to reset images for ChirpViews
-            for view in self.performanceViews {
-                view.image = view.performance?.image
-            }
-            if let recordView = self.recordView {
-                recordView.image = recordView.performance?.image
-            }
+            self.resetPerformanceImages()
 
             self.playButton.isEnabled = true
             self.jamButton.isEnabled = true
 
             print("JAMVC: opening Pd file for loaded performance.")
             //self.chirpeySquare.openPdFile(withName: loadedPerformance.instrument) // open Pd File.
-
+            
+            
+        case ChirpJamModes.composing:
+            
+            self.statusLabel.text = "Composing..."
+            
+            self.playButton.isEnabled = true
+            self.jamButton.isEnabled = true
+            
+            self.resetPerformanceImages()
+            
         default:
 
             self.navigationItem.title = "performance"
@@ -518,12 +563,6 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         }
 
         self.playButton.setTitle("play", for: UIControlState.normal)
-
-        if composing {
-            self.state = ChirpJamModes.new
-        } else {
-            self.state = ChirpJamModes.loaded
-        }
 
         self.updateUI()
 
