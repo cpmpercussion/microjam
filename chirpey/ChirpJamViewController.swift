@@ -10,7 +10,7 @@ import DropDown
 
 // TODO: how to tell between loaded and saved and just loaded?
 
-class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerDelegate {
+class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerDelegate, AddJamDelegate {
     /// Maximum allowed recording time.
     let RECORDING_TIME = 5.0
     var state = ChirpJamModes.new
@@ -40,7 +40,6 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     @IBOutlet weak var instrumentButton: UIButton!
 
     // Views for adding single performances. Composing
-    var composing = false
     @IBOutlet weak var addJamButton: UIButton!
 
     // MARK: - Navigation
@@ -246,14 +245,39 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             }
         }
     }
+    
+    
+    // Mark: AddJamDelegate methods
+    
+    func didReturnWithoutSelected() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func didSelectJamAt(index : Int) {
+        print("Delegate returned index: ", index)
+        
+        let performance = appDelegate.performanceStore.storedPerformances[index]
+        self.newViewWith(performance: performance, withFrame: self.chirpViewContainer.bounds)
+        
+        self.state = ChirpJamModes.loaded
+        self.updateUI()
+        
+        self.dismiss(animated: true, completion: nil)
+    }
 
     // MARK: - UI Interaction Functions
 
     @IBAction func addJam(_ sender: UIButton) {
-
-        self.present(, animated: <#T##Bool#>, completion: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
-
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "addJamViewController") as! AddJamViewController
+        controller.modalTransitionStyle = .crossDissolve
+        controller.modalPresentationStyle = .overCurrentContext
+        controller.delegate = self
+        self.present(controller, animated: true, completion: nil)
     }
+    
+    
     /// IBAction for the play button. Starts playback of performance and replies iff in loaded mode. Stops if already playing.
     @IBAction func playButtonPressed(_ sender: UIButton) {
 

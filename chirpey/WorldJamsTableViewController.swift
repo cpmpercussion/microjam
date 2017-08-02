@@ -154,12 +154,12 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
             if let selectedJamCell = sender as? PerformanceTableCell {
                 let indexPath = tableView.indexPath(for: selectedJamCell)!
                 var selectedJam = performanceStore.storedPerformances[indexPath.row]
-                jamDetailViewController.newViewWith(performance: selectedJam)
+                jamDetailViewController.newViewWith(performance: selectedJam, withFrame: nil)
 
                 while selectedJam.replyto != "" { // load up all replies.
                     // FIXME: fetching replies fails if they have not been downloaded from cloud.
                     if let reply = performanceStore.fetchPerformanceFrom(title: selectedJam.replyto) {
-                        jamDetailViewController.newViewWith(performance: reply)
+                        jamDetailViewController.newViewWith(performance: reply, withFrame: nil)
                         selectedJam = reply
                         print("WJTVC: cued a reply")
                     } else {
