@@ -100,6 +100,10 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         }
 
         if !self.performanceViews.isEmpty {
+            
+            // If there are loaded performance from world controller, disable composing feature..
+            self.addJamButton.isEnabled = false
+            
             for view in self.performanceViews {
                 view.frame = self.chirpViewContainer.bounds
                 //view.contentMode = .scaleToFill
@@ -119,8 +123,6 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         super.viewDidLoad()
         print("JAMVC: viewDidLoad")
         self.recordingProgress!.progress = 0.0 // need to initialise the recording progress at zero.
-
-        print(self)
 
         // Soundscheme Dropdown initialisation.
         // FIXME: make sure dropdown is working.
@@ -274,7 +276,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     func didReturnWithoutSelected() {
         
         if self.performanceViews.isEmpty {
-            // No performances are selected, just return to a new state
+            // No performances are loaded, just return to a new state
             self.state = ChirpJamModes.new
             self.updateUI()
         }
@@ -568,7 +570,11 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         }
 
         self.playButton.setTitle("play", for: UIControlState.normal)
-
+        
+        if self.state != ChirpJamModes.composing {
+            self.state = ChirpJamModes.loaded
+        }
+        
         self.updateUI()
 
         self.progressTimer?.invalidate()
