@@ -12,6 +12,7 @@
 		56002F471F306C0F00003B88 /* UserNameChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56002F461F306C0F00003B88 /* UserNameChooserViewController.swift */; };
 		562FDCA61F316870000409C8 /* UserSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562FDCA51F316870000409C8 /* UserSettingsViewController.swift */; };
 		562FDCA81F316EAE000409C8 /* UserSettingsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 562FDCA71F316EAE000409C8 /* UserSettingsViewController.storyboard */; };
+		562FDCAA1F32D202000409C8 /* PerformerProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562FDCA91F32D202000409C8 /* PerformerProfile.swift */; };
 		563E06101EFBE71700F0D471 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563E060F1EFBE71700F0D471 /* Constants.swift */; };
 		565143FA1DFAB79E00F56B32 /* adsr.pd in Resources */ = {isa = PBXBuildFile; fileRef = 565143F81DFAB79E00F56B32 /* adsr.pd */; };
 		565143FB1DFAB79E00F56B32 /* xfade.pd in Resources */ = {isa = PBXBuildFile; fileRef = 565143F91DFAB79E00F56B32 /* xfade.pd */; };
@@ -94,6 +95,7 @@
 		56002F461F306C0F00003B88 /* UserNameChooserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserNameChooserViewController.swift; path = chirpey/UserNameChooserViewController.swift; sourceTree = "<group>"; };
 		562FDCA51F316870000409C8 /* UserSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserSettingsViewController.swift; path = chirpey/UserSettingsViewController.swift; sourceTree = "<group>"; };
 		562FDCA71F316EAE000409C8 /* UserSettingsViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = UserSettingsViewController.storyboard; path = chirpey/UserSettingsViewController.storyboard; sourceTree = "<group>"; };
+		562FDCA91F32D202000409C8 /* PerformerProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PerformerProfile.swift; path = chirpey/PerformerProfile.swift; sourceTree = "<group>"; };
 		563E060F1EFBE71700F0D471 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		565143F81DFAB79E00F56B32 /* adsr.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = adsr.pd; sourceTree = "<group>"; };
 		565143F91DFAB79E00F56B32 /* xfade.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = xfade.pd; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 		560772DA1F206F10000D862D /* models */ = {
 			isa = PBXGroup;
 			children = (
+				562FDCA91F32D202000409C8 /* PerformerProfile.swift */,
 				56621B0C1DE39D33009B9AB6 /* ChirpPerformance.swift */,
 			);
 			name = models;
@@ -804,6 +807,7 @@
 				567286661E05E0AF0024A515 /* MicrojamTabBarController.swift in Sources */,
 				563E06101EFBE71700F0D471 /* Constants.swift in Sources */,
 				56B329E51E44834E001345DC /* WorldJamsTableViewController.swift in Sources */,
+				562FDCAA1F32D202000409C8 /* PerformerProfile.swift in Sources */,
 				56621B0D1DE39D33009B9AB6 /* ChirpPerformance.swift in Sources */,
 				56D707EF1F15960900FDEB76 /* PerformanceStore.swift in Sources */,
 				56621B171DEC27B0009B9AB6 /* PerformanceTableCell.swift in Sources */,
