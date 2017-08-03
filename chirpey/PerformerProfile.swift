@@ -34,5 +34,27 @@ class PerformerProfile: NSObject {
     convenience init?(avatar: UIImage, stageName: String, jamHex: String, backgroundHex: String, soundScheme: Int64) {
         self.init(avatar: avatar, stageName: stageName, jamColour: UIColor(jamHex, defaultColor: UIColor.blue), backgroundColour: UIColor(backgroundHex), soundScheme: soundScheme)
     }
+    
+    /// Initialiser for a blank performance
+    convenience override init() {
+        self.init(avatar: UIImage(), stageName: "", jamColour: UIColor.blue, backgroundColour: UIColor.clear, soundScheme: 1)
+    }
+}
+
+extension PerformerProfile {
+    /// Returns a colour from a given hue value picked using a slider.
+    static func colourFromHue(hue: Float) -> UIColor {
+        return UIColor(hue: CGFloat(hue), saturation: 1.0, brightness: 0.7, alpha: 1.0)
+    }
+    
+    /// Returns a hue [0,1] from a given UIColor
+    static func hueFrom(colour: UIColor) -> Float {
+        var hue: CGFloat = 0
+        var saturation: CGFloat = 0
+        var brightness: CGFloat = 0
+        var alpha: CGFloat = 0
+        colour.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
+        return Float(hue)
+    }
 }
 
