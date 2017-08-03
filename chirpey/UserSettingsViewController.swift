@@ -36,7 +36,13 @@ class UserSettingsViewController: UIViewController {
     }
     /// Avatar image view.
     @IBOutlet weak var avatarImageView: UIImageView!
-
+    /// Text field for the user's stage name
+    @IBOutlet weak var stageNameField: UITextField!
+    /// Slider to control the jam drawing colour
+    @IBOutlet weak var jamColourSlider: UISlider!
+    /// Slider to control the jam background colour
+    @IBOutlet weak var backgroundColourSlider: UISlider!
+    
     /// CKRecord of user information.
     var userRecord: CKRecord? {
         didSet {
@@ -62,6 +68,7 @@ class UserSettingsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        stageNameField.delegate = self // become delegate for the stagename field.
         NotificationCenter.default.addObserver(self, selector: #selector(startDiscoveryProcess), name: Notification.Name.CKAccountChanged, object: nil)
         startDiscoveryProcess()
     }
@@ -184,6 +191,13 @@ class UserSettingsViewController: UIViewController {
         present(imagePicker, animated: true, completion: nil)
     }
     
+    /// Triggered when user changes the jam colour slider
+    @IBAction func jamSliderMoved(_ sender: UISlider) {
+    }
+    
+    /// Triggered when user changes the background colour
+    @IBAction func backgroundSliderMoved(_ sender: UISlider) {
+    }
 }
 
 
@@ -248,6 +262,25 @@ extension UserSettingsViewController: UIImagePickerControllerDelegate, UINavigat
             
             print("Successfully updated user record with new avatar")
         }
+    }
+    
+}
+
+/// Stage Name Chooser extension
+/// Adds functions to handle user changing the UITextField for their stage name on the settings screen.
+extension UserSettingsViewController: UITextFieldDelegate {
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        if let newName = stageNameField.text {
+            UserDefaults.standard.set(newName, forKey: SettingsKeys.performerKey)
+            print("USVC: Set stage name to: ", newName)
+        }
+        return true
     }
     
 }

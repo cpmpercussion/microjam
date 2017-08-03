@@ -91,8 +91,8 @@
                                             <constraint firstAttribute="trailing" secondItem="eVN-qB-FWL" secondAttribute="trailing" id="vpc-Lw-MSu"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" text="Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WKd-Lv-hSv">
-                                        <rect key="frame" x="149" y="108" width="45.5" height="18"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" text="Real Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WKd-Lv-hSv">
+                                        <rect key="frame" x="132" y="108" width="79.5" height="18"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                         <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -109,11 +109,11 @@
                                         <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="not set" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cdE-c8-L8d">
-                                        <rect key="frame" x="136.5" y="194.5" width="70" height="27"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="choose a stage name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cdE-c8-L8d">
+                                        <rect key="frame" x="66.5" y="194.5" width="210" height="27"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="22"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="continue"/>
                                     </textField>
                                 </subviews>
                             </stackView>
@@ -131,6 +131,9 @@
                                     </label>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Go9-OM-27h">
                                         <rect key="frame" x="-2" y="30" width="347" height="31"/>
+                                        <connections>
+                                            <action selector="jamSliderMoved:" destination="PTT-5t-yZZ" eventType="valueChanged" id="FNU-Rr-8kA"/>
+                                        </connections>
                                     </slider>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Background Colour:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UQ9-ca-DYh">
                                         <rect key="frame" x="0.0" y="60" width="343" height="30"/>
@@ -143,6 +146,9 @@
                                     </label>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Imy-x2-W5d">
                                         <rect key="frame" x="-2" y="90" width="347" height="31"/>
+                                        <connections>
+                                            <action selector="backgroundSliderMoved:" destination="PTT-5t-yZZ" eventType="valueChanged" id="tfr-ci-Gs3"/>
+                                        </connections>
                                     </slider>
                                 </subviews>
                             </stackView>
@@ -203,9 +209,12 @@
                         <outlet property="avatarContainerView" destination="SKz-gD-qjb" id="2xS-Gb-HvO"/>
                         <outlet property="avatarImageView" destination="eVN-qB-FWL" id="1Er-yt-OOC"/>
                         <outlet property="avatarSpinner" destination="XD8-1Z-pnf" id="MMO-JQ-PY4"/>
+                        <outlet property="backgroundColourSlider" destination="Imy-x2-W5d" id="cnL-Dj-uXJ"/>
                         <outlet property="idLabel" destination="p69-VM-2J6" id="Ckw-U9-2sB"/>
+                        <outlet property="jamColourSlider" destination="Go9-OM-27h" id="J4f-lb-6Jw"/>
                         <outlet property="nameLabel" destination="dVM-yn-OBI" id="bs7-A7-CSb"/>
                         <outlet property="noAccountView" destination="2zS-nc-bi7" id="BHE-Fc-hDc"/>
+                        <outlet property="stageNameField" destination="cdE-c8-L8d" id="f9P-lX-jX4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vzj-Fw-MMg" userLabel="First Responder" sceneMemberID="firstResponder"/>
