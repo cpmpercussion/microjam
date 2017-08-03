@@ -52,7 +52,7 @@ class SearchJamViewController: UIViewController {
     func getData(withSearchText text : String) {
         print("Getting data with text: ", text)
         
-        performanceStore.fetchRecord(withType: PerfCloudKeys.type, matching: text, inField: "Performer")
+        performanceStore.fetchRecord(withType: PerfCloudKeys.type, matchingString: text, inField: "Performer")
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
