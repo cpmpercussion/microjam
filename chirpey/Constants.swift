@@ -71,6 +71,18 @@ struct PerfCloudKeys {
     static let colour = "Colour"
 }
 
+/// Keys for Users type in CloudKit Storage
+struct UserCloudKeys {
+    static let avatar = "avatar" // Asset
+    static let email = "Email" // String
+    static let home = "Home" // String
+    static let name = "Name" // String
+    static let stagename = "stageName" // String
+    static let jamColour = "jamColour" // String (of hex code)
+    static let backgroundColour = "backgroundColour" // String (of hex code)
+    static let soundScheme = "soundScheme" // Int(64) of instrument code
+}
+
 // MARK: UI and View Controller Constants
 
 /// Modes for the ChirpJameViewController: either new, recording, loaded, or playing.
