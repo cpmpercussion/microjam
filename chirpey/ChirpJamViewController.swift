@@ -305,11 +305,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         // Displaying the add jam view controller
         self.state = ChirpJamModes.composing
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "addJamViewController") as! AddJamViewController
-        controller.modalTransitionStyle = .crossDissolve
-        controller.modalPresentationStyle = .overCurrentContext
-        controller.delegate = self
+        let controller = SearchJamViewController(nibName: "SearchJamViewController", bundle: nil)
         self.present(controller, animated: true, completion: nil)
     }
     
