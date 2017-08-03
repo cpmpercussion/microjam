@@ -54,6 +54,10 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
 
         present(alertController, animated: true, completion: nil)
     }
+    
+    func queryCompleted(withResult result: [Any]) {
+        
+    }
 
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {

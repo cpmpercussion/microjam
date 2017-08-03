@@ -20,6 +20,8 @@ protocol ModelDelegate {
     
     /// Called when the `PerformanceStore` successfully updates from the cloud backend.
     func modelUpdated()
+    
+    func queryCompleted(withResult result: [Any])
 }
 
 /**
@@ -82,6 +84,31 @@ class PerformanceStore: NSObject {
     func tempURL() -> URL {
         let filename = ProcessInfo.processInfo.globallyUniqueString + ".png"
         return URL.init(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(filename)
+    }
+    
+    func fetchRecord(withType recordType: String, matching string: String, inField field: String) {
+        
+        let predicate = NSPredicate(format: "%K == %@", argumentArray: [field, string])
+        let query = CKQuery(recordType: recordType, predicate: predicate)
+        let operation = CKQueryOperation(query: query)
+        operation.resultsLimit = max_jams_to_fetch
+        
+        var performances = [ChirpPerformance]()
+        
+        operation.recordFetchedBlock = { record in
+            let perf = self.performanceFrom(record: record)
+            performances.append(perf)
+            print("Got performance: ", perf)
+        }
+        
+        operation.queryCompletionBlock = { (cursor, error) in
+            if let e = error {
+                print("Query error: \n", e)
+            }
+            self.delegate?.queryCompleted(withResult: ["Query is done"])
+        }
+        
+        publicDB.add(operation)
     }
 
     /// Refresh list of world jams from CloudKit and then update in world jam table view.

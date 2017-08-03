@@ -20,6 +20,8 @@ class SearchJamViewController: UIViewController {
     let colors = [0xF0A97E, 0xA3D0D6, 0xC2D39D, 0xA29E94]
     let categories = ["Instrument", "Username", "Description", "Genre"]
     
+    let performanceStore = (UIApplication.shared.delegate as! AppDelegate).performanceStore
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -36,17 +38,6 @@ class SearchJamViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
     func updateCollectionView(accordingToCell cell : SearchCell) {
         
         if cell.title.text == "Username" {
@@ -60,6 +51,8 @@ class SearchJamViewController: UIViewController {
     
     func getData(withSearchText text : String) {
         print("Getting data with text: ", text)
+        
+        performanceStore.fetchRecord(withType: PerfCloudKeys.type, matching: text, inField: "Performer")
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -70,6 +63,26 @@ class SearchJamViewController: UIViewController {
         }
     }
 
+}
+
+extension SearchJamViewController: ModelDelegate {
+    
+    func errorUpdating(error: NSError) {
+        
+    }
+    
+    func modelUpdated() {
+        
+    }
+    
+    func queryCompleted(withResult result: [Any]) {
+        
+        print("Query is complete!")
+        
+        for r in result {
+            print(r)
+        }
+    }
 }
 
 extension SearchJamViewController: UICollectionViewDelegate {
