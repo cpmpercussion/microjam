@@ -12,6 +12,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
     var window: UIWindow?
     let performanceStore = PerformanceStore()
+    let userProfile = UserProfile.shared
     var storedPerformances : [ChirpPerformance] = [] // FIXME delete these
     static let defaultSettings : [String : Any] = [
         SettingsKeys.performerKey:"performer",
