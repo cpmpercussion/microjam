@@ -86,9 +86,8 @@ class PerformanceStore: NSObject {
         return URL.init(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(filename)
     }
     
-    func fetchRecord(withType recordType: String, matchingString string: String, inField field: String) {
+    func fetchRecord(withType recordType: String, andPredicate predicate: NSPredicate) {
         
-        let predicate = NSPredicate(format: "%K == %@", argumentArray: [field, string])
         let query = CKQuery(recordType: recordType, predicate: predicate)
         let operation = CKQueryOperation(query: query)
         operation.resultsLimit = max_jams_to_fetch
@@ -105,7 +104,10 @@ class PerformanceStore: NSObject {
             if let e = error {
                 print("Query error: \n", e)
             }
-            self.delegate?.queryCompleted(withResult: ["Query is done"])
+            
+            DispatchQueue.main.async {
+                self.delegate?.queryCompleted(withResult: performances)
+            }
         }
         
         publicDB.add(operation)

@@ -14,8 +14,10 @@ class SearchJamViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
     
+    // These numbers are ment for calculating the size of the each cell
     var numberOfColoums = 2
     var numberOfRows = 2
+    var numberOfItems = 4
     
     let colors = [0xF0A97E, 0xA3D0D6, 0xC2D39D, 0xA29E94]
     let categories = ["Instrument", "Username", "Description", "Genre"]
@@ -31,6 +33,7 @@ class SearchJamViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         searchBar.delegate = self
+        performanceStore.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,14 +55,15 @@ class SearchJamViewController: UIViewController {
     func getData(withSearchText text : String) {
         print("Getting data with text: ", text)
         
-        performanceStore.fetchRecord(withType: PerfCloudKeys.type, matchingString: text, inField: "Performer")
+        let predicate = NSPredicate(format: "%K == %@", argumentArray: ["Performer", text])
+        performanceStore.fetchRecord(withType: PerfCloudKeys.type, andPredicate: predicate)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
+        // Make the keyboard go away!
         if searchBar.isFirstResponder {
             searchBar.resignFirstResponder()
-            collectionView.isUserInteractionEnabled = true
         }
     }
 
@@ -79,9 +83,13 @@ extension SearchJamViewController: ModelDelegate {
         
         print("Query is complete!")
         
-        for r in result {
-            print(r)
-        }
+        let performances = result as! [ChirpPerformance]
+        
+        numberOfItems = performances.count
+        numberOfColoums = 3
+        numberOfRows = -1 // A negative number means the cell will be square
+        collectionView.reloadData()
+        
     }
 }
 
@@ -101,7 +109,7 @@ extension SearchJamViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return numberOfColoums + numberOfRows
+        return numberOfItems
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -116,8 +124,6 @@ extension SearchJamViewController: UICollectionViewDataSource {
                             alpha: 1.0)
         
         cell.backgroundColor = color
-        cell.title.textColor = UIColor.white
-        cell.title.text = self.categories[indexPath.row]
         
         return cell
     }
@@ -129,7 +135,11 @@ extension SearchJamViewController: UICollectionViewDelegateFlowLayout {
         
         
         let width = self.collectionView.bounds.size.width / CGFloat(numberOfColoums)
-        let height = self.collectionView.bounds.size.height / CGFloat(numberOfRows)
+        var height = self.collectionView.bounds.size.height / CGFloat(numberOfRows)
+        
+        if numberOfRows < 0 {
+           height = width
+        }
         
         return CGSize(width: width, height: height)
     }
@@ -142,6 +152,11 @@ extension SearchJamViewController: UISearchBarDelegate {
         self.collectionView.isUserInteractionEnabled = false
     }
     
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        print("Did end editing...")
+        self.collectionView.isUserInteractionEnabled = true
+    }
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         print("Search button clicked")
         
@@ -149,6 +164,7 @@ extension SearchJamViewController: UISearchBarDelegate {
             getData(withSearchText: text)
         }
         
+        // Make the keyboard go away!
         searchBar.resignFirstResponder()
     }
 }
