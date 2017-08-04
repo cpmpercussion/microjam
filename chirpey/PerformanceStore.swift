@@ -88,7 +88,7 @@ class PerformanceStore: NSObject {
     }
 
     /// Returns a temporary file path for png images
-    func tempURL() -> URL {
+    static func tempURL() -> URL {
         let filename = ProcessInfo.processInfo.globallyUniqueString + ".png"
         return URL.init(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(filename)
     }
@@ -200,7 +200,7 @@ class PerformanceStore: NSObject {
         performanceRecord[PerfCloudKeys.colour] = performance.colourString() as CKRecordValue
 
         do { // Saving image data
-            let imageURL = tempURL()
+            let imageURL = PerformanceStore.tempURL()
             let imageData = UIImagePNGRepresentation(performance.image)!
             try imageData.write(to: imageURL, options: .atomicWrite)
             let asset = CKAsset(fileURL: imageURL)
