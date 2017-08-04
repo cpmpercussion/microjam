@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import CloudKit
+
 
 class SearchJamViewController: UIViewController {
 
@@ -22,8 +24,6 @@ class SearchJamViewController: UIViewController {
     let colors = [0xF0A97E, 0xA3D0D6, 0xC2D39D, 0xA29E94]
     let categories = ["Instrument", "Username", "Description", "Genre"]
     
-    let performanceStore = (UIApplication.shared.delegate as! AppDelegate).performanceStore
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -33,12 +33,35 @@ class SearchJamViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         searchBar.delegate = self
-        performanceStore.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func handleSearch(withSearchText text: String) {
+        
+        let publicDB = CKContainer.default().publicCloudDatabase
+        
+        var records = [CKRecord]()
+        
+        let predicate = NSPredicate(format: "Performer == %@", argumentArray: [text])
+        let query = CKQuery(recordType: PerfCloudKeys.type, predicate: predicate)
+        publicDB.perform(query, inZoneWith: nil) { (result:[CKRecord]?, error:Error?) in
+            
+            if let e = error {
+                print(e)
+                return
+            }
+            
+            if let r = result {
+                records = r
+            }
+            
+            print("Query is complete!")
+            print(records)
+        }
     }
     
     func updateCollectionView(accordingToCell cell : SearchCell) {
@@ -52,13 +75,6 @@ class SearchJamViewController: UIViewController {
         }
     }
     
-    func getData(withSearchText text : String) {
-        print("Getting data with text: ", text)
-        
-        let predicate = NSPredicate(format: "%K == %@", argumentArray: ["Performer", text])
-        performanceStore.fetchRecord(withType: PerfCloudKeys.type, andPredicate: predicate)
-    }
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         // Make the keyboard go away!
@@ -67,30 +83,6 @@ class SearchJamViewController: UIViewController {
         }
     }
 
-}
-
-extension SearchJamViewController: ModelDelegate {
-    
-    func errorUpdating(error: NSError) {
-        
-    }
-    
-    func modelUpdated() {
-        
-    }
-    
-    func queryCompleted(withResult result: [Any]) {
-        
-        print("Query is complete!")
-        
-        let performances = result as! [ChirpPerformance]
-        
-        numberOfItems = performances.count
-        numberOfColoums = 3
-        numberOfRows = -1 // A negative number means the cell will be square
-        collectionView.reloadData()
-        
-    }
 }
 
 extension SearchJamViewController: UICollectionViewDelegate {
@@ -161,7 +153,7 @@ extension SearchJamViewController: UISearchBarDelegate {
         print("Search button clicked")
         
         if let text = searchBar.text {
-            getData(withSearchText: text)
+            handleSearch(withSearchText: text)
         }
         
         // Make the keyboard go away!

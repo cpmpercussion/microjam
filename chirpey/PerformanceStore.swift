@@ -21,7 +21,6 @@ protocol ModelDelegate {
     /// Called when the `PerformanceStore` successfully updates from the cloud backend.
     func modelUpdated()
     
-    func queryCompleted(withResult result: [Any])
 }
 
 /**
@@ -85,33 +84,6 @@ class PerformanceStore: NSObject {
         let filename = ProcessInfo.processInfo.globallyUniqueString + ".png"
         return URL.init(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(filename)
     }
-    
-    func fetchRecord(withType recordType: String, andPredicate predicate: NSPredicate) {
-        
-        let query = CKQuery(recordType: recordType, predicate: predicate)
-        let operation = CKQueryOperation(query: query)
-        operation.resultsLimit = max_jams_to_fetch
-        
-        var performances = [ChirpPerformance]()
-        
-        operation.recordFetchedBlock = { record in
-            let perf = self.performanceFrom(record: record)
-            performances.append(perf)
-            print("Got performance: ", perf)
-        }
-        
-        operation.queryCompletionBlock = { (cursor, error) in
-            if let e = error {
-                print("Query error: \n", e)
-            }
-            
-            DispatchQueue.main.async {
-                self.delegate?.queryCompleted(withResult: performances)
-            }
-        }
-        
-        publicDB.add(operation)
-    }
 
     /// Refresh list of world jams from CloudKit and then update in world jam table view.
     func fetchWorldJamsFromCloud() {
@@ -126,7 +98,7 @@ class PerformanceStore: NSObject {
         let operation = CKQueryOperation(query: query)
         operation.resultsLimit = max_jams_to_fetch
         operation.recordFetchedBlock = { record in
-            let perf = self.performanceFrom(record: record)
+            let perf = PerformanceStore.performanceFrom(record: record)
             fetchedPerformances.append(perf)
         } // Appends fetched records to the array of Performances
 
@@ -189,7 +161,7 @@ class PerformanceStore: NSObject {
     }
 
     /// Returns a ChirpPerformance from a CKRecord of a performance
-    func performanceFrom(record: CKRecord) -> ChirpPerformance {
+    static func performanceFrom(record: CKRecord) -> ChirpPerformance {
         // TODO: Need some kind of protection against failure here.
         let touches = record.object(forKey: PerfCloudKeys.touches) as! String
         let date = (record.object(forKey: PerfCloudKeys.date) as! NSDate) as Date
