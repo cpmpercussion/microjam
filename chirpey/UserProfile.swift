@@ -182,7 +182,6 @@ class UserProfile: PerformerProfile {
         catch {
             print("UserProfile: Error writing image data:", error)
         }
-        
         updateUserProfile()
     }
     
