@@ -14,8 +14,8 @@ class UserProfile: PerformerProfile {
     /// Shared instance (singleton) of the user's PerformerProfile
     static let shared = UserProfile()
     /// Maximum width of avatar image.
-    static let avatarWidth: CGFloat = 400
-    /// CloudKit Container\
+    static let avatarWidth: CGFloat = 200
+    /// CloudKit Container
     let container = CKContainer.default()
     /// CKRecord of user information.
     var record: CKRecord? {
@@ -164,8 +164,8 @@ class UserProfile: PerformerProfile {
     /// Update avatar image in record and sends to cloudkit
     func updateAvatar(_ image: UIImage) {
         // resize image
-        guard let newImage = image.scaleImage(toWidth: UserProfile.avatarWidth)
-            else {
+        print("UserProfile: resizing avatar to:", UserProfile.avatarWidth)
+        guard let newImage = image.scaleImage(toWidth: UserProfile.avatarWidth) else {
             print("UserProfile: Could not resize avatar")
             return
         }
@@ -219,6 +219,7 @@ extension UIImage {
     /// scales UIImages to a given size.
     func scaleImage(toSize newSize: CGSize) -> UIImage? {
         // thx to Travis M.'s answer https://stackoverflow.com/a/34599236/1646138
+        print("UserProfile Resizing to:", newSize.width, "by", newSize.height)
         let newRect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height).integral
         UIGraphicsBeginImageContextWithOptions(newSize, false, 0)
         if let context = UIGraphicsGetCurrentContext() {

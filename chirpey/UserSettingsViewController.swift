@@ -15,6 +15,7 @@
 
 import UIKit
 import CloudKit
+import DropDown
 
 /// Displays iCloud User Settings screen to allow user to update avatar, name, and other details.
 class UserSettingsViewController: UIViewController {
@@ -38,6 +39,9 @@ class UserSettingsViewController: UIViewController {
     @IBOutlet weak var jamColourSlider: UISlider!
     /// Slider to control the jam background colour
     @IBOutlet weak var backgroundColourSlider: UISlider!
+    /// Dropdown menu for selecting SoundScheme
+    let soundSchemeDropDown = DropDown() // dropdown menu for soundscheme
+    @IBOutlet weak var soundSchemeDropDownButton: UIButton!
     
     /// Link to the users' profile data.
     let profile = UserProfile.shared
@@ -53,6 +57,7 @@ class UserSettingsViewController: UIViewController {
         backgroundColourSlider.tintColor = profile.backgroundColour
         backgroundColourSlider.thumbTintColor = profile.backgroundColour
         backgroundColourSlider.setValue(PerformerProfile.hueFrom(colour: profile.backgroundColour), animated: true)
+        soundSchemeDropDownButton.setTitle(SoundSchemes.namesForKeys[Int(profile.soundScheme)], for: .normal)
     }
     
     
@@ -69,6 +74,21 @@ class UserSettingsViewController: UIViewController {
         stageNameField.delegate = self // become delegate for the stagename field.
 //        NotificationCenter.default.addObserver(self, selector: #selector(startDiscoveryProcess), name: Notification.Name.CKAccountChanged, object: nil)
 //        startDiscoveryProcess()
+        // Soundscheme Dropdown initialisation.
+        // FIXME: make sure dropdown is working.
+        soundSchemeDropDown.anchorView = self.soundSchemeDropDownButton // anchor dropdown to intrument button
+        soundSchemeDropDown.dataSource = Array(SoundSchemes.namesForKeys.values) // set dropdown datasource to available SoundSchemes
+        soundSchemeDropDown.direction = .bottom
+        
+        // Action triggered on selection
+        soundSchemeDropDown.selectionAction = {(index: Int, item: String) -> Void in
+            print("DropDown selected:", index, item)
+            if let sound = SoundSchemes.keysForNames[item] {
+                self.profile.soundScheme = Int64(sound)
+                UserDefaults.standard.set(sound, forKey: SettingsKeys.soundSchemeKey)
+                self.updateUI()
+            }
+        }
         updateUI()
     }
     
@@ -133,6 +153,10 @@ class UserSettingsViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         print("USVC: view will disappear")
         profile.updateUserProfile()
+    }
+    
+    @IBAction func soundSchemeTapped(_ sender: Any) {
+        soundSchemeDropDown.show()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
