@@ -52,6 +52,16 @@ class UserSettingsViewController: UIViewController {
     
     /// updates the profile screen's fields according to a PerformerProfile object
     func updateUI() {
+        // Display appropriate views if user is not logged in.
+        if profile.loggedIn {
+            identityStack.isHidden = false
+            settingsStack.isHidden = false
+            noAccountView.isHidden = true
+        } else {
+            identityStack.isHidden = true
+            settingsStack.isHidden = true
+            noAccountView.isHidden = false
+        }
         avatarImageView.image = profile.avatar
         avatarContainerView.isHidden = false
         stageNameField.text = profile.stageName
@@ -77,16 +87,7 @@ class UserSettingsViewController: UIViewController {
         super.viewDidLoad()
         stageNameField.delegate = self // become delegate for the stagename field.
         
-        // Display appropriate views if user is not logged in.
-        if profile.loggedIn {
-            identityStack.isHidden = false
-            settingsStack.isHidden = false
-            noAccountView.isHidden = true
-        } else {
-            identityStack.isHidden = true
-            settingsStack.isHidden = true
-            noAccountView.isHidden = false
-        }
+
         
         // Soundscheme Dropdown initialisation.
         soundSchemeDropDown.anchorView = self.soundSchemeDropDownButton // anchor dropdown to intrument button
@@ -139,6 +140,15 @@ class UserSettingsViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         print("USVC: view will disappear")
         profile.updateUserProfile()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        print("USVC: view will appear")
+        
+        if (!profile.loggedIn) {
+            print("USVC: Profile not logged in, asking UserProfile for update")
+        }
+        updateUI()
     }
     
     @IBAction func soundSchemeTapped(_ sender: Any) {

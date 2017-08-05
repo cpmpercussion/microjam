@@ -61,7 +61,6 @@ class UserProfile: PerformerProfile {
                         UIApplication.shared.isNetworkActivityIndicatorVisible = false
                         print("UserProfile: iCloud is not available")
                         self.loggedIn = false
-                        
                     }
                 }
             }
@@ -230,18 +229,21 @@ class UserProfile: PerformerProfile {
     /// Update basic profile info in CloudKit (stagename, colours, and soundscheme)
     /// Does not update avatar image.
     internal func updateUserProfile() {
-        if let record = self.record {
-            record[UserCloudKeys.stagename] = stageName as CKRecordValue
-            record[UserCloudKeys.jamColour] = jamColour.hexString() as CKRecordValue
-            record[UserCloudKeys.backgroundColour] = backgroundColour.hexString() as CKRecordValue
-            record[UserCloudKeys.soundScheme] = soundScheme as CKRecordValue
-            container.publicCloudDatabase.save(record) { _, error in
-                if (error != nil) {
-                    print("UserProfile: Error saving to cloudkit")
-                    print(error ?? "")
-                } else {
-                    print("UserProfile: updated user profile in cloudkit.")
-                }
+        guard let record = self.record else {
+            print("UserProfile: Error: User record not initialised")
+            return
+        }
+        
+        record[UserCloudKeys.stagename] = stageName as CKRecordValue
+        record[UserCloudKeys.jamColour] = jamColour.hexString() as CKRecordValue
+        record[UserCloudKeys.backgroundColour] = backgroundColour.hexString() as CKRecordValue
+        record[UserCloudKeys.soundScheme] = soundScheme as CKRecordValue
+        container.publicCloudDatabase.save(record) { _, error in
+            if (error != nil) {
+                print("UserProfile: Error saving to cloudkit")
+                print(error ?? "")
+            } else {
+                print("UserProfile: updated user profile in cloudkit.")
             }
         }
 
