@@ -17,6 +17,8 @@ class UserProfile: PerformerProfile {
     static let avatarWidth: CGFloat = 200
     /// CloudKit Container
     let container = CKContainer.default()
+    /// Records whether user is logged in or not.
+    var loggedIn = false
     /// CKRecord of user information.
     var record: CKRecord? {
         didSet {
@@ -30,16 +32,48 @@ class UserProfile: PerformerProfile {
     private init() {
         // TODO: this should be loaded up from an NSCoder most likely!
         super.init(avatar: UIImage(), stageName: "", jamColour: UIColor.blue, backgroundColour: UIColor.clear, soundScheme: 1)
-        fetchUserRecordID() // fetch the cloudkit record and populate fields properly.
+        //fetchUserRecordID() // fetch the cloudkit record and populate fields properly.
+        NotificationCenter.default.addObserver(self, selector: #selector(discoverCloudAccountStatus), name: Notification.Name.CKAccountChanged, object: nil)
+        discoverCloudAccountStatus() // start account discovery, populates fields as available
     }
     
     // MARK: Discovery Methods
+    
+    /// Used to discover if user is logged into iCloud or not and display appropriate views.
+    @objc private func discoverCloudAccountStatus() {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        container.accountStatus { status, error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    // Error doing CloudKit Discovery
+                    print("UserProfile: Error dicovering profile: \(error)")
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                } else {
+                    switch status {
+                    case .available:
+                        // logged in
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                        print("UserProfile: iCloud is available")
+                        self.fetchUserRecordID()
+                        self.loggedIn = true
+                    case .couldNotDetermine, .noAccount, .restricted:
+                        // not logged in
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                        print("UserProfile: iCloud is not available")
+                        self.loggedIn = false
+                        
+                    }
+                }
+            }
+        }
+    }
     
     /// Fetches the user's user record ID.
     private func fetchUserRecordID() {
         container.fetchUserRecordID { recordID, error in
             guard let recordID = recordID, error == nil else {
                 // TODO: fill in error handling.
+                print("UserProfile: Error: User record ID not found.")
                 return
             }
             
@@ -57,10 +91,12 @@ class UserProfile: PerformerProfile {
         container.publicCloudDatabase.fetch(withRecordID: recordID) { record, error in
             guard let record = record, error == nil else {
                 // TODO: error handling.
+                print("UserProfile: Error: User record not found.")
                 return
             }
-            print("UserProfile: Found user record.")
+            
             DispatchQueue.main.async {
+                print("UserProfile: Found user record.")
                 self.record = record
             }
         }
@@ -156,6 +192,8 @@ class UserProfile: PerformerProfile {
             if (cloudNeedsUpdating) {
                 updateUserProfile()
             }
+        } else {
+            print("UserProfile: Error: User record does not exist!")
         }
     }
 
@@ -169,6 +207,10 @@ class UserProfile: PerformerProfile {
             print("UserProfile: Could not resize avatar")
             return
         }
+        guard let record = self.record else {
+            print("UserProfile: Error: User record not initialised")
+            return
+        }
         
         avatar = newImage // set the new avatar
         
@@ -177,7 +219,7 @@ class UserProfile: PerformerProfile {
             let imageData = UIImagePNGRepresentation(newImage)!
             try imageData.write(to: imageURL, options: .atomicWrite)
             let asset = CKAsset(fileURL: imageURL)
-            self.record![UserCloudKeys.avatar] = asset
+            record[UserCloudKeys.avatar] = asset
         }
         catch {
             print("UserProfile: Error writing image data:", error)

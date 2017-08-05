@@ -20,6 +20,10 @@ import DropDown
 /// Displays iCloud User Settings screen to allow user to update avatar, name, and other details.
 class UserSettingsViewController: UIViewController {
     
+    /// stack for the Avatar view and stagename field
+    @IBOutlet weak var identityStack: UIStackView!
+    /// stack for the colour selectors and soundscheme dropdown
+    @IBOutlet weak var settingsStack: UIStackView!
     /// View shown if user is not logged into iCloud.
     @IBOutlet weak var noAccountView: UIStackView!
     /// Activity indicator used when loading avatar.
@@ -72,9 +76,17 @@ class UserSettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         stageNameField.delegate = self // become delegate for the stagename field.
-        // possibly do some discovery about iCloud status
-//        NotificationCenter.default.addObserver(self, selector: #selector(startDiscoveryProcess), name: Notification.Name.CKAccountChanged, object: nil)
-//        startDiscoveryProcess()
+        
+        // Display appropriate views if user is not logged in.
+        if profile.loggedIn {
+            identityStack.isHidden = false
+            settingsStack.isHidden = false
+            noAccountView.isHidden = true
+        } else {
+            identityStack.isHidden = true
+            settingsStack.isHidden = true
+            noAccountView.isHidden = false
+        }
         
         // Soundscheme Dropdown initialisation.
         soundSchemeDropDown.anchorView = self.soundSchemeDropDownButton // anchor dropdown to intrument button
@@ -93,32 +105,7 @@ class UserSettingsViewController: UIViewController {
         updateUI()
     }
     
-    /// Used to discover if user is logged into iCloud or not and display appropriate views.
-    @objc private func startDiscoveryProcess() {
-        self.noAccountView.isHidden = true
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        container.accountStatus { status, error in
-            DispatchQueue.main.async {
-                if let error = error {
-                    let alert = UIAlertController(title: "Account Error", message: "Unable to determine iCloud account status.\n\(error.localizedDescription)", preferredStyle: .alert)
-                    self.present(alert, animated: true, completion: nil)
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                } else {
-                    switch status {
-                    case .available:
-                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                        // user is logged in so show appropriate views.
-                        // maybe attempt to pull data from CloudKit
-                        // self.noAccountView.isHidden = true
-                        // profile.
-                    case .couldNotDetermine, .noAccount, .restricted:
-                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                        self.noAccountView.isHidden = false
-                    }
-                }
-            }
-        }
-    }
+
     
     /// Used by login button, opens Settings app so that user can log into iCloud.
     @IBAction func logIn(_ sender: Any) {

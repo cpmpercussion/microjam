@@ -195,8 +195,10 @@
                         <outlet property="avatarImageView" destination="eVN-qB-FWL" id="1Er-yt-OOC"/>
                         <outlet property="avatarSpinner" destination="XD8-1Z-pnf" id="MMO-JQ-PY4"/>
                         <outlet property="backgroundColourSlider" destination="Imy-x2-W5d" id="cnL-Dj-uXJ"/>
+                        <outlet property="identityStack" destination="qR4-ur-PsO" id="gx6-48-enw"/>
                         <outlet property="jamColourSlider" destination="Go9-OM-27h" id="J4f-lb-6Jw"/>
                         <outlet property="noAccountView" destination="2zS-nc-bi7" id="BHE-Fc-hDc"/>
+                        <outlet property="settingsStack" destination="P0a-lG-ALF" id="PLg-IB-69a"/>
                         <outlet property="soundSchemeDropDownButton" destination="AYd-1x-gD3" id="jVi-nX-Ntc"/>
                         <outlet property="stageNameField" destination="cdE-c8-L8d" id="f9P-lX-jX4"/>
                     </connections>
