@@ -20,7 +20,7 @@ extension UIViewController {
 }
 
 /// Maximum number of jams to download at a time from CloudKit
-let max_jams_to_fetch = 25
+let max_jams_to_fetch = 50
 
 /// Classes implementing this protocol have can be notified of success or failure of updates from the `PerformanceStore`'s cloud backend.
 protocol ModelDelegate {
