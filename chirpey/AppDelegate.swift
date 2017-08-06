@@ -98,6 +98,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         print("AD: Application will terminate")
         performanceStore.savePerformances()
+        UserProfile.shared.saveProfile() // save local copy of performance profile.
     }
 
 }

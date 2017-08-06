@@ -17,6 +17,10 @@ class UserProfile: NSObject {
     static let shared = UserProfile()
     /// Maximum width of avatar image.
     static let avatarWidth: CGFloat = 200
+    /// URL of local documents directory.
+    static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
+    /// UserProfile storage location.
+    static let profileURL = DocumentsDirectory.appendingPathComponent("userProfile")
     /// CloudKit Container
     let container = CKContainer.default()
     /// Records whether user is logged in or not.
@@ -28,7 +32,7 @@ class UserProfile: NSObject {
         }
     }
     /// Storage for user's performer profile.
-    var profile: PerformerProfile = PerformerProfile.init()
+    var profile: PerformerProfile = UserProfile.loadProfile()
     
     // MARK: Initialisers
     
@@ -41,6 +45,26 @@ class UserProfile: NSObject {
         //fetchUserRecordID() // fetch the cloudkit record and populate fields properly.
         NotificationCenter.default.addObserver(self, selector: #selector(discoverCloudAccountStatus), name: Notification.Name.CKAccountChanged, object: nil)
         discoverCloudAccountStatus() // start account discovery, populates fields as available
+    }
+    
+    /// Load UserProfile from file.
+    static func loadProfile() -> PerformerProfile {
+        if let loadedProfile =  NSKeyedUnarchiver.unarchiveObject(withFile: UserProfile.profileURL.path) as? PerformerProfile {
+            return loadedProfile
+        } else {
+            return PerformerProfile()
+        }
+    }
+    
+    /// Save UserProfile to file.
+    func saveProfile() {
+        NSLog("UserProfile: Going to save profile")
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(profile, toFile: UserProfile.profileURL.path)
+        if (!isSuccessfulSave) {
+            print("UserProfile: Save was not successful.")
+        } else {
+            print("UserProfile: Save was successful.")
+        }
     }
     
     // MARK: Discovery Methods
