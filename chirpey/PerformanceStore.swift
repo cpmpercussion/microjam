@@ -24,10 +24,8 @@ let max_jams_to_fetch = 25
 
 /// Classes implementing this protocol have can be notified of success or failure of updates from the `PerformanceStore`'s cloud backend.
 protocol ModelDelegate {
-
     /// Called when the `PerformanceStore` fails to update for some reason.
     func errorUpdating(error: NSError)
-    
     /// Called when the `PerformanceStore` successfully updates from the cloud backend.
     func modelUpdated()
 }
@@ -36,11 +34,10 @@ protocol ModelDelegate {
  Contains stored performances and handles saving these to the local storage and synchronising with the cloud backend on CloudKit.
 */
 class PerformanceStore: NSObject {
-
+    /// Shared Instance (Singleton) of the PerformanceStore initialised on open.
+    static let shared = PerformanceStore()
     /// Internally stored performances
     var storedPerformances : [ChirpPerformance] = []
-
-
     /// Public CloudKit Database
     let publicDB: CKDatabase = CKContainer.default().publicCloudDatabase
     /// Private CloudKit Database
@@ -48,11 +45,11 @@ class PerformanceStore: NSObject {
     /// Delegate to notify when cloud operations are successful.
     var delegate : ModelDelegate?
 
+    
     /// Loads saved performances and then updates from cloud backend.
-    override init() {
+    override private init() {
         super.init()
-        print("Store: Initialising")
-        print("Store: Loading saved performances...")
+        print("Store: Initialising and loading saved performances.")
         if let savedPerformances = loadPerformances() {
             storedPerformances += savedPerformances
             sortStoredPerformances()

@@ -10,16 +10,25 @@ import Foundation
 
 // MARK: Settings Constants
 
-
 /// Keys for settings in UserDefaults
 struct SettingsKeys {
     static let performerKey = "performer_name"
     static let performerColourKey = "performer_colour"
     static let backgroundColourKey = "background_colour"
     static let soundSchemeKey = "sound_scheme"
+    static let defaultSettings : [String : Any] = [
+        SettingsKeys.performerKey:"performer",
+        SettingsKeys.performerColourKey: 0.5,
+        SettingsKeys.backgroundColourKey: 0.2,
+        SettingsKeys.soundSchemeKey: 0
+    ]
 }
 
 // MARK: Pd Constants
+
+let SOUND_OUTPUT_CHANNELS = 2
+let SAMPLE_RATE = 44100
+let TICKS_PER_BUFFER = 4
 
 /// Constants relating SoundScheme names, ids, and Pd file names.
 struct SoundSchemes {
