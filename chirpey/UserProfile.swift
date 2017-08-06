@@ -12,7 +12,7 @@ import CloudKit
 let userProfileUpdatedNotificationKey = "au.com.charlesmartin.userProfileUpdatedNotificationKey"
 
 /// Singleton class to hold the logged-in user's profile.
-class UserProfile: PerformerProfile {
+class UserProfile: NSObject {
     /// Shared instance (singleton) of the user's PerformerProfile
     static let shared = UserProfile()
     /// Maximum width of avatar image.
@@ -27,13 +27,17 @@ class UserProfile: PerformerProfile {
             assignFromRecord()
         }
     }
+    /// Storage for user's performer profile.
+    var profile: PerformerProfile = PerformerProfile.init()
     
     // MARK: Initialisers
     
     /// Designated initialiser is private as this is a singleton.
-    private init() {
+    private override init() {
         // TODO: this should be loaded up from an NSCoder most likely!
-        super.init(avatar: UIImage(), stageName: "", jamColour: UIColor.blue, backgroundColour: UIColor.clear, soundScheme: 1)
+        super.init()
+        // Look up performer profile.
+        
         //fetchUserRecordID() // fetch the cloudkit record and populate fields properly.
         NotificationCenter.default.addObserver(self, selector: #selector(discoverCloudAccountStatus), name: Notification.Name.CKAccountChanged, object: nil)
         discoverCloudAccountStatus() // start account discovery, populates fields as available
@@ -145,49 +149,49 @@ class UserProfile: PerformerProfile {
             // Avatar
             if let avatarPath = record[UserCloudKeys.avatar] as? CKAsset,
                 let avatarImage = UIImage(contentsOfFile: avatarPath.fileURL.path) {
-                avatar = avatarImage
+                profile.avatar = avatarImage
                 print("UserProfile: Avatar found on Cloudkit.")
             }
             
             // Stage Name
             if let name = record[UserCloudKeys.stagename] as? String {
-                stageName = name
+                profile.stageName = name
                 print("UserProfile: Stagename found on Cloudkit.")
             } else if let name = UserDefaults.standard.string(forKey: SettingsKeys.performerKey) {
-                stageName = name
+                profile.stageName = name
                 print("UserProfile: Stagename found in UserDefaults (updating in cloud)")
                 cloudNeedsUpdating = true
             }
             
             // Jam Colour
             if let jamHex = record[UserCloudKeys.jamColour] as? String {
-                jamColour = UIColor(jamHex)
+                profile.jamColour = UIColor(jamHex)
                 print("UserProfile: jam colour found on Cloudkit.")
             } else {
                 let jamHue = UserDefaults.standard.float(forKey: SettingsKeys.performerColourKey)
-                jamColour = UIColor(hue: CGFloat(jamHue), saturation: 1.0, brightness: 0.7, alpha: 1.0)
+                profile.jamColour = UIColor(hue: CGFloat(jamHue), saturation: 1.0, brightness: 0.7, alpha: 1.0)
                 print("UserProfile: jam colour found in user defaults.")
                 cloudNeedsUpdating = true
             }
             
             // BG Colour
             if let bgHex = record[UserCloudKeys.backgroundColour] as? String {
-                backgroundColour = UIColor(bgHex)
+                profile.backgroundColour = UIColor(bgHex)
                 print("UserProfile: bg colour found on Cloudkit.")
             } else {
                 let bgHue = UserDefaults.standard.float(forKey: SettingsKeys.backgroundColourKey)
-                backgroundColour = UIColor(hue: CGFloat(bgHue), saturation: 1.0, brightness: 0.7, alpha: 1.0)
+                profile.backgroundColour = UIColor(hue: CGFloat(bgHue), saturation: 1.0, brightness: 0.7, alpha: 1.0)
                 print("UserProfile: bg colour found in UserDefaults.")
                 cloudNeedsUpdating = true
             }
             
             // SoundScheme
             if let scheme = record[UserCloudKeys.soundScheme] as? Int64 {
-                soundScheme = scheme
+                profile.soundScheme = scheme
                 print("UserProfile: soundscheme found on Cloudkit.")
             } else {
                 let scheme = UserDefaults.standard.integer(forKey: SettingsKeys.soundSchemeKey)
-                soundScheme = Int64(scheme)
+                profile.soundScheme = Int64(scheme)
                 print("UserProfile: soundscheme found in userdefaults.")
                 cloudNeedsUpdating = true
             }
@@ -215,7 +219,7 @@ class UserProfile: PerformerProfile {
             return
         }
         
-        avatar = newImage // set the new avatar
+        profile.avatar = newImage // set the new avatar
         
         do { // Saving image data
             let imageURL = PerformanceStore.tempURL()
@@ -238,10 +242,10 @@ class UserProfile: PerformerProfile {
             return
         }
         
-        record[UserCloudKeys.stagename] = stageName as CKRecordValue
-        record[UserCloudKeys.jamColour] = jamColour.hexString() as CKRecordValue
-        record[UserCloudKeys.backgroundColour] = backgroundColour.hexString() as CKRecordValue
-        record[UserCloudKeys.soundScheme] = soundScheme as CKRecordValue
+        record[UserCloudKeys.stagename] = profile.stageName as CKRecordValue
+        record[UserCloudKeys.jamColour] = profile.jamColour.hexString() as CKRecordValue
+        record[UserCloudKeys.backgroundColour] = profile.backgroundColour.hexString() as CKRecordValue
+        record[UserCloudKeys.soundScheme] = profile.soundScheme as CKRecordValue
         container.publicCloudDatabase.save(record) { _, error in
             if (error != nil) {
                 print("UserProfile: Error saving to cloudkit")
@@ -253,10 +257,10 @@ class UserProfile: PerformerProfile {
 
         // update user defaults
         // FIXME: use of userdefaults should be deprecated.
-        UserDefaults.standard.set(stageName, forKey: SettingsKeys.performerKey)
-        UserDefaults.standard.set(PerformerProfile.hueFrom(colour: jamColour), forKey: SettingsKeys.performerColourKey)
-        UserDefaults.standard.set(PerformerProfile.hueFrom(colour: backgroundColour), forKey: SettingsKeys.backgroundColourKey)
-        UserDefaults.standard.set(soundScheme, forKey: SettingsKeys.soundSchemeKey)
+        UserDefaults.standard.set(profile.stageName, forKey: SettingsKeys.performerKey)
+        UserDefaults.standard.set(PerformerProfile.hueFrom(colour: profile.jamColour), forKey: SettingsKeys.performerColourKey)
+        UserDefaults.standard.set(PerformerProfile.hueFrom(colour: profile.backgroundColour), forKey: SettingsKeys.backgroundColourKey)
+        UserDefaults.standard.set(profile.soundScheme, forKey: SettingsKeys.soundSchemeKey)
     }
 }
 

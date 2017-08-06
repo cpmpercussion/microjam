@@ -9,7 +9,7 @@
 import UIKit
 
 /// Storage for performer profile data (either for local user or other users).
-class PerformerProfile: NSObject {
+class PerformerProfile: NSObject, NSCoding {
     /// Performer avatar image
     var avatar : UIImage
     /// Performer stage name
@@ -40,29 +40,29 @@ class PerformerProfile: NSObject {
         self.init(avatar: UIImage(), stageName: "", jamColour: UIColor.blue, backgroundColour: UIColor.clear, soundScheme: 1)
     }
     
-//    // MARK: NSCoding Functions
-//    
-//    /// Function for encoding as NSCoder, used for saving on app close.
-//    func encode(with aCoder: NSCoder) {
-//        aCoder.encode(UIImagePNGRepresentation(avatar), forKey: UserCloudKeys.avatar)
-//        aCoder.encode(stageName, forKey: UserCloudKeys.stagename)
-//        aCoder.encode(jamColour, forKey: UserCloudKeys.jamColour)
-//        aCoder.encode(backgroundColour, forKey: UserCloudKeys.backgroundColour)
-//        aCoder.encode(soundScheme, forKey: UserCloudKeys.soundScheme)
-//    }
-//    
-//    /// Initialiser from NSCoder, used when reopening on app launch
-//    required convenience init?(coder aDecoder: NSCoder) {
-//        guard
-//            let imageData = aDecoder.decodeObject(forKey: UserCloudKeys.avatar) as? Data,
-//            let avatar = UIImage(data: imageData),
-//            let stageName = aDecoder.decodeObject(forKey: UserCloudKeys.stagename) as? String,
-//            let jamColour = aDecoder.decodeObject(forKey: UserCloudKeys.jamColour) as? UIColor,
-//            let backgroundColour = aDecoder.decodeObject(forKey: UserCloudKeys.backgroundColour) as? UIColor,
-//            let soundScheme = aDecoder.decodeObject(forKey: UserCloudKeys.soundScheme) as? Int64
-//            else {return nil}
-//        self.init(avatar: avatar, stageName: stageName, jamColour: jamColour, backgroundColour: backgroundColour, soundScheme: soundScheme)
-//    }
+    // MARK: NSCoding Functions
+    
+    /// Function for encoding as NSCoder, used for saving on app close.
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(UIImagePNGRepresentation(avatar), forKey: UserCloudKeys.avatar)
+        aCoder.encode(stageName, forKey: UserCloudKeys.stagename)
+        aCoder.encode(jamColour, forKey: UserCloudKeys.jamColour)
+        aCoder.encode(backgroundColour, forKey: UserCloudKeys.backgroundColour)
+        aCoder.encode(soundScheme, forKey: UserCloudKeys.soundScheme)
+    }
+    
+    /// Initialiser from NSCoder, used when reopening on app launch
+    required convenience init?(coder aDecoder: NSCoder) {
+        guard
+            let imageData = aDecoder.decodeObject(forKey: UserCloudKeys.avatar) as? Data,
+            let avatar = UIImage(data: imageData),
+            let stageName = aDecoder.decodeObject(forKey: UserCloudKeys.stagename) as? String,
+            let jamColour = aDecoder.decodeObject(forKey: UserCloudKeys.jamColour) as? UIColor,
+            let backgroundColour = aDecoder.decodeObject(forKey: UserCloudKeys.backgroundColour) as? UIColor,
+            let soundScheme = aDecoder.decodeObject(forKey: UserCloudKeys.soundScheme) as? Int64
+            else {return nil}
+        self.init(avatar: avatar, stageName: stageName, jamColour: jamColour, backgroundColour: backgroundColour, soundScheme: soundScheme)
+    }
 }
 
 extension PerformerProfile {

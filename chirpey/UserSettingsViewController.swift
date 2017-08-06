@@ -48,12 +48,12 @@ class UserSettingsViewController: UIViewController {
     @IBOutlet weak var soundSchemeDropDownButton: UIButton!
     
     /// Link to the users' profile data.
-    let profile = UserProfile.shared
+    let profile: PerformerProfile = UserProfile.shared.profile
     
     /// updates the profile screen's fields according to the present UserProfile data.
     func updateUI() {
         // Display appropriate views if user is not logged in.
-        if profile.loggedIn {
+        if UserProfile.shared.loggedIn {
             identityStack.isHidden = false
             settingsStack.isHidden = false
             noAccountView.isHidden = true
@@ -145,13 +145,13 @@ class UserSettingsViewController: UIViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         print("USVC: view will disappear")
-        profile.updateUserProfile()
+        UserProfile.shared.updateUserProfile()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         print("USVC: view will appear")
         
-        if (!profile.loggedIn) {
+        if (!UserProfile.shared.loggedIn) {
             print("USVC: Profile not logged in, asking UserProfile for update")
         }
         updateUI()
@@ -177,7 +177,7 @@ extension UserSettingsViewController: UIImagePickerControllerDelegate, UINavigat
         }
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             print("USVC: Updating image")
-            profile.updateAvatar(image)
+            UserProfile.shared.updateAvatar(image)
             avatarImageView.image = image
         }
     }
@@ -195,7 +195,7 @@ extension UserSettingsViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         if let newName = stageNameField.text {
             profile.stageName = newName
-            profile.updateUserProfile()
+            UserProfile.shared.updateUserProfile()
             print("USVC: Set stage name to: ", newName)
         }
         return true
