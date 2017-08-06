@@ -24,11 +24,14 @@ class ChirpView: UIImageView {
     let defaultPlaybackColour : CGColor = UIColor.green.cgColor
     var playbackColour : CGColor?
     let CG_INIT_POINT = CGPoint(x:0,y:0)
-    
-    // Pd File Vars
+    /// Stores the currently open Pd file
     var openPatch : PdFile?
+    /// Stores the $0 (id) value of the currently open Pd patch.
     var openPatchDollarZero : Int32?
+    /// Stores the name of the currently open Pd patch.
     var openPatchName = ""
+    
+    // MARK: Initialisers
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -46,37 +49,14 @@ class ChirpView: UIImageView {
     /// Convenience Initialiser only used when loading performances for playback only. Touch is disabled!
     convenience init(frame: CGRect, performance: ChirpPerformance){
         self.init(frame: frame)
-        self.isMultipleTouchEnabled = false
-        self.isUserInteractionEnabled = false
+        print("ChirpView: Loading programmatically with frame: ", self.frame)
+        self.isMultipleTouchEnabled = false // multitouch is disabled!
+        self.isUserInteractionEnabled = false // user-interaction is disabled!
         self.loadPerformance(performance: performance)
-        
-        print("Loading programmatic ChirpView with frame: ", self.frame)
         self.contentMode = .scaleToFill
     }
     
-    /// Closes the recording and returns the performance.
-    func closeRecording() -> ChirpPerformance? {
-        self.recording = false
-        if let output = self.performance {
-            output.image = self.image!
-            output.performer = UserDefaults.standard.string(forKey: SettingsKeys.performerKey)!
-            output.instrument = SoundSchemes.namesForKeys[UserDefaults.standard.integer(forKey: SettingsKeys.soundSchemeKey)]!
-            output.date = Date()
-            return output
-        }
-        return nil
-    }
-    
-    /// Resets the ChirpView for a new performance and returns the last performance.
-    func reset() -> ChirpPerformance {
-        print("ChirpView: Reset Called")
-        self.performance?.image = self.image!
-        // FIXME: overwrites the date each time a chirpview is reset.
-        self.performance?.date = Date()
-        let output = self.performance
-        self.startNewPerformance()
-        return output!
-    }
+    // MARK: Lifecycle
     
     /// Initialise the ChirpView for a new performance
     func startNewPerformance() {
@@ -107,7 +87,33 @@ class ChirpView: UIImageView {
         self.reloadPatch()
     }
     
+    /// Closes the recording and returns the performance.
+    func closeRecording() -> ChirpPerformance? {
+        self.recording = false
+        if let output = self.performance {
+            output.image = self.image!
+            output.performer = UserProfile.shared.profile.stageName
+            output.instrument = SoundSchemes.namesForKeys[UserProfile.shared.profile.soundScheme]!
+            output.date = Date()
+            return output
+        }
+        return nil
+    }
+    
+    /// Resets the ChirpView for a new performance and returns the last performance.
+    func reset() -> ChirpPerformance {
+        print("ChirpView: Reset Called")
+        self.performance?.image = self.image!
+        self.performance?.date = Date() // stores the date when saved, not started.
+        let output = self.performance
+        self.startNewPerformance() // resets the view for a new performance.
+        return output!
+    }
+    
+
     //MARK: - touch interaction
+    
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.superview?.touchesBegan(touches, with: event)
         if (!self.started) {
@@ -236,18 +242,14 @@ class ChirpView: UIImageView {
             print("ChirpView: Loading the settings specified patch (i.e., new performance)")
             self.openPdFile()
         }
-        print("ChirpView: DollarZero is: ", self.openPatchDollarZero ?? "not available!")
+        // print("ChirpView: DollarZero is: ", self.openPatchDollarZero ?? "not available!")
     }
     
-    /// Opens a Pd patch according the UserDefaults, does nothing if the patch is already open.
+    /// Opens a Pd patch according the UserProfile, does nothing if the patch is already open.
     func openPdFile() {
-        let fileToOpen = SoundSchemes.pdFilesForKeys[UserDefaults.standard.integer(forKey: SettingsKeys.soundSchemeKey)]! as String
-        if openPatchName != fileToOpen {
-            self.openPatch?.close()
-            print("ChirpView: Opening Pd File:", fileToOpen)
-            self.openPatch = PdFile.openNamed(fileToOpen, path: Bundle.main.bundlePath) as? PdFile
-            self.openPatchDollarZero = self.openPatch?.dollarZero
-            openPatchName = fileToOpen
+        let userChoiceKey = UserProfile.shared.profile.soundScheme
+        if let userChoiceFile = SoundSchemes.pdFilesForKeys[userChoiceKey] {
+            openPd(file: userChoiceFile)
         }
     }
     
@@ -258,13 +260,20 @@ class ChirpView: UIImageView {
         print("ChirpView: Attemping to open the Pd File with name:", name)
         if let index = SoundSchemes.namesForKeys.values.index(of: name) {
             let fileToOpen = SoundSchemes.pdFilesForKeys[SoundSchemes.namesForKeys.keys[index]]! as String
-            if openPatchName != fileToOpen {
-                print("ChirpView: Opening Pd File:", fileToOpen)
-                self.openPatch?.close()
-                self.openPatch = PdFile.openNamed(fileToOpen, path: Bundle.main.bundlePath) as? PdFile
-                self.openPatchName = fileToOpen
-                self.openPatchDollarZero = self.openPatch?.dollarZero
-            }
+            openPd(file: fileToOpen)
         }
     }
+    
+    func openPd(file fileToOpen: String) {
+        if openPatchName != fileToOpen {
+            print("ChirpView: Opening Pd File:", fileToOpen)
+            openPatch?.close()
+            openPatch = PdFile.openNamed(fileToOpen, path: Bundle.main.bundlePath) as? PdFile
+            openPatchName = fileToOpen
+            openPatchDollarZero = openPatch?.dollarZero
+        } else {
+            print("ChirpView:", fileToOpen, "was already open.")
+        }
+    }
+    
 }

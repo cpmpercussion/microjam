@@ -32,7 +32,7 @@ let TICKS_PER_BUFFER = 4
 
 /// Constants relating SoundScheme names, ids, and Pd file names.
 struct SoundSchemes {
-    static let namesForKeys : [Int : String] = [
+    static let namesForKeys : [Int64 : String] = [
         0 : "chirp",
         1 : "keys",
         2 : "drums",
@@ -40,7 +40,7 @@ struct SoundSchemes {
         4 : "quack",
         5 : "wub"
     ]
-    static let keysForNames : [String : Int] = [
+    static let keysForNames : [String : Int64] = [
         "chirp" : 0,
         "keys" : 1,
         "drums" : 2,
@@ -48,7 +48,7 @@ struct SoundSchemes {
         "quack" : 4,
         "wub" : 5
     ]
-    static let pdFilesForKeys : [Int : String] = [
+    static let pdFilesForKeys : [Int64 : String] = [
         0 : "chirp.pd",
         1 : "keys.pd",
         2 : "drums.pd",

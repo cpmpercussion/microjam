@@ -72,7 +72,7 @@ class ChirpPerformance : NSObject, NSCoding {
 
     /// Initialiser from NSCoder, used when reopening saved performances on app launch
     required convenience init?(coder aDecoder: NSCoder) {
-        // TODO: write unit test to
+        // TODO: write unit test to test this function.
         guard let data = aDecoder.decodeObject(forKey: PropertyKey.performanceDataKey) as? [TouchRecord]
             else {return nil}
         guard
@@ -85,7 +85,7 @@ class ChirpPerformance : NSObject, NSCoding {
             let replyto = aDecoder.decodeObject(forKey: PropertyKey.replyToKey) as? String
             else {return nil}
         let location = (aDecoder.decodeObject(forKey: "location") as? CLLocation) ?? CLLocation.init(latitude: 60, longitude: 11)
-        print("PERF: Decoding", data.count, "notes:", performer, instrument)
+        // print("PERF: Decoding", data.count, "notes:", performer, instrument)
         self.init(data: data, date: date, performer: performer, instrument: instrument, image: image, location: location, colour: colour, replyto: replyto)
     }
 
