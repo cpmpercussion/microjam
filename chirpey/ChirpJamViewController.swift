@@ -82,9 +82,9 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         super.viewDidAppear(animated)
         print("JAMVC: viewDidAppear.")
         // Check what tab the VC exists under and re-open patch if necessary.
-        if (tabBarItem.title == TabBarItemTitles.jamTab) { // onlyrun this stuff in the jam tab
-            //recordingView.openPdFile() // Make sure the correct Pd File is open
-        }
+//        if (tabBarItem.title == TabBarItemTitles.jamTab) {
+//            // onlyrun this stuff in the jam tab
+//        }
         
         if !performanceViews.isEmpty {
             // there are performances to playback
@@ -135,7 +135,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     
     /// Adds a new playback ChirpView with a ChirpPerformance to the array of performance views.
     func newViewWith(performance : ChirpPerformance) {
-        let newView = ChirpView(frame: CGRect.zero, performance: performance)
+        let newView = ChirpView(with: CGRect.zero, andPerformance: performance)
         newView.isUserInteractionEnabled = false // No UI as this is a playback view.
         newView.backgroundColor = UIColor.clear
         performanceViews.append(newView)
@@ -425,10 +425,9 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     /// Stops the current recording.
     func stopRecording() {
         print("JAMVC: Stopping recording; now loading the recorded performance.")
-        if let lastPerformance = recordingView!.closeRecording(),
-            let replytext = replyto {
-//            TODO: debug this little if let
-            lastPerformance.replyto = replytext
+        if let lastPerformance = recordingView?.saveRecording(),
+            let replyto = self.replyto {
+            lastPerformance.replyto = replyto
             load(performance: lastPerformance)
         }
     }

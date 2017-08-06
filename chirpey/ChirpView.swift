@@ -8,22 +8,41 @@
 
 import UIKit
 
+let CG_INIT_POINT = CGPoint(x:0,y:0)
+let DEFAULT_RECORDING_COLOUR : CGColor = UIColor.red.cgColor
+let DEFAULT_PLAYBACK_COLOUR : CGColor = UIColor.green.cgColor
+
 
 
 /// View class for short touch-interaction musical performances.
 class ChirpView: UIImageView {
-    var lastPoint : CGPoint?
-    var recording = false
-    var playing = false
-    var swiped = false
-    var started = false
-    var startTime = Date()
+    // Performance Data
+    /// Storage for a performance to playback or record
     var performance : ChirpPerformance?
-    let defaultRecordingColour : CGColor = UIColor.red.cgColor
-    var recordingColour : CGColor?
-    let defaultPlaybackColour : CGColor = UIColor.green.cgColor
+    /// Colour for drawing playing touches.
     var playbackColour : CGColor?
-    let CG_INIT_POINT = CGPoint(x:0,y:0)
+    
+    // Drawing
+    /// Stores the location of the last drawn point for animating strokes.
+    var lastPoint : CGPoint?
+    
+    // Interaction
+    /// True if the view is currently playing back a performance
+    var playing = false
+    /// True if the view is currently playing/recording a moving touch
+    var swiped = false
+    /// True if a recording/playback has started
+    var started = false
+    
+    // Recording
+    /// Storage for the date that a performance started recording for timing
+    var startTime = Date()
+    /// True if the view has started a recording (so touches should be recorded)
+    var recording = false
+    /// Colour to render touches as they are recorded.
+    var recordingColour : CGColor?
+    
+    // Pure Data
     /// Stores the currently open Pd file
     var openPatch : PdFile?
     /// Stores the $0 (id) value of the currently open Pd patch.
@@ -33,10 +52,11 @@ class ChirpView: UIImageView {
     
     // MARK: Initialisers
     
+    /// Initialises view for recording, rather than playback.
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         isMultipleTouchEnabled = true
-        startNewPerformance()
+        clearForRecording() // gets view ready for recording.
     }
     
     override init(frame: CGRect) {
@@ -47,128 +67,32 @@ class ChirpView: UIImageView {
     }
     
     /// Convenience Initialiser only used when loading performances for playback only. Touch is disabled!
-    convenience init(frame: CGRect, performance: ChirpPerformance){
+    convenience init(with frame: CGRect, andPerformance perf: ChirpPerformance){
         self.init(frame: frame)
         print("ChirpView: Loading programmatically with frame: ", self.frame)
         isMultipleTouchEnabled = false // multitouch is disabled!
         isUserInteractionEnabled = false // user-interaction is disabled!
-        loadPerformance(performance: performance)
-        contentMode = .scaleToFill
+        loadPerformance(perf)
+        contentMode = .scaleToFill // make sure the image fits the frame
     }
     
     // MARK: Lifecycle
     
-    /// Initialise the ChirpView for a new performance
-    func startNewPerformance() {
-        print("ChirpView: New Performance")
-        recording = false
-        playing = false
-        started = false
-        lastPoint = CG_INIT_POINT
-        swiped = false
-        image = UIImage()
-        performance = ChirpPerformance()
-        recordingColour = performance?.colour.cgColor ?? defaultRecordingColour
-        reloadPatch()
-    }
-    
-    /// Initialise the ChirpView with a loaded performance
-    func loadPerformance(performance: ChirpPerformance) {
+    /// load a new performance in the ChirpView for playback
+    func loadPerformance(_ newPerf: ChirpPerformance) {
         print("ChirpView: Loading existing performance")
+        performance = newPerf
+        image = newPerf.image
+        playbackColour = newPerf.colour.cgColor
         recording = false
         playing = false
         started = false
         lastPoint = CG_INIT_POINT
         swiped = false
-        image = performance.image
-        recordingColour = performance.colour.cgColor
-        playbackColour = performance.colour.cgColor
-        self.performance = performance
         reloadPatch()
-    }
-    
-    /// Closes the recording and returns the performance.
-    func closeRecording() -> ChirpPerformance? {
-        recording = false
-        if let output = self.performance,
-            let image = self.image {
-            output.image = image
-            output.performer = UserProfile.shared.profile.stageName
-            output.instrument = SoundSchemes.namesForKeys[UserProfile.shared.profile.soundScheme]!
-            output.date = Date()
-            return output
-        }
-        return nil
-    }
-    
-    /// Resets the ChirpView for a new performance and returns the last performance.
-    func reset() -> ChirpPerformance {
-        print("ChirpView: Reset Called")
-        self.performance?.image = self.image!
-        self.performance?.date = Date() // stores the date when saved, not started.
-        let output = self.performance
-        self.startNewPerformance() // resets the view for a new performance.
-        return output!
     }
     
 
-    //MARK: - touch interaction
-    
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        superview?.touchesBegan(touches, with: event)
-        if (!started) {
-            startTime = Date()
-            started = true
-        }
-        swiped = false
-        lastPoint = touches.first?.location(in: superview!)
-        let size = touches.first?.majorRadius
-        drawDot(at: lastPoint!, withColour: recordingColour ?? defaultRecordingColour)
-        makeSound(at: lastPoint!, withRadius: size!, thatWasMoving: false)
-        recordTouch(at: lastPoint!, withRadius: size!, thatWasMoving:false)
-    }
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if recording {
-            swiped = true
-            let currentPoint = touches.first?.location(in: superview!)
-            drawLine(from:self.lastPoint!, to:currentPoint!, withColour:recordingColour ?? defaultRecordingColour)
-            lastPoint = currentPoint
-            let size = touches.first?.majorRadius
-            makeSound(at: currentPoint!, withRadius: size!, thatWasMoving: true)
-            recordTouch(at: currentPoint!, withRadius: size!, thatWasMoving: true)
-        }
-    }
-    
-    /// Given a point in the UIImage, sends a touch point to Pd to process for sound.
-    func makeSound(at point : CGPoint, withRadius radius : CGFloat, thatWasMoving moving: Bool) {
-        let x = Double(point.x) / Double(frame.size.width)
-        let y = Double(point.y) / Double(frame.size.width)
-        let z = Double(radius)
-        let m = moving ? 0.0 : 1.0
-        let receiver : String = "\(openPatchDollarZero ?? Int32(0))" + PdConstants.receiverPostFix
-        //let list = ["/x",x,"/y",y,"/z",z] as [Any]
-        // FIXME: figure out how to get Pd to parse the list sequentially.
-        PdBase.sendList(["/m",m], toReceiver: receiver)
-        PdBase.sendList(["/z",z], toReceiver: receiver)
-        PdBase.sendList(["/y",y], toReceiver: receiver)
-        PdBase.sendList(["/x",x], toReceiver: receiver)
-    }
-    
-    /**
-        Adds a touch point to the recording data including whether it was moving
-        and the current time.
-     **/
-    func recordTouch(at point : CGPoint, withRadius radius : CGFloat, thatWasMoving moving : Bool) {
-        let time = -1.0 * startTime.timeIntervalSinceNow
-        let x = Double(point.x) / Double(frame.size.width)
-        let y = Double(point.y) / Double(frame.size.width)
-        let z = Double(radius)
-        if recording { // only record when recording.
-            performance?.recordTouchAt(time: time, x: x, y: y, z: z, moving: moving)
-        }
-    }
     
     // MARK: - drawing functions
 
@@ -203,13 +127,14 @@ class ChirpView: UIImageView {
     }
 
     // MARK: - playback functions
+    
     /**
      Mirrors touchesBegan for replayed performances.
     **/
     func playbackBegan(_ point : CGPoint, _ radius : CGFloat) {
         swiped = false
         lastPoint = point
-        drawDot(at: point, withColour: playbackColour ?? defaultPlaybackColour)
+        drawDot(at: point, withColour: playbackColour ?? DEFAULT_PLAYBACK_COLOUR)
         makeSound(at: point, withRadius: radius, thatWasMoving: false)
     }
     /**
@@ -218,7 +143,7 @@ class ChirpView: UIImageView {
     func playbackMoved(_ point : CGPoint, _ radius : CGFloat) {
         swiped = true
         if let lastPoint = self.lastPoint {
-            drawLine(from: lastPoint, to: point, withColour: playbackColour ?? defaultPlaybackColour)
+            drawLine(from: lastPoint, to: point, withColour: playbackColour ?? DEFAULT_PLAYBACK_COLOUR)
         }
         lastPoint = point
         makeSound(at: point, withRadius: radius, thatWasMoving: true)
@@ -234,8 +159,105 @@ class ChirpView: UIImageView {
         }
         return playbackTouch
     }
+
+}
+
+//MARK: - touch interaction
+
+/// Contains touch interaction and recording functions for ChirpView
+extension ChirpView {
     
-    // MARK: - Pd Patch Managing Functions.
+    /// Responds to taps in the ChirpView, passes on to superviews and reacts.
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        superview?.touchesBegan(touches, with: event)
+        if (!started) {
+            startTime = Date()
+            started = true
+        }
+        swiped = false
+        lastPoint = touches.first?.location(in: superview!)
+        let size = touches.first?.majorRadius
+        drawDot(at: lastPoint!, withColour: recordingColour ?? DEFAULT_RECORDING_COLOUR)
+        makeSound(at: lastPoint!, withRadius: size!, thatWasMoving: false)
+        recordTouch(at: lastPoint!, withRadius: size!, thatWasMoving:false)
+    }
+    
+    /// Responds to moving touch signals, responds with sound and recordings.
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if recording {
+            swiped = true
+            let currentPoint = touches.first?.location(in: superview!)
+            drawLine(from:self.lastPoint!, to:currentPoint!, withColour:recordingColour ?? DEFAULT_RECORDING_COLOUR)
+            lastPoint = currentPoint
+            let size = touches.first?.majorRadius
+            makeSound(at: currentPoint!, withRadius: size!, thatWasMoving: true)
+            recordTouch(at: currentPoint!, withRadius: size!, thatWasMoving: true)
+        }
+    }
+    
+    /**
+     Adds a touch point to the recording data including whether it was moving
+     and the current time.
+     **/
+    func recordTouch(at point : CGPoint, withRadius radius : CGFloat, thatWasMoving moving : Bool) {
+        let time = -1.0 * startTime.timeIntervalSinceNow
+        let x = Double(point.x) / Double(frame.size.width)
+        let y = Double(point.y) / Double(frame.size.width)
+        let z = Double(radius)
+        if recording { // only record when recording.
+            performance?.recordTouchAt(time: time, x: x, y: y, z: z, moving: moving)
+        }
+    }
+    
+    /// Closes the recording and returns the performance.
+    func saveRecording() -> ChirpPerformance? {
+        recording = false
+        guard let output = self.performance,
+            let image = self.image else {
+            return nil
+        }
+        output.image = image
+        output.performer = UserProfile.shared.profile.stageName
+        output.instrument = SoundSchemes.namesForKeys[UserProfile.shared.profile.soundScheme]!
+        output.date = Date()
+        return output
+    }
+    
+    /// Initialise the ChirpView for a new recording
+    func clearForRecording() {
+        print("ChirpView: New Performance")
+        recording = false
+        playing = false
+        started = false
+        lastPoint = CG_INIT_POINT
+        swiped = false
+        image = UIImage()
+        performance = ChirpPerformance()
+        recordingColour = performance?.colour.cgColor ?? DEFAULT_RECORDING_COLOUR
+        reloadPatch()
+    }
+}
+
+
+// MARK: - Pd Patch Managing Functions.
+
+/// Contains Pd and libpd file management for ChirpView.
+extension ChirpView {
+    
+    /// Given a point in the UIImage, sends a touch point to Pd to process for sound.
+    func makeSound(at point : CGPoint, withRadius radius : CGFloat, thatWasMoving moving: Bool) {
+        let x = Double(point.x) / Double(frame.size.width)
+        let y = Double(point.y) / Double(frame.size.width)
+        let z = Double(radius)
+        let m = moving ? 0.0 : 1.0
+        let receiver : String = "\(openPatchDollarZero ?? Int32(0))" + PdConstants.receiverPostFix
+        //let list = ["/x",x,"/y",y,"/z",z] as [Any]
+        // FIXME: figure out how to get Pd to parse the list sequentially.
+        PdBase.sendList(["/m",m], toReceiver: receiver)
+        PdBase.sendList(["/z",z], toReceiver: receiver)
+        PdBase.sendList(["/y",y], toReceiver: receiver)
+        PdBase.sendList(["/x",x], toReceiver: receiver)
+    }
     
     /// Loads the Pd Patch for this ChirpView. If patch name is not set in the ChirpPerformance, the user settings are used.
     func reloadPatch() {
@@ -258,17 +280,17 @@ class ChirpView: UIImageView {
         }
     }
     
-    /**
-     Attempts to open a patch with a given name. Does nothing if the patch is already open.
-     */
+
+    /// Attempts to open a patch with a given name.
     func openPdFile(withName name: String) {
         print("ChirpView: Attemping to open the Pd File with name:", name)
-        if let index = SoundSchemes.namesForKeys.values.index(of: name) {
-            let fileToOpen = SoundSchemes.pdFilesForKeys[SoundSchemes.namesForKeys.keys[index]]! as String
+        if let index = SoundSchemes.namesForKeys.values.index(of: name),
+            let fileToOpen = SoundSchemes.pdFilesForKeys[SoundSchemes.namesForKeys.keys[index]] {
             openPd(file: fileToOpen)
         }
     }
     
+    /// Opens a Pd file given the filename
     func openPd(file fileToOpen: String) {
         if openPatchName != fileToOpen {
             print("ChirpView: Opening Pd File:", fileToOpen)
