@@ -14,7 +14,7 @@ import DateToolsSwift
  Contains the data from a single chirp performance.
  Data is stored as an array of `TouchRecord`.
  */
-class ChirpPerformance : NSObject, NSCoding {
+class ChirpPerformance : NSObject {
     /// Array of `TouchRecord`s to store performance data.
     var performanceData : [TouchRecord]
     /// Array of Timers scheduled to play back each TouchRecord
@@ -35,6 +35,10 @@ class ChirpPerformance : NSObject, NSCoding {
     var location : CLLocation?
     /// Colour used for touch trace of this recording.
     var colour : UIColor = UIColor.blue
+    /// Return a dateString that would work for adding to the performance list.
+    var dateString: String { return self.date.timeAgoSinceNow }
+    /// Returns the hex string for the performance's playback colour.
+    var colourString : String { return self.colour.hexString() }
     //    var backgroundColour : UIColor = UIColor.gray
 
     // MARK: Archiving Paths and TouchRecord header.
@@ -46,30 +50,6 @@ class ChirpPerformance : NSObject, NSCoding {
     /// URL of performance storage directory.
     static let ArchiveURL = DocumentsDirectory.appendingPathComponent("performances")
     
-    /// Keys for performances stored in NSCoders.
-    struct PropertyKey {
-        static let performanceDataKey = "performanceData"
-        static let dateKey = "date"
-        static let performerKey = "performer"
-        static let instrumentKey = "instrument"
-        static let imageKey = "image"
-        static let locationKey = "location"
-        static let colourKey = "colour"
-        static let replyToKey = "replyto"
-    }
-    
-    /// Function for encoding as NSCoder, used for saving performances on app close.
-    func encode(with aCoder: NSCoder) {
-        aCoder.encode(performanceData, forKey: PropertyKey.performanceDataKey)
-        aCoder.encode(date, forKey: PropertyKey.dateKey)
-        aCoder.encode(performer, forKey: PropertyKey.performerKey)
-        aCoder.encode(instrument, forKey: PropertyKey.instrumentKey)
-        aCoder.encode(UIImagePNGRepresentation(image), forKey: PropertyKey.imageKey)
-        aCoder.encode(location, forKey: PropertyKey.locationKey)
-        aCoder.encode(colour.hexString(), forKey: PropertyKey.colourKey)
-        aCoder.encode(replyto, forKey: PropertyKey.replyToKey)
-    }
-
     /// Initialiser from NSCoder, used when reopening saved performances on app launch
     required convenience init?(coder aDecoder: NSCoder) {
         // TODO: write unit test to test this function.
@@ -133,6 +113,30 @@ class ChirpPerformance : NSObject, NSCoding {
         self.performanceData.append(TouchRecord(time: t, x: x, y: y, z: z, moving: moving))
     }
     
+    /// A uniqueish string title for the performance - used for CloudKit records and reply system.
+    func title() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "YYYY-MM-DD-HH-mm-SS"
+        let dateString = formatter.string(from: date)
+        return String(format: "perf-%@-%@-%@", performer, instrument, dateString)
+    }
+    
+    /// Writes a string to the documents directory with a title formed from the current date. Returns the filepath.
+    func writeToFile(csv : String) -> String {
+        var filePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        filePath.append(String(format: "/%@.csv", title()))
+        try? csv.write(toFile: filePath, atomically: true, encoding: String.Encoding.utf8)
+        return filePath
+    }
+    
+
+}
+
+// MARK: Playback functions
+
+/// Extension for playback functions
+extension ChirpPerformance {
+    
     // TODO: make playback behave like "play/pause" rather than start and cancel.
     
     /// Schedules playback of the performance in a given `ChirpView`
@@ -156,35 +160,38 @@ class ChirpPerformance : NSObject, NSCoding {
         }
     }
     
-    /// A uniqueish string title for the performance - used for CloudKit records and reply system.
-    func title() -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "YYYY-MM-DD-HH-mm-SS"
-        let dateString = formatter.string(from: date)
-        return String(format: "perf-%@-%@-%@", performer, instrument, dateString)
+}
+
+// MARK: NSCoding stuff
+
+/// Extension for NSCoding methods
+extension ChirpPerformance: NSCoding {
+    /// Keys for performances stored in NSCoders.
+    struct PropertyKey {
+        static let performanceDataKey = "performanceData"
+        static let dateKey = "date"
+        static let performerKey = "performer"
+        static let instrumentKey = "instrument"
+        static let imageKey = "image"
+        static let locationKey = "location"
+        static let colourKey = "colour"
+        static let replyToKey = "replyto"
     }
     
-    /// Writes a string to the documents directory with a title formed from the current date. Returns the filepath.
-    func writeToFile(csv : String) -> String {
-        var filePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-        filePath.append(String(format: "/%@.csv", title()))
-        try? csv.write(toFile: filePath, atomically: true, encoding: String.Encoding.utf8)
-        return filePath
-    }
-    
-    /// Return a dateString that would work for adding to the performance list.
-    func dateString() -> String {
-        return self.date.timeAgoSinceNow
-    }
-    
-    
-    /// Returns the hex string for the performance's playback colour.
-    func colourString() -> String {
-        return self.colour.hexString()
+    /// Function for encoding as NSCoder, used for saving performances on app close.
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(performanceData, forKey: PropertyKey.performanceDataKey)
+        aCoder.encode(date, forKey: PropertyKey.dateKey)
+        aCoder.encode(performer, forKey: PropertyKey.performerKey)
+        aCoder.encode(instrument, forKey: PropertyKey.instrumentKey)
+        aCoder.encode(UIImagePNGRepresentation(image), forKey: PropertyKey.imageKey)
+        aCoder.encode(location, forKey: PropertyKey.locationKey)
+        aCoder.encode(colour.hexString(), forKey: PropertyKey.colourKey)
+        aCoder.encode(replyto, forKey: PropertyKey.replyToKey)
     }
 }
 
-// MARK: Extra classes and extensions.
+// MARK: UIColor brighterColor for playback
 
 /// Makes a brighter version of UIColors for the playback version.
 extension UIColor {

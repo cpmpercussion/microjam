@@ -340,7 +340,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
                 loadedPerformance = performance
             }
             
-            navigationItem.title = loadedPerformance?.dateString()
+            navigationItem.title = loadedPerformance?.dateString
             statusLabel.text = "Playing..."
             performerLabel.text = loadedPerformance?.performer
             instrumentButton.setTitle(loadedPerformance?.instrument, for: .normal)
@@ -363,7 +363,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             }
             
             
-            navigationItem.title = loadedPerformance?.dateString()
+            navigationItem.title = loadedPerformance?.dateString
             if (!newPerformance) {
                 // disable the save button, only if it's a loaded performance (not a new one)
                 navigationItem.rightBarButtonItem?.isEnabled = false
