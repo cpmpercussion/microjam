@@ -103,7 +103,6 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         self.recordingProgress!.progress = 0.0 // need to initialise the recording progress at zero.
         
         // Soundscheme Dropdown initialisation.
-        // FIXME: make sure dropdown is working.
         soundSchemeDropDown.anchorView = self.instrumentButton // anchor dropdown to intrument button
         soundSchemeDropDown.dataSource = Array(SoundSchemes.namesForKeys.values) // set dropdown datasource to available SoundSchemes
         soundSchemeDropDown.direction = .bottom
@@ -111,12 +110,14 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         // Action triggered on selection
         soundSchemeDropDown.selectionAction = {(index: Int, item: String) -> Void in
             print("DropDown selected:", index, item)
-            UserDefaults.standard.set(SoundSchemes.keysForNames[item], forKey: SettingsKeys.soundSchemeKey)
-            UserDefaults.standard.synchronize()
-            self.updateUI()
+            if let sound = SoundSchemes.keysForNames[item] {
+                UserProfile.shared.profile.soundScheme = Int64(sound)
+                self.updateUI()
+            }
         }
     }
     
+    // Only needed to debug view layouts.
     //    override func viewDidLayoutSubviews() {
     //        print("Laid Out Subviews.")
     //        print("JAMVC: Main ChirpView frame:", self.chirpeySquare.frame.size)
@@ -125,10 +126,10 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     //    }
     
     
+    /// Adds a new playback ChirpView with a ChirpPerformance to the array of performance views.
     func newViewWith(performance : ChirpPerformance) {
-        
         let newView = ChirpView(frame: CGRect.zero, performance: performance)
-        newView.isUserInteractionEnabled = false // Not used for recording
+        newView.isUserInteractionEnabled = false // No UI as this is a playback view.
         newView.backgroundColor = UIColor.clear
         self.performanceViews.append(newView)
     }
@@ -304,14 +305,14 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             } else {
                 self.statusLabel.text = "new" // new performance only.
             }
-            self.performerLabel.text = UserDefaults.standard.string(forKey: SettingsKeys.performerKey)
+            self.performerLabel.text = UserProfile.shared.profile.stageName
             self.playButton.isEnabled = false
             self.jamButton.isEnabled = false
             self.replyButton.isEnabled = false
-            self.instrumentButton.setTitle(SoundSchemes.namesForKeys[UserDefaults.standard.integer(forKey: SettingsKeys.soundSchemeKey)], for: .normal)
+            self.instrumentButton.setTitle(SoundSchemes.namesForKeys[UserProfile.shared.profile.soundScheme], for: .normal)
             if let recordView = self.recordView {
                 // Updating the color of the performance based on the user defaults.
-                recordView.performance?.colour = UIColor(hue: CGFloat(UserDefaults.standard.float(forKey: SettingsKeys.performerColourKey)), saturation: 1.0, brightness: 0.7, alpha: 1.0)
+                recordView.performance?.colour = UserProfile.shared.profile.jamColour
                 recordView.recordingColour = recordView.performance?.colour.cgColor
                 recordView.openPdFile()
             }
@@ -323,8 +324,8 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             self.playButton.isEnabled = false
             self.jamButton.isEnabled = false
             self.replyButton.isEnabled = false
-            self.performerLabel.text = UserDefaults.standard.string(forKey: SettingsKeys.performerKey)
-            self.instrumentButton.setTitle(SoundSchemes.namesForKeys[UserDefaults.standard.integer(forKey: SettingsKeys.soundSchemeKey)], for: .normal)
+            self.performerLabel.text = UserProfile.shared.profile.stageName
+            self.instrumentButton.setTitle(SoundSchemes.namesForKeys[UserProfile.shared.profile.soundScheme], for: .normal)
             
         case ChirpJamModes.playing:
             
@@ -384,7 +385,6 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             self.jamButton.isEnabled = true
             
             print("JAMVC: opening Pd file for loaded performance.")
-            //self.chirpeySquare.openPdFile(withName: loadedPerformance.instrument) // open Pd File.
             
         default:
             
@@ -393,8 +393,8 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             self.playButton.isEnabled = false
             self.jamButton.isEnabled = false
             self.replyButton.isEnabled = false
-            self.performerLabel.text = UserDefaults.standard.string(forKey: SettingsKeys.performerKey)
-            self.instrumentButton.setTitle(SoundSchemes.namesForKeys[UserDefaults.standard.integer(forKey: SettingsKeys.soundSchemeKey)], for: .normal)
+            self.performerLabel.text = UserProfile.shared.profile.stageName
+            self.instrumentButton.setTitle(SoundSchemes.namesForKeys[UserProfile.shared.profile.soundScheme], for: .normal)
         }
     }
     

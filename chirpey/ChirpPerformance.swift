@@ -114,7 +114,7 @@ class ChirpPerformance : NSObject, NSCoding {
     /// Convenience Initialiser for creating performance with data yet to be added.
     convenience override init() {
         // FIXME: actually detect the proper location
-        let perfColour : UIColor = UIColor(hue: CGFloat(UserDefaults.standard.float(forKey: SettingsKeys.performerColourKey)), saturation: 1.0, brightness: 0.7, alpha: 1.0)
+        let perfColour : UIColor = UserProfile.shared.profile.jamColour
         self.init(data : [], date : Date(), performer : "", instrument : "", image : UIImage(), location: CLLocation.init(latitude: 90.0, longitude: 45.0), colour: perfColour.hexString(), replyto: "")
     }
 

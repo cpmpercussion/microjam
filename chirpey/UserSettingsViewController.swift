@@ -71,7 +71,7 @@ class UserSettingsViewController: UIViewController {
         backgroundColourSlider.tintColor = profile.backgroundColour
         backgroundColourSlider.thumbTintColor = profile.backgroundColour
         backgroundColourSlider.setValue(PerformerProfile.hueFrom(colour: profile.backgroundColour), animated: true)
-        soundSchemeDropDownButton.setTitle(SoundSchemes.namesForKeys[Int(profile.soundScheme)], for: .normal)
+        soundSchemeDropDownButton.setTitle(SoundSchemes.namesForKeys[profile.soundScheme], for: .normal)
     }
     
     
@@ -97,7 +97,6 @@ class UserSettingsViewController: UIViewController {
             print("DropDown selected:", index, item)
             if let sound = SoundSchemes.keysForNames[item] {
                 self.profile.soundScheme = Int64(sound)
-                UserDefaults.standard.set(sound, forKey: SettingsKeys.soundSchemeKey)
                 self.updateUI()
             }
         }
