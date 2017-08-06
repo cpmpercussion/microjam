@@ -155,39 +155,6 @@
             </objects>
             <point key="canvasLocation" x="3215.1999999999998" y="-408.84557721139436"/>
         </scene>
-        <!--settings-->
-        <scene sceneID="JKC-ke-Tam">
-            <objects>
-                <tableViewController title="settings" id="s0d-x4-1wv" customClass="SettingsTableViewController" customModule="microjam" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="p5g-hn-j41">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="settingstablecell" id="Cvd-cG-I3p">
-                                <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Cvd-cG-I3p" id="nxe-Y1-Sgh">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="s0d-x4-1wv" id="tQi-5r-8JA"/>
-                            <outlet property="delegate" destination="s0d-x4-1wv" id="2mq-Kl-3Wd"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="settings" id="AAK-cJ-Aeo"/>
-                    <connections>
-                        <segue destination="ft5-bU-KaW" kind="unwind" identifier="UnwindFromSettings" unwindAction="unwindToJamViewWithSender:" id="HGd-FH-PZt"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cMg-wk-IJi" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="ft5-bU-KaW" userLabel="Exit" sceneMemberID="exit"/>
-            </objects>
-            <point key="canvasLocation" x="2268" y="765.96701649175418"/>
-        </scene>
         <!--Microjams!-->
         <scene sceneID="fqF-zj-n21">
             <objects>
@@ -201,7 +168,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="365"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gcn-gn-WZ5" id="sXd-HP-H6B">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="364.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="365"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultRecordingImage" translatesAutoresizingMaskIntoConstraints="NO" id="C1Y-wG-D7P">
@@ -312,7 +279,6 @@
                     <connections>
                         <segue destination="Bey-kK-l91" kind="relationship" relationship="viewControllers" id="JBU-M3-rG5"/>
                         <segue destination="vIe-H4-AUR" kind="relationship" relationship="viewControllers" id="q8E-IA-Mhd"/>
-                        <segue destination="rVf-dj-cV1" kind="relationship" relationship="viewControllers" id="HvA-mY-kCb"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v3b-Zm-w9T" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -375,31 +341,11 @@
             </objects>
             <point key="canvasLocation" x="-30.46875" y="1131.4453125"/>
         </scene>
-        <!--settings-->
-        <scene sceneID="Z9L-iS-2Tn">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rVf-dj-cV1" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="settings" image="settingsTabIcon" id="dBN-0O-gIF"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1k3-Wa-myT">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="s0d-x4-1wv" kind="relationship" relationship="rootViewController" id="jnV-id-EjF"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Kq2-ai-bve" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1328.8" y="765.96701649175418"/>
-        </scene>
     </scenes>
     <resources>
         <image name="defaultRecordingImage" width="150" height="150"/>
         <image name="localjamsTabIcon" width="37" height="37"/>
         <image name="remotejamsTabIcon" width="37" height="37"/>
-        <image name="settingsTabIcon" width="37" height="37"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="fbe-LH-T5z"/>

@@ -12,9 +12,10 @@ import UIKit
 
 class UserNameChooserViewController: UIViewController, UITextFieldDelegate {
 
-
+    /// Text field for entering stage name.
     @IBOutlet weak var userNameTextField: UITextField!
     
+    /// IBAction for pressing continue once stage name is set.
     @IBAction func userNameChoiceButtonPushed(_ sender: Any) {
         if let newName = userNameTextField.text {
             UserDefaults.standard.set(newName, forKey: SettingsKeys.performerKey)
@@ -30,7 +31,6 @@ class UserNameChooserViewController: UIViewController, UITextFieldDelegate {
     }
     
 
-    
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {  //delegate method
         return true
     }

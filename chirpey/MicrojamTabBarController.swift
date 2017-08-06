@@ -9,11 +9,20 @@
 import UIKit
 
 class MicrojamTabBarController: UITabBarController {
+    
+    /// User Settings View Controller
 
     override func viewDidLoad() {
         super.viewDidLoad()
         print("TABVC: Loaded main tab bar.")
-        // Do any additional setup after loading the view.
+        
+        // MARK: Initialise view controllers that exist as tabs.
+        if let userSettingsViewController = UserSettingsViewController.storyboardInstance() {
+        userSettingsViewController.tabBarItem = UITabBarItem(title: "profile", image: #imageLiteral(resourceName: "settingsTabIcon"), selectedImage: nil)
+            viewControllers?.append(userSettingsViewController)
+        } else {
+            print("TABVC: User Settings Tab could not be initialised.")
+        }
     }
 
     override func didReceiveMemoryWarning() {
