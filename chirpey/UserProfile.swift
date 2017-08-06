@@ -9,6 +9,8 @@
 import UIKit
 import CloudKit
 
+let userProfileUpdatedNotificationKey = "au.com.charlesmartin.userProfileUpdatedNotificationKey"
+
 /// Singleton class to hold the logged-in user's profile.
 class UserProfile: PerformerProfile {
     /// Shared instance (singleton) of the user's PerformerProfile
@@ -95,8 +97,10 @@ class UserProfile: PerformerProfile {
             }
             
             DispatchQueue.main.async {
-                print("UserProfile: Found user record.")
+                print("UserProfile: Found user record, notifying.")
                 self.record = record
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: userProfileUpdatedNotificationKey), object: nil)
+                
             }
         }
     }

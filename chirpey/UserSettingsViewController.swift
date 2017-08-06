@@ -50,7 +50,7 @@ class UserSettingsViewController: UIViewController {
     /// Link to the users' profile data.
     let profile = UserProfile.shared
     
-    /// updates the profile screen's fields according to a PerformerProfile object
+    /// updates the profile screen's fields according to the present UserProfile data.
     func updateUI() {
         // Display appropriate views if user is not logged in.
         if profile.loggedIn {
@@ -87,8 +87,6 @@ class UserSettingsViewController: UIViewController {
         super.viewDidLoad()
         stageNameField.delegate = self // become delegate for the stagename field.
         
-
-        
         // Soundscheme Dropdown initialisation.
         soundSchemeDropDown.anchorView = self.soundSchemeDropDownButton // anchor dropdown to intrument button
         soundSchemeDropDown.dataSource = Array(SoundSchemes.namesForKeys.values) // set dropdown datasource to available SoundSchemes
@@ -104,8 +102,16 @@ class UserSettingsViewController: UIViewController {
             }
         }
         updateUI()
+        
+        // add observer for UserProfile updates.
+        NotificationCenter.default.addObserver(self, selector: #selector(userProfileDataUpdated), name: NSNotification.Name(rawValue: userProfileUpdatedNotificationKey), object: nil)
     }
     
+    /// Called by a notification when the UserProfile successfully loads a record.
+    func userProfileDataUpdated() {
+        print("USVC: UserProfile updated, updating UI.")
+        updateUI()
+    }
 
     
     /// Used by login button, opens Settings app so that user can log into iCloud.
