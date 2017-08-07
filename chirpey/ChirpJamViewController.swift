@@ -76,16 +76,13 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        statusLabel.isHidden = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        statusLabel.isHidden = true
         print("JAMVC: viewDidAppear.")
-        // Check what tab the VC exists under and re-open patch if necessary.
-//        if (tabBarItem.title == TabBarItemTitles.jamTab) {
-//            // onlyrun this stuff in the jam tab
-//        }
-        
         if !performanceViews.isEmpty {
             // there are performances to playback
             for view in performanceViews {
@@ -106,6 +103,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        statusLabel.isHidden = true
         print("JAMVC: viewDidLoad")
         recordingProgress!.progress = 0.0 // need to initialise the recording progress at zero.
         
