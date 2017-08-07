@@ -8,13 +8,13 @@
 
 import Foundation
 
-class SelectedTableViewModel: NSObject, UITableViewDataSource, UITableViewDelegate {
+class SelectedTableViewModel: NSObject, UITableViewDataSource {
     
-    var data = ["Guitar", "Bass", "Keys", "Drums"]
+    var data = [String]()
     
     init(withData data: [String]) {
         super.init()
-        //self.data = data
+        self.data = data
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -22,8 +22,12 @@ class SelectedTableViewModel: NSObject, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "filterViewTableCell", for: indexPath) as! FilterViewTableCell
         cell.categoryLabel.text = data[indexPath.row]
+        cell.categoryLabel.sizeToFit()
+        cell.selectedLabel.text = "Drums"
+        
         return cell
     }
 }

@@ -23,8 +23,7 @@ class FilterView: UIView {
     var delegate : FilterViewDelegate?
     
     let categories = ["Instrument", "Genre"]
-    
-    var childTableView : UITableView?
+    var dataModel : SelectedTableViewModel?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -67,33 +66,24 @@ extension FilterView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let cell = tableView.cellForRow(at: indexPath) as! FilterViewTableCell
+        
+        print("Selected item with text: ", cell.categoryLabel.text!)
+        
         if cell.categoryLabel.text == "Instrument" {
             
             let data = ["Guitar", "Bass", "Drums", "Keys"]
+            dataModel = SelectedTableViewModel(withData: data)
             
-            childTableView = UITableView(frame: self.tableView.frame)
-            
-            let cell = UINib(nibName: "FilterViewTableCell", bundle: nil)
-            childTableView!.register(cell, forCellReuseIdentifier: "filterViewTableCell")
-            
-            let tableModel = SelectedTableViewModel(withData: data)
-            childTableView!.dataSource = tableModel
-            childTableView!.delegate = tableModel
-            childTableView!.reloadData()
-            
-            childTableView!.transform = CGAffineTransform(translationX: tableView.frame.width, y: tableView.frame.origin.y)
-            self.addSubview(childTableView!)
-            
-            UIView.animate(withDuration: 0.3, animations: {
-                self.tableView.transform = CGAffineTransform(translationX: -self.tableView.frame.width, y: self.tableView.frame.origin.y)
-                self.childTableView!.transform = .identity
-            })
+            tableView.beginUpdates()
+            tableView.deleteRows(at: [indexPath], with: .left)
+            tableView.insertRows(at: [indexPath], with: .right)
+            tableView.endUpdates()
         }
         
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
+        return 60
     }
 }
 
