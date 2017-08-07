@@ -10,6 +10,11 @@
 		077DC2A7E15F1081FBECA3E5 /* Pods_microjamUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F790C94F468F8D8ACE1123FE /* Pods_microjamUITests.framework */; };
 		3FD8FFE12146D66CF89B8F2F /* Pods_microjam_microjamTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FDD96ACEB14ECDFF2CA2B2F /* Pods_microjam_microjamTests.framework */; };
 		4D17A2951F30A5FA005C9C26 /* AddJamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D17A2941F30A5FA005C9C26 /* AddJamViewController.swift */; };
+		4D20EEFF1F3896CC00C44CD3 /* FilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D20EEFE1F3896CC00C44CD3 /* FilterView.xib */; };
+		4D20EF011F38975E00C44CD3 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D20EF001F38975E00C44CD3 /* FilterView.swift */; };
+		4D20EF041F389D2700C44CD3 /* FilterViewTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D20EF021F389D2700C44CD3 /* FilterViewTableCell.swift */; };
+		4D20EF051F389D2700C44CD3 /* FilterViewTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D20EF031F389D2700C44CD3 /* FilterViewTableCell.xib */; };
+		4D20EF071F38A53E00C44CD3 /* SelectedTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D20EF061F38A53E00C44CD3 /* SelectedTableViewModel.swift */; };
 		4DCA70091F3332B900790640 /* SearchJamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCA70071F3332B900790640 /* SearchJamViewController.swift */; };
 		4DCA700A1F3332B900790640 /* SearchJamViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DCA70081F3332B900790640 /* SearchJamViewController.xib */; };
 		4DCA700D1F33359200790640 /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCA700B1F33359200790640 /* SearchCell.swift */; };
@@ -94,6 +99,11 @@
 		467C19C9B42601CE5131E5AC /* Pods-microjam-microjamTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-microjam-microjamTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-microjam-microjamTests/Pods-microjam-microjamTests.release.xcconfig"; sourceTree = "<group>"; };
 		4B8432CAAE36EBBE2D19F96D /* Pods-microjamUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-microjamUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-microjamUITests/Pods-microjamUITests.release.xcconfig"; sourceTree = "<group>"; };
 		4D17A2941F30A5FA005C9C26 /* AddJamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddJamViewController.swift; sourceTree = "<group>"; };
+		4D20EEFE1F3896CC00C44CD3 /* FilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FilterView.xib; path = chirpey/FilterView.xib; sourceTree = "<group>"; };
+		4D20EF001F38975E00C44CD3 /* FilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FilterView.swift; path = chirpey/FilterView.swift; sourceTree = "<group>"; };
+		4D20EF021F389D2700C44CD3 /* FilterViewTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FilterViewTableCell.swift; path = chirpey/FilterViewTableCell.swift; sourceTree = "<group>"; };
+		4D20EF031F389D2700C44CD3 /* FilterViewTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FilterViewTableCell.xib; path = chirpey/FilterViewTableCell.xib; sourceTree = "<group>"; };
+		4D20EF061F38A53E00C44CD3 /* SelectedTableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectedTableViewModel.swift; path = chirpey/SelectedTableViewModel.swift; sourceTree = "<group>"; };
 		4DCA70071F3332B900790640 /* SearchJamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchJamViewController.swift; path = chirpey/SearchJamViewController.swift; sourceTree = "<group>"; };
 		4DCA70081F3332B900790640 /* SearchJamViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SearchJamViewController.xib; path = chirpey/SearchJamViewController.xib; sourceTree = "<group>"; };
 		4DCA700B1F33359200790640 /* SearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchCell.swift; path = chirpey/SearchCell.swift; sourceTree = "<group>"; };
@@ -214,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				56621B0C1DE39D33009B9AB6 /* ChirpPerformance.swift */,
+				4D20EF061F38A53E00C44CD3 /* SelectedTableViewModel.swift */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -225,6 +236,10 @@
 				56621B161DEC27B0009B9AB6 /* PerformanceTableCell.swift */,
 				4DCA700B1F33359200790640 /* SearchCell.swift */,
 				4DCA700C1F33359200790640 /* SearchCell.xib */,
+				4D20EF001F38975E00C44CD3 /* FilterView.swift */,
+				4D20EEFE1F3896CC00C44CD3 /* FilterView.xib */,
+				4D20EF021F389D2700C44CD3 /* FilterViewTableCell.swift */,
+				4D20EF031F389D2700C44CD3 /* FilterViewTableCell.xib */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -544,6 +559,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5669CAF11DA7D06A009EEC3B /* loadMetaPdLibs.pd in Resources */,
+				4D20EF051F389D2700C44CD3 /* FilterViewTableCell.xib in Resources */,
 				565144061DFAF95900F56B32 /* s_drumelectro.pd in Resources */,
 				565144071DFAF95900F56B32 /* s_pinknoise.pd in Resources */,
 				5669CAEF1DA7D06A009EEC3B /* percsampler.pd in Resources */,
@@ -555,6 +571,7 @@
 				5669CAE51DA7D06A009EEC3B /* stereovol.pd in Resources */,
 				5669CAF61DA7D06A009EEC3B /* m_phrygian.pd in Resources */,
 				5669CAE21DA7D06A009EEC3B /* dispatch.pd in Resources */,
+				4D20EEFF1F3896CC00C44CD3 /* FilterView.xib in Resources */,
 				5669CAE31DA7D06A009EEC3B /* monopan.pd in Resources */,
 				5669CAF51DA7D06A009EEC3B /* m_mixolydian.pd in Resources */,
 				5669CAE71DA7D06A009EEC3B /* effectschain.pd in Resources */,
@@ -816,9 +833,12 @@
 				4D17A2951F30A5FA005C9C26 /* AddJamViewController.swift in Sources */,
 				563E06101EFBE71700F0D471 /* Constants.swift in Sources */,
 				56B329E51E44834E001345DC /* WorldJamsTableViewController.swift in Sources */,
+				4D20EF071F38A53E00C44CD3 /* SelectedTableViewModel.swift in Sources */,
 				56621B0D1DE39D33009B9AB6 /* ChirpPerformance.swift in Sources */,
 				56D707EF1F15960900FDEB76 /* PerformanceStore.swift in Sources */,
 				56621B171DEC27B0009B9AB6 /* PerformanceTableCell.swift in Sources */,
+				4D20EF041F389D2700C44CD3 /* FilterViewTableCell.swift in Sources */,
+				4D20EF011F38975E00C44CD3 /* FilterView.swift in Sources */,
 				569B92C41DFEA99C00AA257C /* SettingsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

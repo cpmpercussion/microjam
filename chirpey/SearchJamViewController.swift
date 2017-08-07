@@ -12,17 +12,20 @@ import CloudKit
 
 class SearchJamViewController: UIViewController {
 
-
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var filterView: FilterView!
     
     // These numbers are ment for calculating the size of the each cell
-    var numberOfColoums = 2
-    var numberOfRows = 2
-    var numberOfItems = 4
+    var numberOfColoums = 3
+    var numberOfRows = -1
+    var numberOfItems = 24
     
-    let colors = [0xF0A97E, 0xA3D0D6, 0xC2D39D, 0xA29E94]
-    let categories = ["Instrument", "Username", "Description", "Genre"]
+    var loadedPerformances = [ChirpPerformance]()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        filterView.transform = CGAffineTransform(translationX: 0, y: 44 - filterView.frame.height)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,11 +36,39 @@ class SearchJamViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         searchBar.delegate = self
+        filterView.delegate = self
+        
+        getPerformances()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func getPerformances() {
+        
+        let publicDB = CKContainer.default().publicCloudDatabase
+        
+        let predicate = NSPredicate(value: true)
+        let query = CKQuery(recordType: PerfCloudKeys.type, predicate: predicate)
+        let queryOperation = CKQueryOperation(query: query)
+        queryOperation.resultsLimit = numberOfItems
+        queryOperation.recordFetchedBlock = { record in
+            self.loadedPerformances.append(PerformanceStore.performanceFrom(record: record))
+        }
+        queryOperation.queryCompletionBlock = { (cursor, error) in
+            if let error = error {
+                print(error)
+                return
+            }
+            
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
+        
+        publicDB.add(queryOperation)
     }
     
     func handleSearch(withSearchText text: String) {
@@ -64,17 +95,6 @@ class SearchJamViewController: UIViewController {
         }
     }
     
-    func updateCollectionView(accordingToCell cell : SearchCell) {
-        
-        if cell.title.text == "Username" {
-            
-            collectionView.backgroundColor = cell.backgroundColor!
-            numberOfRows = 0
-            numberOfColoums = 0
-            collectionView.reloadData()
-        }
-    }
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         // Make the keyboard go away!
@@ -85,12 +105,26 @@ class SearchJamViewController: UIViewController {
 
 }
 
+extension SearchJamViewController: FilterViewDelegate {
+    
+    func didRequestShowView() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.filterView.transform = .identity
+        })
+    }
+    
+    func didRequestHideView() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.filterView.transform = CGAffineTransform(translationX: 0, y: 44 - self.filterView.frame.height)
+        })
+    }
+}
+
 extension SearchJamViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let cell = collectionView.cellForItem(at: indexPath) as! SearchCell
-        self.updateCollectionView(accordingToCell: cell)
     }
 }
 
@@ -108,14 +142,9 @@ extension SearchJamViewController: UICollectionViewDataSource {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "searchCell", for: indexPath) as! SearchCell
         
-        let colorHex = colors[(indexPath.row + indexPath.section) % 4]
-        
-        let color = UIColor(red: CGFloat((colorHex & 0xff0000) >> 16) / 255.0,
-                            green: CGFloat((colorHex & 0x00ff00) >> 8) / 255.0,
-                            blue: CGFloat(colorHex & 0x0000ff) / 255.0,
-                            alpha: 1.0)
-        
-        cell.backgroundColor = color
+        if !loadedPerformances.isEmpty {
+            cell.imageView.image = loadedPerformances[indexPath.row].image
+        }
         
         return cell
     }
@@ -124,7 +153,6 @@ extension SearchJamViewController: UICollectionViewDataSource {
 extension SearchJamViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
         
         let width = self.collectionView.bounds.size.width / CGFloat(numberOfColoums)
         var height = self.collectionView.bounds.size.height / CGFloat(numberOfRows)
@@ -152,9 +180,9 @@ extension SearchJamViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         print("Search button clicked")
         
-        if let text = searchBar.text {
-            handleSearch(withSearchText: text)
-        }
+//        if let text = searchBar.text {
+//            handleSearch(withSearchText: text)
+//        }
         
         // Make the keyboard go away!
         searchBar.resignFirstResponder()

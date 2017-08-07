@@ -10,7 +10,7 @@ import UIKit
 
 class SearchCell: UICollectionViewCell {
 
-    @IBOutlet weak var title: UILabel!
+    @IBOutlet weak var imageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
