@@ -9,10 +9,13 @@
 import UIKit
 import CloudKit
 
+protocol SearchJamDelegate {
+    
+    func didSelect(performance: ChirpPerformance)
+}
 
 class SearchJamViewController: UIViewController {
 
-    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var filterView: FilterView!
     
@@ -23,6 +26,8 @@ class SearchJamViewController: UIViewController {
     var loadedPerformances = [ChirpPerformance]()
     var queryCursor : CKQueryCursor?
     var resultsLimit = 24
+    
+    var delegate : SearchJamDelegate?
     
     override func viewWillAppear(_ animated: Bool) {
         filterView.transform = CGAffineTransform(translationX: 0, y: 44 - filterView.frame.height)
@@ -36,7 +41,6 @@ class SearchJamViewController: UIViewController {
         
         collectionView.delegate = self
         collectionView.dataSource = self
-        searchBar.delegate = self
         filterView.delegate = self
         
         getPerformances()
@@ -142,12 +146,15 @@ class SearchJamViewController: UIViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-        // Make the keyboard go away!
-        if searchBar.isFirstResponder {
-            searchBar.resignFirstResponder()
-        }
     }
 
+}
+
+extension SearchJamViewController: UINavigationBarDelegate {
+    
+    func position(for bar: UIBarPositioning) -> UIBarPosition {
+        return .topAttached
+    }
 }
 
 extension SearchJamViewController: FilterViewDelegate {
@@ -183,6 +190,9 @@ extension SearchJamViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        if let del = delegate {
+            del.didSelect(performance: loadedPerformances[indexPath.row])
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -223,26 +233,6 @@ extension SearchJamViewController: UICollectionViewDelegateFlowLayout {
         let width = self.collectionView.bounds.size.width / CGFloat(numberOfColoums)
         
         return CGSize(width: width, height: width)
-    }
-}
-
-extension SearchJamViewController: UISearchBarDelegate {
-    
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        print("Did begin editing...")
-        self.collectionView.isUserInteractionEnabled = false
-    }
-    
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        print("Did end editing...")
-        self.collectionView.isUserInteractionEnabled = true
-    }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print("Search button clicked")
-        
-        // Make the keyboard go away!
-        searchBar.resignFirstResponder()
     }
 }
 

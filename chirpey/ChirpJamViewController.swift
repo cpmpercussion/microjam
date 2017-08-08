@@ -10,7 +10,7 @@ import DropDown
 
 // TODO: how to tell between loaded and saved and just loaded?
 
-class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerDelegate, AddJamDelegate {
+class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerDelegate, SearchJamDelegate {
     /// Maximum allowed recording time.
     let RECORDING_TIME = 5.0
     var state = ChirpJamModes.new
@@ -84,6 +84,13 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
                 print("JAMVC: Not jam button segue!")
                 // MARK: Put something here
             }
+        
+        } else if let button = sender as? UIButton {
+            
+            if button == addJamButton {
+                let controller = segue.destination as! SearchJamViewController
+                controller.delegate = self
+            }
         }
     }
 
@@ -101,19 +108,22 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
 
         if !self.performanceViews.isEmpty {
             
-            // If there are loaded performance from world controller, disable composing feature..
-            self.addJamButton.isEnabled = false
-            
-            for view in self.performanceViews {
-                view.frame = self.chirpViewContainer.bounds
-                //view.contentMode = .scaleToFill
-                self.chirpViewContainer.addSubview(view)
+            if self.state != ChirpJamModes.composing {
+                // If there are loaded performance from world controller, disable composing feature..
+                self.addJamButton.isEnabled = false
+                
+                for view in self.performanceViews {
+                    view.frame = self.chirpViewContainer.bounds
+                    //view.contentMode = .scaleToFill
+                    self.chirpViewContainer.addSubview(view)
+                }
+                
+                self.replyto = self.performanceViews.first?.performance?.title()
+                self.newPerformance = false
+                self.state = ChirpJamModes.loaded
+                self.updateUI()
             }
-
-            self.replyto = self.performanceViews.first?.performance?.title()
-            self.newPerformance = false
-            self.state = ChirpJamModes.loaded
-            self.updateUI()
+            
         } else {
             self.newRecordView()
         }
@@ -271,7 +281,15 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     }
     
     
-    // Mark: AddJamDelegate methods
+    // MARK: SearchJamDelegate methods
+    
+    func didSelect(performance: ChirpPerformance) {
+        self.newViewWith(performance: performance, withFrame: self.chirpViewContainer.bounds)
+        self.updateUI()
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    // MARK: AddJamDelegate methods
     
     func didReturnWithoutSelected() {
         
@@ -304,10 +322,6 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         
         // Displaying the add jam view controller
         self.state = ChirpJamModes.composing
-        
-        let controller = SearchJamViewController(nibName: "SearchJamViewController", bundle: nil)
-        self.navigationController?.pushViewController(controller, animated: true)
-        //self.present(controller, animated: true, completion: nil)
     }
     
     

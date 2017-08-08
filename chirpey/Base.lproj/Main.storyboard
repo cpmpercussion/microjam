@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="z8b-cn-TNb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="z8b-cn-TNb">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -44,6 +44,7 @@
                                                 <connections>
                                                     <action selector="addJam:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Zna-bh-aMV"/>
                                                     <action selector="soundSchemeTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8og-Nf-5lO"/>
+                                                    <segue destination="EDu-ps-VJS" kind="show" id="hlv-Ft-hub"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="right" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZY3-BC-5OF">
@@ -167,6 +168,55 @@
             </objects>
             <point key="canvasLocation" x="3215.1999999999998" y="-408.84557721139436"/>
         </scene>
+        <!--Browse-->
+        <scene sceneID="qfW-56-IQr">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tQ2-Ad-Xp7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController title="Browse" id="EDu-ps-VJS" customClass="SearchJamViewController" customModule="microjam" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="chj-1y-9dg"/>
+                        <viewControllerLayoutGuide type="bottom" id="5Hr-a1-5a7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="DXw-Dy-xub">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fSR-JV-0cB">
+                                <rect key="frame" x="0.0" y="108" width="375" height="510"/>
+                                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="EhL-9c-ilT">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JAe-aB-Hxx" customClass="FilterView" customModule="microjam" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="JAe-aB-Hxx" secondAttribute="trailing" id="9c2-OP-7EJ"/>
+                            <constraint firstItem="5Hr-a1-5a7" firstAttribute="top" secondItem="JAe-aB-Hxx" secondAttribute="bottom" id="Jvi-3F-SZn"/>
+                            <constraint firstAttribute="trailing" secondItem="fSR-JV-0cB" secondAttribute="trailing" id="Mbc-YL-JID"/>
+                            <constraint firstItem="JAe-aB-Hxx" firstAttribute="top" secondItem="chj-1y-9dg" secondAttribute="bottom" id="PNs-ce-80g"/>
+                            <constraint firstItem="JAe-aB-Hxx" firstAttribute="leading" secondItem="DXw-Dy-xub" secondAttribute="leading" id="R9x-8d-GFU"/>
+                            <constraint firstItem="5Hr-a1-5a7" firstAttribute="top" secondItem="fSR-JV-0cB" secondAttribute="bottom" id="Uz3-lk-ftR"/>
+                            <constraint firstItem="fSR-JV-0cB" firstAttribute="top" secondItem="chj-1y-9dg" secondAttribute="bottom" constant="44" id="d0v-nk-zpw"/>
+                            <constraint firstItem="fSR-JV-0cB" firstAttribute="leading" secondItem="DXw-Dy-xub" secondAttribute="leading" id="pVH-Lt-aaw"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="fSR-JV-0cB" id="g9o-qh-4Cq"/>
+                        <outlet property="filterView" destination="JAe-aB-Hxx" id="iTq-uW-GT5"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="4060" y="-44"/>
+        </scene>
         <!--Add Jam View Controller-->
         <scene sceneID="Hb4-ld-fDb">
             <objects>
@@ -223,7 +273,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dg7-nn-urT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3922.4000000000001" y="-408.84557721139436"/>
+            <point key="canvasLocation" x="4060" y="-772"/>
         </scene>
         <!--settings-->
         <scene sceneID="JKC-ke-Tam">
@@ -235,10 +285,10 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="settingstablecell" id="Cvd-cG-I3p">
-                                <rect key="frame" x="0.0" y="56" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Cvd-cG-I3p" id="nxe-Y1-Sgh">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -271,7 +321,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="365"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gcn-gn-WZ5" id="sXd-HP-H6B">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="365"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="364.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultRecordingImage" translatesAutoresizingMaskIntoConstraints="NO" id="C1Y-wG-D7P">
@@ -472,6 +522,6 @@
         <image name="settingsTabIcon" width="37" height="37"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="fbe-LH-T5z"/>
+        <segue reference="Hyh-JE-FSE"/>
     </inferredMetricsTieBreakers>
 </document>
