@@ -12,6 +12,8 @@ protocol FilterViewDelegate {
     
     func didRequestShowView()
     func didRequestHideView()
+    func didAddFilter(filter : FilterTableModel)
+    func willUpdateFilter(filter : FilterTableModel)
 }
 
 class FilterView: UIView {
@@ -22,8 +24,25 @@ class FilterView: UIView {
     
     var delegate : FilterViewDelegate?
     
-    let categories = ["Instrument", "Genre"]
-    var dataModel : SelectedTableViewModel?
+    var currentCategory : FilterTableModel?
+    
+    let categories = [FilterTableModel(withCategory: "Instrument"),
+                      FilterTableModel(withCategory: "Genre")]
+    
+    let instruments = [FilterTableModel(withCategory: "chirp"),
+                       FilterTableModel(withCategory: "keys"),
+                       FilterTableModel(withCategory: "drums"),
+                       FilterTableModel(withCategory: "string"),
+                       FilterTableModel(withCategory: "quack"),
+                       FilterTableModel(withCategory: "wub")]
+    
+    let genres = [FilterTableModel(withCategory: "Pop"),
+                  FilterTableModel(withCategory: "Rock"),
+                  FilterTableModel(withCategory: "Jazz"),
+                  FilterTableModel(withCategory: "Heavey"),
+                  FilterTableModel(withCategory: "EDM")]
+    
+    var tableData = [FilterTableModel]()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -44,6 +63,8 @@ class FilterView: UIView {
         
         let cell = UINib(nibName: "FilterViewTableCell", bundle: nil)
         tableView.register(cell, forCellReuseIdentifier: "filterViewTableCell")
+        
+        tableData = categories
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -69,37 +90,59 @@ extension FilterView: UITableViewDelegate {
         
         print("Selected item with text: ", cell.categoryLabel.text!)
         
-        if cell.categoryLabel.text == "Instrument" {
+        if let category = currentCategory {
             
-            let data = ["Guitar", "Bass", "Drums", "Keys"]
-            dataModel = SelectedTableViewModel(withData: data)
+            if category.selected != nil {
+                if let delegate = self.delegate {
+                    delegate.willUpdateFilter(filter: category)
+                }
+            }
             
-            tableView.beginUpdates()
-            tableView.deleteRows(at: [indexPath], with: .left)
-            tableView.insertRows(at: [indexPath], with: .right)
-            tableView.endUpdates()
+            category.selected = cell.categoryLabel.text
+            
+            if let delegate = self.delegate {
+                delegate.didAddFilter(filter: category)
+            }
+            
+            currentCategory = nil
+            tableData = categories
+            tableView.reloadData()
+            
+        } else {
+            
+            if cell.categoryLabel.text == "Instrument" {
+                currentCategory = categories[0]
+                tableData = instruments
+                tableView.reloadData()
+                
+            } else if cell.categoryLabel.text == "Genre" {
+                currentCategory = categories[1]
+                tableData = genres
+                tableView.reloadData()
+            }
         }
         
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        return 50
     }
 }
 
 extension FilterView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categories.count
+        return tableData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "filterViewTableCell", for: indexPath) as! FilterViewTableCell
         
-        cell.categoryLabel.text = categories[indexPath.row]
+        cell.categoryLabel.text = tableData[indexPath.row].category
+        cell.selectedLabel.text = tableData[indexPath.row].selected
         cell.categoryLabel.sizeToFit()
-        cell.selectedLabel.text = ""
+        cell.selectedLabel.sizeToFit()
         
         return cell
     }

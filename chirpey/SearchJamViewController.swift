@@ -21,6 +21,8 @@ class SearchJamViewController: UIViewController {
     var numberOfRows = -1
     var numberOfItems = 24
     
+    var filters = [FilterTableModel]()
+    
     var loadedPerformances = [ChirpPerformance]()
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,11 +48,29 @@ class SearchJamViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func getFilterPredicate() -> NSPredicate {
+        
+        if filters.isEmpty {
+            return NSPredicate(value: true)
+        }
+        
+        var predicates = [NSPredicate]()
+        
+        for filter in filters {
+            let predicate = NSPredicate(format: "%K == %@", argumentArray: [filter.category, filter.selected!])
+            predicates.append(predicate)
+        }
+        
+        return NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+    }
+    
     func getPerformances() {
+        
+        loadedPerformances = [ChirpPerformance]()
         
         let publicDB = CKContainer.default().publicCloudDatabase
         
-        let predicate = NSPredicate(value: true)
+        let predicate = getFilterPredicate()
         let query = CKQuery(recordType: PerfCloudKeys.type, predicate: predicate)
         let queryOperation = CKQueryOperation(query: query)
         queryOperation.resultsLimit = numberOfItems
@@ -114,9 +134,22 @@ extension SearchJamViewController: FilterViewDelegate {
     }
     
     func didRequestHideView() {
+        getPerformances()
+        
         UIView.animate(withDuration: 0.3, animations: {
             self.filterView.transform = CGAffineTransform(translationX: 0, y: 44 - self.filterView.frame.height)
         })
+    }
+    
+    func willUpdateFilter(filter: FilterTableModel) {
+        if let index = filters.index(of: filter) {
+            print("Removing filter at: ", index)
+            filters.remove(at: index)
+        }
+    }
+    
+    func didAddFilter(filter: FilterTableModel) {
+        filters.append(filter)
     }
 }
 
@@ -124,7 +157,6 @@ extension SearchJamViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let cell = collectionView.cellForItem(at: indexPath) as! SearchCell
     }
 }
 
