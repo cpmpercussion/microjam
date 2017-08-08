@@ -306,7 +306,8 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         self.state = ChirpJamModes.composing
         
         let controller = SearchJamViewController(nibName: "SearchJamViewController", bundle: nil)
-        self.present(controller, animated: true, completion: nil)
+        self.navigationController?.pushViewController(controller, animated: true)
+        //self.present(controller, animated: true, completion: nil)
     }
     
     

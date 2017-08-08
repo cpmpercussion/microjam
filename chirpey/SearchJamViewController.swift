@@ -18,12 +18,11 @@ class SearchJamViewController: UIViewController {
     
     // These numbers are ment for calculating the size of the each cell
     var numberOfColoums = 3
-    var numberOfRows = -1
-    var numberOfItems = 24
     
     var filters = [FilterTableModel]()
-    
     var loadedPerformances = [ChirpPerformance]()
+    var queryCursor : CKQueryCursor?
+    var resultsLimit = 24
     
     override func viewWillAppear(_ animated: Bool) {
         filterView.transform = CGAffineTransform(translationX: 0, y: 44 - filterView.frame.height)
@@ -56,16 +55,53 @@ class SearchJamViewController: UIViewController {
         
         var predicates = [NSPredicate]()
         
+        // Creating predicates for all filters in the list
         for filter in filters {
             let predicate = NSPredicate(format: "%K == %@", argumentArray: [filter.category, filter.selected!])
             predicates.append(predicate)
         }
         
+        // A series of AND predicates
         return NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+    }
+    
+    func loadPerformances(withQueryOperation operation: CKQueryOperation) {
+        
+        operation.recordFetchedBlock = { record in
+            self.loadedPerformances.append(PerformanceStore.performanceFrom(record: record))
+        }
+        operation.queryCompletionBlock = { (cursor, error) in
+            if let error = error {
+                print(error)
+                return
+            }
+            // Used for continuing a search
+            self.queryCursor = cursor
+            
+            // Reloading data on main thread when operation is complete
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
+    }
+    
+    func loadMoreData() {
+        
+        if let cursor = queryCursor { // Continuing a previous search
+            
+            let publicDB = CKContainer.default().publicCloudDatabase
+
+            let queryOperation = CKQueryOperation(cursor: cursor)
+            queryOperation.resultsLimit = resultsLimit
+            loadPerformances(withQueryOperation: queryOperation)
+            publicDB.add(queryOperation)
+        }
     }
     
     func getPerformances() {
         
+        // TODO: Find a better way to update the loaded performances
+        // Should look through the loaded performances and see if some passes the filters
         loadedPerformances = [ChirpPerformance]()
         
         let publicDB = CKContainer.default().publicCloudDatabase
@@ -73,25 +109,14 @@ class SearchJamViewController: UIViewController {
         let predicate = getFilterPredicate()
         let query = CKQuery(recordType: PerfCloudKeys.type, predicate: predicate)
         let queryOperation = CKQueryOperation(query: query)
-        queryOperation.resultsLimit = numberOfItems
-        queryOperation.recordFetchedBlock = { record in
-            self.loadedPerformances.append(PerformanceStore.performanceFrom(record: record))
-        }
-        queryOperation.queryCompletionBlock = { (cursor, error) in
-            if let error = error {
-                print(error)
-                return
-            }
-            
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
-        }
-        
+        queryOperation.resultsLimit = resultsLimit
+        loadPerformances(withQueryOperation: queryOperation)
         publicDB.add(queryOperation)
     }
     
     func handleSearch(withSearchText text: String) {
+        
+        // TODO: Implement more search related stuff
         
         let publicDB = CKContainer.default().publicCloudDatabase
         
@@ -142,6 +167,7 @@ extension SearchJamViewController: FilterViewDelegate {
     }
     
     func willUpdateFilter(filter: FilterTableModel) {
+        // Updating filters, for now just removing the filter because it will be added again later
         if let index = filters.index(of: filter) {
             print("Removing filter at: ", index)
             filters.remove(at: index)
@@ -158,6 +184,14 @@ extension SearchJamViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
     }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
+        if indexPath.row >= loadedPerformances.count - 1 {
+            print("Should fetch more data!")
+            loadMoreData()
+        }
+    }
 }
 
 extension SearchJamViewController: UICollectionViewDataSource {
@@ -167,7 +201,7 @@ extension SearchJamViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return numberOfItems
+        return loadedPerformances.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -187,13 +221,8 @@ extension SearchJamViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let width = self.collectionView.bounds.size.width / CGFloat(numberOfColoums)
-        var height = self.collectionView.bounds.size.height / CGFloat(numberOfRows)
         
-        if numberOfRows < 0 {
-           height = width
-        }
-        
-        return CGSize(width: width, height: height)
+        return CGSize(width: width, height: width)
     }
 }
 
@@ -211,10 +240,6 @@ extension SearchJamViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         print("Search button clicked")
-        
-//        if let text = searchBar.text {
-//            handleSearch(withSearchText: text)
-//        }
         
         // Make the keyboard go away!
         searchBar.resignFirstResponder()
