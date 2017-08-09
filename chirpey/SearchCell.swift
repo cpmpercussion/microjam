@@ -16,5 +16,5 @@ class SearchCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
 }

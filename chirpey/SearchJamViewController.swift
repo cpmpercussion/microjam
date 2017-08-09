@@ -29,6 +29,9 @@ class SearchJamViewController: UIViewController {
     
     var delegate : SearchJamDelegate?
     
+    var performancePreview : ChirpPerformance?
+    var previewTimer : Timer?
+    
     override func viewWillAppear(_ animated: Bool) {
         filterView.transform = CGAffineTransform(translationX: 0, y: 44 - filterView.frame.height)
     }
@@ -117,37 +120,6 @@ class SearchJamViewController: UIViewController {
         loadPerformances(withQueryOperation: queryOperation)
         publicDB.add(queryOperation)
     }
-    
-    func handleSearch(withSearchText text: String) {
-        
-        // TODO: Implement more search related stuff
-        
-        let publicDB = CKContainer.default().publicCloudDatabase
-        
-        var records = [CKRecord]()
-        
-        let predicate = NSPredicate(format: "Performer == %@", argumentArray: [text])
-        let query = CKQuery(recordType: PerfCloudKeys.type, predicate: predicate)
-        publicDB.perform(query, inZoneWith: nil) { (result:[CKRecord]?, error:Error?) in
-            
-            if let e = error {
-                print(e)
-                return
-            }
-            
-            if let r = result {
-                records = r
-            }
-            
-            print("Query is complete!")
-            print(records)
-        }
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-    }
-
 }
 
 extension SearchJamViewController: UINavigationBarDelegate {
@@ -190,6 +162,15 @@ extension SearchJamViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        if let pTimer = previewTimer {
+            pTimer.invalidate()
+            if let performance = performancePreview {
+                performance.cancelPlayback()
+                performancePreview = nil
+                return
+            }
+        }
+        
         if let del = delegate {
             del.didSelect(performance: loadedPerformances[indexPath.row])
         }
@@ -200,6 +181,22 @@ extension SearchJamViewController: UICollectionViewDelegate {
         if indexPath.row >= loadedPerformances.count - 1 {
             print("Should fetch more data!")
             loadMoreData()
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        print("Did highlight item at: ", indexPath.row)
+        
+        previewTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (timer) in
+            let performance = self.loadedPerformances[indexPath.row]
+            self.performancePreview = performance
+            ChirpView.play(performance: performance)
+        })
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        if let pTimer = previewTimer {
+            pTimer.invalidate()
         }
     }
 }
@@ -230,7 +227,7 @@ extension SearchJamViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let width = self.collectionView.bounds.size.width / CGFloat(numberOfColoums)
+        let width = self.collectionView.bounds.size.width / CGFloat(numberOfColoums) - 1
         
         return CGSize(width: width, height: width)
     }

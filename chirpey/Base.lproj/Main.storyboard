@@ -171,7 +171,6 @@
         <!--Browse-->
         <scene sceneID="qfW-56-IQr">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tQ2-Ad-Xp7" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController title="Browse" id="EDu-ps-VJS" customClass="SearchJamViewController" customModule="microjam" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="chj-1y-9dg"/>
@@ -182,9 +181,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fSR-JV-0cB">
-                                <rect key="frame" x="0.0" y="108" width="375" height="510"/>
-                                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="EhL-9c-ilT">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="EhL-9c-ilT">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -205,7 +204,7 @@
                             <constraint firstItem="JAe-aB-Hxx" firstAttribute="top" secondItem="chj-1y-9dg" secondAttribute="bottom" id="PNs-ce-80g"/>
                             <constraint firstItem="JAe-aB-Hxx" firstAttribute="leading" secondItem="DXw-Dy-xub" secondAttribute="leading" id="R9x-8d-GFU"/>
                             <constraint firstItem="5Hr-a1-5a7" firstAttribute="top" secondItem="fSR-JV-0cB" secondAttribute="bottom" id="Uz3-lk-ftR"/>
-                            <constraint firstItem="fSR-JV-0cB" firstAttribute="top" secondItem="chj-1y-9dg" secondAttribute="bottom" constant="44" id="d0v-nk-zpw"/>
+                            <constraint firstItem="fSR-JV-0cB" firstAttribute="top" secondItem="chj-1y-9dg" secondAttribute="bottom" id="d0v-nk-zpw"/>
                             <constraint firstItem="fSR-JV-0cB" firstAttribute="leading" secondItem="DXw-Dy-xub" secondAttribute="leading" id="pVH-Lt-aaw"/>
                         </constraints>
                     </view>
@@ -214,6 +213,7 @@
                         <outlet property="filterView" destination="JAe-aB-Hxx" id="iTq-uW-GT5"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tQ2-Ad-Xp7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4060" y="-44"/>
         </scene>
