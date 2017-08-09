@@ -14,6 +14,7 @@
 		4D20EF011F38975E00C44CD3 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D20EF001F38975E00C44CD3 /* FilterView.swift */; };
 		4D20EF041F389D2700C44CD3 /* FilterViewTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D20EF021F389D2700C44CD3 /* FilterViewTableCell.swift */; };
 		4D20EF051F389D2700C44CD3 /* FilterViewTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D20EF031F389D2700C44CD3 /* FilterViewTableCell.xib */; };
+		4D77CC3D1F3B5564008BD48C /* BrowseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D77CC3C1F3B5564008BD48C /* BrowseController.swift */; };
 		4DC9067E1F39C0E50062728E /* FilterTableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC9067D1F39C0E50062728E /* FilterTableModel.swift */; };
 		4DCA70091F3332B900790640 /* SearchJamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCA70071F3332B900790640 /* SearchJamViewController.swift */; };
 		4DCA700D1F33359200790640 /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCA700B1F33359200790640 /* SearchCell.swift */; };
@@ -102,6 +103,7 @@
 		4D20EF001F38975E00C44CD3 /* FilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FilterView.swift; path = chirpey/FilterView.swift; sourceTree = "<group>"; };
 		4D20EF021F389D2700C44CD3 /* FilterViewTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FilterViewTableCell.swift; path = chirpey/FilterViewTableCell.swift; sourceTree = "<group>"; };
 		4D20EF031F389D2700C44CD3 /* FilterViewTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FilterViewTableCell.xib; path = chirpey/FilterViewTableCell.xib; sourceTree = "<group>"; };
+		4D77CC3C1F3B5564008BD48C /* BrowseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BrowseController.swift; path = chirpey/BrowseController.swift; sourceTree = "<group>"; };
 		4DC9067D1F39C0E50062728E /* FilterTableModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FilterTableModel.swift; path = chirpey/FilterTableModel.swift; sourceTree = "<group>"; };
 		4DCA70071F3332B900790640 /* SearchJamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchJamViewController.swift; path = chirpey/SearchJamViewController.swift; sourceTree = "<group>"; };
 		4DCA700B1F33359200790640 /* SearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchCell.swift; path = chirpey/SearchCell.swift; sourceTree = "<group>"; };
@@ -252,6 +254,7 @@
 				567286651E05E0AF0024A515 /* MicrojamTabBarController.swift */,
 				4D17A2941F30A5FA005C9C26 /* AddJamViewController.swift */,
 				4DCA70071F3332B900790640 /* SearchJamViewController.swift */,
+				4D77CC3C1F3B5564008BD48C /* BrowseController.swift */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -822,6 +825,7 @@
 				56002F471F306C0F00003B88 /* UserNameChooserViewController.swift in Sources */,
 				56621B111DE47D5B009B9AB6 /* ChirpJamViewController.swift in Sources */,
 				56621B0F1DE47376009B9AB6 /* AppDelegate.swift in Sources */,
+				4D77CC3D1F3B5564008BD48C /* BrowseController.swift in Sources */,
 				4DCA700D1F33359200790640 /* SearchCell.swift in Sources */,
 				4DCA70091F3332B900790640 /* SearchJamViewController.swift in Sources */,
 				56621B131DE4A496009B9AB6 /* ChirpView.swift in Sources */,

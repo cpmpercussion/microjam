@@ -322,6 +322,10 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         
         // Displaying the add jam view controller
         self.state = ChirpJamModes.composing
+        
+        let layout = UICollectionViewFlowLayout()
+        let controller = BrowseController(collectionViewLayout: layout)
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     
