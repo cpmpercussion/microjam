@@ -102,8 +102,9 @@ class PerformanceStore: NSObject {
         let operation = CKQueryOperation(query: query)
         operation.resultsLimit = max_jams_to_fetch
         operation.recordFetchedBlock = { record in
-            let perf = self.performanceFrom(record: record)
-            fetchedPerformances.append(perf)
+            if let perf = self.performanceFrom(record: record) {
+                fetchedPerformances.append(perf)
+            }
         } // Appends fetched records to the array of Performances
 
         operation.queryCompletionBlock = { [unowned self] (cursor, error) in
@@ -165,7 +166,7 @@ class PerformanceStore: NSObject {
     }
 
     /// Returns a ChirpPerformance from a CKRecord of a performance
-    func performanceFrom(record: CKRecord) -> ChirpPerformance {
+    func performanceFrom(record: CKRecord) -> ChirpPerformance? {
         // TODO: Need some kind of protection against failure here.
         let touches = record.object(forKey: PerfCloudKeys.touches) as! String
         let date = (record.object(forKey: PerfCloudKeys.date) as! NSDate) as Date
@@ -176,9 +177,14 @@ class PerformanceStore: NSObject {
         let imageAsset = record.object(forKey: PerfCloudKeys.image) as! CKAsset
         let image = UIImage(contentsOfFile: imageAsset.fileURL.path)!
         let replyto = record.object(forKey: PerfCloudKeys.replyto) as! String
-        let perf = ChirpPerformance(csv: touches, date: date, performer: performer,
+        let performance_id = record.recordID
+        // Initialise the Performance
+        guard let perf = ChirpPerformance(csv: touches, date: date, performer: performer,
                                     instrument: instrument, image: image, location: location,
-                                    colour: colour, replyto: replyto)!
+                                    colour: colour, replyto: replyto, performanceID: performance_id) else {
+                                        print("PerformanceStore: Could not make Performance from CKRecord.")
+                                        return nil
+        }
         return perf
     }
 

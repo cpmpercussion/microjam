@@ -7,6 +7,7 @@
 //
 import UIKit
 import CoreLocation
+import CloudKit
 import UIColor_Hex_Swift
 import DateToolsSwift
 
@@ -40,6 +41,10 @@ class ChirpPerformance : NSObject {
     /// Returns the hex string for the performance's playback colour.
     var colourString : String { return self.colour.hexString() }
     //    var backgroundColour : UIColor = UIColor.gray
+    /// Keeps track of the Record ID of performances retrieved from CloudKit
+    var performanceID : CKRecordID?
+    /// Keeps track of Record ID of parent performance
+    var parentReference : CKReference?
 
     // MARK: Archiving Paths and TouchRecord header.
 
@@ -67,6 +72,9 @@ class ChirpPerformance : NSObject {
         let location = (aDecoder.decodeObject(forKey: "location") as? CLLocation) ?? CLLocation.init(latitude: 60, longitude: 11)
         // print("PERF: Decoding", data.count, "notes:", performer, instrument)
         self.init(data: data, date: date, performer: performer, instrument: instrument, image: image, location: location, colour: colour, replyto: replyto)
+        if let perfId = aDecoder.decodeObject(forKey: PropertyKey.performanceIDKey) as? CKRecordID {
+            self.performanceID = perfId
+        }
     }
 
     /// Main initialiser
@@ -83,12 +91,13 @@ class ChirpPerformance : NSObject {
     }
     
     /// Initialiser with csv of data for the TouchRecords, useful in initialising performances from CloudKit
-    convenience init?(csv: String, date: Date, performer: String, instrument: String, image: UIImage, location: CLLocation, colour: String, replyto: String) {
+    convenience init?(csv: String, date: Date, performer: String, instrument: String, image: UIImage, location: CLLocation, colour: String, replyto: String, performanceID: CKRecordID) {
         var data : [TouchRecord] = []
         let lines = csv.components(separatedBy: "\n")
         // TODO: test this initialiser
         data = lines.flatMap {TouchRecord.init(fromCSVLine: $0)}
         self.init(data: data, date: date, performer: performer, instrument: instrument, image: image, location: location, colour: colour, replyto: replyto)
+        self.performanceID = performanceID
     }
     
     /// Convenience Initialiser for creating performance with data yet to be added.
@@ -176,6 +185,7 @@ extension ChirpPerformance: NSCoding {
         static let locationKey = "location"
         static let colourKey = "colour"
         static let replyToKey = "replyto"
+        static let performanceIDKey = "performance_id"
     }
     
     /// Function for encoding as NSCoder, used for saving performances on app close.
@@ -188,6 +198,9 @@ extension ChirpPerformance: NSCoding {
         aCoder.encode(location, forKey: PropertyKey.locationKey)
         aCoder.encode(colour.hexString(), forKey: PropertyKey.colourKey)
         aCoder.encode(replyto, forKey: PropertyKey.replyToKey)
+        if let perfID = self.performanceID {
+            aCoder.encode(perfID, forKey: PropertyKey.performanceIDKey)
+        }
     }
 }
 
