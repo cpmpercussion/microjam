@@ -10,7 +10,7 @@ import DropDown
 
 // TODO: how to tell between loaded and saved and just loaded?
 
-class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerDelegate, SearchJamDelegate {
+class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerDelegate, BrowseControllerDelegate {
     /// Maximum allowed recording time.
     let RECORDING_TIME = 5.0
     var state = ChirpJamModes.new
@@ -85,12 +85,6 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
                 // MARK: Put something here
             }
         
-        } else if let button = sender as? UIButton {
-            
-            if button == addJamButton {
-                let controller = segue.destination as! SearchJamViewController
-                controller.delegate = self
-            }
         }
     }
 
@@ -281,7 +275,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     }
     
     
-    // MARK: SearchJamDelegate methods
+    // MARK: BrowseControllerDelegate methods
     
     func didSelect(performance: ChirpPerformance) {
         self.newViewWith(performance: performance, withFrame: self.chirpViewContainer.bounds)
@@ -325,6 +319,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         
         let layout = UICollectionViewFlowLayout()
         let controller = BrowseController(collectionViewLayout: layout)
+        controller.delegate = self
         navigationController?.pushViewController(controller, animated: true)
     }
     

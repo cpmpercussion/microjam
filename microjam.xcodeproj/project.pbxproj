@@ -15,6 +15,7 @@
 		4D20EF041F389D2700C44CD3 /* FilterViewTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D20EF021F389D2700C44CD3 /* FilterViewTableCell.swift */; };
 		4D20EF051F389D2700C44CD3 /* FilterViewTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D20EF031F389D2700C44CD3 /* FilterViewTableCell.xib */; };
 		4D77CC3D1F3B5564008BD48C /* BrowseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D77CC3C1F3B5564008BD48C /* BrowseController.swift */; };
+		4DA6A95D1F3C89DB00CD7589 /* BrowseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA6A95C1F3C89DB00CD7589 /* BrowseCell.swift */; };
 		4DC9067E1F39C0E50062728E /* FilterTableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC9067D1F39C0E50062728E /* FilterTableModel.swift */; };
 		4DCA70091F3332B900790640 /* SearchJamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCA70071F3332B900790640 /* SearchJamViewController.swift */; };
 		4DCA700D1F33359200790640 /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCA700B1F33359200790640 /* SearchCell.swift */; };
@@ -104,6 +105,7 @@
 		4D20EF021F389D2700C44CD3 /* FilterViewTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FilterViewTableCell.swift; path = chirpey/FilterViewTableCell.swift; sourceTree = "<group>"; };
 		4D20EF031F389D2700C44CD3 /* FilterViewTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FilterViewTableCell.xib; path = chirpey/FilterViewTableCell.xib; sourceTree = "<group>"; };
 		4D77CC3C1F3B5564008BD48C /* BrowseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BrowseController.swift; path = chirpey/BrowseController.swift; sourceTree = "<group>"; };
+		4DA6A95C1F3C89DB00CD7589 /* BrowseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BrowseCell.swift; path = chirpey/BrowseCell.swift; sourceTree = "<group>"; };
 		4DC9067D1F39C0E50062728E /* FilterTableModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FilterTableModel.swift; path = chirpey/FilterTableModel.swift; sourceTree = "<group>"; };
 		4DCA70071F3332B900790640 /* SearchJamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchJamViewController.swift; path = chirpey/SearchJamViewController.swift; sourceTree = "<group>"; };
 		4DCA700B1F33359200790640 /* SearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchCell.swift; path = chirpey/SearchCell.swift; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 				4D20EEFE1F3896CC00C44CD3 /* FilterView.xib */,
 				4D20EF021F389D2700C44CD3 /* FilterViewTableCell.swift */,
 				4D20EF031F389D2700C44CD3 /* FilterViewTableCell.xib */,
+				4DA6A95C1F3C89DB00CD7589 /* BrowseCell.swift */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -835,6 +838,7 @@
 				56B329E51E44834E001345DC /* WorldJamsTableViewController.swift in Sources */,
 				56621B0D1DE39D33009B9AB6 /* ChirpPerformance.swift in Sources */,
 				56D707EF1F15960900FDEB76 /* PerformanceStore.swift in Sources */,
+				4DA6A95D1F3C89DB00CD7589 /* BrowseCell.swift in Sources */,
 				56621B171DEC27B0009B9AB6 /* PerformanceTableCell.swift in Sources */,
 				4D20EF041F389D2700C44CD3 /* FilterViewTableCell.swift in Sources */,
 				4D20EF011F38975E00C44CD3 /* FilterView.swift in Sources */,

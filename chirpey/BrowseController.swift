@@ -7,19 +7,46 @@
 //
 
 import UIKit
+import CloudKit
 
 private let reuseIdentifier = "browseCell"
 
-class BrowseController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+protocol BrowseControllerDelegate {
+    
+    func didSelect(performance: ChirpPerformance)
+}
 
+class BrowseController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+    
+    var loadedPerformances = [ChirpPerformance]()
+    
+    var queryCursor: CKQueryCursor?
+    var resultsLimit = 24
+    
+    var delegate: BrowseControllerDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let topView = UIView()
+        topView.backgroundColor = UIColor(white: 0.8, alpha: 1)
+        view.addSubview(topView)
         
+        NSLayoutConstraint(item: <#T##Any#>, attribute: <#T##NSLayoutAttribute#>, relatedBy: <#T##NSLayoutRelation#>, toItem: <#T##Any?#>, attribute: <#T##NSLayoutAttribute#>, multiplier: <#T##CGFloat#>, constant: <#T##CGFloat#>)
+                
+        collectionView?.backgroundColor = UIColor(white: 0.9, alpha: 1)
+        collectionView!.register(BrowseCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
-        self.collectionView?.backgroundColor = UIColor(white: 0.9, alpha: 1)
-        self.collectionView!.register(BrowseCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        fetchPerformances()
 
+    }
+    
+    func previewPerformance(sender: UIButton) {
+        
+        if let superView = sender.superview {
+            let cell = superView as! BrowseCell
+            ChirpView.play(performance: cell.performance!)
+        }
     }
 
     // MARK: UICollectionViewDataSource
@@ -30,15 +57,34 @@ class BrowseController: UICollectionViewController, UICollectionViewDelegateFlow
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return loadedPerformances.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! BrowseCell
         
+        let performance = loadedPerformances[indexPath.item]
+        
+        cell.performance = performance
+        cell.performaceImageView.image = performance.image
+        cell.performerNameLabel.text = "By: " + performance.performer
+        cell.listenButton.addTarget(self, action: #selector(previewPerformance(sender:)), for: .touchUpInside)
+        
         return cell
     }
+    
+    // MARK: UICollectionViewDelegate
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        if let delegate = delegate {
+            let cell = collectionView.cellForItem(at: indexPath) as! BrowseCell
+            delegate.didSelect(performance: cell.performance!)
+        }
+    }
+    
+    // MARK: UICollectionViewFlowLayoutDelegate
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
@@ -54,52 +100,46 @@ class BrowseController: UICollectionViewController, UICollectionViewDelegateFlow
     }
 }
 
+// MARK: Database handling
 
-
-class BrowseCell: UICollectionViewCell {
+extension BrowseController {
     
-    let performaceImageView : UIImageView = {
-        let imageView = UIImageView()
-        imageView.backgroundColor = UIColor.blue
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-    
-    let performerNameLabel : UILabel = {
-        let label = UILabel()
-        label.backgroundColor = UIColor.red
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        backgroundColor = UIColor.white
-        initSubviews()
+    func loadPerformances(withQueryOperation operation: CKQueryOperation) {
+        
+        operation.recordFetchedBlock = { record in
+            self.loadedPerformances.append(PerformanceStore.performanceFrom(record: record))
+        }
+        
+        operation.queryCompletionBlock = { (cursor, error) in
+            if let error = error {
+                print(error)
+                return
+            }
+            // Used for continuing a search
+            self.queryCursor = cursor
+            
+            // Reloading data on main thread when operation is complete
+            DispatchQueue.main.async {
+                self.collectionView!.reloadData()
+            }
+        }
     }
     
-    private func initSubviews() {
-        addSubview(performaceImageView)
-        addSubview(performerNameLabel)
+    func fetchPerformances() {
         
-        let views = ["v0" : performaceImageView, "v1" : performerNameLabel]
+        // TODO: Find a better way to update the loaded performances
+        // Should look through the loaded performances and see if some passes the filters
+        loadedPerformances = [ChirpPerformance]()
         
-        var constraints = [NSLayoutConstraint]()
+        let publicDB = CKContainer.default().publicCloudDatabase
         
-        constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "H:|-16-[v0]-8-[v1]-16-|", options: .alignAllTop, metrics: nil, views: views))
+        let predicate = NSPredicate(value: true)
+        let query = CKQuery(recordType: PerfCloudKeys.type, predicate: predicate)
+        let queryOperation = CKQueryOperation(query: query)
+        queryOperation.resultsLimit = resultsLimit
+        loadPerformances(withQueryOperation: queryOperation)
         
-        constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:|-16-[v0]-16-|", options: .alignAllTop, metrics: nil, views: views))
-        
-        constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:|-16-[v1(33)]", options: .alignAllTop, metrics: nil, views: views))
-        
-        constraints.append(NSLayoutConstraint(item: performaceImageView, attribute: .width, relatedBy: .equal, toItem: performaceImageView, attribute: .height, multiplier: 1.0, constant: 1.0))
-        
-        NSLayoutConstraint.activate(constraints)
-        addConstraints(constraints)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("Required init not implemented")
+        publicDB.add(queryOperation)
     }
 }
 
