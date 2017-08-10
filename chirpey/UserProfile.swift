@@ -297,17 +297,15 @@ extension UIImage {
         // thx to Travis M.'s answer https://stackoverflow.com/a/34599236/1646138
         print("UserProfile Resizing to:", newSize.width, "by", newSize.height)
         let newRect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height).integral
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 0)
-        if let context = UIGraphicsGetCurrentContext() {
-            context.interpolationQuality = .high
-            let flipVertical = CGAffineTransform(a: 1, b: 0, c: 0, d: -1, tx: 0, ty: newSize.height)
-            context.concatenate(flipVertical)
-            context.draw(self.cgImage!, in: newRect)
-            let newImage = UIImage(cgImage: context.makeImage()!)
-            UIGraphicsEndImageContext()
-            return newImage
+        UIGraphicsBeginImageContextWithOptions(newSize, true, 0.0)
+        guard let context = UIGraphicsGetCurrentContext() else {
+            return nil
         }
-        return nil
+        context.interpolationQuality = .high
+        self.draw(in: newRect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage
     }
     
     // Scale image just specifying width.

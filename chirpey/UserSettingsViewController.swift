@@ -63,6 +63,7 @@ class UserSettingsViewController: UIViewController {
             noAccountView.isHidden = false
         }
         avatarImageView.image = profile.avatar
+        avatarImageView.contentMode = .scaleAspectFill
         avatarContainerView.isHidden = false
         stageNameField.text = profile.stageName
         jamColourSlider.setValue(PerformerProfile.hueFrom(colour: profile.jamColour), animated: true)
