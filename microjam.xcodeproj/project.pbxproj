@@ -15,6 +15,7 @@
 		562FDCAA1F32D202000409C8 /* PerformerProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562FDCA91F32D202000409C8 /* PerformerProfile.swift */; };
 		562FDCAC1F335A0D000409C8 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562FDCAB1F335A0D000409C8 /* UserProfile.swift */; };
 		562FDCAE1F3727DC000409C8 /* TouchRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562FDCAD1F3727DC000409C8 /* TouchRecord.swift */; };
+		5634AE9C1F3C500000DD5401 /* UserNameChooserViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5634AE9B1F3C500000DD5401 /* UserNameChooserViewController.storyboard */; };
 		563E06101EFBE71700F0D471 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563E060F1EFBE71700F0D471 /* Constants.swift */; };
 		565143FA1DFAB79E00F56B32 /* adsr.pd in Resources */ = {isa = PBXBuildFile; fileRef = 565143F81DFAB79E00F56B32 /* adsr.pd */; };
 		565143FB1DFAB79E00F56B32 /* xfade.pd in Resources */ = {isa = PBXBuildFile; fileRef = 565143F91DFAB79E00F56B32 /* xfade.pd */; };
@@ -100,6 +101,7 @@
 		562FDCA91F32D202000409C8 /* PerformerProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PerformerProfile.swift; path = chirpey/PerformerProfile.swift; sourceTree = "<group>"; };
 		562FDCAB1F335A0D000409C8 /* UserProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserProfile.swift; path = chirpey/UserProfile.swift; sourceTree = "<group>"; };
 		562FDCAD1F3727DC000409C8 /* TouchRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TouchRecord.swift; path = chirpey/TouchRecord.swift; sourceTree = "<group>"; };
+		5634AE9B1F3C500000DD5401 /* UserNameChooserViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = UserNameChooserViewController.storyboard; path = chirpey/UserNameChooserViewController.storyboard; sourceTree = "<group>"; };
 		563E060F1EFBE71700F0D471 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		565143F81DFAB79E00F56B32 /* adsr.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = adsr.pd; sourceTree = "<group>"; };
 		565143F91DFAB79E00F56B32 /* xfade.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = xfade.pd; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 		560772DB1F206F1B000D862D /* views */ = {
 			isa = PBXGroup;
 			children = (
+				5634AE9B1F3C500000DD5401 /* UserNameChooserViewController.storyboard */,
 				562FDCA71F316EAE000409C8 /* UserSettingsViewController.storyboard */,
 				56621B121DE4A496009B9AB6 /* ChirpView.swift */,
 				56621B161DEC27B0009B9AB6 /* PerformanceTableCell.swift */,
@@ -544,6 +547,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5669CAF11DA7D06A009EEC3B /* loadMetaPdLibs.pd in Resources */,
+				5634AE9C1F3C500000DD5401 /* UserNameChooserViewController.storyboard in Resources */,
 				565144061DFAF95900F56B32 /* s_drumelectro.pd in Resources */,
 				565144071DFAF95900F56B32 /* s_pinknoise.pd in Resources */,
 				5669CAEF1DA7D06A009EEC3B /* percsampler.pd in Resources */,

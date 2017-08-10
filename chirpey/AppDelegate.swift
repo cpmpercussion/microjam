@@ -69,7 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
     /// Presents the UserNameChooserViewController if the user hasn't set a name yet
     func presentUserNameChooserController() {
         // TODO: Replace this with a screen by screen onboarding process including check for iCloud login.
-        if let usernamecontroller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "UserNameChooser") as? UserNameChooserViewController {
+        if let usernamecontroller = UserNameChooserViewController.storyboardInstance() {
             if let window = self.window, let rootViewController = window.rootViewController {
                 var currentController = rootViewController
                 

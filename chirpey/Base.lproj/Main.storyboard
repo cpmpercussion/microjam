@@ -283,7 +283,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v3b-Zm-w9T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-29" y="395"/>
+            <point key="canvasLocation" x="258" y="-409"/>
         </scene>
         <!--world-->
         <scene sceneID="kzA-nM-xvC">
@@ -303,43 +303,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jU7-On-bjl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1329" y="-760"/>
-        </scene>
-        <!--userNameChoice-->
-        <scene sceneID="HQE-ec-RFd">
-            <objects>
-                <viewController storyboardIdentifier="UserNameChooser" id="dZm-9s-Gmj" userLabel="userNameChoice" customClass="UserNameChooserViewController" customModule="microjam" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="b5Y-MI-JbV"/>
-                        <viewControllerLayoutGuide type="bottom" id="Koz-2M-iPQ"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="OMx-Lr-dck">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="choose a stage name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="16m-hO-BOl">
-                                <rect key="frame" x="37.5" y="120" width="300" height="80"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="80" id="NrN-BG-xWL"/>
-                                    <constraint firstAttribute="width" constant="300" id="vrX-cO-joW"/>
-                                </constraints>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="continue"/>
-                            </textField>
-                        </subviews>
-                        <color key="backgroundColor" red="0.97367788460000004" green="0.97367788460000004" blue="0.97367788460000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="16m-hO-BOl" firstAttribute="top" secondItem="b5Y-MI-JbV" secondAttribute="bottom" constant="100" id="D1c-Wa-LUV"/>
-                            <constraint firstItem="16m-hO-BOl" firstAttribute="centerX" secondItem="OMx-Lr-dck" secondAttribute="centerX" id="bXl-02-9vy"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="userNameTextField" destination="16m-hO-BOl" id="5XO-6N-KwG"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tYQ-9R-Pu9" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-30.46875" y="1131.4453125"/>
         </scene>
     </scenes>
     <resources>
