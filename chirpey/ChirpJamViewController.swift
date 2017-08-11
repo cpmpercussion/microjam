@@ -215,7 +215,6 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         for view in performanceViews {
             if let performance = view.performance {
                 performance.playback(inView: view)
-                view.playing = true
             }
         }
         
@@ -224,7 +223,6 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
             if let recordingView = self.recordingView,
                 let performance = recordingView.performance {
                     performance.playback(inView: recordingView)
-                    recordingView.playing = true
             }
         }
     }
@@ -441,15 +439,14 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
                 recordingView.recording = false
             } else {
                 stopPlayback()
-                recordingView.playing = false
             }
         } else {
             stopPlayback()
         }
         
-        for view in performanceViews {
-            view.playing = false
-        }
+        //for view in performanceViews {
+            // FIXME: How do you tell the view to stop playing?
+        //}
         
         playButton.setTitle("play", for: UIControlState.normal)
         state = ChirpJamModes.loaded

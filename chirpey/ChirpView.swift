@@ -14,7 +14,7 @@ let DEFAULT_PLAYBACK_COLOUR : CGColor = UIColor.green.cgColor
 
 
 
-/// View class for short touch-interaction musical performances.
+/// A View class for displaying and playing back ChirpPerformance objects. Subclass of UIImageView. Extensions add recording (and touch interaction) functionality.
 class ChirpView: UIImageView {
     // Performance Data
     /// Storage for a performance to playback or record
@@ -27,8 +27,6 @@ class ChirpView: UIImageView {
     var lastPoint : CGPoint?
     
     // Interaction
-    /// True if the view is currently playing back a performance
-    var playing = false
     /// True if the view is currently playing/recording a moving touch
     var swiped = false
     /// True if a recording/playback has started
@@ -85,7 +83,6 @@ class ChirpView: UIImageView {
         image = newPerf.image
         playbackColour = newPerf.colour.cgColor
         recording = false
-        playing = false
         started = false
         lastPoint = CG_INIT_POINT
         swiped = false
@@ -227,7 +224,6 @@ extension ChirpView {
     func clearForRecording() {
         print("ChirpView: New Performance")
         recording = false
-        playing = false
         started = false
         lastPoint = CG_INIT_POINT
         swiped = false
