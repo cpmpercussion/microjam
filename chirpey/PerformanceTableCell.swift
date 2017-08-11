@@ -9,7 +9,8 @@
 import UIKit
 
 class PerformanceTableCell: UITableViewCell {
-
+    
+    @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var previewImage: UIImageView!
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var performer: UILabel!

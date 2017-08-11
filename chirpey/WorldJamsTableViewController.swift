@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CloudKit
 
 class WorldJamsTableViewController: UITableViewController, ModelDelegate {
 
@@ -58,6 +59,23 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
     func queryCompleted(withResult result: [Any]) {
         
     }
+    
+    func getAvatar(forPerformance performance: ChirpPerformance) -> UIImage? {
+        
+        let publicDB = container.publicCloudDatabase
+        
+        let query = CKQuery(recordType: "user", predicate: NSPredicate(format: "stageName == %@", argumentArray: [performance.performer]))
+            publicDB.perform(query, inZoneWith: nil, completionHandler: { (records: [CKRecord]?, error: Error?) in
+                if let e = error {
+                    print(e)
+                    return
+                }
+                
+                print(records!)
+        })
+        
+        return nil
+    }
 
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -70,11 +88,25 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: worldJamCellIdentifier, for: indexPath) as! PerformanceTableCell
+        
         let performance = performanceStore.storedPerformances[indexPath.row]
+        
+        //let image = getAvatar(forPerformance: performance)
+        
+        cell.avatarImageView.backgroundColor = .lightGray
+        cell.avatarImageView.layer.cornerRadius = cell.avatarImageView.frame.width / 2
+        cell.avatarImageView.clipsToBounds = true
+        
         cell.title.text = performance.dateString
         cell.performer.text = performance.performer
         cell.instrument.text = performance.instrument
+        
         cell.previewImage.image = performance.image
+        cell.previewImage.layer.borderWidth = 1
+        cell.previewImage.layer.borderColor = UIColor(white: 0.9, alpha: 1).cgColor
+        cell.previewImage.layer.cornerRadius = 4
+        cell.previewImage.clipsToBounds = true
+        
         cell.context.text = nonCreditString()
 
         var temp = performance // used to store replies as we fetch them.
@@ -97,6 +129,16 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
         // Sum all the images into one and display
         cell.previewImage.image = self.createImageFrom(images: images)
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        // Width of the preview image
+        let width = view.frame.width - 64
+        
+        //returning height of image, pluss all the text
+        return width + 120
+        
     }
 
     /// Adds multiple images on top of each other
