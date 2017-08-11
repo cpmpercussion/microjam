@@ -167,64 +167,6 @@
             </objects>
             <point key="canvasLocation" x="3215.1999999999998" y="-408.84557721139436"/>
         </scene>
-        <!--Add Jam View Controller-->
-        <scene sceneID="Hb4-ld-fDb">
-            <objects>
-                <viewController storyboardIdentifier="addJamViewController" id="t1d-0Z-yNO" customClass="AddJamViewController" customModule="microjam" customModuleProvider="target" sceneMemberID="viewController">
-                    <visualEffectView key="view" opaque="NO" contentMode="scaleToFill" id="GXB-Tp-nc0">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="YVg-5X-AsZ">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uNl-yp-68j">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    <connections>
-                                        <action selector="return:" destination="t1d-0Z-yNO" eventType="touchUpInside" id="wsO-x5-zvv"/>
-                                    </connections>
-                                </button>
-                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.5" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jnK-cT-KFu">
-                                    <rect key="frame" x="32" y="128" width="311" height="411"/>
-                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="4" minimumInteritemSpacing="4" id="tfa-oj-tEb">
-                                        <size key="itemSize" width="96" height="96"/>
-                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                        <inset key="sectionInset" minX="4" minY="4" maxX="4" maxY="4"/>
-                                    </collectionViewFlowLayout>
-                                    <cells>
-                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.5" contentMode="center" reuseIdentifier="addJamCell" id="6qk-Vk-M9X">
-                                            <rect key="frame" x="4" y="4" width="96" height="96"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                <rect key="frame" x="0.0" y="0.0" width="96" height="96"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                            </view>
-                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </collectionViewCell>
-                                    </cells>
-                                </collectionView>
-                            </subviews>
-                            <constraints>
-                                <constraint firstAttribute="trailing" secondItem="jnK-cT-KFu" secondAttribute="trailing" constant="32" id="XlR-mL-0v8"/>
-                                <constraint firstItem="jnK-cT-KFu" firstAttribute="top" secondItem="YVg-5X-AsZ" secondAttribute="top" constant="128" id="gNE-8u-kA0"/>
-                                <constraint firstItem="jnK-cT-KFu" firstAttribute="leading" secondItem="YVg-5X-AsZ" secondAttribute="leading" constant="32" id="hQw-9Y-0FD"/>
-                                <constraint firstAttribute="bottom" secondItem="jnK-cT-KFu" secondAttribute="bottom" constant="128" id="ymd-6n-I6S"/>
-                            </constraints>
-                        </view>
-                        <blurEffect style="light"/>
-                    </visualEffectView>
-                    <connections>
-                        <outlet property="collectionView" destination="jnK-cT-KFu" id="tXB-hW-jgE"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dg7-nn-urT" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4060" y="-772"/>
-        </scene>
         <!--settings-->
         <scene sceneID="JKC-ke-Tam">
             <objects>
