@@ -44,7 +44,7 @@ class SearchJamViewController: UIViewController {
         
         collectionView.delegate = self
         collectionView.dataSource = self
-        filterView.delegate = self
+        //filterView.delegate = self
         
         getPerformances()
     }
