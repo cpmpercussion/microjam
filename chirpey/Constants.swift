@@ -103,6 +103,7 @@ struct ChirpJamModes {
     static let loaded = 4
     static let playing = 5
     static let composing = 6
+    static let idle = 7
 }
 
 /// Identifiers for different segues used in the storyboard.

@@ -125,7 +125,7 @@ class ChirpView: UIImageView {
     
     static func play(performance: ChirpPerformance) {
         
-        let chirp = ChirpView(frame: CGRect(x: 0, y: 0, width: 300, height: 300), performance: performance)
+        let chirp = ChirpView(with: CGRect(x: 0, y: 0, width: 300, height: 300), andPerformance: performance)
         
         var timers = [Timer]()
         for touch in performance.performanceData {

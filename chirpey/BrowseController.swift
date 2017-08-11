@@ -104,8 +104,12 @@ extension BrowseController {
     
     func loadPerformances(withQueryOperation operation: CKQueryOperation) {
         
+        let performanceStore = (UIApplication.shared.delegate as! AppDelegate).performanceStore
+        
         operation.recordFetchedBlock = { record in
-            self.loadedPerformances.append(PerformanceStore.performanceFrom(record: record))
+            if let performance = performanceStore.performanceFrom(record: record) {
+                self.loadedPerformances.append(performance)
+            }
         }
         
         operation.queryCompletionBlock = { (cursor, error) in
