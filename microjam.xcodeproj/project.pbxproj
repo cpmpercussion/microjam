@@ -13,6 +13,12 @@
 		4DA6A95D1F3C89DB00CD7589 /* BrowseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA6A95C1F3C89DB00CD7589 /* BrowseCell.swift */; };
 		4DC9067E1F39C0E50062728E /* FilterTableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC9067D1F39C0E50062728E /* FilterTableModel.swift */; };
 		56002F471F306C0F00003B88 /* UserNameChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56002F461F306C0F00003B88 /* UserNameChooserViewController.swift */; };
+		562FDCA61F316870000409C8 /* UserSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562FDCA51F316870000409C8 /* UserSettingsViewController.swift */; };
+		562FDCA81F316EAE000409C8 /* UserSettingsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 562FDCA71F316EAE000409C8 /* UserSettingsViewController.storyboard */; };
+		562FDCAA1F32D202000409C8 /* PerformerProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562FDCA91F32D202000409C8 /* PerformerProfile.swift */; };
+		562FDCAC1F335A0D000409C8 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562FDCAB1F335A0D000409C8 /* UserProfile.swift */; };
+		562FDCAE1F3727DC000409C8 /* TouchRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562FDCAD1F3727DC000409C8 /* TouchRecord.swift */; };
+		5634AE9C1F3C500000DD5401 /* UserNameChooserViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5634AE9B1F3C500000DD5401 /* UserNameChooserViewController.storyboard */; };
 		563E06101EFBE71700F0D471 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563E060F1EFBE71700F0D471 /* Constants.swift */; };
 		565143FA1DFAB79E00F56B32 /* adsr.pd in Resources */ = {isa = PBXBuildFile; fileRef = 565143F81DFAB79E00F56B32 /* adsr.pd */; };
 		565143FB1DFAB79E00F56B32 /* xfade.pd in Resources */ = {isa = PBXBuildFile; fileRef = 565143F91DFAB79E00F56B32 /* xfade.pd */; };
@@ -96,6 +102,12 @@
 		4DC9067D1F39C0E50062728E /* FilterTableModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FilterTableModel.swift; path = chirpey/FilterTableModel.swift; sourceTree = "<group>"; };
 		542B447A7B9AE8AC7B6CE3BB /* Pods-microjamTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-microjamTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-microjamTests/Pods-microjamTests.release.xcconfig"; sourceTree = "<group>"; };
 		56002F461F306C0F00003B88 /* UserNameChooserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserNameChooserViewController.swift; path = chirpey/UserNameChooserViewController.swift; sourceTree = "<group>"; };
+		562FDCA51F316870000409C8 /* UserSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserSettingsViewController.swift; path = chirpey/UserSettingsViewController.swift; sourceTree = "<group>"; };
+		562FDCA71F316EAE000409C8 /* UserSettingsViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = UserSettingsViewController.storyboard; path = chirpey/UserSettingsViewController.storyboard; sourceTree = "<group>"; };
+		562FDCA91F32D202000409C8 /* PerformerProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PerformerProfile.swift; path = chirpey/PerformerProfile.swift; sourceTree = "<group>"; };
+		562FDCAB1F335A0D000409C8 /* UserProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserProfile.swift; path = chirpey/UserProfile.swift; sourceTree = "<group>"; };
+		562FDCAD1F3727DC000409C8 /* TouchRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TouchRecord.swift; path = chirpey/TouchRecord.swift; sourceTree = "<group>"; };
+		5634AE9B1F3C500000DD5401 /* UserNameChooserViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = UserNameChooserViewController.storyboard; path = chirpey/UserNameChooserViewController.storyboard; sourceTree = "<group>"; };
 		563E060F1EFBE71700F0D471 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		565143F81DFAB79E00F56B32 /* adsr.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = adsr.pd; sourceTree = "<group>"; };
 		565143F91DFAB79E00F56B32 /* xfade.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = xfade.pd; sourceTree = "<group>"; };
@@ -209,8 +221,11 @@
 		560772DA1F206F10000D862D /* models */ = {
 			isa = PBXGroup;
 			children = (
+				562FDCA91F32D202000409C8 /* PerformerProfile.swift */,
+				562FDCAB1F335A0D000409C8 /* UserProfile.swift */,
 				56621B0C1DE39D33009B9AB6 /* ChirpPerformance.swift */,
 				4DC9067D1F39C0E50062728E /* FilterTableModel.swift */,
+				562FDCAD1F3727DC000409C8 /* TouchRecord.swift */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -218,6 +233,8 @@
 		560772DB1F206F1B000D862D /* views */ = {
 			isa = PBXGroup;
 			children = (
+				5634AE9B1F3C500000DD5401 /* UserNameChooserViewController.storyboard */,
+				562FDCA71F316EAE000409C8 /* UserSettingsViewController.storyboard */,
 				56621B121DE4A496009B9AB6 /* ChirpView.swift */,
 				56621B161DEC27B0009B9AB6 /* PerformanceTableCell.swift */,
 				4DA6A95C1F3C89DB00CD7589 /* BrowseCell.swift */,
@@ -234,6 +251,7 @@
 				569B92C31DFEA99C00AA257C /* SettingsTableViewController.swift */,
 				567286651E05E0AF0024A515 /* MicrojamTabBarController.swift */,
 				4D77CC3C1F3B5564008BD48C /* BrowseController.swift */,
+				562FDCA51F316870000409C8 /* UserSettingsViewController.swift */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -538,6 +556,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5669CAF11DA7D06A009EEC3B /* loadMetaPdLibs.pd in Resources */,
+				5634AE9C1F3C500000DD5401 /* UserNameChooserViewController.storyboard in Resources */,
 				565144061DFAF95900F56B32 /* s_drumelectro.pd in Resources */,
 				565144071DFAF95900F56B32 /* s_pinknoise.pd in Resources */,
 				5669CAEF1DA7D06A009EEC3B /* percsampler.pd in Resources */,
@@ -553,6 +572,7 @@
 				5669CAE71DA7D06A009EEC3B /* effectschain.pd in Resources */,
 				5669CAF31DA7D06A009EEC3B /* m_lydian.pd in Resources */,
 				5669CAE81DA7D06A009EEC3B /* feedbackdelay.pd in Resources */,
+				562FDCA81F316EAE000409C8 /* UserSettingsViewController.storyboard in Resources */,
 				565144051DFAF95900F56B32 /* e_resonzq.pd in Resources */,
 				5669CAED1DA7D06A009EEC3B /* hhm-effects-chain.mmp in Resources */,
 				5669CAE91DA7D06A009EEC3B /* graindelay~.pd in Resources */,
@@ -800,12 +820,16 @@
 			files = (
 				56002F471F306C0F00003B88 /* UserNameChooserViewController.swift in Sources */,
 				56621B111DE47D5B009B9AB6 /* ChirpJamViewController.swift in Sources */,
+				562FDCAC1F335A0D000409C8 /* UserProfile.swift in Sources */,
 				56621B0F1DE47376009B9AB6 /* AppDelegate.swift in Sources */,
 				4D77CC3D1F3B5564008BD48C /* BrowseController.swift in Sources */,
 				56621B131DE4A496009B9AB6 /* ChirpView.swift in Sources */,
+				562FDCA61F316870000409C8 /* UserSettingsViewController.swift in Sources */,
+				562FDCAE1F3727DC000409C8 /* TouchRecord.swift in Sources */,
 				567286661E05E0AF0024A515 /* MicrojamTabBarController.swift in Sources */,
 				563E06101EFBE71700F0D471 /* Constants.swift in Sources */,
 				56B329E51E44834E001345DC /* WorldJamsTableViewController.swift in Sources */,
+				562FDCAA1F32D202000409C8 /* PerformerProfile.swift in Sources */,
 				56621B0D1DE39D33009B9AB6 /* ChirpPerformance.swift in Sources */,
 				56D707EF1F15960900FDEB76 /* PerformanceStore.swift in Sources */,
 				4DA6A95D1F3C89DB00CD7589 /* BrowseCell.swift in Sources */,

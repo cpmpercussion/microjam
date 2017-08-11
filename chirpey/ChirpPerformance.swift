@@ -7,6 +7,7 @@
 //
 import UIKit
 import CoreLocation
+import CloudKit
 import UIColor_Hex_Swift
 import DateToolsSwift
 
@@ -14,7 +15,7 @@ import DateToolsSwift
  Contains the data from a single chirp performance.
  Data is stored as an array of `TouchRecord`.
  */
-class ChirpPerformance : NSObject, NSCoding {
+class ChirpPerformance : NSObject {
     /// Array of `TouchRecord`s to store performance data.
     var performanceData : [TouchRecord]
     /// Array of Timers scheduled to play back each TouchRecord
@@ -35,7 +36,15 @@ class ChirpPerformance : NSObject, NSCoding {
     var location : CLLocation?
     /// Colour used for touch trace of this recording.
     var colour : UIColor = UIColor.blue
+    /// Return a dateString that would work for adding to the performance list.
+    var dateString: String { return self.date.timeAgoSinceNow }
+    /// Returns the hex string for the performance's playback colour.
+    var colourString : String { return self.colour.hexString() }
     //    var backgroundColour : UIColor = UIColor.gray
+    /// Keeps track of the Record ID of performances retrieved from CloudKit
+    var performanceID : CKRecordID?
+    /// Keeps track of Record ID of parent performance
+    var parentReference : CKReference?
 
     // MARK: Archiving Paths and TouchRecord header.
 
@@ -46,33 +55,9 @@ class ChirpPerformance : NSObject, NSCoding {
     /// URL of performance storage directory.
     static let ArchiveURL = DocumentsDirectory.appendingPathComponent("performances")
     
-    /// Keys for performances stored in NSCoders.
-    struct PropertyKey {
-        static let performanceDataKey = "performanceData"
-        static let dateKey = "date"
-        static let performerKey = "performer"
-        static let instrumentKey = "instrument"
-        static let imageKey = "image"
-        static let locationKey = "location"
-        static let colourKey = "colour"
-        static let replyToKey = "replyto"
-    }
-    
-    /// Function for encoding as NSCoder, used for saving performances on app close.
-    func encode(with aCoder: NSCoder) {
-        aCoder.encode(performanceData, forKey: PropertyKey.performanceDataKey)
-        aCoder.encode(date, forKey: PropertyKey.dateKey)
-        aCoder.encode(performer, forKey: PropertyKey.performerKey)
-        aCoder.encode(instrument, forKey: PropertyKey.instrumentKey)
-        aCoder.encode(UIImagePNGRepresentation(image), forKey: PropertyKey.imageKey)
-        aCoder.encode(location, forKey: PropertyKey.locationKey)
-        aCoder.encode(colour.hexString(), forKey: PropertyKey.colourKey)
-        aCoder.encode(replyto, forKey: PropertyKey.replyToKey)
-    }
-
     /// Initialiser from NSCoder, used when reopening saved performances on app launch
     required convenience init?(coder aDecoder: NSCoder) {
-        // TODO: write unit test to
+        // TODO: write unit test to test this function.
         guard let data = aDecoder.decodeObject(forKey: PropertyKey.performanceDataKey) as? [TouchRecord]
             else {return nil}
         guard
@@ -85,8 +70,11 @@ class ChirpPerformance : NSObject, NSCoding {
             let replyto = aDecoder.decodeObject(forKey: PropertyKey.replyToKey) as? String
             else {return nil}
         let location = (aDecoder.decodeObject(forKey: "location") as? CLLocation) ?? CLLocation.init(latitude: 60, longitude: 11)
-        print("PERF: Decoding", data.count, "notes:", performer, instrument)
+        // print("PERF: Decoding", data.count, "notes:", performer, instrument)
         self.init(data: data, date: date, performer: performer, instrument: instrument, image: image, location: location, colour: colour, replyto: replyto)
+        if let perfId = aDecoder.decodeObject(forKey: PropertyKey.performanceIDKey) as? CKRecordID {
+            self.performanceID = perfId
+        }
     }
 
     /// Main initialiser
@@ -103,18 +91,19 @@ class ChirpPerformance : NSObject, NSCoding {
     }
     
     /// Initialiser with csv of data for the TouchRecords, useful in initialising performances from CloudKit
-    convenience init?(csv: String, date: Date, performer: String, instrument: String, image: UIImage, location: CLLocation, colour: String, replyto: String) {
+    convenience init?(csv: String, date: Date, performer: String, instrument: String, image: UIImage, location: CLLocation, colour: String, replyto: String, performanceID: CKRecordID) {
         var data : [TouchRecord] = []
         let lines = csv.components(separatedBy: "\n")
         // TODO: test this initialiser
         data = lines.flatMap {TouchRecord.init(fromCSVLine: $0)}
         self.init(data: data, date: date, performer: performer, instrument: instrument, image: image, location: location, colour: colour, replyto: replyto)
+        self.performanceID = performanceID
     }
     
     /// Convenience Initialiser for creating performance with data yet to be added.
     convenience override init() {
         // FIXME: actually detect the proper location
-        let perfColour : UIColor = UIColor(hue: CGFloat(UserDefaults.standard.float(forKey: SettingsKeys.performerColourKey)), saturation: 1.0, brightness: 0.7, alpha: 1.0)
+        let perfColour : UIColor = UserProfile.shared.profile.jamColour
         self.init(data : [], date : Date(), performer : "", instrument : "", image : UIImage(), location: CLLocation.init(latitude: 90.0, longitude: 45.0), colour: perfColour.hexString(), replyto: "")
     }
 
@@ -132,6 +121,30 @@ class ChirpPerformance : NSObject, NSCoding {
     func recordTouchAt(time t : Double, x : Double, y : Double, z : Double, moving : Bool) {
         self.performanceData.append(TouchRecord(time: t, x: x, y: y, z: z, moving: moving))
     }
+    
+    /// A uniqueish string title for the performance - used for CloudKit records and reply system.
+    func title() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "YYYY-MM-DD-HH-mm-SS"
+        let dateString = formatter.string(from: date)
+        return String(format: "perf-%@-%@-%@", performer, instrument, dateString)
+    }
+    
+    /// Writes a string to the documents directory with a title formed from the current date. Returns the filepath.
+    func writeToFile(csv : String) -> String {
+        var filePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        filePath.append(String(format: "/%@.csv", title()))
+        try? csv.write(toFile: filePath, atomically: true, encoding: String.Encoding.utf8)
+        return filePath
+    }
+    
+
+}
+
+// MARK: Playback functions
+
+/// Extension for playback functions
+extension ChirpPerformance {
     
     // TODO: make playback behave like "play/pause" rather than start and cancel.
     
@@ -156,118 +169,42 @@ class ChirpPerformance : NSObject, NSCoding {
         }
     }
     
-    /// A uniqueish string title for the performance - used for CloudKit records and reply system.
-    func title() -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "YYYY-MM-DD-HH-mm-SS"
-        let dateString = formatter.string(from: date)
-        return String(format: "perf-%@-%@-%@", performer, instrument, dateString)
-    }
-    
-    /// Writes a string to the documents directory with a title formed from the current date. Returns the filepath.
-    func writeToFile(csv : String) -> String {
-        var filePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-        filePath.append(String(format: "/%@.csv", title()))
-        try? csv.write(toFile: filePath, atomically: true, encoding: String.Encoding.utf8)
-        return filePath
-    }
-    
-    /// Return a dateString that would work for adding to the performance list.
-    func dateString() -> String {
-        return self.date.timeAgoSinceNow
-    }
-    
-    
-    /// Returns the hex string for the performance's playback colour.
-    func colourString() -> String {
-        return self.colour.hexString()
-    }
 }
 
-// MARK: Extra classes and extensions.
+// MARK: NSCoding stuff
 
-/**
- Contains the data from a single touch in the interaction square.
- 
- - time: time since the start of the recording in seconds.
- - x: location in square in [0,1]
- - y: location in square in [0,1]
- - z: pressure/size of touch in [0,1] (so far unused)
- - moving: whether the touch was moving when recorded (Bool represented as 0 or 1).
- 
- Includes functions to output a single CSV line representing the touch.
- Must be a class so that TouchRecords can be encoded as NSCoders.
- */
-class TouchRecord: NSObject, NSCoding {
-    /// Time since the start of the recording in seconds
-    var time : Double
-    /// location in square in [0,1]
-    var x : Double
-    /// location in square in [0,1]
-    var y : Double
-    /// pressure/size of touch in [0,1] (so far unused)
-    var z : Double
-    /// whether the touch was moving when recorded
-    var moving : Bool
-    
-    /// Keys for NSCoder encoded contents.
+/// Extension for NSCoding methods
+extension ChirpPerformance: NSCoding {
+    /// Keys for performances stored in NSCoders.
     struct PropertyKey {
-        static let time = "time"
-        static let x = "x"
-        static let y = "y"
-        static let z = "z"
-        static let moving = "moving"
+        static let performanceDataKey = "performanceData"
+        static let dateKey = "date"
+        static let performerKey = "performer"
+        static let instrumentKey = "instrument"
+        static let imageKey = "image"
+        static let locationKey = "location"
+        static let colourKey = "colour"
+        static let replyToKey = "replyto"
+        static let performanceIDKey = "performance_id"
     }
     
-    init(time: Double, x: Double, y: Double, z: Double, moving: Bool) {
-        self.time = time
-        self.x = x
-        self.y = y
-        self.z = z
-        self.moving = moving
-        super.init()
-    }
-    
-    /// Initialises a touchRecord from a single line of a CSV file
-    convenience init?(fromCSVLine line : String) {
-        let components = line.replacingOccurrences(of: " ", with: "").components(separatedBy: ",")
-        guard let time = Double(components[0]),
-            let x = Double(components[1]),
-            let y = Double(components[2]),
-            let z = Double(components[3]),
-            let mov = Double(components[4])
-            else {
-                return nil
-            }
-        let moving = (mov == 1)
-        self.init(time: time, x: x, y: y, z: z, moving: moving)
-    }
-    
-    /// CSV version of the touchRecord for output to file
-    func csv() -> String {
-        return String(format:"%f, %f, %f, %f, %d\n", time, x, y, z, moving ? 1 : 0)
-    }
-    
-    /// Initialise a TouchRecord from an NSCoder.
-    required convenience init?(coder aDecoder: NSCoder) {
-        let time = aDecoder.decodeDouble(forKey: PropertyKey.time)
-        let x = aDecoder.decodeDouble(forKey: PropertyKey.x)
-        let y = aDecoder.decodeDouble(forKey: PropertyKey.y)
-        let z = aDecoder.decodeDouble(forKey: PropertyKey.z)
-        let moving = aDecoder.decodeBool(forKey: PropertyKey.moving)
-        self.init(time: time, x: x, y: y, z: z, moving: moving)
-    }
-    
-    /// Encode a TouchRecord as an NSCoder.
+    /// Function for encoding as NSCoder, used for saving performances on app close.
     func encode(with aCoder: NSCoder) {
-        aCoder.encode(self.time, forKey: PropertyKey.time)
-        aCoder.encode(self.x, forKey: PropertyKey.x)
-        aCoder.encode(self.y, forKey: PropertyKey.y)
-        aCoder.encode(self.z, forKey: PropertyKey.z)
-        aCoder.encode(self.moving, forKey: PropertyKey.moving)
+        aCoder.encode(performanceData, forKey: PropertyKey.performanceDataKey)
+        aCoder.encode(date, forKey: PropertyKey.dateKey)
+        aCoder.encode(performer, forKey: PropertyKey.performerKey)
+        aCoder.encode(instrument, forKey: PropertyKey.instrumentKey)
+        aCoder.encode(UIImagePNGRepresentation(image), forKey: PropertyKey.imageKey)
+        aCoder.encode(location, forKey: PropertyKey.locationKey)
+        aCoder.encode(colour.hexString(), forKey: PropertyKey.colourKey)
+        aCoder.encode(replyto, forKey: PropertyKey.replyToKey)
+        if let perfID = self.performanceID {
+            aCoder.encode(perfID, forKey: PropertyKey.performanceIDKey)
+        }
     }
 }
 
+// MARK: UIColor brighterColor for playback
 
 /// Makes a brighter version of UIColors for the playback version.
 extension UIColor {
