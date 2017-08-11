@@ -14,8 +14,10 @@ let RECORDING_TIME = 5.0
 
 class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerDelegate, BrowseControllerDelegate {
     /// Maximum allowed recording time.
-    var state = ChirpJamModes.idle
-    var mode = ChirpJamModes.new
+    
+    var state = ChirpJamModes.idle // Tells us if the app is playing, recording or idle
+    var mode = ChirpJamModes.new // Tells us which mode the chirp jam is in: new, composing, loaded
+    
     var newPerformance : Bool = true
     var jamming : Bool = false
     var progress = 0.0
@@ -60,15 +62,13 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
                 print("JAMVC: Save button segue!")
 
                 if mode == ChirpJamModes.composing {
-
                     // TODO: Store composing performances
                     print("Need implementation for storing compositions...")
 
-                    while let perf = self.performanceViews.popLast() {
+                    while let perf = performanceViews.popLast() {
                         perf.removeFromSuperview()
                     }
-
-                    self.newRecordingView()
+                    newRecordingView()
 
                     return
                 }
@@ -78,7 +78,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
                         // Adding performance to clouad
                         appDelegate.performanceStore.addNew(performance: performance)
                         // Reset view controller
-                        self.newRecordingView()
+                        newRecordingView()
 
                         // TODO: Maybe it is best to delete the view controller to save memory?
 
