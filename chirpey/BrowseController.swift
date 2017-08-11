@@ -31,8 +31,6 @@ class BrowseController: UICollectionViewController, UICollectionViewDelegateFlow
         let topView = UIView()
         topView.backgroundColor = UIColor(white: 0.8, alpha: 1)
         view.addSubview(topView)
-        
-        NSLayoutConstraint(item: <#T##Any#>, attribute: <#T##NSLayoutAttribute#>, relatedBy: <#T##NSLayoutRelation#>, toItem: <#T##Any?#>, attribute: <#T##NSLayoutAttribute#>, multiplier: <#T##CGFloat#>, constant: <#T##CGFloat#>)
                 
         collectionView?.backgroundColor = UIColor(white: 0.9, alpha: 1)
         collectionView!.register(BrowseCell.self, forCellWithReuseIdentifier: reuseIdentifier)
