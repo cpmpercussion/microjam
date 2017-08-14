@@ -61,18 +61,21 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
     }
     
     func getAvatar(forPerformance performance: ChirpPerformance) -> UIImage? {
+        guard let creatorID = performance.creatorID else {
+            print("WJTVC: No creator for: \(performance.title())")
+            return nil
+        }
         
         let publicDB = container.publicCloudDatabase
-        
-        let query = CKQuery(recordType: "user", predicate: NSPredicate(format: "stageName == %@", argumentArray: [performance.performer]))
-            publicDB.perform(query, inZoneWith: nil, completionHandler: { (records: [CKRecord]?, error: Error?) in
-                if let e = error {
-                    print(e)
-                    return
-                }
-                
-                print(records!)
-        })
+        publicDB.fetch(withRecordID: creatorID) { (record: CKRecord?, error: Error?) in
+            if let e = error {
+                print(e)
+                return
+            }
+            if let rec = record {
+                print(rec)
+            }
+        }
         
         return nil
     }
@@ -91,7 +94,8 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
         
         let performance = performanceStore.storedPerformances[indexPath.row]
         
-        //let image = getAvatar(forPerformance: performance)
+        let avatarImage = getAvatar(forPerformance: performance)
+        //cell.avatarImageView.image = avatarImage
         
         cell.avatarImageView.backgroundColor = .lightGray
         cell.avatarImageView.layer.cornerRadius = cell.avatarImageView.frame.width / 2
