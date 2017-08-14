@@ -57,27 +57,31 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
     }
     
     func queryCompleted(withResult result: [Any]) {
-        
+        print("WJTVC: Completed a Query")
     }
     
-    func getAvatar(forPerformance performance: ChirpPerformance) -> UIImage? {
+    func getAvatar(forPerformance performance: ChirpPerformance, inCell cell: PerformanceTableCell) {
         guard let creatorID = performance.creatorID else {
             print("WJTVC: No creator for: \(performance.title())")
-            return nil
+            return
         }
         
         let publicDB = container.publicCloudDatabase
-        publicDB.fetch(withRecordID: creatorID) { (record: CKRecord?, error: Error?) in
+        publicDB.fetch(withRecordID: creatorID) { [unowned cell] (record: CKRecord?, error: Error?) in
             if let e = error {
-                print(e)
-                return
+                print("WJTVC: Avatar Error: \(e)")
             }
             if let rec = record {
-                print(rec)
+                print("WJTVC: Avatar Record Found.")
+                if let avatarPath = rec[UserCloudKeys.avatar] as? CKAsset,
+                    let avatarImage = UIImage(contentsOfFile: avatarPath.fileURL.path) {
+                    cell.avatarImageView.image = avatarImage
+                    print("WJTVC: Updated Avatar.")
+                } else {
+                    print("WJTVC: Avatar not able to be updated.")
+                }
             }
         }
-        
-        return nil
     }
 
     // MARK: - Table view data source
@@ -94,10 +98,11 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
         
         let performance = performanceStore.storedPerformances[indexPath.row]
         
-        let avatarImage = getAvatar(forPerformance: performance)
+        getAvatar(forPerformance: performance, inCell: cell)
         //cell.avatarImageView.image = avatarImage
         
         cell.avatarImageView.backgroundColor = .lightGray
+        cell.avatarImageView.contentMode = .scaleAspectFill
         cell.avatarImageView.layer.cornerRadius = cell.avatarImageView.frame.width / 2
         cell.avatarImageView.clipsToBounds = true
         
