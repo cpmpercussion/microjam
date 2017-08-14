@@ -12,9 +12,17 @@ import UIKit
 
 class UserNameChooserViewController: UIViewController, UITextFieldDelegate {
 
-
+    /// Text field for entering stage name.
     @IBOutlet weak var userNameTextField: UITextField!
     
+    /// Initialises ViewController with separate storyboard with same name. Used to programmatically load the user settings screen in the tab bar controller.
+    static func storyboardInstance() -> UserNameChooserViewController? {
+        print("UserNameVC: Attempting to initialise from storyboard.")
+        let storyboard = UIStoryboard(name:"UserNameChooserViewController", bundle: nil)
+        return storyboard.instantiateInitialViewController() as? UserNameChooserViewController
+    }
+    
+    /// IBAction for pressing continue once stage name is set.
     @IBAction func userNameChoiceButtonPushed(_ sender: Any) {
         if let newName = userNameTextField.text {
             UserDefaults.standard.set(newName, forKey: SettingsKeys.performerKey)
@@ -30,7 +38,6 @@ class UserNameChooserViewController: UIViewController, UITextFieldDelegate {
     }
     
 
-    
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {  //delegate method
         return true
     }

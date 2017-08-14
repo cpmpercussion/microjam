@@ -9,30 +9,36 @@
 import UIKit
 import CloudKit
 
+/// Exposes CloudKit container to all UIViewControllers
+extension UIViewController {
+
+    /// Default Container (visible to all UIViewControllers)
+    var container: CKContainer {
+        return CKContainer.default()
+    }
+
+}
+
 /// Maximum number of jams to download at a time from CloudKit
-let max_jams_to_fetch = 25
+let max_jams_to_fetch = 50
 
 /// Classes implementing this protocol have can be notified of success or failure of updates from the `PerformanceStore`'s cloud backend.
 protocol ModelDelegate {
-
     /// Called when the `PerformanceStore` fails to update for some reason.
     func errorUpdating(error: NSError)
-    
     /// Called when the `PerformanceStore` successfully updates from the cloud backend.
     func modelUpdated()
-    
+
 }
 
 /**
  Contains stored performances and handles saving these to the local storage and synchronising with the cloud backend on CloudKit.
 */
 class PerformanceStore: NSObject {
-
+    /// Shared Instance (Singleton) of the PerformanceStore initialised on open.
+    static let shared = PerformanceStore()
     /// Internally stored performances
     var storedPerformances : [ChirpPerformance] = []
-
-    /// Default Container
-    let container: CKContainer = CKContainer.default()
     /// Public CloudKit Database
     let publicDB: CKDatabase = CKContainer.default().publicCloudDatabase
     /// Private CloudKit Database
@@ -40,11 +46,11 @@ class PerformanceStore: NSObject {
     /// Delegate to notify when cloud operations are successful.
     var delegate : ModelDelegate?
 
+
     /// Loads saved performances and then updates from cloud backend.
-    override init() {
+    override private init() {
         super.init()
-        print("Store: Initialising")
-        print("Store: Loading saved performances...")
+        print("Store: Initialising and loading saved performances.")
         if let savedPerformances = loadPerformances() {
             storedPerformances += savedPerformances
             sortStoredPerformances()
@@ -80,7 +86,7 @@ class PerformanceStore: NSObject {
     }
 
     /// Returns a temporary file path for png images
-    func tempURL() -> URL {
+    static func tempURL() -> URL {
         let filename = ProcessInfo.processInfo.globallyUniqueString + ".png"
         return URL.init(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(filename)
     }
@@ -88,7 +94,6 @@ class PerformanceStore: NSObject {
     /// Refresh list of world jams from CloudKit and then update in world jam table view.
     func fetchWorldJamsFromCloud() {
         print("Store: Attempting to fetch World Jams from Cloud.")
-        print("Store: Container is: ", container)
         var fetchedPerformances = [ChirpPerformance]()
         let predicate = NSPredicate(value: true)
         let sort = NSSortDescriptor(key: PerfCloudKeys.date, ascending: false)
@@ -98,8 +103,9 @@ class PerformanceStore: NSObject {
         let operation = CKQueryOperation(query: query)
         operation.resultsLimit = max_jams_to_fetch
         operation.recordFetchedBlock = { record in
-            let perf = PerformanceStore.performanceFrom(record: record)
-            fetchedPerformances.append(perf)
+            if let perf = self.performanceFrom(record: record) {
+                fetchedPerformances.append(perf)
+            }
         } // Appends fetched records to the array of Performances
 
         operation.queryCompletionBlock = { [unowned self] (cursor, error) in
@@ -161,7 +167,7 @@ class PerformanceStore: NSObject {
     }
 
     /// Returns a ChirpPerformance from a CKRecord of a performance
-    static func performanceFrom(record: CKRecord) -> ChirpPerformance {
+    func performanceFrom(record: CKRecord) -> ChirpPerformance? {
         // TODO: Need some kind of protection against failure here.
         let touches = record.object(forKey: PerfCloudKeys.touches) as! String
         let date = (record.object(forKey: PerfCloudKeys.date) as! NSDate) as Date
@@ -172,9 +178,14 @@ class PerformanceStore: NSObject {
         let imageAsset = record.object(forKey: PerfCloudKeys.image) as! CKAsset
         let image = UIImage(contentsOfFile: imageAsset.fileURL.path)!
         let replyto = record.object(forKey: PerfCloudKeys.replyto) as! String
-        let perf = ChirpPerformance(csv: touches, date: date, performer: performer,
+        let performance_id = record.recordID
+        // Initialise the Performance
+        guard let perf = ChirpPerformance(csv: touches, date: date, performer: performer,
                                     instrument: instrument, image: image, location: location,
-                                    colour: colour, replyto: replyto)!
+                                    colour: colour, replyto: replyto, performanceID: performance_id) else {
+                                        print("PerformanceStore: Could not make Performance from CKRecord.")
+                                        return nil
+        }
         return perf
     }
 
@@ -190,10 +201,10 @@ class PerformanceStore: NSObject {
         performanceRecord[PerfCloudKeys.touches] = performance.csv() as CKRecordValue
         performanceRecord[PerfCloudKeys.replyto] = performance.replyto as CKRecordValue
         performanceRecord[PerfCloudKeys.location] = performance.location!
-        performanceRecord[PerfCloudKeys.colour] = performance.colourString() as CKRecordValue
+        performanceRecord[PerfCloudKeys.colour] = performance.colourString as CKRecordValue
 
         do { // Saving image data
-            let imageURL = tempURL()
+            let imageURL = PerformanceStore.tempURL()
             let imageData = UIImagePNGRepresentation(performance.image)!
             try imageData.write(to: imageURL, options: .atomicWrite)
             let asset = CKAsset(fileURL: imageURL)

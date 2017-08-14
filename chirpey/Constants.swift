@@ -10,20 +10,29 @@ import Foundation
 
 // MARK: Settings Constants
 
-
 /// Keys for settings in UserDefaults
 struct SettingsKeys {
     static let performerKey = "performer_name"
     static let performerColourKey = "performer_colour"
     static let backgroundColourKey = "background_colour"
     static let soundSchemeKey = "sound_scheme"
+    static let defaultSettings : [String : Any] = [
+        SettingsKeys.performerKey:"performer",
+        SettingsKeys.performerColourKey: 0.5,
+        SettingsKeys.backgroundColourKey: 0.2,
+        SettingsKeys.soundSchemeKey: 0
+    ]
 }
 
 // MARK: Pd Constants
 
+let SOUND_OUTPUT_CHANNELS = 2
+let SAMPLE_RATE = 44100
+let TICKS_PER_BUFFER = 4
+
 /// Constants relating SoundScheme names, ids, and Pd file names.
 struct SoundSchemes {
-    static let namesForKeys : [Int : String] = [
+    static let namesForKeys : [Int64 : String] = [
         0 : "chirp",
         1 : "keys",
         2 : "drums",
@@ -31,7 +40,7 @@ struct SoundSchemes {
         4 : "quack",
         5 : "wub"
     ]
-    static let keysForNames : [String : Int] = [
+    static let keysForNames : [String : Int64] = [
         "chirp" : 0,
         "keys" : 1,
         "drums" : 2,
@@ -39,7 +48,7 @@ struct SoundSchemes {
         "quack" : 4,
         "wub" : 5
     ]
-    static let pdFilesForKeys : [Int : String] = [
+    static let pdFilesForKeys : [Int64 : String] = [
         0 : "chirp.pd",
         1 : "keys.pd",
         2 : "drums.pd",
@@ -67,8 +76,21 @@ struct PerfCloudKeys {
     static let location = "PerformedAt"
     static let performer = "Performer"
     static let replyto = "ReplyTo"
+    static let parent = "parent"
     static let touches = "Touches"
     static let colour = "Colour"
+}
+
+/// Keys for Users type in CloudKit Storage
+struct UserCloudKeys {
+    static let avatar = "avatar" // Asset
+    static let email = "Email" // String
+    static let home = "Home" // String
+    static let name = "Name" // String
+    static let stagename = "stageName" // String
+    static let jamColour = "jamColour" // String (of hex code)
+    static let backgroundColour = "backgroundColour" // String (of hex code)
+    static let soundScheme = "soundScheme" // Int(64) of instrument code
 }
 
 // MARK: UI and View Controller Constants
@@ -82,6 +104,7 @@ struct ChirpJamModes {
     static let loaded = 4
     static let playing = 5
     static let composing = 6
+    static let idle = 7
 }
 
 /// Identifiers for different segues used in the storyboard.

@@ -69,6 +69,14 @@ class BrowseController: UICollectionViewController, UICollectionViewDelegateFlow
     override func viewDidLoad() {
         super.viewDidLoad()
         
+<<<<<<< HEAD
+=======
+        let topView = UIView()
+        topView.backgroundColor = UIColor(white: 0.8, alpha: 1)
+        view.addSubview(topView)
+                
+        collectionView?.backgroundColor = UIColor(white: 0.9, alpha: 1)
+>>>>>>> develop
         collectionView!.register(BrowseCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView!.backgroundColor = UIColor.white
         collectionView!.contentInset = UIEdgeInsets(top: 44, left: 0, bottom: 0, right: 0)
@@ -247,8 +255,12 @@ extension BrowseController {
     
     func loadPerformances(withQueryOperation operation: CKQueryOperation) {
         
+        let performanceStore = (UIApplication.shared.delegate as! AppDelegate).performanceStore
+        
         operation.recordFetchedBlock = { record in
-            self.loadedPerformances.append(PerformanceStore.performanceFrom(record: record))
+            if let performance = performanceStore.performanceFrom(record: record) {
+                self.loadedPerformances.append(performance)
+            }
         }
         
         operation.queryCompletionBlock = { (cursor, error) in
