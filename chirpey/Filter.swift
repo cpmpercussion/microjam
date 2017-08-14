@@ -1,12 +1,12 @@
 //
-//  FilterTableModel.swift
+//  Filter.swift
 //  microjam
 //
-//  Created by Henrik Brustad on 08/08/2017.
+//  Created by Henrik Brustad on 14/08/2017.
 //  Copyright © 2017 Charles Martin. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 class Filter: NSObject {
     
