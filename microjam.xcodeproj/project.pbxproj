@@ -9,16 +9,14 @@
 /* Begin PBXBuildFile section */
 		077DC2A7E15F1081FBECA3E5 /* Pods_microjamUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F790C94F468F8D8ACE1123FE /* Pods_microjamUITests.framework */; };
 		3FD8FFE12146D66CF89B8F2F /* Pods_microjam_microjamTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FDD96ACEB14ECDFF2CA2B2F /* Pods_microjam_microjamTests.framework */; };
-		4D17A2951F30A5FA005C9C26 /* AddJamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D17A2941F30A5FA005C9C26 /* AddJamViewController.swift */; };
 		4D77CC3D1F3B5564008BD48C /* BrowseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D77CC3C1F3B5564008BD48C /* BrowseController.swift */; };
 		4DA6A95D1F3C89DB00CD7589 /* BrowseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA6A95C1F3C89DB00CD7589 /* BrowseCell.swift */; };
 		4DD839771F3DF81D004D3E40 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD839761F3DF81D004D3E40 /* FilterView.swift */; };
 		4DEFCADF1F41BDEF007B7C34 /* FilterViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEFCADE1F41BDEF007B7C34 /* FilterViewCell.swift */; };
 		4DEFCAE11F41C5D9007B7C34 /* BrowseCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEFCAE01F41C5D9007B7C34 /* BrowseCategory.swift */; };
 		4DEFCAE31F41E8EB007B7C34 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEFCAE21F41E8EB007B7C34 /* Filter.swift */; };
-		4D77CC3D1F3B5564008BD48C /* BrowseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D77CC3C1F3B5564008BD48C /* BrowseController.swift */; };
-		4DA6A95D1F3C89DB00CD7589 /* BrowseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA6A95C1F3C89DB00CD7589 /* BrowseCell.swift */; };
-		4DC9067E1F39C0E50062728E /* FilterTableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC9067D1F39C0E50062728E /* FilterTableModel.swift */; };
+		4DEFCAE41F41EC82007B7C34 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563E060F1EFBE71700F0D471 /* Constants.swift */; };
+		4DEFCAE51F41EC90007B7C34 /* WorldJamsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B329E41E44834D001345DC /* WorldJamsTableViewController.swift */; };
 		56002F471F306C0F00003B88 /* UserNameChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56002F461F306C0F00003B88 /* UserNameChooserViewController.swift */; };
 		5613B31E1F3D9C380068ED5D /* ChirpRecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5613B31D1F3D9C380068ED5D /* ChirpRecordingView.swift */; };
 		562FDCA61F316870000409C8 /* UserSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562FDCA51F316870000409C8 /* UserSettingsViewController.swift */; };
@@ -27,7 +25,6 @@
 		562FDCAC1F335A0D000409C8 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562FDCAB1F335A0D000409C8 /* UserProfile.swift */; };
 		562FDCAE1F3727DC000409C8 /* TouchRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562FDCAD1F3727DC000409C8 /* TouchRecord.swift */; };
 		5634AE9C1F3C500000DD5401 /* UserNameChooserViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5634AE9B1F3C500000DD5401 /* UserNameChooserViewController.storyboard */; };
-		563E06101EFBE71700F0D471 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563E060F1EFBE71700F0D471 /* Constants.swift */; };
 		565143FA1DFAB79E00F56B32 /* adsr.pd in Resources */ = {isa = PBXBuildFile; fileRef = 565143F81DFAB79E00F56B32 /* adsr.pd */; };
 		565143FB1DFAB79E00F56B32 /* xfade.pd in Resources */ = {isa = PBXBuildFile; fileRef = 565143F91DFAB79E00F56B32 /* xfade.pd */; };
 		565143FE1DFAF11600F56B32 /* pluck~.pd in Resources */ = {isa = PBXBuildFile; fileRef = 565143FC1DFAF11600F56B32 /* pluck~.pd */; };
@@ -73,7 +70,6 @@
 		568D1DC91DF9BEDF00A2BC0B /* keys.pd in Resources */ = {isa = PBXBuildFile; fileRef = 568D1DC61DF9BEDF00A2BC0B /* keys.pd */; };
 		568D1DCA1DF9BEDF00A2BC0B /* strings.pd in Resources */ = {isa = PBXBuildFile; fileRef = 568D1DC71DF9BEDF00A2BC0B /* strings.pd */; };
 		569B92C41DFEA99C00AA257C /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569B92C31DFEA99C00AA257C /* SettingsTableViewController.swift */; };
-		56B329E51E44834E001345DC /* WorldJamsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B329E41E44834D001345DC /* WorldJamsTableViewController.swift */; };
 		56C88E801DFEFD8200406BF0 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56C88E7F1DFEFD8200406BF0 /* CloudKit.framework */; };
 		56D707EF1F15960900FDEB76 /* PerformanceStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D707EE1F15960900FDEB76 /* PerformanceStore.swift */; };
 		56E94AB31F20751B0049442A /* microjamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E94AB21F20751B0049442A /* microjamTests.swift */; };
@@ -105,16 +101,12 @@
 		29CA87DDE5853DCDE258268C /* Pods_microjamTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_microjamTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		467C19C9B42601CE5131E5AC /* Pods-microjam-microjamTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-microjam-microjamTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-microjam-microjamTests/Pods-microjam-microjamTests.release.xcconfig"; sourceTree = "<group>"; };
 		4B8432CAAE36EBBE2D19F96D /* Pods-microjamUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-microjamUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-microjamUITests/Pods-microjamUITests.release.xcconfig"; sourceTree = "<group>"; };
-		4D17A2941F30A5FA005C9C26 /* AddJamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddJamViewController.swift; sourceTree = "<group>"; };
 		4D77CC3C1F3B5564008BD48C /* BrowseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BrowseController.swift; path = chirpey/BrowseController.swift; sourceTree = "<group>"; };
 		4DA6A95C1F3C89DB00CD7589 /* BrowseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BrowseCell.swift; path = chirpey/BrowseCell.swift; sourceTree = "<group>"; };
 		4DD839761F3DF81D004D3E40 /* FilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FilterView.swift; path = chirpey/FilterView.swift; sourceTree = "<group>"; };
 		4DEFCADE1F41BDEF007B7C34 /* FilterViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FilterViewCell.swift; path = chirpey/FilterViewCell.swift; sourceTree = "<group>"; };
 		4DEFCAE01F41C5D9007B7C34 /* BrowseCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BrowseCategory.swift; path = chirpey/BrowseCategory.swift; sourceTree = "<group>"; };
 		4DEFCAE21F41E8EB007B7C34 /* Filter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Filter.swift; path = chirpey/Filter.swift; sourceTree = "<group>"; };
-		4D77CC3C1F3B5564008BD48C /* BrowseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BrowseController.swift; path = chirpey/BrowseController.swift; sourceTree = "<group>"; };
-		4DA6A95C1F3C89DB00CD7589 /* BrowseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BrowseCell.swift; path = chirpey/BrowseCell.swift; sourceTree = "<group>"; };
-		4DC9067D1F39C0E50062728E /* FilterTableModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FilterTableModel.swift; path = chirpey/FilterTableModel.swift; sourceTree = "<group>"; };
 		542B447A7B9AE8AC7B6CE3BB /* Pods-microjamTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-microjamTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-microjamTests/Pods-microjamTests.release.xcconfig"; sourceTree = "<group>"; };
 		56002F461F306C0F00003B88 /* UserNameChooserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserNameChooserViewController.swift; path = chirpey/UserNameChooserViewController.swift; sourceTree = "<group>"; };
 		5613B31D1F3D9C380068ED5D /* ChirpRecordingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChirpRecordingView.swift; path = chirpey/ChirpRecordingView.swift; sourceTree = "<group>"; };
@@ -242,7 +234,6 @@
 				56621B0C1DE39D33009B9AB6 /* ChirpPerformance.swift */,
 				4DEFCAE01F41C5D9007B7C34 /* BrowseCategory.swift */,
 				4DEFCAE21F41E8EB007B7C34 /* Filter.swift */,
-				4DC9067D1F39C0E50062728E /* FilterTableModel.swift */,
 				562FDCAD1F3727DC000409C8 /* TouchRecord.swift */,
 			);
 			name = models;
@@ -271,7 +262,6 @@
 				56B329E41E44834D001345DC /* WorldJamsTableViewController.swift */,
 				569B92C31DFEA99C00AA257C /* SettingsTableViewController.swift */,
 				567286651E05E0AF0024A515 /* MicrojamTabBarController.swift */,
-				4D17A2941F30A5FA005C9C26 /* AddJamViewController.swift */,
 				4D77CC3C1F3B5564008BD48C /* BrowseController.swift */,
 				562FDCA51F316870000409C8 /* UserSettingsViewController.swift */,
 			);
@@ -840,6 +830,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DEFCAE51F41EC90007B7C34 /* WorldJamsTableViewController.swift in Sources */,
+				4DEFCAE41F41EC82007B7C34 /* Constants.swift in Sources */,
 				56002F471F306C0F00003B88 /* UserNameChooserViewController.swift in Sources */,
 				5613B31E1F3D9C380068ED5D /* ChirpRecordingView.swift in Sources */,
 				56621B111DE47D5B009B9AB6 /* ChirpJamViewController.swift in Sources */,
@@ -852,12 +844,7 @@
 				567286661E05E0AF0024A515 /* MicrojamTabBarController.swift in Sources */,
 				4DD839771F3DF81D004D3E40 /* FilterView.swift in Sources */,
 				4DEFCAE31F41E8EB007B7C34 /* Filter.swift in Sources */,
-				4D17A2951F30A5FA005C9C26 /* AddJamViewController.swift in Sources */,
-				563E06101EFBE71700F0D471 /* Constants.swift in Sources */,
-				56B329E51E44834E001345DC /* WorldJamsTableViewController.swift in Sources */,
 				4DEFCAE11F41C5D9007B7C34 /* BrowseCategory.swift in Sources */,
-				563E06101EFBE71700F0D471 /* Constants.swift in Sources */,
-				56B329E51E44834E001345DC /* WorldJamsTableViewController.swift in Sources */,
 				562FDCAA1F32D202000409C8 /* PerformerProfile.swift in Sources */,
 				56621B0D1DE39D33009B9AB6 /* ChirpPerformance.swift in Sources */,
 				4DEFCADF1F41BDEF007B7C34 /* FilterViewCell.swift in Sources */,
