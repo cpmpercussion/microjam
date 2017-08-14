@@ -118,7 +118,6 @@ class BrowseController: UICollectionViewController, UICollectionViewDelegateFlow
     }
     
     func dimViewTapped() {
-        print("1237")
         toggleFilterView()
     }
     
@@ -174,6 +173,14 @@ class BrowseController: UICollectionViewController, UICollectionViewDelegateFlow
         if let delegate = delegate {
             let cell = collectionView.cellForItem(at: indexPath) as! BrowseCell
             delegate.didSelect(performance: cell.performance!)
+        }
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+                
+        if indexPath.item >= loadedPerformances.count - 1 {
+            print("Should get more data...")
+            loadMorePerformances()
         }
     }
     
@@ -259,13 +266,26 @@ extension BrowseController {
         }
     }
     
+    func loadMorePerformances() {
+        
+        let publicDB = CKContainer.default().publicCloudDatabase
+        
+        if let cursor = queryCursor {
+            let operation = CKQueryOperation(cursor: cursor)
+            operation.resultsLimit = resultsLimit
+            loadPerformances(withQueryOperation: operation)
+            publicDB.add(operation)
+        }
+    }
+    
     func fetchPerformances() {
         
         // TODO: Find a better way to update the loaded performances
         // Should look through the loaded performances and see if some passes the filters
-        loadedPerformances = [ChirpPerformance]()
         
         let publicDB = CKContainer.default().publicCloudDatabase
+        
+        loadedPerformances = [ChirpPerformance]()
         
         let predicate = getFilterPredicate()
         let query = CKQuery(recordType: PerfCloudKeys.type, predicate: predicate)

@@ -21,10 +21,7 @@ class FilterView: UIView {
     
     var delegate: FilterViewDelegate?
 
-    let categories = [BrowseCategory(name: "Instrument", values: ["Chirp", "Keys", "Drums", "Quack", "Strings", "Wub"]),
-                      BrowseCategory(name: "Genre", values: ["Pop", "Rock", "Jazz", "Heavy"]),
-                      BrowseCategory(name: "Username", values: []),
-                      BrowseCategory(name: "Description", values: [])]
+    let categories = [BrowseCategory(name: "Instrument", values: ["Chirp", "Keys", "Drums", "Quack", "Strings", "Wub"])]
     
     let collectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout()

@@ -282,33 +282,6 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         self.updateUI()
         self.navigationController?.popViewController(animated: true)
     }
-    
-    // MARK: AddJamDelegate methods
-    
-    func didReturnWithoutSelected() {
-        
-        if self.performanceViews.isEmpty {
-            // No performances are loaded, just return to a new state
-            self.state = ChirpJamModes.new
-            self.updateUI()
-        }
-        
-        // No change to the state of the app, just dismiss add jam controller
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    func didSelectJamAt(index : Int) {
-        print("Delegate returned index: ", index)
-        
-        // Adding the selected jam to the view and dismissing the add jam controller
-        
-        let performance = appDelegate.performanceStore.storedPerformances[index]
-        self.newViewWith(performance: performance, withFrame: self.chirpViewContainer.bounds)
-        
-        self.updateUI()
-        
-        self.dismiss(animated: true, completion: nil)
-    }
 
     // MARK: - UI Interaction Functions
 

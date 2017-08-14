@@ -96,7 +96,7 @@ extension FilterViewCell: UICollectionViewDelegate {
         if let cell = collectionView.cellForItem(at: indexPath) as? ValueCell {
             
             cell.addThis = !cell.addThis
-            cell.valueLabel.textColor = cell.addThis ? UIColor(white: 0.8, alpha: 1) : .black
+            cell.valueLabel.textColor = cell.addThis ? .black : UIColor(white: 0.8, alpha: 1)
             
             if let del = parent?.delegate {
                 if cell.addThis {
@@ -128,6 +128,7 @@ class ValueCell: UICollectionViewCell {
     
     let valueLabel: UILabel = {
         let label = UILabel()
+        label.textColor = UIColor(white: 0.8, alpha: 1)
         label.font = UIFont.systemFont(ofSize: 14)
         label.textAlignment = .center
         return label
