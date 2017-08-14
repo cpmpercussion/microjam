@@ -8,13 +8,13 @@
 
 import UIKit
 
-class FilterTableModel: NSObject {
+class Filter: NSObject {
     
     var category : String
-    var selected : String?
+    var value : String
     
-    init(withCategory category : String) {
+    init(category : String, value: String) {
         self.category = category
-        super.init()
+        self.value = value
     }
 }

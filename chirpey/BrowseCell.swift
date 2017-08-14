@@ -12,7 +12,7 @@ class BrowseCell: UICollectionViewCell {
     
     var performance: ChirpPerformance?
     
-    let performaceImageView : UIImageView = {
+    let performanceImageView : UIImageView = {
         let imageView = UIImageView()
         imageView.layer.borderWidth = 1
         imageView.layer.borderColor = UIColor(white: 0.8, alpha: 1).cgColor
@@ -48,25 +48,30 @@ class BrowseCell: UICollectionViewCell {
     }
     
     private func initSubviews() {
-        addSubview(performaceImageView)
-        addSubview(performerNameLabel)
-        addSubview(listenButton)
-        addSubview(separatorLine)
+        contentView.addSubview(performanceImageView)
+        contentView.addSubview(performerNameLabel)
+        contentView.addSubview(listenButton)
+        contentView.addSubview(separatorLine)
         
-        let views = ["v0" : performaceImageView, "v1" : performerNameLabel, "v2" : listenButton, "v3" : separatorLine]
+        performanceImageView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive = true
+        performanceImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16).isActive = true
+        performanceImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16).isActive = true
+        performanceImageView.widthAnchor.constraint(equalTo: performanceImageView.heightAnchor).isActive = true
         
-        var constraints = [NSLayoutConstraint]()
+        performerNameLabel.topAnchor.constraint(equalTo: performanceImageView.topAnchor).isActive = true
+        performerNameLabel.leftAnchor.constraint(equalTo: performanceImageView.rightAnchor, constant: 8).isActive = true
+        performerNameLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -16).isActive = true
         
-        constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "H:|-16-[v0]-8-[v1]-16-|", options: .alignAllTop, metrics: nil, views: views))
-        constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "H:|[v3]|", options: [], metrics: nil, views: views))
-
-        constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:|-16-[v0]-15-[v3(1)]|", options: [], metrics: nil, views: views))
-        constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:|-16-[v1(33)]-4-[v2(44)]", options: .alignAllLeading, metrics: nil, views: views))
+        listenButton.bottomAnchor.constraint(equalTo: performanceImageView.bottomAnchor).isActive = true
+        listenButton.leftAnchor.constraint(equalTo: performanceImageView.rightAnchor, constant: 8).isActive = true
+        listenButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        listenButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
         
-        constraints.append(NSLayoutConstraint(item: performaceImageView, attribute: .width, relatedBy: .equal, toItem: performaceImageView, attribute: .height, multiplier: 1.0, constant: 1.0))
+        separatorLine.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive = true
+        separatorLine.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -16).isActive = true
+        separatorLine.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        separatorLine.heightAnchor.constraint(equalToConstant: 1).isActive = true
         
-        NSLayoutConstraint.activate(constraints)
-        addConstraints(constraints)
     }
     
     required init?(coder aDecoder: NSCoder) {
