@@ -105,6 +105,22 @@ class ChirpView: UIImageView {
         image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
     }
+    
+    static func play(performance: ChirpPerformance) {
+        
+        let chirp = ChirpView(with: CGRect(x: 0, y: 0, width: 300, height: 300), andPerformance: performance)
+        
+        var timers = [Timer]()
+        for touch in performance.performanceData {
+            let t = Timer.scheduledTimer(withTimeInterval: touch.time, repeats: false, block: { timer in
+                chirp.makeSound(at: CGPoint(x: touch.x * 300, y: touch.y * 300), withRadius: CGFloat(touch.z), thatWasMoving: touch.moving)
+            })
+            timers.append(t)
+        }
+        
+        performance.playbackTimers = timers
+        
+    }
 
     // MARK: - playback functions
     

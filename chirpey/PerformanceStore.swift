@@ -11,12 +11,12 @@ import CloudKit
 
 /// Exposes CloudKit container to all UIViewControllers
 extension UIViewController {
-    
+
     /// Default Container (visible to all UIViewControllers)
     var container: CKContainer {
         return CKContainer.default()
     }
-    
+
 }
 
 /// Maximum number of jams to download at a time from CloudKit
@@ -28,6 +28,7 @@ protocol ModelDelegate {
     func errorUpdating(error: NSError)
     /// Called when the `PerformanceStore` successfully updates from the cloud backend.
     func modelUpdated()
+
 }
 
 /**
@@ -45,7 +46,7 @@ class PerformanceStore: NSObject {
     /// Delegate to notify when cloud operations are successful.
     var delegate : ModelDelegate?
 
-    
+
     /// Loads saved performances and then updates from cloud backend.
     override private init() {
         super.init()

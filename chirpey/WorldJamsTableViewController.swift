@@ -9,7 +9,7 @@
 import UIKit
 
 class WorldJamsTableViewController: UITableViewController, ModelDelegate {
-    
+
     let performanceStore = (UIApplication.shared.delegate as! AppDelegate).performanceStore
     let worldJamCellIdentifier = "worldJamCell"
 
@@ -37,7 +37,7 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
         refreshControl?.endRefreshing()
         tableView.reloadData()
     }
-    
+
     // borrowed so far from https://www.raywenderlich.com/134694/cloudkit-tutorial-getting-started
     func errorUpdating(error: NSError) {
         let message: String
@@ -49,12 +49,16 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
         let alertController = UIAlertController(title: nil,
                                                 message: message,
                                                 preferredStyle: .alert)
-        
+
         alertController.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
-        
+
         present(alertController, animated: true, completion: nil)
     }
     
+    func queryCompleted(withResult result: [Any]) {
+        
+    }
+
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -72,10 +76,10 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
         cell.instrument.text = performance.instrument
         cell.previewImage.image = performance.image
         cell.context.text = nonCreditString()
-        
+
         var temp = performance // used to store replies as we fetch them.
         var images = [performance.image] // the stack of reply images.
-        
+
         // Get the image from every reply
         while temp.replyto != "" {
             if let replyPerf = performanceStore.fetchPerformanceFrom(title: temp.replyto) {
@@ -89,12 +93,12 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
             }
             print("WJTVC: loaded a reply.")
         }
-        
+
         // Sum all the images into one and display
         cell.previewImage.image = self.createImageFrom(images: images)
         return cell
     }
-    
+
     /// Adds multiple images on top of each other
     func createImageFrom(images : [UIImage]) -> UIImage? {
         if let size = images.first?.size {
@@ -109,13 +113,13 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
         }
         return nil
     }
-    
+
     /// Loads a string crediting the original performer
     func creditString(originalPerformer: String) -> String {
         let output = "replied to " + originalPerformer
         return output
     }
-    
+
     /// Loads a credit string for a solo performance
     func nonCreditString() -> String {
         let ind : Int = Int(arc4random_uniform(UInt32(PerformanceLabels.solo.count)))
@@ -139,13 +143,13 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
     }
     */
 
 
     // MARK: - Navigation
-    
+
     /// Segue to view loaded jams.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == JamViewSegueIdentifiers.showDetailSegue { // view a performance.
@@ -154,12 +158,12 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
             if let selectedJamCell = sender as? PerformanceTableCell {
                 let indexPath = tableView.indexPath(for: selectedJamCell)!
                 var selectedJam = performanceStore.storedPerformances[indexPath.row]
-                jamDetailViewController.newViewWith(performance: selectedJam)
-                
+                jamDetailViewController.newViewWith(performance: selectedJam, withFrame: nil)
+
                 while selectedJam.replyto != "" { // load up all replies.
                     // FIXME: fetching replies fails if they have not been downloaded from cloud.
                     if let reply = performanceStore.fetchPerformanceFrom(title: selectedJam.replyto) {
-                        jamDetailViewController.newViewWith(performance: reply)
+                        jamDetailViewController.newViewWith(performance: reply, withFrame: nil)
                         selectedJam = reply
                         print("WJTVC: cued a reply")
                     } else {
@@ -169,7 +173,7 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
             }
         }
     }
-    
+
     /// Segue back to the World Jam Table
     @IBAction func unwindToJamList(sender: UIStoryboardSegue) {
 //        if let sourceViewController = sender.source as? ChirpJamViewController, let performance = sourceViewController.loadedPerformance {
@@ -177,7 +181,7 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
 //            if let selectedIndexPath = tableView.indexPathForSelectedRow { // passes if a row had been selected.
 //                // Update existing performance
 //                print("WJTVC: Unwound to a selected row:",selectedIndexPath.description)
-//                
+//
 //                if (appDelegate.storedPerformances[selectedIndexPath.row].title() != performance.title()) { // check if it's actually a reply.
 //                    print("WJTVC: Found a reply performance:", performance.title())
 //                    self.addNew(performance: performance) // add it.
@@ -190,12 +194,12 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
 //            }
 //        }
     }
-    
+
     /// Adds a new ChirpPerformance to the top of the list and saves it in the data source.
     func addNew(performance: ChirpPerformance) {
         let newIndexPath = NSIndexPath(row: 0, section: 0)
         performanceStore.addNew(performance: performance)
         self.tableView.insertRows(at: [newIndexPath as IndexPath], with: .top)
     }
-    
+
 }
