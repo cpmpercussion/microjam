@@ -11,8 +11,12 @@ import CloudKit
 
 class WorldJamsTableViewController: UITableViewController, ModelDelegate {
 
+    /// Local reference to the performanceStore singleton.
     let performanceStore = (UIApplication.shared.delegate as! AppDelegate).performanceStore
+    /// Global ID for wordJamCells.
     let worldJamCellIdentifier = "worldJamCell"
+    /// Local dictionary relating CKRecordIDs (Of Users records) to PerformerProfile objects.
+    var localProfileStore = [CKRecordID: PerformerProfile]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,25 +64,22 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
         print("WJTVC: Completed a Query")
     }
     
-    func getAvatar(forPerformance performance: ChirpPerformance, inCell cell: PerformanceTableCell) {
+    func getAvatar(forPerformance performance: ChirpPerformance) {
         guard let creatorID = performance.creatorID else {
             print("WJTVC: No creator for: \(performance.title())")
             return
         }
         
         let publicDB = container.publicCloudDatabase
-        publicDB.fetch(withRecordID: creatorID) { [unowned cell] (record: CKRecord?, error: Error?) in
+        publicDB.fetch(withRecordID: creatorID) { [unowned self] (record: CKRecord?, error: Error?) in
             if let e = error {
                 print("WJTVC: Avatar Error: \(e)")
             }
             if let rec = record {
                 print("WJTVC: Avatar Record Found.")
-                if let avatarPath = rec[UserCloudKeys.avatar] as? CKAsset,
-                    let avatarImage = UIImage(contentsOfFile: avatarPath.fileURL.path) {
-                    cell.avatarImageView.image = avatarImage
-                    print("WJTVC: Updated Avatar.")
-                } else {
-                    print("WJTVC: Avatar not able to be updated.")
+                DispatchQueue.main.async {
+                    self.localProfileStore[creatorID] = PerformerProfile(fromRecord: rec)
+                    self.modelUpdated()
                 }
             }
         }
@@ -97,9 +98,12 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: worldJamCellIdentifier, for: indexPath) as! PerformanceTableCell
         
         let performance = performanceStore.storedPerformances[indexPath.row]
-        
-        getAvatar(forPerformance: performance, inCell: cell)
-        //cell.avatarImageView.image = avatarImage
+        if let creatorID = performance.creatorID,
+            let profile = localProfileStore[creatorID] {
+            cell.avatarImageView.image = profile.avatar
+        } else {
+            getAvatar(forPerformance: performance)
+        }
         
         cell.avatarImageView.backgroundColor = .lightGray
         cell.avatarImageView.contentMode = .scaleAspectFill
