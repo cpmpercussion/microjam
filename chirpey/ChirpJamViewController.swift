@@ -25,7 +25,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
     var progressTimer : Timer?
     /// Storage of the original performance for a reply.
     var performanceViews : [ChirpView] = [ChirpView]() // Previous performances, should be populated if this is a reply
-    var recordingView : ChirpView? //
+    var recordingView : ChirpRecordingView? //
     /// Addition ChirpView for storage of the original performance for a reply.
     var replyto : String?
     /// App delegate - in case we need to upload a performance.
@@ -181,11 +181,12 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
 
         if let recordingView = self.recordingView {
             // Removing current ChirpView
+            recordingView.closePdFile()
             recordingView.removeFromSuperview()
         }
 
         // Creating a new Recording ChirpView
-        let newView = ChirpView(frame: chirpViewContainer!.bounds)
+        let newView = ChirpRecordingView(frame: chirpViewContainer!.bounds)
         newView.isUserInteractionEnabled = true
         newView.backgroundColor = UIColor.clear
         newView.openPdFile()
