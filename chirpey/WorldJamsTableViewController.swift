@@ -109,6 +109,7 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
         cell.avatarImageView.contentMode = .scaleAspectFill
         cell.avatarImageView.layer.cornerRadius = cell.avatarImageView.frame.width / 2
         cell.avatarImageView.clipsToBounds = true
+        cell.avatarImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showUserPerformances)))
         
         cell.title.text = performance.dateString
         cell.performer.text = performance.performer
@@ -142,6 +143,10 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
         // Sum all the images into one and display
         cell.previewImage.image = self.createImageFrom(images: images)
         return cell
+    }
+    
+    func showUserPerformances(sender: UIGestureRecognizer) {
+        print("133")
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

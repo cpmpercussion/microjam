@@ -189,40 +189,6 @@
                                                 <constraint firstAttribute="width" secondItem="C1Y-wG-D7P" secondAttribute="height" multiplier="1:1" id="gtd-6L-cpC"/>
                                             </constraints>
                                         </imageView>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fmu-Vs-F8c">
-                                            <rect key="frame" x="32" y="16" width="311" height="50"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cxR-qX-Aey">
-                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="50" id="9Oe-de-hDH"/>
-                                                        <constraint firstAttribute="width" constant="50" id="uUm-1F-ted"/>
-                                                    </constraints>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="performername" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zm0-8q-7kP">
-                                                    <rect key="frame" x="54" y="3" width="127" height="22"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date and time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RbJ-Tv-ySY" userLabel="Date">
-                                                    <rect key="frame" x="54" y="27.5" width="89" height="17"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <constraints>
-                                                <constraint firstItem="Zm0-8q-7kP" firstAttribute="leading" secondItem="cxR-qX-Aey" secondAttribute="trailing" constant="4" id="9f3-dm-zal"/>
-                                                <constraint firstItem="Zm0-8q-7kP" firstAttribute="centerY" secondItem="fmu-Vs-F8c" secondAttribute="centerY" constant="-11" id="QA7-4Q-nmx"/>
-                                                <constraint firstAttribute="height" constant="50" id="RoH-fE-34h"/>
-                                                <constraint firstItem="cxR-qX-Aey" firstAttribute="leading" secondItem="fmu-Vs-F8c" secondAttribute="leading" id="hdV-An-huK"/>
-                                                <constraint firstItem="RbJ-Tv-ySY" firstAttribute="centerY" secondItem="fmu-Vs-F8c" secondAttribute="centerY" constant="11" id="iBh-oW-MYz"/>
-                                                <constraint firstItem="RbJ-Tv-ySY" firstAttribute="leading" secondItem="cxR-qX-Aey" secondAttribute="trailing" constant="4" id="opJ-Rb-0iB"/>
-                                                <constraint firstItem="cxR-qX-Aey" firstAttribute="centerY" secondItem="fmu-Vs-F8c" secondAttribute="centerY" id="sM4-IE-u10"/>
-                                            </constraints>
-                                        </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="took the stage" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8qM-fi-pVE" userLabel="context">
                                             <rect key="frame" x="32" y="393" width="93" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -235,6 +201,40 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fmu-Vs-F8c">
+                                            <rect key="frame" x="32" y="16" width="311" height="50"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="performername" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zm0-8q-7kP">
+                                                    <rect key="frame" x="54" y="3" width="127" height="22"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date and time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RbJ-Tv-ySY" userLabel="Date">
+                                                    <rect key="frame" x="54" y="27.5" width="89" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cxR-qX-Aey">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="9Oe-de-hDH"/>
+                                                        <constraint firstAttribute="width" constant="50" id="uUm-1F-ted"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="Zm0-8q-7kP" firstAttribute="leading" secondItem="cxR-qX-Aey" secondAttribute="trailing" constant="4" id="9f3-dm-zal"/>
+                                                <constraint firstItem="Zm0-8q-7kP" firstAttribute="centerY" secondItem="fmu-Vs-F8c" secondAttribute="centerY" constant="-11" id="QA7-4Q-nmx"/>
+                                                <constraint firstAttribute="height" constant="50" id="RoH-fE-34h"/>
+                                                <constraint firstItem="cxR-qX-Aey" firstAttribute="leading" secondItem="fmu-Vs-F8c" secondAttribute="leading" id="hdV-An-huK"/>
+                                                <constraint firstItem="RbJ-Tv-ySY" firstAttribute="centerY" secondItem="fmu-Vs-F8c" secondAttribute="centerY" constant="11" id="iBh-oW-MYz"/>
+                                                <constraint firstItem="RbJ-Tv-ySY" firstAttribute="leading" secondItem="cxR-qX-Aey" secondAttribute="trailing" constant="4" id="opJ-Rb-0iB"/>
+                                                <constraint firstItem="cxR-qX-Aey" firstAttribute="centerY" secondItem="fmu-Vs-F8c" secondAttribute="centerY" id="sM4-IE-u10"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="C1Y-wG-D7P" firstAttribute="top" secondItem="fmu-Vs-F8c" secondAttribute="bottom" constant="8" id="5wq-js-o1d"/>
