@@ -124,6 +124,7 @@ class ChirpPerformance : NSObject {
         data = lines.flatMap {TouchRecord.init(fromCSVLine: $0)}
         self.init(data: data, date: date, performer: performer, instrument: instrument, image: image, location: location, colour: colour, replyto: replyto)
         self.performanceID = performanceID
+        self.creatorID = creatorID
     }
     
     /// Convenience Initialiser for creating performance with data yet to be added.
