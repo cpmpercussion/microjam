@@ -43,6 +43,8 @@ class ChirpPerformance : NSObject {
     //    var backgroundColour : UIColor = UIColor.gray
     /// Keeps track of the Record ID of performances retrieved from CloudKit
     var performanceID : CKRecordID?
+    /// Keeps track of the Record ID of the user who created the performance.
+    var creatorID : CKRecordID?
     /// Keeps track of Record ID of parent performance
     var parentReference : CKReference?
 
@@ -75,6 +77,9 @@ class ChirpPerformance : NSObject {
         if let perfId = aDecoder.decodeObject(forKey: PropertyKey.performanceIDKey) as? CKRecordID {
             self.performanceID = perfId
         }
+        if let creatorID = aDecoder.decodeObject(forKey: PropertyKey.creatorIDKey) as? CKRecordID {
+            self.creatorID = creatorID
+        }
     }
 
     /// Main initialiser
@@ -90,8 +95,29 @@ class ChirpPerformance : NSObject {
         super.init()
     }
     
+    /// Convenience Initialiser for use with CloudKit records.
+    convenience init?(fromRecord record: CKRecord) {
+        let touches = record.object(forKey: PerfCloudKeys.touches) as! String
+        let date = (record.object(forKey: PerfCloudKeys.date) as! NSDate) as Date
+        let performer = record.object(forKey: PerfCloudKeys.performer) as! String
+        let instrument = record.object(forKey: PerfCloudKeys.instrument) as! String
+        let location = record.object(forKey: PerfCloudKeys.location) as! CLLocation
+        let colour = record.object(forKey: PerfCloudKeys.colour) as! String
+        let imageAsset = record.object(forKey: PerfCloudKeys.image) as! CKAsset
+        let image = UIImage(contentsOfFile: imageAsset.fileURL.path)!
+        let replyto = record.object(forKey: PerfCloudKeys.replyto) as! String
+        let performance_id = record.recordID
+        let creator_id = record.creatorUserRecordID
+        // TODO: Remove this print after figuring out creatorID.
+        if let creator = creator_id {
+            print("Chirp: Creator: \(creator)")
+        }
+        // Initialise the Performance
+        self.init(csv: touches, date: date, performer: performer, instrument: instrument, image: image, location: location,                                       colour: colour, replyto: replyto, performanceID: performance_id, creatorID: creator_id)
+    }
+    
     /// Initialiser with csv of data for the TouchRecords, useful in initialising performances from CloudKit
-    convenience init?(csv: String, date: Date, performer: String, instrument: String, image: UIImage, location: CLLocation, colour: String, replyto: String, performanceID: CKRecordID) {
+    convenience init?(csv: String, date: Date, performer: String, instrument: String, image: UIImage, location: CLLocation, colour: String, replyto: String, performanceID: CKRecordID, creatorID: CKRecordID?) {
         var data : [TouchRecord] = []
         let lines = csv.components(separatedBy: "\n")
         // TODO: test this initialiser
@@ -186,6 +212,7 @@ extension ChirpPerformance: NSCoding {
         static let colourKey = "colour"
         static let replyToKey = "replyto"
         static let performanceIDKey = "performance_id"
+        static let creatorIDKey = "creator_id"
     }
     
     /// Function for encoding as NSCoder, used for saving performances on app close.
@@ -200,6 +227,9 @@ extension ChirpPerformance: NSCoding {
         aCoder.encode(replyto, forKey: PropertyKey.replyToKey)
         if let perfID = self.performanceID {
             aCoder.encode(perfID, forKey: PropertyKey.performanceIDKey)
+        }
+        if let creatorID = self.creatorID {
+            aCoder.encode(creatorID, forKey: PropertyKey.creatorIDKey)
         }
     }
 }

@@ -78,10 +78,12 @@ struct PerfCloudKeys {
     static let replyto = "ReplyTo"
     static let touches = "Touches"
     static let colour = "Colour"
+    static let createdBy = "createdBy"
 }
 
 /// Keys for Users type in CloudKit Storage
 struct UserCloudKeys {
+    static let type = "Users"
     static let avatar = "avatar" // Asset
     static let email = "Email" // String
     static let home = "Home" // String
