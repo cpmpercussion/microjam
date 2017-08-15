@@ -35,12 +35,15 @@ class ChirpPerformance : NSObject {
     /// Location where performances was recorded (unused).
     var location : CLLocation?
     /// Colour used for touch trace of this recording.
-    var colour : UIColor = UIColor.blue
+    var colour : UIColor = UIColor.red
+    /// Stores UIColor string for the background
+    var backgroundColour : UIColor = UIColor.gray
     /// Return a dateString that would work for adding to the performance list.
     var dateString: String { return self.date.timeAgoSinceNow }
     /// Returns the hex string for the performance's playback colour.
     var colourString : String { return self.colour.hexString() }
-    //    var backgroundColour : UIColor = UIColor.gray
+    /// Returns the hex string for the background colour.
+    var backgroundColourString : String { return self.backgroundColour.hexString()}
     /// Keeps track of the Record ID of performances retrieved from CloudKit
     var performanceID : CKRecordID?
     /// Keeps track of the Record ID of the user who created the performance.
@@ -62,28 +65,38 @@ class ChirpPerformance : NSObject {
         // TODO: write unit test to test this function.
         guard let data = aDecoder.decodeObject(forKey: PropertyKey.performanceDataKey) as? [TouchRecord]
             else {return nil}
-        guard
-            let date = aDecoder.decodeObject(forKey: PropertyKey.dateKey) as? Date,
+        guard let date = aDecoder.decodeObject(forKey: PropertyKey.dateKey) as? Date,
             let performer = aDecoder.decodeObject(forKey: PropertyKey.performerKey) as? String,
             let instrument = aDecoder.decodeObject(forKey: PropertyKey.instrumentKey) as? String,
             let imageData = aDecoder.decodeObject(forKey: PropertyKey.imageKey) as? Data,
             let image = UIImage(data: imageData),
             let colour = aDecoder.decodeObject(forKey: PropertyKey.colourKey) as? String,
+            let bgColour = aDecoder.decodeObject(forKey: PropertyKey.backgroundColourKey) as? String,
             let replyto = aDecoder.decodeObject(forKey: PropertyKey.replyToKey) as? String
             else {return nil}
+
         let location = (aDecoder.decodeObject(forKey: "location") as? CLLocation) ?? CLLocation.init(latitude: 60, longitude: 11)
+
         // print("PERF: Decoding", data.count, "notes:", performer, instrument)
-        self.init(data: data, date: date, performer: performer, instrument: instrument, image: image, location: location, colour: colour, replyto: replyto)
+
+        self.init(data: data, date: date, performer: performer, instrument: instrument, image: image, location: location,
+                  colour: colour, background: bgColour, replyto: replyto)
+
         if let perfId = aDecoder.decodeObject(forKey: PropertyKey.performanceIDKey) as? CKRecordID {
             self.performanceID = perfId
         }
+
         if let creatorID = aDecoder.decodeObject(forKey: PropertyKey.creatorIDKey) as? CKRecordID {
             self.creatorID = creatorID
+        }
+
+        if let parentRef = aDecoder.decodeObject(forKey: PropertyKey.parentReferenceKey) as? CKReference {
+            self.parentReference = parentRef
         }
     }
 
     /// Main initialiser
-    init(data: [TouchRecord], date: Date, performer: String, instrument: String, image: UIImage, location: CLLocation, colour: String, replyto: String) {
+    init(data: [TouchRecord], date: Date, performer: String, instrument: String, image: UIImage, location: CLLocation, colour: String, background: String, replyto: String) {
         self.performanceData = data
         self.date = date
         self.performer = performer
@@ -91,6 +104,7 @@ class ChirpPerformance : NSObject {
         self.image = image
         self.location = location
         self.colour = UIColor(colour)
+        self.backgroundColour = UIColor(background)
         self.replyto = replyto
         super.init()
     }
@@ -102,7 +116,8 @@ class ChirpPerformance : NSObject {
         let performer = record.object(forKey: PerfCloudKeys.performer) as! String
         let instrument = record.object(forKey: PerfCloudKeys.instrument) as! String
         let location = record.object(forKey: PerfCloudKeys.location) as! CLLocation
-        let colour = record.object(forKey: PerfCloudKeys.colour) as! String
+        let colour = record.object(forKey: PerfCloudKeys.colour) as? String ?? UIColor.red.hexString()
+        let bgColour = record.object(forKey: PerfCloudKeys.backgroundColour) as? String ?? UIColor.gray.hexString()
         let imageAsset = record.object(forKey: PerfCloudKeys.image) as! CKAsset
         let image = UIImage(contentsOfFile: imageAsset.fileURL.path)!
         let replyto = record.object(forKey: PerfCloudKeys.replyto) as! String
@@ -113,16 +128,18 @@ class ChirpPerformance : NSObject {
             print("Chirp: Creator: \(creator)")
         }
         // Initialise the Performance
-        self.init(csv: touches, date: date, performer: performer, instrument: instrument, image: image, location: location,                                       colour: colour, replyto: replyto, performanceID: performance_id, creatorID: creator_id)
+        self.init(csv: touches, date: date, performer: performer, instrument: instrument, image: image, location: location,
+                  colour: colour, background: bgColour, replyto: replyto, performanceID: performance_id, creatorID: creator_id)
     }
     
     /// Initialiser with csv of data for the TouchRecords, useful in initialising performances from CloudKit
-    convenience init?(csv: String, date: Date, performer: String, instrument: String, image: UIImage, location: CLLocation, colour: String, replyto: String, performanceID: CKRecordID, creatorID: CKRecordID?) {
+    convenience init?(csv: String, date: Date, performer: String, instrument: String, image: UIImage, location: CLLocation, colour: String, background: String, replyto: String, performanceID: CKRecordID, creatorID: CKRecordID?) {
         var data : [TouchRecord] = []
         let lines = csv.components(separatedBy: "\n")
         // TODO: test this initialiser
         data = lines.flatMap {TouchRecord.init(fromCSVLine: $0)}
-        self.init(data: data, date: date, performer: performer, instrument: instrument, image: image, location: location, colour: colour, replyto: replyto)
+        self.init(data: data, date: date, performer: performer, instrument: instrument, image: image, location: location,
+                  colour: colour, background: background, replyto: replyto)
         self.performanceID = performanceID
         self.creatorID = creatorID
     }
@@ -131,7 +148,9 @@ class ChirpPerformance : NSObject {
     convenience override init() {
         // FIXME: actually detect the proper location
         let perfColour : UIColor = UserProfile.shared.profile.jamColour
-        self.init(data : [], date : Date(), performer : "", instrument : "", image : UIImage(), location: CLLocation.init(latitude: 90.0, longitude: 45.0), colour: perfColour.hexString(), replyto: "")
+        let bgColour : UIColor = UserProfile.shared.profile.backgroundColour
+        self.init(data : [], date : Date(), performer : "", instrument : "", image : UIImage(), location: CLLocation.init(latitude: 90.0, longitude: 45.0),
+                  colour: perfColour.hexString(), background: bgColour.hexString(), replyto: "")
     }
 
     /// Returns a CSV of the current performance data
@@ -211,9 +230,11 @@ extension ChirpPerformance: NSCoding {
         static let imageKey = "image"
         static let locationKey = "location"
         static let colourKey = "colour"
+        static let backgroundColourKey = "bg_colour"
         static let replyToKey = "replyto"
         static let performanceIDKey = "performance_id"
         static let creatorIDKey = "creator_id"
+        static let parentReferenceKey = "parent_reference"
     }
     
     /// Function for encoding as NSCoder, used for saving performances on app close.
@@ -226,11 +247,15 @@ extension ChirpPerformance: NSCoding {
         aCoder.encode(location, forKey: PropertyKey.locationKey)
         aCoder.encode(colour.hexString(), forKey: PropertyKey.colourKey)
         aCoder.encode(replyto, forKey: PropertyKey.replyToKey)
+        aCoder.encode(backgroundColour.hexString(), forKey: PropertyKey.backgroundColourKey)
         if let perfID = self.performanceID {
             aCoder.encode(perfID, forKey: PropertyKey.performanceIDKey)
         }
         if let creatorID = self.creatorID {
             aCoder.encode(creatorID, forKey: PropertyKey.creatorIDKey)
+        }
+        if let parentRef = self.parentReference {
+            aCoder.encode(parentRef, forKey: PropertyKey.parentReferenceKey)
         }
     }
 }
