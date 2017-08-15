@@ -189,6 +189,7 @@ class PerformanceStore: NSObject {
         performanceRecord[PerfCloudKeys.replyto] = performance.replyto as CKRecordValue
         performanceRecord[PerfCloudKeys.location] = performance.location!
         performanceRecord[PerfCloudKeys.colour] = performance.colourString as CKRecordValue
+        performanceRecord[PerfCloudKeys.backgroundColour] = performance.backgroundColourString as CKRecordValue
 
         do { // Saving image data
             let imageURL = PerformanceStore.tempURL()
