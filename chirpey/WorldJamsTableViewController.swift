@@ -7,11 +7,16 @@
 //
 
 import UIKit
+import CloudKit
 
 class WorldJamsTableViewController: UITableViewController, ModelDelegate {
 
+    /// Local reference to the performanceStore singleton.
     let performanceStore = (UIApplication.shared.delegate as! AppDelegate).performanceStore
+    /// Global ID for wordJamCells.
     let worldJamCellIdentifier = "worldJamCell"
+    /// Local dictionary relating CKRecordIDs (Of Users records) to PerformerProfile objects.
+    var localProfileStore = [CKRecordID: PerformerProfile]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +29,7 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
         tableView.rowHeight = 365
         performanceStore.delegate = self
         self.refreshControl?.addTarget(performanceStore, action: #selector(performanceStore.fetchWorldJamsFromCloud), for: UIControlEvents.valueChanged)
+        tableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tableViewTapped)))
     }
 
     override func didReceiveMemoryWarning() {
@@ -56,7 +62,28 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
     }
     
     func queryCompleted(withResult result: [Any]) {
+        print("WJTVC: Completed a Query")
+    }
+    
+    func getAvatar(forPerformance performance: ChirpPerformance) {
+        guard let creatorID = performance.creatorID else {
+            print("WJTVC: No creator for: \(performance.title())")
+            return
+        }
         
+        let publicDB = container.publicCloudDatabase
+        publicDB.fetch(withRecordID: creatorID) { [unowned self] (record: CKRecord?, error: Error?) in
+            if let e = error {
+                print("WJTVC: Avatar Error: \(e)")
+            }
+            if let rec = record {
+                print("WJTVC: Avatar Record Found.")
+                DispatchQueue.main.async {
+                    self.localProfileStore[creatorID] = PerformerProfile(fromRecord: rec)
+                    self.modelUpdated()
+                }
+            }
+        }
     }
 
     // MARK: - Table view data source
@@ -70,11 +97,30 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: worldJamCellIdentifier, for: indexPath) as! PerformanceTableCell
+        
         let performance = performanceStore.storedPerformances[indexPath.row]
+        if let creatorID = performance.creatorID,
+            let profile = localProfileStore[creatorID] {
+            cell.avatarImageView.image = profile.avatar
+        } else {
+            getAvatar(forPerformance: performance)
+        }
+        
+        cell.avatarImageView.backgroundColor = .lightGray
+        cell.avatarImageView.contentMode = .scaleAspectFill
+        cell.avatarImageView.layer.cornerRadius = cell.avatarImageView.frame.width / 2
+        cell.avatarImageView.clipsToBounds = true
+        
         cell.title.text = performance.dateString
         cell.performer.text = performance.performer
         cell.instrument.text = performance.instrument
+        
         cell.previewImage.image = performance.image
+        cell.previewImage.layer.borderWidth = 1
+        cell.previewImage.layer.borderColor = UIColor(white: 0.9, alpha: 1).cgColor
+        cell.previewImage.layer.cornerRadius = 4
+        cell.previewImage.clipsToBounds = true
+        
         cell.context.text = nonCreditString()
 
         var temp = performance // used to store replies as we fetch them.
@@ -97,6 +143,46 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
         // Sum all the images into one and display
         cell.previewImage.image = self.createImageFrom(images: images)
         return cell
+    }
+    
+    func tableViewTapped(sender: UIGestureRecognizer) {
+        
+        let location = sender.location(in: tableView)
+        
+        if let indexPath = tableView.indexPathForRow(at: location) {
+            
+            // Find out which cell was tapped
+            if let cell = tableView.cellForRow(at: indexPath) as? PerformanceTableCell {
+                
+                // Tapped the avatar imageview
+                if cell.avatarImageView.frame.contains(sender.location(in: cell.avatarImageView)) {
+                    // Show user performances
+                    let layout = UICollectionViewFlowLayout()
+                    let controller = UserPerfController(collectionViewLayout: layout)
+                    controller.performer = performanceStore.storedPerformances[indexPath.row].performer
+                    navigationController?.pushViewController(controller, animated: true)
+                
+                // Tapped the preview image
+                } else if cell.previewImage.frame.contains(sender.location(in: cell.previewImage)) {
+                    
+                    // Show the performance in a new ChirpJamController
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let controller = storyboard.instantiateViewController(withIdentifier: "chirpJamController") as! ChirpJamViewController
+                    controller.newViewWith(performance: performanceStore.storedPerformances[indexPath.row], withFrame: nil)
+                    navigationController?.pushViewController(controller, animated: true)
+                }
+            }
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        // Width of the preview image
+        let width = view.frame.width - 64
+        
+        //returning height of image, pluss all the text
+        return width + 120
+        
     }
 
     /// Adds multiple images on top of each other

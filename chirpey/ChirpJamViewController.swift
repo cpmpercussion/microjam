@@ -100,11 +100,9 @@ class ChirpJamViewController: UIViewController {
                     if let performance = recordView.performance {
                         // Adding performance to clouad
                         appDelegate.performanceStore.addNew(performance: performance)
-                        // Reset view controller
-                        newRecordingView()
-
+                        // FIXME: This could potentially leave pd files open when not needed? In Jam tab it's fine as there's only one available.
+                        newRecordingView() // Reset view controller
                         // TODO: Maybe it is best to delete the view controller to save memory?
-
                     }
                 }
             } else {
@@ -153,7 +151,7 @@ class ChirpJamViewController: UIViewController {
                 mode = ChirpJamModes.loaded
                 state = ChirpJamModes.idle
                 jamming = false
-                recordingProgress!.progress = 0.0
+                recordingProgress.progress = 0.0
                 progress = 0.0
                 updateUI()
             }

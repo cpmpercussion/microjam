@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CloudKit
 
 /// Storage for performer profile data (either for local user or other users).
 class PerformerProfile: NSObject, NSCoding {
@@ -79,5 +80,24 @@ extension PerformerProfile {
         var alpha: CGFloat = 0
         colour.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
         return Float(hue)
+    }
+}
+
+// MARK: Functions when loading PerformerProfile from a CKRecord
+
+extension PerformerProfile {
+    
+    convenience init?(fromRecord record: CKRecord) {
+        guard
+            let imagePath = record[UserCloudKeys.avatar] as? CKAsset,
+            let avatar = UIImage(contentsOfFile: imagePath.fileURL.path),
+            let stageName = record[UserCloudKeys.stagename] as? String,
+            let jamColourHex = record[UserCloudKeys.jamColour] as? String,
+            let backgroundColourHex = record[UserCloudKeys.backgroundColour] as? String,
+            let soundScheme = record[UserCloudKeys.soundScheme] as? Int64
+            else {return nil}
+        let jamColour = UIColor(jamColourHex)
+        let backgroundColour = UIColor(backgroundColourHex)
+        self.init(avatar: avatar, stageName: stageName, jamColour: jamColour, backgroundColour: backgroundColour, soundScheme: soundScheme)
     }
 }

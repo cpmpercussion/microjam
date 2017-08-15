@@ -168,23 +168,10 @@ class PerformanceStore: NSObject {
 
     /// Returns a ChirpPerformance from a CKRecord of a performance
     func performanceFrom(record: CKRecord) -> ChirpPerformance? {
-        // TODO: Need some kind of protection against failure here.
-        let touches = record.object(forKey: PerfCloudKeys.touches) as! String
-        let date = (record.object(forKey: PerfCloudKeys.date) as! NSDate) as Date
-        let performer = record.object(forKey: PerfCloudKeys.performer) as! String
-        let instrument = record.object(forKey: PerfCloudKeys.instrument) as! String
-        let location = record.object(forKey: PerfCloudKeys.location) as! CLLocation
-        let colour = record.object(forKey: PerfCloudKeys.colour) as! String
-        let imageAsset = record.object(forKey: PerfCloudKeys.image) as! CKAsset
-        let image = UIImage(contentsOfFile: imageAsset.fileURL.path)!
-        let replyto = record.object(forKey: PerfCloudKeys.replyto) as! String
-        let performance_id = record.recordID
         // Initialise the Performance
-        guard let perf = ChirpPerformance(csv: touches, date: date, performer: performer,
-                                    instrument: instrument, image: image, location: location,
-                                    colour: colour, replyto: replyto, performanceID: performance_id) else {
-                                        print("PerformanceStore: Could not make Performance from CKRecord.")
-                                        return nil
+        guard let perf = ChirpPerformance(fromRecord: record) else {
+            print("PerformanceStore: Could not make Performance from CKRecord.")
+            return nil
         }
         return perf
     }
@@ -202,6 +189,7 @@ class PerformanceStore: NSObject {
         performanceRecord[PerfCloudKeys.replyto] = performance.replyto as CKRecordValue
         performanceRecord[PerfCloudKeys.location] = performance.location!
         performanceRecord[PerfCloudKeys.colour] = performance.colourString as CKRecordValue
+        performanceRecord[PerfCloudKeys.backgroundColour] = performance.backgroundColourString as CKRecordValue
 
         do { // Saving image data
             let imageURL = PerformanceStore.tempURL()
