@@ -76,6 +76,7 @@ struct PerfCloudKeys {
     static let location = "PerformedAt"
     static let performer = "Performer"
     static let replyto = "ReplyTo"
+    static let parent = "parent"
     static let touches = "Touches"
     static let colour = "Colour"
     static let createdBy = "createdBy"

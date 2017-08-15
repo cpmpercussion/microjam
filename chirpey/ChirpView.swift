@@ -32,14 +32,6 @@ class ChirpView: UIImageView {
     /// True if a recording/playback has started
     var started = false
     
-    // Recording
-    /// Storage for the date that a performance started recording for timing
-    var startTime = Date()
-    /// True if the view has started a recording (so touches should be recorded)
-    var recording = false
-    /// Colour to render touches as they are recorded.
-    var recordingColour : CGColor?
-    
     // Pure Data
     /// Stores the currently open Pd file
     var openPatch : PdFile?
@@ -50,18 +42,12 @@ class ChirpView: UIImageView {
     
     // MARK: Initialisers
     
-    /// Initialises view for recording, rather than playback.
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        isMultipleTouchEnabled = true
-        clearForRecording() // gets view ready for recording.
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        performance = ChirpPerformance()
-        recordingColour = self.performance?.colour.cgColor
-        image = UIImage()
     }
     
     /// Convenience Initialiser only used when loading performances for playback only. Touch is disabled!
@@ -82,14 +68,11 @@ class ChirpView: UIImageView {
         performance = newPerf
         image = newPerf.image
         playbackColour = newPerf.colour.cgColor
-        recording = false
         started = false
         lastPoint = CG_INIT_POINT
         swiped = false
-        reloadPatch()
+        openSoundScheme(withName: newPerf.instrument)
     }
-    
-
     
     // MARK: - drawing functions
 
@@ -175,82 +158,6 @@ class ChirpView: UIImageView {
 
 }
 
-//MARK: - touch interaction
-
-/// Contains touch interaction and recording functions for ChirpView
-extension ChirpView {
-    
-    /// Responds to taps in the ChirpView, passes on to superviews and reacts.
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        superview?.touchesBegan(touches, with: event)
-        if (!started) {
-            startTime = Date()
-            started = true
-        }
-        swiped = false
-        lastPoint = touches.first?.location(in: superview!)
-        let size = touches.first?.majorRadius
-        drawDot(at: lastPoint!, withColour: recordingColour ?? DEFAULT_RECORDING_COLOUR)
-        makeSound(at: lastPoint!, withRadius: size!, thatWasMoving: false)
-        recordTouch(at: lastPoint!, withRadius: size!, thatWasMoving:false)
-    }
-    
-    /// Responds to moving touch signals, responds with sound and recordings.
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if recording {
-            swiped = true
-            let currentPoint = touches.first?.location(in: superview!)
-            drawLine(from:self.lastPoint!, to:currentPoint!, withColour:recordingColour ?? DEFAULT_RECORDING_COLOUR)
-            lastPoint = currentPoint
-            let size = touches.first?.majorRadius
-            makeSound(at: currentPoint!, withRadius: size!, thatWasMoving: true)
-            recordTouch(at: currentPoint!, withRadius: size!, thatWasMoving: true)
-        }
-    }
-    
-    /**
-     Adds a touch point to the recording data including whether it was moving
-     and the current time.
-     **/
-    func recordTouch(at point : CGPoint, withRadius radius : CGFloat, thatWasMoving moving : Bool) {
-        let time = -1.0 * startTime.timeIntervalSinceNow
-        let x = Double(point.x) / Double(frame.size.width)
-        let y = Double(point.y) / Double(frame.size.width)
-        let z = Double(radius)
-        if recording { // only record when recording.
-            performance?.recordTouchAt(time: time, x: x, y: y, z: z, moving: moving)
-        }
-    }
-    
-    /// Closes the recording and returns the performance.
-    func saveRecording() -> ChirpPerformance? {
-        recording = false
-        guard let output = self.performance,
-            let image = self.image else {
-            return nil
-        }
-        output.image = image
-        output.performer = UserProfile.shared.profile.stageName
-        output.instrument = SoundSchemes.namesForKeys[UserProfile.shared.profile.soundScheme]!
-        output.date = Date()
-        return output
-    }
-    
-    /// Initialise the ChirpView for a new recording
-    func clearForRecording() {
-        print("ChirpView: New Performance")
-        recording = false
-        started = false
-        lastPoint = CG_INIT_POINT
-        swiped = false
-        image = UIImage()
-        performance = ChirpPerformance()
-        recordingColour = performance?.colour.cgColor ?? DEFAULT_RECORDING_COLOUR
-        reloadPatch()
-    }
-}
-
-
 // MARK: - Pd Patch Managing Functions.
 
 /// Contains Pd and libpd file management for ChirpView.
@@ -271,30 +178,8 @@ extension ChirpView {
         PdBase.sendList(["/x",x], toReceiver: receiver)
     }
     
-    /// Loads the Pd Patch for this ChirpView. If patch name is not set in the ChirpPerformance, the user settings are used.
-    func reloadPatch() {
-        // Opening the Pd File.
-        if let performancePatchName = performance?.instrument, performancePatchName != "" {
-            print("ChirpView: Loading a patch from performance: ", performancePatchName)
-            openPdFile(withName: performancePatchName)
-        } else {
-            print("ChirpView: Loading the settings specified patch (i.e., new performance)")
-            openPdFile()
-        }
-        // print("ChirpView: DollarZero is: ", self.openPatchDollarZero ?? "not available!")
-    }
-    
-    /// Opens a Pd patch according the UserProfile, does nothing if the patch is already open.
-    func openPdFile() {
-        let userChoiceKey = UserProfile.shared.profile.soundScheme
-        if let userChoiceFile = SoundSchemes.pdFilesForKeys[userChoiceKey] {
-            openPd(file: userChoiceFile)
-        }
-    }
-    
-
-    /// Attempts to open a patch with a given name.
-    func openPdFile(withName name: String) {
+    /// Attempts to open a SoundScheme given its name.
+    func openSoundScheme(withName name: String) {
         print("ChirpView: Attemping to open the Pd File with name:", name)
         if let index = SoundSchemes.namesForKeys.values.index(of: name),
             let fileToOpen = SoundSchemes.pdFilesForKeys[SoundSchemes.namesForKeys.keys[index]] {
@@ -306,13 +191,18 @@ extension ChirpView {
     func openPd(file fileToOpen: String) {
         if openPatchName != fileToOpen {
             print("ChirpView: Opening Pd File:", fileToOpen)
-            openPatch?.close()
+            closePdFile()
             openPatch = PdFile.openNamed(fileToOpen, path: Bundle.main.bundlePath) as? PdFile
             openPatchName = fileToOpen
             openPatchDollarZero = openPatch?.dollarZero
         } else {
             print("ChirpView:", fileToOpen, "was already open.")
         }
+    }
+    
+    /// Closes whatever Pd file is open.
+    func closePdFile() {
+        openPatch?.close()
     }
     
 }
