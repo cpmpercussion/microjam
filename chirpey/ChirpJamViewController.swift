@@ -471,7 +471,7 @@ extension ChirpJamViewController {
                 performerLabel.text = loadedPerformance?.performer
                 instrumentButton.setTitle(loadedPerformance?.instrument, for: .normal)
                 playButton.isEnabled = true
-                replyButton.isEnabled = false
+                replyButton.isEnabled = true
                 jamButton.isEnabled = true
             }
         }
