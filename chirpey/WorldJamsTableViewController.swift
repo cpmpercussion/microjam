@@ -29,6 +29,7 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
         tableView.rowHeight = 365
         performanceStore.delegate = self
         self.refreshControl?.addTarget(performanceStore, action: #selector(performanceStore.fetchWorldJamsFromCloud), for: UIControlEvents.valueChanged)
+        tableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tableViewTapped)))
     }
 
     override func didReceiveMemoryWarning() {
@@ -109,7 +110,6 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
         cell.avatarImageView.contentMode = .scaleAspectFill
         cell.avatarImageView.layer.cornerRadius = cell.avatarImageView.frame.width / 2
         cell.avatarImageView.clipsToBounds = true
-        cell.avatarImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showUserPerformances)))
         
         cell.title.text = performance.dateString
         cell.performer.text = performance.performer
@@ -145,8 +145,34 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
         return cell
     }
     
-    func showUserPerformances(sender: UIGestureRecognizer) {
-        print("133")
+    func tableViewTapped(sender: UIGestureRecognizer) {
+        
+        let location = sender.location(in: tableView)
+        
+        if let indexPath = tableView.indexPathForRow(at: location) {
+            
+            // Find out which cell was tapped
+            if let cell = tableView.cellForRow(at: indexPath) as? PerformanceTableCell {
+                
+                // Tapped the avatar imageview
+                if cell.avatarImageView.frame.contains(sender.location(in: cell.avatarImageView)) {
+                    // Show user performances
+                    let layout = UICollectionViewFlowLayout()
+                    let controller = UserPerfController(collectionViewLayout: layout)
+                    controller.performer = performanceStore.storedPerformances[indexPath.row].performer
+                    navigationController?.pushViewController(controller, animated: true)
+                
+                // Tapped the preview image
+                } else if cell.previewImage.frame.contains(sender.location(in: cell.previewImage)) {
+                    
+                    // Show the performance in a new ChirpJamController
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let controller = storyboard.instantiateViewController(withIdentifier: "chirpJamController") as! ChirpJamViewController
+                    controller.newViewWith(performance: performanceStore.storedPerformances[indexPath.row], withFrame: nil)
+                    navigationController?.pushViewController(controller, animated: true)
+                }
+            }
+        }
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -14,7 +14,7 @@
         <!--New Performance-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="ChirpJamViewController" customModule="microjam" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="chirpJamController" automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="ChirpJamViewController" customModule="microjam" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -194,7 +194,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="worldJamCell" rowHeight="414" id="gcn-gn-WZ5" customClass="PerformanceTableCell" customModule="microjam">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="worldJamCell" rowHeight="414" id="gcn-gn-WZ5" customClass="PerformanceTableCell" customModule="microjam">
                                 <rect key="frame" x="0.0" y="28" width="375" height="414"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gcn-gn-WZ5" id="sXd-HP-H6B">
@@ -274,7 +274,6 @@
                                     <outlet property="performer" destination="Zm0-8q-7kP" id="THh-XF-Quf"/>
                                     <outlet property="previewImage" destination="C1Y-wG-D7P" id="aqE-Qq-Xr4"/>
                                     <outlet property="title" destination="RbJ-Tv-ySY" id="qjK-yS-wAq"/>
-                                    <segue destination="BYZ-38-t0r" kind="show" identifier="ShowDetail" id="A2V-33-R8N"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
