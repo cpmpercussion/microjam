@@ -71,7 +71,7 @@ class ChirpView: UIImageView {
         started = false
         lastPoint = CG_INIT_POINT
         swiped = false
-        reloadPatch()
+        openSoundScheme(withName: newPerf.instrument)
     }
     
     // MARK: - drawing functions
@@ -178,30 +178,8 @@ extension ChirpView {
         PdBase.sendList(["/x",x], toReceiver: receiver)
     }
     
-    /// Loads the Pd Patch for this ChirpView. If patch name is not set in the ChirpPerformance, the user settings are used.
-    func reloadPatch() {
-        // Opening the Pd File.
-        if let performancePatchName = performance?.instrument, performancePatchName != "" {
-            print("ChirpView: Loading a patch from performance: ", performancePatchName)
-            openPdFile(withName: performancePatchName)
-        } else {
-            print("ChirpView: Loading the settings specified patch (i.e., new performance)")
-            openPdFile()
-        }
-        // print("ChirpView: DollarZero is: ", self.openPatchDollarZero ?? "not available!")
-    }
-    
-    /// Opens a Pd patch according the UserProfile, does nothing if the patch is already open.
-    func openPdFile() {
-        let userChoiceKey = UserProfile.shared.profile.soundScheme
-        if let userChoiceFile = SoundSchemes.pdFilesForKeys[userChoiceKey] {
-            openPd(file: userChoiceFile)
-        }
-    }
-    
-
-    /// Attempts to open a patch with a given name.
-    func openPdFile(withName name: String) {
+    /// Attempts to open a SoundScheme given its name.
+    func openSoundScheme(withName name: String) {
         print("ChirpView: Attemping to open the Pd File with name:", name)
         if let index = SoundSchemes.namesForKeys.values.index(of: name),
             let fileToOpen = SoundSchemes.pdFilesForKeys[SoundSchemes.namesForKeys.keys[index]] {

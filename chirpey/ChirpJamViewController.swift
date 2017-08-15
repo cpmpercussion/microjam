@@ -103,7 +103,7 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         print("JAMVC: viewDidAppear.")
         // Check what tab the VC exists under and re-open patch if necessary.
         if (tabBarItem.title == TabBarItemTitles.jamTab) { // onlyrun this stuff in the jam tab
-            //self.recordView.openPdFile() // Make sure the correct Pd File is open
+            //self.recordView.openUserSoundScheme() // Make sure the correct Pd File is open
         }
 
         if !performanceViews.isEmpty {
@@ -189,7 +189,6 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
         let newView = ChirpRecordingView(frame: chirpViewContainer!.bounds)
         newView.isUserInteractionEnabled = true
         newView.backgroundColor = UIColor.clear
-        newView.openPdFile()
 
         recordingView = newView
         chirpViewContainer.addSubview(newView)
@@ -425,10 +424,10 @@ class ChirpJamViewController: UIViewController, UIDocumentInteractionControllerD
                 performerLabel.text = UserProfile.shared.profile.stageName
                 instrumentButton.setTitle(SoundSchemes.namesForKeys[UserProfile.shared.profile.soundScheme], for: .normal)
                 if let recordingView = self.recordingView {
-                    // Updating the color of the performance based on the user defaults.
+                    // Updating the color and soundscheme of the recording based on the user defaults.
                     recordingView.performance?.colour = UserProfile.shared.profile.jamColour
                     recordingView.recordingColour = recordingView.performance?.colour.cgColor
-                    recordingView.openPdFile()
+                    recordingView.openUserSoundScheme()
                 }
                 playButton.isEnabled = true
                 replyButton.isEnabled = false

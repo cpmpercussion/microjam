@@ -108,6 +108,20 @@ extension ChirpRecordingView {
         image = UIImage()
         performance = ChirpPerformance()
         recordingColour = performance?.colour.cgColor ?? DEFAULT_RECORDING_COLOUR
-        reloadPatch()
+        openUserSoundScheme()
     }
+}
+
+// MARK: Pd (Sound) Functions
+
+extension ChirpRecordingView {
+    
+    /// Opens the SoundScheme specified in the user's profile.
+    func openUserSoundScheme() {
+        let userChoiceKey = UserProfile.shared.profile.soundScheme
+        if let userChoiceFile = SoundSchemes.pdFilesForKeys[userChoiceKey] {
+            openPd(file: userChoiceFile)
+        }
+    }
+
 }
