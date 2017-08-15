@@ -79,6 +79,7 @@ struct PerfCloudKeys {
     static let parent = "parent"
     static let touches = "Touches"
     static let colour = "Colour"
+    static let backgroundColour = "BackgroundColour"
     static let createdBy = "createdBy"
 }
 
