@@ -17,7 +17,9 @@ let RECORDING_TIME = 5.0
 
 extension ChirpJamViewController: BrowseControllerDelegate {
     
+    /// Adds a ChirpPerformance when chosen in the BrowseController
     func didSelect(performance: ChirpPerformance) {
+        // TODO: Add this as a parent to the currently recording jam.
         self.newViewWith(performance: performance, withFrame: self.chirpViewContainer.bounds)
         self.updateUI()
         self.navigationController?.popViewController(animated: true)
@@ -285,6 +287,7 @@ class ChirpJamViewController: UIViewController {
 
     // MARK: - UI Interaction Functions
 
+    /// Opens the composition screen for choosing parent jams.
     @IBAction func addJam(_ sender: UIButton) {
 
         // Displaying the browse view controller
