@@ -92,7 +92,6 @@ class WorldJamsTableViewController: UITableViewController {
                 // TODO: in this case, the performance should be fetched from the cloud. but there isn't functionality in the store for this yet.
                 break
             }
-            print("WJTVC: loaded a reply.")
         }
 
         // Sum all the images into one and display

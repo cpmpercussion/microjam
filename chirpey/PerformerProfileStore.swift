@@ -9,19 +9,6 @@
 import UIKit
 import CloudKit
 
-//extension PerformerProfileStore : NSKeyedUnarchiverDelegate {
-//    // This class is placeholder for unknown classes.
-//    // It will eventually be `nil` when decoded.
-//    final class Unknown: NSObject, NSCoding  {
-//        init?(coder aDecoder: NSCoder) { super.init(); return nil }
-//        func encode(with aCoder: NSCoder) {}
-//    }
-//
-//    func unarchiver(_ unarchiver: NSKeyedUnarchiver, cannotDecodeObjectOfClassName name: String, originalClasses classNames: [String]) -> AnyClass? {
-//        return Unknown.self
-//    }
-//}
-
 class PerformerProfileStore : NSObject {
     /// Shared Instance
     static let shared = PerformerProfileStore()

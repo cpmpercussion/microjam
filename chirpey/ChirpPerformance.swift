@@ -123,10 +123,6 @@ class ChirpPerformance : NSObject {
         let replyto = record.object(forKey: PerfCloudKeys.replyto) as! String
         let performance_id = record.recordID
         let creator_id = record.creatorUserRecordID
-        // TODO: Remove this print after figuring out creatorID.
-        if let creator = creator_id {
-            print("Chirp: Creator: \(creator)")
-        }
         // Initialise the Performance
         self.init(csv: touches, date: date, performer: performer, instrument: instrument, image: image, location: location,
                   colour: colour, background: bgColour, replyto: replyto, performanceID: performance_id, creatorID: creator_id)
