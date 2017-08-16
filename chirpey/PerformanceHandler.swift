@@ -13,8 +13,8 @@ class PerformanceHandler: NSObject {
     var isPlaying = false
     
     var timers: [Timer]?
-    var performances: [ChirpPerformance]?
-    var pdFiles: [PdFile]?
+    var performances = [ChirpPerformance]()
+    var pdFiles = [PdFile]()
     
     convenience init(performances: [ChirpPerformance]) {
         self.init()
@@ -22,32 +22,49 @@ class PerformanceHandler: NSObject {
         pdFiles = openPdFiles(forPerformances: performances)
     }
     
+    func isEmpty() -> Bool {
+        return performances.isEmpty
+    }
+    
     func add(performance: ChirpPerformance) {
         
-        if performances == nil {
-            performances = [ChirpPerformance]() // Make a new array
-            pdFiles = [PdFile]() // Make array for corresponding pdFiles
-        }
-        
-        performances!.append(performance)
-        pdFiles!.append(openPdFile(forPerformance: performance)!)
+        performances.append(performance)
+        pdFiles.append(openPdFile(forPerformance: performance)!)
         
         print("Added performance!")
     }
     
+    func removeLastPerformance() -> Bool {
+        
+        if let _ = performances.popLast(), let file = pdFiles.popLast() {
+            closePd(file: file)
+            return true
+        }
+        
+        return false
+    }
+    
+    func removePerformances() {
+        
+        performances.removeAll()
+        // Closing all Pd files
+        for file in pdFiles {
+            closePd(file: file)
+        }
+        pdFiles.removeAll()
+    }
+    
     func playPerformances() {
         
-        if let perfs = performances {
-            isPlaying = true
-            timers = [Timer]()
-            for (i, perf) in perfs.enumerated() {
-                // make the timers
-                for touch in perf.performanceData {
-                    timers!.append(Timer.scheduledTimer(withTimeInterval: touch.time, repeats: false, block: { _ in
-                        // play back for each touch, with the performance instrument
-                        self.makeSound(withTouch: touch, andPdFile: self.pdFiles![i])
-                    }))
-                }
+        isPlaying = true
+        timers = [Timer]()
+        for (i, perf) in performances.enumerated() {
+            // make the timers
+            for touch in perf.performanceData {
+                timers!.append(Timer.scheduledTimer(withTimeInterval: touch.time, repeats: false, block: { _ in
+                    // play back for each touch, with the performance instrument
+                    self.makeSound(withTouch: touch, andPdFile: self.pdFiles[i])
+                }))
             }
         }
     }
@@ -103,10 +120,8 @@ class PerformanceHandler: NSObject {
     }
     
     func closePdFiles() {
-        if let pdFiles = pdFiles {
-            for file in pdFiles {
-                closePd(file: file)
-            }
+        for file in pdFiles {
+            closePd(file: file)
         }
     }
     

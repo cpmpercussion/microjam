@@ -10,45 +10,70 @@ import UIKit
 
 class PerformanceViewHandler: PerformanceHandler {
     
-    var imageViews: [UIImageView]?
+    var imageViews = [UIImageView]()
     
     override func add(performance: ChirpPerformance) {
         super.add(performance: performance)
-        
-        if imageViews == nil {
-            imageViews = [UIImageView]()
+        let imageView = UIImageView(image: performance.image)
+        imageView.isUserInteractionEnabled = false
+        imageViews.append(imageView)
+    }
+    
+    func add(performance: ChirpPerformance, withFrame frame: CGRect) {
+        super.add(performance: performance)
+        let imageView = UIImageView(frame: frame)
+        imageView.image = performance.image
+        imageView.isUserInteractionEnabled = false
+        imageViews.append(imageView)
+    }
+    
+    override func removeLastPerformance() -> Bool {
+        if super.removeLastPerformance() {
+            if let view = imageViews.popLast() {
+                view.removeFromSuperview()
+                return true
+            }
         }
-        
-        imageViews!.append(UIImageView(image: performance.image))
+        return false
+    }
+    
+    override func removePerformances() {
+        super.removePerformances()
+        for view in imageViews {
+            view.removeFromSuperview()
+        }
+        imageViews.removeAll()
     }
     
     func displayImagesIn(view: UIView) {
         
-        if let views = imageViews {
-            for v in views {
-                v.frame = view.bounds
-                view.addSubview(v)
-            }
+        for iv in imageViews {
+            iv.frame = view.bounds
+            view.addSubview(iv)
         }
     }
     
     override func playPerformances() {
         
-        if let perfs = performances {
-            isPlaying = true
-            timers = [Timer]()
-            for (i, perf) in perfs.enumerated() {
-                // make the timers
-                var previousTouch: TouchRecord?
-                for touch in perf.performanceData {
-                    timers!.append(Timer.scheduledTimer(withTimeInterval: touch.time, repeats: false, block: { _ in
-                        // play back for each touch, with the performance instrument
-                        self.makeSound(withTouch: touch, andPdFile: self.pdFiles![i])
-                        self.draw(inImageView: self.imageViews![i], withTouch: touch, previousTouch: previousTouch, andColor: perf.colour.brighterColor.cgColor)
-                    }))
+        isPlaying = true
+        timers = [Timer]()
+        for (i, perf) in performances.enumerated() {
+            // make the timers
+            var previousTouch: TouchRecord?
+            for touch in perf.performanceData {
+                timers!.append(Timer.scheduledTimer(withTimeInterval: touch.time, repeats: false, block: { _ in
+                    // play back for each touch, with the performance instrument
+                    self.makeSound(withTouch: touch, andPdFile: self.pdFiles[i])
+                    self.draw(inImageView: self.imageViews[i], withTouch: touch, previousTouch: previousTouch, andColor: perf.colour.brighterColor.cgColor)
                     previousTouch = touch
-                }
+                }))
             }
+        }
+    }
+    
+    func resetPerformanceImages() {
+        for (i, view) in imageViews.enumerated() {
+            view.image = performances[i].image
         }
     }
     
@@ -70,7 +95,7 @@ class PerformanceViewHandler: PerformanceHandler {
     
     /// Draws a dot at a given point in the UIImage.
     func drawDot(inImageView imageView: UIImageView, atPoint point: CGPoint, withColor color: CGColor) {
-        UIGraphicsBeginImageContext(imageView.frame.size);
+        UIGraphicsBeginImageContextWithOptions(imageView.frame.size, false, (UIScreen.main).scale)
         let context = UIGraphicsGetCurrentContext();
         imageView.image!.draw(in: imageView.bounds)
         context!.setFillColor(color);
@@ -82,7 +107,7 @@ class PerformanceViewHandler: PerformanceHandler {
     
     /// Draws a line between two points in the UIImage.
     func drawLine(inImageView imageView: UIImageView, fromPoint from: CGPoint, toPoint to: CGPoint, withColor color: CGColor) {
-        UIGraphicsBeginImageContext(imageView.frame.size)
+        UIGraphicsBeginImageContextWithOptions(imageView.frame.size, false, (UIScreen.main).scale)
         guard let context = UIGraphicsGetCurrentContext() else {
             return
         }
