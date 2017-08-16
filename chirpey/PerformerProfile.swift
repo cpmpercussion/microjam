@@ -45,23 +45,31 @@ class PerformerProfile: NSObject, NSCoding {
     
     /// Function for encoding as NSCoder, used for saving on app close.
     func encode(with aCoder: NSCoder) {
-        aCoder.encode(UIImagePNGRepresentation(avatar), forKey: UserCloudKeys.avatar)
+        aCoder.encode(avatar, forKey: UserCloudKeys.avatar)
         aCoder.encode(stageName, forKey: UserCloudKeys.stagename)
         aCoder.encode(jamColour, forKey: UserCloudKeys.jamColour)
         aCoder.encode(backgroundColour, forKey: UserCloudKeys.backgroundColour)
         aCoder.encode(soundScheme, forKey: UserCloudKeys.soundScheme)
+        print("Archived \(stageName)'s profile.")
     }
     
     /// Initialiser from NSCoder, used when reopening on app launch
     required convenience init?(coder aDecoder: NSCoder) {
-        guard
-            let imageData = aDecoder.decodeObject(forKey: UserCloudKeys.avatar) as? Data,
-            let avatar = UIImage(data: imageData),
-            let stageName = aDecoder.decodeObject(forKey: UserCloudKeys.stagename) as? String,
-            let jamColour = aDecoder.decodeObject(forKey: UserCloudKeys.jamColour) as? UIColor,
-            let backgroundColour = aDecoder.decodeObject(forKey: UserCloudKeys.backgroundColour) as? UIColor,
-            let soundScheme = aDecoder.decodeObject(forKey: UserCloudKeys.soundScheme) as? Int64
-            else {return nil}
+        guard let avatar = aDecoder.decodeObject(forKey: UserCloudKeys.avatar) as? UIImage else {
+                print("Profile: failed to decode avatar")
+                return nil
+        }
+        guard let stageName = aDecoder.decodeObject(forKey: UserCloudKeys.stagename) as? String else {
+            print("Profile: failed to decode name")
+            return nil
+        }
+        guard let jamColour = aDecoder.decodeObject(forKey: UserCloudKeys.jamColour) as? UIColor,
+            let backgroundColour = aDecoder.decodeObject(forKey: UserCloudKeys.backgroundColour) as? UIColor else {
+                print("Profile: failed to decode colours")
+                return nil
+        }
+        let soundScheme = aDecoder.decodeInt64(forKey: UserCloudKeys.soundScheme)
+        print("Successfully decoded \(stageName)'s profile.")
         self.init(avatar: avatar, stageName: stageName, jamColour: jamColour, backgroundColour: backgroundColour, soundScheme: soundScheme)
     }
 }
