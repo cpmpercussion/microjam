@@ -8,6 +8,9 @@
 import UIKit
 import DropDown
 
+/// Maximum allowed recording time.
+let RECORDING_TIME = 5.0
+
 // TODO: how to tell between loaded and saved and just loaded?
 
 // MARK: - BrowseControllerDelegate Extension
@@ -23,8 +26,18 @@ extension ChirpJamViewController: BrowseControllerDelegate {
     }
 }
 
-class ChirpJamViewController: PerformanceController {
+class ChirpJamViewController: UIViewController {
     
+    /// Storage of the present playback/recording state: playing, recording or idle
+    var state = ChirpJamModes.idle
+    /// Stores the recording/playback progress.
+    var progress = 0.0
+    /// Timer for progress in recording and playback.
+    var progressTimer : Timer?
+    /// Storage of the parent performances (if any).
+    var performanceViews : [ChirpView] = [ChirpView]()
+    /// Stores the present jamming state
+    var jamming : Bool = false
     /// Storage of the present mode for this screen: new, composing, loaded
     var mode = ChirpJamModes.new
     /// Stores whethere this is a new performance screen
@@ -37,6 +50,8 @@ class ChirpJamViewController: PerformanceController {
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     /// Dropdown menu for selecting SoundScheme
     let soundSchemeDropDown = DropDown() // dropdown menu for soundscheme
+    
+    let performanceViewHandler = PerformanceViewHandler()
 
     /// Button to initiate a reply performance.
     @IBOutlet weak var replyButton: UIButton!
@@ -181,12 +196,14 @@ class ChirpJamViewController: PerformanceController {
             if mode != ChirpJamModes.composing {
                 // If there are loaded performance from world controller, disable composing feature..
                 addJamButton.isHidden = true
-
-                for view in performanceViews {
-                    view.frame = chirpViewContainer.bounds
-                    chirpViewContainer.addSubview(view)
-                }
-
+                                
+//                for view in performanceViews {
+//                    view.frame = chirpViewContainer.bounds
+//                    chirpViewContainer.addSubview(view)
+//                }
+                
+                performanceViewHandler.displayImagesIn(view: chirpViewContainer)
+                
                 replyto = performanceViews.first?.performance?.title()
                 newPerformance = false
                 state = ChirpJamModes.idle
@@ -238,6 +255,7 @@ class ChirpJamViewController: PerformanceController {
         } else {
             // This is the case if we add performances before the view is displayed. no reference!
             newView = ChirpView(with: CGRect.zero, andPerformance: performance)
+            performanceViewHandler.add(performance: performance)
         }
 
         newView.isUserInteractionEnabled = false // Not used for recording
@@ -288,24 +306,35 @@ class ChirpJamViewController: PerformanceController {
 
     /// IBAction for the play button. Starts playback of performance and replies iff in loaded mode. Stops if already playing.
     @IBAction func playButtonPressed(_ sender: UIButton) {
-
-        if state == ChirpJamModes.idle {
-            // Start playback
-            if !jamming {
-                playButton.setTitle("stop", for: .normal)
-            }
-            state = ChirpJamModes.playing
-            updateUI()
-            recordingProgress!.progress = 0.0
-            progress = 0.0
-            startProgressBar()
-            playBackPerformances()
-
-        } else {
-            // Stop playback
+        
+        if performanceViewHandler.isPlaying {
+            performanceViewHandler.stopPerformances()
             playButton.setTitle("play", for: .normal)
-            stopTimer()
+            stopProgressBar()
+        } else {
+            performanceViewHandler.playPerformances()
+            playButton.setTitle("stop", for: .normal)
+            startProgressBar()
         }
+        
+        
+//        if state == ChirpJamModes.idle {
+//            // Start playback
+//            if !jamming {
+//                playButton.setTitle("stop", for: .normal)
+//            }
+//            state = ChirpJamModes.playing
+//            updateUI()
+//            recordingProgress!.progress = 0.0
+//            progress = 0.0
+//            startProgressBar()
+//            playBackPerformances()
+//
+//        } else {
+//            // Stop playback
+//            playButton.setTitle("play", for: .normal)
+//            stopTimer()
+//        }
     }
 
     /// IBAction for the SoundScheme label. Opens a dropdown menu for selection when in "new" state.
@@ -503,8 +532,18 @@ extension ChirpJamViewController {
         }
     }
     
+    func stopProgressBar() {
+        if let timer = progressTimer {
+            timer.invalidate()
+            progress = 0.0
+            recordingProgress?.progress = 0.0
+        }
+    }
+    
     /// Starts a recurring timer that increments the progress bar.
     func startProgressBar() {
+        recordingProgress!.progress = 0.0
+        progress = 0.0
         progressTimer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: self.incrementRecordingProgress)
     }
     
