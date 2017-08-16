@@ -56,9 +56,11 @@ class WorldJamsTableViewController: UITableViewController {
         
         let performance = performanceStore.storedPerformances[indexPath.row]
         
-        /// Update the avatar if available, otherwise, do nothing and it will update later.
+        /// Update the avatar if available, otherwise, unset image (it will update later).
         if let profile = profilesStore.getProfile(forPerformance: performance) {
             cell.avatarImageView.image = profile.avatar
+        } else {
+            cell.avatarImageView.image = nil // unset avatar image (UIImageView might be reused)
         }
         
         cell.avatarImageView.backgroundColor = .lightGray
