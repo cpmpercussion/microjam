@@ -12,11 +12,9 @@ import CloudKit
 class WorldJamsTableViewController: UITableViewController {
 
     /// Local reference to the performanceStore singleton.
-    let performanceStore = (UIApplication.shared.delegate as! AppDelegate).performanceStore
+    let performanceStore = PerformanceStore.shared
     /// Global ID for wordJamCells.
     let worldJamCellIdentifier = "worldJamCell"
-    /// Local dictionary relating CKRecordIDs (Of Users records) to PerformerProfile objects.
-    var localProfileStore = [CKRecordID: PerformerProfile]()
     /// Local reference to the PerformerProfileStore
     let profilesStore = PerformerProfileStore.shared
 
@@ -58,6 +56,7 @@ class WorldJamsTableViewController: UITableViewController {
         
         let performance = performanceStore.storedPerformances[indexPath.row]
         
+        /// Update the avatar if available, otherwise, do nothing and it will update later.
         if let profile = profilesStore.getProfile(forPerformance: performance) {
             cell.avatarImageView.image = profile.avatar
         }

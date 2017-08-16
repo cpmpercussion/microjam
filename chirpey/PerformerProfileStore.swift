@@ -9,6 +9,19 @@
 import UIKit
 import CloudKit
 
+//extension PerformerProfileStore : NSKeyedUnarchiverDelegate {
+//    // This class is placeholder for unknown classes.
+//    // It will eventually be `nil` when decoded.
+//    final class Unknown: NSObject, NSCoding  {
+//        init?(coder aDecoder: NSCoder) { super.init(); return nil }
+//        func encode(with aCoder: NSCoder) {}
+//    }
+//
+//    func unarchiver(_ unarchiver: NSKeyedUnarchiver, cannotDecodeObjectOfClassName name: String, originalClasses classNames: [String]) -> AnyClass? {
+//        return Unknown.self
+//    }
+//}
+
 class PerformerProfileStore : NSObject {
     /// Shared Instance
     static let shared = PerformerProfileStore()
@@ -31,7 +44,22 @@ class PerformerProfileStore : NSObject {
     
     /// Load Profiles from file
     static func loadProfiles() -> [CKRecordID: PerformerProfile] {
-        if let loadedProfiles = NSKeyedUnarchiver.unarchiveObject(withFile: PerformerProfileStore.profilesURL.path) as? [CKRecordID: PerformerProfile] {
+
+        guard let dat = NSData(contentsOf: PerformerProfileStore.profilesURL) else {
+            print("PerformerProfilesStore: No archive found.")
+            return [CKRecordID: PerformerProfile]()
+        }
+
+        let unarchiver = NSKeyedUnarchiver(forReadingWith: dat as Data)
+        var result : Any?
+        do {
+            try result = unarchiver.decodeTopLevelObject()
+        } catch {
+            print("PerformerProfileStore: Error decoding archive.")
+            result = nil
+        }
+
+        if let loadedProfiles = result as? [CKRecordID: PerformerProfile] {
             print("PerformerProfileStore: Loaded Profiles.")
             return loadedProfiles
         } else {
