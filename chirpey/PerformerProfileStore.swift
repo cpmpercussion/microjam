@@ -31,23 +31,8 @@ class PerformerProfileStore : NSObject {
     
     /// Load Profiles from file
     static func loadProfiles() -> [CKRecordID: PerformerProfile] {
-
-        guard let dat = NSData(contentsOf: PerformerProfileStore.profilesURL) else {
-            print("PerformerProfilesStore: No archive found.")
-            return [CKRecordID: PerformerProfile]()
-        }
-
-        let unarchiver = NSKeyedUnarchiver(forReadingWith: dat as Data)
-        var result : Any?
-        do {
-            try result = unarchiver.decodeTopLevelObject()
-        } catch {
-            print("PerformerProfileStore: Error decoding archive.")
-            result = nil
-        }
-
-        if let loadedProfiles = result as? [CKRecordID: PerformerProfile] {
-            print("PerformerProfileStore: Loaded Profiles.")
+        if let loadedProfiles = NSKeyedUnarchiver.unarchiveObject(withFile: PerformerProfileStore.profilesURL.path) as? [CKRecordID: PerformerProfile] {
+            print("PerformerProfileStore: Loaded \(loadedProfiles.count) profiles.")
             return loadedProfiles
         } else {
             print("PerformerProfileStore: Failed to load profiles.")
@@ -57,6 +42,7 @@ class PerformerProfileStore : NSObject {
     
     /// Save Profiles to file.
     func saveProfiles() {
+        print("PerformerProfileStore: Saving \(profiles.count) profiles.")
         let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(profiles, toFile: PerformerProfileStore.profilesURL.path)
         if (!isSuccessfulSave) {
             print("PerformerProfileStore: Save was not successful.")
@@ -88,10 +74,11 @@ class PerformerProfileStore : NSObject {
             if let e = error {
                 print("PerformerProfileStore: Profile Error: \(e)")
             }
-            if let rec = record {
-                print("PerformerProfileStore: Profile Found.")
+            if let rec = record,
+                let prof = PerformerProfile(fromRecord: rec) {
                 DispatchQueue.main.async {
-                    self.profiles[performerID] = PerformerProfile(fromRecord: rec)
+                    self.profiles[performerID] = prof
+                    print("PerformerProfileStore: \(prof.stageName)'s profile found.")
                     self.delegate?.modelUpdated()
                 }
             }
