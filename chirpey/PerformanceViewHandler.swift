@@ -19,17 +19,25 @@ class PerformanceViewHandler: PerformanceHandler {
         imageViews.append(imageView)
     }
     
-    func add(performance: ChirpPerformance, withFrame frame: CGRect) {
+    func add(performance: ChirpPerformance, inView view: UIView) {
         super.add(performance: performance)
-        let imageView = UIImageView(frame: frame)
+        let imageView = UIImageView(frame: view.frame)
         imageView.image = performance.image
         imageView.isUserInteractionEnabled = false
         imageViews.append(imageView)
+        view.addSubview(imageView)
+    }
+    
+    func add(performance: ChirpPerformance, withPdFile file: PdFile, andImageView view: UIImageView) {
+        super.add(performance: performance, withPdFile: file)
+        imageViews.append(view)
     }
     
     override func removeLastPerformance() -> Bool {
+        // Remove last performances, closing and removing pdFile
         if super.removeLastPerformance() {
             if let view = imageViews.popLast() {
+                // Remove the last image view from the superview
                 view.removeFromSuperview()
                 return true
             }
@@ -77,7 +85,7 @@ class PerformanceViewHandler: PerformanceHandler {
         }
     }
     
-    private func draw(inImageView imageView: UIImageView, withTouch current: TouchRecord, previousTouch previous: TouchRecord?, andColor color: CGColor) {
+    func draw(inImageView imageView: UIImageView, withTouch current: TouchRecord, previousTouch previous: TouchRecord?, andColor color: CGColor) {
         
         let size = imageView.frame.height
         

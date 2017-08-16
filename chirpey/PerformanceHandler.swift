@@ -27,25 +27,28 @@ class PerformanceHandler: NSObject {
     }
     
     func add(performance: ChirpPerformance) {
-        
+        // Add a single performance and open the correct PdFile
         performances.append(performance)
         pdFiles.append(openPdFile(forPerformance: performance)!)
-        
-        print("Added performance!")
+    }
+    
+    func add(performance: ChirpPerformance, withPdFile file: PdFile) {
+        // Add a single performance with the specified PdFile
+        performances.append(performance)
+        pdFiles.append(file)
     }
     
     func removeLastPerformance() -> Bool {
-        
+        // Remove last performance and the corresponding pdFile
         if let _ = performances.popLast(), let file = pdFiles.popLast() {
-            closePd(file: file)
+            closePd(file: file) // Close the file
             return true
         }
-        
         return false
     }
     
     func removePerformances() {
-        
+        // Remove all performances, close all the files and remove the file pointers
         performances.removeAll()
         // Closing all Pd files
         for file in pdFiles {
@@ -56,15 +59,17 @@ class PerformanceHandler: NSObject {
     
     func playPerformances() {
         
-        isPlaying = true
-        timers = [Timer]()
-        for (i, perf) in performances.enumerated() {
-            // make the timers
-            for touch in perf.performanceData {
-                timers!.append(Timer.scheduledTimer(withTimeInterval: touch.time, repeats: false, block: { _ in
-                    // play back for each touch, with the performance instrument
-                    self.makeSound(withTouch: touch, andPdFile: self.pdFiles[i])
-                }))
+        if !isPlaying {
+            isPlaying = true
+            timers = [Timer]()
+            for (i, perf) in performances.enumerated() {
+                // make the timers
+                for touch in perf.performanceData {
+                    timers!.append(Timer.scheduledTimer(withTimeInterval: touch.time, repeats: false, block: { _ in
+                        // play back for each touch, with the performance instrument
+                        self.makeSound(withTouch: touch, andPdFile: self.pdFiles[i])
+                    }))
+                }
             }
         }
     }
@@ -91,26 +96,25 @@ class PerformanceHandler: NSObject {
         PdBase.sendList(["/x", touch.x], toReceiver: receiver)
     }
     
+    /// Opens the PdFiles for all the performance in the array
     private func openPdFiles(forPerformances performances: [ChirpPerformance]) -> [PdFile] {
         
         var files = [PdFile]()
-        
         for perf in performances {
             if let pdFile = openPdFile(forPerformance: perf) {
                 files.append(pdFile)
             }
         }
-        
         return files
     }
     
+    /// Opens a PdFile for a single performance
     private func openPdFile(forPerformance performance: ChirpPerformance) -> PdFile? {
         
         if let fileKey = SoundSchemes.keysForNames[performance.instrument],
             let file = SoundSchemes.pdFilesForKeys[fileKey] {
             return openPd(file: file)
         }
-        
         return nil
     }
     
@@ -119,6 +123,15 @@ class PerformanceHandler: NSObject {
         return PdFile.openNamed(file, path: Bundle.main.bundlePath) as! PdFile
     }
     
+    func openUserSoundScheme() -> PdFile? {
+        let userChoiceKey = UserProfile.shared.profile.soundScheme
+        if let userChoiceFile = SoundSchemes.pdFilesForKeys[userChoiceKey] {
+            return openPd(file: userChoiceFile)
+        }
+        return nil
+    }
+    
+    /// Closing all the PdFiles opened in the handler
     func closePdFiles() {
         for file in pdFiles {
             closePd(file: file)
