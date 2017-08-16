@@ -12,6 +12,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
     var window: UIWindow?
     let performanceStore = PerformanceStore.shared
     let userProfile = UserProfile.shared
+    let profileStore = PerformerProfileStore.shared
     var audioController : PdAudioController?
 
     // MARK: Pd Engine Initialisation
@@ -84,7 +85,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         print("AD: Application will terminate, saving data.")
         performanceStore.savePerformances() // save locally stored performances.
-        UserProfile.shared.saveProfile() // save local copy of performance profile.
+        userProfile.saveProfile() // save local copy of performance profile.
+        profileStore.saveProfiles() // save local copy of performer profiles.
     }
 
 }

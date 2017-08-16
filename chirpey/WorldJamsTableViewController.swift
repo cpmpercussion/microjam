@@ -9,7 +9,7 @@
 import UIKit
 import CloudKit
 
-class WorldJamsTableViewController: UITableViewController, ModelDelegate {
+class WorldJamsTableViewController: UITableViewController {
 
     /// Local reference to the performanceStore singleton.
     let performanceStore = (UIApplication.shared.delegate as! AppDelegate).performanceStore
@@ -17,7 +17,11 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
     let worldJamCellIdentifier = "worldJamCell"
     /// Local dictionary relating CKRecordIDs (Of Users records) to PerformerProfile objects.
     var localProfileStore = [CKRecordID: PerformerProfile]()
+    /// Local reference to the PerformerProfileStore
+    let profilesStore = PerformerProfileStore.shared
 
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -28,65 +32,19 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         tableView.rowHeight = 365
         performanceStore.delegate = self
+        profilesStore.delegate = self
         self.refreshControl?.addTarget(performanceStore, action: #selector(performanceStore.fetchWorldJamsFromCloud), for: UIControlEvents.valueChanged)
         tableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tableViewTapped)))
     }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    // borrowed so far from https://www.raywenderlich.com/134694/cloudkit-tutorial-getting-started
-    func modelUpdated() {
-        print("WJTVC: Model updated, reloading data")
-        refreshControl?.endRefreshing()
-        tableView.reloadData()
-    }
-
-    // borrowed so far from https://www.raywenderlich.com/134694/cloudkit-tutorial-getting-started
-    func errorUpdating(error: NSError) {
-        let message: String
-        if error.code == 1 {
-            message = "Log into iCloud on your device and make sure the iCloud drive is turned on for this app."
-        } else {
-            message = error.localizedDescription
-        }
-        let alertController = UIAlertController(title: nil,
-                                                message: message,
-                                                preferredStyle: .alert)
-
-        alertController.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
-
-        present(alertController, animated: true, completion: nil)
-    }
     
-    func queryCompleted(withResult result: [Any]) {
-        print("WJTVC: Completed a Query")
-    }
-    
-    func getAvatar(forPerformance performance: ChirpPerformance) {
-        guard let creatorID = performance.creatorID else {
-            print("WJTVC: No creator for: \(performance.title())")
-            return
-        }
-        
-        let publicDB = container.publicCloudDatabase
-        publicDB.fetch(withRecordID: creatorID) { [unowned self] (record: CKRecord?, error: Error?) in
-            if let e = error {
-                print("WJTVC: Avatar Error: \(e)")
-            }
-            if let rec = record {
-                print("WJTVC: Avatar Record Found.")
-                DispatchQueue.main.async {
-                    self.localProfileStore[creatorID] = PerformerProfile(fromRecord: rec)
-                    self.modelUpdated()
-                }
-            }
-        }
-    }
-
     // MARK: - Table view data source
+
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -99,11 +57,9 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: worldJamCellIdentifier, for: indexPath) as! PerformanceTableCell
         
         let performance = performanceStore.storedPerformances[indexPath.row]
-        if let creatorID = performance.creatorID,
-            let profile = localProfileStore[creatorID] {
+        
+        if let profile = profilesStore.getProfile(forPerformance: performance) {
             cell.avatarImageView.image = profile.avatar
-        } else {
-            getAvatar(forPerformance: performance)
         }
         
         cell.avatarImageView.backgroundColor = .lightGray
@@ -144,6 +100,8 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
         cell.previewImage.image = self.createImageFrom(images: images)
         return cell
     }
+    
+    // MARK: UI Methods
     
     func tableViewTapped(sender: UIGestureRecognizer) {
         
@@ -212,28 +170,6 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
         return PerformanceLabels.solo[ind]
     }
 
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }
-    }
-    */
-
-
     // MARK: - Navigation
 
     /// Segue to view loaded jams.
@@ -286,6 +222,36 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
         let newIndexPath = NSIndexPath(row: 0, section: 0)
         performanceStore.addNew(performance: performance)
         self.tableView.insertRows(at: [newIndexPath as IndexPath], with: .top)
+    }
+
+}
+
+// MARK: - ModelDelegate methods
+
+extension WorldJamsTableViewController: ModelDelegate {
+    
+    /// Conforms to ModelDelegate Protocol
+    func modelUpdated() {
+        print("WJTVC: Model updated, reloading data")
+        refreshControl?.endRefreshing()
+        tableView.reloadData()
+    }
+    
+    /// Conforms to ModelDelegate Protocol
+    func errorUpdating(error: NSError) {
+        let message: String
+        if error.code == 1 {
+            message = "Log into iCloud on your device and make sure the iCloud drive is turned on for this app."
+        } else {
+            message = error.localizedDescription
+        }
+        let alertController = UIAlertController(title: nil,
+                                                message: message,
+                                                preferredStyle: .alert)
+        
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+        
+        present(alertController, animated: true, completion: nil)
     }
 
 }
