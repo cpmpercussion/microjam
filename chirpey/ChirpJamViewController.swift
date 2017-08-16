@@ -8,9 +8,6 @@
 import UIKit
 import DropDown
 
-/// Maximum allowed recording time.
-let RECORDING_TIME = 5.0
-
 // TODO: how to tell between loaded and saved and just loaded?
 
 // MARK: - BrowseControllerDelegate Extension
@@ -26,21 +23,12 @@ extension ChirpJamViewController: BrowseControllerDelegate {
     }
 }
 
-class ChirpJamViewController: UIViewController {
-    /// Storage of the present playback/recording state: playing, recording or idle
-    var state = ChirpJamModes.idle
+class ChirpJamViewController: PerformanceController {
+    
     /// Storage of the present mode for this screen: new, composing, loaded
     var mode = ChirpJamModes.new
     /// Stores whethere this is a new performance screen
     var newPerformance : Bool = true
-    /// Stores the present jamming state
-    var jamming : Bool = false
-    /// Stores the recording/playback progress.
-    var progress = 0.0
-    /// Timer for progress in recording and playback.
-    var progressTimer : Timer?
-    /// Storage of the parent performances (if any).
-    var performanceViews : [ChirpView] = [ChirpView]()
     /// The ChirpRecordingView if this is a recordable ChirpJamViewController
     var recordingView : ChirpRecordingView?
     /// Addition ChirpView for storage of the original performance for a reply.

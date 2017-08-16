@@ -169,6 +169,21 @@ class WorldJamsTableViewController: UITableViewController, ModelDelegate {
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                     let controller = storyboard.instantiateViewController(withIdentifier: "chirpJamController") as! ChirpJamViewController
                     controller.newViewWith(performance: performanceStore.storedPerformances[indexPath.row], withFrame: nil)
+                    
+                    var selectedJam = performanceStore.storedPerformances[indexPath.row]
+                    
+                    while selectedJam.replyto != "" { // load up all replies.
+                        // FIXME: fetching replies fails if they have not been downloaded from cloud.
+                        if let reply = performanceStore.fetchPerformanceFrom(title: selectedJam.replyto) {
+                            controller.newViewWith(performance: reply, withFrame: nil)
+                            selectedJam = reply
+                            print("WJTVC: cued a reply")
+                        } else {
+                            break // if a reply can't be found, stop loading the thread.
+                        }
+                    }
+                    
+                    // Present the chirpViewController
                     navigationController?.pushViewController(controller, animated: true)
                 }
             }
