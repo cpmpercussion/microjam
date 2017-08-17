@@ -12,6 +12,7 @@ class PerformanceViewHandler: PerformanceHandler {
     
     var imageViews = [UIImageView]()
     
+    // Used when added performances outside of the controller
     override func add(performance: ChirpPerformance) {
         super.add(performance: performance)
         let imageView = UIImageView(image: performance.image)
@@ -19,6 +20,7 @@ class PerformanceViewHandler: PerformanceHandler {
         imageViews.append(imageView)
     }
     
+    // Adding performance within the controller
     func add(performance: ChirpPerformance, inView view: UIView) {
         super.add(performance: performance)
         let imageView = UIImageView(frame: view.bounds)
@@ -34,18 +36,23 @@ class PerformanceViewHandler: PerformanceHandler {
         imageViews.append(view)
     }
     
-    override func removeLastPerformance() -> Bool {
-        // Remove last performances, closing and removing pdFile
-        if super.removeLastPerformance() {
-            if let view = imageViews.popLast() {
-                // Remove the last image view from the superview
-                view.removeFromSuperview()
-                return true
-            }
+    func remove(performance: ChirpPerformance, andImageView view: UIImageView) {
+        super.remove(performance: performance)
+        if let index = imageViews.index(of: view) {
+            imageViews.remove(at: index)
         }
-        return false
     }
     
+    override func removeLastPerformance() {
+        // Remove last performances, closing and removing pdFile
+        super.removeLastPerformance()
+        if let view = imageViews.popLast() {
+            // Remove the last image view from the superview
+            view.removeFromSuperview()
+        }
+    }
+    
+    // remove all performances
     override func removePerformances() {
         super.removePerformances()
         for view in imageViews {
@@ -54,8 +61,8 @@ class PerformanceViewHandler: PerformanceHandler {
         imageViews.removeAll()
     }
     
+    // If performances are added outside of the controller, they need to be added to a parent view
     func displayImagesIn(view: UIView) {
-        
         for iv in imageViews {
             iv.frame = view.bounds
             view.addSubview(iv)
@@ -66,6 +73,7 @@ class PerformanceViewHandler: PerformanceHandler {
         
         isPlaying = true
         timers = [Timer]()
+        
         for (i, perf) in performances.enumerated() {
             // make the timers
             var previousTouch: TouchRecord?

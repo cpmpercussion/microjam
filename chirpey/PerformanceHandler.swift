@@ -38,13 +38,18 @@ class PerformanceHandler: NSObject {
         pdFiles.append(file)
     }
     
-    func removeLastPerformance() -> Bool {
+    func remove(performance: ChirpPerformance) {
+        if let index = performances.index(of: performance) {
+            pdFiles.remove(at: index)
+            performances.remove(at: index)
+        }
+    }
+    
+    func removeLastPerformance() {
         // Remove last performance and the corresponding pdFile
         if let _ = performances.popLast(), let file = pdFiles.popLast() {
             closePd(file: file) // Close the file
-            return true
         }
-        return false
     }
     
     func removePerformances() {
@@ -71,6 +76,17 @@ class PerformanceHandler: NSObject {
                     }))
                 }
             }
+        }
+    }
+    
+    func play(performance: ChirpPerformance, withPdFile file: PdFile) {
+        
+        playPerformances()
+        
+        for touch in performance.performanceData {
+            timers!.append(Timer.scheduledTimer(withTimeInterval: touch.time, repeats: false, block: { _ in
+                self.makeSound(withTouch: touch, andPdFile: file)
+            }))
         }
     }
     
