@@ -21,13 +21,14 @@ class PerformanceViewHandler: PerformanceHandler {
     
     func add(performance: ChirpPerformance, inView view: UIView) {
         super.add(performance: performance)
-        let imageView = UIImageView(frame: view.frame)
+        let imageView = UIImageView(frame: view.bounds)
         imageView.image = performance.image
         imageView.isUserInteractionEnabled = false
         imageViews.append(imageView)
         view.addSubview(imageView)
     }
     
+    // Used mostly for recorded performances
     func add(performance: ChirpPerformance, withPdFile file: PdFile, andImageView view: UIImageView) {
         super.add(performance: performance, withPdFile: file)
         imageViews.append(view)
@@ -87,7 +88,7 @@ class PerformanceViewHandler: PerformanceHandler {
     
     func draw(inImageView imageView: UIImageView, withTouch current: TouchRecord, previousTouch previous: TouchRecord?, andColor color: CGColor) {
         
-        let size = imageView.frame.height
+        let size = imageView.frame.width
         
         if current.moving {
             let previousPoint = CGPoint(x: CGFloat(previous!.x) * size, y: CGFloat(previous!.y) * size)

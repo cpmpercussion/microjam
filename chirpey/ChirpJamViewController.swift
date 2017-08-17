@@ -30,6 +30,8 @@ class ChirpJamViewController: UIViewController {
     var recordingEnabled = true
     /// Storage of the present playback/recording state: playing, recording or idle
     var isRecording = false
+    /// Tells us whether the recording has been added to the stack in the performance handler
+    var recordingIsDone = false
     /// Enters composing mode if a performance is added from within the ChirpJamController
     var isComposing = false
     /// Whether it is a new performance or a reply to an existing performance
@@ -40,23 +42,22 @@ class ChirpJamViewController: UIViewController {
     var progressTimer : Timer?
     /// Stores the present jamming state
     var jamming : Bool = false
-    /// The ChirpRecordingView if this is a recordable ChirpJamViewController
-    //var recordingView : ChirpRecordingView?
-    /// Addition ChirpView for storage of the original performance for a reply.
     
+    /// Recording attributes
     var startTime: Date?
     var performance: ChirpPerformance?
     var recordingView: UIImageView?
     var pdFile: PdFile?
     var previousPoint: CGPoint?
     
+    /// Addition ChirpView for storage of the original performance for a reply.
     var replyto : String?
     /// App delegate - in case we need to upload a performance.
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     /// Dropdown menu for selecting SoundScheme
     let soundSchemeDropDown = DropDown() // dropdown menu for soundscheme
-    
-    let performanceViewHandler = PerformanceViewHandler()
+    /// Handler for the loaded performances and their images
+    let performanceHandler = PerformanceViewHandler()
 
     /// Button to initiate a reply performance.
     @IBOutlet weak var replyButton: UIButton!
@@ -99,7 +100,8 @@ class ChirpJamViewController: UIViewController {
                     // TODO: Store composing performances
                     print("Need implementation for storing compositions...")
 
-                    performanceViewHandler.removePerformances()
+                    performanceHandler.removePerformances()
+                    recordingView = nil
                     newRecordingView()
 
                     return
@@ -124,16 +126,20 @@ class ChirpJamViewController: UIViewController {
     @IBAction func cancelPerformance(_ sender: UIBarButtonItem) {
         print("JAMVC: Cancel Button Pressed.")
         
-        // Stop current actions
-        stopTimer() // Stopping all Timers
-        //stopRecording()
-        stopPlayback() // stop any possible playback
+        // Stop any timers
+        if isRecording {
+            stopRecording()
+        } else {
+            stopPlayback()
+        }
         
         if isComposing {
             
-            _ = performanceViewHandler.removeLastPerformance()
+            // Remove the last added performance
+            _ = performanceHandler.removeLastPerformance()
             
-            if performanceViewHandler.isEmpty() {
+            // If there are no more added performances ,return to the new performance state
+            if performanceHandler.isEmpty() {
                 newPerformance = true
                 newRecordingView()
             }
@@ -142,14 +148,16 @@ class ChirpJamViewController: UIViewController {
         }
         
         if let recordingView = recordingView {
-            if performanceViewHandler.isEmpty() {
+            
+            newRecordingView()
+            
+            if performanceHandler.isEmpty() {
                 // No loaded performances means we're in the jam tab, just reset to a new record view
                 replyButton.setTitle("Reply", for: .normal)
-                newRecordingView()
+                newPerformance = true
+                
             } else {
                 // Reset back to the loaded performances
-                recordingView.removeFromSuperview()
-                self.recordingView = nil // this is a bit confusing, it means to set the VC's recordingView to nil, not the present unwrapped local variable.
                 replyButton.setTitle("Reply", for: .normal)
                 newPerformance = false
                 jamming = false
@@ -177,18 +185,19 @@ class ChirpJamViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if !performanceViewHandler.isEmpty() {
+        if !performanceHandler.isEmpty() {
             
             // If we are in a composing state, it means we have returned from browse view. No need to add subviews
             if !isComposing {
                 // If there are loaded performance from world controller, disable composing feature..
                 addJamButton.isHidden = true
                 statusLabel.text = "Loaded..."
-                performerLabel.text = performanceViewHandler.performances.first?.performer
-                navigationItem.title = performanceViewHandler.performances.first?.dateString
-                replyto = performanceViewHandler.performances.first?.title()
+                performerLabel.text = performanceHandler.performances.first?.performer
+                navigationItem.title = performanceHandler.performances.first?.dateString
+                replyto = performanceHandler.performances.first?.title()
                 
-                performanceViewHandler.displayImagesIn(view: chirpViewContainer)
+                // Performances have been added to the performance handler, but not displayed
+                performanceHandler.displayImagesIn(view: chirpViewContainer)
                 
             }
             
@@ -210,6 +219,7 @@ class ChirpJamViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("JAMVC: viewDidLoad")
+        
         recordingProgress!.progress = 0.0 // need to initialise the recording progress at zero.
 
         // Soundscheme Dropdown initialisation.
@@ -222,6 +232,7 @@ class ChirpJamViewController: UIViewController {
             print("DropDown selected:", index, item)
             if let sound = SoundSchemes.keysForNames[item] {
                 UserProfile.shared.profile.soundScheme = Int64(sound)
+                self.instrumentChanged()
             }
         }
     }
@@ -231,20 +242,38 @@ class ChirpJamViewController: UIViewController {
     /// Creates a new ChirpView loaded with a ChirpPerformance and adds to the chirpViewContainer
     func newViewWith(performance: ChirpPerformance, withFrame frame: CGRect?) {
 
-        if let _ = frame {
-            performanceViewHandler.add(performance: performance, inView: chirpViewContainer)
+        if frame != nil {
+            performanceHandler.add(performance: performance, inView: chirpViewContainer)
         } else {
             // This is the case if we add performances before the view is displayed. No frame to reference
-            performanceViewHandler.add(performance: performance)
+            performanceHandler.add(performance: performance)
+        }
+    }
+    
+    func instrumentChanged() {
+        // Close current file and open new instrument file
+        if let file = pdFile {
+            file.close()
+            pdFile = performanceHandler.openUserSoundScheme()
         }
     }
 
     /// Resets to a new performance state.
     func newRecordingView() {
-
-        if recordingView != nil {
-            // Removing current performance and image view, pluss closing PdFile
-            let _ = performanceViewHandler.removeLastPerformance()
+        
+        if let view = recordingView {
+            if recordingIsDone {
+                // Remove the recording from the performance handler
+                _ = performanceHandler.removeLastPerformance()
+                
+            } else {
+                // Current recording is not added to the performance handler
+                view.removeFromSuperview() // Removing the image view from the screen
+                pdFile!.close()
+                pdFile = nil
+                performance = nil
+                recordingView = nil
+            }
         }
         
         // Creating a new performance
@@ -256,9 +285,10 @@ class ChirpJamViewController: UIViewController {
         recordingView!.image = UIImage()
         chirpViewContainer.addSubview(recordingView!) // Add image view to screen
         
-        pdFile = performanceViewHandler.openUserSoundScheme()
+        pdFile = performanceHandler.openUserSoundScheme()
 
         newPerformance = true
+        recordingIsDone = false
         jamming = false
 
     }
@@ -284,7 +314,7 @@ class ChirpJamViewController: UIViewController {
         if isRecording {
             stopRecording()
         } else {
-            if performanceViewHandler.isPlaying {
+            if performanceHandler.isPlaying {
                 stopPlayback()
             } else {
                 startPlayback()
@@ -303,10 +333,14 @@ class ChirpJamViewController: UIViewController {
     @IBAction func replyButtonPressed(_ sender: Any) {
         print("JAMVC: Reply button pressed");
         // Reply button is only enabled if it is a new performance
-        replyButton.setTitle("Reset", for: .normal)
         
         stopPlayback()
         newRecordingView()
+        
+        performerLabel.text = UserProfile.shared.profile.stageName
+        replyButton.setTitle("Reset", for: .normal)
+        replyto = performanceHandler.performances.first!.title()
+        statusLabel.text = "Reply to: " + replyto!
     }
 
     /// IBAction for the Jam Button
@@ -316,14 +350,14 @@ class ChirpJamViewController: UIViewController {
             // Stop Jamming
             jamButton.setTitle("jam", for: UIControlState.normal)
             jamming = false
-            if (performanceViewHandler.isPlaying) {
-                performanceViewHandler.stopPerformances()
+            if (performanceHandler.isPlaying) {
+                performanceHandler.stopPerformances()
             }
         } else {
             // Start Jamming
             jamButton.setTitle("no jam", for: UIControlState.normal)
             jamming = true
-            if (!performanceViewHandler.isPlaying) {
+            if (!performanceHandler.isPlaying) {
                 playButtonPressed(playButton) // start playing if not already playing.
             }
         }
@@ -343,13 +377,13 @@ class ChirpJamViewController: UIViewController {
             
             let size = touches.first?.majorRadius
             let touch = TouchRecord(time: -startTime!.timeIntervalSinceNow,
-                                    x: Double(point!.x / view.frame.width),
-                                    y: Double(point!.y / view.frame.height),
+                                    x: Double(point!.x / recordingView!.frame.width),
+                                    y: Double(point!.y / recordingView!.frame.height),
                                     z: Double(size!),
                                     moving: false)
             
-            performanceViewHandler.drawDot(inImageView: recordingView!, atPoint: point!, withColor: performance!.colour.brighterColor.cgColor)
-            performanceViewHandler.makeSound(withTouch: touch, andPdFile: pdFile!)
+            performanceHandler.drawDot(inImageView: recordingView!, atPoint: point!, withColor: performance!.colour.cgColor)
+            performanceHandler.makeSound(withTouch: touch, andPdFile: pdFile!)
             performance!.performanceData.append(touch)
             
             previousPoint = point!
@@ -362,17 +396,17 @@ class ChirpJamViewController: UIViewController {
             
             let currentPoint = touches.first?.location(in: recordingView!)
             
-            performanceViewHandler.drawLine(inImageView: recordingView!, fromPoint: previousPoint!, toPoint: currentPoint!, withColor: performance!.colour.brighterColor.cgColor)
+            performanceHandler.drawLine(inImageView: recordingView!, fromPoint: previousPoint!, toPoint: currentPoint!, withColor: performance!.colour.cgColor)
             
             let size = touches.first?.majorRadius
 
             let touch = TouchRecord(time: -startTime!.timeIntervalSinceNow,
-                                    x: Double(currentPoint!.x / view.frame.width),
-                                    y: Double(currentPoint!.y / view.frame.height),
+                                    x: Double(currentPoint!.x / recordingView!.frame.width),
+                                    y: Double(currentPoint!.y / recordingView!.frame.height),
                                     z: Double(size!),
                                     moving: true)
             
-            performanceViewHandler.makeSound(withTouch: touch, andPdFile: pdFile!)
+            performanceHandler.makeSound(withTouch: touch, andPdFile: pdFile!)
             performance!.performanceData.append(touch)
             
             previousPoint = currentPoint
@@ -380,100 +414,6 @@ class ChirpJamViewController: UIViewController {
         }
     }
 }
-
-// MARK: - User Interface Updates
-
-//extension ChirpJamViewController {
-//    
-//    /// Updates the image in each ChirpView/ChirpRecordingView with those referenced in their respective ChirpPerformances
-//    func resetPerformanceImages() {
-//        
-//        if let recordView = recordingView {
-//            recordView.image = recordView.performance?.image
-//        }
-//    }
-//
-//    /// Update the UI labels and image only if there is a valid performance loaded.
-//    func updateUI() {
-//        print("JAMVC: Updating UI.")
-//
-//        if isRecording {
-//            statusLabel.text = "recording..."
-//            playButton.isEnabled = false
-//            jamButton.isEnabled = false
-//            replyButton.isEnabled = false
-//            performerLabel.text = UserProfile.shared.profile.stageName
-//            instrumentButton.setTitle(SoundSchemes.namesForKeys[UserProfile.shared.profile.soundScheme], for: .normal)
-//        }
-//
-//        case ChirpJamModes.playing:
-//
-//            var loadedPerformance = self.performanceViews.last?.performance
-//
-//            if let recordingView = self.recordingView,
-//                let performance = recordingView.performance {
-//                loadedPerformance = performance
-//            }
-//
-//            navigationItem.title = loadedPerformance?.dateString
-//            performerLabel.text = loadedPerformance?.performer
-//            instrumentButton.setTitle(loadedPerformance?.instrument, for: .normal)
-//            playButton.isEnabled = true
-//            jamButton.isEnabled = true
-//
-//            if newPerformance {
-//                replyButton.isEnabled = false // Should not be able to reply to your own performance
-//            } else {
-//                replyButton.isEnabled = true // reply button enabled in loaded jams.
-//            }
-//            
-//        default:
-//            
-//            if mode == ChirpJamModes.new {
-//                navigationItem.title = "New Performance"
-//                if let replytext = self.replyto {
-//                    statusLabel.text = "reply to: " + replytext // setting reply to text
-//                } else {
-//                    statusLabel.text = "new" // new performance only.
-//                }
-//                performerLabel.text = UserProfile.shared.profile.stageName
-//                instrumentButton.setTitle(SoundSchemes.namesForKeys[UserProfile.shared.profile.soundScheme], for: .normal)
-//                if let recordingView = self.recordingView {
-//                    // Updating the color and soundscheme of the recording based on the user defaults.
-//                    recordingView.performance?.colour = UserProfile.shared.profile.jamColour
-//                    recordingView.recordingColour = recordingView.performance?.colour.cgColor
-//                    recordingView.openUserSoundScheme()
-//                }
-//                playButton.isEnabled = true
-//                replyButton.isEnabled = false
-//                jamButton.isEnabled = true
-//            
-//            } else if mode == ChirpJamModes.composing {
-//                statusLabel.text = "composing..."
-//                performerLabel.text = UserProfile.shared.profile.stageName
-//                playButton.isEnabled = true
-//                replyButton.isEnabled = false
-//                jamButton.isEnabled = true
-//            
-//            } else {
-//                var loadedPerformance = self.performanceViews.last?.performance
-//                
-//                if let recordingView = self.recordingView,
-//                    let performance = recordingView.performance {
-//                    loadedPerformance = performance
-//                }
-//                
-//                navigationItem.title = loadedPerformance?.dateString
-//                statusLabel.text = "Loaded..."
-//                performerLabel.text = loadedPerformance?.performer
-//                instrumentButton.setTitle(loadedPerformance?.instrument, for: .normal)
-//                playButton.isEnabled = true
-//                replyButton.isEnabled = true
-//                jamButton.isEnabled = true
-//            }
-//        }
-//    }
-//}
 
 // MARK: - Extension for Playback/Recording Control Methods.
 
@@ -517,17 +457,20 @@ extension ChirpJamViewController {
     
     func startPlayback() {
         statusLabel.text = "Playing..."
+        
+        playButton.setTitle("Stop", for: .normal)
+        
         startProgressBar()
-        performanceViewHandler.playPerformances()
+        performanceHandler.playPerformances()
     }
 
     /// Stop playback and cancel timers.
     func stopPlayback() {
         print("JAMVC: Stopping any requested playback")
         
-        performanceViewHandler.stopPerformances()
+        performanceHandler.stopPerformances()
         stopProgressBar()
-        performanceViewHandler.resetPerformanceImages()
+        performanceHandler.resetPerformanceImages()
         
         if newPerformance {
             statusLabel.text = "New..."
@@ -552,7 +495,7 @@ extension ChirpJamViewController {
             
             startTime = Date()
             startProgressBar()
-            performanceViewHandler.playPerformances()
+            performanceHandler.playPerformances()
         }
     }
     
@@ -569,7 +512,9 @@ extension ChirpJamViewController {
         
         // Put current recording in stack of performances
         performance!.image = recordingView!.image!
-        performanceViewHandler.add(performance: performance!, withPdFile: pdFile!, andImageView: recordingView!)
+        performanceHandler.add(performance: performance!, withPdFile: pdFile!, andImageView: recordingView!)
+        // Mark recording as done!
+        recordingIsDone = true
     }
     
     /// Stops the current recording.
@@ -581,23 +526,6 @@ extension ChirpJamViewController {
         
         // Throw away current recording
         newRecordingView()
-    }
-
-    /// Automatically triggered when recording time finishes.
-    func stopTimer() {
-        // FIXME: Incorporate this method with stopPlayback?
-        // FIXME: Make sure that the reply performances are reset as well as the main performance.
-        NSLog("JAMVC: Stop Timer Called (either finished or cancelled).")
-
-        stopProgressBar()
-
-        // Restart Playback in Jam Mode.
-        if (jamming) {
-            print("JAMVC: Restarting playback for the jam.")
-            if (!performanceViewHandler.isPlaying) {
-                playButtonPressed(playButton) // start playing if not already playing.
-            }
-        }
     }
 }
 
