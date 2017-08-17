@@ -12,6 +12,8 @@
 		4D4ACAE61F44500300543CC9 /* PerformanceHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4ACAE51F44500300543CC9 /* PerformanceHandler.swift */; };
 		4D4ACAE81F44759E00543CC9 /* PerformanceViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4ACAE71F44759E00543CC9 /* PerformanceViewHandler.swift */; };
 		4D77CC3D1F3B5564008BD48C /* BrowseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D77CC3C1F3B5564008BD48C /* BrowseController.swift */; };
+		4D82BC7E1F4608B600E227AF /* ExploreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D82BC7D1F4608B600E227AF /* ExploreController.swift */; };
+		4D82BC801F460EF100E227AF /* ExploreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D82BC7F1F460EF100E227AF /* ExploreCell.swift */; };
 		4DA6A95D1F3C89DB00CD7589 /* BrowseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA6A95C1F3C89DB00CD7589 /* BrowseCell.swift */; };
 		4DD839771F3DF81D004D3E40 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD839761F3DF81D004D3E40 /* FilterView.swift */; };
 		4DDB71011F43179A00925F4D /* UserPerfController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDB71001F43179A00925F4D /* UserPerfController.swift */; };
@@ -108,6 +110,8 @@
 		4D4ACAE51F44500300543CC9 /* PerformanceHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PerformanceHandler.swift; path = chirpey/PerformanceHandler.swift; sourceTree = "<group>"; };
 		4D4ACAE71F44759E00543CC9 /* PerformanceViewHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PerformanceViewHandler.swift; path = chirpey/PerformanceViewHandler.swift; sourceTree = "<group>"; };
 		4D77CC3C1F3B5564008BD48C /* BrowseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BrowseController.swift; path = chirpey/BrowseController.swift; sourceTree = "<group>"; };
+		4D82BC7D1F4608B600E227AF /* ExploreController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExploreController.swift; path = chirpey/ExploreController.swift; sourceTree = "<group>"; };
+		4D82BC7F1F460EF100E227AF /* ExploreCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExploreCell.swift; path = chirpey/ExploreCell.swift; sourceTree = "<group>"; };
 		4DA6A95C1F3C89DB00CD7589 /* BrowseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BrowseCell.swift; path = chirpey/BrowseCell.swift; sourceTree = "<group>"; };
 		4DD839761F3DF81D004D3E40 /* FilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FilterView.swift; path = chirpey/FilterView.swift; sourceTree = "<group>"; };
 		4DDB71001F43179A00925F4D /* UserPerfController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserPerfController.swift; path = chirpey/UserPerfController.swift; sourceTree = "<group>"; };
@@ -259,6 +263,7 @@
 				4DA6A95C1F3C89DB00CD7589 /* BrowseCell.swift */,
 				4DD839761F3DF81D004D3E40 /* FilterView.swift */,
 				4DEFCADE1F41BDEF007B7C34 /* FilterViewCell.swift */,
+				4D82BC7F1F460EF100E227AF /* ExploreCell.swift */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -274,6 +279,7 @@
 				4D77CC3C1F3B5564008BD48C /* BrowseController.swift */,
 				562FDCA51F316870000409C8 /* UserSettingsViewController.swift */,
 				4DDB71001F43179A00925F4D /* UserPerfController.swift */,
+				4D82BC7D1F4608B600E227AF /* ExploreController.swift */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -844,6 +850,7 @@
 			files = (
 				4DEFCAE51F41EC90007B7C34 /* WorldJamsTableViewController.swift in Sources */,
 				4DEFCAE41F41EC82007B7C34 /* Constants.swift in Sources */,
+				4D82BC7E1F4608B600E227AF /* ExploreController.swift in Sources */,
 				56002F471F306C0F00003B88 /* UserNameChooserViewController.swift in Sources */,
 				5613B31E1F3D9C380068ED5D /* ChirpRecordingView.swift in Sources */,
 				56621B111DE47D5B009B9AB6 /* ChirpJamViewController.swift in Sources */,
@@ -868,6 +875,7 @@
 				56621B171DEC27B0009B9AB6 /* PerformanceTableCell.swift in Sources */,
 				4D4ACAE81F44759E00543CC9 /* PerformanceViewHandler.swift in Sources */,
 				569B92C41DFEA99C00AA257C /* SettingsTableViewController.swift in Sources */,
+				4D82BC801F460EF100E227AF /* ExploreCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

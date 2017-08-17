@@ -153,23 +153,7 @@ class ChirpJamViewController: UIViewController {
         } else {
             print("In world tab")
             // In the world tab
-            if replyto != nil {
-                // This is a reply to a performance, cancel the reply
-                replyto = nil
-                newRecordingView()
-                
-                newPerformance = false
-                recordingEnabled = false
-                
-                replyButton.setTitle("Reply", for: .normal)
-                replyButton.isEnabled = true
-                statusLabel.text = "Loaded..."
-                performerLabel.text = performanceHandler.performances.first?.performer
-                instrumentButton.setTitle(performanceHandler.performances.first?.instrument, for: .normal)
-            } else {
-                // Return to world jam table controller
-                navigationController!.popViewController(animated: true)
-            }
+            navigationController!.popViewController(animated: true)
         }
     }
     

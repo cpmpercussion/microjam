@@ -91,7 +91,7 @@
                                                 <rect key="frame" x="114.5" y="0.0" width="114" height="44"/>
                                                 <color key="backgroundColor" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="replyButton" label="Reply"/>
-                                                <state key="normal" title="reply"/>
+                                                <state key="normal" title="reset"/>
                                                 <connections>
                                                     <action selector="replyButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UCv-rQ-qeE"/>
                                                 </connections>
@@ -328,7 +328,6 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="Bey-kK-l91" kind="relationship" relationship="viewControllers" id="JBU-M3-rG5"/>
                         <segue destination="vIe-H4-AUR" kind="relationship" relationship="viewControllers" id="q8E-IA-Mhd"/>
                     </connections>
                 </tabBarController>

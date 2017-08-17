@@ -79,6 +79,27 @@ class PerformanceHandler: NSObject {
         }
     }
     
+    func play(performances: [ChirpPerformance]) {
+        
+        let files = openPdFiles(forPerformances: performances)
+        
+        if !isPlaying {
+            isPlaying = true
+            timers = [Timer]()
+            for (i, perf) in performances.enumerated() {
+                // make the timers
+                for touch in perf.performanceData {
+                    timers!.append(Timer.scheduledTimer(withTimeInterval: touch.time, repeats: false, block: { _ in
+                        // play back for each touch, with the performance instrument
+                        self.makeSound(withTouch: touch, andPdFile: files[i])
+                    }))
+                }
+            }
+        }
+    }
+    
+    
+    
     func play(performance: ChirpPerformance, withPdFile file: PdFile) {
         
         playPerformances()
