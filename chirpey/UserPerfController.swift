@@ -55,7 +55,7 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "chirpJamController") as! ChirpJamViewController
-        controller.newViewWith(performance: loadedPerformances[indexPath.item], withFrame: nil)
+        //controller.newViewWith(performance: loadedPerformances[indexPath.item], withFrame: nil)
         navigationController?.pushViewController(controller, animated: true)
     }
     

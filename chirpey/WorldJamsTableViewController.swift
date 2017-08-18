@@ -65,11 +65,19 @@ class WorldJamsTableViewController: UITableViewController, PlayerDelegate {
             }
         }
     }
-
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func replyButtonPressed(sender: UIButton) {
+        
+        let indexPath = IndexPath(row: sender.tag, section: 0)
+        if let cell = tableView.cellForRow(at: indexPath) as? PerformanceTableCell {
+            if let player = cell.player {
+                
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let controller = storyboard.instantiateViewController(withIdentifier: "chirpJamController") as! ChirpJamViewController
+                controller.player = player
+                navigationController?.pushViewController(controller, animated: true)
+            }
+        }
     }
     
     // MARK: - Table view data source
@@ -119,6 +127,12 @@ class WorldJamsTableViewController: UITableViewController, PlayerDelegate {
         cell.playButton.backgroundColor = UIColor(white: 0.8, alpha: 0.7)
         cell.playButton.addTarget(self, action: #selector(playButtonPressed), for: .touchUpInside)
         cell.playButton.clipsToBounds = true
+        
+        cell.replyButton.layer.cornerRadius = 23 // Button size is 46
+        cell.replyButton.tag = indexPath.row
+        cell.replyButton.backgroundColor = UIColor(white: 0.8, alpha: 0.7)
+        cell.replyButton.addTarget(self, action: #selector(replyButtonPressed), for: .touchUpInside)
+        cell.replyButton.clipsToBounds = true
 
         cell.player = Player()
         cell.player!.delegate = self
@@ -210,26 +224,26 @@ class WorldJamsTableViewController: UITableViewController, PlayerDelegate {
 
     /// Segue to view loaded jams.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == JamViewSegueIdentifiers.showDetailSegue { // view a performance.
-            // load up current data into a JamViewController
-            let jamDetailViewController = segue.destination as! ChirpJamViewController
-            if let selectedJamCell = sender as? PerformanceTableCell {
-                let indexPath = tableView.indexPath(for: selectedJamCell)!
-                var selectedJam = performanceStore.storedPerformances[indexPath.row]
-                jamDetailViewController.newViewWith(performance: selectedJam, withFrame: nil)
-
-                while selectedJam.replyto != "" { // load up all replies.
-                    // FIXME: fetching replies fails if they have not been downloaded from cloud.
-                    if let reply = performanceStore.fetchPerformanceFrom(title: selectedJam.replyto) {
-                        jamDetailViewController.newViewWith(performance: reply, withFrame: nil)
-                        selectedJam = reply
-                        print("WJTVC: cued a reply")
-                    } else {
-                        break // if a reply can't be found, stop loading the thread.
-                    }
-                }
-            }
-        }
+//        if segue.identifier == JamViewSegueIdentifiers.showDetailSegue { // view a performance.
+//            // load up current data into a JamViewController
+//            let jamDetailViewController = segue.destination as! ChirpJamViewController
+//            if let selectedJamCell = sender as? PerformanceTableCell {
+//                let indexPath = tableView.indexPath(for: selectedJamCell)!
+//                var selectedJam = performanceStore.storedPerformances[indexPath.row]
+//                jamDetailViewController.newViewWith(performance: selectedJam, withFrame: nil)
+//
+//                while selectedJam.replyto != "" { // load up all replies.
+//                    // FIXME: fetching replies fails if they have not been downloaded from cloud.
+//                    if let reply = performanceStore.fetchPerformanceFrom(title: selectedJam.replyto) {
+//                        jamDetailViewController.newViewWith(performance: reply, withFrame: nil)
+//                        selectedJam = reply
+//                        print("WJTVC: cued a reply")
+//                    } else {
+//                        break // if a reply can't be found, stop loading the thread.
+//                    }
+//                }
+//            }
+//        }
     }
 
     /// Segue back to the World Jam Table

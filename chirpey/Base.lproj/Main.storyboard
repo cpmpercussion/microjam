@@ -254,6 +254,16 @@
                                                 <constraint firstAttribute="width" secondItem="qwU-ld-Uy2" secondAttribute="height" multiplier="1:1" id="VzA-GE-cNg"/>
                                             </constraints>
                                         </view>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JOw-B7-ob4">
+                                            <rect key="frame" x="289" y="331" width="46" height="46"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="46" id="YNc-to-Xg0"/>
+                                                <constraint firstAttribute="height" constant="46" id="tub-8c-s9b"/>
+                                            </constraints>
+                                            <state key="normal" title="Reply">
+                                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ske-ad-PVr">
                                             <rect key="frame" x="40" y="331" width="46" height="46"/>
                                             <constraints>
@@ -274,6 +284,8 @@
                                         <constraint firstItem="fmu-Vs-F8c" firstAttribute="top" secondItem="sXd-HP-H6B" secondAttribute="top" constant="16" id="ZoK-Ou-uGQ"/>
                                         <constraint firstItem="6dJ-ZF-dqm" firstAttribute="top" secondItem="qwU-ld-Uy2" secondAttribute="bottom" constant="8" id="ec4-OP-dkm"/>
                                         <constraint firstAttribute="trailing" secondItem="fmu-Vs-F8c" secondAttribute="trailing" constant="32" id="fQp-2M-dbg"/>
+                                        <constraint firstItem="JOw-B7-ob4" firstAttribute="trailing" secondItem="qwU-ld-Uy2" secondAttribute="trailing" constant="-8" id="fwl-LJ-Z2c"/>
+                                        <constraint firstItem="JOw-B7-ob4" firstAttribute="bottom" secondItem="qwU-ld-Uy2" secondAttribute="bottom" constant="-8" id="grD-si-jhZ"/>
                                         <constraint firstItem="6dJ-ZF-dqm" firstAttribute="trailing" secondItem="qwU-ld-Uy2" secondAttribute="trailing" id="kQE-uV-VtS"/>
                                         <constraint firstItem="qwU-ld-Uy2" firstAttribute="top" secondItem="fmu-Vs-F8c" secondAttribute="bottom" constant="8" id="mM1-qw-oZG"/>
                                         <constraint firstItem="8qM-fi-pVE" firstAttribute="top" secondItem="qwU-ld-Uy2" secondAttribute="bottom" constant="8" id="mwc-Zn-Kqj"/>
@@ -287,6 +299,7 @@
                                     <outlet property="instrument" destination="6dJ-ZF-dqm" id="0qa-jE-Cxt"/>
                                     <outlet property="performer" destination="Zm0-8q-7kP" id="THh-XF-Quf"/>
                                     <outlet property="playButton" destination="Ske-ad-PVr" id="nou-a3-Rt7"/>
+                                    <outlet property="replyButton" destination="JOw-B7-ob4" id="9f4-DV-vZu"/>
                                     <outlet property="title" destination="RbJ-Tv-ySY" id="qjK-yS-wAq"/>
                                 </connections>
                             </tableViewCell>
