@@ -69,57 +69,14 @@ class ExploreController: UIViewController {
         return PerformanceLabels.solo[ind]
     }
     
-    /// Adds multiple images on top of each other
-    func createImageFrom(images : [UIImage]) -> UIImage? {
-        if let size = images.first?.size {
-            UIGraphicsBeginImageContext(size)
-            let areaSize = CGRect(x: 0, y: 0, width:size.width, height: size.height)
-            for image in images.reversed() {
-                image.draw(in: areaSize, blendMode: CGBlendMode.normal, alpha: 1.0)
-            }
-            let outImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-            UIGraphicsEndImageContext()
-            return outImage
-        }
-        return nil
-    }
-    
     func playButtonPressed() {
         print("Play button pressed")
         
         let index = Int(collectionView.contentOffset.x / view.frame.width)
         let cell = collectionView.cellForItem(at: IndexPath(item: index, section: 0)) as! ExploreCell
         
-        if !performanceHandler.isPlaying {
-            
-            var performances = [ChirpPerformance]()
-            
-            var selectedJam = performanceStore.storedPerformances[index]
-            performances.append(selectedJam)
-            
-            while selectedJam.replyto != "" {
-                
-                if let reply = performanceStore.fetchPerformanceFrom(title: selectedJam.replyto) {
-                    performances.append(reply)
-                    selectedJam = reply
-                    print("WJTVC: cued a reply")
-                } else {
-                    break // if a reply can't be found, stop loading the thread.
-                }
-            }
-            
-            Timer.scheduledTimer(withTimeInterval: 5, repeats: false, block: { (_) in
-                self.performanceHandler.stopPerformances()
-                cell.playButton.setTitle("Play", for: .normal)
-            })
-            
-            performanceHandler.play(performances: performances)
-            
-            cell.playButton.setTitle("Stop", for: .normal)
-        
-        } else {
-            performanceHandler.stopPerformances()
-            cell.playButton.setTitle("Play", for: .normal)
+        if let player = cell.player {
+            player.play()
         }
     }
     
@@ -128,27 +85,6 @@ class ExploreController: UIViewController {
         
         let index = Int(collectionView.contentOffset.x / view.frame.width)
         print(index)
-        
-        // Show the performance in a new ChirpJamController
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "chirpJamController") as! ChirpJamViewController
-        controller.newViewWith(performance: performanceStore.storedPerformances[index], withFrame: nil)
-        
-        var selectedJam = performanceStore.storedPerformances[index]
-        
-        while selectedJam.replyto != "" { // load up all replies.
-            // FIXME: fetching replies fails if they have not been downloaded from cloud.
-            if let reply = performanceStore.fetchPerformanceFrom(title: selectedJam.replyto) {
-                controller.newViewWith(performance: reply, withFrame: nil)
-                selectedJam = reply
-                print("WJTVC: cued a reply")
-            } else {
-                break // if a reply can't be found, stop loading the thread.
-            }
-        }
-        
-        // Present the chirpViewController
-        navigationController?.pushViewController(controller, animated: true)
     }
     
 }
@@ -167,10 +103,16 @@ extension ExploreController: UICollectionViewDataSource {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! ExploreCell
         
-        let performance = performanceStore.storedPerformances[indexPath.item]
+        var performance = performanceStore.storedPerformances[indexPath.row]
         
         if let profile = profilesStore.getProfile(forPerformance: performance) {
             cell.avatarImageView.image = profile.avatar
+        }
+        
+        if let player = cell.player {
+            for chirp in player.chirpViews {
+                chirp.removeFromSuperview()
+            }
         }
         
         cell.title.text = performance.dateString
@@ -178,19 +120,19 @@ extension ExploreController: UICollectionViewDataSource {
         cell.instrument.text = performance.instrument
         cell.playButton.addTarget(self, action: #selector(playButtonPressed), for: .touchUpInside)
         cell.replyButton.addTarget(self, action: #selector(replyButtonPressed), for: .touchUpInside)
-        
-        cell.previewImage.image = performance.image
         cell.context.text = nonCreditString()
         
-        var temp = performance // used to store replies as we fetch them.
-        var images = [performance.image] // the stack of reply images.
+        cell.player = Player()
+        let chirpView = ChirpView(with: cell.chirpContainer.bounds, andPerformance: performance)
+        cell.player!.chirpViews.append(chirpView)
+        cell.chirpContainer.addSubview(chirpView)
         
-        // Get the image from every reply
-        while temp.replyto != "" {
-            if let replyPerf = performanceStore.fetchPerformanceFrom(title: temp.replyto) {
-                cell.context.text = creditString(originalPerformer: replyPerf.performer)
-                images.append(replyPerf.image)
-                temp = replyPerf
+        while performance.replyto != "" {
+            if let reply = performanceStore.fetchPerformanceFrom(title: performance.replyto) {
+                let chirp = ChirpView(with: cell.chirpContainer.bounds, andPerformance: reply)
+                cell.player!.chirpViews.append(chirp)
+                cell.chirpContainer.addSubview(chirp)
+                performance = reply
             } else {
                 // break if the replyPerf can't be found.
                 // TODO: in this case, the performance should be fetched from the cloud. but there isn't functionality in the store for this yet.
@@ -198,9 +140,6 @@ extension ExploreController: UICollectionViewDataSource {
             }
             print("WJTVC: loaded a reply.")
         }
-        
-        // Sum all the images into one and display
-        cell.previewImage.image = createImageFrom(images: images)
         
         return cell
     }

@@ -67,7 +67,7 @@ class ChirpView: UIImageView {
         print("ChirpView: Loading existing performance")
         performance = newPerf
         image = newPerf.image
-        playbackColour = newPerf.colour.cgColor
+        playbackColour = newPerf.colour.brighterColor.cgColor
         started = false
         lastPoint = CG_INIT_POINT
         swiped = false

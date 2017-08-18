@@ -10,12 +10,15 @@ import UIKit
 
 class PerformanceTableCell: UITableViewCell {
     
+    var player: Player?
+    
     @IBOutlet weak var avatarImageView: UIImageView!
-    @IBOutlet weak var previewImage: UIImageView!
+    @IBOutlet weak var chirpContainer: UIView!
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var performer: UILabel!
     @IBOutlet weak var instrument: UILabel!
     @IBOutlet weak var context: UILabel!
+    @IBOutlet weak var playButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()

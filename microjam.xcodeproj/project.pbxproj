@@ -17,6 +17,7 @@
 		4DA6A95D1F3C89DB00CD7589 /* BrowseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA6A95C1F3C89DB00CD7589 /* BrowseCell.swift */; };
 		4DD839771F3DF81D004D3E40 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD839761F3DF81D004D3E40 /* FilterView.swift */; };
 		4DDB71011F43179A00925F4D /* UserPerfController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDB71001F43179A00925F4D /* UserPerfController.swift */; };
+		4DE5FAF01F46E6470024F16B /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE5FAEF1F46E6470024F16B /* Player.swift */; };
 		4DEFCADF1F41BDEF007B7C34 /* FilterViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEFCADE1F41BDEF007B7C34 /* FilterViewCell.swift */; };
 		4DEFCAE11F41C5D9007B7C34 /* BrowseCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEFCAE01F41C5D9007B7C34 /* BrowseCategory.swift */; };
 		4DEFCAE31F41E8EB007B7C34 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEFCAE21F41E8EB007B7C34 /* Filter.swift */; };
@@ -115,6 +116,7 @@
 		4DA6A95C1F3C89DB00CD7589 /* BrowseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BrowseCell.swift; path = chirpey/BrowseCell.swift; sourceTree = "<group>"; };
 		4DD839761F3DF81D004D3E40 /* FilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FilterView.swift; path = chirpey/FilterView.swift; sourceTree = "<group>"; };
 		4DDB71001F43179A00925F4D /* UserPerfController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserPerfController.swift; path = chirpey/UserPerfController.swift; sourceTree = "<group>"; };
+		4DE5FAEF1F46E6470024F16B /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Player.swift; path = chirpey/Player.swift; sourceTree = "<group>"; };
 		4DEFCADE1F41BDEF007B7C34 /* FilterViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FilterViewCell.swift; path = chirpey/FilterViewCell.swift; sourceTree = "<group>"; };
 		4DEFCAE01F41C5D9007B7C34 /* BrowseCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BrowseCategory.swift; path = chirpey/BrowseCategory.swift; sourceTree = "<group>"; };
 		4DEFCAE21F41E8EB007B7C34 /* Filter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Filter.swift; path = chirpey/Filter.swift; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 				562FDCAD1F3727DC000409C8 /* TouchRecord.swift */,
 				4D4ACAE51F44500300543CC9 /* PerformanceHandler.swift */,
 				4D4ACAE71F44759E00543CC9 /* PerformanceViewHandler.swift */,
+				4DE5FAEF1F46E6470024F16B /* Player.swift */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -859,6 +862,7 @@
 				4DDB71011F43179A00925F4D /* UserPerfController.swift in Sources */,
 				56621B0F1DE47376009B9AB6 /* AppDelegate.swift in Sources */,
 				56BAAFC61F44370000DC41CA /* PerformerProfileStore.swift in Sources */,
+				4DE5FAF01F46E6470024F16B /* Player.swift in Sources */,
 				4D77CC3D1F3B5564008BD48C /* BrowseController.swift in Sources */,
 				56621B131DE4A496009B9AB6 /* ChirpView.swift in Sources */,
 				562FDCA61F316870000409C8 /* UserSettingsViewController.swift in Sources */,

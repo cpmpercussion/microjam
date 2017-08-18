@@ -10,6 +10,8 @@ import UIKit
 
 class ExploreCell: UICollectionViewCell {
     
+    var player: Player?
+    
     let avatarImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = UIColor(white: 0.9, alpha: 1)
@@ -28,13 +30,13 @@ class ExploreCell: UICollectionViewCell {
         return label
     }()
 
-    let previewImage: UIImageView = {
-        let imageView = UIImageView()
-        imageView.layer.borderWidth = 1
-        imageView.layer.borderColor = UIColor(white: 0.8, alpha: 1).cgColor
-        imageView.layer.cornerRadius = 8
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
+    let chirpContainer: UIView = {
+        let view = UIView()
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor(white: 0.8, alpha: 1).cgColor
+        view.layer.cornerRadius = 8
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     let title: UILabel = {
@@ -88,8 +90,8 @@ class ExploreCell: UICollectionViewCell {
     }
     
     private func initSubviews() {
-        contentView.addSubview(previewImage)
-        setupPreviewImage()
+        contentView.addSubview(chirpContainer)
+        setupChirpContainer()
         contentView.addSubview(avatarImageView)
         setupAvatarImage()
         contentView.addSubview(performer)
@@ -106,17 +108,17 @@ class ExploreCell: UICollectionViewCell {
         setupReplyButton()
     }
     
-    private func setupPreviewImage() {
-        previewImage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        previewImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: -16).isActive = true
-        previewImage.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 32).isActive = true
-        previewImage.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -32).isActive = true
-        previewImage.heightAnchor.constraint(equalTo: previewImage.widthAnchor).isActive = true
+    private func setupChirpContainer() {
+        chirpContainer.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        chirpContainer.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: -16).isActive = true
+        chirpContainer.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 32).isActive = true
+        chirpContainer.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -32).isActive = true
+        chirpContainer.heightAnchor.constraint(equalTo: chirpContainer.widthAnchor).isActive = true
     }
     
     private func setupAvatarImage() {
-        avatarImageView.leftAnchor.constraint(equalTo: previewImage.leftAnchor, constant: 8).isActive = true
-        avatarImageView.bottomAnchor.constraint(equalTo: previewImage.topAnchor, constant: -8).isActive = true
+        avatarImageView.leftAnchor.constraint(equalTo: chirpContainer.leftAnchor, constant: 8).isActive = true
+        avatarImageView.bottomAnchor.constraint(equalTo: chirpContainer.topAnchor, constant: -8).isActive = true
         avatarImageView.widthAnchor.constraint(equalToConstant: 60).isActive = true
         avatarImageView.heightAnchor.constraint(equalToConstant: 60).isActive = true
     }
@@ -125,26 +127,26 @@ class ExploreCell: UICollectionViewCell {
         performer.leftAnchor.constraint(equalTo: avatarImageView.rightAnchor, constant: 4).isActive = true
         performer.bottomAnchor.constraint(equalTo: avatarImageView.centerYAnchor).isActive = true
         performer.topAnchor.constraint(equalTo: avatarImageView.topAnchor).isActive = true
-        performer.rightAnchor.constraint(equalTo: previewImage.rightAnchor).isActive = true
+        performer.rightAnchor.constraint(equalTo: chirpContainer.rightAnchor).isActive = true
     }
     
     private func setupTitleLabel() {
         title.topAnchor.constraint(equalTo: avatarImageView.centerYAnchor).isActive = true
         title.leftAnchor.constraint(equalTo: avatarImageView.rightAnchor, constant: 4).isActive = true
-        title.rightAnchor.constraint(equalTo: previewImage.rightAnchor).isActive = true
+        title.rightAnchor.constraint(equalTo: chirpContainer.rightAnchor).isActive = true
         title.bottomAnchor.constraint(equalTo: avatarImageView.bottomAnchor).isActive = true
     }
     
     private func setupContextLabel() {
-        context.leftAnchor.constraint(equalTo: previewImage.leftAnchor, constant: 8).isActive = true
-        context.topAnchor.constraint(equalTo: previewImage.bottomAnchor, constant: 8).isActive = true
-        context.rightAnchor.constraint(equalTo: previewImage.centerXAnchor).isActive = true
+        context.leftAnchor.constraint(equalTo: chirpContainer.leftAnchor, constant: 8).isActive = true
+        context.topAnchor.constraint(equalTo: chirpContainer.bottomAnchor, constant: 8).isActive = true
+        context.rightAnchor.constraint(equalTo: chirpContainer.centerXAnchor).isActive = true
     }
     
     private func setupInstrumentLabel() {
-        instrument.leftAnchor.constraint(equalTo: previewImage.centerXAnchor).isActive = true
-        instrument.topAnchor.constraint(equalTo: previewImage.bottomAnchor, constant: 8).isActive = true
-        instrument.rightAnchor.constraint(equalTo: previewImage.rightAnchor, constant: -8).isActive = true
+        instrument.leftAnchor.constraint(equalTo: chirpContainer.centerXAnchor).isActive = true
+        instrument.topAnchor.constraint(equalTo: chirpContainer.bottomAnchor, constant: 8).isActive = true
+        instrument.rightAnchor.constraint(equalTo: chirpContainer.rightAnchor, constant: -8).isActive = true
     }
     
     private func setupPlayButton() {

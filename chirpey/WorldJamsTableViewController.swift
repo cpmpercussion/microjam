@@ -9,7 +9,7 @@
 import UIKit
 import CloudKit
 
-class WorldJamsTableViewController: UITableViewController {
+class WorldJamsTableViewController: UITableViewController, PlayerDelegate {
 
     /// Local reference to the performanceStore singleton.
     let performanceStore = (UIApplication.shared.delegate as! AppDelegate).performanceStore
@@ -19,6 +19,8 @@ class WorldJamsTableViewController: UITableViewController {
     var localProfileStore = [CKRecordID: PerformerProfile]()
     /// Local reference to the PerformerProfileStore
     let profilesStore = PerformerProfileStore.shared
+    
+    var currentlyPlaying: PerformanceTableCell?
 
     // MARK: - Lifecycle
     
@@ -35,6 +37,33 @@ class WorldJamsTableViewController: UITableViewController {
         profilesStore.delegate = self
         self.refreshControl?.addTarget(performanceStore, action: #selector(performanceStore.fetchWorldJamsFromCloud), for: UIControlEvents.valueChanged)
         tableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tableViewTapped)))
+    }
+    
+    func playerShouldStop() {
+        
+        if let cell = currentlyPlaying {
+            cell.player!.stop()
+            cell.playButton.setTitle("Play", for: .normal)
+        }
+    }
+    
+    func playButtonPressed(sender: UIButton) {
+        
+        let indexPath = IndexPath(row: sender.tag, section: 0)
+        if let cell = tableView.cellForRow(at: indexPath) as? PerformanceTableCell {
+            if let player = cell.player {
+                
+                currentlyPlaying = cell
+                
+                if !player.isPlaying {
+                    player.play()
+                    cell.playButton.setTitle("Stop", for: .normal)
+                } else {
+                    player.stop()
+                    cell.playButton.setTitle("Play", for: .normal)
+                }
+            }
+        }
     }
 
 
@@ -56,10 +85,16 @@ class WorldJamsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: worldJamCellIdentifier, for: indexPath) as! PerformanceTableCell
         
-        let performance = performanceStore.storedPerformances[indexPath.row]
+        var performance = performanceStore.storedPerformances[indexPath.row]
         
         if let profile = profilesStore.getProfile(forPerformance: performance) {
             cell.avatarImageView.image = profile.avatar
+        }
+        
+        if let player = cell.player {
+            for chirp in player.chirpViews {
+                chirp.removeFromSuperview()
+            }
         }
         
         cell.avatarImageView.backgroundColor = .lightGray
@@ -71,23 +106,32 @@ class WorldJamsTableViewController: UITableViewController {
         cell.performer.text = performance.performer
         cell.instrument.text = performance.instrument
         
-        cell.previewImage.image = performance.image
-        cell.previewImage.layer.borderWidth = 1
-        cell.previewImage.layer.borderColor = UIColor(white: 0.9, alpha: 1).cgColor
-        cell.previewImage.layer.cornerRadius = 4
-        cell.previewImage.clipsToBounds = true
+        cell.chirpContainer.layer.cornerRadius = 8
+        cell.chirpContainer.layer.borderWidth = 1
+        cell.chirpContainer.layer.borderColor = UIColor(white: 0.8, alpha: 1).cgColor
+        cell.chirpContainer.backgroundColor = .white
+        cell.chirpContainer.clipsToBounds = true
         
         cell.context.text = nonCreditString()
+        
+        cell.playButton.layer.cornerRadius = 23 // Button size is 46
+        cell.playButton.tag = indexPath.row
+        cell.playButton.backgroundColor = UIColor(white: 0.8, alpha: 0.7)
+        cell.playButton.addTarget(self, action: #selector(playButtonPressed), for: .touchUpInside)
+        cell.playButton.clipsToBounds = true
 
-        var temp = performance // used to store replies as we fetch them.
-        var images = [performance.image] // the stack of reply images.
-
-        // Get the image from every reply
-        while temp.replyto != "" {
-            if let replyPerf = performanceStore.fetchPerformanceFrom(title: temp.replyto) {
-                cell.context.text = creditString(originalPerformer: replyPerf.performer)
-                images.append(replyPerf.image)
-                temp = replyPerf
+        cell.player = Player()
+        cell.player!.delegate = self
+        let chirpView = ChirpView(with: cell.chirpContainer.bounds, andPerformance: performance)
+        cell.player!.chirpViews.append(chirpView)
+        cell.chirpContainer.addSubview(chirpView)
+        
+        while performance.replyto != "" {
+            if let reply = performanceStore.fetchPerformanceFrom(title: performance.replyto) {
+                let chirp = ChirpView(with: cell.chirpContainer.bounds, andPerformance: reply)
+                cell.player!.chirpViews.append(chirp)
+                cell.chirpContainer.addSubview(chirp)
+                performance = reply
             } else {
                 // break if the replyPerf can't be found.
                 // TODO: in this case, the performance should be fetched from the cloud. but there isn't functionality in the store for this yet.
@@ -97,7 +141,6 @@ class WorldJamsTableViewController: UITableViewController {
         }
 
         // Sum all the images into one and display
-        cell.previewImage.image = self.createImageFrom(images: images)
         return cell
     }
     
@@ -121,28 +164,6 @@ class WorldJamsTableViewController: UITableViewController {
                     navigationController?.pushViewController(controller, animated: true)
                 
                 // Tapped the preview image
-                } else if cell.previewImage.frame.contains(sender.location(in: cell.previewImage)) {
-                    
-                    // Show the performance in a new ChirpJamController
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let controller = storyboard.instantiateViewController(withIdentifier: "chirpJamController") as! ChirpJamViewController
-                    controller.newViewWith(performance: performanceStore.storedPerformances[indexPath.row], withFrame: nil)
-                    
-                    var selectedJam = performanceStore.storedPerformances[indexPath.row]
-                    
-                    while selectedJam.replyto != "" { // load up all replies.
-                        // FIXME: fetching replies fails if they have not been downloaded from cloud.
-                        if let reply = performanceStore.fetchPerformanceFrom(title: selectedJam.replyto) {
-                            controller.newViewWith(performance: reply, withFrame: nil)
-                            selectedJam = reply
-                            print("WJTVC: cued a reply")
-                        } else {
-                            break // if a reply can't be found, stop loading the thread.
-                        }
-                    }
-                    
-                    // Present the chirpViewController
-                    navigationController?.pushViewController(controller, animated: true)
                 }
             }
         }
