@@ -19,19 +19,36 @@ class PerformerProfileStore : NSObject {
     /// CloudKit database
     let database = CKContainer.default().publicCloudDatabase
     /// Storage for profiles
-    var profiles: [CKRecordID: PerformerProfile] = PerformerProfileStore.loadProfiles()
+    var profiles: [CKRecordID: PerformerProfile]
     /// Storage for delegate conforming to ModelDelegate
     var delegate: ModelDelegate?
     
     private override init() {
+        profiles = PerformerProfileStore.loadProfiles()
         super.init()
         // TODO: Need to do some checking for updates in the background
         // TODO: What if there are multiple delegates? Maybe change to NSNotifications
     }
     
     /// Load Profiles from file
-    static func loadProfiles() -> [CKRecordID: PerformerProfile] {
-        if let loadedProfiles = NSKeyedUnarchiver.unarchiveObject(withFile: PerformerProfileStore.profilesURL.path) as? [CKRecordID: PerformerProfile] {
+    private static func loadProfiles() -> [CKRecordID: PerformerProfile] {
+        print("Loading profiles...")
+//        var result : Any?
+//        do {
+//            let dat = try Data(contentsOf: PerformerProfileStore.profilesURL)
+//            let unarchiver = NSKeyedUnarchiver(forReadingWith: dat)
+//            result = try unarchiver.decodeTopLevelObject()
+//            unarchiver.finishDecoding()
+//            print("Successfully decoded archive.")
+//        } catch let (err) {
+//            print("PerformerProfileStore failed to decode archive.")
+//            print(err)
+//            result = nil
+//        }
+        
+        let result = NSKeyedUnarchiver.unarchiveObject(withFile: PerformerProfileStore.profilesURL.path)
+        
+        if let loadedProfiles = result as? [CKRecordID: PerformerProfile] {
             print("PerformerProfileStore: Loaded \(loadedProfiles.count) profiles.")
             return loadedProfiles
         } else {
