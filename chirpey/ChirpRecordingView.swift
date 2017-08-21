@@ -23,6 +23,7 @@ class ChirpRecordingView: ChirpView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         isMultipleTouchEnabled = true
+        isUserInteractionEnabled = true
         clearForRecording() // gets view ready for recording.
     }
     
@@ -30,6 +31,7 @@ class ChirpRecordingView: ChirpView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         isMultipleTouchEnabled = true
+        isUserInteractionEnabled = true
         clearForRecording() // gets view ready for recording.
     }
     
@@ -45,16 +47,18 @@ extension ChirpRecordingView {
     /// Responds to taps in the ChirpView, passes on to superviews and reacts.
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         superview?.touchesBegan(touches, with: event)
-        if (!started) {
-            startTime = Date()
-            started = true
+        if recording {
+            if (!started) {
+                startTime = Date()
+                started = true
+            }
+            swiped = false
+            lastPoint = touches.first?.location(in: superview!)
+            let size = touches.first?.majorRadius
+            drawDot(at: lastPoint!, withColour: recordingColour ?? DEFAULT_RECORDING_COLOUR)
+            makeSound(at: lastPoint!, withRadius: size!, thatWasMoving: false)
+            recordTouch(at: lastPoint!, withRadius: size!, thatWasMoving:false)
         }
-        swiped = false
-        lastPoint = touches.first?.location(in: superview!)
-        let size = touches.first?.majorRadius
-        drawDot(at: lastPoint!, withColour: recordingColour ?? DEFAULT_RECORDING_COLOUR)
-        makeSound(at: lastPoint!, withRadius: size!, thatWasMoving: false)
-        recordTouch(at: lastPoint!, withRadius: size!, thatWasMoving:false)
     }
     
     /// Responds to moving touch signals, responds with sound and recordings.
@@ -108,6 +112,7 @@ extension ChirpRecordingView {
         image = UIImage()
         performance = ChirpPerformance()
         recordingColour = performance?.colour.cgColor ?? DEFAULT_RECORDING_COLOUR
+        playbackColour = performance?.colour.brighterColor.cgColor ?? DEFAULT_PLAYBACK_COLOUR
         openUserSoundScheme()
     }
 }

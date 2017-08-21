@@ -10,6 +10,11 @@ import UIKit
 import CloudKit
 
 class WorldJamsTableViewController: UITableViewController, PlayerDelegate {
+    
+    func progressTimerStep() {
+        
+    }
+
 
     /// Local reference to the performanceStore singleton.
     let performanceStore = (UIApplication.shared.delegate as! AppDelegate).performanceStore
@@ -39,7 +44,7 @@ class WorldJamsTableViewController: UITableViewController, PlayerDelegate {
         tableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tableViewTapped)))
     }
     
-    func playerShouldStop() {
+    func progressTimerEnded() {
         
         if let cell = currentlyPlaying {
             cell.player!.stop()
@@ -74,7 +79,8 @@ class WorldJamsTableViewController: UITableViewController, PlayerDelegate {
                 
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let controller = storyboard.instantiateViewController(withIdentifier: "chirpJamController") as! ChirpJamViewController
-                controller.player = player
+                let recorder = Recorder(frame: CGRect.zero, player: player)
+                controller.recorder = recorder
                 navigationController?.pushViewController(controller, animated: true)
             }
         }
@@ -97,6 +103,8 @@ class WorldJamsTableViewController: UITableViewController, PlayerDelegate {
         
         if let profile = profilesStore.getProfile(forPerformance: performance) {
             cell.avatarImageView.image = profile.avatar
+        } else {
+            cell.avatarImageView.image = nil
         }
         
         if let player = cell.player {

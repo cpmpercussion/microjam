@@ -10,18 +10,30 @@ import UIKit
 
 protocol PlayerDelegate {
     
-    func playerShouldStop()
+    func progressTimerEnded()
+    func progressTimerStep()
 }
 
 class Player: NSObject {
+    
+    var maxPlayerTime = 5.0
     
     var isPlaying = false
     var timers = [Timer]()
     var chirpViews = [ChirpView]()
     
     var progressTimer: Timer?
+    var progress = 0.0
     
     var delegate: PlayerDelegate?
+    
+    func play(chirp: ChirpView) {
+        for touch in chirp.performance!.performanceData {
+            timers.append(Timer.scheduledTimer(withTimeInterval: touch.time,
+                                               repeats: false,
+                                               block: chirp.makeTouchPlayerWith(touch: touch)))
+        }
+    }
     
     func play() {
         
@@ -31,17 +43,28 @@ class Player: NSObject {
             timers = [Timer]()
             
             for chirp in chirpViews {
-                for touch in chirp.performance!.performanceData {
-                    timers.append(Timer.scheduledTimer(withTimeInterval: touch.time,
-                                                       repeats: false,
-                                                       block: chirp.makeTouchPlayerWith(touch: touch)))
-                }
+                play(chirp: chirp)
             }
             
-            progressTimer = Timer.scheduledTimer(withTimeInterval: 5, repeats: false, block: { (timer) in
-                self.delegate!.playerShouldStop()
-            })
+            startProgressTimer()
         }
+    }
+    
+    func startProgressTimer() {
+        progressTimer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: { (timer) in
+            self.step()
+        })
+    }
+    
+    func step() {
+        
+        self.delegate!.progressTimerStep()
+        
+        if progress >= maxPlayerTime {
+            self.delegate!.progressTimerEnded()
+        }
+        
+        progress += 0.01
     }
     
     func stop() {
@@ -49,11 +72,12 @@ class Player: NSObject {
         if isPlaying {
             isPlaying = false
             
-            if let progress = progressTimer {
-                progress.invalidate()
+            if let timer = progressTimer {
+                timer.invalidate()
+                progress = 0.0
                 
-                for timer in timers {
-                    timer.invalidate()
+                for t in timers {
+                    t.invalidate()
                 }
                 
                 for chirp in chirpViews {

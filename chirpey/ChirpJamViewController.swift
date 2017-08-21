@@ -20,28 +20,18 @@ extension ChirpJamViewController: BrowseControllerDelegate {
     /// Adds a ChirpPerformance when chosen in the BrowseController
     func didSelect(performance: ChirpPerformance) {
         // TODO: Add this as a parent to the currently recording jam.
-        self.navigationController?.popViewController(animated: true)
+        //self.navigationController?.popViewController(animated: true)
     }
 }
 
 class ChirpJamViewController: UIViewController {
     
-    var recordingEnabled = true
-    /// Storage of the present playback/recording state: playing, recording or idle
-    var isRecording = false
-    /// Tells us whether the recording has been added to the stack in the performance handler
-    var recordingIsDone = false
     /// Enters composing mode if a performance is added from within the ChirpJamController
     var isComposing = false
-    /// Stores the recording/playback progress.
-    var progress = 0.0
-    /// Timer for progress in recording and playback.
-    var progressTimer : Timer?
     /// Stores the present jamming state
     var jamming : Bool = false
     
-    var recordingView: ChirpRecordingView?
-    var player: Player?
+    var recorder: Recorder?
     
     /// Addition ChirpView for storage of the original performance for a reply.
     var replyto : String?
@@ -79,8 +69,9 @@ class ChirpJamViewController: UIViewController {
         
         jamming = false // stop jamming.
         
-//        if state == ChirpJamModes.recording {stopRecording() }
-//        if state == ChirpJamModes.playing { stopPlayback() } // stop any possible playback.
+        if let recorder = recorder {
+            recorder.stop()
+        }
         
         if let barButton = sender as? UIBarButtonItem {
             // TODO: Is this check actually used?
@@ -89,16 +80,13 @@ class ChirpJamViewController: UIViewController {
 
                 if isComposing {
                     // TODO: Store composing performances
-                    print("Need implementation for storing compositions...")
-
-                    recordingView = nil
                     newRecordingView()
-
-                    return
+                
+                } else {
+                    appDelegate.performanceStore.addNew(performance: recorder!.recordingView.performance!)
+                    navigationController?.popViewController(animated: true)
                 }
-
-                //appDelegate.performanceStore.addNew(performance: performance)
-
+            
             } else {
                 print("JAMVC: Not jam button segue!")
                 // MARK: Put something here
@@ -112,10 +100,8 @@ class ChirpJamViewController: UIViewController {
         print("JAMVC: Cancel Button Pressed.")
         
         // Stop any timers
-        if isRecording {
-            stopRecording()
-        } else {
-            stopPlayback()
+        if let recorder = recorder {
+            recorder.stop()
         }
         
         if tabBarItem.title == TabBarItemTitles.jamTab {
@@ -139,19 +125,30 @@ class ChirpJamViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if let player = player {
-            print("Controller was loaded with ", player)
+        if let recorder = recorder {
+            print("Controller was loaded with ", recorder)
             
-            for view in player.chirpViews {
+            for view in recorder.chirpViews {
                 view.frame = chirpViewContainer.bounds
                 chirpViewContainer.addSubview(view)
             }
-            
-            replyto = player.chirpViews.first?.performance?.title()
-            statusLabel.text = "reply to: " + replyto!
+        
+            recorder.delegate = self
+            replyto = recorder.chirpViews.first?.performance?.title()
+            if let rep = replyto {
+                statusLabel.text = "reply to: " + rep
+            } else {
+                statusLabel.text = "Composing..."
+            }
+        
+        } else {
+            recorder = Recorder(frame: chirpViewContainer.bounds)
+            recorder!.delegate = self
+            statusLabel.text = "New..."
         }
 
         newRecordingView()
+        performerLabel.text = recorder!.recordingView.performance!.performer
     }
 
     override func viewDidLoad() {
@@ -160,6 +157,8 @@ class ChirpJamViewController: UIViewController {
         
         // need to initialise the recording progress at zero.
         recordingProgress!.progress = 0.0
+        
+        replyButton.isEnabled = false
         
         // Setting the correct instrument
         instrumentButton.setTitle(SoundSchemes.namesForKeys[UserProfile.shared.profile.soundScheme], for: .normal)
@@ -184,15 +183,15 @@ class ChirpJamViewController: UIViewController {
     /// Resets to a new performance state.
     func newRecordingView() {
         
-        if let recordingView = recordingView {
-            recordingView.closePdFile()
-            recordingView.removeFromSuperview()
+        if let recorder = recorder {
+            recorder.recordingView.closePdFile()
+            recorder.recordingView.removeFromSuperview()
+            recorder.recordingEnabled = true
+            recorder.recordingIsDone = false
+            recorder.recordingView = ChirpRecordingView(frame: chirpViewContainer.bounds)
+            recorder.recordingView.performance!.performer = UserProfile.shared.profile.stageName
+            chirpViewContainer.addSubview(recorder.recordingView)
         }
-        
-        recordingView = ChirpRecordingView(frame: chirpViewContainer.bounds)
-        
-        jamming = false
-
     }
 
     // MARK: - UI Interaction Functions
@@ -213,7 +212,27 @@ class ChirpJamViewController: UIViewController {
     /// IBAction for the play button. Starts playback of performance and replies iff in loaded mode. Stops if already playing.
     @IBAction func playButtonPressed(_ sender: UIButton) {
         
-    
+        if let recorder = recorder {
+            if recorder.isPlaying {
+                playButton.setTitle("Play", for: .normal)
+                jamButton.isEnabled = true
+                
+                if let rep = replyto {
+                    statusLabel.text = "Reply to: " + rep
+                } else {
+                    statusLabel.text = "New..."
+                
+                }
+            
+                recorder.stop()
+            
+            } else {
+                playButton.setTitle("Stop", for: .normal)
+                jamButton.isEnabled = false
+                statusLabel.text = "Playing..."
+                recorder.play()
+            }
+        }
     }
 
     /// IBAction for the SoundScheme label. Opens a dropdown menu for selection when in "new" state.
@@ -224,11 +243,13 @@ class ChirpJamViewController: UIViewController {
 
     @IBAction func replyButtonPressed(_ sender: Any) {
         print("JAMVC: Reply button pressed");
-        // Reply button is only enabled if it is a new performance
         
-        if isRecording {
-            stopPlayback()
+        if let recorder = recorder {
+            recordingProgress.progress = 0.0
+            recorder.stop()
         }
+        
+        newRecordingView()
     }
 
     /// IBAction for the Jam Button
@@ -248,110 +269,43 @@ class ChirpJamViewController: UIViewController {
     /// touchesBegan method starts a recording if this is the first touch in a new microjam.
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         // start timer if not recording
-        let point = touches.first?.location(in: recordingView);
         
-        if recordingEnabled {
+        if let recorder = recorder {
             
-            if (recordingView!.bounds.contains(point!) && !isRecording) {
+            let point = touches.first?.location(in: recorder.recordingView);
+            
+            if (recorder.recordingView.bounds.contains(point!)) {
                 print("JAMVC: Starting a Recording")
-                startRecording()
+                statusLabel.text = "Recording..."
+                playButton.setTitle("Stop", for: .normal)
+                recorder.record()
             }
         }
     }
 }
 
-// MARK: - Extension for Playback/Recording Control Methods.
+// MARK: Player delegate methods
 
-extension ChirpJamViewController {
+extension ChirpJamViewController: PlayerDelegate {
     
-    /// Stopping the timer and resetting progress
-    func stopProgressBar() {
-        if let timer = progressTimer {
-            timer.invalidate()
-            progress = 0.0
-            recordingProgress?.progress = 0.0
-        }
+    func progressTimerStep() {
+        recordingProgress.progress = Float(recorder!.progress / recorder!.maxPlayerTime)
     }
-    
-    /// Starts a recurring timer that increments the progress bar.
-    func startProgressBar() {
-        recordingProgress!.progress = 0.0
-        progress = 0.0
-        progressTimer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: self.incrementRecordingProgress)
-    }
-    
+
     func progressTimerEnded() {
+        recordingProgress.progress = 0.0
+        recorder!.stop()
         
-        // If jamming..
-        
-        if isRecording {
-            completeRecording()
-        } else {
-            stopPlayback()
+        if recorder!.recordingIsDone {
+            replyButton.isEnabled = true
+            if let rep = replyto {
+                statusLabel.text = "Reply to: " + rep
+            } else {
+                statusLabel.text = "New..."
+            }
         }
-    }
-    
-    /// Increment the recording progress bar by 10ms; called automatically by timers.
-    func incrementRecordingProgress(_ : Timer) {
-        progress += 0.01;
-        recordingProgress?.progress = Float(progress / RECORDING_TIME)
-        if (progress >= RECORDING_TIME) {
-            progressTimerEnded()
-        }
-    }
-    
-    func startPlayback() {
-        statusLabel.text = "Playing..."
-        playButton.setTitle("Stop", for: .normal)
-        startProgressBar()
-    }
-
-    /// Stop playback and cancel timers.
-    func stopPlayback() {
-        print("JAMVC: Stopping any requested playback")
-        
-        stopProgressBar()
         
         playButton.setTitle("Play", for: .normal)
-    }
-    
-    /// Sets into recording mode and starts the timer.
-    func startRecording() {
-        NSLog("JAMVC: Starting a recording.")
-        
-        statusLabel.text = "Recording..."
-        
-        isRecording = true
-        jamming = false
-        
-        playButton.setTitle("Stop Rec", for: .normal)
-        replyButton.isEnabled = false
-        jamButton.isEnabled = false
-    }
-    
-    func completeRecording() {
-        
-        isRecording = false
-        recordingEnabled = false
-        stopPlayback()
-        
-        playButton.isEnabled = true
-        replyButton.isEnabled = true
-        jamButton.isEnabled = true
-        
-        // Mark recording as done!
-        recordingIsDone = true
-    }
-    
-    /// Stops the current recording.
-    func stopRecording() {
-        print("JAMVC: Stopping recording")
-        
-        isRecording = false
-        stopPlayback()
-        
-        // Throw away current recording
-        newRecordingView()
     }
 }
 
