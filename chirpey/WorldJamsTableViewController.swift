@@ -98,6 +98,7 @@ class WorldJamsTableViewController: UITableViewController {
             
             if let current = currentlyPlaying {
                 current.player!.stop()
+                current.playButton.setTitle("Play", for: .normal)
                 currentlyPlaying = nil
             }
 
@@ -107,6 +108,18 @@ class WorldJamsTableViewController: UITableViewController {
             controller.recorder = recorder
             navigationController?.pushViewController(controller, animated: true)
         }
+    }
+    
+    // MARK: Scroll view delegate methods
+    
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        
+        if let cell = currentlyPlaying {
+            cell.playButton.setTitle("Play", for: .normal)
+            cell.player!.stop()
+            currentlyPlaying = nil
+        }
+        
     }
 
     // MARK: - Table view data source
@@ -318,6 +331,7 @@ extension WorldJamsTableViewController: ModelDelegate {
         refreshControl?.endRefreshing()
         
         if let cell = currentlyPlaying {
+            cell.playButton.setTitle("Play", for: .normal)
             cell.player!.stop()
             currentlyPlaying = nil
         }
