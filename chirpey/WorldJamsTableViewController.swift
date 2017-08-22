@@ -9,7 +9,7 @@
 import UIKit
 import CloudKit
 
-class WorldJamsTableViewController: UITableViewController, PlayerDelegate {
+class WorldJamsTableViewController: UITableViewController {
 
     /// Local reference to the performanceStore singleton.
     let performanceStore = (UIApplication.shared.delegate as! AppDelegate).performanceStore
@@ -20,10 +20,15 @@ class WorldJamsTableViewController: UITableViewController, PlayerDelegate {
     /// Local reference to the PerformerProfileStore
     let profilesStore = PerformerProfileStore.shared
     
-    
+    var players = [Player]()
     var currentlyPlaying: PerformanceTableCell?
 
     // MARK: - Lifecycle
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,17 +45,34 @@ class WorldJamsTableViewController: UITableViewController, PlayerDelegate {
         tableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tableViewTapped)))
     }
     
-    func progressTimerStep() {
-        
-    }
-    
-    func progressTimerEnded() {
-        
-        if let cell = currentlyPlaying {
-            cell.player!.stop()
-            cell.playButton.setTitle("Play", for: .normal)
-        }
-    }
+//    func setupPlayers() {
+//        
+//        for performance in performanceStore.storedPerformances {
+//            
+//            let player = Player()
+//            player.delegate = self
+//            let chirpView = ChirpView(with: CGRect.zero, andPerformance: performance)
+//            player.chirpViews.append(chirpView)
+//            
+//            var current = performance
+//            
+//            while current.replyto != "" {
+//                if let next = performanceStore.fetchPerformanceFrom(title: current.replyto) {
+//                    let chirp = ChirpView(with: CGRect.zero, andPerformance: next)
+//                    player.chirpViews.append(chirp)
+//                    current = next
+//                } else {
+//                    // break if the replyPerf can't be found.
+//                    // TODO: in this case, the performance should be fetched from the cloud. but there isn't functionality in the store for this yet.
+//                    break
+//                }
+//            }
+//            
+//            players.append(player)
+//        }
+//        
+//        tableView.reloadData()
+//    }
     
     func playButtonPressed(sender: UIButton) {
         
@@ -97,18 +119,39 @@ class WorldJamsTableViewController: UITableViewController, PlayerDelegate {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: worldJamCellIdentifier, for: indexPath) as! PerformanceTableCell
         
-        var performance = performanceStore.storedPerformances[indexPath.row]
+        if let player = cell.player {
+            for chirp in player.chirpViews {
+                chirp.removeFromSuperview()
+            }
+        }
+        
+        let performance = performanceStore.storedPerformances[indexPath.row]
+        
+        cell.player = Player()
+        cell.player!.delegate = self
+        let chirpView = ChirpView(with: cell.chirpContainer.bounds, andPerformance: performance)
+        cell.player!.chirpViews.append(chirpView)
+        cell.chirpContainer.addSubview(chirpView)
+        
+        var current = performance
+        
+        while current.replyto != "" {
+            if let next = performanceStore.fetchPerformanceFrom(title: current.replyto) {
+                let chirp = ChirpView(with: cell.chirpContainer.bounds, andPerformance: next)
+                cell.player!.chirpViews.append(chirp)
+                cell.chirpContainer.addSubview(chirp)
+                current = next
+            } else {
+                // break if the replyPerf can't be found.
+                // TODO: in this case, the performance should be fetched from the cloud. but there isn't functionality in the store for this yet.
+                break
+            }
+        }
         
         if let profile = profilesStore.getProfile(forPerformance: performance) {
             cell.avatarImageView.image = profile.avatar
         } else {
             cell.avatarImageView.image = nil
-        }
-        
-        if let player = cell.player {
-            for chirp in player.chirpViews {
-                chirp.removeFromSuperview()
-            }
         }
         
         cell.title.text = performance.dateString
@@ -123,27 +166,6 @@ class WorldJamsTableViewController: UITableViewController, PlayerDelegate {
         cell.replyButton.tag = indexPath.row
         cell.replyButton.addTarget(self, action: #selector(replyButtonPressed), for: .touchUpInside)
 
-        cell.player = Player()
-        cell.player!.delegate = self
-        let chirpView = ChirpView(with: cell.chirpContainer.bounds, andPerformance: performance)
-        cell.player!.chirpViews.append(chirpView)
-        cell.chirpContainer.addSubview(chirpView)
-        
-        while performance.replyto != "" {
-            if let reply = performanceStore.fetchPerformanceFrom(title: performance.replyto) {
-                let chirp = ChirpView(with: cell.chirpContainer.bounds, andPerformance: reply)
-                cell.player!.chirpViews.append(chirp)
-                cell.chirpContainer.addSubview(chirp)
-                performance = reply
-            } else {
-                // break if the replyPerf can't be found.
-                // TODO: in this case, the performance should be fetched from the cloud. but there isn't functionality in the store for this yet.
-                break
-            }
-            print("WJTVC: loaded a reply.")
-        }
-
-        // Sum all the images into one and display
         return cell
     }
     
@@ -263,6 +285,22 @@ class WorldJamsTableViewController: UITableViewController, PlayerDelegate {
         self.tableView.insertRows(at: [newIndexPath as IndexPath], with: .top)
     }
 
+}
+
+extension WorldJamsTableViewController: PlayerDelegate {
+    
+    
+    func progressTimerStep() {
+        
+    }
+    
+    func progressTimerEnded() {
+        
+        if let cell = currentlyPlaying {
+            cell.player!.stop()
+            cell.playButton.setTitle("Play", for: .normal)
+        }
+    }
 }
 
 // MARK: - ModelDelegate methods

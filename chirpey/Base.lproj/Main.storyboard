@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="z8b-cn-TNb">
-    <device id="ipad9_7" orientation="portrait">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -20,23 +20,23 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="zD1-ua-tDc">
-                                <rect key="frame" x="128" y="199" width="512" height="626"/>
+                                <rect key="frame" x="16" y="83.5" width="343" height="500"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="0lT-q9-yLP">
-                                        <rect key="frame" x="0.0" y="0.0" width="512" height="44"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="performer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Mx-bs-Bwy">
-                                                <rect key="frame" x="0.0" y="0.0" width="170.5" height="44"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="114.5" height="44"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="right" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PVn-2h-cdI">
-                                                <rect key="frame" x="170.5" y="0.0" width="171" height="44"/>
+                                                <rect key="frame" x="114.5" y="0.0" width="114" height="44"/>
                                                 <accessibility key="accessibilityConfiguration" hint="Tap here to choose a different sound." identifier="instrumentChooser" label="Instrument Menu"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <state key="normal" title="add jam">
@@ -48,7 +48,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="right" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZY3-BC-5OF">
-                                                <rect key="frame" x="341.5" y="0.0" width="170.5" height="44"/>
+                                                <rect key="frame" x="228.5" y="0.0" width="114.5" height="44"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <state key="normal" title="instrument">
                                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -63,23 +63,23 @@
                                         </constraints>
                                     </stackView>
                                     <view autoresizesSubviews="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xQz-CD-1rT">
-                                        <rect key="frame" x="0.0" y="52" width="512" height="512"/>
+                                        <rect key="frame" x="0.0" y="66.5" width="343" height="343"/>
                                         <color key="backgroundColor" red="0.59487018602307074" green="0.7976250858479812" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="xQz-CD-1rT" secondAttribute="height" multiplier="1:1" id="f5e-P8-eQa"/>
                                         </constraints>
                                     </view>
                                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="yna-Q3-0q0">
-                                        <rect key="frame" x="0.0" y="572" width="512" height="2"/>
+                                        <rect key="frame" x="0.0" y="431.5" width="343" height="2"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="2.5" id="YbG-Hu-9DN"/>
                                         </constraints>
                                     </progressView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="b8e-yj-oN7">
-                                        <rect key="frame" x="0.0" y="582" width="512" height="44"/>
+                                        <rect key="frame" x="0.0" y="456" width="343" height="44"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O9V-pQ-Tlh">
-                                                <rect key="frame" x="0.0" y="0.0" width="170.5" height="44"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="114.5" height="44"/>
                                                 <color key="backgroundColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="playButton" label="Play"/>
                                                 <state key="normal" title="play"/>
@@ -88,7 +88,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xh5-cz-PkR" userLabel="Reply Button">
-                                                <rect key="frame" x="170.5" y="0.0" width="171" height="44"/>
+                                                <rect key="frame" x="114.5" y="0.0" width="114" height="44"/>
                                                 <color key="backgroundColor" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="replyButton" label="Reply"/>
                                                 <state key="normal" title="reset"/>
@@ -97,7 +97,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HfI-q6-7dd">
-                                                <rect key="frame" x="341.5" y="0.0" width="170.5" height="44"/>
+                                                <rect key="frame" x="228.5" y="0.0" width="114.5" height="44"/>
                                                 <color key="backgroundColor" red="0.80000001190000003" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="jamButton" label="Jam"/>
                                                 <state key="normal" title="jam"/>
@@ -180,31 +180,31 @@
             <objects>
                 <tableViewController id="EVE-Cq-utu" customClass="WorldJamsTableViewController" customModule="microjam" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="414" sectionHeaderHeight="28" sectionFooterHeight="28" id="Dms-qf-PhV">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="worldJamCell" rowHeight="414" id="gcn-gn-WZ5" customClass="PerformanceTableCell" customModule="microjam">
-                                <rect key="frame" x="0.0" y="28" width="768" height="414"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="414"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gcn-gn-WZ5" id="sXd-HP-H6B">
-                                    <rect key="frame" x="0.0" y="0.0" width="768" height="413.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="413.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="took the stage" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8qM-fi-pVE" userLabel="context">
-                                            <rect key="frame" x="32" y="786" width="93" height="17"/>
+                                            <rect key="frame" x="32" y="393" width="93" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="instrument" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6dJ-ZF-dqm">
-                                            <rect key="frame" x="649" y="786" width="87" height="22"/>
+                                            <rect key="frame" x="256" y="393" width="87" height="22"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fmu-Vs-F8c">
-                                            <rect key="frame" x="32" y="16" width="704" height="50"/>
+                                            <rect key="frame" x="32" y="16" width="311" height="50"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="performername" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zm0-8q-7kP">
                                                     <rect key="frame" x="54" y="3" width="127" height="22"/>
@@ -238,14 +238,14 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qwU-ld-Uy2">
-                                            <rect key="frame" x="32" y="74" width="704" height="704"/>
+                                            <rect key="frame" x="32" y="74" width="311" height="311"/>
                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="qwU-ld-Uy2" secondAttribute="height" multiplier="1:1" id="VzA-GE-cNg"/>
                                             </constraints>
                                         </view>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JOw-B7-ob4">
-                                            <rect key="frame" x="682" y="724" width="46" height="46"/>
+                                            <rect key="frame" x="289" y="331" width="46" height="46"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="46" id="YNc-to-Xg0"/>
                                                 <constraint firstAttribute="height" constant="46" id="tub-8c-s9b"/>
@@ -255,7 +255,7 @@
                                             </state>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ske-ad-PVr">
-                                            <rect key="frame" x="40" y="724" width="46" height="46"/>
+                                            <rect key="frame" x="40" y="331" width="46" height="46"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="46" id="gNE-VS-NXh"/>
                                                 <constraint firstAttribute="width" constant="46" id="vNH-EB-538"/>

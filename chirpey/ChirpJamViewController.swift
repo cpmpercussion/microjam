@@ -20,7 +20,12 @@ extension ChirpJamViewController: BrowseControllerDelegate {
     /// Adds a ChirpPerformance when chosen in the BrowseController
     func didSelect(performance: ChirpPerformance) {
         // TODO: Add this as a parent to the currently recording jam.
-        //self.navigationController?.popViewController(animated: true)
+        if let recorder = recorder {
+            let chirp = ChirpView(with: chirpViewContainer.bounds, andPerformance: performance)
+            recorder.chirpViews.append(chirp)
+            chirpViewContainer.addSubview(chirp)
+            navigationController?.popViewController(animated: true)
+        }
     }
 }
 
@@ -46,8 +51,6 @@ class ChirpJamViewController: UIViewController {
     @IBOutlet weak var playButton: UIButton!
     /// Button to activate "jamming" mode.
     @IBOutlet weak var jamButton: UIButton!
-    /// Label showing the recording/playback status
-    @IBOutlet weak var statusLabel: UILabel!
     /// Label shoing the current performer.
     @IBOutlet weak var performerLabel: UILabel!
     /// Container view for the performance/recording views
@@ -84,8 +87,9 @@ class ChirpJamViewController: UIViewController {
                 
                 } else {
                     appDelegate.performanceStore.addNew(performance: recorder!.recordingView.performance!)
-                    navigationController?.popViewController(animated: true)
                 }
+                
+                navigationController?.popViewController(animated: true)
             
             } else {
                 print("JAMVC: Not jam button segue!")
@@ -103,20 +107,24 @@ class ChirpJamViewController: UIViewController {
         if let recorder = recorder {
             recorder.stop()
         }
+
+        if replyto != nil {
+            // In the world tab
+            navigationController!.popViewController(animated: true)
         
-        if tabBarItem.title == TabBarItemTitles.jamTab {
+        } else {
             // In the jab tab
             if isComposing {
                 // Remove the last added performance
-                // If there are no more added performances ,return to the new performance state
+                if let chirp = recorder!.chirpViews.popLast() {
+                    print("Shourld remove chirp")
+                    chirp.removeFromSuperview()
+                }
+                
             } else {
                 // Just reset to a new recording
                 newRecordingView()
             }
-            
-        } else {
-            // In the world tab
-            navigationController!.popViewController(animated: true)
         }
     }
 
@@ -128,23 +136,18 @@ class ChirpJamViewController: UIViewController {
         if let recorder = recorder {
             print("Controller was loaded with ", recorder)
             
-            for view in recorder.chirpViews {
-                view.frame = chirpViewContainer.bounds
-                chirpViewContainer.addSubview(view)
-            }
-        
-            recorder.delegate = self
-            replyto = recorder.chirpViews.first?.performance?.title()
-            if let rep = replyto {
-                statusLabel.text = "reply to: " + rep
-            } else {
-                statusLabel.text = "Composing..."
+            if !isComposing {
+                for view in recorder.chirpViews {
+                    view.frame = chirpViewContainer.bounds
+                    chirpViewContainer.addSubview(view)
+                }
+                recorder.delegate = self
+                replyto = recorder.chirpViews.first?.performance?.title()
             }
         
         } else {
             recorder = Recorder(frame: chirpViewContainer.bounds)
             recorder!.delegate = self
-            statusLabel.text = "New..."
         }
 
         newRecordingView()
@@ -174,7 +177,16 @@ class ChirpJamViewController: UIViewController {
             print("DropDown selected:", index, item)
             if let sound = SoundSchemes.keysForNames[item] {
                 UserProfile.shared.profile.soundScheme = Int64(sound)
+                self.instrumentChanged()
             }
+        }
+    }
+    
+    func instrumentChanged() {
+        
+        if let recorder = recorder {
+            recorder.recordingView.openUserSoundScheme()
+            instrumentButton.setTitle(SoundSchemes.namesForKeys[UserProfile.shared.profile.soundScheme], for: .normal)
         }
     }
     
@@ -190,6 +202,9 @@ class ChirpJamViewController: UIViewController {
             recorder.recordingIsDone = false
             recorder.recordingView = ChirpRecordingView(frame: chirpViewContainer.bounds)
             recorder.recordingView.performance!.performer = UserProfile.shared.profile.stageName
+            if let rep = replyto {
+                recorder.recordingView.performance!.replyto = rep
+            }
             chirpViewContainer.addSubview(recorder.recordingView)
         }
     }
@@ -216,20 +231,12 @@ class ChirpJamViewController: UIViewController {
             if recorder.isPlaying {
                 playButton.setTitle("Play", for: .normal)
                 jamButton.isEnabled = true
-                
-                if let rep = replyto {
-                    statusLabel.text = "Reply to: " + rep
-                } else {
-                    statusLabel.text = "New..."
-                
-                }
-            
+                recordingProgress.progress = 0.0
                 recorder.stop()
             
             } else {
                 playButton.setTitle("Stop", for: .normal)
                 jamButton.isEnabled = false
-                statusLabel.text = "Playing..."
                 recorder.play()
             }
         }
@@ -259,10 +266,19 @@ class ChirpJamViewController: UIViewController {
             // Stop Jamming
             jamButton.setTitle("jam", for: UIControlState.normal)
             jamming = false
+            playButton.isEnabled = true
+            recordingProgress.progress = 0.0
+            if let recorder = recorder {
+                recorder.stop()
+            }
         } else {
             // Start Jamming
             jamButton.setTitle("no jam", for: UIControlState.normal)
             jamming = true
+            playButton.isEnabled = false
+            if let recorder = recorder {
+                recorder.play()
+            }
         }
     }
     
@@ -276,7 +292,6 @@ class ChirpJamViewController: UIViewController {
             
             if (recorder.recordingView.bounds.contains(point!)) {
                 print("JAMVC: Starting a Recording")
-                statusLabel.text = "Recording..."
                 playButton.setTitle("Stop", for: .normal)
                 recorder.record()
             }
@@ -296,14 +311,15 @@ extension ChirpJamViewController: PlayerDelegate {
         recordingProgress.progress = 0.0
         recorder!.stop()
         
+        if jamming {
+            recorder!.play()
+            return
+        }
+        
         if recorder!.recordingIsDone {
             replyButton.isEnabled = true
-            if let rep = replyto {
-                statusLabel.text = "Reply to: " + rep
-            } else {
-                statusLabel.text = "New..."
-            }
         }
+        jamButton.isEnabled = true
         
         playButton.setTitle("Play", for: .normal)
     }
