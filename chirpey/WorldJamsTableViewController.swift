@@ -77,13 +77,13 @@ class WorldJamsTableViewController: UITableViewController {
         let indexPath = IndexPath(row: sender.tag, section: 0)
         if let cell = tableView.cellForRow(at: indexPath) as? PerformanceTableCell,
             let player = cell.player {
-
-            currentlyPlaying = cell
-
+            
             if !player.isPlaying {
+                currentlyPlaying = cell
                 player.play()
                 cell.playButton.setTitle("Stop", for: .normal)
             } else {
+                currentlyPlaying = nil
                 player.stop()
                 cell.playButton.setTitle("Play", for: .normal)
             }
@@ -119,6 +119,7 @@ class WorldJamsTableViewController: UITableViewController {
 
         if let player = cell.player {
             for chirp in player.chirpViews {
+                chirp.closePdFile()
                 chirp.removeFromSuperview()
             }
         }
@@ -297,6 +298,7 @@ extension WorldJamsTableViewController: PlayerDelegate {
         if let cell = currentlyPlaying {
             cell.player!.stop()
             cell.playButton.setTitle("Play", for: .normal)
+            currentlyPlaying = nil
         }
     }
 }
