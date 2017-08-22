@@ -12,14 +12,12 @@ import CloudKit
 class WorldJamsTableViewController: UITableViewController {
 
     /// Local reference to the performanceStore singleton.
-    let performanceStore = (UIApplication.shared.delegate as! AppDelegate).performanceStore
+    let performanceStore = PerformanceStore.shared
     /// Global ID for wordJamCells.
     let worldJamCellIdentifier = "worldJamCell"
-    /// Local dictionary relating CKRecordIDs (Of Users records) to PerformerProfile objects.
-    var localProfileStore = [CKRecordID: PerformerProfile]()
     /// Local reference to the PerformerProfileStore
     let profilesStore = PerformerProfileStore.shared
-    
+
     var players = [Player]()
     var currentlyPlaying: PerformanceTableCell?
 
@@ -29,7 +27,7 @@ class WorldJamsTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         tableView.reloadData()
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -44,18 +42,18 @@ class WorldJamsTableViewController: UITableViewController {
         self.refreshControl?.addTarget(performanceStore, action: #selector(performanceStore.fetchWorldJamsFromCloud), for: UIControlEvents.valueChanged)
         tableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tableViewTapped)))
     }
-    
+
 //    func setupPlayers() {
-//        
+//
 //        for performance in performanceStore.storedPerformances {
-//            
+//
 //            let player = Player()
 //            player.delegate = self
 //            let chirpView = ChirpView(with: CGRect.zero, andPerformance: performance)
 //            player.chirpViews.append(chirpView)
-//            
+//
 //            var current = performance
-//            
+//
 //            while current.replyto != "" {
 //                if let next = performanceStore.fetchPerformanceFrom(title: current.replyto) {
 //                    let chirp = ChirpView(with: CGRect.zero, andPerformance: next)
@@ -67,21 +65,21 @@ class WorldJamsTableViewController: UITableViewController {
 //                    break
 //                }
 //            }
-//            
+//
 //            players.append(player)
 //        }
-//        
+//
 //        tableView.reloadData()
 //    }
-    
+
     func playButtonPressed(sender: UIButton) {
-        
+
         let indexPath = IndexPath(row: sender.tag, section: 0)
         if let cell = tableView.cellForRow(at: indexPath) as? PerformanceTableCell,
             let player = cell.player {
-                
+
             currentlyPlaying = cell
-            
+
             if !player.isPlaying {
                 player.play()
                 cell.playButton.setTitle("Stop", for: .normal)
@@ -91,13 +89,13 @@ class WorldJamsTableViewController: UITableViewController {
             }
         }
     }
-    
+
     func replyButtonPressed(sender: UIButton) {
-        
+
         let indexPath = IndexPath(row: sender.tag, section: 0)
         if let cell = tableView.cellForRow(at: indexPath) as? PerformanceTableCell,
             let player = cell.player {
-                
+
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let controller = storyboard.instantiateViewController(withIdentifier: "chirpJamController") as! ChirpJamViewController
             let recorder = Recorder(frame: CGRect.zero, player: player)
@@ -105,7 +103,7 @@ class WorldJamsTableViewController: UITableViewController {
             navigationController?.pushViewController(controller, animated: true)
         }
     }
-    
+
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -118,7 +116,7 @@ class WorldJamsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: worldJamCellIdentifier, for: indexPath) as! PerformanceTableCell
-        
+
         if let player = cell.player {
             for chirp in player.chirpViews {
                 chirp.removeFromSuperview()
@@ -126,15 +124,15 @@ class WorldJamsTableViewController: UITableViewController {
         }
         
         let performance = performanceStore.storedPerformances[indexPath.row]
-        
+
         cell.player = Player()
         cell.player!.delegate = self
         let chirpView = ChirpView(with: cell.chirpContainer.bounds, andPerformance: performance)
         cell.player!.chirpViews.append(chirpView)
         cell.chirpContainer.addSubview(chirpView)
-        
+
         var current = performance
-        
+
         while current.replyto != "" {
             if let next = performanceStore.fetchPerformanceFrom(title: current.replyto) {
                 let chirp = ChirpView(with: cell.chirpContainer.bounds, andPerformance: next)
@@ -147,39 +145,39 @@ class WorldJamsTableViewController: UITableViewController {
                 break
             }
         }
-        
+
         if let profile = profilesStore.getProfile(forPerformance: performance) {
             cell.avatarImageView.image = profile.avatar
         } else {
             cell.avatarImageView.image = nil
         }
-        
+
         cell.title.text = performance.dateString
         cell.performer.text = performance.performer
         cell.instrument.text = performance.instrument
-        
+
         cell.context.text = nonCreditString()
-        
+
         cell.playButton.tag = indexPath.row
         cell.playButton.addTarget(self, action: #selector(playButtonPressed), for: .touchUpInside)
-        
+
         cell.replyButton.tag = indexPath.row
         cell.replyButton.addTarget(self, action: #selector(replyButtonPressed), for: .touchUpInside)
 
         return cell
     }
-    
+
     // MARK: UI Methods
-    
+
     func tableViewTapped(sender: UIGestureRecognizer) {
-        
+
         let location = sender.location(in: tableView)
-        
+
         if let indexPath = tableView.indexPathForRow(at: location) {
-            
+
             // Find out which cell was tapped
             if let cell = tableView.cellForRow(at: indexPath) as? PerformanceTableCell {
-                
+
                 // Tapped the avatar imageview
                 if cell.avatarImageView.frame.contains(sender.location(in: cell.avatarImageView)) {
                     // Show user performances
@@ -187,21 +185,21 @@ class WorldJamsTableViewController: UITableViewController {
                     let controller = UserPerfController(collectionViewLayout: layout)
                     controller.performer = performanceStore.storedPerformances[indexPath.row].performer
                     navigationController?.pushViewController(controller, animated: true)
-                
+
                 // Tapped the preview image
                 }
             }
         }
     }
-    
+
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
+
         // Width of the preview image
         let width = view.frame.width - 64
-        
+
         //returning height of image, pluss all the text
         return width + 120
-        
+
     }
 
     /// Adds multiple images on top of each other
@@ -288,14 +286,14 @@ class WorldJamsTableViewController: UITableViewController {
 }
 
 extension WorldJamsTableViewController: PlayerDelegate {
-    
-    
+
+
     func progressTimerStep() {
-        
+
     }
-    
+
     func progressTimerEnded() {
-        
+
         if let cell = currentlyPlaying {
             cell.player!.stop()
             cell.playButton.setTitle("Play", for: .normal)
@@ -306,14 +304,14 @@ extension WorldJamsTableViewController: PlayerDelegate {
 // MARK: - ModelDelegate methods
 
 extension WorldJamsTableViewController: ModelDelegate {
-    
+
     /// Conforms to ModelDelegate Protocol
     func modelUpdated() {
         print("WJTVC: Model updated, reloading data")
         refreshControl?.endRefreshing()
         tableView.reloadData()
     }
-    
+
     /// Conforms to ModelDelegate Protocol
     func errorUpdating(error: NSError) {
         let message: String
@@ -325,9 +323,9 @@ extension WorldJamsTableViewController: ModelDelegate {
         let alertController = UIAlertController(title: nil,
                                                 message: message,
                                                 preferredStyle: .alert)
-        
+
         alertController.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
-        
+
         present(alertController, animated: true, completion: nil)
     }
 
