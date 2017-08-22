@@ -10,11 +10,6 @@ import UIKit
 import CloudKit
 
 class WorldJamsTableViewController: UITableViewController, PlayerDelegate {
-    
-    func progressTimerStep() {
-        
-    }
-
 
     /// Local reference to the performanceStore singleton.
     let performanceStore = (UIApplication.shared.delegate as! AppDelegate).performanceStore
@@ -24,6 +19,7 @@ class WorldJamsTableViewController: UITableViewController, PlayerDelegate {
     var localProfileStore = [CKRecordID: PerformerProfile]()
     /// Local reference to the PerformerProfileStore
     let profilesStore = PerformerProfileStore.shared
+    
     
     var currentlyPlaying: PerformanceTableCell?
 
@@ -44,6 +40,10 @@ class WorldJamsTableViewController: UITableViewController, PlayerDelegate {
         tableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tableViewTapped)))
     }
     
+    func progressTimerStep() {
+        
+    }
+    
     func progressTimerEnded() {
         
         if let cell = currentlyPlaying {
@@ -55,18 +55,17 @@ class WorldJamsTableViewController: UITableViewController, PlayerDelegate {
     func playButtonPressed(sender: UIButton) {
         
         let indexPath = IndexPath(row: sender.tag, section: 0)
-        if let cell = tableView.cellForRow(at: indexPath) as? PerformanceTableCell {
-            if let player = cell.player {
+        if let cell = tableView.cellForRow(at: indexPath) as? PerformanceTableCell,
+            let player = cell.player {
                 
-                currentlyPlaying = cell
-                
-                if !player.isPlaying {
-                    player.play()
-                    cell.playButton.setTitle("Stop", for: .normal)
-                } else {
-                    player.stop()
-                    cell.playButton.setTitle("Play", for: .normal)
-                }
+            currentlyPlaying = cell
+            
+            if !player.isPlaying {
+                player.play()
+                cell.playButton.setTitle("Stop", for: .normal)
+            } else {
+                player.stop()
+                cell.playButton.setTitle("Play", for: .normal)
             }
         }
     }
@@ -74,15 +73,14 @@ class WorldJamsTableViewController: UITableViewController, PlayerDelegate {
     func replyButtonPressed(sender: UIButton) {
         
         let indexPath = IndexPath(row: sender.tag, section: 0)
-        if let cell = tableView.cellForRow(at: indexPath) as? PerformanceTableCell {
-            if let player = cell.player {
+        if let cell = tableView.cellForRow(at: indexPath) as? PerformanceTableCell,
+            let player = cell.player {
                 
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let controller = storyboard.instantiateViewController(withIdentifier: "chirpJamController") as! ChirpJamViewController
-                let recorder = Recorder(frame: CGRect.zero, player: player)
-                controller.recorder = recorder
-                navigationController?.pushViewController(controller, animated: true)
-            }
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let controller = storyboard.instantiateViewController(withIdentifier: "chirpJamController") as! ChirpJamViewController
+            let recorder = Recorder(frame: CGRect.zero, player: player)
+            controller.recorder = recorder
+            navigationController?.pushViewController(controller, animated: true)
         }
     }
     
@@ -113,34 +111,17 @@ class WorldJamsTableViewController: UITableViewController, PlayerDelegate {
             }
         }
         
-        cell.avatarImageView.backgroundColor = .lightGray
-        cell.avatarImageView.contentMode = .scaleAspectFill
-        cell.avatarImageView.layer.cornerRadius = cell.avatarImageView.frame.width / 2
-        cell.avatarImageView.clipsToBounds = true
-        
         cell.title.text = performance.dateString
         cell.performer.text = performance.performer
         cell.instrument.text = performance.instrument
         
-        cell.chirpContainer.layer.cornerRadius = 8
-        cell.chirpContainer.layer.borderWidth = 1
-        cell.chirpContainer.layer.borderColor = UIColor(white: 0.8, alpha: 1).cgColor
-        cell.chirpContainer.backgroundColor = .white
-        cell.chirpContainer.clipsToBounds = true
-        
         cell.context.text = nonCreditString()
         
-        cell.playButton.layer.cornerRadius = 23 // Button size is 46
         cell.playButton.tag = indexPath.row
-        cell.playButton.backgroundColor = UIColor(white: 0.8, alpha: 0.7)
         cell.playButton.addTarget(self, action: #selector(playButtonPressed), for: .touchUpInside)
-        cell.playButton.clipsToBounds = true
         
-        cell.replyButton.layer.cornerRadius = 23 // Button size is 46
         cell.replyButton.tag = indexPath.row
-        cell.replyButton.backgroundColor = UIColor(white: 0.8, alpha: 0.7)
         cell.replyButton.addTarget(self, action: #selector(replyButtonPressed), for: .touchUpInside)
-        cell.replyButton.clipsToBounds = true
 
         cell.player = Player()
         cell.player!.delegate = self
