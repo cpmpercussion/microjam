@@ -95,6 +95,11 @@ class WorldJamsTableViewController: UITableViewController {
         let indexPath = IndexPath(row: sender.tag, section: 0)
         if let cell = tableView.cellForRow(at: indexPath) as? PerformanceTableCell,
             let player = cell.player {
+            
+            if let current = currentlyPlaying {
+                current.player!.stop()
+                currentlyPlaying = nil
+            }
 
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let controller = storyboard.instantiateViewController(withIdentifier: "chirpJamController") as! ChirpJamViewController
@@ -311,6 +316,12 @@ extension WorldJamsTableViewController: ModelDelegate {
     func modelUpdated() {
         print("WJTVC: Model updated, reloading data")
         refreshControl?.endRefreshing()
+        
+        if let cell = currentlyPlaying {
+            cell.player!.stop()
+            currentlyPlaying = nil
+        }
+        
         tableView.reloadData()
     }
 
