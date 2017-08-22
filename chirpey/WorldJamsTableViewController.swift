@@ -18,8 +18,16 @@ class WorldJamsTableViewController: UITableViewController {
     /// Local reference to the PerformerProfileStore
     let profilesStore = PerformerProfileStore.shared
 
+    var players = [Player]()
+    var currentlyPlaying: PerformanceTableCell?
+
     // MARK: - Lifecycle
-    
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -35,12 +43,67 @@ class WorldJamsTableViewController: UITableViewController {
         tableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tableViewTapped)))
     }
 
+//    func setupPlayers() {
+//
+//        for performance in performanceStore.storedPerformances {
+//
+//            let player = Player()
+//            player.delegate = self
+//            let chirpView = ChirpView(with: CGRect.zero, andPerformance: performance)
+//            player.chirpViews.append(chirpView)
+//
+//            var current = performance
+//
+//            while current.replyto != "" {
+//                if let next = performanceStore.fetchPerformanceFrom(title: current.replyto) {
+//                    let chirp = ChirpView(with: CGRect.zero, andPerformance: next)
+//                    player.chirpViews.append(chirp)
+//                    current = next
+//                } else {
+//                    // break if the replyPerf can't be found.
+//                    // TODO: in this case, the performance should be fetched from the cloud. but there isn't functionality in the store for this yet.
+//                    break
+//                }
+//            }
+//
+//            players.append(player)
+//        }
+//
+//        tableView.reloadData()
+//    }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func playButtonPressed(sender: UIButton) {
+
+        let indexPath = IndexPath(row: sender.tag, section: 0)
+        if let cell = tableView.cellForRow(at: indexPath) as? PerformanceTableCell,
+            let player = cell.player {
+
+            currentlyPlaying = cell
+
+            if !player.isPlaying {
+                player.play()
+                cell.playButton.setTitle("Stop", for: .normal)
+            } else {
+                player.stop()
+                cell.playButton.setTitle("Play", for: .normal)
+            }
+        }
     }
-    
+
+    func replyButtonPressed(sender: UIButton) {
+
+        let indexPath = IndexPath(row: sender.tag, section: 0)
+        if let cell = tableView.cellForRow(at: indexPath) as? PerformanceTableCell,
+            let player = cell.player {
+
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let controller = storyboard.instantiateViewController(withIdentifier: "chirpJamController") as! ChirpJamViewController
+            let recorder = Recorder(frame: CGRect.zero, player: player)
+            controller.recorder = recorder
+            navigationController?.pushViewController(controller, animated: true)
+        }
+    }
+
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -53,42 +116,29 @@ class WorldJamsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: worldJamCellIdentifier, for: indexPath) as! PerformanceTableCell
-        
-        let performance = performanceStore.storedPerformances[indexPath.row]
-        
-        /// Update the avatar if available, otherwise, unset image (it will update later).
-        if let profile = profilesStore.getProfile(forPerformance: performance) {
-            cell.avatarImageView.image = profile.avatar
-        } else {
-            cell.avatarImageView.image = nil // unset avatar image (UIImageView might be reused)
+
+        if let player = cell.player {
+            for chirp in player.chirpViews {
+                chirp.removeFromSuperview()
+            }
         }
         
-        cell.avatarImageView.backgroundColor = .lightGray
-        cell.avatarImageView.contentMode = .scaleAspectFill
-        cell.avatarImageView.layer.cornerRadius = cell.avatarImageView.frame.width / 2
-        cell.avatarImageView.clipsToBounds = true
-        
-        cell.title.text = performance.dateString
-        cell.performer.text = performance.performer
-        cell.instrument.text = performance.instrument
-        
-        cell.previewImage.image = performance.image
-        cell.previewImage.layer.borderWidth = 1
-        cell.previewImage.layer.borderColor = UIColor(white: 0.9, alpha: 1).cgColor
-        cell.previewImage.layer.cornerRadius = 4
-        cell.previewImage.clipsToBounds = true
-        
-        cell.context.text = nonCreditString()
+        let performance = performanceStore.storedPerformances[indexPath.row]
 
-        var temp = performance // used to store replies as we fetch them.
-        var images = [performance.image] // the stack of reply images.
+        cell.player = Player()
+        cell.player!.delegate = self
+        let chirpView = ChirpView(with: cell.chirpContainer.bounds, andPerformance: performance)
+        cell.player!.chirpViews.append(chirpView)
+        cell.chirpContainer.addSubview(chirpView)
 
-        // Get the image from every reply
-        while temp.replyto != "" {
-            if let replyPerf = performanceStore.fetchPerformanceFrom(title: temp.replyto) {
-                cell.context.text = creditString(originalPerformer: replyPerf.performer)
-                images.append(replyPerf.image)
-                temp = replyPerf
+        var current = performance
+
+        while current.replyto != "" {
+            if let next = performanceStore.fetchPerformanceFrom(title: current.replyto) {
+                let chirp = ChirpView(with: cell.chirpContainer.bounds, andPerformance: next)
+                cell.player!.chirpViews.append(chirp)
+                cell.chirpContainer.addSubview(chirp)
+                current = next
             } else {
                 // break if the replyPerf can't be found.
                 // TODO: in this case, the performance should be fetched from the cloud. but there isn't functionality in the store for this yet.
@@ -96,22 +146,38 @@ class WorldJamsTableViewController: UITableViewController {
             }
         }
 
-        // Sum all the images into one and display
-        cell.previewImage.image = self.createImageFrom(images: images)
+        if let profile = profilesStore.getProfile(forPerformance: performance) {
+            cell.avatarImageView.image = profile.avatar
+        } else {
+            cell.avatarImageView.image = nil
+        }
+
+        cell.title.text = performance.dateString
+        cell.performer.text = performance.performer
+        cell.instrument.text = performance.instrument
+
+        cell.context.text = nonCreditString()
+
+        cell.playButton.tag = indexPath.row
+        cell.playButton.addTarget(self, action: #selector(playButtonPressed), for: .touchUpInside)
+
+        cell.replyButton.tag = indexPath.row
+        cell.replyButton.addTarget(self, action: #selector(replyButtonPressed), for: .touchUpInside)
+
         return cell
     }
-    
+
     // MARK: UI Methods
-    
+
     func tableViewTapped(sender: UIGestureRecognizer) {
-        
+
         let location = sender.location(in: tableView)
-        
+
         if let indexPath = tableView.indexPathForRow(at: location) {
-            
+
             // Find out which cell was tapped
             if let cell = tableView.cellForRow(at: indexPath) as? PerformanceTableCell {
-                
+
                 // Tapped the avatar imageview
                 if cell.avatarImageView.frame.contains(sender.location(in: cell.avatarImageView)) {
                     // Show user performances
@@ -119,43 +185,21 @@ class WorldJamsTableViewController: UITableViewController {
                     let controller = UserPerfController(collectionViewLayout: layout)
                     controller.performer = performanceStore.storedPerformances[indexPath.row].performer
                     navigationController?.pushViewController(controller, animated: true)
-                
+
                 // Tapped the preview image
-                } else if cell.previewImage.frame.contains(sender.location(in: cell.previewImage)) {
-                    
-                    // Show the performance in a new ChirpJamController
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let controller = storyboard.instantiateViewController(withIdentifier: "chirpJamController") as! ChirpJamViewController
-                    controller.newViewWith(performance: performanceStore.storedPerformances[indexPath.row], withFrame: nil)
-                    
-                    var selectedJam = performanceStore.storedPerformances[indexPath.row]
-                    
-                    while selectedJam.replyto != "" { // load up all replies.
-                        // FIXME: fetching replies fails if they have not been downloaded from cloud.
-                        if let reply = performanceStore.fetchPerformanceFrom(title: selectedJam.replyto) {
-                            controller.newViewWith(performance: reply, withFrame: nil)
-                            selectedJam = reply
-                            print("WJTVC: cued a reply")
-                        } else {
-                            break // if a reply can't be found, stop loading the thread.
-                        }
-                    }
-                    
-                    // Present the chirpViewController
-                    navigationController?.pushViewController(controller, animated: true)
                 }
             }
         }
     }
-    
+
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
+
         // Width of the preview image
         let width = view.frame.width - 64
-        
+
         //returning height of image, pluss all the text
         return width + 120
-        
+
     }
 
     /// Adds multiple images on top of each other
@@ -189,26 +233,26 @@ class WorldJamsTableViewController: UITableViewController {
 
     /// Segue to view loaded jams.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == JamViewSegueIdentifiers.showDetailSegue { // view a performance.
-            // load up current data into a JamViewController
-            let jamDetailViewController = segue.destination as! ChirpJamViewController
-            if let selectedJamCell = sender as? PerformanceTableCell {
-                let indexPath = tableView.indexPath(for: selectedJamCell)!
-                var selectedJam = performanceStore.storedPerformances[indexPath.row]
-                jamDetailViewController.newViewWith(performance: selectedJam, withFrame: nil)
-
-                while selectedJam.replyto != "" { // load up all replies.
-                    // FIXME: fetching replies fails if they have not been downloaded from cloud.
-                    if let reply = performanceStore.fetchPerformanceFrom(title: selectedJam.replyto) {
-                        jamDetailViewController.newViewWith(performance: reply, withFrame: nil)
-                        selectedJam = reply
-                        print("WJTVC: cued a reply")
-                    } else {
-                        break // if a reply can't be found, stop loading the thread.
-                    }
-                }
-            }
-        }
+//        if segue.identifier == JamViewSegueIdentifiers.showDetailSegue { // view a performance.
+//            // load up current data into a JamViewController
+//            let jamDetailViewController = segue.destination as! ChirpJamViewController
+//            if let selectedJamCell = sender as? PerformanceTableCell {
+//                let indexPath = tableView.indexPath(for: selectedJamCell)!
+//                var selectedJam = performanceStore.storedPerformances[indexPath.row]
+//                jamDetailViewController.newViewWith(performance: selectedJam, withFrame: nil)
+//
+//                while selectedJam.replyto != "" { // load up all replies.
+//                    // FIXME: fetching replies fails if they have not been downloaded from cloud.
+//                    if let reply = performanceStore.fetchPerformanceFrom(title: selectedJam.replyto) {
+//                        jamDetailViewController.newViewWith(performance: reply, withFrame: nil)
+//                        selectedJam = reply
+//                        print("WJTVC: cued a reply")
+//                    } else {
+//                        break // if a reply can't be found, stop loading the thread.
+//                    }
+//                }
+//            }
+//        }
     }
 
     /// Segue back to the World Jam Table
@@ -241,17 +285,33 @@ class WorldJamsTableViewController: UITableViewController {
 
 }
 
+extension WorldJamsTableViewController: PlayerDelegate {
+
+
+    func progressTimerStep() {
+
+    }
+
+    func progressTimerEnded() {
+
+        if let cell = currentlyPlaying {
+            cell.player!.stop()
+            cell.playButton.setTitle("Play", for: .normal)
+        }
+    }
+}
+
 // MARK: - ModelDelegate methods
 
 extension WorldJamsTableViewController: ModelDelegate {
-    
+
     /// Conforms to ModelDelegate Protocol
     func modelUpdated() {
         print("WJTVC: Model updated, reloading data")
         refreshControl?.endRefreshing()
         tableView.reloadData()
     }
-    
+
     /// Conforms to ModelDelegate Protocol
     func errorUpdating(error: NSError) {
         let message: String
@@ -263,9 +323,9 @@ extension WorldJamsTableViewController: ModelDelegate {
         let alertController = UIAlertController(title: nil,
                                                 message: message,
                                                 preferredStyle: .alert)
-        
+
         alertController.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
-        
+
         present(alertController, animated: true, completion: nil)
     }
 

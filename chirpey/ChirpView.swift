@@ -67,7 +67,7 @@ class ChirpView: UIImageView {
         print("ChirpView: Loading existing performance")
         performance = newPerf
         image = newPerf.image
-        playbackColour = newPerf.colour.cgColor
+        playbackColour = newPerf.colour.brighterColor.cgColor
         started = false
         lastPoint = CG_INIT_POINT
         swiped = false
@@ -78,7 +78,7 @@ class ChirpView: UIImageView {
 
     /// Draws a dot at a given point in the UIImage.
     func drawDot(at point : CGPoint, withColour color : CGColor) {
-        UIGraphicsBeginImageContext(frame.size);
+        UIGraphicsBeginImageContextWithOptions(frame.size, false, (UIScreen.main).scale)
         let context = UIGraphicsGetCurrentContext();
         image?.draw(in: CGRect(x:0, y:0, width:frame.size.width, height:frame.size.height))
         context!.setFillColor(color);
@@ -90,7 +90,7 @@ class ChirpView: UIImageView {
 
     /// Draws a line between two points in the UIImage.
     func drawLine(from fromPoint : CGPoint, to toPoint : CGPoint, withColour color : CGColor) {
-        UIGraphicsBeginImageContext(frame.size)
+        UIGraphicsBeginImageContextWithOptions(frame.size, false, (UIScreen.main).scale)
         guard let context = UIGraphicsGetCurrentContext() else {
             return
         }

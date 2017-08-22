@@ -10,16 +10,40 @@ import UIKit
 
 class PerformanceTableCell: UITableViewCell {
     
+    var player: Player?
+    
     @IBOutlet weak var avatarImageView: UIImageView!
-    @IBOutlet weak var previewImage: UIImageView!
+    @IBOutlet weak var chirpContainer: UIView!
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var performer: UILabel!
     @IBOutlet weak var instrument: UILabel!
     @IBOutlet weak var context: UILabel!
+    @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var replyButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        avatarImageView.backgroundColor = .lightGray
+        avatarImageView.contentMode = .scaleAspectFill
+        avatarImageView.layer.cornerRadius = avatarImageView.frame.width / 2
+        avatarImageView.clipsToBounds = true
+        
+        chirpContainer.layer.cornerRadius = 8
+        chirpContainer.layer.borderWidth = 1
+        chirpContainer.layer.borderColor = UIColor(white: 0.8, alpha: 1).cgColor
+        chirpContainer.backgroundColor = .white
+        chirpContainer.clipsToBounds = true
+        
+        playButton.layer.cornerRadius = 23 // Button size is 46
+        playButton.backgroundColor = UIColor(white: 0.8, alpha: 0.7)
+        playButton.clipsToBounds = true
+        
+        replyButton.layer.cornerRadius = 23 // Button size is 46
+        replyButton.backgroundColor = UIColor(white: 0.8, alpha: 0.7)
+        replyButton.clipsToBounds = true
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
