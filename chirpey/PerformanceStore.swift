@@ -69,8 +69,6 @@ class PerformanceStore: NSObject {
 
     /// Add a new performance to the list and then save the list.
     func addNew(performance : ChirpPerformance) {
-        self.storedPerformances.insert(performance, at: 0)//
-        self.savePerformances()
         self.upload(performance: performance)
     }
 
@@ -208,6 +206,17 @@ class PerformanceStore: NSObject {
                 print("Store: Error saving to the database.")
                 print(error ?? "")
             }
+            // todo take the record and add the CreatorID to the performance store's version.
+            if let creator_id = record?.creatorUserRecordID {
+                DispatchQueue.main.async {
+                    // add the creator id to the record
+                    performance.creatorID = creator_id
+                    self.storedPerformances.insert(performance, at: 0)//
+                    self.delegate?.modelUpdated() // stop spinner
+                    self.savePerformances()
+                }
+            }
+            
             print("Store: Saved to cloudkit:", performance.title()) // runs when upload is complete
         })
     }
