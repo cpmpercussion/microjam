@@ -239,6 +239,9 @@ class ChirpJamViewController: UIViewController {
             if recorder.isPlaying {
                 playButton.setTitle("Play", for: .normal)
                 jamButton.isEnabled = true
+                if recorder.isRecording {
+                    replyButton.isEnabled = true
+                }
                 recordingProgress.progress = 0.0
                 recorder.stop()
             
@@ -265,6 +268,7 @@ class ChirpJamViewController: UIViewController {
         }
         
         newRecordingView()
+        replyButton.isEnabled = false
     }
 
     /// IBAction for the Jam Button
