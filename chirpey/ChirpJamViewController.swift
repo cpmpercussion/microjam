@@ -123,6 +123,12 @@ class ChirpJamViewController: UIViewController {
                 
             } else {
                 // Just reset to a new recording
+                recorder!.recordingEnabled = false
+                recorder!.recordingIsDone = false
+                playButton.isEnabled = false
+                jamButton.isEnabled = false
+                replyButton.isEnabled = true
+                replyButton.setTitle("Enable rec", for: .normal)
                 newRecordingView()
             }
         }
