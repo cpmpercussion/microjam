@@ -8,6 +8,11 @@
 
 import UIKit
 
+struct TailSegment {
+    var touch: TouchRecord
+    var timer: Timer
+}
+
 /// Subclass of ChirpView that enables recording and user interaction
 class ChirpRecordingView: ChirpView {
     
@@ -18,6 +23,8 @@ class ChirpRecordingView: ChirpView {
     var recording = false
     /// Colour to render touches as they are recorded.
     var recordingColour : CGColor?
+    
+    var tailSegments = [TailSegment]()
 
     /// Programmatic init getting ready for recording.
     override init(frame: CGRect) {
@@ -59,6 +66,10 @@ extension ChirpRecordingView {
             swiped = false
             drawDot(at: lastPoint!, withColour: recordingColour ?? DEFAULT_RECORDING_COLOUR)
             recordTouch(at: lastPoint!, withRadius: size!, thatWasMoving:false)
+        
+        } else {
+            addTailSegment(at: lastPoint!, withSize: size!, thatWasMoving: false)
+            draw(tailSegments: tailSegments, withColor: recordingColour!)
         }
         makeSound(at: lastPoint!, withRadius: size!, thatWasMoving: false)
     }
@@ -75,9 +86,28 @@ extension ChirpRecordingView {
             drawLine(from:self.lastPoint!, to:currentPoint!, withColour:recordingColour ?? DEFAULT_RECORDING_COLOUR)
             lastPoint = currentPoint
             recordTouch(at: currentPoint!, withRadius: size!, thatWasMoving: true)
+        
+        } else {
+            addTailSegment(at: currentPoint!, withSize: size!, thatWasMoving: true)
+            draw(tailSegments: tailSegments, withColor: recordingColour!)
+            lastPoint = currentPoint
         }
         
         makeSound(at: currentPoint!, withRadius: size!, thatWasMoving: true)
+    }
+    
+    private func addTailSegment(at point: CGPoint, withSize size: CGFloat, thatWasMoving moving: Bool) {
+        
+        let touch = TouchRecord(time: 0, x: Double(point.x), y: Double(point.y), z: Double(size), moving: moving)
+        let timer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { (timer) in
+            if !self.tailSegments.isEmpty {
+                self.tailSegments.removeFirst()
+                self.draw(tailSegments: self.tailSegments, withColor: self.recordingColour!)
+            }
+        }
+        
+        let tailSegment = TailSegment(touch: touch, timer: timer)
+        tailSegments.append(tailSegment)
     }
     
     /**
