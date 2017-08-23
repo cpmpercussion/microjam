@@ -106,6 +106,34 @@ class ChirpView: UIImageView {
         UIGraphicsEndImageContext();
     }
     
+    func draw(tailSegments: [TailSegment], withColor color: CGColor) {
+        UIGraphicsBeginImageContextWithOptions(frame.size, false, (UIScreen.main).scale)
+        guard let context = UIGraphicsGetCurrentContext() else {
+            return
+        }
+        
+        context.setFillColor(color)
+        context.setStrokeColor(color)
+        context.setBlendMode(CGBlendMode.normal)
+        context.setLineCap(CGLineCap.round)
+        context.setLineWidth(10.0)
+        
+        context.beginPath()
+        
+        for (i, current) in tailSegments.enumerated() {
+            
+            if i == 0 || !current.touch.moving {
+                context.move(to: CGPoint(x: current.touch.x, y: current.touch.y))
+            }
+            
+            context.addLine(to: CGPoint(x: current.touch.x, y: current.touch.y))
+        }
+        
+        context.strokePath()
+        image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+    }
+    
     static func play(performance: ChirpPerformance) {
         
         let chirp = ChirpView(with: CGRect(x: 0, y: 0, width: 300, height: 300), andPerformance: performance)
