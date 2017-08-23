@@ -21,6 +21,7 @@ class Player: NSObject {
     var isPlaying = false
     var timers = [Timer]()
     var chirpViews = [ChirpView]()
+    var viewsAreLoaded = false
     
     var progressTimer: Timer?
     var progress = 0.0

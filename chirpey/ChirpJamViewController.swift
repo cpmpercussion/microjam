@@ -136,11 +136,14 @@ class ChirpJamViewController: UIViewController {
         if let recorder = recorder {
             print("Controller was loaded with ", recorder)
             
-            if !isComposing {
+            if !isComposing && !recorder.viewsAreLoaded {
+                
                 for view in recorder.chirpViews {
                     view.frame = chirpViewContainer.bounds
                     chirpViewContainer.addSubview(view)
                 }
+                
+                recorder.viewsAreLoaded = true // Make sure the views are not added to the chirp containter if they are already added
                 recorder.delegate = self
                 replyto = recorder.chirpViews.first?.performance?.title()
                 
