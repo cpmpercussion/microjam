@@ -147,7 +147,7 @@ class WorldJamsTableViewController: UITableViewController {
         cell.player = Player()
         cell.player!.delegate = self
         let chirpView = ChirpView(with: cell.chirpContainer.bounds, andPerformance: performance)
-        cell.chirpContainer.backgroundColor = performance.backgroundColour
+        cell.chirpContainer.backgroundColor = performance.backgroundColour.darkerColor
         cell.player!.chirpViews.append(chirpView)
         cell.chirpContainer.addSubview(chirpView)
 
@@ -155,7 +155,7 @@ class WorldJamsTableViewController: UITableViewController {
 
         while current.replyto != "" {
             if let next = performanceStore.fetchPerformanceFrom(title: current.replyto) {
-                cell.chirpContainer.backgroundColor = next.backgroundColour
+                cell.chirpContainer.backgroundColor = next.backgroundColour.darkerColor
                 let chirp = ChirpView(with: cell.chirpContainer.bounds, andPerformance: next)
                 cell.player!.chirpViews.append(chirp)
                 cell.chirpContainer.addSubview(chirp)
