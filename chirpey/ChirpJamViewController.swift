@@ -154,14 +154,14 @@ class ChirpJamViewController: UIViewController {
                 replyto = recorder.chirpViews.first?.performance?.title()
                 
                 if let last = recorder.chirpViews.last {
-                    chirpViewContainer.backgroundColor = last.performance!.backgroundColour
+                    chirpViewContainer.backgroundColor = last.performance!.backgroundColour.darkerColor
                 }
             }
         
         } else {
             recorder = Recorder(frame: chirpViewContainer.bounds)
             recorder!.delegate = self
-            chirpViewContainer.backgroundColor = UserProfile.shared.profile.backgroundColour
+            chirpViewContainer.backgroundColor = UserProfile.shared.profile.backgroundColour.darkerColor
             playButton.isEnabled = false
             jamButton.isEnabled = false
         }
