@@ -156,6 +156,8 @@ class ChirpJamViewController: UIViewController {
             recorder = Recorder(frame: chirpViewContainer.bounds)
             recorder!.delegate = self
             chirpViewContainer.backgroundColor = UserProfile.shared.profile.backgroundColour
+            playButton.isEnabled = false
+            jamButton.isEnabled = false
         }
 
         newRecordingView()
@@ -169,7 +171,8 @@ class ChirpJamViewController: UIViewController {
         // need to initialise the recording progress at zero.
         recordingProgress!.progress = 0.0
         
-        replyButton.isEnabled = false
+        replyButton.setTitle("Enable rec", for: .normal)
+        replyButton.isEnabled = true
         
         // Setting the correct instrument
         instrumentButton.setTitle(SoundSchemes.namesForKeys[UserProfile.shared.profile.soundScheme], for: .normal)
@@ -206,7 +209,6 @@ class ChirpJamViewController: UIViewController {
         if let recorder = recorder {
             recorder.recordingView.closePdFile()
             recorder.recordingView.removeFromSuperview()
-            recorder.recordingEnabled = true
             recorder.recordingIsDone = false
             recorder.recordingView = ChirpRecordingView(frame: chirpViewContainer.bounds)
             recorder.recordingView.performance!.performer = UserProfile.shared.profile.stageName
@@ -263,12 +265,24 @@ class ChirpJamViewController: UIViewController {
         print("JAMVC: Reply button pressed");
         
         if let recorder = recorder {
+            
+            if !recorder.recordingEnabled {
+                recorder.recordingEnabled = true
+                replyButton.setTitle("Reset", for: .normal)
+            }
+            
             recordingProgress.progress = 0.0
             recorder.stop()
-        }
         
-        newRecordingView()
-        replyButton.isEnabled = false
+            newRecordingView()
+            replyButton.isEnabled = false
+            
+            if !recorder.viewsAreLoaded {
+                // There is nothing to be played or jammed
+                playButton.isEnabled = false
+                jamButton.isEnabled = false
+            }
+        }
     }
 
     /// IBAction for the Jam Button
@@ -304,8 +318,10 @@ class ChirpJamViewController: UIViewController {
             
             if (recorder.recordingView.bounds.contains(point!)) {
                 print("JAMVC: Starting a Recording")
-                playButton.setTitle("Stop", for: .normal)
-                recorder.record()
+                if recorder.record() { // Returns true if recording is starting
+                    playButton.isEnabled = true
+                    playButton.setTitle("Stop", for: .normal)
+                }
             }
         }
     }
@@ -331,8 +347,9 @@ extension ChirpJamViewController: PlayerDelegate {
         if recorder!.recordingIsDone {
             replyButton.isEnabled = true
         }
-        jamButton.isEnabled = true
         
+        jamButton.isEnabled = true
+        playButton.isEnabled = true
         playButton.setTitle("Play", for: .normal)
     }
 }

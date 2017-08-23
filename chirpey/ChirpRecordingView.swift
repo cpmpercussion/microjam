@@ -47,31 +47,37 @@ extension ChirpRecordingView {
     /// Responds to taps in the ChirpView, passes on to superviews and reacts.
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         superview?.touchesBegan(touches, with: event)
+        
+        lastPoint = touches.first?.location(in: superview!)
+        let size = touches.first?.majorRadius
+        
         if recording {
             if (!started) {
                 startTime = Date()
                 started = true
             }
             swiped = false
-            lastPoint = touches.first?.location(in: superview!)
-            let size = touches.first?.majorRadius
             drawDot(at: lastPoint!, withColour: recordingColour ?? DEFAULT_RECORDING_COLOUR)
-            makeSound(at: lastPoint!, withRadius: size!, thatWasMoving: false)
             recordTouch(at: lastPoint!, withRadius: size!, thatWasMoving:false)
         }
+        makeSound(at: lastPoint!, withRadius: size!, thatWasMoving: false)
     }
     
     /// Responds to moving touch signals, responds with sound and recordings.
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        let currentPoint = touches.first?.location(in: superview!)
+        let size = touches.first?.majorRadius
+
         if recording {
             swiped = true
-            let currentPoint = touches.first?.location(in: superview!)
+            
             drawLine(from:self.lastPoint!, to:currentPoint!, withColour:recordingColour ?? DEFAULT_RECORDING_COLOUR)
             lastPoint = currentPoint
-            let size = touches.first?.majorRadius
-            makeSound(at: currentPoint!, withRadius: size!, thatWasMoving: true)
             recordTouch(at: currentPoint!, withRadius: size!, thatWasMoving: true)
         }
+        
+        makeSound(at: currentPoint!, withRadius: size!, thatWasMoving: true)
     }
     
     /**

@@ -12,7 +12,7 @@ class Recorder: Player {
     
     var recordingView: ChirpRecordingView
     
-    var recordingEnabled = true
+    var recordingEnabled = false
     /// Storage of the present playback/recording state: playing, recording or idle
     var isRecording = false
     /// Tells us whether the recording has been added to the stack in the performance handler
@@ -28,7 +28,7 @@ class Recorder: Player {
         chirpViews = player.chirpViews
     }
     
-    func record() {
+    func record() -> Bool {
         if recordingEnabled {
             if !isRecording {
                 isRecording = true
@@ -36,8 +36,12 @@ class Recorder: Player {
                 
                 // Starting progresstimer and playback of performances if any
                 play()
+                
+                return true
             }
         }
+        
+        return false
     }
     
     override func play() {
