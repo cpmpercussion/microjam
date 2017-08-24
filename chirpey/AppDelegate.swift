@@ -74,7 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
     func presentUserNameChooserController() {
         // TODO: Replace this with a screen by screen onboarding process including check for iCloud login.
         
-        let controller = OnBoardingController()
+        let controller = OnBoardingController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         
         if let window = self.window, let rootViewController = window.rootViewController {
             var currentController = rootViewController
@@ -82,7 +82,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
             while let presentedController = currentController.presentedViewController {
                 currentController = presentedController
             }
-            currentController.present(controller, animated: false, completion: nil)
+            currentController.present(controller, animated: true, completion: nil)
         }
     }
     
