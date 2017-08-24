@@ -82,7 +82,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
             while let presentedController = currentController.presentedViewController {
                 currentController = presentedController
             }
-            currentController.present(controller, animated: true, completion: nil)
+            currentController.present(controller, animated: false, completion: nil)
         }
     }
     
