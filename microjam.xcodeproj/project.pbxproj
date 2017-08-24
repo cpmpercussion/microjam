@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		077DC2A7E15F1081FBECA3E5 /* Pods_microjamUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F790C94F468F8D8ACE1123FE /* Pods_microjamUITests.framework */; };
 		3FD8FFE12146D66CF89B8F2F /* Pods_microjam_microjamTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FDD96ACEB14ECDFF2CA2B2F /* Pods_microjam_microjamTests.framework */; };
+		4D412F481F4ED8E40072F3D4 /* OnBoardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D412F471F4ED8E40072F3D4 /* OnBoardingController.swift */; };
 		4D77CC3D1F3B5564008BD48C /* BrowseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D77CC3C1F3B5564008BD48C /* BrowseController.swift */; };
 		4DA6A95D1F3C89DB00CD7589 /* BrowseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA6A95C1F3C89DB00CD7589 /* BrowseCell.swift */; };
 		4DD839771F3DF81D004D3E40 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD839761F3DF81D004D3E40 /* FilterView.swift */; };
@@ -105,6 +106,7 @@
 		29CA87DDE5853DCDE258268C /* Pods_microjamTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_microjamTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		467C19C9B42601CE5131E5AC /* Pods-microjam-microjamTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-microjam-microjamTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-microjam-microjamTests/Pods-microjam-microjamTests.release.xcconfig"; sourceTree = "<group>"; };
 		4B8432CAAE36EBBE2D19F96D /* Pods-microjamUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-microjamUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-microjamUITests/Pods-microjamUITests.release.xcconfig"; sourceTree = "<group>"; };
+		4D412F471F4ED8E40072F3D4 /* OnBoardingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OnBoardingController.swift; path = chirpey/OnBoardingController.swift; sourceTree = "<group>"; };
 		4D77CC3C1F3B5564008BD48C /* BrowseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BrowseController.swift; path = chirpey/BrowseController.swift; sourceTree = "<group>"; };
 		4DA6A95C1F3C89DB00CD7589 /* BrowseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BrowseCell.swift; path = chirpey/BrowseCell.swift; sourceTree = "<group>"; };
 		4DD839761F3DF81D004D3E40 /* FilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FilterView.swift; path = chirpey/FilterView.swift; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 				4D77CC3C1F3B5564008BD48C /* BrowseController.swift */,
 				562FDCA51F316870000409C8 /* UserSettingsViewController.swift */,
 				4DDB71001F43179A00925F4D /* UserPerfController.swift */,
+				4D412F471F4ED8E40072F3D4 /* OnBoardingController.swift */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -860,6 +863,7 @@
 				567286661E05E0AF0024A515 /* MicrojamTabBarController.swift in Sources */,
 				4DD839771F3DF81D004D3E40 /* FilterView.swift in Sources */,
 				4DEFCAE31F41E8EB007B7C34 /* Filter.swift in Sources */,
+				4D412F481F4ED8E40072F3D4 /* OnBoardingController.swift in Sources */,
 				4DEFCAE11F41C5D9007B7C34 /* BrowseCategory.swift in Sources */,
 				562FDCAA1F32D202000409C8 /* PerformerProfile.swift in Sources */,
 				56621B0D1DE39D33009B9AB6 /* ChirpPerformance.swift in Sources */,

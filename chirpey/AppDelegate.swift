@@ -65,20 +65,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
             print("AD: Name still set to default, ask user to change")
             perform(#selector(presentUserNameChooserController), with: nil, afterDelay: 0)
         }
+        
+        perform(#selector(presentUserNameChooserController), with: nil, afterDelay: 0)
+        
     }
 
     /// Presents the UserNameChooserViewController if the user hasn't set a name yet
     func presentUserNameChooserController() {
         // TODO: Replace this with a screen by screen onboarding process including check for iCloud login.
-        if let usernamecontroller = UserNameChooserViewController.storyboardInstance() {
-            if let window = self.window, let rootViewController = window.rootViewController {
-                var currentController = rootViewController
-                
-                while let presentedController = currentController.presentedViewController {
-                    currentController = presentedController
-                }
-                currentController.present(usernamecontroller, animated: true, completion: nil)
+        
+        let controller = OnBoardingController()
+        
+        if let window = self.window, let rootViewController = window.rootViewController {
+            var currentController = rootViewController
+            
+            while let presentedController = currentController.presentedViewController {
+                currentController = presentedController
             }
+            currentController.present(controller, animated: true, completion: nil)
         }
     }
     
