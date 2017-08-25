@@ -24,7 +24,6 @@ class OnBoardingController: UIPageViewController {
         super.viewDidLoad()
         dataSource = self
         
-        // Initialize all the view controller as PageContentControllers
         setViewControllers([orderedControllers.first!], direction: .forward, animated: false, completion: nil)
     }
     
