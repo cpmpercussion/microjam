@@ -60,6 +60,19 @@ class ChirpView: UIImageView {
         contentMode = .scaleToFill // make sure the image fits the frame
     }
     
+    convenience init(performance: ChirpPerformance) {
+        self.init(frame: CGRect.zero)
+        isMultipleTouchEnabled = false // multitouch is disabled!
+        isUserInteractionEnabled = false // user-interaction is disabled!
+        contentMode = .scaleToFill // make sure the image fits the frame
+        self.performance = performance
+        image = performance.image
+        playbackColour = performance.colour.brighterColor.cgColor
+        started = false
+        swiped = false
+        lastPoint = CG_INIT_POINT
+    }
+    
     // MARK: Lifecycle
     
     /// load a new performance in the ChirpView for playback

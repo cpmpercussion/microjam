@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		077DC2A7E15F1081FBECA3E5 /* Pods_microjamUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F790C94F468F8D8ACE1123FE /* Pods_microjamUITests.framework */; };
 		3FD8FFE12146D66CF89B8F2F /* Pods_microjam_microjamTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FDD96ACEB14ECDFF2CA2B2F /* Pods_microjam_microjamTests.framework */; };
+		4D4DA8BE1F5030ED00C21A8B /* ExploreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4DA8BD1F5030ED00C21A8B /* ExploreController.swift */; };
+		4D4DA8C11F503B0400C21A8B /* ExploreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4DA8C01F503B0400C21A8B /* ExploreCell.swift */; };
 		4D77CC3D1F3B5564008BD48C /* BrowseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D77CC3C1F3B5564008BD48C /* BrowseController.swift */; };
 		4DA6A95D1F3C89DB00CD7589 /* BrowseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA6A95C1F3C89DB00CD7589 /* BrowseCell.swift */; };
 		4DD839771F3DF81D004D3E40 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD839761F3DF81D004D3E40 /* FilterView.swift */; };
@@ -105,6 +107,8 @@
 		29CA87DDE5853DCDE258268C /* Pods_microjamTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_microjamTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		467C19C9B42601CE5131E5AC /* Pods-microjam-microjamTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-microjam-microjamTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-microjam-microjamTests/Pods-microjam-microjamTests.release.xcconfig"; sourceTree = "<group>"; };
 		4B8432CAAE36EBBE2D19F96D /* Pods-microjamUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-microjamUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-microjamUITests/Pods-microjamUITests.release.xcconfig"; sourceTree = "<group>"; };
+		4D4DA8BD1F5030ED00C21A8B /* ExploreController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExploreController.swift; path = chirpey/ExploreController.swift; sourceTree = "<group>"; };
+		4D4DA8C01F503B0400C21A8B /* ExploreCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExploreCell.swift; path = chirpey/ExploreCell.swift; sourceTree = "<group>"; };
 		4D77CC3C1F3B5564008BD48C /* BrowseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BrowseController.swift; path = chirpey/BrowseController.swift; sourceTree = "<group>"; };
 		4DA6A95C1F3C89DB00CD7589 /* BrowseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BrowseCell.swift; path = chirpey/BrowseCell.swift; sourceTree = "<group>"; };
 		4DD839761F3DF81D004D3E40 /* FilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FilterView.swift; path = chirpey/FilterView.swift; sourceTree = "<group>"; };
@@ -234,6 +238,22 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		4D4DA8BC1F5030D200C21A8B /* Slick Design */ = {
+			isa = PBXGroup;
+			children = (
+				4D4DA8BD1F5030ED00C21A8B /* ExploreController.swift */,
+			);
+			name = "Slick Design";
+			sourceTree = "<group>";
+		};
+		4D4DA8BF1F503AEC00C21A8B /* Slick UI */ = {
+			isa = PBXGroup;
+			children = (
+				4D4DA8C01F503B0400C21A8B /* ExploreCell.swift */,
+			);
+			name = "Slick UI";
+			sourceTree = "<group>";
+		};
 		560772DA1F206F10000D862D /* models */ = {
 			isa = PBXGroup;
 			children = (
@@ -251,6 +271,7 @@
 		560772DB1F206F1B000D862D /* views */ = {
 			isa = PBXGroup;
 			children = (
+				4D4DA8BF1F503AEC00C21A8B /* Slick UI */,
 				5634AE9B1F3C500000DD5401 /* UserNameChooserViewController.storyboard */,
 				562FDCA71F316EAE000409C8 /* UserSettingsViewController.storyboard */,
 				56621B121DE4A496009B9AB6 /* ChirpView.swift */,
@@ -266,6 +287,7 @@
 		560772DC1F206F3B000D862D /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				4D4DA8BC1F5030D200C21A8B /* Slick Design */,
 				56002F461F306C0F00003B88 /* UserNameChooserViewController.swift */,
 				56621B101DE47D5B009B9AB6 /* ChirpJamViewController.swift */,
 				56B329E41E44834D001345DC /* WorldJamsTableViewController.swift */,
@@ -844,6 +866,7 @@
 			files = (
 				4DEFCAE51F41EC90007B7C34 /* WorldJamsTableViewController.swift in Sources */,
 				4DEFCAE41F41EC82007B7C34 /* Constants.swift in Sources */,
+				4D4DA8BE1F5030ED00C21A8B /* ExploreController.swift in Sources */,
 				56002F471F306C0F00003B88 /* UserNameChooserViewController.swift in Sources */,
 				5613B31E1F3D9C380068ED5D /* ChirpRecordingView.swift in Sources */,
 				56621B111DE47D5B009B9AB6 /* ChirpJamViewController.swift in Sources */,
@@ -868,6 +891,7 @@
 				4DA6A95D1F3C89DB00CD7589 /* BrowseCell.swift in Sources */,
 				56621B171DEC27B0009B9AB6 /* PerformanceTableCell.swift in Sources */,
 				569B92C41DFEA99C00AA257C /* SettingsTableViewController.swift in Sources */,
+				4D4DA8C11F503B0400C21A8B /* ExploreCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

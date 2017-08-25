@@ -40,6 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         UserDefaults.standard.register(defaults: SettingsKeys.defaultSettings)
         startAudioEngine() // start Pd
+        
         return true
     }
     
@@ -60,11 +61,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
     }
     
     func applicationDidFinishLaunching(_ application: UIApplication) {
-        if (UserDefaults.standard.string(forKey: SettingsKeys.performerKey) == SettingsKeys.defaultSettings[SettingsKeys.performerKey] as? String) {
-            // Still set to default name, prompt to change setting!
-            print("AD: Name still set to default, ask user to change")
-            perform(#selector(presentUserNameChooserController), with: nil, afterDelay: 0)
-        }
+        
+        UIApplication.shared.statusBarStyle = .lightContent
+        
+        let exploreController = ExploreController()
+        let rootController = UINavigationController(rootViewController: exploreController)
+        rootController.navigationBar.tintColor = .white
+        rootController.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        rootController.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.makeKeyAndVisible()
+        
+        self.window?.rootViewController = rootController
+        
+//        if (UserDefaults.standard.string(forKey: SettingsKeys.performerKey) == SettingsKeys.defaultSettings[SettingsKeys.performerKey] as? String) {
+//            // Still set to default name, prompt to change setting!
+//            print("AD: Name still set to default, ask user to change")
+//            perform(#selector(presentUserNameChooserController), with: nil, afterDelay: 0)
+//        }
     }
 
     /// Presents the UserNameChooserViewController if the user hasn't set a name yet
