@@ -36,13 +36,19 @@ class PerformanceTableCell: UITableViewCell {
         chirpContainer.backgroundColor = .white
         chirpContainer.clipsToBounds = true
         
-        playButton.layer.cornerRadius = 23 // Button size is 46
-        playButton.backgroundColor = UIColor(white: 0.8, alpha: 0.7)
-        playButton.clipsToBounds = true
+        playButton.layer.cornerRadius = 18 // Button size is 36
+        //playButton.backgroundColor = UIColor(white: 0.8, alpha: 0.7)
+        playButton.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal)
+        playButton.tintColor = UIColor.darkGray
+        //playButton.imageView?.contentMode = .scaleAspectFit
+//        playButton.clipsToBounds = true
         
-        replyButton.layer.cornerRadius = 23 // Button size is 46
-        replyButton.backgroundColor = UIColor(white: 0.8, alpha: 0.7)
-        replyButton.clipsToBounds = true
+        replyButton.layer.cornerRadius = 18 // Button size is 36
+        //replyButton.backgroundColor = UIColor(white: 0.8, alpha: 0.7)
+        replyButton.setImage(#imageLiteral(resourceName: "microjam-reply"), for: .normal)
+        replyButton.tintColor = UIColor.darkGray
+        //playButton.imageView?.contentMode = .scaleAspectFit
+//        replyButton.clipsToBounds = true
 
     }
 

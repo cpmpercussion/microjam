@@ -81,11 +81,13 @@ class WorldJamsTableViewController: UITableViewController {
             if !player.isPlaying {
                 currentlyPlaying = cell
                 player.play()
-                cell.playButton.setTitle("Stop", for: .normal)
+                cell.playButton.setTitle("stop", for: .normal)
+                cell.playButton.setImage(#imageLiteral(resourceName: "microjam-pause"), for: .normal)
             } else {
                 currentlyPlaying = nil
                 player.stop()
-                cell.playButton.setTitle("Play", for: .normal)
+                cell.playButton.setTitle("play", for: .normal)
+                cell.playButton.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal)
             }
         }
     }
@@ -99,6 +101,7 @@ class WorldJamsTableViewController: UITableViewController {
             if let current = currentlyPlaying {
                 current.player!.stop()
                 current.playButton.setTitle("Play", for: .normal)
+                current.playButton.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal)
                 currentlyPlaying = nil
             }
 
@@ -116,6 +119,7 @@ class WorldJamsTableViewController: UITableViewController {
         
         if let cell = currentlyPlaying {
             cell.playButton.setTitle("Play", for: .normal)
+            cell.playButton.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal)
             cell.player!.stop()
             currentlyPlaying = nil
         }
@@ -318,6 +322,7 @@ extension WorldJamsTableViewController: PlayerDelegate {
         if let cell = currentlyPlaying {
             cell.player!.stop()
             cell.playButton.setTitle("Play", for: .normal)
+            cell.playButton.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal)
             currentlyPlaying = nil
         }
     }
@@ -334,6 +339,7 @@ extension WorldJamsTableViewController: ModelDelegate {
         
         if let cell = currentlyPlaying {
             cell.playButton.setTitle("Play", for: .normal)
+            cell.playButton.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal)
             cell.player!.stop()
             currentlyPlaying = nil
         }
