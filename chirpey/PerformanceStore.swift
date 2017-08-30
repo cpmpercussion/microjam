@@ -189,9 +189,13 @@ class PerformanceStore: NSObject {
         performanceRecord[PerfCloudKeys.colour] = performance.colourString as CKRecordValue
         performanceRecord[PerfCloudKeys.backgroundColour] = performance.backgroundColourString as CKRecordValue
 
+        guard let imageData = UIImagePNGRepresentation(performance.image) else {
+            print("PerformanceStore: Blank performance, not able to save.")
+            return
+        }
+        
         do { // Saving image data
             let imageURL = PerformanceStore.tempURL()
-            let imageData = UIImagePNGRepresentation(performance.image)!
             try imageData.write(to: imageURL, options: .atomicWrite)
             let asset = CKAsset(fileURL: imageURL)
             performanceRecord[PerfCloudKeys.image] = asset
