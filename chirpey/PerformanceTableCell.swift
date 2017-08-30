@@ -24,7 +24,6 @@ class PerformanceTableCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
         avatarImageView.backgroundColor = .lightGray
         avatarImageView.contentMode = .scaleAspectFill
         avatarImageView.layer.cornerRadius = avatarImageView.frame.width / 2
@@ -37,24 +36,16 @@ class PerformanceTableCell: UITableViewCell {
         chirpContainer.clipsToBounds = true
         
         playButton.layer.cornerRadius = 18 // Button size is 36
-        //playButton.backgroundColor = UIColor(white: 0.8, alpha: 0.7)
         playButton.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal)
         playButton.tintColor = UIColor.darkGray
-        //playButton.imageView?.contentMode = .scaleAspectFit
-//        playButton.clipsToBounds = true
-        
+
         replyButton.layer.cornerRadius = 18 // Button size is 36
-        //replyButton.backgroundColor = UIColor(white: 0.8, alpha: 0.7)
         replyButton.setImage(#imageLiteral(resourceName: "microjam-reply"), for: .normal)
         replyButton.tintColor = UIColor.darkGray
-        //playButton.imageView?.contentMode = .scaleAspectFit
-//        replyButton.clipsToBounds = true
-
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
 

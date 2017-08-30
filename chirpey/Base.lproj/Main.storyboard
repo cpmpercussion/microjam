@@ -26,29 +26,24 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="zD1-ua-tDc">
                                 <rect key="frame" x="20" y="118" width="374" height="500"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="0lT-q9-yLP">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="0lT-q9-yLP" userLabel="header stack">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="50"/>
                                         <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7hp-N0-fr7">
+                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="H5Q-Ee-YMp"/>
+                                                    <constraint firstAttribute="width" constant="50" id="RwF-JV-1Lb"/>
+                                                </constraints>
+                                            </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="performer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Mx-bs-Bwy">
-                                                <rect key="frame" x="0.0" y="0.0" width="124.66666666666666" height="44"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <rect key="frame" x="133" y="13" width="91.333333333333343" height="24"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="right" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PVn-2h-cdI">
-                                                <rect key="frame" x="124.66666666666667" y="0.0" width="124.66666666666664" height="44"/>
-                                                <accessibility key="accessibilityConfiguration" hint="Tap here to choose a different sound." identifier="instrumentChooser" label="Instrument Menu"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <state key="normal" title="add jam">
-                                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="addJam:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Zna-bh-aMV"/>
-                                                    <action selector="soundSchemeTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8og-Nf-5lO"/>
-                                                </connections>
-                                            </button>
                                             <button opaque="NO" contentMode="right" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZY3-BC-5OF">
-                                                <rect key="frame" x="249.33333333333329" y="0.0" width="124.66666666666671" height="44"/>
+                                                <rect key="frame" x="291" y="8.6666666666666714" width="83" height="32.999999999999986"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <state key="normal" title="instrument">
                                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -58,49 +53,72 @@
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="pyO-lX-2s6"/>
-                                        </constraints>
                                     </stackView>
                                     <view autoresizesSubviews="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xQz-CD-1rT">
-                                        <rect key="frame" x="0.0" y="56" width="374" height="374"/>
+                                        <rect key="frame" x="0.0" y="60" width="374" height="374"/>
                                         <color key="backgroundColor" red="0.59487018602307074" green="0.7976250858479812" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="xQz-CD-1rT" secondAttribute="height" multiplier="1:1" id="f5e-P8-eQa"/>
                                         </constraints>
                                     </view>
                                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="yna-Q3-0q0">
-                                        <rect key="frame" x="0.0" y="442" width="374" height="2"/>
+                                        <rect key="frame" x="0.0" y="444" width="374" height="2"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="2.5" id="YbG-Hu-9DN"/>
                                         </constraints>
                                     </progressView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="b8e-yj-oN7">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="b8e-yj-oN7" userLabel="button stack">
                                         <rect key="frame" x="0.0" y="456" width="374" height="44"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O9V-pQ-Tlh">
-                                                <rect key="frame" x="0.0" y="0.0" width="124.66666666666666" height="44"/>
-                                                <color key="backgroundColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s3v-f5-bcy" userLabel="Rewind">
+                                                <rect key="frame" x="0.0" y="0.0" width="54" height="44"/>
+                                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <state key="normal" title="Rewind" image="microjam-rewind"/>
+                                                <connections>
+                                                    <action selector="rewindScreen:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Sn8-Ot-WFi"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DIT-bx-YUr" userLabel="Record Enable">
+                                                <rect key="frame" x="64" y="0.0" width="54" height="44"/>
+                                                <color key="tintColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal" title="Record" image="microjam-record"/>
+                                                <connections>
+                                                    <action selector="recordEnablePressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="l0F-Vu-Ec6"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O9V-pQ-Tlh">
+                                                <rect key="frame" x="128" y="0.0" width="54" height="44"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="playButton" label="Play"/>
-                                                <state key="normal" title="play"/>
+                                                <color key="tintColor" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal" title="play" image="microjam-play"/>
                                                 <connections>
                                                     <action selector="playButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dgp-Uu-Gtl"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xh5-cz-PkR" userLabel="Reply Button">
-                                                <rect key="frame" x="124.66666666666667" y="0.0" width="124.66666666666664" height="44"/>
-                                                <color key="backgroundColor" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <button opaque="NO" contentMode="right" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PVn-2h-cdI" userLabel="Add Layer Button">
+                                                <rect key="frame" x="192" y="0.0" width="54" height="44"/>
+                                                <accessibility key="accessibilityConfiguration" hint="Tap here to choose a different sound." identifier="instrumentChooser" label="Instrument Menu"/>
+                                                <color key="tintColor" red="0.38397389650000002" green="0.78096622230000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <state key="normal" title="add jam" image="microjam-layer">
+                                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="addJam:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Zna-bh-aMV"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xh5-cz-PkR" userLabel="Reply Button">
+                                                <rect key="frame" x="256" y="0.0" width="54" height="44"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="replyButton" label="Reply"/>
-                                                <state key="normal" title="reset"/>
+                                                <state key="normal" title="reset" image="microjam-reply"/>
                                                 <connections>
                                                     <action selector="replyButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UCv-rQ-qeE"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HfI-q6-7dd">
-                                                <rect key="frame" x="249.33333333333329" y="0.0" width="124.66666666666671" height="44"/>
-                                                <color key="backgroundColor" red="0.80000001190000003" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HfI-q6-7dd">
+                                                <rect key="frame" x="320" y="0.0" width="54" height="44"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="jamButton" label="Jam"/>
-                                                <state key="normal" title="jam"/>
+                                                <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <state key="normal" title="jam" image="microjam-loop"/>
                                                 <connections>
                                                     <action selector="jamButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tfY-Hj-qaX"/>
                                                 </connections>
@@ -160,13 +178,16 @@
                     </navigationItem>
                     <connections>
                         <outlet property="addJamButton" destination="PVn-2h-cdI" id="bdT-cP-vq8"/>
+                        <outlet property="avatarImageView" destination="7hp-N0-fr7" id="S2K-dz-icj"/>
                         <outlet property="chirpViewContainer" destination="xQz-CD-1rT" id="XZB-k8-oGW"/>
                         <outlet property="instrumentButton" destination="ZY3-BC-5OF" id="unF-Xi-IZM"/>
                         <outlet property="jamButton" destination="HfI-q6-7dd" id="rub-hB-VgX"/>
                         <outlet property="performerLabel" destination="1Mx-bs-Bwy" id="E9T-t5-KvJ"/>
                         <outlet property="playButton" destination="O9V-pQ-Tlh" id="G3q-ZV-wU4"/>
+                        <outlet property="recEnableButton" destination="DIT-bx-YUr" id="kWD-36-XNN"/>
                         <outlet property="recordingProgress" destination="yna-Q3-0q0" id="MIs-Qa-IgM"/>
                         <outlet property="replyButton" destination="Xh5-cz-PkR" id="Rz0-nT-OUe"/>
+                        <outlet property="rewindButton" destination="s3v-f5-bcy" id="GR9-LT-y1g"/>
                         <outlet property="savePerformanceButton" destination="wbR-IC-fN1" id="CRU-Eg-9kn"/>
                     </connections>
                 </viewController>
@@ -371,8 +392,12 @@
     </scenes>
     <resources>
         <image name="localjamsTabIcon" width="37" height="37"/>
+        <image name="microjam-layer" width="158" height="178"/>
+        <image name="microjam-loop" width="158" height="178"/>
         <image name="microjam-play" width="158" height="178"/>
+        <image name="microjam-record" width="158" height="178"/>
         <image name="microjam-reply" width="158" height="178"/>
+        <image name="microjam-rewind" width="158" height="178"/>
         <image name="remotejamsTabIcon" width="37" height="37"/>
     </resources>
     <inferredMetricsTieBreakers>
