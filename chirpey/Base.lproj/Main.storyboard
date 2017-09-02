@@ -24,7 +24,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="zD1-ua-tDc">
-                                <rect key="frame" x="20" y="118" width="374" height="500"/>
+                                <rect key="frame" x="20" y="69" width="374" height="598"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="0lT-q9-yLP" userLabel="header stack">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="50"/>
@@ -43,7 +43,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="right" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZY3-BC-5OF">
-                                                <rect key="frame" x="291" y="8.6666666666666714" width="83" height="32.999999999999986"/>
+                                                <rect key="frame" x="291" y="8.6666666666666714" width="83" height="33"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <state key="normal" title="instrument">
                                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -54,21 +54,21 @@
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <view autoresizesSubviews="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xQz-CD-1rT">
-                                        <rect key="frame" x="0.0" y="60" width="374" height="374"/>
+                                    <view autoresizesSubviews="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="xQz-CD-1rT">
+                                        <rect key="frame" x="0.0" y="92.666666666666629" width="374" height="374"/>
                                         <color key="backgroundColor" red="0.59487018602307074" green="0.7976250858479812" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="xQz-CD-1rT" secondAttribute="height" multiplier="1:1" id="f5e-P8-eQa"/>
                                         </constraints>
                                     </view>
                                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="yna-Q3-0q0">
-                                        <rect key="frame" x="0.0" y="444" width="374" height="2"/>
+                                        <rect key="frame" x="0.0" y="509.33333333333337" width="374" height="2"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="2.5" id="YbG-Hu-9DN"/>
                                         </constraints>
                                     </progressView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="b8e-yj-oN7" userLabel="button stack">
-                                        <rect key="frame" x="0.0" y="456" width="374" height="44"/>
+                                        <rect key="frame" x="0.0" y="554" width="374" height="44"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s3v-f5-bcy" userLabel="Rewind">
                                                 <rect key="frame" x="0.0" y="0.0" width="54" height="44"/>
@@ -144,6 +144,7 @@
                             <constraint firstItem="zD1-ua-tDc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" priority="100" id="EHR-tQ-gQn"/>
                             <constraint firstItem="zD1-ua-tDc" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="ZPz-88-bma"/>
                             <constraint firstAttribute="trailingMargin" secondItem="zD1-ua-tDc" secondAttribute="trailing" id="aaP-7f-fRc"/>
+                            <constraint firstItem="zD1-ua-tDc" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="5" id="jzn-Pz-JZX"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -209,7 +210,7 @@
                                 <rect key="frame" x="0.0" y="28" width="414" height="468"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gcn-gn-WZ5" id="sXd-HP-H6B">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="468"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="467.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="took the stage" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8qM-fi-pVE" userLabel="context">
