@@ -57,7 +57,7 @@ class ChirpView: UIImageView {
         isMultipleTouchEnabled = false // multitouch is disabled!
         isUserInteractionEnabled = false // user-interaction is disabled!
         loadPerformance(perf)
-        contentMode = .scaleToFill // make sure the image fits the frame
+        contentMode = .scaleAspectFit // make sure the image fits the frame
     }
     
     // MARK: Lifecycle

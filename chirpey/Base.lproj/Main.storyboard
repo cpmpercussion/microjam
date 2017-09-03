@@ -54,7 +54,7 @@
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <view autoresizesSubviews="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="xQz-CD-1rT">
+                                    <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="xQz-CD-1rT">
                                         <rect key="frame" x="0.0" y="92.666666666666629" width="374" height="374"/>
                                         <color key="backgroundColor" red="0.59487018602307074" green="0.7976250858479812" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -130,10 +130,12 @@
                                     </stackView>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="xQz-CD-1rT" firstAttribute="leading" secondItem="zD1-ua-tDc" secondAttribute="leadingMargin" id="ari-B0-pfk"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="900" constant="600" id="ecT-7N-yAA">
                                         <variation key="heightClass=regular-widthClass=compact" constant="500"/>
                                         <variation key="heightClass=regular-widthClass=regular" constant="600"/>
                                     </constraint>
+                                    <constraint firstItem="xQz-CD-1rT" firstAttribute="trailing" secondItem="zD1-ua-tDc" secondAttribute="trailingMargin" id="gnH-rU-3EU"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="900" constant="512" id="qtJ-yz-YKd"/>
                                 </constraints>
                             </stackView>

@@ -21,6 +21,8 @@ class ChirpRecorder: ChirpPlayer {
     
     init(frame: CGRect) {
         recordingView = ChirpRecordingView(frame: frame)
+        recordingView.clipsToBounds = true
+        recordingView.contentMode = .scaleAspectFill
         super.init()
     }
     

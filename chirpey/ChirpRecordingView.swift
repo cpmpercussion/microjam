@@ -23,12 +23,13 @@ class ChirpRecordingView: ChirpView {
     var recording = false
     /// Colour to render touches as they are recorded.
     var recordingColour : CGColor?
-    
+    /// Animated tail segments for practice mode.
     var tailSegments = [TailSegment]()
 
     /// Programmatic init getting ready for recording.
     override init(frame: CGRect) {
         super.init(frame: frame)
+        print("ChirpRecordingView: Loading programmatically with frame: ", self.frame)
         isMultipleTouchEnabled = true
         isUserInteractionEnabled = true
         clearForRecording() // gets view ready for recording.
@@ -41,9 +42,6 @@ class ChirpRecordingView: ChirpView {
         isUserInteractionEnabled = true
         clearForRecording() // gets view ready for recording.
     }
-    
-    
-
 }
 
 //MARK: - touch interaction
@@ -73,29 +71,35 @@ extension ChirpRecordingView {
         }
         makeSound(at: lastPoint!, withRadius: size!, thatWasMoving: false)
     }
+
+    /// Clips a CGPoint to the bounds of the ChirpRecordingView.
+    func clipTouchLocationToBounds(_ point: CGPoint) -> CGPoint {
+        let x = max(min(point.x, bounds.width), 0)
+        let y = max(min(point.y, bounds.height), 0)
+        return CGPoint.init(x: x, y: y)
+    }
     
     /// Responds to moving touch signals, responds with sound and recordings.
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        let currentPoint = touches.first?.location(in: superview!)
+        let currentPoint = clipTouchLocationToBounds((touches.first?.location(in: superview!))!)
         let size = touches.first?.majorRadius
 
         if recording {
             swiped = true
-            
-            drawLine(from:self.lastPoint!, to:currentPoint!, withColour:recordingColour ?? DEFAULT_RECORDING_COLOUR)
+            drawLine(from:self.lastPoint!, to:currentPoint, withColour:recordingColour ?? DEFAULT_RECORDING_COLOUR)
             lastPoint = currentPoint
-            recordTouch(at: currentPoint!, withRadius: size!, thatWasMoving: true)
+            recordTouch(at: currentPoint, withRadius: size!, thatWasMoving: true)
         
         } else {
-            addTailSegment(at: currentPoint!, withSize: size!, thatWasMoving: true)
+            addTailSegment(at: currentPoint, withSize: size!, thatWasMoving: true)
             draw(tailSegments: tailSegments, withColor: recordingColour!)
             lastPoint = currentPoint
         }
         
-        makeSound(at: currentPoint!, withRadius: size!, thatWasMoving: true)
+        makeSound(at: currentPoint, withRadius: size!, thatWasMoving: true)
     }
     
+    /// Add animated tail segment
     private func addTailSegment(at point: CGPoint, withSize size: CGFloat, thatWasMoving moving: Bool) {
         
         let touch = TouchRecord(time: 0, x: Double(point.x), y: Double(point.y), z: Double(size), moving: moving)

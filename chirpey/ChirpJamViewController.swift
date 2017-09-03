@@ -34,9 +34,8 @@ class ChirpJamViewController: UIViewController {
     var isComposing = false
     /// Stores the present jamming state
     var jamming : Bool = false
-    
+    /// Stores the ChirpRecorder for recording a new performance
     var recorder: ChirpRecorder?
-    
     /// Addition ChirpView for storage of the original performance for a reply.
     var replyto : String?
     /// App delegate - in case we need to upload a performance.
@@ -144,8 +143,24 @@ class ChirpJamViewController: UIViewController {
 
     // MARK: - Lifecycle
     
+    override func viewDidAppear(_ animated: Bool) {
+        /// FIXME: The chirpViewContainer bounds is unknown until now and the ChirpViews then jerk into place in a bad way. Can we fix this?
+        
+        print("DidAppear Bounds", chirpViewContainer.bounds)
+        
+        // Attempting to set bounds of all ChirpViews on screen.
+        for view in chirpViewContainer.subviews {
+            view.frame = chirpViewContainer.bounds
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        chirpViewContainer.autoresizesSubviews = true // make sure jams are correct size.
+        chirpViewContainer.clipsToBounds = true
+        chirpViewContainer.contentMode = .scaleAspectFill
+        
+        
         // rewind
         rewindButton.imageView?.contentMode = .scaleAspectFit
         rewindButton.tintColor = UIColor.init("#7DCFB6")
@@ -194,6 +209,7 @@ class ChirpJamViewController: UIViewController {
         
         } else {
             // Loaded with a new recorder. (i.e., in the jam tab)
+            print("Here we are in the jam tab")
             recorder = ChirpRecorder(frame: chirpViewContainer.bounds)
             recorder!.delegate = self
             chirpViewContainer.backgroundColor = UserProfile.shared.profile.backgroundColour.darkerColor
@@ -217,9 +233,6 @@ class ChirpJamViewController: UIViewController {
         // need to initialise the recording progress at zero.
         recordingProgress!.progress = 0.0
         
-        replyButton.setTitle("Enable rec", for: .normal)
-        replyButton.isEnabled = true
-        
         // Setting the correct instrument
         instrumentButton.setTitle(SoundSchemes.namesForKeys[UserProfile.shared.profile.soundScheme], for: .normal)
         instrumentButton.isEnabled = true
@@ -239,6 +252,7 @@ class ChirpJamViewController: UIViewController {
         }
     }
     
+    /// Called if instrument is changed in the dropdown menu
     func instrumentChanged() {
         if let recorder = recorder {
             recorder.recordingView.openUserSoundScheme()
@@ -250,7 +264,6 @@ class ChirpJamViewController: UIViewController {
 
     /// Resets to a new performance state.
     func newRecordingView() {
-        
         if let recorder = recorder {
             recorder.recordingView.closePdFile()
             recorder.recordingView.removeFromSuperview()
