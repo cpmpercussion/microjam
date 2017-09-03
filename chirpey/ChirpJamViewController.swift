@@ -148,21 +148,22 @@ class ChirpJamViewController: UIViewController {
         super.viewWillAppear(animated)
         // rewind
         rewindButton.imageView?.contentMode = .scaleAspectFit
+        rewindButton.tintColor = UIColor.init("#7DCFB6")
         // rec enable
         recEnableButton.imageView?.contentMode = .scaleAspectFit
         recEnableButton.tintColor = UIColor.red.darkerColor
 
         // play
         playButton.imageView?.contentMode = .scaleAspectFit
-        playButton.tintColor = UIColor.yellow
-
+        playButton.tintColor = UIColor.init("#F79256")
         // add layer
         addJamButton.imageView?.contentMode = .scaleAspectFit
-        addJamButton.tintColor = UIColor.green
+        addJamButton.tintColor = UIColor.init("#7DCFB6")
+        addJamButton.isHidden = true // hide the add layer button for now.
         
         // jam
         jamButton.imageView?.contentMode = .scaleAspectFit
-        jamButton.tintColor = UIColor.blue
+        jamButton.tintColor = UIColor.init("#1D4E89")
         
         /// TODO: delete reply button
         // reply
@@ -312,7 +313,7 @@ class ChirpJamViewController: UIViewController {
             if recorder.isPlaying {
                 playButton.setTitle("Play", for: .normal)
                 playButton.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal)
-                playButton.tintColor = UIColor.yellow
+                playButton.tintColor = UIColor.init("#F79256")
                 jamButton.isEnabled = true
                 if recorder.isRecording {
                     replyButton.isEnabled = true
@@ -323,7 +324,7 @@ class ChirpJamViewController: UIViewController {
             } else {
                 playButton.setTitle("Stop", for: .normal)
                 playButton.setImage(#imageLiteral(resourceName: "microjam-pause"), for: .normal)
-                playButton.tintColor = UIColor.yellow.darkerColor
+                playButton.tintColor = UIColor.init("#F79256").darkerColor
                 jamButton.isEnabled = false
                 recorder.play()
             }
@@ -348,7 +349,7 @@ class ChirpJamViewController: UIViewController {
         if (jamming) {
             // Stop Jamming
             jamButton.setTitle("jam", for: UIControlState.normal)
-            jamButton.tintColor = UIColor.blue
+            jamButton.tintColor = UIColor.init("#1D4E89")
             jamming = false
             playButton.isEnabled = true
             recordingProgress.progress = 0.0
@@ -358,7 +359,7 @@ class ChirpJamViewController: UIViewController {
         } else {
             // Start Jamming
             jamButton.setTitle("no jam", for: UIControlState.normal)
-            jamButton.tintColor = UIColor.blue.darkerColor
+            jamButton.tintColor = UIColor.init("#1D4E89").darkerColor
             jamming = true
             playButton.isEnabled = false
             if let recorder = recorder {
