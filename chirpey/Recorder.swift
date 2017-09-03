@@ -8,10 +8,11 @@
 
 import UIKit
 
+/// A ChirpPlayerController with the ability to record a new ChirpPerformance
 class Recorder: Player {
-    
+    /// The ChirpRecorder's ChirpRecordingView
     var recordingView: ChirpRecordingView
-    
+    /// Storage for whether the recorder is enabled or not, controls whether touches are stored and playback starts on touch.
     var recordingEnabled = false
     /// Storage of the present playback/recording state: playing, recording or idle
     var isRecording = false
@@ -28,33 +29,31 @@ class Recorder: Player {
         chirpViews = player.chirpViews
     }
     
+    /// Starts a new recording if recordingEnabled, time is controlled by the superclass's progressTimer.
     func record() -> Bool {
         if recordingEnabled {
             if !isRecording {
                 isRecording = true
                 recordingView.recording = true
-                
                 // Starting progresstimer and playback of performances if any
                 play()
-                
                 return true
             }
         }
-        
         return false
     }
     
+    /// Override the superclass's play function to only playback once a recording is finished.
     override func play() {
         super.play()
-        
         if recordingIsDone {
             play(chirp: recordingView)
         }
     }
     
+    /// Override superclass's stop function to control recording state.
     override func stop() {
         super.stop()
-        
         if isRecording {
             isRecording = false
             if recordingView.saveRecording() != nil {
@@ -62,9 +61,8 @@ class Recorder: Player {
                 recordingEnabled = false
             }
         }
-        
-        if recordingIsDone {
-            recordingView.image = recordingView.performance!.image
+        if recordingIsDone, let performance = recordingView.performance {
+            recordingView.image = performance.image
         }
     }
 }
