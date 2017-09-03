@@ -10,7 +10,7 @@ import UIKit
 
 class PerformanceTableCell: UITableViewCell {
     
-    var player: Player?
+    var player: ChirpPlayer?
     
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var chirpContainer: UIView!

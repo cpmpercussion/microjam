@@ -8,13 +8,15 @@
 
 import UIKit
 
+/// Enabled classes to receive updates on the playback state of ChirpPlayers and ChirpRecorders.
 protocol PlayerDelegate {
     
     func progressTimerEnded()
     func progressTimerStep()
 }
 
-class Player: NSObject {
+/// Plays back one or more ChirpViews
+class ChirpPlayer: NSObject {
     
     var maxPlayerTime = 5.0
     

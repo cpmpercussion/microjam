@@ -18,7 +18,7 @@ class WorldJamsTableViewController: UITableViewController {
     /// Local reference to the PerformerProfileStore
     let profilesStore = PerformerProfileStore.shared
 
-    var players = [Player]()
+    var players = [ChirpPlayer]()
     var currentlyPlaying: PerformanceTableCell?
 
     // MARK: - Lifecycle
@@ -92,6 +92,7 @@ class WorldJamsTableViewController: UITableViewController {
         }
     }
 
+    
     func replyButtonPressed(sender: UIButton) {
 
         let indexPath = IndexPath(row: sender.tag, section: 0)
@@ -107,7 +108,7 @@ class WorldJamsTableViewController: UITableViewController {
 
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let controller = storyboard.instantiateViewController(withIdentifier: "chirpJamController") as! ChirpJamViewController
-            let recorder = Recorder(frame: CGRect.zero, player: player)
+            let recorder = ChirpRecorder(frame: CGRect.zero, player: player)
             controller.recorder = recorder
             navigationController?.pushViewController(controller, animated: true)
         }
@@ -148,7 +149,7 @@ class WorldJamsTableViewController: UITableViewController {
         
         let performance = performanceStore.storedPerformances[indexPath.row]
 
-        cell.player = Player()
+        cell.player = ChirpPlayer()
         cell.player!.delegate = self
         let chirpView = ChirpView(with: cell.chirpContainer.bounds, andPerformance: performance)
         cell.chirpContainer.backgroundColor = performance.backgroundColour.darkerColor

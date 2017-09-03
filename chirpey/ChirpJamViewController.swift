@@ -35,7 +35,7 @@ class ChirpJamViewController: UIViewController {
     /// Stores the present jamming state
     var jamming : Bool = false
     
-    var recorder: Recorder?
+    var recorder: ChirpRecorder?
     
     /// Addition ChirpView for storage of the original performance for a reply.
     var replyto : String?
@@ -194,7 +194,7 @@ class ChirpJamViewController: UIViewController {
         
         } else {
             // Loaded with a new recorder. (i.e., in the jam tab)
-            recorder = Recorder(frame: chirpViewContainer.bounds)
+            recorder = ChirpRecorder(frame: chirpViewContainer.bounds)
             recorder!.delegate = self
             chirpViewContainer.backgroundColor = UserProfile.shared.profile.backgroundColour.darkerColor
             // disable buttons that cannot be used in this state

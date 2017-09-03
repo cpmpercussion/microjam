@@ -9,7 +9,7 @@
 import UIKit
 
 /// A ChirpPlayerController with the ability to record a new ChirpPerformance
-class Recorder: Player {
+class ChirpRecorder: ChirpPlayer {
     /// The ChirpRecorder's ChirpRecordingView
     var recordingView: ChirpRecordingView
     /// Storage for whether the recorder is enabled or not, controls whether touches are stored and playback starts on touch.
@@ -24,7 +24,7 @@ class Recorder: Player {
         super.init()
     }
     
-    convenience init(frame: CGRect, player: Player) {
+    convenience init(frame: CGRect, player: ChirpPlayer) {
         self.init(frame: frame)
         chirpViews = player.chirpViews
     }

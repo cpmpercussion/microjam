@@ -13,13 +13,13 @@
 		4DA6A95D1F3C89DB00CD7589 /* BrowseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA6A95C1F3C89DB00CD7589 /* BrowseCell.swift */; };
 		4DD839771F3DF81D004D3E40 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD839761F3DF81D004D3E40 /* FilterView.swift */; };
 		4DDB71011F43179A00925F4D /* UserPerfController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDB71001F43179A00925F4D /* UserPerfController.swift */; };
-		4DE5FAF01F46E6470024F16B /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE5FAEF1F46E6470024F16B /* Player.swift */; };
+		4DE5FAF01F46E6470024F16B /* ChirpPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE5FAEF1F46E6470024F16B /* ChirpPlayer.swift */; };
 		4DEFCADF1F41BDEF007B7C34 /* FilterViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEFCADE1F41BDEF007B7C34 /* FilterViewCell.swift */; };
 		4DEFCAE11F41C5D9007B7C34 /* BrowseCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEFCAE01F41C5D9007B7C34 /* BrowseCategory.swift */; };
 		4DEFCAE31F41E8EB007B7C34 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEFCAE21F41E8EB007B7C34 /* Filter.swift */; };
 		4DEFCAE41F41EC82007B7C34 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563E060F1EFBE71700F0D471 /* Constants.swift */; };
 		4DEFCAE51F41EC90007B7C34 /* WorldJamsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B329E41E44834D001345DC /* WorldJamsTableViewController.swift */; };
-		4DF23D0C1F4AF51F006033F8 /* Recorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF23D0B1F4AF51F006033F8 /* Recorder.swift */; };
+		4DF23D0C1F4AF51F006033F8 /* ChirpRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF23D0B1F4AF51F006033F8 /* ChirpRecorder.swift */; };
 		56002F471F306C0F00003B88 /* UserNameChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56002F461F306C0F00003B88 /* UserNameChooserViewController.swift */; };
 		5613B31E1F3D9C380068ED5D /* ChirpRecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5613B31D1F3D9C380068ED5D /* ChirpRecordingView.swift */; };
 		562FDCA61F316870000409C8 /* UserSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562FDCA51F316870000409C8 /* UserSettingsViewController.swift */; };
@@ -109,11 +109,11 @@
 		4DA6A95C1F3C89DB00CD7589 /* BrowseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BrowseCell.swift; path = chirpey/BrowseCell.swift; sourceTree = "<group>"; };
 		4DD839761F3DF81D004D3E40 /* FilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FilterView.swift; path = chirpey/FilterView.swift; sourceTree = "<group>"; };
 		4DDB71001F43179A00925F4D /* UserPerfController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserPerfController.swift; path = chirpey/UserPerfController.swift; sourceTree = "<group>"; };
-		4DE5FAEF1F46E6470024F16B /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Player.swift; path = chirpey/Player.swift; sourceTree = "<group>"; };
+		4DE5FAEF1F46E6470024F16B /* ChirpPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChirpPlayer.swift; path = chirpey/ChirpPlayer.swift; sourceTree = "<group>"; };
 		4DEFCADE1F41BDEF007B7C34 /* FilterViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FilterViewCell.swift; path = chirpey/FilterViewCell.swift; sourceTree = "<group>"; };
 		4DEFCAE01F41C5D9007B7C34 /* BrowseCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BrowseCategory.swift; path = chirpey/BrowseCategory.swift; sourceTree = "<group>"; };
 		4DEFCAE21F41E8EB007B7C34 /* Filter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Filter.swift; path = chirpey/Filter.swift; sourceTree = "<group>"; };
-		4DF23D0B1F4AF51F006033F8 /* Recorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Recorder.swift; path = chirpey/Recorder.swift; sourceTree = "<group>"; };
+		4DF23D0B1F4AF51F006033F8 /* ChirpRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChirpRecorder.swift; path = chirpey/ChirpRecorder.swift; sourceTree = "<group>"; };
 		542B447A7B9AE8AC7B6CE3BB /* Pods-microjamTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-microjamTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-microjamTests/Pods-microjamTests.release.xcconfig"; sourceTree = "<group>"; };
 		56002F461F306C0F00003B88 /* UserNameChooserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserNameChooserViewController.swift; path = chirpey/UserNameChooserViewController.swift; sourceTree = "<group>"; };
 		5613B31D1F3D9C380068ED5D /* ChirpRecordingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChirpRecordingView.swift; path = chirpey/ChirpRecordingView.swift; sourceTree = "<group>"; };
@@ -242,8 +242,8 @@
 				4DEFCAE01F41C5D9007B7C34 /* BrowseCategory.swift */,
 				4DEFCAE21F41E8EB007B7C34 /* Filter.swift */,
 				562FDCAD1F3727DC000409C8 /* TouchRecord.swift */,
-				4DE5FAEF1F46E6470024F16B /* Player.swift */,
-				4DF23D0B1F4AF51F006033F8 /* Recorder.swift */,
+				4DE5FAEF1F46E6470024F16B /* ChirpPlayer.swift */,
+				4DF23D0B1F4AF51F006033F8 /* ChirpRecorder.swift */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -851,11 +851,11 @@
 				4DDB71011F43179A00925F4D /* UserPerfController.swift in Sources */,
 				56621B0F1DE47376009B9AB6 /* AppDelegate.swift in Sources */,
 				56BAAFC61F44370000DC41CA /* PerformerProfileStore.swift in Sources */,
-				4DE5FAF01F46E6470024F16B /* Player.swift in Sources */,
+				4DE5FAF01F46E6470024F16B /* ChirpPlayer.swift in Sources */,
 				4D77CC3D1F3B5564008BD48C /* BrowseController.swift in Sources */,
 				56621B131DE4A496009B9AB6 /* ChirpView.swift in Sources */,
 				562FDCA61F316870000409C8 /* UserSettingsViewController.swift in Sources */,
-				4DF23D0C1F4AF51F006033F8 /* Recorder.swift in Sources */,
+				4DF23D0C1F4AF51F006033F8 /* ChirpRecorder.swift in Sources */,
 				562FDCAE1F3727DC000409C8 /* TouchRecord.swift in Sources */,
 				567286661E05E0AF0024A515 /* MicrojamTabBarController.swift in Sources */,
 				4DD839771F3DF81D004D3E40 /* FilterView.swift in Sources */,
