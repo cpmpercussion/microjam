@@ -207,6 +207,7 @@ class ChirpJamViewController: UIViewController {
         newRecordingView()
         performerLabel.text = recorder!.recordingView.performance!.performer // set performer label to current user.
         avatarImageView.image = UserProfile.shared.profile.avatar // set performer avatar to be current user.
+        avatarImageView.contentMode = .scaleAspectFill // content mode for avatar.
     }
 
     override func viewDidLoad() {
