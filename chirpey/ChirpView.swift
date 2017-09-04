@@ -234,3 +234,70 @@ extension ChirpView {
     }
     
 }
+
+/// Extension to contain constraint and layout helpers.
+extension UIView {
+    
+    /// Adds constraints to pin the edges of a UIView to another UIView.
+    func constrainEdgesTo(_ referenceView: UIView) {
+        func add(chirpView : ChirpView) {
+            
+            /// FIXME: Are the horiz and vertical constraints required?
+            let horizontalConstraint = NSLayoutConstraint(item: chirpView,
+                                                          attribute: NSLayoutAttribute.centerX,
+                                                          relatedBy: NSLayoutRelation.equal,
+                                                          toItem: referenceView,
+                                                          attribute: NSLayoutAttribute.centerX,
+                                                          multiplier: 1,
+                                                          constant: 0)
+            let verticalConstraint = NSLayoutConstraint(item: chirpView,
+                                                        attribute: NSLayoutAttribute.centerY,
+                                                        relatedBy: NSLayoutRelation.equal,
+                                                        toItem: referenceView,
+                                                        attribute: NSLayoutAttribute.centerY,
+                                                        multiplier: 1,
+                                                        constant: 0)
+            
+            /// FIXME: Are these working correctly?
+            let leftConstraint = NSLayoutConstraint(item: chirpView,
+                                                    attribute: NSLayoutAttribute.left,
+                                                    relatedBy: NSLayoutRelation.equal,
+                                                    toItem: referenceView,
+                                                    attribute: NSLayoutAttribute.left,
+                                                    multiplier: 1,
+                                                    constant: 0)
+            let rightConstraint = NSLayoutConstraint(item: chirpView,
+                                                     attribute: NSLayoutAttribute.right,
+                                                     relatedBy: NSLayoutRelation.equal,
+                                                     toItem: referenceView,
+                                                     attribute: NSLayoutAttribute.right,
+                                                     multiplier: 1,
+                                                     constant: 0)
+            let topConstraint = NSLayoutConstraint(item: chirpView,
+                                                   attribute: NSLayoutAttribute.top,
+                                                   relatedBy: NSLayoutRelation.equal,
+                                                   toItem: referenceView,
+                                                   attribute: NSLayoutAttribute.top,
+                                                   multiplier: 1,
+                                                   constant: 0)
+            let bottomConstraint = NSLayoutConstraint(item: chirpView,
+                                                      attribute: NSLayoutAttribute.bottom,
+                                                      relatedBy: NSLayoutRelation.equal,
+                                                      toItem: referenceView,
+                                                      attribute: NSLayoutAttribute.bottom,
+                                                      multiplier: 1,
+                                                      constant: 0)
+//            let chirpHoriz = NSLayoutConstraint(item: referenceView,
+//                                                attribute: NSLayoutAttribute.centerX,
+//                                                relatedBy: NSLayoutRelation.equal,
+//                                                toItem: self.view,
+//                                                attribute: NSLayoutAttribute.centerX,
+//                                                multiplier: 1,
+//                                                constant: 0)
+            // Add the constraints
+            addConstraints([horizontalConstraint,verticalConstraint,leftConstraint,rightConstraint,topConstraint,bottomConstraint])
+            // Fix the content mode to scaleAspectFill
+            contentMode = .scaleAspectFill
+        }
+    }
+}
