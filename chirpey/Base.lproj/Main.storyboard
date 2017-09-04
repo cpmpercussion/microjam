@@ -182,6 +182,7 @@
                     <connections>
                         <outlet property="addJamButton" destination="PVn-2h-cdI" id="bdT-cP-vq8"/>
                         <outlet property="avatarImageView" destination="7hp-N0-fr7" id="S2K-dz-icj"/>
+                        <outlet property="cancelPerformanceButton" destination="Y3a-G9-SuM" id="U3S-rw-NMX"/>
                         <outlet property="chirpViewContainer" destination="xQz-CD-1rT" id="XZB-k8-oGW"/>
                         <outlet property="instrumentButton" destination="ZY3-BC-5OF" id="unF-Xi-IZM"/>
                         <outlet property="jamButton" destination="HfI-q6-7dd" id="rub-hB-VgX"/>
@@ -212,7 +213,7 @@
                                 <rect key="frame" x="0.0" y="28" width="414" height="420"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gcn-gn-WZ5" id="sXd-HP-H6B">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="419.66666666666669"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="420"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="took the stage" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8qM-fi-pVE" userLabel="context">

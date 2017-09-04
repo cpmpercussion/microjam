@@ -69,8 +69,10 @@ class ChirpJamViewController: UIViewController {
     @IBOutlet weak var chirpViewContainer: UIView!
     /// Progress bar for playback and recording progress
     @IBOutlet weak var recordingProgress: UIProgressView!
-    /// Button for saving recorded performance
+    /// Right nav bar button for saving recorded performance
     @IBOutlet weak var savePerformanceButton: UIBarButtonItem!
+    /// Left nav bar button for cancelling replies
+    @IBOutlet weak var cancelPerformanceButton: UIBarButtonItem!
     /// Button for choosing/displaying soundscheme
     @IBOutlet weak var instrumentButton: UIButton!
     /// Button to add specific parent performances when composing a performance
@@ -114,11 +116,11 @@ class ChirpJamViewController: UIViewController {
         // Stop any timers
         if let recorder = recorder {
             recorder.stop()
-
+            
+            // find out what tab we're in
             if replyto != nil {
                 // In the world tab
                 navigationController!.popViewController(animated: true)
-            
             } else {
                 // In the jab tab
                 if isComposing {
@@ -208,7 +210,6 @@ class ChirpJamViewController: UIViewController {
         
         if let recorder = recorder {
             // Loaded with an existing recorder (i.e., to make a reply)
-            print("JamVC: Loaded with ", recorder)
             
             if !isComposing && !recorder.viewsAreLoaded {
                 
@@ -217,7 +218,7 @@ class ChirpJamViewController: UIViewController {
                     chirpViewContainer.addSubview(view)
                 }
                 
-                recorder.viewsAreLoaded = true // Make sure the views are not added to the chirp containter if they are already added
+                recorder.viewsAreLoaded = true // Make sure the views are not added to the chirp container if they are already added
                 recorder.delegate = self
                 replyto = recorder.chirpViews.first?.performance?.title() // set reply
                 
@@ -227,9 +228,11 @@ class ChirpJamViewController: UIViewController {
             }
             rewindButton.isEnabled = false
             
+            // enable the cancel button
+            cancelPerformanceButton.isEnabled = true
+            
         } else {
             // Loaded with a new recorder. (i.e., in the jam tab)
-            print("Here we are in the jam tab")
             recorder = ChirpRecorder(frame: chirpViewContainer.bounds)
             recorder?.delegate = self
             chirpViewContainer.backgroundColor = UserProfile.shared.profile.backgroundColour.darkerColor
@@ -238,6 +241,8 @@ class ChirpJamViewController: UIViewController {
             jamButton.isEnabled = false
             rewindButton.isEnabled = false
         }
+        
+        print("JamVC: Loaded with:", recorder ?? "nothing")
         
         newRecordingView()
         
@@ -249,6 +254,25 @@ class ChirpJamViewController: UIViewController {
         for view in chirpViewContainer.subviews {
             view.translatesAutoresizingMaskIntoConstraints = false
             view.constrainEdgesTo(chirpViewContainer)
+        }
+        
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        // disable cancel button in jam tab
+        /// FIXME: This seems only possible _after_ the view appears?
+        if tabBarController?.selectedViewController?.tabBarItem.title == TabBarItemTitles.jamTab {
+            cancelPerformanceButton.isEnabled = false
+        } else {
+            cancelPerformanceButton.isEnabled = true
+        }
+        
+        // disable/enable the save button
+        if let rec = recorder, rec.recordingIsDone {
+            savePerformanceButton.isEnabled = true
+        } else {
+            savePerformanceButton.isEnabled = false
         }
     }
     
@@ -274,6 +298,7 @@ class ChirpJamViewController: UIViewController {
                 recorder.recordingView.performance!.replyto = rep
             }
             chirpViewContainer.addSubview(recorder.recordingView)
+            savePerformanceButton.isEnabled = false // no saving a blank recording
         }
     }
 
@@ -415,15 +440,18 @@ extension ChirpJamViewController: PlayerDelegate {
             return
         }
         
-        // enabled replying if recording is finished.
-        if recorder!.recordingIsDone {
+        // enable saving and replying if recording is finished.
+        if let rec = recorder, rec.recordingIsDone {
             replyButton.isEnabled = true
+            savePerformanceButton.isEnabled = true
         }
         
         rewindButton.isEnabled = true
         jamButton.isEnabled = true
         playButton.isEnabled = true
         playButton.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal)
+        
+        
     }
 }
 
