@@ -10,15 +10,23 @@ import UIKit
 
 class PerformanceTableCell: UITableViewCell {
     
+    /// A player controller for the ChirpView in the present cell
     var player: ChirpPlayer?
-    
+    /// The avatar image in the cell
     @IBOutlet weak var avatarImageView: UIImageView!
+    /// Container view for the one or more ChirpViews for the cell
     @IBOutlet weak var chirpContainer: UIView!
+    /// Title of the top performance in the cell
     @IBOutlet weak var title: UILabel!
+    /// Performer of the top performance in the cell
     @IBOutlet weak var performer: UILabel!
+    /// Instrument of the top performance in the cell
     @IBOutlet weak var instrument: UILabel!
+    /// A context  label describing added details about the performance
     @IBOutlet weak var context: UILabel!
+    /// A play button layered over the ChirpContainer
     @IBOutlet weak var playButton: UIButton!
+    /// A reply button layered over the ChirpContainer
     @IBOutlet weak var replyButton: UIButton!
     
     override func awakeFromNib() {
