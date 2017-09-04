@@ -63,7 +63,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
         if (UserDefaults.standard.string(forKey: SettingsKeys.performerKey) == SettingsKeys.defaultSettings[SettingsKeys.performerKey] as? String) {
             // Still set to default name, prompt to change setting!
             print("AD: Name still set to default, ask user to change")
-            perform(#selector(presentUserNameChooserController), with: nil, afterDelay: 0)
+//            perform(#selector(presentUserNameChooserController), with: nil, afterDelay: 0)
+            /// FIXME: figure out a better walkthrough to set user details.
         }
     }
 
