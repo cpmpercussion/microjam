@@ -143,61 +143,6 @@ class ChirpJamViewController: UIViewController {
 
     // MARK: - Lifecycle
     
-//    override func viewDidAppear(_ animated: Bool) {
-//        /// FIXME: The chirpViewContainer bounds is unknown until now and the ChirpViews then jerk into place in a bad way. Can we fix this?
-//        print("DidAppear container", chirpViewContainer.bounds)
-//        print("DidAppear recorder ", recorder?.recordingView.bounds ?? "not available")
-//    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        if let recorder = recorder {
-            // Loaded with an existing recorder (i.e., to make a reply)
-            print("JamVC: Loaded with ", recorder)
-            
-            if !isComposing && !recorder.viewsAreLoaded {
-                
-                for view in recorder.chirpViews {
-                    view.frame = chirpViewContainer.bounds
-                    chirpViewContainer.addSubview(view)
-                }
-                
-                recorder.viewsAreLoaded = true // Make sure the views are not added to the chirp containter if they are already added
-                recorder.delegate = self
-                replyto = recorder.chirpViews.first?.performance?.title() // set reply
-                
-                if let last = recorder.chirpViews.last {
-                    chirpViewContainer.backgroundColor = last.performance!.backgroundColour.darkerColor
-                }
-            }
-            rewindButton.isEnabled = false
-        
-        } else {
-            // Loaded with a new recorder. (i.e., in the jam tab)
-            print("Here we are in the jam tab")
-            recorder = ChirpRecorder(frame: chirpViewContainer.bounds)
-            recorder?.delegate = self
-            chirpViewContainer.backgroundColor = UserProfile.shared.profile.backgroundColour.darkerColor
-            // disable buttons that cannot be used in this state
-            playButton.isEnabled = false
-            jamButton.isEnabled = false
-            rewindButton.isEnabled = false
-        }
-
-        newRecordingView()
-        
-        // Setup user data
-        performerLabel.text = recorder!.recordingView.performance!.performer // set performer label to current user.
-        avatarImageView.image = UserProfile.shared.profile.avatar // set performer avatar to be current user.
-        
-        // Add constraints for chirpViewContainer's subviews.
-        for view in chirpViewContainer.subviews {
-            view.translatesAutoresizingMaskIntoConstraints = false
-            view.constrainEdgesTo(chirpViewContainer)
-        }
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         print("JAMVC: viewDidLoad")
@@ -206,7 +151,7 @@ class ChirpJamViewController: UIViewController {
         chirpViewContainer.autoresizesSubviews = true // make sure jams are correct size.
         chirpViewContainer.clipsToBounds = true
         chirpViewContainer.contentMode = .scaleAspectFill
-
+        
         // configure avatarImageView
         avatarImageView.contentMode = .scaleAspectFill // content mode for avatar.
         
@@ -240,12 +185,12 @@ class ChirpJamViewController: UIViewController {
         // Setting the correct instrument
         instrumentButton.setTitle(SoundSchemes.namesForKeys[UserProfile.shared.profile.soundScheme], for: .normal)
         instrumentButton.isEnabled = true
-
+        
         // Soundscheme Dropdown initialisation.
         soundSchemeDropDown.anchorView = instrumentButton // anchor dropdown to intrument button
         soundSchemeDropDown.dataSource = Array(SoundSchemes.namesForKeys.values) // set dropdown datasource to available SoundSchemes
         soundSchemeDropDown.direction = .bottom
-
+        
         // Action triggered on selection
         soundSchemeDropDown.selectionAction = {(index: Int, item: String) -> Void in
             print("DropDown selected:", index, item)
@@ -255,6 +200,61 @@ class ChirpJamViewController: UIViewController {
             }
         }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let recorder = recorder {
+            // Loaded with an existing recorder (i.e., to make a reply)
+            print("JamVC: Loaded with ", recorder)
+            
+            if !isComposing && !recorder.viewsAreLoaded {
+                
+                for view in recorder.chirpViews {
+                    view.frame = chirpViewContainer.bounds
+                    chirpViewContainer.addSubview(view)
+                }
+                
+                recorder.viewsAreLoaded = true // Make sure the views are not added to the chirp containter if they are already added
+                recorder.delegate = self
+                replyto = recorder.chirpViews.first?.performance?.title() // set reply
+                
+                if let last = recorder.chirpViews.last {
+                    chirpViewContainer.backgroundColor = last.performance!.backgroundColour.darkerColor
+                }
+            }
+            rewindButton.isEnabled = false
+            
+        } else {
+            // Loaded with a new recorder. (i.e., in the jam tab)
+            print("Here we are in the jam tab")
+            recorder = ChirpRecorder(frame: chirpViewContainer.bounds)
+            recorder?.delegate = self
+            chirpViewContainer.backgroundColor = UserProfile.shared.profile.backgroundColour.darkerColor
+            // disable buttons that cannot be used in this state
+            playButton.isEnabled = false
+            jamButton.isEnabled = false
+            rewindButton.isEnabled = false
+        }
+        
+        newRecordingView()
+        
+        // Setup user data
+        performerLabel.text = recorder!.recordingView.performance!.performer // set performer label to current user.
+        avatarImageView.image = UserProfile.shared.profile.avatar // set performer avatar to be current user.
+        
+        // Add constraints for chirpViewContainer's subviews.
+        for view in chirpViewContainer.subviews {
+            view.translatesAutoresizingMaskIntoConstraints = false
+            view.constrainEdgesTo(chirpViewContainer)
+        }
+    }
+    
+//    override func viewDidAppear(_ animated: Bool) {
+//        /// FIXME: The chirpViewContainer bounds is unknown until now and the ChirpViews then jerk into place in a bad way. Can we fix this?
+//        print("DidAppear container", chirpViewContainer.bounds)
+//        print("DidAppear recorder ", recorder?.recordingView.bounds ?? "not available")
+//    }
     
     /// Called if instrument is changed in the dropdown menu
     func instrumentChanged() {
