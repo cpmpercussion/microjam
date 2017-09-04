@@ -36,7 +36,8 @@ class WorldJamsTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        tableView.rowHeight = 365
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 420 // iPhone 7 height
         performanceStore.delegate = self
         profilesStore.delegate = self
         self.refreshControl?.addTarget(performanceStore, action: #selector(performanceStore.fetchWorldJamsFromCloud), for: UIControlEvents.valueChanged)
@@ -81,12 +82,10 @@ class WorldJamsTableViewController: UITableViewController {
             if !player.isPlaying {
                 currentlyPlaying = cell
                 player.play()
-                cell.playButton.setTitle("stop", for: .normal)
                 cell.playButton.setImage(#imageLiteral(resourceName: "microjam-pause"), for: .normal)
             } else {
                 currentlyPlaying = nil
                 player.stop()
-                cell.playButton.setTitle("play", for: .normal)
                 cell.playButton.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal)
             }
         }
@@ -101,7 +100,6 @@ class WorldJamsTableViewController: UITableViewController {
             
             if let current = currentlyPlaying {
                 current.player!.stop()
-                current.playButton.setTitle("Play", for: .normal)
                 current.playButton.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal)
                 currentlyPlaying = nil
             }
@@ -119,7 +117,6 @@ class WorldJamsTableViewController: UITableViewController {
     override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         
         if let cell = currentlyPlaying {
-            cell.playButton.setTitle("Play", for: .normal)
             cell.playButton.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal)
             cell.player!.stop()
             currentlyPlaying = nil
@@ -224,16 +221,6 @@ class WorldJamsTableViewController: UITableViewController {
         }
     }
 
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-
-        // Width of the preview image
-        let width = view.frame.width - 64
-
-        //returning height of image, pluss all the text
-        return width + 120
-
-    }
-
     /// Adds multiple images on top of each other
     func createImageFrom(images : [UIImage]) -> UIImage? {
         if let size = images.first?.size {
@@ -328,7 +315,6 @@ extension WorldJamsTableViewController: PlayerDelegate {
 
         if let cell = currentlyPlaying {
             cell.player!.stop()
-            cell.playButton.setTitle("Play", for: .normal)
             cell.playButton.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal)
             currentlyPlaying = nil
         }
@@ -345,7 +331,6 @@ extension WorldJamsTableViewController: ModelDelegate {
         refreshControl?.endRefreshing()
         
         if let cell = currentlyPlaying {
-            cell.playButton.setTitle("Play", for: .normal)
             cell.playButton.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal)
             cell.player!.stop()
             currentlyPlaying = nil
