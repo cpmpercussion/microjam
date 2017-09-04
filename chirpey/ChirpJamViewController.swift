@@ -252,12 +252,6 @@ class ChirpJamViewController: UIViewController {
         }
     }
     
-//    override func viewDidAppear(_ animated: Bool) {
-//        /// FIXME: The chirpViewContainer bounds is unknown until now and the ChirpViews then jerk into place in a bad way. Can we fix this?
-//        print("DidAppear container", chirpViewContainer.bounds)
-//        print("DidAppear recorder ", recorder?.recordingView.bounds ?? "not available")
-//    }
-    
     /// Called if instrument is changed in the dropdown menu
     func instrumentChanged() {
         if let recorder = recorder {
@@ -331,7 +325,6 @@ class ChirpJamViewController: UIViewController {
     @IBAction func playButtonPressed(_ sender: UIButton) {
         if let recorder = recorder {
             if recorder.isPlaying {
-                playButton.setTitle("Play", for: .normal)
                 playButton.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal)
                 playButton.tintColor = UIColor.init("#F79256")
                 jamButton.isEnabled = true
@@ -342,9 +335,8 @@ class ChirpJamViewController: UIViewController {
                 recorder.stop()
             
             } else {
-                playButton.setTitle("Stop", for: .normal)
                 playButton.setImage(#imageLiteral(resourceName: "microjam-pause"), for: .normal)
-                playButton.tintColor = UIColor.init("#F79256").darkerColor
+                playButton.tintColor = UIColor.init("#F79256").brighterColor
                 jamButton.isEnabled = false
                 recorder.play()
             }
@@ -368,7 +360,6 @@ class ChirpJamViewController: UIViewController {
         // TODO: implement some kind of generative performing here!
         if (jamming) {
             // Stop Jamming
-            jamButton.setTitle("jam", for: UIControlState.normal)
             jamButton.tintColor = UIColor.init("#1D4E89")
             jamming = false
             playButton.isEnabled = true
@@ -378,8 +369,7 @@ class ChirpJamViewController: UIViewController {
             }
         } else {
             // Start Jamming
-            jamButton.setTitle("no jam", for: UIControlState.normal)
-            jamButton.tintColor = UIColor.init("#1D4E89").darkerColor
+            jamButton.tintColor = UIColor.init("#1D4E89").brighterColor
             jamming = true
             playButton.isEnabled = false
             if let recorder = recorder {
@@ -398,7 +388,6 @@ class ChirpJamViewController: UIViewController {
                 if recorder.record() { // Returns true if recording is starting
                     print("JAMVC: Starting a Recording")
                     playButton.isEnabled = true
-                    playButton.setTitle("Stop", for: .normal)
                     playButton.setImage(#imageLiteral(resourceName: "microjam-stop"), for: .normal)
                 }
             }
@@ -410,11 +399,12 @@ class ChirpJamViewController: UIViewController {
 
 extension ChirpJamViewController: PlayerDelegate {
     
+    /// Updates the progress bar in response to steps from the ChirpPlayer
     func progressTimerStep() {
         recordingProgress.progress = Float(recorder!.progress / recorder!.maxPlayerTime)
     }
 
-    /// Finished a recording or playback
+    /// Updates UI when the ChirpPlayer reports playback/recording has finished.
     func progressTimerEnded() {
         recordingProgress.progress = 0.0
         recorder!.stop()
@@ -433,7 +423,6 @@ extension ChirpJamViewController: PlayerDelegate {
         rewindButton.isEnabled = true
         jamButton.isEnabled = true
         playButton.isEnabled = true
-        playButton.setTitle("Play", for: .normal)
         playButton.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal)
     }
 }
