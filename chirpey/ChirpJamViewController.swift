@@ -148,7 +148,9 @@ class ChirpJamViewController: UIViewController {
         print("JAMVC: viewDidLoad")
         
         // configuration for the chirpViewContainer
-        chirpViewContainer.autoresizesSubviews = true // make sure jams are correct size.
+        chirpViewContainer.layer.cornerRadius = 8
+        chirpViewContainer.layer.borderWidth = 1
+        chirpViewContainer.layer.borderColor = UIColor(white: 0.8, alpha: 1).cgColor
         chirpViewContainer.clipsToBounds = true
         chirpViewContainer.contentMode = .scaleAspectFill
         
