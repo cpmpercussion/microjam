@@ -143,49 +143,15 @@ class ChirpJamViewController: UIViewController {
 
     // MARK: - Lifecycle
     
-    override func viewDidAppear(_ animated: Bool) {
-        /// FIXME: The chirpViewContainer bounds is unknown until now and the ChirpViews then jerk into place in a bad way. Can we fix this?
-        
-        print("DidAppear Bounds", chirpViewContainer.bounds)
-        
-        // Attempting to set bounds of all ChirpViews on screen.
-        for view in chirpViewContainer.subviews {
-            view.frame = chirpViewContainer.bounds
-        }
-    }
+//    override func viewDidAppear(_ animated: Bool) {
+//        /// FIXME: The chirpViewContainer bounds is unknown until now and the ChirpViews then jerk into place in a bad way. Can we fix this?
+//        print("DidAppear container", chirpViewContainer.bounds)
+//        print("DidAppear recorder ", recorder?.recordingView.bounds ?? "not available")
+//    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        chirpViewContainer.autoresizesSubviews = true // make sure jams are correct size.
-        chirpViewContainer.clipsToBounds = true
-        chirpViewContainer.contentMode = .scaleAspectFill
-        
-        
-        // rewind
-        rewindButton.imageView?.contentMode = .scaleAspectFit
-        rewindButton.tintColor = UIColor.init("#7DCFB6")
-        // rec enable
-        recEnableButton.imageView?.contentMode = .scaleAspectFit
-        recEnableButton.tintColor = UIColor.red.darkerColor
 
-        // play
-        playButton.imageView?.contentMode = .scaleAspectFit
-        playButton.tintColor = UIColor.init("#F79256")
-        // add layer
-        addJamButton.imageView?.contentMode = .scaleAspectFit
-        addJamButton.tintColor = UIColor.init("#7DCFB6")
-        addJamButton.isHidden = true // hide the add layer button for now.
-        
-        // jam
-        jamButton.imageView?.contentMode = .scaleAspectFit
-        jamButton.tintColor = UIColor.init("#1D4E89")
-        
-        /// TODO: delete reply button
-        // reply
-        replyButton.imageView?.contentMode = .scaleAspectFit
-        replyButton.isHidden = true // not using reply button in this view currently
-        
-        
         if let recorder = recorder {
             // Loaded with an existing recorder (i.e., to make a reply)
             print("JamVC: Loaded with ", recorder)
@@ -211,24 +177,62 @@ class ChirpJamViewController: UIViewController {
             // Loaded with a new recorder. (i.e., in the jam tab)
             print("Here we are in the jam tab")
             recorder = ChirpRecorder(frame: chirpViewContainer.bounds)
-            recorder!.delegate = self
+            recorder?.delegate = self
             chirpViewContainer.backgroundColor = UserProfile.shared.profile.backgroundColour.darkerColor
             // disable buttons that cannot be used in this state
             playButton.isEnabled = false
             jamButton.isEnabled = false
             rewindButton.isEnabled = false
-            
         }
 
         newRecordingView()
+        
+        // Setup user data
         performerLabel.text = recorder!.recordingView.performance!.performer // set performer label to current user.
         avatarImageView.image = UserProfile.shared.profile.avatar // set performer avatar to be current user.
-        avatarImageView.contentMode = .scaleAspectFill // content mode for avatar.
+        
+        // Add constraints for chirpViewContainer's subviews.
+        for view in chirpViewContainer.subviews {
+            view.translatesAutoresizingMaskIntoConstraints = false
+            view.constrainEdgesTo(chirpViewContainer)
+        }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         print("JAMVC: viewDidLoad")
+        
+        // configuration for the chirpViewContainer
+        chirpViewContainer.autoresizesSubviews = true // make sure jams are correct size.
+        chirpViewContainer.clipsToBounds = true
+        chirpViewContainer.contentMode = .scaleAspectFill
+
+        // configure avatarImageView
+        avatarImageView.contentMode = .scaleAspectFill // content mode for avatar.
+        
+        // rewind
+        rewindButton.imageView?.contentMode = .scaleAspectFit
+        rewindButton.tintColor = UIColor.init("#7DCFB6")
+        // rec enable
+        recEnableButton.imageView?.contentMode = .scaleAspectFit
+        recEnableButton.tintColor = UIColor.red.darkerColor
+        
+        // play
+        playButton.imageView?.contentMode = .scaleAspectFit
+        playButton.tintColor = UIColor.init("#F79256")
+        // add layer
+        addJamButton.imageView?.contentMode = .scaleAspectFit
+        addJamButton.tintColor = UIColor.init("#7DCFB6")
+        addJamButton.isHidden = true // hide the add layer button for now.
+        
+        // jam
+        jamButton.imageView?.contentMode = .scaleAspectFit
+        jamButton.tintColor = UIColor.init("#1D4E89")
+        
+        /// TODO: delete reply button
+        // reply
+        replyButton.imageView?.contentMode = .scaleAspectFit
+        replyButton.isHidden = true // not using reply button in this view currently
         
         // need to initialise the recording progress at zero.
         recordingProgress!.progress = 0.0
