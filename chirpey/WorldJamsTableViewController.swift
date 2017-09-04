@@ -171,6 +171,12 @@ class WorldJamsTableViewController: UITableViewController {
                 break
             }
         }
+        
+        // Add constraints for cell.chirpContainer's subviews.
+        for view in cell.chirpContainer.subviews {
+            view.translatesAutoresizingMaskIntoConstraints = false
+            view.constrainEdgesTo(cell.chirpContainer)
+        }
 
         if let profile = profilesStore.getProfile(forPerformance: performance) {
             cell.avatarImageView.image = profile.avatar
