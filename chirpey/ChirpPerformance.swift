@@ -50,6 +50,10 @@ class ChirpPerformance : NSObject {
     var creatorID : CKRecordID?
     /// Keeps track of Record ID of parent performance
     var parentReference : CKReference?
+    /// Description
+    override var description: String {
+        return title()
+    }
 
     // MARK: Archiving Paths and TouchRecord header.
 

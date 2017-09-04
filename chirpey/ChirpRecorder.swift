@@ -18,6 +18,13 @@ class ChirpRecorder: ChirpPlayer {
     var isRecording = false
     /// Tells us whether the recording has been added to the stack in the performance handler
     var recordingIsDone = false
+    /// Description of the ChirpPlayer with it's first ChirpPerformance.
+    override var description: String {
+        guard let perfString = chirpViews.first?.performance?.description else {
+            return "ChirpRecorder-NoPerformance"
+        }
+        return "ChirpRecorder-" + perfString
+    }
     
     init(frame: CGRect) {
         recordingView = ChirpRecordingView(frame: frame)

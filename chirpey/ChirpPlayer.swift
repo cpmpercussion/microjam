@@ -34,7 +34,14 @@ class ChirpPlayer: NSObject {
     var progress = 0.0
     /// Stores delegate to inform them about start/stop events and current progress.
     var delegate: PlayerDelegate?
-    
+    /// Description of the ChirpPlayer with it's first ChirpPerformance.
+    override var description: String {
+        guard let perfString = chirpViews.first?.performance?.description else {
+            return "ChirpPlayer-NoPerformance"
+        }
+        return "ChirpPlayer-" + perfString
+    }
+        
     /// Play a particular ChirpView's performance
     func play(chirp: ChirpView) {
         for touch in chirp.performance!.performanceData {

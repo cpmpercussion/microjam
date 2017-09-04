@@ -24,7 +24,7 @@ class MicrojamTabBarController: UITabBarController {
         
         // MARK: Initialise view controllers that exist as tabs.
         if let userSettingsViewController = UserSettingsViewController.storyboardInstance() {
-        userSettingsViewController.tabBarItem = UITabBarItem(title: "profile", image: #imageLiteral(resourceName: "settingsTabIcon"), selectedImage: nil)
+        userSettingsViewController.tabBarItem = UITabBarItem(title: TabBarItemTitles.profileTab, image: #imageLiteral(resourceName: "settingsTabIcon"), selectedImage: nil)
             viewControllers?.append(userSettingsViewController)
         } else {
             print("TABVC: User Settings Tab could not be initialised.")
