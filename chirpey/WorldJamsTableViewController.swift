@@ -156,7 +156,7 @@ class WorldJamsTableViewController: UITableViewController {
         var current = performance
 
         while current.replyto != "" {
-            if let next = performanceStore.fetchPerformanceFrom(title: current.replyto) {
+            if let next = performanceStore.getPerformance(fortitle: current.replyto) {
                 cell.chirpContainer.backgroundColor = next.backgroundColour.darkerColor
                 let chirp = ChirpView(with: cell.chirpContainer.bounds, andPerformance: next)
                 cell.player!.chirpViews.append(chirp)

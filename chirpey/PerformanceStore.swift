@@ -39,18 +39,26 @@ class PerformanceStore: NSObject {
     static let shared = PerformanceStore()
     /// Internally stored performances
     var storedPerformances : [ChirpPerformance] = []
+    /// CloudKit database
+    let database = CKContainer.default().publicCloudDatabase
     /// Public CloudKit Database
     let publicDB: CKDatabase = CKContainer.default().publicCloudDatabase
     /// Private CloudKit Database
     let privateDB: CKDatabase = CKContainer.default().privateCloudDatabase
     /// Delegate to notify when cloud operations are successful.
     var delegate : ModelDelegate?
+    /// performances
+    var performances: [CKRecordID : ChirpPerformance]
+    /// URL of local documents directory.
+    static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
+    /// URL of storage location
+    static let perfDictURL = DocumentsDirectory.appendingPathComponent("performanceStoreDict")
 
 
     /// Loads saved performances and then updates from cloud backend.
     override private init() {
+        performances = PerformanceStore.loadPerformanceDict() // load the performance dictionary
         super.init()
-        print("Store: Initialising and loading saved performances.")
         if let savedPerformances = loadPerformances() {
             storedPerformances += savedPerformances
             sortStoredPerformances()
@@ -66,6 +74,18 @@ class PerformanceStore: NSObject {
         let loadedPerformances =  NSKeyedUnarchiver.unarchiveObject(withFile: ChirpPerformance.ArchiveURL.path) as? [ChirpPerformance]
         return loadedPerformances
     }
+    
+    /// Load Profiles from file
+    private static func loadPerformanceDict() -> [CKRecordID: ChirpPerformance] {
+        print("Loading perf dict...")
+        let result = NSKeyedUnarchiver.unarchiveObject(withFile: PerformanceStore.perfDictURL.path)
+        if let loadedPerformances = result as? [CKRecordID: ChirpPerformance] {
+            return loadedPerformances
+        } else {
+            print("PerformerProfileStore: Failed to load perfs.")
+            return [CKRecordID: ChirpPerformance]()
+        }
+    }
 
     /// Add a new performance to the list and then save the list.
     func addNew(performance : ChirpPerformance) {
@@ -74,13 +94,8 @@ class PerformanceStore: NSObject {
 
     /// Save recorded performances to file.
     func savePerformances() {
-        NSLog("Store: Going to save %d performances", self.storedPerformances.count)
-        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(self.storedPerformances, toFile: ChirpPerformance.ArchiveURL.path)
-        if (!isSuccessfulSave) {
-            print("Store: Save was not successful.")
-        } else {
-            print("Store: successfully saved", self.storedPerformances.count, "performances")
-        }
+        NSKeyedArchiver.archiveRootObject(performances, toFile: PerformanceStore.perfDictURL.path)
+        NSKeyedArchiver.archiveRootObject(self.storedPerformances, toFile: ChirpPerformance.ArchiveURL.path)
     }
 
     /// Returns a temporary file path for png images
@@ -137,6 +152,7 @@ class PerformanceStore: NSObject {
         let titles = self.storedPerformances.map{$0.title()}
         var countPerfsAdded = 0
         for perf in performances {
+            self.performances[CKRecordID(recordName: perf.title())] = perf
             if !titles.contains(perf.title()) {
                 self.storedPerformances.append(perf)
                 countPerfsAdded += 1
@@ -145,35 +161,54 @@ class PerformanceStore: NSObject {
         print("Store: ", countPerfsAdded, " perfs added to stored performances.")
         self.sortStoredPerformances()
     }
-
-    /// Retrieves a ChirpPerformance from a given title string.
-    func fetchPerformanceFrom(title: String) -> ChirpPerformance? {
-        var perf: ChirpPerformance?
-        for chirpPerformance in self.storedPerformances {
-            if (chirpPerformance.title() == title) {
-                perf = chirpPerformance
-            }
+    
+    /// Return a profile for a given user's CKRecordID
+    func getPerformance(forID recordID: CKRecordID) -> ChirpPerformance? {
+        if let performance = performances[recordID] {
+            return performance
+        } else {
+            fetchPerformance(forID: recordID)
+            return nil
         }
-        return perf
     }
 
+    /// Retrieves a ChirpPerformance from a given title string.
+    func getPerformance(fortitle title: String) -> ChirpPerformance? {
+        let recID = CKRecordID(recordName: title)
+        return(getPerformance(forID: recID))
+    }
+    
+    /// Fetch a particular performance from CloudKit
+    func fetchPerformance(forID recordID: CKRecordID) {
+        // This is a low-priority operation.
+        database.fetch(withRecordID: recordID) { [unowned self] (record: CKRecord?, error: Error?) in
+            if let e = error {
+                print("PerformanceStore: Performance Error: \(e)")
+            }
+            if let rec = record,
+                let perf = ChirpPerformance(fromRecord: rec) {
+                DispatchQueue.main.async {
+                    self.performances[recordID] = perf
+                    self.addToStored(performances: [perf])
+                    print("PerformerProfileStore: \(perf.title()) found.")
+                    self.delegate?.modelUpdated()
+                }
+            }
+        }
+    }
+
+    
     /// Sorts the stored performances by date
     func sortStoredPerformances() {
         self.storedPerformances.sort(by: {(rec1: ChirpPerformance, rec2: ChirpPerformance) -> Bool in
             rec1.date > rec2.date
         })
     }
+}
 
-    /// Returns a ChirpPerformance from a CKRecord of a performance
-    func performanceFrom(record: CKRecord) -> ChirpPerformance? {
-        // Initialise the Performance
-        guard let perf = ChirpPerformance(fromRecord: record) else {
-            print("PerformanceStore: Could not make Performance from CKRecord.")
-            return nil
-        }
-        return perf
-    }
-
+/// Extension for uploading functionality
+extension PerformanceStore {
+    
     /// Upload a saved jam to CloudKit
     func upload(performance : ChirpPerformance) {
         // Setup the record
@@ -188,7 +223,7 @@ class PerformanceStore: NSObject {
         performanceRecord[PerfCloudKeys.location] = performance.location!
         performanceRecord[PerfCloudKeys.colour] = performance.colourString as CKRecordValue
         performanceRecord[PerfCloudKeys.backgroundColour] = performance.backgroundColourString as CKRecordValue
-
+        
         guard let imageData = UIImagePNGRepresentation(performance.image) else {
             print("PerformanceStore: Blank performance, not able to save.")
             return
@@ -203,7 +238,7 @@ class PerformanceStore: NSObject {
         catch {
             print("Store: Error writing image data:", error)
         }
-
+        
         // Upload to the container
         publicDB.save(performanceRecord, completionHandler: {(record, error) -> Void in
             if (error != nil) {
@@ -223,5 +258,19 @@ class PerformanceStore: NSObject {
             
             print("Store: Saved to cloudkit:", performance.title()) // runs when upload is complete
         })
+    }
+}
+
+/// Extension for Parsing Methods
+extension PerformanceStore {
+    
+    /// Returns a ChirpPerformance from a CKRecord of a performance
+    func performanceFrom(record: CKRecord) -> ChirpPerformance? {
+        // Initialise the Performance
+        guard let perf = ChirpPerformance(fromRecord: record) else {
+            print("PerformanceStore: Could not make Performance from CKRecord.")
+            return nil
+        }
+        return perf
     }
 }
