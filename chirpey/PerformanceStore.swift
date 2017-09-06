@@ -53,12 +53,15 @@ class PerformanceStore: NSObject {
     static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
     /// URL of storage location
     static let perfDictURL = DocumentsDirectory.appendingPathComponent("performanceStoreDict")
+    /// a feed of ChirpPerformances for the world screen generated from stored performances.
+    var feed : [ChirpPerformance] = []
 
 
     /// Loads saved performances and then updates from cloud backend.
     override private init() {
         performances = PerformanceStore.loadPerformanceDict() // load the performance dictionary
         super.init()
+        
         if let savedPerformances = loadPerformances() {
             storedPerformances += savedPerformances
             sortStoredPerformances()
@@ -66,6 +69,8 @@ class PerformanceStore: NSObject {
         } else {
             NSLog("Store: Failed to load performances")
         }
+        feed = generateFeed()
+        print("PerformanceStore: Feed has \(feed.count) items.")
         fetchWorldJamsFromCloud() // get jams from CloudKit
     }
 
@@ -103,6 +108,29 @@ class PerformanceStore: NSObject {
         let filename = ProcessInfo.processInfo.globallyUniqueString + ".png"
         return URL.init(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(filename)
     }
+    
+    /// Traverse the performance store's dictionary to create a "feed", or list of relevant jams for the world screen.
+    func generateFeed() -> [ChirpPerformance] {
+        /// FIXME: is there a more swifty/functional way of doing all this? probably.
+        var tempFeed = performances
+        let titles = tempFeed.values.map{$0.title()}
+        let parentTitles = tempFeed.values.map{$0.replyto}
+        
+        // remove each parent performance from the dict
+        for parent in parentTitles {
+            if titles.contains(parent) {
+                tempFeed.removeValue(forKey: CKRecordID(recordName: parent))
+            }
+        }
+        // the dict now only contains child (leaf) performances, turn into an array
+        var outFeed = Array(tempFeed.values)
+        // sort by date
+        outFeed.sort(by: {(rec1: ChirpPerformance, rec2: ChirpPerformance) -> Bool in
+                rec1.date > rec2.date
+            })
+        // done!
+        return outFeed
+    }
 
     /// Refresh list of world jams from CloudKit and then update in world jam table view.
     func fetchWorldJamsFromCloud() {
@@ -133,7 +161,7 @@ class PerformanceStore: NSObject {
             }
             print("Store: ", fetchedPerformances.count, " performances downloaded.")
             self.addToStored(performances: fetchedPerformances) // update the stored performances
-            //self.storedPerformances = fetchedPerformances // update the stored performances
+            self.feed = self.generateFeed()
             print("Store: ", self.storedPerformances.count, " total stored performances.")
             DispatchQueue.main.async { // give the delegate the trigger to update the table.
                 self.delegate?.modelUpdated()
@@ -204,13 +232,21 @@ class PerformanceStore: NSObject {
             rec1.date > rec2.date
         })
     }
+    
+    /// Sorts a list of ChirpPerformances by date.
+    func sortPerformancesByDate(_ perfs : [ChirpPerformance]) -> [ChirpPerformance] {
+        return perfs.sorted(by: {(rec1: ChirpPerformance, rec2: ChirpPerformance) -> Bool in
+            rec1.date > rec2.date
+        })
+    }
+    
 }
 
 /// Extension for uploading functionality
 extension PerformanceStore {
     
     /// Upload a saved jam to CloudKit
-    func upload(performance : ChirpPerformance)  {
+    func upload(performance : ChirpPerformance) {
         // Setup the record
         print("Store: Saving the performance:", performance.title())
         let performanceID = CKRecordID(recordName: performance.title())

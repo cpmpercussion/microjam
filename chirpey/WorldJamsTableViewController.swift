@@ -131,7 +131,8 @@ class WorldJamsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return performanceStore.storedPerformances.count
+//        return performanceStore.storedPerformances.count
+        return performanceStore.feed.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -144,7 +145,9 @@ class WorldJamsTableViewController: UITableViewController {
             }
         }
         
-        let performance = performanceStore.storedPerformances[indexPath.row]
+//        let performance = performanceStore.storedPerformances[indexPath.row]
+        let performance = performanceStore.feed[indexPath.row]
+
 
         cell.player = ChirpPlayer()
         cell.player!.delegate = self
