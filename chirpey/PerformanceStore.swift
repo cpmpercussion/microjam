@@ -210,7 +210,7 @@ class PerformanceStore: NSObject {
 extension PerformanceStore {
     
     /// Upload a saved jam to CloudKit
-    func upload(performance : ChirpPerformance) {
+    func upload(performance : ChirpPerformance)  {
         // Setup the record
         print("Store: Saving the performance:", performance.title())
         let performanceID = CKRecordID(recordName: performance.title())
@@ -250,7 +250,8 @@ extension PerformanceStore {
                 DispatchQueue.main.async {
                     // add the creator id to the record
                     performance.creatorID = creator_id
-                    self.storedPerformances.insert(performance, at: 0)//
+                    self.storedPerformances.insert(performance, at: 0) // add to performance list
+                    self.performances[performanceID] = performance // add to performance dictionary
                     self.delegate?.modelUpdated() // stop spinner
                     self.savePerformances()
                 }
