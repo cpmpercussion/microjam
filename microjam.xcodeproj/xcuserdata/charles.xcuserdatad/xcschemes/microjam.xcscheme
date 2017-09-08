@@ -48,6 +48,16 @@
                ReferencedContainer = "container:microjam.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "56E94AB91F20793F0049442A"
+               BuildableName = "microjamExtraTests.xctest"
+               BlueprintName = "microjamExtraTests"
+               ReferencedContainer = "container:microjam.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

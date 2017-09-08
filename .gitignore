@@ -2,6 +2,9 @@ research-data-downloader/*.csv
 research-data-downloader/*.png
 docs/_site/*
 
+# Re-add tilde files for libpd
+!*~
+
 # Xcode - Swift.gitignore
 #
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
@@ -72,3 +75,4 @@ fastlane/test_output
 
 microjam.xcworkspace/xcuserdata
 
+.DS_Store

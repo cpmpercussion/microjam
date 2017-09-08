@@ -9,11 +9,26 @@
 import UIKit
 
 class MicrojamTabBarController: UITabBarController {
+    
+    /// User Settings View Controller
 
     override func viewDidLoad() {
         super.viewDidLoad()
         print("TABVC: Loaded main tab bar.")
-        // Do any additional setup after loading the view.
+        
+//        let controller = ExploreController()
+//        controller.tabBarItem = UITabBarItem(title: "explore", image: #imageLiteral(resourceName: "remotejamsTabIcon"), selectedImage: nil)
+//        
+//        let navigation = UINavigationController(rootViewController: controller)
+//        viewControllers?.insert(navigation, at: 0)
+        
+        // MARK: Initialise view controllers that exist as tabs.
+        if let userSettingsViewController = UserSettingsViewController.storyboardInstance() {
+        userSettingsViewController.tabBarItem = UITabBarItem(title: TabBarItemTitles.profileTab, image: #imageLiteral(resourceName: "settingsTabIcon"), selectedImage: nil)
+            viewControllers?.append(userSettingsViewController)
+        } else {
+            print("TABVC: User Settings Tab could not be initialised.")
+        }
     }
 
     override func didReceiveMemoryWarning() {

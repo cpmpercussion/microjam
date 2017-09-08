@@ -67,6 +67,7 @@ static void clip_setup(void)
 #define DUMTAB1SIZE 256
 #define DUMTAB2SIZE 1024
 
+/* These are only written at setup time when there's a global lock in place. */
 static float rsqrt_exptab[DUMTAB1SIZE], rsqrt_mantissatab[DUMTAB2SIZE];
 
 static void init_rsqrt(void)
@@ -257,7 +258,7 @@ static t_int *sigwrap_perform(t_int *w)
     {
         t_sample f = *in++;
         int k = f;
-        if (f > 0) *out++ = f-k;
+        if (k <= f) *out++ = f-k;
         else *out++ = f - (k-1);
     }
     return (w + 4);

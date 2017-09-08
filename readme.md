@@ -3,7 +3,7 @@
 ![MicroJam allows users to record and share very short musical
 performances on a touch screen. This user is recording a reply over a
 previously saved
-performance.](https://github.com/cpmpercussion/microjam/raw/master/images/microjam-action-small.jpg)
+performance.](https://raw.githubusercontent.com/cpmpercussion/microjam/develop/images/rc1/microjam-rc-1-duo.jpg)
 
 [![DOI](https://zenodo.org/badge/70703690.svg)](https://zenodo.org/badge/latestdoi/70703690)
 
