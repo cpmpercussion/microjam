@@ -1,13 +1,13 @@
-#N canvas 193 64 831 285 10;
+#N canvas 491 34 831 380 10;
 #X msg 204 228 /y \$1;
 #X floatatom 130 123 5 0 0 0 - - -, f 5;
 #X floatatom 65 124 5 0 0 0 - - -, f 5;
 #X obj 44 159 hsl 128 15 0 127 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 12200 1;
+-1 -1 10400 1;
 #X floatatom 278 115 5 0 0 0 - - -, f 5;
 #X floatatom 213 116 5 0 0 0 - - -, f 5;
 #X obj 192 151 hsl 128 15 0 127 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 4100 1;
+-1 -1 7200 1;
 #X obj 203 192 / 127;
 #X obj 78 82 ctlin 113;
 #X obj 226 74 ctlin 114;
@@ -16,12 +16,20 @@
 #X floatatom 419 113 5 0 0 0 - - -, f 5;
 #X floatatom 354 114 5 0 0 0 - - -, f 5;
 #X obj 333 149 hsl 128 15 0 127 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 1600 1;
+-1 -1 1400 1;
 #X obj 344 190 / 127;
 #X obj 367 72 ctlin 115;
 #X msg 345 226 /z \$1;
 #X text 85 7 use XYZ pad program;
 #X obj 204 269 outlet;
+#X obj 464 189 t b;
+#X msg 468 256 /m \$1;
+#X floatatom 454 288 5 0 0 0 - - -, f 5;
+#X obj 465 221 f;
+#X msg 511 186 0;
+#X msg 553 186 1;
+#X obj 524 115 t b b;
+#X obj 511 160 delay 35;
 #X connect 0 0 19 0;
 #X connect 2 0 3 0;
 #X connect 2 0 10 0;
@@ -40,3 +48,14 @@
 #X connect 16 0 13 0;
 #X connect 16 1 12 0;
 #X connect 17 0 19 0;
+#X connect 17 0 20 0;
+#X connect 20 0 23 0;
+#X connect 21 0 19 0;
+#X connect 21 0 26 0;
+#X connect 23 0 21 0;
+#X connect 23 0 22 0;
+#X connect 24 0 23 1;
+#X connect 25 0 23 1;
+#X connect 26 0 27 0;
+#X connect 26 1 25 0;
+#X connect 27 0 24 0;
