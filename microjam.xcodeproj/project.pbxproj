@@ -23,11 +23,9 @@
 		56002F471F306C0F00003B88 /* UserNameChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56002F461F306C0F00003B88 /* UserNameChooserViewController.swift */; };
 		5613B31E1F3D9C380068ED5D /* ChirpRecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5613B31D1F3D9C380068ED5D /* ChirpRecordingView.swift */; };
 		5625E85D1F6874FF00AFE8BF /* block-tester.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5625E6B51F6874FE00AFE8BF /* block-tester.pd */; };
-		5625E85E1F6874FF00AFE8BF /* c_ead.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5625E6B61F6874FE00AFE8BF /* c_ead.pd */; };
 		5625E85F1F6874FF00AFE8BF /* chirp.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5625E6B71F6874FE00AFE8BF /* chirp.pd */; };
 		5625E8601F6874FF00AFE8BF /* drums.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5625E6B81F6874FE00AFE8BF /* drums.pd */; };
-		5625E8611F6874FF00AFE8BF /* e_resonzq.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5625E6B91F6874FE00AFE8BF /* e_resonzq.pd */; };
-		5625E8621F6874FF00AFE8BF /* fm.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5625E6BA1F6874FE00AFE8BF /* fm.pd */; };
+		5625E8621F6874FF00AFE8BF /* fmlead.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5625E6BA1F6874FE00AFE8BF /* fmlead.pd */; };
 		5625E8631F6874FF00AFE8BF /* keys.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5625E6BB1F6874FE00AFE8BF /* keys.pd */; };
 		5625E8641F6874FF00AFE8BF /* adsr.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5625E6BE1F6874FE00AFE8BF /* adsr.pd */; };
 		5625E8651F6874FF00AFE8BF /* dispatch.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5625E6BF1F6874FE00AFE8BF /* dispatch.pd */; };
@@ -502,11 +500,9 @@
 		56002F461F306C0F00003B88 /* UserNameChooserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserNameChooserViewController.swift; path = chirpey/UserNameChooserViewController.swift; sourceTree = "<group>"; };
 		5613B31D1F3D9C380068ED5D /* ChirpRecordingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChirpRecordingView.swift; path = chirpey/ChirpRecordingView.swift; sourceTree = "<group>"; };
 		5625E6B51F6874FE00AFE8BF /* block-tester.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "block-tester.pd"; sourceTree = "<group>"; };
-		5625E6B61F6874FE00AFE8BF /* c_ead.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = c_ead.pd; sourceTree = "<group>"; };
 		5625E6B71F6874FE00AFE8BF /* chirp.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chirp.pd; sourceTree = "<group>"; };
 		5625E6B81F6874FE00AFE8BF /* drums.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = drums.pd; sourceTree = "<group>"; };
-		5625E6B91F6874FE00AFE8BF /* e_resonzq.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = e_resonzq.pd; sourceTree = "<group>"; };
-		5625E6BA1F6874FE00AFE8BF /* fm.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fm.pd; sourceTree = "<group>"; };
+		5625E6BA1F6874FE00AFE8BF /* fmlead.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fmlead.pd; sourceTree = "<group>"; };
 		5625E6BB1F6874FE00AFE8BF /* keys.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = keys.pd; sourceTree = "<group>"; };
 		5625E6BE1F6874FE00AFE8BF /* adsr.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = adsr.pd; sourceTree = "<group>"; };
 		5625E6BF1F6874FE00AFE8BF /* dispatch.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dispatch.pd; sourceTree = "<group>"; };
@@ -1060,11 +1056,9 @@
 			isa = PBXGroup;
 			children = (
 				5625E6B51F6874FE00AFE8BF /* block-tester.pd */,
-				5625E6B61F6874FE00AFE8BF /* c_ead.pd */,
 				5625E6B71F6874FE00AFE8BF /* chirp.pd */,
 				5625E6B81F6874FE00AFE8BF /* drums.pd */,
-				5625E6B91F6874FE00AFE8BF /* e_resonzq.pd */,
-				5625E6BA1F6874FE00AFE8BF /* fm.pd */,
+				5625E6BA1F6874FE00AFE8BF /* fmlead.pd */,
 				5625E6BB1F6874FE00AFE8BF /* keys.pd */,
 				5625E6BC1F6874FE00AFE8BF /* metaPdLibs */,
 				5625E6D81F6874FE00AFE8BF /* microjam_fm_chain.pd */,
@@ -1755,7 +1749,6 @@
 				5625E8A61F6874FF00AFE8BF /* c_markov-help.pd in Resources */,
 				5625E9CC1F68750000AFE8BF /* u_loader-help.pd in Resources */,
 				5625E9331F68750000AFE8BF /* m_beat2ms.pd in Resources */,
-				5625E8611F6874FF00AFE8BF /* e_resonzq.pd in Resources */,
 				5625E9EF1F68750000AFE8BF /* u_sigm.pd in Resources */,
 				5625E9F91F68750000AFE8BF /* z_blank-help.pd in Resources */,
 				5625E9151F68750000AFE8BF /* g_pattern32.pd in Resources */,
@@ -1924,7 +1917,7 @@
 				5625E85D1F6874FF00AFE8BF /* block-tester.pd in Resources */,
 				5625E9651F68750000AFE8BF /* rj.txt in Resources */,
 				5625E9AF1F68750000AFE8BF /* u_dispatch-help.pd in Resources */,
-				5625E8621F6874FF00AFE8BF /* fm.pd in Resources */,
+				5625E8621F6874FF00AFE8BF /* fmlead.pd in Resources */,
 				5625E99D1F68750000AFE8BF /* s_wsb.pd in Resources */,
 				5625E8B31F6874FF00AFE8BF /* c_patternchange.pd in Resources */,
 				5625E9891F68750000AFE8BF /* s_noish.pd in Resources */,
@@ -1950,7 +1943,6 @@
 				5625E9F01F68750000AFE8BF /* u_spinner-help.pd in Resources */,
 				5625E9741F68750000AFE8BF /* s_czz.pd in Resources */,
 				5625E9511F68750000AFE8BF /* m_thresholds.pd in Resources */,
-				5625E85E1F6874FF00AFE8BF /* c_ead.pd in Resources */,
 				5625E9B51F68750000AFE8BF /* u_follower.pd in Resources */,
 				5625E8F71F68750000AFE8BF /* e_scompress-help.pd in Resources */,
 				5625E86A1F6874FF00AFE8BF /* xfade.pd in Resources */,

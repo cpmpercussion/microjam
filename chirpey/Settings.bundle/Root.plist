@@ -88,7 +88,9 @@
 				<integer>2</integer>
 				<integer>3</integer>
 				<integer>4</integer>
-                <integer>5</integer>
+				<integer>5</integer>
+                <integer>6</integer>
+                <integer>7</integer>
 			</array>
 			<key>Titles</key>
 			<array>
@@ -97,7 +99,9 @@
 				<string>drums</string>
 				<string>strings</string>
 				<string>quack</string>
-                <string>wub</string>
+				<string>wub</string>
+				<string>pad</string>
+				<string>fmlead</string>
 			</array>
 		</dict>
 	</array>
