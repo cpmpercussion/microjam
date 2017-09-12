@@ -148,6 +148,7 @@
 #X obj 63 147 t f f;
 #X obj 121 217 + 0.88;
 #X obj 121 195 * 0.12;
+#X obj 32 46 block-tester;
 #X connect 1 0 2 0;
 #X connect 2 0 8 0;
 #X connect 5 0 0 0;
@@ -210,3 +211,4 @@
 #X connect 52 1 54 0;
 #X connect 53 0 30 0;
 #X connect 54 0 53 0;
+#X connect 55 0 8 0;
