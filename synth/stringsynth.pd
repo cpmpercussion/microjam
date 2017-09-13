@@ -77,7 +77,7 @@
 #X obj 430 344 r \$0-trigger;
 #X msg 446 92 1000;
 #X obj 430 393 t b;
-#N canvas 559 437 450 300 velocity 0;
+#N canvas 559 437 450 300 velocity 1;
 #X obj 170 7 inlet;
 #X obj 171 39 sel 0;
 #X obj 189 80 / 127;
@@ -86,11 +86,11 @@
 #X obj 194 155 dbtorms;
 #X floatatom 276 153 5 0 0 0 - - -, f 5;
 #X floatatom 294 103 5 0 0 0 - - -, f 5;
-#N canvas 874 410 450 300 constrain 0;
+#N canvas 874 410 450 300 constrain 1;
 #X obj 46 22 inlet;
 #X obj 48 106 outlet;
-#X obj 47 74 + 0.6;
-#X obj 47 52 * 0.4;
+#X obj 48 74 + 0.8;
+#X obj 47 52 * 0.2;
 #X connect 0 0 3 0;
 #X connect 2 0 1 0;
 #X connect 3 0 2 0;

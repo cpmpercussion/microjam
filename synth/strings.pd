@@ -1,10 +1,11 @@
-#N canvas 1471 277 588 373 10;
+#N canvas 690 149 588 373 10;
 #X declare -path metaPdLibs/control;
 #X declare -path metaPdLibs/fx;
 #X declare -path metaPdLibs/instrument;
 #X declare -path metaPdLibs/scales;
 #X declare -path metaPdLibs;
 #X declare -path rj;
+#X declare -path .;
 #X obj 118 43 r \$0-input;
 #X obj 118 65 list trim;
 #X obj 116 86 t a a;
@@ -16,6 +17,7 @@
 #X obj 33 79 declare -path metaPdLibs/scales;
 #X obj 34 104 declare -path metaPdLibs;
 #X obj 39 131 declare -path rj;
+#X obj 26 166 declare -path .;
 #X restore 24 13 pd includes;
 #X obj 124 238 microjam_string_chain;
 #X obj 341 197 vu 15 120 empty empty -1 -8 0 10 -66577 -1 1 0;
