@@ -40,12 +40,10 @@
 		5625E86E1F6874FF00AFE8BF /* pitchshift~.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5625E6C91F6874FE00AFE8BF /* pitchshift~.pd */; };
 		5625E86F1F6874FF00AFE8BF /* rev2~.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5625E6CA1F6874FE00AFE8BF /* rev2~.pd */; };
 		5625E8701F6874FF00AFE8BF /* rlop~.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5625E6CB1F6874FE00AFE8BF /* rlop~.pd */; };
-		5625E8711F6874FF00AFE8BF /* hhm-effects-chain.mmp in Resources */ = {isa = PBXBuildFile; fileRef = 5625E6CC1F6874FE00AFE8BF /* hhm-effects-chain.mmp */; };
 		5625E8721F6874FF00AFE8BF /* cpmlooper.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5625E6CE1F6874FE00AFE8BF /* cpmlooper.pd */; };
 		5625E8731F6874FF00AFE8BF /* percsampler.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5625E6CF1F6874FE00AFE8BF /* percsampler.pd */; };
 		5625E8741F6874FF00AFE8BF /* slicesampler.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5625E6D01F6874FE00AFE8BF /* slicesampler.pd */; };
 		5625E8751F6874FF00AFE8BF /* loadMetaPdLibs.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5625E6D11F6874FE00AFE8BF /* loadMetaPdLibs.pd */; };
-		5625E8761F6874FF00AFE8BF /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 5625E6D21F6874FE00AFE8BF /* README.md */; };
 		5625E8771F6874FF00AFE8BF /* m_lydian.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5625E6D41F6874FE00AFE8BF /* m_lydian.pd */; };
 		5625E8781F6874FF00AFE8BF /* m_lydiansharp5.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5625E6D51F6874FE00AFE8BF /* m_lydiansharp5.pd */; };
 		5625E8791F6874FF00AFE8BF /* m_mixolydian.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5625E6D61F6874FE00AFE8BF /* m_mixolydian.pd */; };
@@ -460,6 +458,9 @@
 		56D707EF1F15960900FDEB76 /* PerformanceStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D707EE1F15960900FDEB76 /* PerformanceStore.swift */; };
 		56E94AB31F20751B0049442A /* microjamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E94AB21F20751B0049442A /* microjamTests.swift */; };
 		56E94AB51F20753E0049442A /* microjamUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E94AB41F20753E0049442A /* microjamUITests.swift */; };
+		56FD9DE61F69142C00D6A345 /* touch_to_notes.pd in Resources */ = {isa = PBXBuildFile; fileRef = 56FD9DE51F69142C00D6A345 /* touch_to_notes.pd */; };
+		56FD9DE91F69207F00D6A345 /* touch_tester_auto.pd in Resources */ = {isa = PBXBuildFile; fileRef = 56FD9DE71F69207F00D6A345 /* touch_tester_auto.pd */; };
+		56FD9DEA1F69207F00D6A345 /* touch_tester.pd in Resources */ = {isa = PBXBuildFile; fileRef = 56FD9DE81F69207F00D6A345 /* touch_tester.pd */; };
 		798119EB716DF4238044D3D4 /* Pods_microjam.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63C4E84624B83BA18A354CA2 /* Pods_microjam.framework */; };
 		A09F5669ECC4CFA6138A6CB1 /* Pods_microjamTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29CA87DDE5853DCDE258268C /* Pods_microjamTests.framework */; };
 /* End PBXBuildFile section */
@@ -517,12 +518,10 @@
 		5625E6C91F6874FE00AFE8BF /* pitchshift~.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "pitchshift~.pd"; sourceTree = "<group>"; };
 		5625E6CA1F6874FE00AFE8BF /* rev2~.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "rev2~.pd"; sourceTree = "<group>"; };
 		5625E6CB1F6874FE00AFE8BF /* rlop~.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "rlop~.pd"; sourceTree = "<group>"; };
-		5625E6CC1F6874FE00AFE8BF /* hhm-effects-chain.mmp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "hhm-effects-chain.mmp"; sourceTree = "<group>"; };
 		5625E6CE1F6874FE00AFE8BF /* cpmlooper.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cpmlooper.pd; sourceTree = "<group>"; };
 		5625E6CF1F6874FE00AFE8BF /* percsampler.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = percsampler.pd; sourceTree = "<group>"; };
 		5625E6D01F6874FE00AFE8BF /* slicesampler.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = slicesampler.pd; sourceTree = "<group>"; };
 		5625E6D11F6874FE00AFE8BF /* loadMetaPdLibs.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = loadMetaPdLibs.pd; sourceTree = "<group>"; };
-		5625E6D21F6874FE00AFE8BF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		5625E6D41F6874FE00AFE8BF /* m_lydian.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = m_lydian.pd; sourceTree = "<group>"; };
 		5625E6D51F6874FE00AFE8BF /* m_lydiansharp5.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = m_lydiansharp5.pd; sourceTree = "<group>"; };
 		5625E6D61F6874FE00AFE8BF /* m_mixolydian.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = m_mixolydian.pd; sourceTree = "<group>"; };
@@ -948,6 +947,9 @@
 		56D94A371F208155003C4139 /* test-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "test-Bridging-Header.h"; sourceTree = "<group>"; };
 		56E94AB21F20751B0049442A /* microjamTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = microjamTests.swift; sourceTree = "<group>"; };
 		56E94AB41F20753E0049442A /* microjamUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = microjamUITests.swift; sourceTree = "<group>"; };
+		56FD9DE51F69142C00D6A345 /* touch_to_notes.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = touch_to_notes.pd; sourceTree = "<group>"; };
+		56FD9DE71F69207F00D6A345 /* touch_tester_auto.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = touch_tester_auto.pd; sourceTree = "<group>"; };
+		56FD9DE81F69207F00D6A345 /* touch_tester.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = touch_tester.pd; sourceTree = "<group>"; };
 		63C4E84624B83BA18A354CA2 /* Pods_microjam.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_microjam.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		65C97DCF3688EF691BBB543B /* Pods-microjam-microjamTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-microjam-microjamTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-microjam-microjamTests/Pods-microjam-microjamTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7E59A152461FB44F2E21DD12 /* Pods-microjamUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-microjamUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-microjamUITests/Pods-microjamUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1055,6 +1057,9 @@
 		5625E6B41F6874FE00AFE8BF /* synth */ = {
 			isa = PBXGroup;
 			children = (
+				56FD9DE71F69207F00D6A345 /* touch_tester_auto.pd */,
+				56FD9DE81F69207F00D6A345 /* touch_tester.pd */,
+				56FD9DE51F69142C00D6A345 /* touch_to_notes.pd */,
 				5625E6B51F6874FE00AFE8BF /* block-tester.pd */,
 				5625E6B71F6874FE00AFE8BF /* chirp.pd */,
 				5625E6B81F6874FE00AFE8BF /* drums.pd */,
@@ -1089,10 +1094,8 @@
 				5625E6BD1F6874FE00AFE8BF /* control */,
 				5625E6C51F6874FE00AFE8BF /* effectschain.pd */,
 				5625E6C61F6874FE00AFE8BF /* fx */,
-				5625E6CC1F6874FE00AFE8BF /* hhm-effects-chain.mmp */,
 				5625E6CD1F6874FE00AFE8BF /* instruments */,
 				5625E6D11F6874FE00AFE8BF /* loadMetaPdLibs.pd */,
-				5625E6D21F6874FE00AFE8BF /* README.md */,
 				5625E6D31F6874FE00AFE8BF /* scales */,
 			);
 			path = metaPdLibs;
@@ -1913,6 +1916,7 @@
 				5625E8941F6874FF00AFE8BF /* c_bus-help.pd in Resources */,
 				5625E9C81F68750000AFE8BF /* u_listreduce-help.pd in Resources */,
 				5669CA9A1DA7AAA6009EEC3B /* Assets.xcassets in Resources */,
+				56FD9DEA1F69207F00D6A345 /* touch_tester.pd in Resources */,
 				5625E9AD1F68750000AFE8BF /* u_collect-help.pd in Resources */,
 				5625E85D1F6874FF00AFE8BF /* block-tester.pd in Resources */,
 				5625E9651F68750000AFE8BF /* rj.txt in Resources */,
@@ -1942,6 +1946,7 @@
 				5625E8D11F6874FF00AFE8BF /* e_dynproc-help.pd in Resources */,
 				5625E9F01F68750000AFE8BF /* u_spinner-help.pd in Resources */,
 				5625E9741F68750000AFE8BF /* s_czz.pd in Resources */,
+				56FD9DE91F69207F00D6A345 /* touch_tester_auto.pd in Resources */,
 				5625E9511F68750000AFE8BF /* m_thresholds.pd in Resources */,
 				5625E9B51F68750000AFE8BF /* u_follower.pd in Resources */,
 				5625E8F71F68750000AFE8BF /* e_scompress-help.pd in Resources */,
@@ -2080,7 +2085,6 @@
 				5625E8D21F6874FF00AFE8BF /* e_dynproc.pd in Resources */,
 				5625E9E61F68750000AFE8BF /* u_samplebank2-help.pd in Resources */,
 				5625E8D01F6874FF00AFE8BF /* e_dubdel.pd in Resources */,
-				5625E8711F6874FF00AFE8BF /* hhm-effects-chain.mmp in Resources */,
 				5625E9BA1F68750000AFE8BF /* u_listdrip-help.pd in Resources */,
 				5625E98D1F68750000AFE8BF /* s_osc.pd in Resources */,
 				5625E8E21F6874FF00AFE8BF /* e_noclickdel-help.pd in Resources */,
@@ -2124,6 +2128,7 @@
 				5625E8D51F6874FF00AFE8BF /* e_fbdelay2.pd in Resources */,
 				5625E8C81F6874FF00AFE8BF /* e_bitcrusher.pd in Resources */,
 				5625E90C1F68750000AFE8BF /* g_hsl-help.pd in Resources */,
+				56FD9DE61F69142C00D6A345 /* touch_to_notes.pd in Resources */,
 				5625E9461F68750000AFE8BF /* m_ratio2intv-help.pd in Resources */,
 				5625E8F81F68750000AFE8BF /* e_scompress.pd in Resources */,
 				5625E9B81F68750000AFE8BF /* u_highpassq-help.pd in Resources */,
@@ -2392,7 +2397,6 @@
 				562FDCA61F316870000409C8 /* UserSettingsViewController.swift in Sources */,
 				4DF23D0C1F4AF51F006033F8 /* ChirpRecorder.swift in Sources */,
 				562FDCAE1F3727DC000409C8 /* TouchRecord.swift in Sources */,
-				5625E8761F6874FF00AFE8BF /* README.md in Sources */,
 				567286661E05E0AF0024A515 /* MicrojamTabBarController.swift in Sources */,
 				4DD839771F3DF81D004D3E40 /* FilterView.swift in Sources */,
 				4DEFCAE31F41E8EB007B7C34 /* Filter.swift in Sources */,
