@@ -1,4 +1,5 @@
-#N canvas 76 57 939 686 10;
+#N canvas 157 200 939 686 10;
+#X declare -path .;
 #X obj 110 441 outlet~;
 #X obj 204 444 outlet~;
 #N canvas 773 403 889 476 crystal 0;
@@ -61,13 +62,13 @@
 #X connect 25 0 26 2;
 #X connect 26 0 14 0;
 #X restore 240 368 pd crystal;
-#X obj 105 213 stringsynth;
+#X obj 111 188 stringsynth;
 #X obj 32 23 inlet notes;
 #X obj 110 21 inlet lr;
 #X obj 177 20 inlet dy;
 #X obj 246 25 inlet pressure;
 #X obj 346 25 inlet release;
-#X floatatom 197 47 5 0 0 0 - - -, f 5;
+#X floatatom 209 74 5 0 0 0 - - -, f 5;
 #X obj 202 249 *~ 0.6;
 #X obj 100 323 e_dubdel \$0-dubdel;
 #X msg 340 151 dry \$1;
@@ -83,6 +84,7 @@
 #X msg 291 297 dry 0.2 \, bq 2 \, basedur 500 \, bpitch 83 \, feedback
 0.99 \, dell 2 \, delr 3 \,;
 #X obj 296 271 loadbang;
+#X obj 261 159 *;
 #X connect 2 0 0 0;
 #X connect 2 0 1 0;
 #X connect 3 0 10 0;
@@ -91,9 +93,10 @@
 #X connect 3 1 11 1;
 #X connect 4 0 3 0;
 #X connect 5 0 3 1;
-#X connect 6 0 2 1;
 #X connect 6 0 9 0;
 #X connect 6 0 13 0;
+#X connect 6 0 16 0;
+#X connect 7 0 16 1;
 #X connect 10 0 2 0;
 #X connect 11 0 0 0;
 #X connect 11 1 1 0;
@@ -101,3 +104,4 @@
 #X connect 13 0 12 0;
 #X connect 14 0 11 2;
 #X connect 15 0 14 0;
+#X connect 16 0 2 1;

@@ -461,6 +461,9 @@
 		56FD9DE61F69142C00D6A345 /* touch_to_notes.pd in Resources */ = {isa = PBXBuildFile; fileRef = 56FD9DE51F69142C00D6A345 /* touch_to_notes.pd */; };
 		56FD9DE91F69207F00D6A345 /* touch_tester_auto.pd in Resources */ = {isa = PBXBuildFile; fileRef = 56FD9DE71F69207F00D6A345 /* touch_tester_auto.pd */; };
 		56FD9DEA1F69207F00D6A345 /* touch_tester.pd in Resources */ = {isa = PBXBuildFile; fileRef = 56FD9DE81F69207F00D6A345 /* touch_tester.pd */; };
+		56FD9DEE1F695B5A00D6A345 /* touch_to_drum.pd in Resources */ = {isa = PBXBuildFile; fileRef = 56FD9DED1F695B5A00D6A345 /* touch_to_drum.pd */; };
+		56FD9E031F695C8300D6A345 /* microjam_string_chain.pd in Resources */ = {isa = PBXBuildFile; fileRef = 56FD9DF51F695C8300D6A345 /* microjam_string_chain.pd */; };
+		56FD9E071F695C8300D6A345 /* output_stage.pd in Resources */ = {isa = PBXBuildFile; fileRef = 56FD9DF91F695C8300D6A345 /* output_stage.pd */; };
 		798119EB716DF4238044D3D4 /* Pods_microjam.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63C4E84624B83BA18A354CA2 /* Pods_microjam.framework */; };
 		A09F5669ECC4CFA6138A6CB1 /* Pods_microjamTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29CA87DDE5853DCDE258268C /* Pods_microjamTests.framework */; };
 /* End PBXBuildFile section */
@@ -950,6 +953,9 @@
 		56FD9DE51F69142C00D6A345 /* touch_to_notes.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = touch_to_notes.pd; sourceTree = "<group>"; };
 		56FD9DE71F69207F00D6A345 /* touch_tester_auto.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = touch_tester_auto.pd; sourceTree = "<group>"; };
 		56FD9DE81F69207F00D6A345 /* touch_tester.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = touch_tester.pd; sourceTree = "<group>"; };
+		56FD9DED1F695B5A00D6A345 /* touch_to_drum.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = touch_to_drum.pd; sourceTree = "<group>"; };
+		56FD9DF51F695C8300D6A345 /* microjam_string_chain.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = microjam_string_chain.pd; path = metaPdLibs/microjam_string_chain.pd; sourceTree = "<group>"; };
+		56FD9DF91F695C8300D6A345 /* output_stage.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = output_stage.pd; path = metaPdLibs/output_stage.pd; sourceTree = "<group>"; };
 		63C4E84624B83BA18A354CA2 /* Pods_microjam.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_microjam.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		65C97DCF3688EF691BBB543B /* Pods-microjam-microjamTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-microjam-microjamTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-microjam-microjamTests/Pods-microjam-microjamTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7E59A152461FB44F2E21DD12 /* Pods-microjamUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-microjamUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-microjamUITests/Pods-microjamUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1057,33 +1063,36 @@
 		5625E6B41F6874FE00AFE8BF /* synth */ = {
 			isa = PBXGroup;
 			children = (
-				56FD9DE71F69207F00D6A345 /* touch_tester_auto.pd */,
-				56FD9DE81F69207F00D6A345 /* touch_tester.pd */,
-				56FD9DE51F69142C00D6A345 /* touch_to_notes.pd */,
 				5625E6B51F6874FE00AFE8BF /* block-tester.pd */,
 				5625E6B71F6874FE00AFE8BF /* chirp.pd */,
 				5625E6B81F6874FE00AFE8BF /* drums.pd */,
 				5625E6BA1F6874FE00AFE8BF /* fmlead.pd */,
 				5625E6BB1F6874FE00AFE8BF /* keys.pd */,
-				5625E6BC1F6874FE00AFE8BF /* metaPdLibs */,
 				5625E6D81F6874FE00AFE8BF /* microjam_fm_chain.pd */,
 				5625E6D91F6874FE00AFE8BF /* microjam_fm_patch.pd */,
 				5625E6DA1F6874FE00AFE8BF /* microjam_fmlead.pd */,
 				5625E6DB1F6874FE00AFE8BF /* microjam_pad_chain.pd */,
 				5625E6DC1F6874FE00AFE8BF /* microjam_pad_patch.pd */,
 				5625E6DD1F6874FE00AFE8BF /* microjam_spad.pd */,
+				56FD9DF51F695C8300D6A345 /* microjam_string_chain.pd */,
 				5625E6DE1F6874FE00AFE8BF /* midi_outlets.pd */,
 				5625E6DF1F6874FE00AFE8BF /* mpe_outlets.pd */,
 				5625E6E01F6874FE00AFE8BF /* nanopad-tester.pd */,
+				56FD9DF91F695C8300D6A345 /* output_stage.pd */,
 				5625E6E11F6874FE00AFE8BF /* pad.pd */,
 				5625E6E21F6874FE00AFE8BF /* pluck~.pd */,
 				5625E6E31F6874FE00AFE8BF /* quack.pd */,
-				5625E6E41F6874FE00AFE8BF /* rj */,
 				5625E8581F6874FF00AFE8BF /* s_drumelectro.pd */,
 				5625E8591F6874FF00AFE8BF /* s_pinknoise.pd */,
 				5625E85A1F6874FF00AFE8BF /* strings.pd */,
 				5625E85B1F6874FF00AFE8BF /* stringsynth.pd */,
+				56FD9DE71F69207F00D6A345 /* touch_tester_auto.pd */,
+				56FD9DE81F69207F00D6A345 /* touch_tester.pd */,
+				56FD9DED1F695B5A00D6A345 /* touch_to_drum.pd */,
+				56FD9DE51F69142C00D6A345 /* touch_to_notes.pd */,
 				5625E85C1F6874FF00AFE8BF /* wub.pd */,
+				5625E6BC1F6874FE00AFE8BF /* metaPdLibs */,
+				5625E6E41F6874FE00AFE8BF /* rj */,
 			);
 			path = synth;
 			sourceTree = SOURCE_ROOT;
@@ -1789,6 +1798,7 @@
 				5625E9641F68750000AFE8BF /* rj-meta.pd in Resources */,
 				5625E9BC1F68750000AFE8BF /* u_listequal-help.pd in Resources */,
 				5625E8DE1F6874FF00AFE8BF /* e_lop4-help.pd in Resources */,
+				56FD9E071F695C8300D6A345 /* output_stage.pd in Resources */,
 				5625E8861F6874FF00AFE8BF /* quack.pd in Resources */,
 				5625E8701F6874FF00AFE8BF /* rlop~.pd in Resources */,
 				5625E9DA1F68750000AFE8BF /* u_multisamplebank-help.pd in Resources */,
@@ -2053,6 +2063,7 @@
 				5625E8D91F6874FF00AFE8BF /* e_freqshift.pd in Resources */,
 				5625E9D41F68750000AFE8BF /* u_makepoly-help.pd in Resources */,
 				5625E8CF1F6874FF00AFE8BF /* e_dubdel-help.pd in Resources */,
+				56FD9E031F695C8300D6A345 /* microjam_string_chain.pd in Resources */,
 				5625E97B1F68750000AFE8BF /* s_fmoscil-help.pd in Resources */,
 				5625E9CD1F68750000AFE8BF /* u_loader.pd in Resources */,
 				5625E9801F68750000AFE8BF /* s_guitar-help.pd in Resources */,
@@ -2085,6 +2096,7 @@
 				5625E8D21F6874FF00AFE8BF /* e_dynproc.pd in Resources */,
 				5625E9E61F68750000AFE8BF /* u_samplebank2-help.pd in Resources */,
 				5625E8D01F6874FF00AFE8BF /* e_dubdel.pd in Resources */,
+				56FD9DEE1F695B5A00D6A345 /* touch_to_drum.pd in Resources */,
 				5625E9BA1F68750000AFE8BF /* u_listdrip-help.pd in Resources */,
 				5625E98D1F68750000AFE8BF /* s_osc.pd in Resources */,
 				5625E8E21F6874FF00AFE8BF /* e_noclickdel-help.pd in Resources */,

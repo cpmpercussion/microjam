@@ -1,4 +1,4 @@
-#N canvas 731 118 835 695 10;
+#N canvas 286 106 835 718 10;
 #X declare -path .;
 #X obj 431 442 / 100;
 #X obj 431 422 random 20;
@@ -72,12 +72,12 @@
 #X connect 4 0 7 1;
 #X connect 5 0 7 0;
 #X connect 7 0 6 0;
-#X restore 38 435 pd envelope;
+#X restore 59 425 pd envelope;
 #X obj 430 369 sel 0;
 #X obj 430 344 r \$0-trigger;
 #X msg 446 92 1000;
 #X obj 430 393 t b;
-#N canvas 426 499 450 300 velocity 0;
+#N canvas 559 437 450 300 velocity 0;
 #X obj 170 7 inlet;
 #X obj 171 39 sel 0;
 #X obj 189 80 / 127;
@@ -97,8 +97,9 @@
 #X restore 191 104 pd constrain;
 #X floatatom 303 181 5 0 0 0 - - -, f 5;
 #X obj 174 214 s \$0-trigger;
+#X msg 144 133 0;
 #X connect 0 0 1 0;
-#X connect 1 0 10 0;
+#X connect 1 0 11 0;
 #X connect 1 1 2 0;
 #X connect 2 0 3 0;
 #X connect 2 0 7 0;
@@ -108,15 +109,24 @@
 #X connect 5 0 9 0;
 #X connect 5 0 10 0;
 #X connect 8 0 4 0;
+#X connect 11 0 10 0;
 #X restore 83 88 pd velocity;
 #N canvas 310 290 450 300 trig 0;
-#X obj 74 22 r \$0-trigger;
+#X obj 89 18 r \$0-trigger;
 #X obj 73 56 sel 0;
 #X obj 73 84 t b;
 #X obj 72 118 outlet;
+#X obj 184 78 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 133 115 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X floatatom 126 73 5 0 0 0 - - -, f 5;
 #X connect 0 0 1 0;
+#X connect 0 0 4 0;
+#X connect 0 0 6 0;
 #X connect 1 1 2 0;
 #X connect 2 0 3 0;
+#X connect 2 0 5 0;
 #X restore 36 332 pd trig;
 #X obj 59 178 s \$0-pitch;
 #X obj 88 309 r \$0-pitch;
