@@ -69,7 +69,7 @@
 #X connect 12 0 4 0;
 #X restore 228 259 pd delta_y;
 #X obj 145 285 * 12;
-#N canvas 214 202 613 371 note_proc 0;
+#N canvas 971 361 613 371 note_proc 0;
 #X obj 86 311 outlet;
 #X obj 94 148 t b b b;
 #X obj 95 180 f;
@@ -146,8 +146,8 @@
 #X text 295 349 pressure;
 #X obj 42 95 * \$2;
 #X obj 42 143 + \$1;
-#X obj 414 169 * 60;
-#X obj 413 191 + 65;
+#X obj 414 169 * 80;
+#X obj 413 191 + 47;
 #X connect 0 0 2 0;
 #X connect 1 0 26 0;
 #X connect 2 0 9 0;
