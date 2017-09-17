@@ -77,6 +77,8 @@ class ChirpJamViewController: UIViewController {
     @IBOutlet weak var instrumentButton: UIButton!
     /// Button to add specific parent performances when composing a performance
     @IBOutlet weak var addJamButton: UIButton!
+    /// Roboplay button; requests an AI response performance
+    @IBOutlet weak var roboplayButton: UIButton!
 
     // MARK: - Navigation
 
@@ -401,6 +403,11 @@ class ChirpJamViewController: UIViewController {
                 recorder.play()
             }
         }
+    }
+    
+    /// Roboplay Button Pressed, request an AI response and add as a layer.
+    @IBAction func roboplayPressed(_ sender: Any) {
+        // FIME: fill this in!
     }
     
     /// touchesBegan method starts a recording if this is the first touch in a new microjam.

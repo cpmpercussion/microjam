@@ -71,7 +71,7 @@
                                         <rect key="frame" x="0.0" y="554" width="374" height="44"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s3v-f5-bcy" userLabel="Rewind">
-                                                <rect key="frame" x="0.0" y="0.0" width="54" height="44"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="45" height="44"/>
                                                 <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <state key="normal" title="Rewind" image="microjam-rewind"/>
                                                 <connections>
@@ -79,7 +79,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DIT-bx-YUr" userLabel="Record Enable">
-                                                <rect key="frame" x="64" y="0.0" width="54" height="44"/>
+                                                <rect key="frame" x="55.000000000000007" y="0.0" width="44.666666666666679" height="44"/>
                                                 <color key="tintColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" title="Record" image="microjam-record"/>
                                                 <connections>
@@ -87,7 +87,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O9V-pQ-Tlh">
-                                                <rect key="frame" x="128" y="0.0" width="54" height="44"/>
+                                                <rect key="frame" x="109.66666666666666" y="0.0" width="45" height="44"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="playButton" label="Play"/>
                                                 <color key="tintColor" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" title="play" image="microjam-play"/>
@@ -96,7 +96,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="right" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PVn-2h-cdI" userLabel="Add Layer Button">
-                                                <rect key="frame" x="192" y="0.0" width="54" height="44"/>
+                                                <rect key="frame" x="164.66666666666666" y="0.0" width="44.666666666666686" height="44"/>
                                                 <accessibility key="accessibilityConfiguration" hint="Tap here to choose a different sound." identifier="instrumentChooser" label="Instrument Menu"/>
                                                 <color key="tintColor" red="0.38397389650000002" green="0.78096622230000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="add jam" image="microjam-layer">
@@ -107,7 +107,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xh5-cz-PkR" userLabel="Reply Button">
-                                                <rect key="frame" x="256" y="0.0" width="54" height="44"/>
+                                                <rect key="frame" x="219.33333333333331" y="0.0" width="44.999999999999943" height="44"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="replyButton" label="Reply"/>
                                                 <state key="normal" title="reset" image="microjam-reply"/>
                                                 <connections>
@@ -115,12 +115,19 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HfI-q6-7dd">
-                                                <rect key="frame" x="320" y="0.0" width="54" height="44"/>
+                                                <rect key="frame" x="274.33333333333326" y="0.0" width="44.666666666666686" height="44"/>
                                                 <accessibility key="accessibilityConfiguration" identifier="jamButton" label="Jam"/>
                                                 <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="jam" image="microjam-loop"/>
                                                 <connections>
                                                     <action selector="jamButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tfY-Hj-qaX"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cTj-r6-Uk1" userLabel="Roboplay Button">
+                                                <rect key="frame" x="329" y="0.0" width="45" height="44"/>
+                                                <state key="normal" title="Button" image="microjam-roboplay"/>
+                                                <connections>
+                                                    <action selector="roboplayPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Tr4-Um-Wds"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -192,6 +199,7 @@
                         <outlet property="recordingProgress" destination="yna-Q3-0q0" id="MIs-Qa-IgM"/>
                         <outlet property="replyButton" destination="Xh5-cz-PkR" id="Rz0-nT-OUe"/>
                         <outlet property="rewindButton" destination="s3v-f5-bcy" id="GR9-LT-y1g"/>
+                        <outlet property="roboplayButton" destination="cTj-r6-Uk1" id="Fd3-DA-luH"/>
                         <outlet property="savePerformanceButton" destination="wbR-IC-fN1" id="CRU-Eg-9kn"/>
                     </connections>
                 </viewController>
@@ -415,6 +423,7 @@
         <image name="microjam-record" width="158" height="178"/>
         <image name="microjam-reply" width="158" height="178"/>
         <image name="microjam-rewind" width="158" height="178"/>
+        <image name="microjam-roboplay" width="158" height="178"/>
         <image name="remotejamsTabIcon" width="37" height="37"/>
     </resources>
     <inferredMetricsTieBreakers>
