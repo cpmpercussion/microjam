@@ -408,6 +408,63 @@ class ChirpJamViewController: UIViewController {
     /// Roboplay Button Pressed, request an AI response and add as a layer.
     @IBAction func roboplayPressed(_ sender: Any) {
         // FIME: fill this in!
+        let roboResponseEndpoint: String = "http://138.197.179.234:5000/api/predict"
+        guard let perfToRespond = self.recorder?.recordingView.saveRecording()?.csv() else {
+            print("No perf to respond to.")
+            return
+        }
+        guard let roboResponseURL = URL(string: roboResponseEndpoint) else {
+            print("Error: cannot create URL")
+            return
+        }
+        var roboResponseUrlRequest = URLRequest(url: roboResponseURL)
+        roboResponseUrlRequest.httpMethod = "POST"
+        
+        let perfRequest: [String: Any] = ["title": perfToRespond]
+        let jsonPerfRequest: Data
+        do {
+            jsonPerfRequest = try JSONSerialization.data(withJSONObject: perfRequest, options: [])
+            roboResponseUrlRequest.httpBody = jsonPerfRequest
+        } catch {
+            print("Error: cannot create JSON from todo")
+            return
+        }
+        
+        let session = URLSession.shared
+        let task = session.dataTask(with: roboResponseUrlRequest) { data, response, error in
+            // do stuff with response, data & error here
+            guard error == nil else {
+                print("error calling POST on /api/predict")
+                print(error!)
+                return
+            }
+            guard let responseData = data else {
+                print("Error: did not receive data")
+                return
+            }
+            // parse the result as JSON, since that's what the API provides
+            do {
+                guard let reponsePerfJSON = try JSONSerialization.jsonObject(with: responseData, options: [])
+                    as? [String: Any] else {
+                        print("error trying to convert data to JSON")
+                        return
+                }
+                // now we have the
+                // let's just print it to prove we can access it
+                print("The response is: " + reponsePerfJSON.description)
+                // so check for a title and print it if we have one
+                guard let responsePerfCSV = responsePerfJSON["response"] as? String else {
+                    print("Could not get response from JSON")
+                    return
+                }
+                print("The response was: " + responsePerfCSV)
+                // do something with it.
+            } catch  {
+                print("error trying to convert data to JSON")
+                return
+            }
+        }
+        task.resume()
     }
     
     /// touchesBegan method starts a recording if this is the first touch in a new microjam.
