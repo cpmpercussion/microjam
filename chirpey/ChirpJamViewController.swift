@@ -444,14 +444,14 @@ class ChirpJamViewController: UIViewController {
             }
             // parse the result as JSON, since that's what the API provides
             do {
-                guard let reponsePerfJSON = try JSONSerialization.jsonObject(with: responseData, options: [])
+                guard let responsePerfJSON = try JSONSerialization.jsonObject(with: responseData, options: [])
                     as? [String: Any] else {
                         print("error trying to convert data to JSON")
                         return
                 }
                 // now we have the
                 // let's just print it to prove we can access it
-                print("The response is: " + reponsePerfJSON.description)
+                print("The response is: " + responsePerfJSON.description)
                 // so check for a title and print it if we have one
                 guard let responsePerfCSV = responsePerfJSON["response"] as? String else {
                     print("Could not get response from JSON")
