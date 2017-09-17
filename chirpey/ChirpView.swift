@@ -195,9 +195,8 @@ extension ChirpView {
     func makeSound(at point : CGPoint, withRadius radius : CGFloat, thatWasMoving moving: Bool) {
         let x = Double(point.x) / Double(frame.size.width)
         let y = Double(point.y) / Double(frame.size.width)
-        let z = Double(min(radius / 30.0, 1.0))
-        //print("Radius: \(radius), Z: \(z)")
-        let m = moving ? 0.0 : 1.0
+        let z = Double(min(radius / 120.0, 1.0))
+        let m = moving ? 1 : 0
         let receiver : String = "\(openPatchDollarZero ?? Int32(0))" + PdConstants.receiverPostFix
         //let list = ["/x",x,"/y",y,"/z",z] as [Any]
         // FIXME: figure out how to get Pd to parse the list sequentially.
@@ -205,6 +204,8 @@ extension ChirpView {
         PdBase.sendList(["/y",y], toReceiver: receiver)
         PdBase.sendList(["/z",z], toReceiver: receiver)
         PdBase.sendList(["/m",m], toReceiver: receiver)
+        //print("Radius: \(radius), Z: \(z)")
+        //print("/x: \(x) /y: \(y) /z: \(z) /m: \(m)")
     }
     
     /// Attempts to open a SoundScheme given its name.

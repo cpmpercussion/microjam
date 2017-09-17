@@ -76,3 +76,7 @@ fastlane/test_output
 microjam.xcworkspace/xcuserdata
 
 .DS_Store
+
+synth/.DS_Store
+
+Pods/TensorFlow-experimental/
