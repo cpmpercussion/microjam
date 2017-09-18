@@ -11,6 +11,16 @@ import CloudKit
 import UIColor_Hex_Swift
 import DateToolsSwift
 
+struct RoboJamPerfData {
+    static let performer = "RoboJammer"
+    static let instrument = "keys"
+    static let fakeLocation = CLLocation(latitude: 90.0, longitude: 45.0)
+    static let color = "#F44708"
+    static let bg = "#550527"
+    static let creator = CKRecordID(recordName: "RoboJammer")
+    static let id = CKRecordID(recordName: "none")
+}
+
 /**
  Contains the data from a single chirp performance.
  Data is stored as an array of `TouchRecord`.
