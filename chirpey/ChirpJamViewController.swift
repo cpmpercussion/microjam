@@ -31,6 +31,8 @@ class ChirpJamViewController: UIViewController {
     var jamming : Bool = false
     /// Stores the ChirpRecorder for recording a new performance
     var recorder: ChirpRecorder?
+    /// Stores a robojamview
+    var robojam: RoboJamView?
     /// Addition ChirpView for storage of the original performance for a reply.
     var replyto : String?
     /// App delegate - in case we need to upload a performance.
@@ -320,6 +322,7 @@ class ChirpJamViewController: UIViewController {
                 jamButton.isEnabled = false
             }
         }
+        removeRoboJam()
     }
     
     /// IBAction for the record enable button
@@ -556,14 +559,28 @@ extension ChirpJamViewController: BrowseControllerDelegate {
 
 extension ChirpJamViewController {
     
+    /// Remove existing RoboJam
+    func removeRoboJam() {
+        if let recorder = recorder, let existingRoboJam = self.robojam {
+            existingRoboJam.closePdFile()
+            if let index = recorder.chirpViews.index(of: existingRoboJam) {
+                recorder.chirpViews.remove(at: index)
+            }
+            existingRoboJam.removeFromSuperview()
+        }
+    }
+    
     // Add an extra jam from the RoboJam servers
     func addRoboJam(_ performance: ChirpPerformance) {
+        removeRoboJam() // remove a robojam that might already be there.
         if let recorder = recorder {
-            let roboJam = RoboJamView(with: chirpViewContainer.bounds, andPerformance: performance)
-            recorder.chirpViews.append(roboJam)
-            chirpViewContainer.addSubview(roboJam)
-            chirpViewContainer.bringSubview(toFront: recorder.recordingView)
-            roboJam.generateImage()
+            self.robojam = RoboJamView(with: chirpViewContainer.bounds, andPerformance: performance)
+            if let robojam = self.robojam {
+                recorder.chirpViews.append(robojam)
+                chirpViewContainer.addSubview(robojam)
+                chirpViewContainer.bringSubview(toFront: recorder.recordingView)
+                robojam.generateImage()
+            }
         }
     }
 }
