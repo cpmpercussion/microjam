@@ -21,7 +21,7 @@ class RoboJamView: ChirpView {
     func silentPlaybackBegan(_ point : CGPoint, _ radius : CGFloat) {
         swiped = false
         lastPoint = point
-        drawDot(at: point, withColour: self.performance?.colour.cgColor ?? DEFAULT_PLAYBACK_COLOUR)
+        drawDot(at: point, withColour: self.performance?.colour.darkerColor.cgColor ?? DEFAULT_PLAYBACK_COLOUR)
     }
     /**
      Mirrors touchesMoved for replayed performances.
@@ -29,7 +29,7 @@ class RoboJamView: ChirpView {
     func silentPlaybackMoved(_ point : CGPoint, _ radius : CGFloat) {
         swiped = true
         if let lastPoint = self.lastPoint {
-            drawLine(from: lastPoint, to: point, withColour: self.performance?.colour.cgColor ?? DEFAULT_PLAYBACK_COLOUR)
+            drawLine(from: lastPoint, to: point, withColour: self.performance?.colour.darkerColor.cgColor ?? DEFAULT_PLAYBACK_COLOUR)
         }
         lastPoint = point
     }
@@ -56,7 +56,7 @@ class RoboJamView: ChirpView {
             timers.append(Timer.scheduledTimer(withTimeInterval: animationTime,
                                                repeats: false,
                                                block: makeSilentTouchPlayerWith(touch: touch)))
-            animationTime += 0.01
+            animationTime += 0.005
         }
         timers.append(Timer.scheduledTimer(withTimeInterval: animationTime, repeats: false, block: {(Timer) -> Void in
             if let image = self.image, let perf = self.performance {

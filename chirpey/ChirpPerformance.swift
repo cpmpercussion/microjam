@@ -297,6 +297,6 @@ extension UIColor {
         guard getHue(&h, saturation: &s, brightness: &b, alpha: &a)
             else {return self}
 
-        return UIColor(hue: h, saturation: max(0.7*s,0.4), brightness: b, alpha: (0.8 * a))
+        return UIColor(hue: h, saturation: max(0.7*s,0.4), brightness: b, alpha: a)
     }
 }

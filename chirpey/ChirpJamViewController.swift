@@ -88,6 +88,7 @@ class ChirpJamViewController: UIViewController {
         if let recorder = recorder,
             let finishedPerformance = recorder.recordingView.performance {
             recorder.stop()
+            removeRoboJam()
             
             if let barButton = sender as? UIBarButtonItem {
                 // TODO: Is this check actually used?
@@ -111,6 +112,7 @@ class ChirpJamViewController: UIViewController {
     /// IBAction for Cancel (bar) button. stops playback/recording and dismisses present performance.
     @IBAction func cancelPerformance(_ sender: UIBarButtonItem) {
         print("JAMVC: Cancel Button Pressed.")
+        removeRoboJam()
         
         // Stop any timers
         if let recorder = recorder {
@@ -228,7 +230,7 @@ class ChirpJamViewController: UIViewController {
                     chirpViewContainer.backgroundColor = last.performance!.backgroundColour.darkerColor
                 }
             }
-            rewindButton.isEnabled = false
+            rewindButton.isEnabled = true
             
             // enable the cancel button
             cancelPerformanceButton.isEnabled = true
@@ -242,7 +244,7 @@ class ChirpJamViewController: UIViewController {
             playButton.isEnabled = false
             roboplayButton.isEnabled = false
             jamButton.isEnabled = false
-            rewindButton.isEnabled = false
+            rewindButton.isEnabled = true
         }
         
         print("JamVC: Loaded with:", recorder ?? "nothing")
@@ -260,6 +262,10 @@ class ChirpJamViewController: UIViewController {
         }
         
         
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        removeRoboJam()
     }
     
     override func viewDidAppear(_ animated: Bool) {
