@@ -450,6 +450,7 @@ class ChirpJamViewController: UIViewController {
         let session = URLSession.shared
         let task = session.dataTask(with: roboResponseUrlRequest) { data, response, error in
             // do stuff with response, data & error here
+            self.roboplayButton.stopBopping() // first stop the bopping.
             guard error == nil else {
                 print("error calling POST on /api/predict")
                 print(error!)
@@ -462,6 +463,7 @@ class ChirpJamViewController: UIViewController {
             // parse the result as JSON, since that's what the API provides
             self.roboplayResponseHandler(responseData)
         }
+        roboplayButton.startBopping()
         task.resume()
     }
     
@@ -595,10 +597,23 @@ extension ChirpJamViewController {
 extension UIButton {
     /// Shakes the button a little bit.
     func shake() {
-        let animation = CAKeyframeAnimation(keyPath: "transform.translation.x")
+        let animation = CAKeyframeAnimation(keyPath: "transform.translation.y")
         animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
-        animation.duration = 0.6
+        animation.duration = 1.0
         animation.values = [-10.0, 10.0, -5.0, 5.0, -2.5, 2.5, -1, 1, 0.0 ]
         layer.add(animation, forKey: "shake")
+    }
+    
+    func stopBopping() {
+        layer.removeAnimation(forKey: "bop")
+    }
+    
+    func startBopping() {
+        let animation = CAKeyframeAnimation(keyPath: "transform.translation.x")
+        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        animation.duration = 0.2
+        animation.values = [-2.5,2.5,0]
+        animation.repeatCount = 100
+        layer.add(animation, forKey: "bop")
     }
 }
