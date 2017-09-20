@@ -132,6 +132,7 @@ class ChirpJamViewController: UIViewController {
                     recorder.recordingEnabled = false
                     recorder.recordingIsDone = false
                     playButton.isEnabled = false
+                    roboplayButton.isEnabled = false
                     jamButton.isEnabled = false
                     replyButton.isEnabled = true
                     newRecordingView()
@@ -237,6 +238,7 @@ class ChirpJamViewController: UIViewController {
             chirpViewContainer.backgroundColor = UserProfile.shared.profile.backgroundColour.darkerColor
             // disable buttons that cannot be used in this state
             playButton.isEnabled = false
+            roboplayButton.isEnabled = false
             jamButton.isEnabled = false
             rewindButton.isEnabled = false
         }
@@ -314,6 +316,7 @@ class ChirpJamViewController: UIViewController {
             if !recorder.viewsAreLoaded {
                 // There is nothing to be played or jammed
                 playButton.isEnabled = false
+                roboplayButton.isEnabled = false
                 jamButton.isEnabled = false
             }
         }
@@ -524,14 +527,13 @@ extension ChirpJamViewController: PlayerDelegate {
         if let rec = recorder, rec.recordingIsDone {
             replyButton.isEnabled = true
             savePerformanceButton.isEnabled = true
+            roboplayButton.isEnabled = true
         }
         
         rewindButton.isEnabled = true
         jamButton.isEnabled = true
         playButton.isEnabled = true
         playButton.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal)
-        
-        
     }
 }
 
