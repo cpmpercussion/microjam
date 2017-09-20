@@ -436,6 +436,7 @@
 		5625E9FC1F68750000AFE8BF /* strings.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5625E85A1F6874FF00AFE8BF /* strings.pd */; };
 		5625E9FD1F68750000AFE8BF /* stringsynth.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5625E85B1F6874FF00AFE8BF /* stringsynth.pd */; };
 		5625E9FE1F68750000AFE8BF /* wub.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5625E85C1F6874FF00AFE8BF /* wub.pd */; };
+		5627B5F61F72F062007807E4 /* RoboJamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5627B5F51F72F062007807E4 /* RoboJamView.swift */; };
 		562FDCA61F316870000409C8 /* UserSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562FDCA51F316870000409C8 /* UserSettingsViewController.swift */; };
 		562FDCA81F316EAE000409C8 /* UserSettingsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 562FDCA71F316EAE000409C8 /* UserSettingsViewController.storyboard */; };
 		562FDCAA1F32D202000409C8 /* PerformerProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562FDCA91F32D202000409C8 /* PerformerProfile.swift */; };
@@ -917,6 +918,7 @@
 		5625E85A1F6874FF00AFE8BF /* strings.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = strings.pd; sourceTree = "<group>"; };
 		5625E85B1F6874FF00AFE8BF /* stringsynth.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stringsynth.pd; sourceTree = "<group>"; };
 		5625E85C1F6874FF00AFE8BF /* wub.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wub.pd; sourceTree = "<group>"; };
+		5627B5F51F72F062007807E4 /* RoboJamView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoboJamView.swift; path = chirpey/RoboJamView.swift; sourceTree = "<group>"; };
 		562FDCA51F316870000409C8 /* UserSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserSettingsViewController.swift; path = chirpey/UserSettingsViewController.swift; sourceTree = "<group>"; };
 		562FDCA71F316EAE000409C8 /* UserSettingsViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = UserSettingsViewController.storyboard; path = chirpey/UserSettingsViewController.storyboard; sourceTree = "<group>"; };
 		562FDCA91F32D202000409C8 /* PerformerProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PerformerProfile.swift; path = chirpey/PerformerProfile.swift; sourceTree = "<group>"; };
@@ -1026,6 +1028,7 @@
 				5634AE9B1F3C500000DD5401 /* UserNameChooserViewController.storyboard */,
 				562FDCA71F316EAE000409C8 /* UserSettingsViewController.storyboard */,
 				56621B121DE4A496009B9AB6 /* ChirpView.swift */,
+				5627B5F51F72F062007807E4 /* RoboJamView.swift */,
 				5613B31D1F3D9C380068ED5D /* ChirpRecordingView.swift */,
 				56621B161DEC27B0009B9AB6 /* PerformanceTableCell.swift */,
 				4DA6A95C1F3C89DB00CD7589 /* BrowseCell.swift */,
@@ -2420,6 +2423,7 @@
 				4DA6A95D1F3C89DB00CD7589 /* BrowseCell.swift in Sources */,
 				56621B171DEC27B0009B9AB6 /* PerformanceTableCell.swift in Sources */,
 				569B92C41DFEA99C00AA257C /* SettingsTableViewController.swift in Sources */,
+				5627B5F61F72F062007807E4 /* RoboJamView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

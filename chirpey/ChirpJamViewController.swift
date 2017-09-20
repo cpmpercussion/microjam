@@ -405,17 +405,18 @@ class ChirpJamViewController: UIViewController {
         }
     }
     
+    let roboResponseEndpoint: String = "http://138.197.179.234:5000/api/predict"
+    //        let roboResponseEndpoint: String = "http://0.0.0.0:5000/api/predict"
+    
     /// Roboplay Button Pressed, request an AI response and add as a layer.
     @IBAction func roboplayPressed(_ sender: UIButton) {
         // nice shake animation
         //sender.shake()
-        let roboResponseEndpoint: String = "http://138.197.179.234:5000/api/predict"
-//        let roboResponseEndpoint: String = "http://0.0.0.0:5000/api/predict"
+
         guard let perfToRespond = self.recorder?.recordingView.saveRecording()?.csv() else {
             print("No perf to respond to.")
             return
         }
-//        let perfToRespond = "time,x,y,z,moving\n0.002468, 0.106414, 0.122449, 20.000000, 0\n0.020841, 0.106414, 0.125364, 20.000000, 1\n0.043218, 0.107872, 0.137026, 20.000000, 1\n0.065484, 0.107872, 0.176385, 20.000000, 1\n0.090776, 0.107872, 0.231778, 20.000000, 1\n0.110590, 0.109329, 0.301749, 20.000000, 1\n0.133338, 0.115160, 0.357143, 20.000000, 1\n0.155677, 0.125364, 0.412536, 20.000000, 1\n0.178238, 0.134111, 0.432945, 20.000000, 1\n0.516467, 0.275510, 0.180758, 20.000000, 0\n0.542726, 0.274052, 0.205539, 20.000000, 1\n0.560772, 0.274052, 0.249271, 20.000000, 1\n0.583259, 0.282799, 0.316327, 20.000000, 1\n0.605750, 0.295918, 0.376093, 20.000000, 1\n0.628259, 0.309038, 0.415452, 20.000000, 1\n0.653835, 0.316327, 0.432945, 20.000000, 1\n0.673523, 0.325073, 0.440233, 20.000000, 1\n1.000294, 0.590379, 0.179300, 20.000000, 0\n1.022137, 0.593294, 0.183673, 20.000000, 1\n1.044706, 0.594752, 0.208455, 20.000000, 1\n1.067020, 0.606414, 0.279883, 20.000000, 1\n1.091137, 0.626822, 0.355685, 20.000000, 1\n1.111968, 0.647230, 0.425656, 20.000000, 1\n1.134535, 0.655977, 0.462099, 20.000000, 1\n1.156987, 0.657434, 0.485423, 20.000000, 1\n1.619212, 0.857143, 0.263848, 20.000000, 0\n1.642492, 0.854227, 0.281341, 20.000000, 1\n1.663123, 0.851312, 0.320700, 20.000000, 1\n1.685776, 0.846939, 0.413994, 20.000000, 1\n1.708192, 0.846939, 0.510204, 20.000000, 1\n1.730717, 0.858601, 0.591837, 20.000000, 1\n1.753953, 0.868805, 0.632653, 20.000000, 1\n1.775862, 0.876093, 0.660350, 20.000000, 1\n4.376275, 0.542274, 0.860058, 20.000000, 0\n4.419554, 0.543732, 0.860058, 20.000000, 1"
         print("found performance: \(perfToRespond)")
         guard let roboResponseURL = URL(string: roboResponseEndpoint) else {
             print("Error: cannot create URL")
@@ -558,9 +559,11 @@ extension ChirpJamViewController {
     // Add an extra jam from the RoboJam servers
     func addRoboJam(_ performance: ChirpPerformance) {
         if let recorder = recorder {
-            let chirp = ChirpView(with: chirpViewContainer.bounds, andPerformance: performance)
-            recorder.chirpViews.append(chirp)
-            chirpViewContainer.addSubview(chirp)
+            let roboJam = RoboJamView(with: chirpViewContainer.bounds, andPerformance: performance)
+            recorder.chirpViews.append(roboJam)
+            chirpViewContainer.addSubview(roboJam)
+            chirpViewContainer.bringSubview(toFront: recorder.recordingView)
+            roboJam.generateImage()
         }
     }
 }
