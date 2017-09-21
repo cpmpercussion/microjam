@@ -484,7 +484,7 @@ class ChirpJamViewController: UIViewController {
             }
             print("Response found!")
             //print("The response was: " + responsePerfCSV)
-            if let responsePerf = ChirpPerformance(csv: responsePerfCSV, date: Date(), performer: "RoboJam", instrument: RoboJamPerfData.instrument, image: UIImage(), location: RoboJamPerfData.fakeLocation, colour: RoboJamPerfData.color, background: RoboJamPerfData.bg, replyto: "", performanceID: RoboJamPerfData.id, creatorID: RoboJamPerfData.creator) {
+            if let responsePerf = createRoboJam(responsePerfCSV) {
                 DispatchQueue.main.async{
                     self.addRoboJam(responsePerf)
                     print("Response added!")
@@ -590,6 +590,23 @@ extension ChirpJamViewController {
                 robojam.generateImage()
             }
         }
+    }
+    
+    func createRoboJam(_ perfCSV: String) -> ChirpPerformance? {
+        var instrument = RoboJamPerfData.instrument
+        if let currentInstrument = recorder?.recordingView.performance?.instrument {
+            instrument = chooseOtherInstrument(currentInstrument)
+        }
+        
+        return ChirpPerformance(csv: perfCSV, date: Date(), performer: RoboJamPerfData.performer, instrument: instrument, image: UIImage(), location: RoboJamPerfData.fakeLocation, colour: RoboJamPerfData.color, background: RoboJamPerfData.bg, replyto: "", performanceID: RoboJamPerfData.id, creatorID: RoboJamPerfData.creator)
+        
+    }
+    
+    func chooseOtherInstrument(_ inst: String) -> String {
+        var instChoices = SoundSchemes.keysForNames.keys.filter { $0 != inst } as [String]
+        let choice = instChoices[Int(arc4random_uniform(UInt32(instChoices.count)))]
+        print("RoboJam is playing: \(choice)")
+        return choice
     }
 }
 
