@@ -73,7 +73,7 @@ class WorldJamsTableViewController: UITableViewController {
 //        tableView.reloadData()
 //    }
 
-    func playButtonPressed(sender: UIButton) {
+    @objc func playButtonPressed(sender: UIButton) {
 
         let indexPath = IndexPath(row: sender.tag, section: 0)
         if let cell = tableView.cellForRow(at: indexPath) as? PerformanceTableCell,
@@ -92,7 +92,7 @@ class WorldJamsTableViewController: UITableViewController {
     }
 
     
-    func replyButtonPressed(sender: UIButton) {
+    @objc func replyButtonPressed(sender: UIButton) {
 
         let indexPath = IndexPath(row: sender.tag, section: 0)
         if let cell = tableView.cellForRow(at: indexPath) as? PerformanceTableCell,
@@ -201,7 +201,7 @@ class WorldJamsTableViewController: UITableViewController {
 
     // MARK: UI Methods
 
-    func tableViewTapped(sender: UIGestureRecognizer) {
+    @objc func tableViewTapped(sender: UIGestureRecognizer) {
 
         let location = sender.location(in: tableView)
 

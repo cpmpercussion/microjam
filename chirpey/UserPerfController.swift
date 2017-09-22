@@ -59,7 +59,7 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
         navigationController?.pushViewController(controller, animated: true)
     }
     
-    func previewPerformance(sender: UIButton) {
+    @objc func previewPerformance(sender: UIButton) {
         
         // The button is in the contentView of the cell, need to get the content view's superview...
         if let superView = sender.superview?.superview {

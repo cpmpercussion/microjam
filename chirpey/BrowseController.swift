@@ -117,11 +117,11 @@ class BrowseController: UICollectionViewController, UICollectionViewDelegateFlow
         filterView.isHidden = true
     }
     
-    func dimViewTapped() {
+    @objc func dimViewTapped() {
         toggleFilterView()
     }
     
-    func toggleFilterView() {
+    @objc func toggleFilterView() {
         
         if dimView.isHidden {
             dimView.isHidden = false
@@ -132,7 +132,7 @@ class BrowseController: UICollectionViewController, UICollectionViewDelegateFlow
         }
     }
     
-    func previewPerformance(sender: UIButton) {
+    @objc func previewPerformance(sender: UIButton) {
         
         // The button is in the contentView of the cell, need to get the content view's superview...
         if let superView = sender.superview?.superview {

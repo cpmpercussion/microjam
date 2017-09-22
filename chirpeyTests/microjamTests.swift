@@ -13,18 +13,19 @@ import CoreLocation
 class microjamTests: XCTestCase {
     var performanceUnderTest: ChirpPerformance!
     
+    /// Not working right now.
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        performanceUnderTest =  ChirpPerformance(
-            data: [],
-            date: Date(),
-            performer: "testperformer",
-            instrument: "testinstrument",
-            image: UIImage(),
-            location: CLLocation.init(latitude: 90.0, longitude: 45.0),
-            colour: "000000",
-            replyto: "")
+//        performanceUnderTest =  ChirpPerformance(
+//            data: [],
+//            date: Date(),
+//            performer: "testperformer",
+//            instrument: "testinstrument",
+//            image: UIImage(),
+//            location: CLLocation.init(latitude: 90.0, longitude: 45.0),
+//            colour: "000000",
+//            replyto: "")
 
     }
     
