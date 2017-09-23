@@ -450,7 +450,9 @@ class ChirpJamViewController: UIViewController {
         let session = URLSession.shared
         let task = session.dataTask(with: roboResponseUrlRequest) { data, response, error in
             // do stuff with response, data & error here
-            self.roboplayButton.stopSwirling() // first stop the bopping.
+            DispatchQueue.main.async{
+                self.roboplayButton.stopBopping() // first stop the bopping.
+            }
             guard error == nil else {
                 print("error calling POST on /api/predict")
                 print(error!)
@@ -463,7 +465,7 @@ class ChirpJamViewController: UIViewController {
             // parse the result as JSON, since that's what the API provides
             self.roboplayResponseHandler(responseData)
         }
-        roboplayButton.startSwirling()
+        roboplayButton.startBopping()
         task.resume()
     }
     
@@ -636,14 +638,14 @@ extension UIButton {
     
     func startSwirling() {
         let animationX = CAKeyframeAnimation(keyPath: "transform.translation.x")
-        animationX.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        animationX.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         animationX.duration = 0.2
-        animationX.values = [-2.5,2.5,0]
+        animationX.values = [0,-2.5,2.5,0]
         animationX.repeatCount = 100
         let animationY = CAKeyframeAnimation(keyPath: "transform.translation.y")
-        animationY.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        animationY.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         animationY.duration = 0.2
-        animationY.values = [-2.5,2.5,0]
+        animationY.values = [-2.5,0,0,2.5]
         animationY.repeatCount = 100
         layer.add(animationX, forKey: "swirl_x")
         layer.add(animationY, forKey: "swirl_y")
