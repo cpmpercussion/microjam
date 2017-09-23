@@ -53,11 +53,13 @@ class RoboJamView: ChirpView {
         }
         var animationTime = 0.0
         for touch in performance.performanceData {
-            timers.append(Timer.scheduledTimer(withTimeInterval: animationTime,
+            let frameTime = touch.time * 0.5
+            timers.append(Timer.scheduledTimer(withTimeInterval: frameTime,
                                                repeats: false,
                                                block: makeSilentTouchPlayerWith(touch: touch)))
-            animationTime += 0.005
+            animationTime += frameTime
         }
+        animationTime += 0.1
         timers.append(Timer.scheduledTimer(withTimeInterval: animationTime, repeats: false, block: {(Timer) -> Void in
             if let image = self.image, let perf = self.performance {
                 perf.image = image

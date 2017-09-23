@@ -309,7 +309,6 @@ class WorldJamsTableViewController: UITableViewController {
 
 extension WorldJamsTableViewController: PlayerDelegate {
 
-
     func progressTimerStep() {
 
     }
