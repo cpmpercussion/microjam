@@ -78,7 +78,8 @@ class ChirpJamViewController: UIViewController {
     @IBOutlet weak var roboplayButton: UIButton!
 
     // MARK: - Navigation
-
+    
+    /// Prepare to segue - this is where the Jam screen actually saves performances! So it's an important check.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         print("JAMVC: Preparing for Segue.")
         // FIXME: save the performance if the timer hasn't run out.
@@ -86,6 +87,7 @@ class ChirpJamViewController: UIViewController {
         
         if let recorder = recorder,
             let finishedPerformance = recorder.recordingView.performance {
+            /// FIXME: Save the robojam to a robo account as needed.
             recorder.stop()
             removeRoboJam()
             
@@ -111,7 +113,7 @@ class ChirpJamViewController: UIViewController {
     /// IBAction for Cancel (bar) button. stops playback/recording and dismisses present performance.
     @IBAction func cancelPerformance(_ sender: UIBarButtonItem) {
         print("JAMVC: Cancel Button Pressed.")
-        removeRoboJam()
+        removeRoboJam() // Throw away robojam if present.
         
         // Stop any timers
         if let recorder = recorder {
