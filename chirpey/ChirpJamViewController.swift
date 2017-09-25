@@ -82,7 +82,6 @@ class ChirpJamViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         print("JAMVC: Preparing for Segue.")
         // FIXME: save the performance if the timer hasn't run out.
-        
         jamming = false // stop jamming.
         
         if let recorder = recorder,
@@ -91,16 +90,16 @@ class ChirpJamViewController: UIViewController {
             removeRoboJam()
             
             if let barButton = sender as? UIBarButtonItem {
-                // TODO: Is this check actually used?
                 if savePerformanceButton === barButton {
                     print("JAMVC: Save button segue!")
-                    
                     /// TODO: Store composing performances
                     if isComposing {
                         /// FIXME: hack to stop saving in composing mode
                         newRecordingView()
                     } else {
-                        // actually save the performance
+                        // save the performance and add to the world screen.
+                        // this uploads, adds to the PerformanceStore and calls generateFeed so that
+                        // feed will appear updated instantly.
                         PerformanceStore.shared.addNew(performance: finishedPerformance)
                     }
                     navigationController?.popViewController(animated: true)
