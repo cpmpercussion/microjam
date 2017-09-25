@@ -38,6 +38,11 @@
                BlueprintName = "microjamTests"
                ReferencedContainer = "container:microjam.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "microjamTests">
+               </Test>
+            </SkippedTests>
          </TestableReference>
          <TestableReference
             skipped = "NO">
