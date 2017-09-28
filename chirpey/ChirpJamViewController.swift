@@ -78,29 +78,30 @@ class ChirpJamViewController: UIViewController {
     @IBOutlet weak var roboplayButton: UIButton!
 
     // MARK: - Navigation
-
+    
+    /// Prepare to segue - this is where the Jam screen actually saves performances! So it's an important check.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         print("JAMVC: Preparing for Segue.")
         // FIXME: save the performance if the timer hasn't run out.
-        
         jamming = false // stop jamming.
         
         if let recorder = recorder,
             let finishedPerformance = recorder.recordingView.performance {
+            /// FIXME: Save the robojam to a robo account as needed.
             recorder.stop()
             removeRoboJam()
             
             if let barButton = sender as? UIBarButtonItem {
-                // TODO: Is this check actually used?
                 if savePerformanceButton === barButton {
                     print("JAMVC: Save button segue!")
-                    
                     /// TODO: Store composing performances
                     if isComposing {
                         /// FIXME: hack to stop saving in composing mode
                         newRecordingView()
                     } else {
-                        // actually save the performance
+                        // save the performance and add to the world screen.
+                        // this uploads, adds to the PerformanceStore and calls generateFeed so that
+                        // feed will appear updated instantly.
                         PerformanceStore.shared.addNew(performance: finishedPerformance)
                     }
                     navigationController?.popViewController(animated: true)
@@ -112,7 +113,7 @@ class ChirpJamViewController: UIViewController {
     /// IBAction for Cancel (bar) button. stops playback/recording and dismisses present performance.
     @IBAction func cancelPerformance(_ sender: UIBarButtonItem) {
         print("JAMVC: Cancel Button Pressed.")
-        removeRoboJam()
+        removeRoboJam() // Throw away robojam if present.
         
         // Stop any timers
         if let recorder = recorder {
@@ -450,7 +451,9 @@ class ChirpJamViewController: UIViewController {
         let session = URLSession.shared
         let task = session.dataTask(with: roboResponseUrlRequest) { data, response, error in
             // do stuff with response, data & error here
-            self.roboplayButton.stopBopping() // first stop the bopping.
+            DispatchQueue.main.async{
+                self.roboplayButton.stopBopping() // first stop the bopping.
+            }
             guard error == nil else {
                 print("error calling POST on /api/predict")
                 print(error!)
@@ -632,5 +635,25 @@ extension UIButton {
         animation.values = [-2.5,2.5,0]
         animation.repeatCount = 100
         layer.add(animation, forKey: "bop")
+    }
+    
+    func startSwirling() {
+        let animationX = CAKeyframeAnimation(keyPath: "transform.translation.x")
+        animationX.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        animationX.duration = 0.2
+        animationX.values = [0,-2.5,2.5,0]
+        animationX.repeatCount = 100
+        let animationY = CAKeyframeAnimation(keyPath: "transform.translation.y")
+        animationY.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        animationY.duration = 0.2
+        animationY.values = [-2.5,0,0,2.5]
+        animationY.repeatCount = 100
+        layer.add(animationX, forKey: "swirl_x")
+        layer.add(animationY, forKey: "swirl_y")
+    }
+    
+    func stopSwirling() {
+        layer.removeAnimation(forKey: "swirl_x")
+        layer.removeAnimation(forKey: "swirl_y")
     }
 }

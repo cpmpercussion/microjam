@@ -73,7 +73,7 @@ class WorldJamsTableViewController: UITableViewController {
 //        tableView.reloadData()
 //    }
 
-    func playButtonPressed(sender: UIButton) {
+    @objc func playButtonPressed(sender: UIButton) {
 
         let indexPath = IndexPath(row: sender.tag, section: 0)
         if let cell = tableView.cellForRow(at: indexPath) as? PerformanceTableCell,
@@ -92,7 +92,7 @@ class WorldJamsTableViewController: UITableViewController {
     }
 
     
-    func replyButtonPressed(sender: UIButton) {
+    @objc func replyButtonPressed(sender: UIButton) {
 
         let indexPath = IndexPath(row: sender.tag, section: 0)
         if let cell = tableView.cellForRow(at: indexPath) as? PerformanceTableCell,
@@ -131,7 +131,6 @@ class WorldJamsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return performanceStore.storedPerformances.count
         return performanceStore.feed.count
     }
 
@@ -145,10 +144,7 @@ class WorldJamsTableViewController: UITableViewController {
             }
         }
         
-//        let performance = performanceStore.storedPerformances[indexPath.row]
         let performance = performanceStore.feed[indexPath.row]
-
-
         cell.player = ChirpPlayer()
         cell.player!.delegate = self
         let chirpView = ChirpView(with: cell.chirpContainer.bounds, andPerformance: performance)
@@ -201,7 +197,7 @@ class WorldJamsTableViewController: UITableViewController {
 
     // MARK: UI Methods
 
-    func tableViewTapped(sender: UIGestureRecognizer) {
+    @objc func tableViewTapped(sender: UIGestureRecognizer) {
 
         let location = sender.location(in: tableView)
 
@@ -308,7 +304,6 @@ class WorldJamsTableViewController: UITableViewController {
 }
 
 extension WorldJamsTableViewController: PlayerDelegate {
-
 
     func progressTimerStep() {
 

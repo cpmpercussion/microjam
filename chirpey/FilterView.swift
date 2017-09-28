@@ -66,7 +66,7 @@ class FilterView: UIView {
         doneButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
     }
     
-    func doneButtonPressed() {
+    @objc func doneButtonPressed() {
         
         if let del = delegate {
             del.didEndEditing()

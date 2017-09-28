@@ -106,39 +106,12 @@ class ChirpView: UIImageView {
         UIGraphicsEndImageContext();
     }
     
-    func draw(tailSegments: [TailSegment], withColor color: CGColor) {
-        UIGraphicsBeginImageContextWithOptions(frame.size, false, (UIScreen.main).scale)
-        guard let context = UIGraphicsGetCurrentContext() else {
-            return
-        }
-        
-        context.setFillColor(color)
-        context.setStrokeColor(color)
-        context.setBlendMode(CGBlendMode.normal)
-        context.setLineCap(CGLineCap.round)
-        context.setLineWidth(10.0)
-        
-        context.beginPath()
-        
-        for (i, current) in tailSegments.enumerated() {
-            
-            if i == 0 || !current.touch.moving {
-                context.move(to: CGPoint(x: current.touch.x, y: current.touch.y))
-            }
-            
-            context.addLine(to: CGPoint(x: current.touch.x, y: current.touch.y))
-        }
-        
-        context.strokePath()
-        image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-    }
-    
+
+    /// Schedule a performance for playback, is this used?
     static func play(performance: ChirpPerformance) {
-        
         let chirp = ChirpView(with: CGRect(x: 0, y: 0, width: 300, height: 300), andPerformance: performance)
-        
         var timers = [Timer]()
+        
         for touch in performance.performanceData {
             let t = Timer.scheduledTimer(withTimeInterval: touch.time, repeats: false, block: { timer in
                 chirp.makeSound(at: CGPoint(x: touch.x * 300, y: touch.y * 300), withRadius: CGFloat(touch.z), thatWasMoving: touch.moving)
@@ -147,7 +120,6 @@ class ChirpView: UIImageView {
         }
         
         performance.playbackTimers = timers
-        
     }
 
     // MARK: - playback functions

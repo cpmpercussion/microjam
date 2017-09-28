@@ -44,7 +44,7 @@ class UserNameChooserViewController: UIViewController, UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {   //delegate method
         textField.resignFirstResponder()
-        self.userNameChoiceButtonPushed(sender: self) // accept the user name
+        self.userNameChoiceButtonPushed(self) // accept the user name
         return true
     }
     

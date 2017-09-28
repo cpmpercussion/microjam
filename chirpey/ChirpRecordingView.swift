@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// Storage for a single tail segment which consists of a touch location and a timer for removing it.
 struct TailSegment {
     var touch: TouchRecord
     var timer: Timer
@@ -52,11 +53,11 @@ extension ChirpRecordingView {
     /// Responds to taps in the ChirpView, passes on to superviews and reacts.
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         superview?.touchesBegan(touches, with: event)
-        
         lastPoint = touches.first?.location(in: superview!)
         let size = touches.first?.majorRadius
         
         if recording {
+            // draw and record touch if recording
             if (!started) {
                 startTime = Date()
                 started = true
@@ -64,11 +65,12 @@ extension ChirpRecordingView {
             swiped = false
             drawDot(at: lastPoint!, withColour: recordingColour ?? DEFAULT_RECORDING_COLOUR)
             recordTouch(at: lastPoint!, withRadius: size!, thatWasMoving:false)
-        
         } else {
+            // not recording, add disappearing touches.
             addTailSegment(at: lastPoint!, withSize: size!, thatWasMoving: false)
             draw(tailSegments: tailSegments, withColor: recordingColour!)
         }
+        // always make a sound.
         makeSound(at: lastPoint!, withRadius: size!, thatWasMoving: false)
     }
 
@@ -85,34 +87,23 @@ extension ChirpRecordingView {
         let size = touches.first?.majorRadius
 
         if recording {
+            // draw and record touch if recording
             swiped = true
             drawLine(from:self.lastPoint!, to:currentPoint, withColour:recordingColour ?? DEFAULT_RECORDING_COLOUR)
             lastPoint = currentPoint
             recordTouch(at: currentPoint, withRadius: size!, thatWasMoving: true)
-        
         } else {
+            // not recording, add disappearing touches.
             addTailSegment(at: currentPoint, withSize: size!, thatWasMoving: true)
             draw(tailSegments: tailSegments, withColor: recordingColour!)
             lastPoint = currentPoint
         }
         
+        // Always make a sound.
         makeSound(at: currentPoint, withRadius: size!, thatWasMoving: true)
     }
     
-    /// Add animated tail segment
-    private func addTailSegment(at point: CGPoint, withSize size: CGFloat, thatWasMoving moving: Bool) {
-        
-        let touch = TouchRecord(time: 0, x: Double(point.x), y: Double(point.y), z: Double(size), moving: moving)
-        let timer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { (timer) in
-            if !self.tailSegments.isEmpty {
-                self.tailSegments.removeFirst()
-                self.draw(tailSegments: self.tailSegments, withColor: self.recordingColour!)
-            }
-        }
-        
-        let tailSegment = TailSegment(touch: touch, timer: timer)
-        tailSegments.append(tailSegment)
-    }
+
     
     /**
      Adds a touch point to the recording data including whether it was moving
@@ -144,7 +135,7 @@ extension ChirpRecordingView {
     
     /// Initialise the ChirpView for a new recording
     func clearForRecording() {
-        print("ChirpView: New Performance")
+        print("ChirpRecordingView: Clearing for a New Performance")
         recording = false
         started = false
         lastPoint = CG_INIT_POINT
@@ -156,6 +147,60 @@ extension ChirpRecordingView {
         openUserSoundScheme()
     }
 }
+
+// MARK: Tail segment drawing functions
+
+extension ChirpRecordingView {
+    
+    /// Add animated tail segment that removes itself after a certain time.
+    private func addTailSegment(at point: CGPoint, withSize size: CGFloat, thatWasMoving moving: Bool) {
+        let touch = TouchRecord(time: 0, x: Double(point.x), y: Double(point.y), z: Double(size), moving: moving)
+        let timer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { (timer) in
+            if !self.tailSegments.isEmpty {
+                self.tailSegments.removeFirst()
+                self.draw(tailSegments: self.tailSegments, withColor: self.recordingColour!)
+            }
+        }
+        let tailSegment = TailSegment(touch: touch, timer: timer)
+        tailSegments.append(tailSegment)
+    }
+    
+    /// Draws all present tail segments. If there is a recorded image it should draw them on top of that, if not draw from nothing.
+    func draw(tailSegments: [TailSegment], withColor color: CGColor) {
+        UIGraphicsBeginImageContextWithOptions(frame.size, false, (UIScreen.main).scale)
+        guard let context = UIGraphicsGetCurrentContext() else {
+            return
+        }
+        
+        // Get the present recorded image.
+        if let presentPerf = performance {
+            presentPerf.image.draw(in: CGRect(x:0, y:0, width:frame.size.width, height:frame.size.height))
+        }
+
+        // Now draw all the tail segments.
+        context.setFillColor(color)
+        context.setStrokeColor(color)
+        context.setBlendMode(CGBlendMode.normal)
+        context.setLineCap(CGLineCap.round)
+        context.setLineWidth(10.0)
+        context.beginPath()
+        
+        for (i, current) in tailSegments.enumerated() {
+            
+            if i == 0 || !current.touch.moving {
+                context.move(to: CGPoint(x: current.touch.x, y: current.touch.y))
+            }
+            
+            context.addLine(to: CGPoint(x: current.touch.x, y: current.touch.y))
+        }
+        
+        context.strokePath()
+        image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+    }
+    
+}
+
 
 // MARK: Pd (Sound) Functions
 

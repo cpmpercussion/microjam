@@ -92,9 +92,21 @@ class PerformanceStore: NSObject {
         }
     }
 
-    /// Add a new performance to the list and then save the list.
+    /// Upload a new performance and add it to the performance store. This only works if the performer is logged in.
     func addNew(performance : ChirpPerformance) {
         self.upload(performance: performance)
+        // Add this perf to the model as well.
+        if let performersUserRecordID = UserProfile.shared.record?.creatorUserRecordID  {
+            print("User is logged in, updating performance info and adding to store.")
+            let perfID = CKRecordID(recordName: performance.title())
+            performance.performanceID = perfID
+            performance.creatorID = performersUserRecordID
+            self.performances[perfID] = performance
+            DispatchQueue.main.async {
+                self.feed = self.generateFeed()
+                self.delegate?.modelUpdated() // stop spinner
+            }
+        }
     }
 
     /// Save recorded performances to file.
@@ -133,7 +145,7 @@ class PerformanceStore: NSObject {
     }
 
     /// Refresh list of world jams from CloudKit and then update in world jam table view.
-    func fetchWorldJamsFromCloud() {
+    @objc func fetchWorldJamsFromCloud() {
         print("Store: Attempting to fetch World Jams from Cloud.")
         var fetchedPerformances = [ChirpPerformance]()
         let predicate = NSPredicate(value: true)
@@ -281,18 +293,6 @@ extension PerformanceStore {
                 print("Store: Error saving to the database.")
                 print(error ?? "")
             }
-            // todo take the record and add the CreatorID to the performance store's version.
-            if let creator_id = record?.creatorUserRecordID {
-                DispatchQueue.main.async {
-                    // add the creator id to the record
-                    performance.creatorID = creator_id
-                    self.storedPerformances.insert(performance, at: 0) // add to performance list
-                    self.performances[performanceID] = performance // add to performance dictionary
-                    self.delegate?.modelUpdated() // stop spinner
-                    self.savePerformances()
-                }
-            }
-            
             print("Store: Saved to cloudkit:", performance.title()) // runs when upload is complete
         })
     }

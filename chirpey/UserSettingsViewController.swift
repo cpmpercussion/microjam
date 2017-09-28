@@ -108,7 +108,7 @@ class UserSettingsViewController: UIViewController {
     }
     
     /// Called by a notification when the UserProfile successfully loads a record.
-    func userProfileDataUpdated() {
+    @objc func userProfileDataUpdated() {
         print("USVC: UserProfile updated, updating UI.")
         updateUI()
     }

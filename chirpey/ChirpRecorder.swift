@@ -42,6 +42,7 @@ class ChirpRecorder: ChirpPlayer {
     func record() -> Bool {
         if recordingEnabled {
             if !isRecording {
+                print("ChirpRecorder: Starting recording")
                 isRecording = true
                 recordingView.recording = true
                 // Starting progresstimer and playback of performances if any
@@ -71,6 +72,7 @@ class ChirpRecorder: ChirpPlayer {
             }
         }
         if recordingIsDone, let performance = recordingView.performance {
+            print("ChirpRecorder: Adding performance image as my display image: \(performance.title())")
             recordingView.image = performance.image
         }
     }
