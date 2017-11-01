@@ -327,6 +327,8 @@ class ChirpJamViewController: UIViewController {
                 playButton.isEnabled = false
                 roboplayButton.isEnabled = false
                 jamButton.isEnabled = false
+                // and recording is disabled.
+                recEnableButton.tintColor = UIColor.red.darkerColor
             }
         }
         removeRoboJam()
@@ -334,13 +336,16 @@ class ChirpJamViewController: UIViewController {
     
     /// IBAction for the record enable button
     @IBAction func recordEnablePressed(_ sender: UIButton) {
-        print("JAMVC: Record enabled pressed, ready to record")
         if let recorder = recorder {
             if !recorder.recordingEnabled {
                 // recording was not enabled.
+                print("JAMVC: Record pressed; enabled.")
+
                 recEnableButton.tintColor = UIColor.red
                 recorder.recordingEnabled = true
             } else {
+                print("JAMVC: Record pressed; disabled.")
+
                 recEnableButton.tintColor = UIColor.red.darkerColor
                 recorder.recordingEnabled = false
             }
@@ -427,12 +432,12 @@ class ChirpJamViewController: UIViewController {
             print("No perf to respond to.")
             return
         }
-        print("found performance: \(perfToRespond)")
+        // print("found performance: \(perfToRespond)")
         guard let roboResponseURL = URL(string: roboResponseEndpoint) else {
             print("Error: cannot create URL")
             return
         }
-        print("have URL: \(roboResponseURL)")
+        // print("have URL: \(roboResponseURL)")
         
         var roboResponseUrlRequest = URLRequest(url: roboResponseURL)
         roboResponseUrlRequest.httpMethod = "POST"
@@ -479,14 +484,13 @@ class ChirpJamViewController: UIViewController {
                     print("error trying to convert data to JSON")
                     return
             }
-            // let's just print it to prove we can access it
-            print("The response is: " + responsePerfJSON.description)
+            // print("The response is: " + responsePerfJSON.description)
             guard let responsePerfCSV = responsePerfJSON["response"] as? String else {
                 print("Could not parse JSON")
                 return
             }
-            print("Response found!")
-            //print("The response was: " + responsePerfCSV)
+            // print("Response found!")
+            // print("The response was: " + responsePerfCSV)
             if let responsePerf = createRoboJam(responsePerfCSV) {
                 DispatchQueue.main.async{
                     self.addRoboJam(responsePerf)
@@ -595,6 +599,7 @@ extension ChirpJamViewController {
         }
     }
     
+    /// Transform a RoboJam response into ChirpPerformance for playback.
     func createRoboJam(_ perfCSV: String) -> ChirpPerformance? {
         var instrument = RoboJamPerfData.instrument
         if let currentInstrument = recorder?.recordingView.performance?.instrument {
@@ -602,7 +607,6 @@ extension ChirpJamViewController {
         }
         
         return ChirpPerformance(csv: perfCSV, date: Date(), performer: RoboJamPerfData.performer, instrument: instrument, image: UIImage(), location: RoboJamPerfData.fakeLocation, colour: RoboJamPerfData.color, background: RoboJamPerfData.bg, replyto: "", performanceID: RoboJamPerfData.id, creatorID: RoboJamPerfData.creator)
-        
     }
     
     func chooseOtherInstrument(_ inst: String) -> String {

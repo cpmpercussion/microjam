@@ -47,25 +47,32 @@ class RoboJamView: ChirpView {
     
     /// Play out the loaded robojam silently to create the image.
     func generateImage() {
+        print("Generating Image")
         guard let performance = performance else {
             print("No performance to generate from.")
             return
         }
         var animationTime = 0.0
         for touch in performance.performanceData {
-            let frameTime = touch.time * 0.5
+            let frameTime = touch.time * 0.4
             timers.append(Timer.scheduledTimer(withTimeInterval: frameTime,
                                                repeats: false,
                                                block: makeSilentTouchPlayerWith(touch: touch)))
-            animationTime += frameTime
+            animationTime = frameTime
         }
         animationTime += 0.1
-        timers.append(Timer.scheduledTimer(withTimeInterval: animationTime, repeats: false, block: {(Timer) -> Void in
-            if let image = self.image, let perf = self.performance {
-                perf.image = image
-            }
-        }))
-        
+        print("Trying to add the performance image in:", animationTime)
+        timers.append(Timer.scheduledTimer(withTimeInterval: animationTime,
+                                           repeats: false,
+                                           block: addGeneratedImage))
+    }
+    
+    /// update the performance image.
+    func addGeneratedImage(_ timer: Timer) {
+        if let image = self.image, let perf = self.performance {
+            perf.image = image
+            print("RoboJamView: added complete image")
+        }
     }
 
 }
