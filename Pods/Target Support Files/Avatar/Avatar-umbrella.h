@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_microjamTestsVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_microjamTestsVersionString[];
+FOUNDATION_EXPORT double AvatarVersionNumber;
+FOUNDATION_EXPORT const unsigned char AvatarVersionString[];
 
