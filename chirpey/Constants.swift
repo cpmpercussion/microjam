@@ -17,7 +17,7 @@ struct SettingsKeys {
     static let backgroundColourKey = "background_colour"
     static let soundSchemeKey = "sound_scheme"
     static let defaultSettings : [String : Any] = [
-        SettingsKeys.performerKey:"performer",
+        SettingsKeys.performerKey:"",
         SettingsKeys.performerColourKey: 0.5,
         SettingsKeys.backgroundColourKey: 0.2,
         SettingsKeys.soundSchemeKey: 0

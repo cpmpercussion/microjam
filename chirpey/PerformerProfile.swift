@@ -8,6 +8,10 @@
 
 import UIKit
 import CloudKit
+import Avatar
+import SwiftRandom
+
+
 
 /// Storage for performer profile data (either for local user or other users).
 class PerformerProfile: NSObject, NSCoding {
@@ -108,4 +112,27 @@ extension PerformerProfile {
         let backgroundColour = UIColor(backgroundColourHex)
         self.init(avatar: avatar, stageName: stageName, jamColour: jamColour, backgroundColour: backgroundColour, soundScheme: soundScheme)
     }
+}
+
+// MARK: Functions for generating random username and avatar for new users.
+
+extension RandomUserData {
+
+    static func randomPerformerName() -> String {
+        let nameParts = ["ai","ae","au","bi","ba","bu","by","cae","co","de","du","da","e","fa","fu","gu","gi",
+                         "he","i","ja","la","le","lo","ma","mo","ne","nu","o","ra","ru","sa","te","tu","xi","xe","y"]
+        let syllables = Int.random(2,8)
+        let output = ""
+        for _ in 0..syllables {
+            output += nameParts.randomItem!
+        }
+        output = output.first.uppercased() + output.dropFirst() // first leter is uppercase.
+        return output
+    }
+    
+    static func randomUserAvatar() -> UIImage {
+        let avatar = Avatar.generate(for: CGSize(200,200), scale: 20)
+        return avatar
+    }
+    
 }
