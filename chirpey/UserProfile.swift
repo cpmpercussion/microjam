@@ -188,7 +188,7 @@ class UserProfile: NSObject {
             if let name = record[UserCloudKeys.stagename] as? String {
                 profile.stageName = name
                 print("UserProfile: Stagename found on Cloudkit.")
-                if name.isEmpty || name == "Performer" {
+                if name.isEmpty || name == "performer" {
                     let genName = PerformerProfile.randomPerformerName()
                     profile.stageName = genName
                     print("UserProfile: New stagename generated: ", name)
