@@ -33,6 +33,7 @@
 # define SCHED_TICK(x) sched_tick()
 #endif
 
+// forward declares
 void pd_init(void);
 int sys_startgui(const char *libdir);
 void sys_stopgui(void);
@@ -51,15 +52,17 @@ int sys_pollgui(void);
   void stdout_setup();
 #endif
 
-static t_atom *argv = NULL, *curr;
-static int argm = 0, argc;
+static PERTHREAD t_atom *argv = NULL;
+static PERTHREAD t_atom *curr = NULL;
+static PERTHREAD int argm = 0;
+static PERTHREAD int argc = 0;
 
 static void *get_object(const char *s) {
   t_pd *x = gensym(s)->s_thing;
   return x;
 }
 
-/* this is called instead of sys_main() to start things */
+// this is called instead of sys_main() to start things
 int libpd_init(void) {
   static int initialized = 0;
   if (initialized) return -1; // only allow init once (for now)
@@ -72,7 +75,6 @@ int libpd_init(void) {
   sys_printtostderr = 0;
   sys_usestdpath = 0; // don't use pd_extrapath, only sys_searchpath
   sys_debuglevel = 0;
-  sys_verbose = 0;
   sys_noloadbang = 0;
   sys_hipriority = 0;
   sys_nmidiin = 0;
@@ -88,6 +90,7 @@ int libpd_init(void) {
   libpdreceive_setup();
   sys_set_audio_api(API_DUMMY);
   STUFF->st_searchpath = NULL;
+  sys_libdir = gensym("");
 #ifdef LIBPD_EXTRA
   bob_tilde_setup();
   bonk_tilde_setup();
@@ -121,7 +124,9 @@ void libpd_add_to_search_path(const char *s) {
 void *libpd_openfile(const char *basename, const char *dirname) {
   void * retval;
   sys_lock();
+  pd_globallock();
   retval = (void *)glob_evalfile(NULL, gensym(basename), gensym(dirname));
+  pd_globalunlock();
   sys_unlock();
   return retval;
 }
@@ -511,7 +516,7 @@ int libpd_midibyte(int port, int byte) {
 
 int libpd_sysex(int port, int byte) {
   CHECK_PORT
-  CHECK_RANGE_7BIT(byte)
+  CHECK_RANGE_8BIT(byte)
   sys_lock();
   inmidi_sysex(port, byte);
   sys_unlock();
@@ -555,7 +560,7 @@ void libpd_set_midibytehook(const t_libpd_midibytehook hook) {
   libpd_midibytehook = hook;
 }
 
-int libpd_startgui(char *path) {
+int libpd_start_gui(char *path) {
   int retval;
   sys_lock();
   retval = sys_startgui(path);
@@ -563,21 +568,72 @@ int libpd_startgui(char *path) {
   return retval;
 }
 
-void libpd_stopgui( void) {
+void libpd_stop_gui(void) {
   sys_lock();
   sys_stopgui();
   sys_unlock();
 }
 
-void libpd_pollgui( void) {
+void libpd_poll_gui(void) {
   sys_lock();
   sys_pollgui();
   sys_unlock();
 }
 
-/* dummy routines needed because we don't use s_file.c */
+t_pdinstance *libpd_new_instance(void) {
+#ifdef PDINSTANCE
+  return pdinstance_new();
+#else
+  return 0;
+#endif
+}
+
+void libpd_set_instance(t_pdinstance *x) {
+#ifdef PDINSTANCE
+  pd_setinstance(x);
+#endif
+}
+
+void libpd_free_instance(t_pdinstance *x) {
+#ifdef PDINSTANCE
+  pdinstance_free(x);
+#endif
+}
+
+t_pdinstance *libpd_this_instance(void) {
+  return pd_this;
+}
+
+t_pdinstance *libpd_get_instance(int index) {
+#ifdef PDINSTANCE
+  if(index < 0 || index >= pd_ninstances) {return 0;}
+  return pd_instances[index];
+#else
+  return pd_this;
+#endif
+}
+
+int libpd_num_instances(void) {
+#ifdef PDINSTANCE
+  return pd_ninstances;
+#else
+  return 1;
+#endif
+}
+
+void libpd_set_verbose(int verbose) {
+  if (verbose < 0) verbose = 0;
+  sys_verbose = verbose;
+}
+
+int libpd_get_verbose(void) {
+  return sys_verbose;
+}
+
+// dummy routines needed because we don't use s_file.c
 void glob_loadpreferences(t_pd *dummy, t_symbol *s) {}
 void glob_savepreferences(t_pd *dummy, t_symbol *s) {}
 void glob_forgetpreferences(t_pd *dummy) {}
 void sys_loadpreferences(const char *filename, int startingup) {}
 int sys_oktoloadfiles(int done) {return 1;}
+void sys_savepreferences(const char *filename) {} // used in s_path.c

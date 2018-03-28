@@ -52,6 +52,7 @@ class UserProfile: NSObject {
         if let loadedProfile =  NSKeyedUnarchiver.unarchiveObject(withFile: UserProfile.profileURL.path) as? PerformerProfile {
             return loadedProfile
         } else {
+            // no profile stored, open a blank profile.
             return PerformerProfile()
         }
     }
@@ -170,20 +171,36 @@ class UserProfile: NSObject {
         if let record = record {
             // User Record Found, extract user data to display
             var cloudNeedsUpdating = false
+            var avatarNeedsUpdating = false
             // Avatar
             if let avatarPath = record[UserCloudKeys.avatar] as? CKAsset,
                 let avatarImage = UIImage(contentsOfFile: avatarPath.fileURL.path) {
                 profile.avatar = avatarImage
                 print("UserProfile: Avatar found on Cloudkit.")
+            } else {
+                // Generate temporary avatar image
+                if let avatarImage = PerformerProfile.randomUserAvatar() {
+                    profile.avatar = avatarImage
+                    avatarNeedsUpdating = true
+                    print("UserProfile: New avatar generated")
+                }
             }
             
             // Stage Name
             if let name = record[UserCloudKeys.stagename] as? String {
                 profile.stageName = name
                 print("UserProfile: Stagename found on Cloudkit.")
-            } else if let name = UserDefaults.standard.string(forKey: SettingsKeys.performerKey) {
+                if name.isEmpty || name == "performer" {
+                    let genName = PerformerProfile.randomPerformerName()
+                    profile.stageName = genName
+                    print("UserProfile: New stagename generated: ", name)
+                    cloudNeedsUpdating = true
+                }
+            } else {
+                // Generate random stagename
+                let name = PerformerProfile.randomPerformerName()
                 profile.stageName = name
-                print("UserProfile: Stagename found in UserDefaults (updating in cloud)")
+                print("UserProfile: New stagename generated: ", name)
                 cloudNeedsUpdating = true
             }
             
@@ -222,6 +239,9 @@ class UserProfile: NSObject {
             
             if (cloudNeedsUpdating) {
                 updateUserProfile()
+            }
+            if (avatarNeedsUpdating) {
+                updateAvatar(profile.avatar)
             }
         } else {
             print("UserProfile: Error: User record does not exist!")

@@ -3,7 +3,6 @@
 //  microjam
 // 
 //  Manages User Settings such as ID, performer name and avatar
-//  That 
 //  Created by Charles Martin on 2/8/17.
 //  Copyright © 2017 Charles Martin. All rights reserved.
 //

@@ -123,6 +123,8 @@ static void stdout_anything(t_stdout *x, t_symbol *s, int argc, t_atom *argv)
                 pd_tilde_putsymbol(argv->a_w.w_symbol, stdout);
         }
         putc(A_SEMI, stdout);
+        if (x->x_flush)
+            fflush(stdout);
         return;
     }
     msgbuf[0] = 0;
@@ -133,7 +135,7 @@ static void stdout_anything(t_stdout *x, t_symbol *s, int argc, t_atom *argv)
     {
         if (sp < ep-1)
             sp[0] = ' ', sp[1] = 0, sp++;
-        atom_string(argv++, sp, ep-sp);
+        atom_string(argv++, sp, (unsigned int)(ep-sp));
         sp += strlen(sp);
     }
     switch(x->x_mode) {

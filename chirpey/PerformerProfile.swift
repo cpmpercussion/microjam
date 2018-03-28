@@ -8,6 +8,10 @@
 
 import UIKit
 import CloudKit
+import Avatar
+import SwiftRandom
+
+
 
 /// Storage for performer profile data (either for local user or other users).
 class PerformerProfile: NSObject, NSCoding {
@@ -38,7 +42,10 @@ class PerformerProfile: NSObject, NSCoding {
     
     /// Initialiser for a blank performance
     convenience override init() {
-        self.init(avatar: UIImage(), stageName: "", jamColour: UIColor.blue, backgroundColour: UIColor.clear, soundScheme: 1)
+        self.init(avatar: PerformerProfile.randomUserAvatar() ?? UIImage(),
+                  stageName: PerformerProfile.randomPerformerName(),
+                  jamColour: PerformerProfile.randomJamColour(),
+                  backgroundColour: UIColor.clear, soundScheme: 1)
     }
     
     // MARK: NSCoding Functions
@@ -108,4 +115,32 @@ extension PerformerProfile {
         let backgroundColour = UIColor(backgroundColourHex)
         self.init(avatar: avatar, stageName: stageName, jamColour: jamColour, backgroundColour: backgroundColour, soundScheme: soundScheme)
     }
+}
+
+// MARK: Functions for generating random username and avatar for new users.
+
+extension PerformerProfile {
+
+    static func randomPerformerName() -> String {
+        let nameParts = ["ai","ae","au","bi","ba","bu","by","cae","co","fa","fu","gu","gi",
+                         "i","ja","la","le","lo","ma","mo","ne","nu","o","ra","ru","sa","te","xi",
+                         "e","y","a","o","u","e","y","a","o","u","e","y"]
+//                         "a","o","u","e","y","a","o","u","e","y","a","o","u"]
+        let syllables = Int.random(2,5)
+        var output = ""
+        for _ in 0...syllables {
+            output += nameParts.randomItem()!
+        }
+        return output.capitalized
+    }
+    
+    static func randomUserAvatar() -> UIImage? {
+        let size = CGSize(width: UserProfile.avatarWidth, height: UserProfile.avatarWidth)
+        return Avatar.generate(for: size, scale: 20) // ?? UIImage()
+    }
+    
+    static func randomJamColour() -> UIColor {
+        return colourFromHue(hue: Float(arc4random()) / 0xFFFFFFFF)
+    }
+    
 }
