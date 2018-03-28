@@ -131,7 +131,7 @@ extension PerformerProfile {
     }
     
     static func randomUserAvatar() -> UIImage? {
-        let size = CGSize(width: 200,height: 200)
+        let size = CGSize(width: UserProfile.avatarWidth, height: UserProfile.avatarWidth)
         return Avatar.generate(for: size, scale: 20)
     }
     

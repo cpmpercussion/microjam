@@ -175,15 +175,30 @@ class UserProfile: NSObject {
                 let avatarImage = UIImage(contentsOfFile: avatarPath.fileURL.path) {
                 profile.avatar = avatarImage
                 print("UserProfile: Avatar found on Cloudkit.")
+            } else {
+                // Generate temporary avatar image
+                if let avatarImage = PerformerProfile.randomUserAvatar() {
+                    profile.avatar = avatarImage
+                    print("UserProfile: New avatar generated")
+                    cloudNeedsUpdating = true
+                }
             }
             
             // Stage Name
             if let name = record[UserCloudKeys.stagename] as? String {
                 profile.stageName = name
                 print("UserProfile: Stagename found on Cloudkit.")
-            } else if let name = UserDefaults.standard.string(forKey: SettingsKeys.performerKey) {
+                if name.isEmpty || name == "Performer" {
+                    let genName = PerformerProfile.randomPerformerName()
+                    profile.stageName = genName
+                    print("UserProfile: New stagename generated: ", name)
+                    cloudNeedsUpdating = true
+                }
+            } else {
+                // Generate random stagename
+                let name = PerformerProfile.randomPerformerName()
                 profile.stageName = name
-                print("UserProfile: Stagename found in UserDefaults (updating in cloud)")
+                print("UserProfile: New stagename generated: ", name)
                 cloudNeedsUpdating = true
             }
             
