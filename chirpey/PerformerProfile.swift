@@ -42,7 +42,10 @@ class PerformerProfile: NSObject, NSCoding {
     
     /// Initialiser for a blank performance
     convenience override init() {
-        self.init(avatar: UIImage(), stageName: "", jamColour: UIColor.blue, backgroundColour: UIColor.clear, soundScheme: 1)
+        self.init(avatar: PerformerProfile.randomUserAvatar() ?? UIImage(),
+                  stageName: PerformerProfile.randomPerformerName(),
+                  jamColour: PerformerProfile.randomJamColour(),
+                  backgroundColour: UIColor.clear, soundScheme: 1)
     }
     
     // MARK: NSCoding Functions
@@ -133,7 +136,11 @@ extension PerformerProfile {
     
     static func randomUserAvatar() -> UIImage? {
         let size = CGSize(width: UserProfile.avatarWidth, height: UserProfile.avatarWidth)
-        return Avatar.generate(for: size, scale: 20)
+        return Avatar.generate(for: size, scale: 20) // ?? UIImage()
+    }
+    
+    static func randomJamColour() -> UIColor {
+        return colourFromHue(hue: Float(arc4random()) / 0xFFFFFFFF)
     }
     
 }
