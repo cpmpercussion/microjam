@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1Ky-aD-J6s">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="d5F-NO-LFe">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,30 +22,52 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="choose a stage name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eiY-g1-KKK">
-                                <rect key="frame" x="37.5" y="120" width="300" height="80"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="wKA-dg-vkF"/>
-                                    <constraint firstAttribute="height" constant="80" id="yc2-Gg-06x"/>
-                                </constraints>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="continue"/>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qsP-zo-lDm">
-                                <rect key="frame" x="16" y="61.5" width="343" height="38.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="IG6-Lb-f7o">
+                                <rect key="frame" x="21" y="187" width="333" height="294.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set a stagename for your Microjams" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qsP-zo-lDm">
+                                        <rect key="frame" x="0.0" y="0.0" width="333" height="76.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="choose a stage name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eiY-g1-KKK">
+                                        <rect key="frame" x="0.0" y="76.5" width="333" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="80" id="yc2-Gg-06x"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="continue"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="td6-j5-ckS">
+                                        <rect key="frame" x="0.0" y="156.5" width="333" height="30"/>
+                                        <state key="normal" title="Generate a name for me!"/>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose a stylish or fun stagename or hit &quot;generate&quot; to let us choose. You can change your name later as well!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ljs-wi-Tof">
+                                        <rect key="frame" x="0.0" y="186.5" width="333" height="61"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MicroJam is just for fun, so avoid real names :-)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="imA-mX-Lbt">
+                                        <rect key="frame" x="0.0" y="247.5" width="333" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tRg-ap-YSG">
+                                        <rect key="frame" x="0.0" y="264.5" width="333" height="30"/>
+                                        <state key="normal" title="Done choosing!"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="0.97367788460000004" green="0.97367788460000004" blue="0.97367788460000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="1" green="0.49327188729999999" blue="0.47399842739999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="eiY-g1-KKK" firstAttribute="centerX" secondItem="Nvr-kd-oF6" secondAttribute="centerX" id="0aO-m9-vOV"/>
-                            <constraint firstItem="qsP-zo-lDm" firstAttribute="leading" secondItem="Nvr-kd-oF6" secondAttribute="leadingMargin" id="4vD-vN-s3Z"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="qsP-zo-lDm" secondAttribute="trailing" id="6wz-fO-bb4"/>
-                            <constraint firstItem="eiY-g1-KKK" firstAttribute="top" secondItem="qsP-zo-lDm" secondAttribute="bottom" constant="20" id="gQW-sa-UhO"/>
-                            <constraint firstItem="eiY-g1-KKK" firstAttribute="top" secondItem="62V-d9-XCY" secondAttribute="bottom" constant="100" id="tdV-ox-y0j"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="IG6-Lb-f7o" secondAttribute="trailing" constant="5" id="HGP-oE-G6F"/>
+                            <constraint firstItem="IG6-Lb-f7o" firstAttribute="centerY" secondItem="Nvr-kd-oF6" secondAttribute="centerY" id="VvP-qQ-K8Z"/>
+                            <constraint firstItem="IG6-Lb-f7o" firstAttribute="centerX" secondItem="Nvr-kd-oF6" secondAttribute="centerX" id="gMY-Ac-32t"/>
                         </constraints>
                     </view>
                     <connections>
@@ -54,7 +76,115 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lii-L2-UCP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-266" y="664"/>
+            <point key="canvasLocation" x="-151" y="388"/>
+        </scene>
+        <!--Avatar Chooser-->
+        <scene sceneID="v5s-sE-9UO">
+            <objects>
+                <viewController storyboardIdentifier="AvatarChooser" title="Avatar Chooser" id="XEA-AX-jOF" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ZUB-zm-owK"/>
+                        <viewControllerLayoutGuide type="bottom" id="ncy-hK-Dzi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ACX-5L-K0c">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Nbs-bV-VvB">
+                                <rect key="frame" x="21" y="251.5" width="333" height="164.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Choose an avatar to represent you" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hQH-HE-cn6">
+                                        <rect key="frame" x="0.0" y="0.0" width="333" height="76.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We've made an avatar for you, but you can choose another image if you want." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mxh-hc-oF6">
+                                        <rect key="frame" x="0.0" y="76.5" width="333" height="41"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MicroJam is just for fun, so avoid real faces :-)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YiR-Ya-9H4">
+                                        <rect key="frame" x="0.0" y="117.5" width="333" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MIp-y8-l2s">
+                                        <rect key="frame" x="0.0" y="134.5" width="333" height="30"/>
+                                        <state key="normal" title="Done choosing!"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.83234566450000003" blue="0.47320586440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Nbs-bV-VvB" firstAttribute="centerX" secondItem="ACX-5L-K0c" secondAttribute="centerX" id="EEq-Tn-enU"/>
+                            <constraint firstItem="Nbs-bV-VvB" firstAttribute="leading" secondItem="ACX-5L-K0c" secondAttribute="leadingMargin" constant="5" id="MHC-GW-gbJ"/>
+                            <constraint firstItem="Nbs-bV-VvB" firstAttribute="centerY" secondItem="ACX-5L-K0c" secondAttribute="centerY" id="e3q-pU-LlT"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Nbs-bV-VvB" secondAttribute="trailing" constant="5" id="x1t-7T-pJh"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GUC-yc-TJj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="591" y="387"/>
+        </scene>
+        <!--Jam Tester-->
+        <scene sceneID="VOu-F6-SMw">
+            <objects>
+                <viewController storyboardIdentifier="JamTester" title="Jam Tester" id="0lp-5e-Law" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uSu-nC-hnq"/>
+                        <viewControllerLayoutGuide type="bottom" id="cmc-PN-4fj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8ZN-VA-xIt">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="8q0-Hz-h2v">
+                                <rect key="frame" x="5" y="259.5" width="365" height="147.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="MicroJam is an app for performing tiny pieces of music." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="80r-5S-oI7">
+                                        <rect key="frame" x="0.0" y="0.0" width="365" height="76.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Just swipe and tap in the square above to make cool sounds!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WWz-Tk-nNO">
+                                        <rect key="frame" x="0.0" y="76.5" width="365" height="41"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kYj-Dq-SRI">
+                                        <rect key="frame" x="0.0" y="117.5" width="365" height="30"/>
+                                        <state key="normal" title="I'm ready!"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.83216959239999999" green="0.98548370600000001" blue="0.47333085539999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="8q0-Hz-h2v" secondAttribute="trailing" constant="5" id="Dh1-dZ-R9a"/>
+                            <constraint firstItem="8q0-Hz-h2v" firstAttribute="centerX" secondItem="8ZN-VA-xIt" secondAttribute="centerX" id="PHr-b7-aN3"/>
+                            <constraint firstItem="8q0-Hz-h2v" firstAttribute="leading" secondItem="8ZN-VA-xIt" secondAttribute="leading" constant="5" id="iiU-gP-FZR"/>
+                            <constraint firstItem="8q0-Hz-h2v" firstAttribute="centerY" secondItem="8ZN-VA-xIt" secondAttribute="centerY" id="nc3-Mh-5Jf"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c2f-X7-ma6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1284" y="387"/>
+        </scene>
+        <!--Page View Controller-->
+        <scene sceneID="YfJ-qV-Nee">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="d5F-NO-LFe" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="14x-ll-atO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-998" y="389"/>
         </scene>
     </scenes>
 </document>

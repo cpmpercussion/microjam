@@ -10,7 +10,7 @@
 
 import UIKit
 
-class UserNameChooserViewController: UIViewController, UITextFieldDelegate {
+class UserNameChooserViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate, UITextFieldDelegate {
 
     /// Text field for entering stage name.
     @IBOutlet weak var userNameTextField: UITextField!
