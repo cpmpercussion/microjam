@@ -62,10 +62,6 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="tZO-Dv-UUF">
-                                <rect key="frame" x="168" y="610" width="39" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </pageControl>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.49327188729999999" blue="0.47399842739999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -94,41 +90,107 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Nbs-bV-VvB">
-                                <rect key="frame" x="21" y="251.5" width="333" height="164.5"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Nbs-bV-VvB">
+                                <rect key="frame" x="21" y="251.5" width="333" height="292.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Choose an avatar to represent you" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hQH-HE-cn6">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" ambiguous="YES" text="Choose an avatar to represent you" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hQH-HE-cn6">
                                         <rect key="frame" x="0.0" y="0.0" width="333" height="76.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We've made an avatar for you, but you can choose another image if you want." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mxh-hc-oF6">
-                                        <rect key="frame" x="0.0" y="76.5" width="333" height="41"/>
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eyH-y0-k9I">
+                                        <rect key="frame" x="0.0" y="76.5" width="333" height="128"/>
+                                        <subviews>
+                                            <view hidden="YES" clipsSubviews="YES" contentMode="scaleAspectFit" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yfM-n7-ouY" userLabel="Avatar container view">
+                                                <rect key="frame" x="0.0" y="-36" width="333" height="200"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uGD-Ls-bYR" userLabel="Avatar Image">
+                                                        <rect key="frame" x="0.0" y="0.0" width="333" height="200"/>
+                                                        <color key="backgroundColor" red="0.90227607659999998" green="0.89745107089999998" blue="0.90710108239999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </imageView>
+                                                    <visualEffectView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LYH-2B-Cn7">
+                                                        <rect key="frame" x="0.0" y="0.0" width="333" height="18"/>
+                                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" id="Pbx-K1-q0i">
+                                                            <rect key="frame" x="0.0" y="0.0" width="333" height="18"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <subviews>
+                                                                <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZZu-Zj-mmm">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="333" height="18"/>
+                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" id="HgR-d4-8wb">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="333" height="18"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                        <subviews>
+                                                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7fG-0Z-bF4">
+                                                                                <rect key="frame" x="15" y="-3" width="30" height="27"/>
+                                                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="11"/>
+                                                                                <state key="normal" title="Edit"/>
+                                                                            </button>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstItem="7fG-0Z-bF4" firstAttribute="centerY" secondItem="HgR-d4-8wb" secondAttribute="centerY" id="Dgg-0c-GGI"/>
+                                                                            <constraint firstItem="7fG-0Z-bF4" firstAttribute="top" secondItem="HgR-d4-8wb" secondAttribute="top" constant="-3" id="tIf-g0-Bva"/>
+                                                                            <constraint firstItem="7fG-0Z-bF4" firstAttribute="centerX" secondItem="HgR-d4-8wb" secondAttribute="centerX" id="tIz-bH-NJX"/>
+                                                                        </constraints>
+                                                                    </view>
+                                                                    <vibrancyEffect>
+                                                                        <blurEffect style="extraLight"/>
+                                                                    </vibrancyEffect>
+                                                                </visualEffectView>
+                                                            </subviews>
+                                                        </view>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="18" id="DjC-mw-F1z"/>
+                                                        </constraints>
+                                                        <blurEffect style="extraLight"/>
+                                                    </visualEffectView>
+                                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="BCR-xO-7Kd" userLabel="avatar activity indicator">
+                                                        <rect key="frame" x="156.5" y="90" width="20" height="20"/>
+                                                        <color key="color" red="0.2274509804" green="0.4823529412" blue="0.83529411760000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </activityIndicatorView>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstItem="BCR-xO-7Kd" firstAttribute="centerX" secondItem="yfM-n7-ouY" secondAttribute="centerX" id="8sc-QY-gUr"/>
+                                                    <constraint firstAttribute="height" constant="200" id="HLY-cJ-y6R"/>
+                                                    <constraint firstAttribute="width" constant="200" id="IXF-kO-Jbs"/>
+                                                    <constraint firstAttribute="trailing" secondItem="uGD-Ls-bYR" secondAttribute="trailing" id="LDH-yv-Oyx"/>
+                                                    <constraint firstItem="LYH-2B-Cn7" firstAttribute="top" secondItem="yfM-n7-ouY" secondAttribute="top" id="N1P-gz-cYe"/>
+                                                    <constraint firstAttribute="bottom" secondItem="uGD-Ls-bYR" secondAttribute="bottom" id="Oqq-9R-wJ9"/>
+                                                    <constraint firstAttribute="trailing" secondItem="LYH-2B-Cn7" secondAttribute="trailing" id="RHS-0y-loz"/>
+                                                    <constraint firstItem="BCR-xO-7Kd" firstAttribute="centerY" secondItem="yfM-n7-ouY" secondAttribute="centerY" id="c1k-Xq-sku"/>
+                                                    <constraint firstItem="uGD-Ls-bYR" firstAttribute="leading" secondItem="yfM-n7-ouY" secondAttribute="leading" id="gC2-Fw-PR7"/>
+                                                    <constraint firstItem="LYH-2B-Cn7" firstAttribute="leading" secondItem="yfM-n7-ouY" secondAttribute="leading" id="otH-bu-07w"/>
+                                                    <constraint firstItem="uGD-Ls-bYR" firstAttribute="top" secondItem="yfM-n7-ouY" secondAttribute="top" id="xqL-Sr-kWr"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="We've made an avatar for you, but you can choose another image if you want." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mxh-hc-oF6">
+                                        <rect key="frame" x="0.0" y="204.5" width="333" height="41"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MicroJam is just for fun, so avoid real faces :-)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YiR-Ya-9H4">
-                                        <rect key="frame" x="0.0" y="117.5" width="333" height="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="MicroJam is just for fun, so avoid real faces :-)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YiR-Ya-9H4">
+                                        <rect key="frame" x="0.0" y="245.5" width="333" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MIp-y8-l2s">
-                                        <rect key="frame" x="0.0" y="134.5" width="333" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MIp-y8-l2s">
+                                        <rect key="frame" x="0.0" y="262.5" width="333" height="30"/>
                                         <state key="normal" title="Done choosing!"/>
                                     </button>
                                 </subviews>
                             </stackView>
-                            <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="vfW-Ia-1FK">
-                                <rect key="frame" x="168" y="610" width="39" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </pageControl>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.83234566450000003" blue="0.47320586440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Nbs-bV-VvB" firstAttribute="centerX" secondItem="ACX-5L-K0c" secondAttribute="centerX" id="EEq-Tn-enU"/>
+                            <constraint firstItem="Nbs-bV-VvB" firstAttribute="centerY" secondItem="ACX-5L-K0c" secondAttribute="centerY" id="GjN-HI-DaW"/>
                             <constraint firstItem="Nbs-bV-VvB" firstAttribute="leading" secondItem="ACX-5L-K0c" secondAttribute="leadingMargin" constant="5" id="MHC-GW-gbJ"/>
                             <constraint firstItem="Nbs-bV-VvB" firstAttribute="centerY" secondItem="ACX-5L-K0c" secondAttribute="centerY" id="e3q-pU-LlT"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Nbs-bV-VvB" secondAttribute="trailing" constant="5" id="x1t-7T-pJh"/>
@@ -172,10 +234,6 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="85U-Vo-f82">
-                                <rect key="frame" x="168" y="610" width="39" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </pageControl>
                         </subviews>
                         <color key="backgroundColor" red="0.83216959239999999" green="0.98548370600000001" blue="0.47333085539999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
