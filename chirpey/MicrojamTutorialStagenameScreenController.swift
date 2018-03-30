@@ -18,10 +18,19 @@ class MicrojamTutorialStagenameScreenController: UIViewController {
         if let newName = userNameTextField.text {
             UserDefaults.standard.set(newName, forKey: SettingsKeys.performerKey)
             print("UserNameVC: Set Name to: ", newName)
+            // FIXME: set for update in iCloud
+
         }
+        
         // dismiss
         //dismiss(animated: true, completion: nil)
     }
+    
+    @IBAction func generateStageName(_ sender: Any) {
+        let newName = PerformerProfile.randomPerformerName()
+        userNameTextField.text = newName
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

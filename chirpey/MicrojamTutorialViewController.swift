@@ -13,25 +13,30 @@ import UIKit
 class MicrojamTutorialViewController: UIPageViewController {
     
     private(set) lazy var orderedViewControllers: [UIViewController] = {
-        return [UIStoryboard(name:"MicrojamTutorialViewController", bundle: nil).instantiateViewController(withIdentifier: "UserNameChooser"),
+        return [
+           
+            UIStoryboard(name:"MicrojamTutorialViewController", bundle: nil).instantiateViewController(withIdentifier: "UserNameChooser"),
                 UIStoryboard(name:"MicrojamTutorialViewController", bundle: nil).instantiateViewController(withIdentifier: "AvatarChooser"),
-                UIStoryboard(name:"MicrojamTutorialViewController", bundle: nil).instantiateViewController(withIdentifier: "JamTester")]
+                 UIStoryboard(name:"MicrojamTutorialViewController", bundle: nil).instantiateViewController(withIdentifier: "JamTester")
+        ]
     }()
 
     /// Initialises ViewController with separate storyboard with same name. Used to programmatically load the user settings screen in the tab bar controller.
     static func storyboardInstance() -> MicrojamTutorialViewController? {
-        print("UserNameVC: Attempting to initialise from storyboard.")
+        print("TutorialVC: Attempting to initialise from storyboard.")
         let storyboard = UIStoryboard(name:"MicrojamTutorialViewController", bundle: nil)
+        print("TutorialVC: Opened storyboard.")
         return storyboard.instantiateInitialViewController() as? MicrojamTutorialViewController
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource = self // UIPageViewController datasource
-        
+        print("TutorialVC: Attempting to present first VC.")
         // Display first VC
         if let firstViewController = orderedViewControllers.first {
             setViewControllers([firstViewController], direction: .forward, animated: true, completion: nil)
+            print("TutorialVC: Presented first VC.")
         }
     }
     
