@@ -14,10 +14,11 @@ class MicrojamTutorialViewController: UIPageViewController {
     
     private(set) lazy var orderedViewControllers: [UIViewController] = {
         return [
-           
+            UIStoryboard(name:"MicrojamTutorialViewController", bundle: nil).instantiateViewController(withIdentifier: "JamTester"),
+            UIStoryboard(name:"MicrojamTutorialViewController", bundle: nil).instantiateViewController(withIdentifier: "iCloudCheck"),
             UIStoryboard(name:"MicrojamTutorialViewController", bundle: nil).instantiateViewController(withIdentifier: "UserNameChooser"),
-                UIStoryboard(name:"MicrojamTutorialViewController", bundle: nil).instantiateViewController(withIdentifier: "AvatarChooser"),
-                 UIStoryboard(name:"MicrojamTutorialViewController", bundle: nil).instantiateViewController(withIdentifier: "JamTester")
+            UIStoryboard(name:"MicrojamTutorialViewController", bundle: nil).instantiateViewController(withIdentifier: "AvatarChooser"),
+            UIStoryboard(name:"MicrojamTutorialViewController", bundle: nil).instantiateViewController(withIdentifier: "GetStarted")
         ]
     }()
 

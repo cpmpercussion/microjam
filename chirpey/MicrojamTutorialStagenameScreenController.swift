@@ -9,33 +9,29 @@
 import UIKit
 
 class MicrojamTutorialStagenameScreenController: UIViewController {
+    
+    /// Link to the users' profile data.
+    let profile: PerformerProfile = UserProfile.shared.profile
 
     /// Text field for entering stage name.
     @IBOutlet weak var userNameTextField: UITextField!
     
-    /// IBAction for pressing continue once stage name is set.
-    @IBAction func userNameChoiceButtonPushed(_ sender: Any) {
-        if let newName = userNameTextField.text {
-            UserDefaults.standard.set(newName, forKey: SettingsKeys.performerKey)
-            print("UserNameVC: Set Name to: ", newName)
-            // FIXME: set for update in iCloud
-
-        }
-        
-        // dismiss
-        //dismiss(animated: true, completion: nil)
-    }
-    
     @IBAction func generateStageName(_ sender: Any) {
         let newName = PerformerProfile.randomPerformerName()
         userNameTextField.text = newName
+        UserDefaults.standard.set(newName, forKey: SettingsKeys.performerKey)
+        profile.stageName = newName
+        UserProfile.shared.updateUserProfile()
     }
     
+    @IBAction func skipTutorial(_ sender: Any) {
+        self.dismiss(animated: false, completion: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        userNameTextField.text = profile.stageName
         userNameTextField.delegate = self // UI TextFieldDelegate
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,9 +57,15 @@ extension MicrojamTutorialStagenameScreenController: UITextFieldDelegate {
         return true
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {   // text field delegate method
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        self.userNameChoiceButtonPushed(self) // accept the user name
+        if let newName = userNameTextField.text {
+            profile.stageName = newName
+            UserDefaults.standard.set(newName, forKey: SettingsKeys.performerKey)
+            UserProfile.shared.updateUserProfile()
+        }
         return true
     }
 }
+
+

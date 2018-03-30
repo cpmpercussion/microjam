@@ -103,8 +103,6 @@ extension ChirpRecordingView {
         makeSound(at: currentPoint, withRadius: size!, thatWasMoving: true)
     }
     
-
-    
     /**
      Adds a touch point to the recording data including whether it was moving
      and the current time.
@@ -214,4 +212,13 @@ extension ChirpRecordingView {
         }
     }
 
+}
+
+// MARK : Gesture Recognition
+
+extension ChirpRecordingView {
+    /// Don't return gesture recognizer signals if the view is in an interactive state.
+    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return false
+    }
 }
