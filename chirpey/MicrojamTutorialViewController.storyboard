@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="d5F-NO-LFe">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="d5F-NO-LFe">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Microjam Tutorial Cloud Login View Controller-->
         <scene sceneID="ZYC-6L-JBx">
             <objects>
-                <viewController storyboardIdentifier="iCloudCheck" id="IH1-Qv-Tt0" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="iCloudCheck" id="IH1-Qv-Tt0" customClass="MicrojamTutorialCloudLoginViewController" customModule="microjam" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hpi-dg-Hua"/>
                         <viewControllerLayoutGuide type="bottom" id="4nF-RR-CDt"/>
@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="RXn-U1-YUO">
-                                <rect key="frame" x="21" y="188" width="333" height="291"/>
+                                <rect key="frame" x="21" y="107.5" width="333" height="453.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iCloud" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1bu-MY-H3n">
                                         <rect key="frame" x="0.0" y="0.0" width="333" height="38.5"/>
@@ -31,36 +31,55 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iCloud account not found" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uMg-W1-W9q">
-                                        <rect key="frame" x="0.0" y="38.5" width="333" height="29"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                        <color key="textColor" red="1" green="0.0" blue="0.16620096149999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rlJ-cJ-DRb">
-                                        <rect key="frame" x="0.0" y="67.5" width="333" height="51"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="32"/>
-                                        <state key="normal" title="Go to iCloud login"/>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="hot-wf-XbB" userLabel="logged in stack">
+                                        <rect key="frame" x="0.0" y="38.5" width="333" height="76.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You're logged in and ready to go!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZwN-hn-ooL">
+                                                <rect key="frame" x="0.0" y="0.0" width="333" height="76.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Fer-Ty-ov3" userLabel="no account stack">
+                                        <rect key="frame" x="0.0" y="115" width="333" height="166"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You're not logged into iCloud. You won't be able to save your jams." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uMg-W1-W9q">
+                                                <rect key="frame" x="0.0" y="0.0" width="333" height="115"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rlJ-cJ-DRb">
+                                                <rect key="frame" x="0.0" y="115" width="333" height="51"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                                <state key="normal" title="Go to iCloud login"/>
+                                                <connections>
+                                                    <action selector="logIn:" destination="IH1-Qv-Tt0" eventType="touchUpInside" id="aCr-rn-HJD"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SfM-1f-uKK">
-                                        <rect key="frame" x="0.0" y="118.5" width="333" height="81.5"/>
+                                        <rect key="frame" x="0.0" y="281" width="333" height="81.5"/>
                                         <string key="text">MicroJam uses iCloud to store your performances and share them with others. You can't store or share performances unless you're logged into iCloud.</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We do not store or share your real name, email address, or any other personal information." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bBn-GW-2Mu">
-                                        <rect key="frame" x="0.0" y="200" width="333" height="61"/>
+                                        <rect key="frame" x="0.0" y="362.5" width="333" height="61"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V3V-KG-fru">
-                                        <rect key="frame" x="0.0" y="261" width="333" height="30"/>
+                                        <rect key="frame" x="0.0" y="423.5" width="333" height="30"/>
                                         <state key="normal" title="skip for now">
                                             <color key="titleColor" red="0.57414853570000002" green="0.57416242360000003" blue="0.57415497299999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
+                                            <action selector="skipTutorial:" destination="IH1-Qv-Tt0" eventType="touchUpInside" id="L9t-Rl-QHb"/>
                                             <action selector="skipTutorial:" destination="1Ky-aD-J6s" eventType="touchUpInside" id="X8g-OH-jp9"/>
                                         </connections>
                                     </button>
@@ -75,6 +94,10 @@
                             <constraint firstItem="RXn-U1-YUO" firstAttribute="centerX" secondItem="gCw-2Z-dWZ" secondAttribute="centerX" id="tkh-0J-M1R"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="loggedInView" destination="hot-wf-XbB" id="Ybi-Vb-mXy"/>
+                        <outlet property="noAccountView" destination="Fer-Ty-ov3" id="V5D-p4-zH3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JhM-j1-oKT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -277,7 +300,7 @@
         <!--Get Started-->
         <scene sceneID="wFu-NU-gAG">
             <objects>
-                <viewController storyboardIdentifier="GetStarted" title="Get Started" id="b2e-fj-Fc2" userLabel="Get Started" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GetStarted" title="Get Started" id="b2e-fj-Fc2" userLabel="Get Started" customClass="MicrojamTutorialGetStartedViewController" customModule="microjam" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SJE-tU-Rqf"/>
                         <viewControllerLayoutGuide type="bottom" id="TWD-qi-fJs"/>
@@ -301,6 +324,7 @@
                                             <color key="titleColor" red="0.57414853570000002" green="0.57416242360000003" blue="0.57415497299999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
+                                            <action selector="skipTutorial:" destination="b2e-fj-Fc2" eventType="touchUpInside" id="4eI-xP-NgN"/>
                                             <action selector="skipTutorial:" destination="XEA-AX-jOF" eventType="touchUpInside" id="XsB-fT-z90"/>
                                         </connections>
                                     </button>

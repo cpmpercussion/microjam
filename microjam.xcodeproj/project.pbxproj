@@ -454,6 +454,8 @@
 		567286661E05E0AF0024A515 /* MicrojamTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567286651E05E0AF0024A515 /* MicrojamTabBarController.swift */; };
 		568D1DC41DF995E500A2BC0B /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 568D1DC31DF995E500A2BC0B /* Settings.bundle */; };
 		569B92C41DFEA99C00AA257C /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569B92C31DFEA99C00AA257C /* SettingsTableViewController.swift */; };
+		56A46DF4206F8ABA0084BC16 /* MicrojamTutorialGetStartedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A46DF3206F8ABA0084BC16 /* MicrojamTutorialGetStartedViewController.swift */; };
+		56A46DF6206F8B170084BC16 /* MicrojamTutorialCloudLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A46DF5206F8B170084BC16 /* MicrojamTutorialCloudLoginViewController.swift */; };
 		56BAAFC61F44370000DC41CA /* PerformerProfileStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BAAFC51F44370000DC41CA /* PerformerProfileStore.swift */; };
 		56C88E801DFEFD8200406BF0 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56C88E7F1DFEFD8200406BF0 /* CloudKit.framework */; };
 		56D707EF1F15960900FDEB76 /* PerformanceStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D707EE1F15960900FDEB76 /* PerformanceStore.swift */; };
@@ -934,6 +936,8 @@
 		567286651E05E0AF0024A515 /* MicrojamTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MicrojamTabBarController.swift; path = chirpey/MicrojamTabBarController.swift; sourceTree = "<group>"; };
 		568D1DC31DF995E500A2BC0B /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		569B92C31DFEA99C00AA257C /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsTableViewController.swift; path = chirpey/SettingsTableViewController.swift; sourceTree = "<group>"; };
+		56A46DF3206F8ABA0084BC16 /* MicrojamTutorialGetStartedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicrojamTutorialGetStartedViewController.swift; sourceTree = "<group>"; };
+		56A46DF5206F8B170084BC16 /* MicrojamTutorialCloudLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MicrojamTutorialCloudLoginViewController.swift; path = chirpey/MicrojamTutorialCloudLoginViewController.swift; sourceTree = "<group>"; };
 		56B329E41E44834D001345DC /* WorldJamsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WorldJamsTableViewController.swift; path = chirpey/WorldJamsTableViewController.swift; sourceTree = "<group>"; };
 		56BAAFC51F44370000DC41CA /* PerformerProfileStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PerformerProfileStore.swift; path = chirpey/PerformerProfileStore.swift; sourceTree = "<group>"; };
 		56C88E7E1DFEFD7200406BF0 /* microjam.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = microjam.entitlements; sourceTree = "<group>"; };
@@ -1020,6 +1024,8 @@
 		560772DC1F206F3B000D862D /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				56A46DF3206F8ABA0084BC16 /* MicrojamTutorialGetStartedViewController.swift */,
+				56A46DF5206F8B170084BC16 /* MicrojamTutorialCloudLoginViewController.swift */,
 				56002F461F306C0F00003B88 /* MicrojamTutorialViewController.swift */,
 				56621B101DE47D5B009B9AB6 /* ChirpJamViewController.swift */,
 				56B329E41E44834D001345DC /* WorldJamsTableViewController.swift */,
@@ -2285,6 +2291,8 @@
 				56621B171DEC27B0009B9AB6 /* PerformanceTableCell.swift in Sources */,
 				569B92C41DFEA99C00AA257C /* SettingsTableViewController.swift in Sources */,
 				5627B5F61F72F062007807E4 /* RoboJamView.swift in Sources */,
+				56A46DF6206F8B170084BC16 /* MicrojamTutorialCloudLoginViewController.swift in Sources */,
+				56A46DF4206F8ABA0084BC16 /* MicrojamTutorialGetStartedViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
