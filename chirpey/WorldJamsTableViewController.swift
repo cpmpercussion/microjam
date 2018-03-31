@@ -176,12 +176,13 @@ class WorldJamsTableViewController: UITableViewController {
 
         if let profile = profilesStore.getProfile(forPerformance: performance) {
             cell.avatarImageView.image = profile.avatar
+            cell.performer.text = profile.stageName
         } else {
             cell.avatarImageView.image = nil
+            cell.performer.text = performance.performer
         }
 
         cell.title.text = performance.dateString
-        cell.performer.text = performance.performer
         cell.instrument.text = performance.instrument
 
         cell.context.text = nonCreditString()
