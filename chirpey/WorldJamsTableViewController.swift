@@ -44,35 +44,6 @@ class WorldJamsTableViewController: UITableViewController {
         tableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tableViewTapped)))
     }
 
-//    func setupPlayers() {
-//
-//        for performance in performanceStore.storedPerformances {
-//
-//            let player = Player()
-//            player.delegate = self
-//            let chirpView = ChirpView(with: CGRect.zero, andPerformance: performance)
-//            player.chirpViews.append(chirpView)
-//
-//            var current = performance
-//
-//            while current.replyto != "" {
-//                if let next = performanceStore.fetchPerformanceFrom(title: current.replyto) {
-//                    let chirp = ChirpView(with: CGRect.zero, andPerformance: next)
-//                    player.chirpViews.append(chirp)
-//                    current = next
-//                } else {
-//                    // break if the replyPerf can't be found.
-//                    // TODO: in this case, the performance should be fetched from the cloud. but there isn't functionality in the store for this yet.
-//                    break
-//                }
-//            }
-//
-//            players.append(player)
-//        }
-//
-//        tableView.reloadData()
-//    }
-
     @objc func playButtonPressed(sender: UIButton) {
 
         let indexPath = IndexPath(row: sender.tag, section: 0)
@@ -154,16 +125,19 @@ class WorldJamsTableViewController: UITableViewController {
 
         var current = performance
 
+        // TODO: maybe don't load too too many performances.
         while current.replyto != "" {
-            if let next = performanceStore.getPerformance(fortitle: current.replyto) {
+            if let next = performanceStore.getPerformance(forID: CKRecordID(recordName: current.replyto)) {
                 cell.chirpContainer.backgroundColor = next.backgroundColour.darkerColor
                 let chirp = ChirpView(with: cell.chirpContainer.bounds, andPerformance: next)
                 cell.player!.chirpViews.append(chirp)
                 cell.chirpContainer.addSubview(chirp)
                 current = next
             } else {
-                // break if the replyPerf can't be found.
-                // TODO: in this case, the performance should be fetched from the cloud. but there isn't functionality in the store for this yet.
+                // try to fetch from cloud if the reply can't be found.
+                // Try to find the relevant reply and add to the store. - this is low priority and will update later.
+                performanceStore.fetchPerformance(forID: CKRecordID(recordName: current.replyto))
+                // Break.
                 break
             }
         }

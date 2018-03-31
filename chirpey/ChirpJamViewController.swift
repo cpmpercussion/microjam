@@ -7,6 +7,7 @@
 //
 import UIKit
 import DropDown
+import CloudKit
 
 /// Maximum allowed recording time.
 let RECORDING_TIME = 5.0
@@ -33,8 +34,10 @@ class ChirpJamViewController: UIViewController {
     var recorder: ChirpRecorder?
     /// Stores a robojamview
     var robojam: RoboJamView?
-    /// Addition ChirpView for storage of the original performance for a reply.
+    /// String value of CKRecordID for storage of the original performance for a reply.
     var replyto : String?
+    /// CKRecordID version of the above
+    var replyParentID : CKRecordID?
     /// App delegate - in case we need to upload a performance.
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     /// Dropdown menu for selecting SoundScheme
@@ -225,7 +228,8 @@ class ChirpJamViewController: UIViewController {
                 
                 recorder.viewsAreLoaded = true // Make sure the views are not added to the chirp container if they are already added
                 recorder.delegate = self
-                replyto = recorder.chirpViews.first?.performance?.title() // set reply
+                replyto = recorder.chirpViews.first?.performance?.title() // set reply parent title.
+                replyParentID = recorder.chirpViews.first?.performance?.performanceID // set reply parent CKRecordID.
                 
                 if let last = recorder.chirpViews.last {
                     chirpViewContainer.backgroundColor = last.performance!.backgroundColour.darkerColor

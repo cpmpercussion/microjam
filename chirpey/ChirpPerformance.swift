@@ -36,6 +36,8 @@ class ChirpPerformance : NSObject {
     var performer : String
     /// Title of the MicroJam performance that this replies to, empty string if it is not a reply.
     var replyto : String = ""
+    /// CKRecordID of the parent performance. Only exists if the performance is a reply.
+    var replyParentID : CKRecordID?
     /// Name of the SoundScheme used to record this performance.
     var instrument : String
     /// UIImage of completed performance touch trace.

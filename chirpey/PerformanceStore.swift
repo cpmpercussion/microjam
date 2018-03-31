@@ -202,7 +202,7 @@ class PerformanceStore: NSObject {
         self.sortStoredPerformances()
     }
     
-    /// Return a profile for a given user's CKRecordID
+    /// Return a performance for a given CKRecordID
     func getPerformance(forID recordID: CKRecordID) -> ChirpPerformance? {
         if let performance = performances[recordID] {
             return performance
@@ -212,11 +212,12 @@ class PerformanceStore: NSObject {
         }
     }
 
-    /// Retrieves a ChirpPerformance from a given title string.
-    func getPerformance(fortitle title: String) -> ChirpPerformance? {
-        let recID = CKRecordID(recordName: title)
-        return(getPerformance(forID: recID))
-    }
+// Getting rid of the "title" obsession, should only use CKRecordIDs from now on.
+//    /// Retrieves a ChirpPerformance from a given title string.
+//    func getPerformance(fortitle title: String) -> ChirpPerformance? {
+//        let recID = CKRecordID(recordName: title)
+//        return(getPerformance(forID: recID))
+//    }
     
     /// Fetch a particular performance from CloudKit
     func fetchPerformance(forID recordID: CKRecordID) {
