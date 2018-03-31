@@ -341,7 +341,7 @@ extension WorldJamsTableViewController: ModelDelegate {
     func errorUpdating(error: NSError) {
         let message: String
         if error.code == 1 {
-            message = "Log into iCloud on your device and make sure the iCloud drive is turned on for this app."
+            message = ErrorDialogues.icloudNotLoggedIn
         } else {
             message = error.localizedDescription
         }

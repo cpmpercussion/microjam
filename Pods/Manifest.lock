@@ -1,6 +1,6 @@
 PODS:
   - Avatar (1.0.3)
-  - DateToolsSwift (2.0.3)
+  - DateToolsSwift (4.0.0)
   - DropDown (2.3.1)
   - InAppSettingsKit (2.9)
   - libpd (0.10.0)
@@ -31,7 +31,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Avatar: 1d905503a7977e6084714208bb4aef6c0695bd99
-  DateToolsSwift: bf69bf9056d9e53c5c03f06e51f219b9b8b02f9e
+  DateToolsSwift: 875d97ff9e3a5d54abdd67a269b3f51c757b71ab
   DropDown: 20499c7b2731b0d21609af924e47c7677a2be50d
   InAppSettingsKit: fc3dea21846535b76b8289b119dbfdbe2505b2b2
   libpd: 77d1445db7649a0d2357f0b5fd83409799008f62
