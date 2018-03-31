@@ -61,17 +61,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
     
     func applicationDidFinishLaunching(_ application: UIApplication) {
         // MARK: Check to start tutorial.
-        if (UserDefaults.standard.string(forKey: SettingsKeys.performerKey) == SettingsKeys.defaultSettings[SettingsKeys.performerKey] as? String) {
-            // Still set to default name, prompt to change setting!
-//            print("AD: Starting Tutorial")
-//            perform(#selector(presentTutorial), with: nil, afterDelay: 0)
+        if (!UserDefaults.standard.bool(forKey: SettingsKeys.tutorialCompleted)) {
+            print("AD: Starting Tutorial")
+          perform(#selector(presentTutorial), with: nil, afterDelay: 0)
         }
-        perform(#selector(presentTutorial), with: nil, afterDelay: 0)
     }
 
     /// Presents the MicrojamTutorialViewController to new users.
     @objc func presentTutorial() {
-        // TODO: Replace this with a screen by screen onboarding process including check for iCloud login.
         if let tutorialController = MicrojamTutorialViewController.storyboardInstance() {
             if let window = self.window, let rootViewController = window.rootViewController {
                 var currentController = rootViewController

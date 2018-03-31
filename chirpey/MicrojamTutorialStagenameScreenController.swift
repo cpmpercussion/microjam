@@ -26,6 +26,7 @@ class MicrojamTutorialStagenameScreenController: UIViewController {
     
     @IBAction func skipTutorial(_ sender: Any) {
         self.dismiss(animated: false, completion: nil)
+        UserDefaults.standard.set(true, forKey: SettingsKeys.tutorialCompleted)
     }
     
     override func viewDidLoad() {

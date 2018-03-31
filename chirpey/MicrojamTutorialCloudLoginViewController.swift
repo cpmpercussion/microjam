@@ -45,6 +45,7 @@ class MicrojamTutorialCloudLoginViewController: UIViewController {
     
     @IBAction func skipTutorial(_ sender: Any) {
         self.dismiss(animated: false, completion: nil)
+        UserDefaults.standard.set(true, forKey: SettingsKeys.tutorialCompleted)
     }
     
     /// Used by login button, opens Settings app so that user can log into iCloud.

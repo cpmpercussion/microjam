@@ -16,11 +16,13 @@ struct SettingsKeys {
     static let performerColourKey = "performer_colour"
     static let backgroundColourKey = "background_colour"
     static let soundSchemeKey = "sound_scheme"
+    static let tutorialCompleted = "tutorial_completed"
     static let defaultSettings : [String : Any] = [
         SettingsKeys.performerKey:"",
         SettingsKeys.performerColourKey: 0.5,
         SettingsKeys.backgroundColourKey: 0.2,
-        SettingsKeys.soundSchemeKey: 0
+        SettingsKeys.soundSchemeKey: 0,
+        SettingsKeys.tutorialCompleted: false
     ]
 }
 
@@ -151,5 +153,11 @@ struct PerformanceLabels {
         "took the stage with",
         "jammed with",
     ]
+}
+
+/// Error messages and dialogues
+
+struct ErrorDialogues {
+    static let icloudNotLoggedIn = "MicroJam uses iCloud to store performances, log into iCloud in the Settings app to see other jams!"
 }
 
