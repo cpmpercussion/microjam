@@ -1024,19 +1024,19 @@
 		560772DC1F206F3B000D862D /* controllers */ = {
 			isa = PBXGroup;
 			children = (
-				56A46DF3206F8ABA0084BC16 /* MicrojamTutorialGetStartedViewController.swift */,
-				56A46DF5206F8B170084BC16 /* MicrojamTutorialCloudLoginViewController.swift */,
-				56002F461F306C0F00003B88 /* MicrojamTutorialViewController.swift */,
-				56621B101DE47D5B009B9AB6 /* ChirpJamViewController.swift */,
-				56B329E41E44834D001345DC /* WorldJamsTableViewController.swift */,
-				569B92C31DFEA99C00AA257C /* SettingsTableViewController.swift */,
-				567286651E05E0AF0024A515 /* MicrojamTabBarController.swift */,
 				4D77CC3C1F3B5564008BD48C /* BrowseController.swift */,
-				562FDCA51F316870000409C8 /* UserSettingsViewController.swift */,
-				4DDB71001F43179A00925F4D /* UserPerfController.swift */,
-				560568DB206E4A3F00A50521 /* MicrojamTutorialStagenameScreenController.swift */,
+				56621B101DE47D5B009B9AB6 /* ChirpJamViewController.swift */,
+				567286651E05E0AF0024A515 /* MicrojamTabBarController.swift */,
 				560568DD206E4AAF00A50521 /* MicrojamTutorialAvatarScreenController.swift */,
+				56A46DF5206F8B170084BC16 /* MicrojamTutorialCloudLoginViewController.swift */,
+				56A46DF3206F8ABA0084BC16 /* MicrojamTutorialGetStartedViewController.swift */,
+				560568DB206E4A3F00A50521 /* MicrojamTutorialStagenameScreenController.swift */,
 				560568DF206E4AD300A50521 /* MicrojamTutorialTestingScreenController.swift */,
+				56002F461F306C0F00003B88 /* MicrojamTutorialViewController.swift */,
+				569B92C31DFEA99C00AA257C /* SettingsTableViewController.swift */,
+				4DDB71001F43179A00925F4D /* UserPerfController.swift */,
+				562FDCA51F316870000409C8 /* UserSettingsViewController.swift */,
+				56B329E41E44834D001345DC /* WorldJamsTableViewController.swift */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
