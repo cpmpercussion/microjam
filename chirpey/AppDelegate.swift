@@ -63,7 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
         // MARK: Check to start tutorial.
         if (!UserDefaults.standard.bool(forKey: SettingsKeys.tutorialCompleted)) {
             print("AD: Starting Tutorial")
-          perform(#selector(presentTutorial), with: nil, afterDelay: 0)
+            perform(#selector(presentTutorial), with: nil, afterDelay: 0)
         }
     }
 
