@@ -252,47 +252,12 @@ class WorldJamsTableViewController: UITableViewController {
 
     /// Segue to view loaded jams.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == JamViewSegueIdentifiers.showDetailSegue { // view a performance.
-//            // load up current data into a JamViewController
-//            let jamDetailViewController = segue.destination as! ChirpJamViewController
-//            if let selectedJamCell = sender as? PerformanceTableCell {
-//                let indexPath = tableView.indexPath(for: selectedJamCell)!
-//                var selectedJam = performanceStore.storedPerformances[indexPath.row]
-//                jamDetailViewController.newViewWith(performance: selectedJam, withFrame: nil)
-//
-//                while selectedJam.replyto != "" { // load up all replies.
-//                    // FIXME: fetching replies fails if they have not been downloaded from cloud.
-//                    if let reply = performanceStore.fetchPerformanceFrom(title: selectedJam.replyto) {
-//                        jamDetailViewController.newViewWith(performance: reply, withFrame: nil)
-//                        selectedJam = reply
-//                        print("WJTVC: cued a reply")
-//                    } else {
-//                        break // if a reply can't be found, stop loading the thread.
-//                    }
-//                }
-//            }
-//        }
+
     }
 
     /// Segue back to the World Jam Table
     @IBAction func unwindToJamList(sender: UIStoryboardSegue) {
-//        if let sourceViewController = sender.source as? ChirpJamViewController, let performance = sourceViewController.loadedPerformance {
-//            print("WJTVC: Unwound, found a performance:", performance.title())
-//            if let selectedIndexPath = tableView.indexPathForSelectedRow { // passes if a row had been selected.
-//                // Update existing performance
-//                print("WJTVC: Unwound to a selected row:",selectedIndexPath.description)
-//
-//                if (appDelegate.storedPerformances[selectedIndexPath.row].title() != performance.title()) { // check if it's actually a reply.
-//                    print("WJTVC: Found a reply performance:", performance.title())
-//                    self.addNew(performance: performance) // add it.
-//                }
-//            } else {
-//                // Add a new performance
-//                print("WJTVC: Unwound with a new performance:", performance.title())
-//                self.addNew(performance: performance)
-//                sourceViewController.new() // resets the performance after saving it.
-//            }
-//        }
+
     }
 
     /// Adds a new ChirpPerformance to the top of the list and saves it in the data source.
