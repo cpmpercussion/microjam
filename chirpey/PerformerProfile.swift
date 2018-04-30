@@ -45,7 +45,8 @@ class PerformerProfile: NSObject, NSCoding {
         self.init(avatar: PerformerProfile.randomUserAvatar() ?? UIImage(),
                   stageName: PerformerProfile.randomPerformerName(),
                   jamColour: PerformerProfile.randomJamColour(),
-                  backgroundColour: UIColor.clear, soundScheme: 1)
+                  backgroundColour: PerformerProfile.randomJamColour(),
+                  soundScheme: 1)
     }
     
     // MARK: NSCoding Functions

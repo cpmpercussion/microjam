@@ -53,12 +53,8 @@ class UserSettingsViewController: UIViewController {
     func updateUI() {
         // Display appropriate views if user is not logged in.
         if UserProfile.shared.loggedIn {
-            identityStack.isHidden = false
-            settingsStack.isHidden = false
             noAccountView.isHidden = true
         } else {
-            identityStack.isHidden = true
-            settingsStack.isHidden = true
             noAccountView.isHidden = false
         }
         avatarImageView.image = profile.avatar
