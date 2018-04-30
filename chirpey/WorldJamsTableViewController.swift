@@ -15,12 +15,15 @@ class WorldJamsTableViewController: UITableViewController {
     let performanceStore = PerformanceStore.shared
     /// Global ID for wordJamCells.
     let worldJamCellIdentifier = "worldJamCell"
-    /// Local reference to the PerformerProfileStore
+    /// Local reference to the PerformerProfileStore.
     let profilesStore = PerformerProfileStore.shared
-
+    /// UILabel as a header view for warning messages.
+    let headerView: UILabel = UILabel()
+    /// A list of currently playing ChirpPlayers.
     var players = [ChirpPlayer]()
+    /// A record of the currently playing table cell.
     var currentlyPlaying: PerformanceTableCell?
-
+    
     // MARK: - Lifecycle
 
     override func viewWillAppear(_ animated: Bool) {
@@ -40,6 +43,17 @@ class WorldJamsTableViewController: UITableViewController {
         tableView.estimatedRowHeight = 420 // iPhone 7 height
         performanceStore.delegate = self
         profilesStore.delegate = self
+        
+        // Initialise the headerView (not used unless needed to display an error).
+        headerView.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 100)
+        headerView.backgroundColor = UIColor.gray
+        headerView.text = "A world of jams awaits you."
+        headerView.textColor = UIColor.white
+        headerView.textAlignment = NSTextAlignment.center
+        headerView.lineBreakMode = .byWordWrapping
+        headerView.numberOfLines = 0
+        
+        // Initialise the refreshControl
         self.refreshControl?.addTarget(performanceStore, action: #selector(performanceStore.fetchWorldJamsFromCloud), for: UIControlEvents.valueChanged)
         tableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tableViewTapped)))
     }
@@ -265,33 +279,31 @@ extension WorldJamsTableViewController: ModelDelegate {
 
     /// Conforms to ModelDelegate Protocol
     func modelUpdated() {
-        print("WJTVC: Model updated, reloading data")
+        print("WJTVC: Model updated, reloading data.")
         refreshControl?.endRefreshing()
+        tableView.tableHeaderView = nil
         
         if let cell = currentlyPlaying {
             cell.playButton.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal)
             cell.player!.stop()
             currentlyPlaying = nil
         }
-        
         tableView.reloadData()
     }
 
     /// Conforms to ModelDelegate Protocol
     func errorUpdating(error: NSError) {
+        print("WJTVC: Model could not be updated.")
+        refreshControl?.endRefreshing()
+        tableView.tableHeaderView = headerView
         let message: String
         if error.code == 1 {
             message = ErrorDialogues.icloudNotLoggedIn
         } else {
             message = error.localizedDescription
         }
-        let alertController = UIAlertController(title: nil,
-                                                message: message,
-                                                preferredStyle: .alert)
-
-        alertController.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
-
-        present(alertController, animated: true, completion: nil)
+        headerView.text = message
+        headerView.isHidden = false
     }
 
 }

@@ -166,8 +166,7 @@ class PerformanceStore: NSObject {
             if let error = error {
                 DispatchQueue.main.async {
                     self.delegate?.errorUpdating(error: error as NSError)
-                    print("Store: Cloud Query error:\(error)")
-                    self.delegate?.modelUpdated() // stop spinner
+                    print("Store: Cloud Query error: \(error)")
                 }
                 return
             }
