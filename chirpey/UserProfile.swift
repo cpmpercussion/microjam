@@ -110,8 +110,6 @@ class UserProfile: NSObject {
             DispatchQueue.main.async {
                 print("USVC: Found user: \(recordID.recordName). Discovering info.")
                 self.fetchUserRecord(with: recordID) // get the user record.
-                self.discoverIdentity(for: recordID)
-                self.discoverFriends()
             }
         }
     }
@@ -131,38 +129,6 @@ class UserProfile: NSObject {
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: userProfileUpdatedNotificationKey), object: nil)
                 
             }
-        }
-    }
-    
-    /// Look up the user's name and other details on CloudKit
-    private func discoverIdentity(for recordID: CKRecordID) {
-        container.requestApplicationPermission(.userDiscoverability) { status, error in
-            guard status == .granted, error == nil else {
-                // TODO: error handling.
-                DispatchQueue.main.async {
-                    print("UserProfile: Not authorised to show user's name.")
-                }
-                return
-            }
-            
-            self.container.discoverUserIdentity(withUserRecordID: recordID) { identity, error in
-                defer {
-                    DispatchQueue.main.async {
-                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                    }
-                }
-            }
-        }
-    }
-    
-    /// Look up users contacts who also have microjam records.
-    private func discoverFriends() {
-        container.discoverAllIdentities { identities, error in
-            guard let identities = identities, error == nil else {
-                // TODO: error handling.
-                return
-            }
-            print("UserProfile: User has \(identities.count) contact(s) using the app:")
         }
     }
     
