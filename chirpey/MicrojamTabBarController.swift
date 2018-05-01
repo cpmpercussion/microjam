@@ -30,12 +30,14 @@ class MicrojamTabBarController: UITabBarController {
             print("TABVC: User Settings Tab could not be initialised.")
         }
         
-        if let userPerfsTableViewController = UserPerfsTableViewController.storyboardInstance() {
-            userPerfsTableViewController.tabBarItem = UITabBarItem(title: TabBarItemTitles.userPerfsTab, image: #imageLiteral(resourceName: "settingsTabIcon"), selectedImage: nil)
-            viewControllers?.append(userPerfsTableViewController)
-        } else {
-            print("TABVC: User Perfs Tab could not be initialised.")
-        }
+        // user perfs tab.
+        // disabled for now.
+//        if let userPerfsTableViewController = UserPerfsTableViewController.storyboardInstance() {
+//            userPerfsTableViewController.tabBarItem = UITabBarItem(title: TabBarItemTitles.userPerfsTab, image: #imageLiteral(resourceName: "settingsTabIcon"), selectedImage: nil)
+//            viewControllers?.append(userPerfsTableViewController)
+//        } else {
+//            print("TABVC: User Perfs Tab could not be initialised.")
+//        }
     }
 
     override func didReceiveMemoryWarning() {
