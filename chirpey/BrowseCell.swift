@@ -53,9 +53,9 @@ class BrowseCell: UICollectionViewCell {
         contentView.addSubview(listenButton)
 //        contentView.addSubview(separatorLine)
         
-        performanceImageView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 5).isActive = true
-        performanceImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5).isActive = true
-        performanceImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5).isActive = true
+        performanceImageView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 1).isActive = true
+        performanceImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 1).isActive = true
+        performanceImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -1).isActive = true
         performanceImageView.widthAnchor.constraint(equalTo: performanceImageView.heightAnchor).isActive = true
         
 //        performerNameLabel.topAnchor.constraint(equalTo: performanceImageView.topAnchor).isActive = true

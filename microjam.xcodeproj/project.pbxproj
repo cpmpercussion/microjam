@@ -445,6 +445,7 @@
 		5634AE9C1F3C500000DD5401 /* MicrojamTutorialViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5634AE9B1F3C500000DD5401 /* MicrojamTutorialViewController.storyboard */; };
 		564AF3B320989E7B0050B541 /* ChirpJamViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 564AF3B220989E7B0050B541 /* ChirpJamViewController.storyboard */; };
 		564AF3B520989FC80050B541 /* UserPerfTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564AF3B420989FC80050B541 /* UserPerfTableViewCell.swift */; };
+		564AF3B7209900990050B541 /* PerformerInfoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564AF3B6209900990050B541 /* PerformerInfoHeader.swift */; };
 		56621B0D1DE39D33009B9AB6 /* ChirpPerformance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56621B0C1DE39D33009B9AB6 /* ChirpPerformance.swift */; };
 		56621B0F1DE47376009B9AB6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56621B0E1DE47376009B9AB6 /* AppDelegate.swift */; };
 		56621B111DE47D5B009B9AB6 /* ChirpJamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56621B101DE47D5B009B9AB6 /* ChirpJamViewController.swift */; };
@@ -926,6 +927,7 @@
 		563E060F1EFBE71700F0D471 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		564AF3B220989E7B0050B541 /* ChirpJamViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = ChirpJamViewController.storyboard; path = chirpey/ChirpJamViewController.storyboard; sourceTree = "<group>"; };
 		564AF3B420989FC80050B541 /* UserPerfTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserPerfTableViewCell.swift; path = chirpey/UserPerfTableViewCell.swift; sourceTree = "<group>"; };
+		564AF3B6209900990050B541 /* PerformerInfoHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PerformerInfoHeader.swift; path = chirpey/PerformerInfoHeader.swift; sourceTree = "<group>"; };
 		56621B091DE344E2009B9AB6 /* chirpey-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "chirpey-Bridging-Header.h"; sourceTree = "<group>"; };
 		56621B0C1DE39D33009B9AB6 /* ChirpPerformance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChirpPerformance.swift; path = chirpey/ChirpPerformance.swift; sourceTree = "<group>"; };
 		56621B0E1DE47376009B9AB6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -1024,6 +1026,7 @@
 				56621B161DEC27B0009B9AB6 /* PerformanceTableCell.swift */,
 				564AF3B420989FC80050B541 /* UserPerfTableViewCell.swift */,
 				4DA6A95C1F3C89DB00CD7589 /* BrowseCell.swift */,
+				564AF3B6209900990050B541 /* PerformerInfoHeader.swift */,
 				4DD839761F3DF81D004D3E40 /* FilterView.swift */,
 				4DEFCADE1F41BDEF007B7C34 /* FilterViewCell.swift */,
 				56ADAB7E20975B9F0085D372 /* UserPerfsViewController.storyboard */,
@@ -2304,6 +2307,7 @@
 				560568DC206E4A3F00A50521 /* MicrojamTutorialStagenameScreenController.swift in Sources */,
 				56D707EF1F15960900FDEB76 /* PerformanceStore.swift in Sources */,
 				4DA6A95D1F3C89DB00CD7589 /* BrowseCell.swift in Sources */,
+				564AF3B7209900990050B541 /* PerformerInfoHeader.swift in Sources */,
 				56621B171DEC27B0009B9AB6 /* PerformanceTableCell.swift in Sources */,
 				569B92C41DFEA99C00AA257C /* SettingsTableViewController.swift in Sources */,
 				5627B5F61F72F062007807E4 /* RoboJamView.swift in Sources */,

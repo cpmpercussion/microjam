@@ -10,11 +10,14 @@ import UIKit
 import CloudKit
 
 private let reuseIdentifier = "browseCell"
+private let headerReuseIdentifier = "headerView"
 
 /// Displays all performances by a particular performer ID in a UICollectionView
 class UserPerfController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-    /// Global performance store singleton
-    let performanceStore = (UIApplication.shared.delegate as! AppDelegate).performanceStore
+    /// Local reference to the performanceStore singleton.
+    let performanceStore = PerformanceStore.shared
+    /// Local reference to the PerformerProfileStore.
+    let profilesStore = PerformerProfileStore.shared
     /// The performer to be displayed.
     var performer: String? {
         didSet {
@@ -27,17 +30,37 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionView?.register(PerformerInfoHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier)
         collectionView?.register(BrowseCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView?.backgroundColor = .white
-        //        fetchPerformances() // retrieve performances for "performer" from CoudKit
         if let performerID = performerID {
             print("UserPerfController: fetching performances for:", performerID)
             fetchPerformances(createdBy: performerID)
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: 100)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width / 3.5, height: view.frame.width / 3.5)
+        return CGSize(width: view.frame.width / 3.3, height: view.frame.width / 3.3)
+    }
+
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier, for: indexPath) as! PerformerInfoHeader
+        headerView.frame.size.height = 100
+        
+        // setup the header view
+        if let performerID = performerID,
+            let profile = profilesStore.getProfile(forID: performerID) {
+            headerView.avatarImageView.image = profile.avatar
+            headerView.performerNameLabel.text = profile.stageName
+        } else {
+            headerView.avatarImageView.image = nil
+            headerView.performerNameLabel.text = performer
+        }
+        return headerView
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
