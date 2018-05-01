@@ -43,7 +43,7 @@ class UserPerfsTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 420 // iPhone 8 height
+        tableView.estimatedRowHeight = 336 // iPhone 8 height
         performanceStore.delegate = self
         profilesStore.delegate = self
         
