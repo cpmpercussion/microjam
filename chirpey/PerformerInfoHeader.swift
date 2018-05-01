@@ -34,15 +34,22 @@ class PerformerInfoHeader: UICollectionReusableView {
         addSubview(avatarImageView)
         addSubview(performerNameLabel)
         
-        avatarImageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 5).isActive = true
-        avatarImageView.topAnchor.constraint(equalTo: topAnchor, constant: 5).isActive = true
-        avatarImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5).isActive = true
+        avatarImageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 30).isActive = true
+        avatarImageView.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
+        avatarImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10).isActive = true
         avatarImageView.widthAnchor.constraint(equalTo: avatarImageView.heightAnchor).isActive = true
         
-        performerNameLabel.topAnchor.constraint(equalTo: avatarImageView.topAnchor).isActive = true
-        performerNameLabel.leftAnchor.constraint(equalTo: avatarImageView.rightAnchor, constant: 8).isActive = true
-        performerNameLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -16).isActive = true
+        performerNameLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        //        performerNameLabel.topAnchor.constraint(equalTo: avatarImageView.topAnchor).isActive = true
+        performerNameLabel.leftAnchor.constraint(equalTo: avatarImageView.rightAnchor, constant: 20).isActive = true
+        performerNameLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -20).isActive = true
         
+        avatarImageView.backgroundColor = .lightGray
+        avatarImageView.contentMode = .scaleAspectFill
+        avatarImageView.layer.cornerRadius = 45 // avatarImageView.frame.width / 2
+        avatarImageView.clipsToBounds = true
+        
+        performerNameLabel.font = performerNameLabel.font.withSize(24)
     }
     
     required init?(coder aDecoder: NSCoder) {
