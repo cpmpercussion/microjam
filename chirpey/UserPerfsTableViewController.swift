@@ -22,7 +22,7 @@ class UserPerfsTableViewController: UITableViewController {
     /// A list of currently playing ChirpPlayers.
     var players = [ChirpPlayer]()
     /// A record of the currently playing table cell.
-    var currentlyPlaying: PerformanceTableCell?
+    var currentlyPlaying: UserPerfTableViewCell?
     
     // MARK: - Lifecycle
     /// Initialises ViewController with separate storyboard with same name. Used to programmatically load the user settings screen in the tab bar controller.
@@ -40,14 +40,10 @@ class UserPerfsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 420 // iPhone 7 height
+        tableView.estimatedRowHeight = 420 // iPhone 8 height
         performanceStore.delegate = self
         profilesStore.delegate = self
         
@@ -65,12 +61,10 @@ class UserPerfsTableViewController: UITableViewController {
         tableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tableViewTapped)))
     }
 
-
     @objc func playButtonPressed(sender: UIButton) {
         let indexPath = IndexPath(row: sender.tag, section: 0)
-        if let cell = tableView.cellForRow(at: indexPath) as? PerformanceTableCell,
+        if let cell = tableView.cellForRow(at: indexPath) as? UserPerfTableViewCell,
             let player = cell.player {
-            
             if !player.isPlaying {
                 currentlyPlaying = cell
                 player.play()
@@ -83,10 +77,10 @@ class UserPerfsTableViewController: UITableViewController {
         }
     }
     
-    
+
     @objc func replyButtonPressed(sender: UIButton) {
         let indexPath = IndexPath(row: sender.tag, section: 0)
-        if let cell = tableView.cellForRow(at: indexPath) as? PerformanceTableCell,
+        if let cell = tableView.cellForRow(at: indexPath) as? UserPerfTableViewCell,
             let player = cell.player {
             
             if let current = currentlyPlaying {
@@ -95,7 +89,9 @@ class UserPerfsTableViewController: UITableViewController {
                 currentlyPlaying = nil
             }
             
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            // TODO: fix this, need to change to the other storyboard.
+            // TODO: test this out.
+            let storyboard = UIStoryboard(name: "ChirpJamViewController", bundle: nil)
             let controller = storyboard.instantiateViewController(withIdentifier: "chirpJamController") as! ChirpJamViewController
             let recorder = ChirpRecorder(frame: CGRect.zero, player: player)
             controller.recorder = recorder
@@ -104,7 +100,6 @@ class UserPerfsTableViewController: UITableViewController {
     }
     
     // MARK: Scroll view delegate methods
-    
     override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         if let cell = currentlyPlaying {
             cell.playButton.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal)
@@ -124,7 +119,7 @@ class UserPerfsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: userJamCellIdentifier, for: indexPath) as! PerformanceTableCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: userJamCellIdentifier, for: indexPath) as! UserPerfTableViewCell
         
         if let player = cell.player {
             for chirp in player.chirpViews {
@@ -166,22 +161,8 @@ class UserPerfsTableViewController: UITableViewController {
             view.constrainEdgesTo(cell.chirpContainer)
         }
         
-        if let profile = profilesStore.getProfile(forPerformance: performance) {
-            cell.avatarImageView.image = profile.avatar
-            cell.performer.text = profile.stageName
-        } else {
-            cell.avatarImageView.image = nil
-            cell.performer.text = performance.performer
-        }
-        
-        cell.title.text = performance.dateString
-        cell.instrument.text = performance.instrument
-        
-        cell.context.text = nonCreditString()
-        
         cell.playButton.tag = indexPath.row
         cell.playButton.addTarget(self, action: #selector(playButtonPressed), for: .touchUpInside)
-        
         cell.replyButton.tag = indexPath.row
         cell.replyButton.addTarget(self, action: #selector(replyButtonPressed), for: .touchUpInside)
         
@@ -189,30 +170,17 @@ class UserPerfsTableViewController: UITableViewController {
     }
     
     // MARK: UI Methods
-    
     @objc func tableViewTapped(sender: UIGestureRecognizer) {
-        
         let location = sender.location(in: tableView)
-        
         if let indexPath = tableView.indexPathForRow(at: location) {
-            
             // Find out which cell was tapped
-            if let cell = tableView.cellForRow(at: indexPath) as? PerformanceTableCell {
-                
-                // Tapped the avatar imageview
-                if cell.avatarImageView.frame.contains(sender.location(in: cell.avatarImageView)) {
-                    // Show user performances
-                    let layout = UICollectionViewFlowLayout()
-                    let controller = UserPerfController(collectionViewLayout: layout)
-                    controller.performer = performanceStore.storedPerformances[indexPath.row].performer
-                    navigationController?.pushViewController(controller, animated: true)
-                    
-                    // Tapped the preview image
-                }
+            if let cell = tableView.cellForRow(at: indexPath) as? UserPerfTableViewCell {
+                // do something with this information.
             }
         }
     }
     
+    // TODO: Put this function in one place only.
     /// Adds multiple images on top of each other
     func createImageFrom(images : [UIImage]) -> UIImage? {
         if let size = images.first?.size {
@@ -227,38 +195,7 @@ class UserPerfsTableViewController: UITableViewController {
         }
         return nil
     }
-    
-    /// Loads a string crediting the original performer
-    func creditString(originalPerformer: String) -> String {
-        let output = "replied to " + originalPerformer
-        return output
-    }
-    
-    /// Loads a credit string for a solo performance
-    func nonCreditString() -> String {
-        let ind : Int = Int(arc4random_uniform(UInt32(PerformanceLabels.solo.count)))
-        return PerformanceLabels.solo[ind]
-    }
-    
-    // MARK: - Navigation
-    
-    /// Segue to view loaded jams.
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-    }
-    
-    /// Segue back to the World Jam Table
-    @IBAction func unwindToJamList(sender: UIStoryboardSegue) {
-        
-    }
-    
-//    /// Adds a new ChirpPerformance to the top of the list and saves it in the data source.
-//    func addNew(performance: ChirpPerformance) {
-//        let newIndexPath = NSIndexPath(row: 0, section: 0)
-//        performanceStore.addNew(performance: performance)
-//        self.tableView.insertRows(at: [newIndexPath as IndexPath], with: .top)
-//    }
-    
+
 }
 
 extension UserPerfsTableViewController: PlayerDelegate {
