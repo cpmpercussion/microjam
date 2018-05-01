@@ -71,7 +71,6 @@ class BrowseCell: UICollectionViewCell {
         separatorLine.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -16).isActive = true
         separatorLine.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         separatorLine.heightAnchor.constraint(equalToConstant: 1).isActive = true
-        
     }
     
     required init?(coder aDecoder: NSCoder) {

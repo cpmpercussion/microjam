@@ -163,3 +163,5 @@ struct ErrorDialogues {
     static let icloudNotLoggedIn = "MicroJam uses iCloud to store performances. Log into iCloud in the Settings app to see other jams!"
 }
 
+
+

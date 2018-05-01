@@ -194,13 +194,15 @@ class WorldJamsTableViewController: UITableViewController {
 
             // Find out which cell was tapped
             if let cell = tableView.cellForRow(at: indexPath) as? PerformanceTableCell {
-
+                // get performance from that cell
+                let performance = performanceStore.feed[indexPath.row]
                 // Tapped the avatar imageview
                 if cell.avatarImageView.frame.contains(sender.location(in: cell.avatarImageView)) {
                     // Show user performances
                     let layout = UICollectionViewFlowLayout()
                     let controller = UserPerfController(collectionViewLayout: layout)
-                    controller.performer = performanceStore.storedPerformances[indexPath.row].performer
+                    controller.performer = performance.performer
+                    controller.performerID = performance.creatorID
                     navigationController?.pushViewController(controller, animated: true)
 
                 // Tapped the preview image
