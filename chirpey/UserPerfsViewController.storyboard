@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="fn0-XC-krC">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Reply to performance-->
+        <scene sceneID="1vh-NU-WDF">
+            <objects>
+                <viewController storyboardIdentifier="userPerfChirpJamController" automaticallyAdjustsScrollViewInsets="NO" id="bxd-bu-iJf" userLabel="Reply to performance" customClass="ChirpJamViewController" customModule="microjam" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ZOk-6z-Pnc"/>
+                        <viewControllerLayoutGuide type="bottom" id="fRR-mb-AiI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kll-4G-ZiG">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="R2t-KJ-G8G">
+                                <rect key="frame" x="16" y="69" width="343" height="529"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="cI2-2Z-2Xa" userLabel="header stack">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="50"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YQ1-Z5-vfx">
+                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="R5P-Sx-nHd"/>
+                                                    <constraint firstAttribute="width" constant="50" id="r5B-1i-0sP"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="performer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QFa-W8-98F">
+                                                <rect key="frame" x="119" y="13" width="89" height="24"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="right" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gAi-tn-uGR">
+                                                <rect key="frame" x="260" y="8.5" width="83" height="33"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <state key="normal" title="instrument">
+                                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="soundSchemeTapped:" destination="bxd-bu-iJf" eventType="touchUpInside" id="1Pe-OA-Kiw"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="asK-9f-lAp">
+                                        <rect key="frame" x="0.0" y="80" width="343" height="343"/>
+                                        <color key="backgroundColor" red="0.59487018599999997" green="0.79762508580000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="asK-9f-lAp" secondAttribute="height" multiplier="1:1" id="ODY-VZ-VNj"/>
+                                        </constraints>
+                                    </view>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="0zo-jd-PL3">
+                                        <rect key="frame" x="0.0" y="453" width="343" height="2"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="2.5" id="7Xg-cM-yic"/>
+                                        </constraints>
+                                    </progressView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="7NG-9Z-QxP" userLabel="button stack">
+                                        <rect key="frame" x="0.0" y="485" width="343" height="44"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MLP-EP-YqQ" userLabel="Rewind">
+                                                <rect key="frame" x="0.0" y="0.0" width="40.5" height="44"/>
+                                                <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
+                                                <state key="normal" title="Rewind" image="microjam-rewind"/>
+                                                <connections>
+                                                    <action selector="rewindScreen:" destination="bxd-bu-iJf" eventType="touchUpInside" id="9s8-cg-RIh"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JWa-JW-LSI" userLabel="Record Enable">
+                                                <rect key="frame" x="50.5" y="0.0" width="40.5" height="44"/>
+                                                <color key="tintColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal" title="Record" image="microjam-record"/>
+                                                <connections>
+                                                    <action selector="recordEnablePressed:" destination="bxd-bu-iJf" eventType="touchUpInside" id="NUT-Hu-0Wl"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SJj-Fq-0Ab">
+                                                <rect key="frame" x="101" y="0.0" width="40.5" height="44"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="playButton" label="Play"/>
+                                                <color key="tintColor" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal" title="play" image="microjam-play"/>
+                                                <connections>
+                                                    <action selector="playButtonPressed:" destination="bxd-bu-iJf" eventType="touchUpInside" id="msu-Ul-BQ8"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="right" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CD4-mD-jXA" userLabel="Add Layer Button">
+                                                <rect key="frame" x="151.5" y="0.0" width="40" height="44"/>
+                                                <accessibility key="accessibilityConfiguration" hint="Tap here to choose a different sound." identifier="instrumentChooser" label="Instrument Menu"/>
+                                                <color key="tintColor" red="0.38397389650000002" green="0.78096622230000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <state key="normal" title="add jam" image="microjam-layer">
+                                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="addJam:" destination="bxd-bu-iJf" eventType="touchUpInside" id="gd6-J3-uwq"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mvb-uu-EQW" userLabel="Reply Button">
+                                                <rect key="frame" x="201.5" y="0.0" width="40.5" height="44"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="replyButton" label="Reply"/>
+                                                <state key="normal" title="reset" image="microjam-reply"/>
+                                                <connections>
+                                                    <action selector="replyButtonPressed:" destination="bxd-bu-iJf" eventType="touchUpInside" id="Cd8-7L-MQP"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jVg-iu-RHK">
+                                                <rect key="frame" x="252" y="0.0" width="40.5" height="44"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="jamButton" label="Jam"/>
+                                                <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <state key="normal" title="jam" image="microjam-loop"/>
+                                                <connections>
+                                                    <action selector="jamButtonPressed:" destination="bxd-bu-iJf" eventType="touchUpInside" id="xaV-WE-a2p"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LAp-OL-tLY" userLabel="Roboplay Button">
+                                                <rect key="frame" x="302.5" y="0.0" width="40.5" height="44"/>
+                                                <state key="normal" title="Button" image="microjam-roboplay"/>
+                                                <connections>
+                                                    <action selector="roboplayPressed:" destination="bxd-bu-iJf" eventType="touchUpInside" id="PmY-xT-Gq1"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="bwf-ch-fBK"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="asK-9f-lAp" firstAttribute="leading" secondItem="R2t-KJ-G8G" secondAttribute="leadingMargin" id="3ak-jg-A6n"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="900" constant="600" id="ghM-6c-mMT">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="500"/>
+                                        <variation key="heightClass=regular-widthClass=regular" constant="600"/>
+                                    </constraint>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="900" constant="512" id="jkO-DC-QnA"/>
+                                    <constraint firstItem="asK-9f-lAp" firstAttribute="trailing" secondItem="R2t-KJ-G8G" secondAttribute="trailingMargin" id="vNd-F8-8ei"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.97367788460000004" green="0.97367788460000004" blue="0.97367788460000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="R2t-KJ-G8G" firstAttribute="centerY" secondItem="kll-4G-ZiG" secondAttribute="centerY" id="D54-q4-7m5"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="R2t-KJ-G8G" secondAttribute="trailing" id="WqI-z3-YoN"/>
+                            <constraint firstItem="R2t-KJ-G8G" firstAttribute="centerX" secondItem="kll-4G-ZiG" secondAttribute="centerX" priority="100" id="m3k-F4-iaQ"/>
+                            <constraint firstItem="R2t-KJ-G8G" firstAttribute="leading" secondItem="kll-4G-ZiG" secondAttribute="leadingMargin" id="tm7-hP-v7c"/>
+                            <constraint firstItem="R2t-KJ-G8G" firstAttribute="top" secondItem="ZOk-6z-Pnc" secondAttribute="bottom" constant="5" id="v6N-nt-2sZ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="pLt-61-IbU"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="tm7-hP-v7c"/>
+                                <exclude reference="WqI-z3-YoN"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="tm7-hP-v7c"/>
+                                <include reference="WqI-z3-YoN"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <mask key="constraints">
+                                <exclude reference="tm7-hP-v7c"/>
+                                <exclude reference="WqI-z3-YoN"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" title="New Performance" id="Qlu-Uv-8U0">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="xal-YX-CJN">
+                            <connections>
+                                <action selector="cancelPerformance:" destination="bxd-bu-iJf" id="4ez-IL-T3V"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="gVt-Pd-AcB">
+                            <connections>
+                                <segue destination="Uzp-Xh-qcX" kind="unwind" unwindAction="unwindToJamListWithSender:" id="po2-Us-Kts"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="addJamButton" destination="CD4-mD-jXA" id="3pR-nX-ppV"/>
+                        <outlet property="avatarImageView" destination="YQ1-Z5-vfx" id="Uas-ne-O1S"/>
+                        <outlet property="cancelPerformanceButton" destination="xal-YX-CJN" id="mU8-ri-P6n"/>
+                        <outlet property="chirpViewContainer" destination="asK-9f-lAp" id="7DC-J1-ZaE"/>
+                        <outlet property="instrumentButton" destination="gAi-tn-uGR" id="hwf-yh-0GA"/>
+                        <outlet property="jamButton" destination="jVg-iu-RHK" id="ljc-EI-e2f"/>
+                        <outlet property="performerLabel" destination="QFa-W8-98F" id="uDv-oJ-TK2"/>
+                        <outlet property="playButton" destination="SJj-Fq-0Ab" id="c82-IQ-R7I"/>
+                        <outlet property="recEnableButton" destination="JWa-JW-LSI" id="m0g-zy-7Dk"/>
+                        <outlet property="recordingProgress" destination="0zo-jd-PL3" id="jFk-BL-Kd9"/>
+                        <outlet property="replyButton" destination="Mvb-uu-EQW" id="aHE-g7-cOy"/>
+                        <outlet property="rewindButton" destination="MLP-EP-YqQ" id="6kU-dx-WqM"/>
+                        <outlet property="roboplayButton" destination="LAp-OL-tLY" id="dwT-cg-alE"/>
+                        <outlet property="savePerformanceButton" destination="gVt-Pd-AcB" id="gSW-FA-Htb"/>
+                    </connections>
+                </viewController>
+                <exit id="Uzp-Xh-qcX" userLabel="Exit" sceneMemberID="exit"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="peU-Fw-G1m" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3065" y="-762"/>
+        </scene>
+        <!--user-jams-->
+        <scene sceneID="sL7-xc-kd8">
+            <objects>
+                <tableViewController id="nFr-ey-MFT" userLabel="user-jams" customClass="UserPerfsTableViewController" customModule="microjam" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="400" sectionHeaderHeight="28" sectionFooterHeight="28" id="jYi-mH-8ke">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="worldJamCell" id="NUU-x7-l2z" customClass="PerformanceTableCell" customModule="microjam">
+                                <rect key="frame" x="0.0" y="28" width="375" height="400"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NUU-x7-l2z" id="HN8-to-oPG">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="399.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0MZ-ip-hUZ">
+                                            <rect key="frame" x="32.5" y="72" width="310" height="310.5"/>
+                                            <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="0MZ-ip-hUZ" secondAttribute="height" multiplier="1:1" id="Gen-RT-xSR"/>
+                                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="500" id="k2t-IW-SC9"/>
+                                            </constraints>
+                                        </view>
+                                        <button opaque="NO" contentMode="scaleAspectFit" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bs6-ia-K0p">
+                                            <rect key="frame" x="298.5" y="340.5" width="36" height="36"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="36" id="0lD-IL-ecQ"/>
+                                                <constraint firstAttribute="width" constant="36" id="Fi3-ue-g0p"/>
+                                            </constraints>
+                                            <state key="normal" title="reply" image="microjam-reply"/>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleAspectFit" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aVu-xz-7nb">
+                                            <rect key="frame" x="40.5" y="340.5" width="36" height="36"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="36" id="0jp-vv-hkq"/>
+                                                <constraint firstAttribute="height" constant="36" id="vYF-tl-P1j"/>
+                                            </constraints>
+                                            <state key="normal" title="play" image="microjam-play"/>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="bs6-ia-K0p" firstAttribute="trailing" secondItem="0MZ-ip-hUZ" secondAttribute="trailing" constant="-8" id="Bop-w6-FGv"/>
+                                        <constraint firstItem="bs6-ia-K0p" firstAttribute="bottom" secondItem="0MZ-ip-hUZ" secondAttribute="bottom" constant="-8" id="G9z-nq-T8e"/>
+                                        <constraint firstItem="0MZ-ip-hUZ" firstAttribute="top" secondItem="HN8-to-oPG" secondAttribute="topMargin" constant="8" id="NT0-am-n15"/>
+                                        <constraint firstItem="0MZ-ip-hUZ" firstAttribute="centerX" secondItem="HN8-to-oPG" secondAttribute="centerX" id="WxJ-Ae-laL"/>
+                                        <constraint firstItem="aVu-xz-7nb" firstAttribute="bottom" secondItem="0MZ-ip-hUZ" secondAttribute="bottom" constant="-8" id="oCM-P2-edG"/>
+                                        <constraint firstItem="aVu-xz-7nb" firstAttribute="leading" secondItem="0MZ-ip-hUZ" secondAttribute="leading" constant="8" id="pI5-ub-SfV"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="chirpContainer" destination="0MZ-ip-hUZ" id="lGS-pr-aSl"/>
+                                    <outlet property="playButton" destination="aVu-xz-7nb" id="7Rb-tT-Mce"/>
+                                    <outlet property="replyButton" destination="bs6-ia-K0p" id="cal-ow-QhE"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="nFr-ey-MFT" id="Iby-HP-TjA"/>
+                            <outlet property="delegate" destination="nFr-ey-MFT" id="1jo-0v-vP8"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="My Microjams" id="2iS-hu-7dL">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="W0G-nn-ggF">
+                            <connections>
+                                <segue destination="bxd-bu-iJf" kind="show" identifier="AddPerformance" id="0vT-YG-akN"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="fPK-50-fMT">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </refreshControl>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yqu-pl-NdO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2265.8203125" y="-761.71875"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="qcC-RV-cQA">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fn0-XC-krC" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="VqZ-xv-teA">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="nFr-ey-MFT" kind="relationship" relationship="rootViewController" id="uSD-0h-d2z"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jhd-Wg-i0Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1329" y="-760"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="microjam-layer" width="158" height="178"/>
+        <image name="microjam-loop" width="158" height="178"/>
+        <image name="microjam-play" width="158" height="178"/>
+        <image name="microjam-record" width="158" height="178"/>
+        <image name="microjam-reply" width="158" height="178"/>
+        <image name="microjam-rewind" width="158" height="178"/>
+        <image name="microjam-roboplay" width="158" height="178"/>
+    </resources>
+</document>

@@ -24,10 +24,17 @@ class MicrojamTabBarController: UITabBarController {
         
         // MARK: Initialise view controllers that exist as tabs.
         if let userSettingsViewController = UserSettingsViewController.storyboardInstance() {
-        userSettingsViewController.tabBarItem = UITabBarItem(title: TabBarItemTitles.profileTab, image: #imageLiteral(resourceName: "settingsTabIcon"), selectedImage: nil)
+            userSettingsViewController.tabBarItem = UITabBarItem(title: TabBarItemTitles.profileTab, image: #imageLiteral(resourceName: "settingsTabIcon"), selectedImage: nil)
             viewControllers?.append(userSettingsViewController)
         } else {
             print("TABVC: User Settings Tab could not be initialised.")
+        }
+        
+        if let userPerfsTableViewController = UserPerfsTableViewController.storyboardInstance() {
+            userPerfsTableViewController.tabBarItem = UITabBarItem(title: TabBarItemTitles.userPerfsTab, image: #imageLiteral(resourceName: "settingsTabIcon"), selectedImage: nil)
+            viewControllers?.append(userPerfsTableViewController)
+        } else {
+            print("TABVC: User Perfs Tab could not be initialised.")
         }
     }
 

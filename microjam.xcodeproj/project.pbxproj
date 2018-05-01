@@ -456,6 +456,8 @@
 		569B92C41DFEA99C00AA257C /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569B92C31DFEA99C00AA257C /* SettingsTableViewController.swift */; };
 		56A46DF4206F8ABA0084BC16 /* MicrojamTutorialGetStartedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A46DF3206F8ABA0084BC16 /* MicrojamTutorialGetStartedViewController.swift */; };
 		56A46DF6206F8B170084BC16 /* MicrojamTutorialCloudLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A46DF5206F8B170084BC16 /* MicrojamTutorialCloudLoginViewController.swift */; };
+		56ADAB7F20975B9F0085D372 /* UserPerfsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56ADAB7E20975B9F0085D372 /* UserPerfsViewController.storyboard */; };
+		56ADAB8120975E6A0085D372 /* UserPerfsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ADAB8020975E6A0085D372 /* UserPerfsTableViewController.swift */; };
 		56BAAFC61F44370000DC41CA /* PerformerProfileStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BAAFC51F44370000DC41CA /* PerformerProfileStore.swift */; };
 		56C88E801DFEFD8200406BF0 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56C88E7F1DFEFD8200406BF0 /* CloudKit.framework */; };
 		56D707EF1F15960900FDEB76 /* PerformanceStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D707EE1F15960900FDEB76 /* PerformanceStore.swift */; };
@@ -938,6 +940,8 @@
 		569B92C31DFEA99C00AA257C /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsTableViewController.swift; path = chirpey/SettingsTableViewController.swift; sourceTree = "<group>"; };
 		56A46DF3206F8ABA0084BC16 /* MicrojamTutorialGetStartedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicrojamTutorialGetStartedViewController.swift; sourceTree = "<group>"; };
 		56A46DF5206F8B170084BC16 /* MicrojamTutorialCloudLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MicrojamTutorialCloudLoginViewController.swift; path = chirpey/MicrojamTutorialCloudLoginViewController.swift; sourceTree = "<group>"; };
+		56ADAB7E20975B9F0085D372 /* UserPerfsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = UserPerfsViewController.storyboard; path = chirpey/UserPerfsViewController.storyboard; sourceTree = "<group>"; };
+		56ADAB8020975E6A0085D372 /* UserPerfsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserPerfsTableViewController.swift; path = chirpey/UserPerfsTableViewController.swift; sourceTree = "<group>"; };
 		56B329E41E44834D001345DC /* WorldJamsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WorldJamsTableViewController.swift; path = chirpey/WorldJamsTableViewController.swift; sourceTree = "<group>"; };
 		56BAAFC51F44370000DC41CA /* PerformerProfileStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PerformerProfileStore.swift; path = chirpey/PerformerProfileStore.swift; sourceTree = "<group>"; };
 		56C88E7E1DFEFD7200406BF0 /* microjam.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = microjam.entitlements; sourceTree = "<group>"; };
@@ -1017,6 +1021,7 @@
 				4DA6A95C1F3C89DB00CD7589 /* BrowseCell.swift */,
 				4DD839761F3DF81D004D3E40 /* FilterView.swift */,
 				4DEFCADE1F41BDEF007B7C34 /* FilterViewCell.swift */,
+				56ADAB7E20975B9F0085D372 /* UserPerfsViewController.storyboard */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -1037,6 +1042,7 @@
 				4DDB71001F43179A00925F4D /* UserPerfController.swift */,
 				562FDCA51F316870000409C8 /* UserSettingsViewController.swift */,
 				56B329E41E44834D001345DC /* WorldJamsTableViewController.swift */,
+				56ADAB8020975E6A0085D372 /* UserPerfsTableViewController.swift */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -1871,6 +1877,7 @@
 				5625E8941F6874FF00AFE8BF /* c_bus-help.pd in Resources */,
 				5625E9C81F68750000AFE8BF /* u_listreduce-help.pd in Resources */,
 				5669CA9A1DA7AAA6009EEC3B /* Assets.xcassets in Resources */,
+				56ADAB7F20975B9F0085D372 /* UserPerfsViewController.storyboard in Resources */,
 				56FD9DEA1F69207F00D6A345 /* touch_tester.pd in Resources */,
 				5625E9AD1F68750000AFE8BF /* u_collect-help.pd in Resources */,
 				5625E85D1F6874FF00AFE8BF /* block-tester.pd in Resources */,
@@ -2267,6 +2274,7 @@
 				5613B31E1F3D9C380068ED5D /* ChirpRecordingView.swift in Sources */,
 				560568E0206E4AD300A50521 /* MicrojamTutorialTestingScreenController.swift in Sources */,
 				56621B111DE47D5B009B9AB6 /* ChirpJamViewController.swift in Sources */,
+				56ADAB8120975E6A0085D372 /* UserPerfsTableViewController.swift in Sources */,
 				562FDCAC1F335A0D000409C8 /* UserProfile.swift in Sources */,
 				4DDB71011F43179A00925F4D /* UserPerfController.swift in Sources */,
 				56621B0F1DE47376009B9AB6 /* AppDelegate.swift in Sources */,

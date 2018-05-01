@@ -131,6 +131,7 @@ struct TabBarItemTitles {
     static let jamTab = "jam!"
     static let settingsTab = "settings"
     static let profileTab = "profile"
+    static let userPerfsTab = "perfs"
 }
 
 /// Labels for performance contexts.
