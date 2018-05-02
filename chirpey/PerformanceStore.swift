@@ -9,6 +9,9 @@
 import UIKit
 import CloudKit
 
+let performanceStoreUpdatedNotificationKey = "au.com.charlesmartin.performanceStoreUpdatedNotificationKey"
+let performanceStoreFailedUpdateNotificationKey = "au.com.charlesmartin.performanceStoreFailedUpdateNotificationKey"
+
 /// Exposes CloudKit container to all UIViewControllers
 extension UIViewController {
 
@@ -55,7 +58,6 @@ class PerformanceStore: NSObject {
     static let perfDictURL = DocumentsDirectory.appendingPathComponent("performanceStoreDict")
     /// a feed of ChirpPerformances for the world screen generated from stored performances.
     var feed : [ChirpPerformance] = []
-
 
     /// Loads saved performances and then updates from cloud backend.
     override private init() {
@@ -105,6 +107,7 @@ class PerformanceStore: NSObject {
             DispatchQueue.main.async {
                 self.feed = self.generateFeed()
                 self.delegate?.modelUpdated() // stop spinner
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: performanceStoreUpdatedNotificationKey), object: nil)
             }
         }
     }
@@ -143,6 +146,17 @@ class PerformanceStore: NSObject {
         // done!
         return outFeed
     }
+    
+    /// Return performances in the store for a given user by CKRecordID
+    func performances(byPerformer perfID: CKRecordID) -> [ChirpPerformance] {
+        var output = [ChirpPerformance]()
+        for perf in storedPerformances {
+            if perf.creatorID == perfID {
+                output.append(perf)
+            }
+        }
+        return output
+    }
 
     /// Refresh list of world jams from CloudKit and then update in world jam table view.
     @objc func fetchWorldJamsFromCloud() {
@@ -176,6 +190,7 @@ class PerformanceStore: NSObject {
             print("Store: ", self.storedPerformances.count, " total stored performances.")
             DispatchQueue.main.async { // give the delegate the trigger to update the table.
                 self.delegate?.modelUpdated()
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: performanceStoreUpdatedNotificationKey), object: nil)
             }
             print("Store: Successfully updated from cloud")
         }
@@ -211,13 +226,6 @@ class PerformanceStore: NSObject {
         }
     }
 
-// Getting rid of the "title" obsession, should only use CKRecordIDs from now on.
-//    /// Retrieves a ChirpPerformance from a given title string.
-//    func getPerformance(fortitle title: String) -> ChirpPerformance? {
-//        let recID = CKRecordID(recordName: title)
-//        return(getPerformance(forID: recID))
-//    }
-    
     /// Fetch a particular performance from CloudKit
     func fetchPerformance(forID recordID: CKRecordID) {
         // This is a low-priority operation.
@@ -230,13 +238,13 @@ class PerformanceStore: NSObject {
                 DispatchQueue.main.async {
                     self.performances[recordID] = perf
                     self.addToStored(performances: [perf])
-                    print("PerformerProfileStore: \(perf.title()) found.")
+                    print("PerformanceStore: \(perf.title()) found.")
                     self.delegate?.modelUpdated()
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: performanceStoreUpdatedNotificationKey), object: nil)
                 }
             }
         }
     }
-
     
     /// Sorts the stored performances by date
     func sortStoredPerformances() {
@@ -250,6 +258,40 @@ class PerformanceStore: NSObject {
         return perfs.sorted(by: {(rec1: ChirpPerformance, rec2: ChirpPerformance) -> Bool in
             rec1.date > rec2.date
         })
+    }
+    
+}
+
+/// Extension for specific queries
+extension PerformanceStore {
+    
+    /// Fetch performances by a given performer from CloudKit
+    func fetchPerformances(byPerformer perfID: CKRecordID) {
+        let performerSearchPredicate = NSPredicate(format: "%K == %@", argumentArray: ["creatorUserRecordID", perfID])
+        let query = CKQuery(recordType: PerfCloudKeys.type, predicate: performerSearchPredicate)
+        query.sortDescriptors = [NSSortDescriptor(key: PerfCloudKeys.date, ascending: false)]
+        let queryOperation = CKQueryOperation(query: query)
+        
+        queryOperation.recordFetchedBlock = { record in
+            if let performance = self.performanceFrom(record: record) {
+                self.addToStored(performances: [performance])
+                DispatchQueue.main.async {
+                    print("PerformanceStore: finished loading performer's perfs - model updated.")
+                    self.delegate?.modelUpdated()
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: performanceStoreUpdatedNotificationKey), object: nil)
+                }
+            }
+        }
+        
+        queryOperation.queryCompletionBlock = { (cursor, error) in
+            if let error = error {
+                print("PerformanceStore error:", error)
+                return
+            }
+        }
+        
+        // perform query operation
+        database.add(queryOperation)
     }
     
 }

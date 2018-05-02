@@ -8,8 +8,11 @@
 
 import UIKit
 
+/// The header view for a UserPerfController screen. This header shows a user's avatar and stagename.
 class PerformerInfoHeader: UICollectionReusableView {
-    
+    /// The assumed height for the header view.
+    static let headerHeight : CGFloat = 100
+    /// A UIImageView for the performer's avatar
     let avatarImageView : UIImageView = {
         let imageView = UIImageView()
         imageView.layer.borderWidth = 1
@@ -17,7 +20,7 @@ class PerformerInfoHeader: UICollectionReusableView {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-    
+    /// A UILabel for the performer's stagename
     let performerNameLabel : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -26,27 +29,32 @@ class PerformerInfoHeader: UICollectionReusableView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        //        backgroundColor = UIColor.white
         initSubviews()
     }
     
+    /// Set up the subviews and add constraints manually.
     private func initSubviews() {
+        let avatarImageHeight : CGFloat = PerformerInfoHeader.headerHeight * 0.8
+        let avatarTopMargin : CGFloat = (PerformerInfoHeader.headerHeight - avatarImageHeight) / 2
+        let avatarSideMargin : CGFloat = 30
+        let stagenameSideMargin : CGFloat = 20
+        
         addSubview(avatarImageView)
         addSubview(performerNameLabel)
         
-        avatarImageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 30).isActive = true
-        avatarImageView.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
-        avatarImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10).isActive = true
+        avatarImageView.leftAnchor.constraint(equalTo: leftAnchor, constant: avatarSideMargin).isActive = true
+        avatarImageView.topAnchor.constraint(equalTo: topAnchor, constant: avatarTopMargin).isActive = true
+        avatarImageView.heightAnchor.constraint(equalToConstant: avatarImageHeight).isActive = true
+        avatarImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -avatarTopMargin).isActive = true
         avatarImageView.widthAnchor.constraint(equalTo: avatarImageView.heightAnchor).isActive = true
         
         performerNameLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        //        performerNameLabel.topAnchor.constraint(equalTo: avatarImageView.topAnchor).isActive = true
-        performerNameLabel.leftAnchor.constraint(equalTo: avatarImageView.rightAnchor, constant: 20).isActive = true
-        performerNameLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -20).isActive = true
+        performerNameLabel.leftAnchor.constraint(equalTo: avatarImageView.rightAnchor, constant: stagenameSideMargin).isActive = true
+        performerNameLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -(stagenameSideMargin)).isActive = true
         
         avatarImageView.backgroundColor = .lightGray
         avatarImageView.contentMode = .scaleAspectFill
-        avatarImageView.layer.cornerRadius = 45 // avatarImageView.frame.width / 2
+        avatarImageView.layer.cornerRadius = avatarImageHeight / 2
         avatarImageView.clipsToBounds = true
         
         performerNameLabel.font = performerNameLabel.font.withSize(24)
