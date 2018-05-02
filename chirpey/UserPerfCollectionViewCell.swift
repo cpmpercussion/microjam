@@ -10,7 +10,7 @@ import UIKit
 
 class UserPerfCollectionViewCell: UICollectionViewCell {
     /// the margin from the performance image to the view edge
-    let imageMargin : CGFloat = 1
+    let imageMargin : CGFloat = 0
     /// the margin to the image to the listen button.
     let listenButtonMargin : CGFloat = 5
     /// the size of the listen button.

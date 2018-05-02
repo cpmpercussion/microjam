@@ -59,6 +59,7 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
         }
     }
     
+    
     /// method to set the height of the header section
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: PerformerInfoHeader.headerHeight)
@@ -81,7 +82,17 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
     
     /// method to set the size of each item in the collection view; aiming for rows of three on a phone.
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width / 3.3, height: view.frame.width / 3.3)
+        return CGSize(width: view.frame.width / 3, height: view.frame.width / 3)
+    }
+    
+    /// Set the inter-item spacing for the CollectionView to 0
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    /// Set the line spacing for the CollectionView to 0
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
     }
     
     /// method to decide how many items are in the CollectionView
