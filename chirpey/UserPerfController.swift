@@ -9,7 +9,7 @@
 import UIKit
 import CloudKit
 
-private let reuseIdentifier = "browseCell"
+private let reuseIdentifier = "UserPerfCollectionViewCell"
 private let headerReuseIdentifier = "headerView"
 
 /// Displays all performances by a particular performer ID in a UICollectionView
@@ -32,7 +32,7 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView?.register(PerformerInfoHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier)
-        collectionView?.register(BrowseCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView?.register(UserPerfCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView?.backgroundColor = .white
         NotificationCenter.default.addObserver(self, selector: #selector(updateDataFromStore), name: NSNotification.Name(rawValue: performanceStoreUpdatedNotificationKey), object: nil)
     }
@@ -47,7 +47,7 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
     @objc func updateDataFromStore() {
         if let performerID = performerID {
             loadedPerformances = performanceStore.performances(byPerformer: performerID)
-            print("UserPerfController: updated data, found: ", loadedPerformances.count, "performances")
+            // print("UserPerfController: updated data, found: ", loadedPerformances.count, "performances")
             collectionView?.reloadData()
         }
     }
@@ -91,7 +91,7 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
     
     /// method to set up each cell in the CollectionView
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! BrowseCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! UserPerfCollectionViewCell
         let performance = loadedPerformances[indexPath.item]
         // Set up cell with performance data
         cell.performance = performance
@@ -113,7 +113,7 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
     /// Plays back the performance in each Browse Cell when the listen button is tapped.
     @objc func previewPerformance(sender: UIButton) {
         if let superView = sender.superview?.superview {
-            let cell = superView as! BrowseCell
+            let cell = superView as! UserPerfCollectionViewCell
             ChirpView.play(performance: cell.performance!)
         }
     }

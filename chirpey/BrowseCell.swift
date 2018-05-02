@@ -6,6 +6,8 @@
 //  Copyright © 2017 Charles Martin. All rights reserved.
 //
 
+//TODO: is this class needed?
+
 import UIKit
 
 class BrowseCell: UICollectionViewCell {
@@ -36,43 +38,42 @@ class BrowseCell: UICollectionViewCell {
         return button
     }()
     
-//    let separatorLine : UIView = {
-//        let line = UIView()
-//        line.backgroundColor = UIColor(white: 0.8, alpha: 1)
-//        line.translatesAutoresizingMaskIntoConstraints = false
-//        return line
-//    }()
+    let separatorLine : UIView = {
+        let line = UIView()
+        line.backgroundColor = UIColor(white: 0.8, alpha: 1)
+        line.translatesAutoresizingMaskIntoConstraints = false
+        return line
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-//        backgroundColor = UIColor.white
         initSubviews()
     }
     
     private func initSubviews() {
         contentView.addSubview(performanceImageView)
-//        contentView.addSubview(performerNameLabel)
+        contentView.addSubview(performerNameLabel)
         contentView.addSubview(listenButton)
-//        contentView.addSubview(separatorLine)
+        contentView.addSubview(separatorLine)
         
         performanceImageView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 1).isActive = true
         performanceImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 1).isActive = true
         performanceImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -1).isActive = true
         performanceImageView.widthAnchor.constraint(equalTo: performanceImageView.heightAnchor).isActive = true
         
-//        performerNameLabel.topAnchor.constraint(equalTo: performanceImageView.topAnchor).isActive = true
-//        performerNameLabel.leftAnchor.constraint(equalTo: performanceImageView.rightAnchor, constant: 8).isActive = true
-//        performerNameLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -16).isActive = true
-//
+        performerNameLabel.topAnchor.constraint(equalTo: performanceImageView.topAnchor).isActive = true
+        performerNameLabel.leftAnchor.constraint(equalTo: performanceImageView.rightAnchor, constant: 8).isActive = true
+        performerNameLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -16).isActive = true
+
         listenButton.bottomAnchor.constraint(equalTo: performanceImageView.bottomAnchor, constant: -5).isActive = true
         listenButton.leftAnchor.constraint(equalTo: performanceImageView.leftAnchor, constant: 5).isActive = true
         listenButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
         listenButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
-//
-//        separatorLine.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive = true
-//        separatorLine.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -16).isActive = true
-//        separatorLine.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-//        separatorLine.heightAnchor.constraint(equalToConstant: 1).isActive = true
+
+        separatorLine.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16).isActive = true
+        separatorLine.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -16).isActive = true
+        separatorLine.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        separatorLine.heightAnchor.constraint(equalToConstant: 1).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {
