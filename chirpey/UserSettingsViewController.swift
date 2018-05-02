@@ -19,12 +19,14 @@ import DropDown
 /// Displays iCloud User Settings screen to allow user to update avatar, name, and other details.
 class UserSettingsViewController: UIViewController {
     
+    /// Stack for the whole profile screen
+    @IBOutlet weak var containerStack: UIStackView!
     /// stack for the Avatar view and stagename field
     @IBOutlet weak var identityStack: UIStackView!
     /// stack for the colour selectors and soundscheme dropdown
     @IBOutlet weak var settingsStack: UIStackView!
     /// View shown if user is not logged into iCloud.
-    @IBOutlet weak var noAccountView: UIStackView!
+    @IBOutlet weak var noAccountView: UIView!
     /// Activity indicator used when loading avatar.
     @IBOutlet weak var avatarSpinner: UIActivityIndicatorView!
     /// Container view for avatar image.
@@ -96,10 +98,35 @@ class UserSettingsViewController: UIViewController {
                 self.updateUI()
             }
         }
+        
+        setupProfileCollectionView()
+        
         updateUI()
         
         // add observer for UserProfile updates.
         NotificationCenter.default.addObserver(self, selector: #selector(userProfileDataUpdated), name: NSNotification.Name(rawValue: userProfileUpdatedNotificationKey), object: nil)
+    }
+    
+    /// Setup the user performance collection view at the bottom of the profile screen.
+    func setupProfileCollectionView() {
+        print("setting up the collection view")
+        // Setup the collection view
+        let layout = UICollectionViewFlowLayout()
+        let controller = UserPerfController(collectionViewLayout: layout)
+        controller.performer = profile.stageName
+        controller.performerID = UserProfile.shared.recordID
+        navigationController?.pushViewController(controller, animated: true)
+        addChildViewController(controller)
+        controller.view.translatesAutoresizingMaskIntoConstraints = false
+        // put the controller where it should go.
+        containerStack.addArrangedSubview(controller.view)
+//        NSLayoutConstraint.activate([
+//            controller.view.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+//            controller.view.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+//            controller.view.topAnchor.constraint(equalTo: view.topAnchor, constant: 10),
+//            controller.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10)
+//            ])
+        controller.didMove(toParentViewController: self)
     }
     
     /// Called by a notification when the UserProfile successfully loads a record.
