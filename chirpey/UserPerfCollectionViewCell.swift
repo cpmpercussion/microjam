@@ -25,12 +25,22 @@ class UserPerfCollectionViewCell: UICollectionViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-    
+    /// Play Button
     let listenButton : UIButton = {
         let button = UIButton(type: .system)
         button.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal)
         button.setTitleColor(UIColor(white: 0.1, alpha: 1), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.tintColor = UIColor.darkGray
+        return button
+    }()
+    /// Reply Button
+    let replyButton : UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(#imageLiteral(resourceName: "microjam-reply"), for: .normal)
+        button.setTitleColor(UIColor(white: 0.1, alpha: 1), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 10 // Button size is 36
         button.tintColor = UIColor.darkGray
         return button
     }()
@@ -44,6 +54,7 @@ class UserPerfCollectionViewCell: UICollectionViewCell {
     private func initSubviews() {
         contentView.addSubview(performanceImageView)
         contentView.addSubview(listenButton)
+        contentView.addSubview(replyButton)
         
         // Contraints for the performance image
         performanceImageView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: imageMargin).isActive = true
@@ -57,6 +68,13 @@ class UserPerfCollectionViewCell: UICollectionViewCell {
         listenButton.leftAnchor.constraint(equalTo: performanceImageView.leftAnchor, constant: listenButtonMargin).isActive = true
         listenButton.widthAnchor.constraint(equalToConstant: listenButtonWidth).isActive = true
         listenButton.heightAnchor.constraint(equalTo: listenButton.widthAnchor).isActive = true
+        
+        // Constraints for the reply button
+        replyButton.layer.cornerRadius = listenButtonWidth / 2
+        replyButton.bottomAnchor.constraint(equalTo: performanceImageView.bottomAnchor, constant: -(listenButtonMargin)).isActive = true
+        replyButton.rightAnchor.constraint(equalTo: performanceImageView.rightAnchor, constant: -(listenButtonMargin)).isActive = true
+        replyButton.widthAnchor.constraint(equalToConstant: listenButtonWidth).isActive = true
+        replyButton.heightAnchor.constraint(equalTo: listenButton.widthAnchor).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {
