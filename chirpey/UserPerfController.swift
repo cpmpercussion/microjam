@@ -46,6 +46,7 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
     /// Updates the CollectionView from the local performance store data.
     @objc func updateDataFromStore() {
         if let performerID = performerID {
+            // print("UserPerfVC: Searching for data about:", performerID)
             loadedPerformances = performanceStore.performances(byPerformer: performerID)
             // print("UserPerfController: updated data, found: ", loadedPerformances.count, "performances")
             collectionView?.reloadData()

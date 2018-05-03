@@ -220,7 +220,7 @@ extension UserPerfsTableViewController: ModelDelegate {
     
     /// Conforms to ModelDelegate Protocol
     func modelUpdated() {
-        print("UserPerfsVC: Model updated, reloading data.")
+        // print("UserPerfsVC: Model updated, reloading data.")
         refreshControl?.endRefreshing()
         tableView.tableHeaderView = nil
         

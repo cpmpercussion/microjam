@@ -281,7 +281,7 @@ extension WorldJamsTableViewController: ModelDelegate {
 
     /// Conforms to ModelDelegate Protocol
     func modelUpdated() {
-        print("WJTVC: Model updated, reloading data.")
+        //print("WJTVC: Model updated, reloading data.")
         refreshControl?.endRefreshing()
         tableView.tableHeaderView = nil
         

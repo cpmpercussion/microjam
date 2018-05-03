@@ -201,7 +201,7 @@ class PerformanceStore: NSObject {
 
     /// Add a list of performances into the currently stored performances.
     func addToStored(performances: [ChirpPerformance]) {
-        print("Store: Adding performances to stored list")
+        //print("Store: Adding performances to stored list")
         //self.storedPerformances = performances // update the stored performances // old
         let titles = self.storedPerformances.map{$0.title()}
         var countPerfsAdded = 0
@@ -212,7 +212,7 @@ class PerformanceStore: NSObject {
                 countPerfsAdded += 1
             }
         }
-        print("Store: ", countPerfsAdded, " perfs added to stored performances.")
+        //print("Store: ", countPerfsAdded, " perfs added to stored performances.")
         self.sortStoredPerformances()
     }
     
@@ -276,7 +276,6 @@ extension PerformanceStore {
             if let performance = self.performanceFrom(record: record) {
                 self.addToStored(performances: [performance])
                 DispatchQueue.main.async {
-                    print("PerformanceStore: finished loading performer's perfs - model updated.")
                     self.delegate?.modelUpdated()
                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: performanceStoreUpdatedNotificationKey), object: nil)
                 }
@@ -287,6 +286,8 @@ extension PerformanceStore {
             if let error = error {
                 print("PerformanceStore error:", error)
                 return
+            } else {
+                print("PerformanceStore: finished loading perfs for", perfID)
             }
         }
         

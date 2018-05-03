@@ -77,8 +77,10 @@ class UserSettingsViewController: UIViewController {
     static func storyboardInstance() -> UserSettingsViewController? {
         print("USVC: Attempting to initialise from storyboard.")
         let storyboard = UIStoryboard(name:"UserSettingsViewController", bundle: nil)
-        let navController = storyboard.instantiateInitialViewController() as? UINavigationController
-        return navController?.topViewController as? UserSettingsViewController
+        let controller = storyboard.instantiateInitialViewController() as? UserSettingsViewController
+        return controller
+        //let navController = storyboard.instantiateInitialViewController() as? UINavigationController
+        //return navController?.topViewController as? UserSettingsViewController
     }
 
     override func viewDidLoad() {
@@ -112,13 +114,9 @@ class UserSettingsViewController: UIViewController {
         print("setting up the collection view")
         // Setup the collection view
         let layout = UICollectionViewFlowLayout()
-        let controller = UserPerfController(collectionViewLayout: layout)
-        controller.performer = profile.stageName
-        controller.performerID = UserProfile.shared.recordID
-        navigationController?.pushViewController(controller, animated: true)
+        let controller = ProfilePerfCollectionViewController(collectionViewLayout: layout)
         addChildViewController(controller)
         controller.view.translatesAutoresizingMaskIntoConstraints = false
-        // put the controller where it should go.
         containerStack.addArrangedSubview(controller.view)
 //        NSLayoutConstraint.activate([
 //            controller.view.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
