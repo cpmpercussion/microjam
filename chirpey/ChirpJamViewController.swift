@@ -218,9 +218,7 @@ class ChirpJamViewController: UIViewController {
         
         if let recorder = recorder {
             // Loaded with an existing recorder (i.e., to make a reply)
-            
             if !isComposing && !recorder.viewsAreLoaded {
-                
                 for view in recorder.chirpViews {
                     view.frame = chirpViewContainer.bounds
                     chirpViewContainer.addSubview(view)

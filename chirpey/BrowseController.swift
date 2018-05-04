@@ -137,7 +137,8 @@ class BrowseController: UICollectionViewController, UICollectionViewDelegateFlow
         // The button is in the contentView of the cell, need to get the content view's superview...
         if let superView = sender.superview?.superview {
             let cell = superView as! BrowseCell
-            ChirpView.play(performance: cell.performance!)
+            // FIXME: Revise this statement to use a chirpplayer object.
+//            ChirpView.play(performance: cell.performance!)
         }
     }
 

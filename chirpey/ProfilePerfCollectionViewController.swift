@@ -98,8 +98,8 @@ class ProfilePerfCollectionViewController: UICollectionViewController, UICollect
         // Set up cell with performance data
         cell.performance = performance
         cell.performanceImageView.image = performance.image
-        cell.performanceImageView.backgroundColor = performance.backgroundColour
-        cell.listenButton.addTarget(self, action: #selector(previewPerformance(sender:)), for: .touchUpInside)
+        cell.performanceImageView.backgroundColor = performance.backgroundColour.darkerColor
+        cell.playButton.addTarget(self, action: #selector(previewPerformance(sender:)), for: .touchUpInside)
         return cell
     }
     
@@ -116,7 +116,8 @@ class ProfilePerfCollectionViewController: UICollectionViewController, UICollect
     @objc func previewPerformance(sender: UIButton) {
         if let superView = sender.superview?.superview {
             let cell = superView as! UserPerfCollectionViewCell
-            ChirpView.play(performance: cell.performance!)
+            // ChirpView.play(performance: cell.performance!)
+            // FIXME: revise this statement to use a ChirpPlayer object.
         }
     }
     
