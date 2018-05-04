@@ -131,6 +131,8 @@ struct TabBarItemTitles {
     static let jamTab = "jam!"
     static let settingsTab = "settings"
     static let profileTab = "profile"
+    static let userPerfsTab = "perfs"
+    static let repliesTab = "replies"
 }
 
 /// Labels for performance contexts.
@@ -160,4 +162,6 @@ struct PerformanceLabels {
 struct ErrorDialogues {
     static let icloudNotLoggedIn = "MicroJam uses iCloud to store performances. Log into iCloud in the Settings app to see other jams!"
 }
+
+
 

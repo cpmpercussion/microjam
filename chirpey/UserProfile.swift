@@ -25,6 +25,8 @@ class UserProfile: NSObject {
     let container = CKContainer.default()
     /// Records whether user is logged in or not.
     var loggedIn = false
+    /// CKRecordID for the user
+    var recordID: CKRecordID?
     /// CKRecord of user information.
     var record: CKRecord? {
         didSet {
@@ -109,6 +111,7 @@ class UserProfile: NSObject {
             
             DispatchQueue.main.async {
                 print("USVC: Found user: \(recordID.recordName). Discovering info.")
+                self.recordID = recordID
                 self.fetchUserRecord(with: recordID) // get the user record.
             }
         }

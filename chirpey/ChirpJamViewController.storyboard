@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="QMJ-jf-6IU">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--performance-->
+        <scene sceneID="cQe-la-IDt">
+            <objects>
+                <viewController storyboardIdentifier="userPerfChirpJamController" automaticallyAdjustsScrollViewInsets="NO" id="biZ-h3-m2K" userLabel="performance" customClass="ChirpJamViewController" customModule="microjam" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="JiL-jf-Cxb"/>
+                        <viewControllerLayoutGuide type="bottom" id="guu-fE-DC1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9EA-NS-Gth">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="YbA-uu-qOE">
+                                <rect key="frame" x="16" y="69" width="343" height="529"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ruj-JX-I80" userLabel="header stack">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="50"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hkd-ef-Gke">
+                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="50" id="BZT-YU-yK6"/>
+                                                    <constraint firstAttribute="height" constant="50" id="nOi-M4-P4e"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="performer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oL5-5d-xZL">
+                                                <rect key="frame" x="119" y="13" width="89" height="24"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="right" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0DV-eO-7cP">
+                                                <rect key="frame" x="260" y="8.5" width="83" height="33"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <state key="normal" title="instrument">
+                                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="soundSchemeTapped:" destination="biZ-h3-m2K" eventType="touchUpInside" id="oKl-sw-wi8"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="KZA-aj-oyP">
+                                        <rect key="frame" x="0.0" y="80" width="343" height="343"/>
+                                        <color key="backgroundColor" red="0.59487018599999997" green="0.79762508580000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="KZA-aj-oyP" secondAttribute="height" multiplier="1:1" id="Mo5-VG-QIn"/>
+                                        </constraints>
+                                    </view>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="dDf-x3-d2A">
+                                        <rect key="frame" x="0.0" y="453" width="343" height="2"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="2.5" id="EQm-mQ-fjI"/>
+                                        </constraints>
+                                    </progressView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="euI-J4-sSw" userLabel="button stack">
+                                        <rect key="frame" x="0.0" y="485" width="343" height="44"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u5c-DI-hYM" userLabel="Rewind">
+                                                <rect key="frame" x="0.0" y="0.0" width="40.5" height="44"/>
+                                                <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
+                                                <state key="normal" title="Rewind" image="microjam-rewind"/>
+                                                <connections>
+                                                    <action selector="rewindScreen:" destination="biZ-h3-m2K" eventType="touchUpInside" id="MWW-FP-2Jc"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fg3-ri-xVn" userLabel="Record Enable">
+                                                <rect key="frame" x="50.5" y="0.0" width="40.5" height="44"/>
+                                                <color key="tintColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal" title="Record" image="microjam-record"/>
+                                                <connections>
+                                                    <action selector="recordEnablePressed:" destination="biZ-h3-m2K" eventType="touchUpInside" id="ZW1-kj-USJ"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fA1-Jk-Cp5">
+                                                <rect key="frame" x="101" y="0.0" width="40.5" height="44"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="playButton" label="Play"/>
+                                                <color key="tintColor" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal" title="play" image="microjam-play"/>
+                                                <connections>
+                                                    <action selector="playButtonPressed:" destination="biZ-h3-m2K" eventType="touchUpInside" id="Pa8-wd-Y6m"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="right" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9a9-II-qfe" userLabel="Add Layer Button">
+                                                <rect key="frame" x="151.5" y="0.0" width="40" height="44"/>
+                                                <accessibility key="accessibilityConfiguration" hint="Tap here to choose a different sound." identifier="instrumentChooser" label="Instrument Menu"/>
+                                                <color key="tintColor" red="0.38397389650000002" green="0.78096622230000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <state key="normal" title="add jam" image="microjam-layer">
+                                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="addJam:" destination="biZ-h3-m2K" eventType="touchUpInside" id="1QU-pd-4sX"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9JM-fD-Gwu" userLabel="Reply Button">
+                                                <rect key="frame" x="201.5" y="0.0" width="40.5" height="44"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="replyButton" label="Reply"/>
+                                                <state key="normal" title="reset" image="microjam-reply"/>
+                                                <connections>
+                                                    <action selector="replyButtonPressed:" destination="biZ-h3-m2K" eventType="touchUpInside" id="Ajb-W5-v7m"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ltw-xN-isr">
+                                                <rect key="frame" x="252" y="0.0" width="40.5" height="44"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="jamButton" label="Jam"/>
+                                                <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <state key="normal" title="jam" image="microjam-loop"/>
+                                                <connections>
+                                                    <action selector="jamButtonPressed:" destination="biZ-h3-m2K" eventType="touchUpInside" id="SjB-mR-TSD"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1tC-Gd-VT7" userLabel="Roboplay Button">
+                                                <rect key="frame" x="302.5" y="0.0" width="40.5" height="44"/>
+                                                <state key="normal" title="Button" image="microjam-roboplay"/>
+                                                <connections>
+                                                    <action selector="roboplayPressed:" destination="biZ-h3-m2K" eventType="touchUpInside" id="8w9-nU-ePS"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="52I-hz-mE9"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="KZA-aj-oyP" firstAttribute="trailing" secondItem="YbA-uu-qOE" secondAttribute="trailingMargin" id="OOg-C5-OnX"/>
+                                    <constraint firstItem="KZA-aj-oyP" firstAttribute="leading" secondItem="YbA-uu-qOE" secondAttribute="leadingMargin" id="RYY-kb-jwr"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="900" constant="600" id="jdd-Qb-X9r">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="500"/>
+                                        <variation key="heightClass=regular-widthClass=regular" constant="600"/>
+                                    </constraint>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="900" constant="512" id="wS9-mt-haF"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.97367788460000004" green="0.97367788460000004" blue="0.97367788460000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="YbA-uu-qOE" firstAttribute="top" secondItem="JiL-jf-Cxb" secondAttribute="bottom" constant="5" id="9a7-MR-gNg"/>
+                            <constraint firstItem="YbA-uu-qOE" firstAttribute="centerX" secondItem="9EA-NS-Gth" secondAttribute="centerX" priority="100" id="j2h-Qi-2wn"/>
+                            <constraint firstItem="YbA-uu-qOE" firstAttribute="leading" secondItem="9EA-NS-Gth" secondAttribute="leadingMargin" id="lLf-rZ-ZjW"/>
+                            <constraint firstItem="YbA-uu-qOE" firstAttribute="centerY" secondItem="9EA-NS-Gth" secondAttribute="centerY" id="s4v-0e-9k5"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="YbA-uu-qOE" secondAttribute="trailing" id="tnQ-l3-so5"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="SId-8l-Idk"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="lLf-rZ-ZjW"/>
+                                <exclude reference="tnQ-l3-so5"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="lLf-rZ-ZjW"/>
+                                <include reference="tnQ-l3-so5"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <mask key="constraints">
+                                <exclude reference="lLf-rZ-ZjW"/>
+                                <exclude reference="tnQ-l3-so5"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" title="New Performance" id="4E8-qy-0Oe">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="OWB-3w-3qr">
+                            <connections>
+                                <action selector="cancelPerformance:" destination="biZ-h3-m2K" id="RCX-tr-x8Z"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="Ayi-La-iYA">
+                            <connections>
+                                <segue destination="aop-uN-eVC" kind="unwind" unwindAction="unwindToJamListWithSender:" id="rgi-ww-4i2"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="addJamButton" destination="9a9-II-qfe" id="vBm-jK-i3k"/>
+                        <outlet property="avatarImageView" destination="hkd-ef-Gke" id="PvO-OA-3NM"/>
+                        <outlet property="cancelPerformanceButton" destination="OWB-3w-3qr" id="F2Q-lv-8wz"/>
+                        <outlet property="chirpViewContainer" destination="KZA-aj-oyP" id="kbb-GD-BuD"/>
+                        <outlet property="instrumentButton" destination="0DV-eO-7cP" id="3V8-cL-l5L"/>
+                        <outlet property="jamButton" destination="ltw-xN-isr" id="faf-f7-JwM"/>
+                        <outlet property="performerLabel" destination="oL5-5d-xZL" id="tvn-IV-HnN"/>
+                        <outlet property="playButton" destination="fA1-Jk-Cp5" id="oqn-aS-541"/>
+                        <outlet property="recEnableButton" destination="fg3-ri-xVn" id="LW9-hQ-PQM"/>
+                        <outlet property="recordingProgress" destination="dDf-x3-d2A" id="T87-QR-yDq"/>
+                        <outlet property="replyButton" destination="9JM-fD-Gwu" id="fzj-ci-z27"/>
+                        <outlet property="rewindButton" destination="u5c-DI-hYM" id="GUh-Tx-SaO"/>
+                        <outlet property="roboplayButton" destination="1tC-Gd-VT7" id="AaM-lI-LT3"/>
+                        <outlet property="savePerformanceButton" destination="Ayi-La-iYA" id="qnI-A5-xcq"/>
+                    </connections>
+                </viewController>
+                <exit id="aop-uN-eVC" userLabel="Exit" sceneMemberID="exit"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Spw-Na-Njd" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2383" y="-824"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ner-1k-Wun">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QMJ-jf-6IU" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="auG-Qg-1Rj">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="biZ-h3-m2K" kind="relationship" relationship="rootViewController" id="dJh-yd-hX8"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dv9-P4-n9L" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1590" y="-824"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="microjam-layer" width="158" height="178"/>
+        <image name="microjam-loop" width="158" height="178"/>
+        <image name="microjam-play" width="158" height="178"/>
+        <image name="microjam-record" width="158" height="178"/>
+        <image name="microjam-reply" width="158" height="178"/>
+        <image name="microjam-rewind" width="158" height="178"/>
+        <image name="microjam-roboplay" width="158" height="178"/>
+    </resources>
+</document>

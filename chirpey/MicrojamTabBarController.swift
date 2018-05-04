@@ -15,20 +15,49 @@ class MicrojamTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("TABVC: Loaded main tab bar.")
-        
 //        let controller = ExploreController()
 //        controller.tabBarItem = UITabBarItem(title: "explore", image: #imageLiteral(resourceName: "remotejamsTabIcon"), selectedImage: nil)
-//        
 //        let navigation = UINavigationController(rootViewController: controller)
 //        viewControllers?.insert(navigation, at: 0)
-        
         // MARK: Initialise view controllers that exist as tabs.
-        if let userSettingsViewController = UserSettingsViewController.storyboardInstance() {
-        userSettingsViewController.tabBarItem = UITabBarItem(title: TabBarItemTitles.profileTab, image: #imageLiteral(resourceName: "settingsTabIcon"), selectedImage: nil)
-            viewControllers?.append(userSettingsViewController)
+        setupSettingsTab()
+        //setupProfileTab()
+        //setupUserPerfsTab() // disabled for now.
+    }
+    
+    /// Setup user perfs tab
+    func setupUserPerfsTab() {
+        if let userPerfsTableViewController = UserPerfsTableViewController.storyboardInstance() {
+            userPerfsTableViewController.tabBarItem = UITabBarItem(title: TabBarItemTitles.userPerfsTab, image: #imageLiteral(resourceName: "profileTabIcon"), selectedImage: nil)
+            viewControllers?.append(userPerfsTableViewController)
+        } else {
+            print("TABVC: User Perfs Tab could not be initialised.")
+        }
+    }
+    
+    /// Setup settings screen
+    func setupSettingsTab() {
+        if let controller = UserSettingsViewController.storyboardInstance() {
+            controller.tabBarItem = UITabBarItem(title: TabBarItemTitles.profileTab, image: #imageLiteral(resourceName: "profileTabIcon"), selectedImage: nil)
+//            controller.view.translatesAutoresizingMaskIntoConstraints = false
+            let navigation = UINavigationController(rootViewController: controller)
+            viewControllers?.append(navigation)
         } else {
             print("TABVC: User Settings Tab could not be initialised.")
         }
+    }
+    
+    /// Setup the profile screen
+    func setupProfileTab() {
+        print("setting up the profile screen")
+        // Setup the collection view
+        let layout = UICollectionViewFlowLayout()
+        let controller = ProfilePerfCollectionViewController(collectionViewLayout: layout)
+        controller.view.translatesAutoresizingMaskIntoConstraints = false
+        let navigation = UINavigationController(rootViewController: controller)
+        controller.tabBarItem = UITabBarItem(title: TabBarItemTitles.profileTab, image: #imageLiteral(resourceName: "profileTabIcon"), selectedImage: nil)
+        viewControllers?.append(navigation)
+        print("TABVC: Profile Tab could not be initialised")
     }
 
     override func didReceiveMemoryWarning() {

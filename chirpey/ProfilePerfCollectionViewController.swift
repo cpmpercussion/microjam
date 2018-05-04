@@ -1,84 +1,74 @@
 //
-//  UserPerfController.swift
+//  ProfilePerfCollectionViewController.swift
 //  microjam
 //
-//  Created by Henrik Brustad on 15/08/2017.
-//  Copyright © 2017 Charles Martin. All rights reserved.
+//  Created by Charles Martin on 2/5/18.
+//  Copyright © 2018 Charles Martin. All rights reserved.
 //
 
 import UIKit
 import CloudKit
+import DropDown
 
-private let reuseIdentifier = "UserPerfCollectionViewCell"
-private let headerReuseIdentifier = "headerView"
+private let reuseIdentifier = "ProfilePerfCollectionViewCell"
 
-/// Displays all performances by a particular performer ID in a UICollectionView
-class UserPerfController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+/// Displays a profile screen including settings, user data and a collection of all previous performances.
+class ProfilePerfCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     /// Local reference to the performanceStore singleton.
     let performanceStore = PerformanceStore.shared
     /// Local reference to the PerformerProfileStore.
     let profilesStore = PerformerProfileStore.shared
-    /// The performer to be displayed.
-    var performer: String? {
-        didSet {
-            navigationItem.title = performer
-        }
-    }
+    /// Local reference to the userProfile
+    let userProfile = UserProfile.shared
+    /// Link to the users' profile data.
+    let profile: PerformerProfile = UserProfile.shared.profile
     /// Performer to search for (must be set when instantiating this ViewController.
-    var performerID: CKRecordID?
+    var performerID: CKRecordID = CKRecordID(recordName: "__defaultOwner__")
     /// Performances by performer
     var loadedPerformances = [ChirpPerformance]()
     
+    /// updates the profile screen's fields according to the present UserProfile data.
+    func updateUI() {
+        // Display appropriate views if user is not logged in.
+        if userProfile.loggedIn {
+            updateDataFromStore()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView?.register(PerformerInfoHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier)
         collectionView?.register(UserPerfCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView?.backgroundColor = .white
+        updateDataFromStore()
+        
+        // Subscribe to notification centre updates.
         NotificationCenter.default.addObserver(self, selector: #selector(updateDataFromStore), name: NSNotification.Name(rawValue: performanceStoreUpdatedNotificationKey), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        // Attempt to load the data and display it.
-        updateDataFromStore()
+        updateUI()
         updateDataFromCloud()
+    }
+    
+    /// Called by a notification when the UserProfile successfully loads a record.
+    @objc func userProfileDataUpdated() {
+        //print("ProfileVC: UserProfile updated, updating UI.")
+        updateUI()
     }
     
     /// Updates the CollectionView from the local performance store data.
     @objc func updateDataFromStore() {
-        if let performerID = performerID {
-            // print("UserPerfVC: Searching for data about:", performerID)
-            loadedPerformances = performanceStore.performances(byPerformer: performerID)
-            // print("UserPerfController: updated data, found: ", loadedPerformances.count, "performances")
-            collectionView?.reloadData()
-        }
+        //print("ProfileVC: Updating data from store")
+        //print("ProfileVC: Searching for data about:", performerID)
+        loadedPerformances = performanceStore.performances(byPerformer: performerID)
+        //print("ProfileVC: updated data, found: ", loadedPerformances.count, "performances")
+        collectionView?.reloadData()
     }
     
     /// Asks the performance store to fetch performances related to the current performerID from the cloud.
     func updateDataFromCloud() {
-        if let performerID = performerID {
-            performanceStore.fetchPerformances(byPerformer: performerID)
-        }
-    }
-    
-    
-    /// method to set the height of the header section
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: PerformerInfoHeader.headerHeight)
-    }
-
-    /// method to set up the header view; displays the performer's avatar and stagename.
-    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier, for: indexPath) as! PerformerInfoHeader
-        headerView.frame.size.height = PerformerInfoHeader.headerHeight
-        if let performerID = performerID,
-            let profile = profilesStore.getProfile(forID: performerID) {
-            headerView.avatarImageView.image = profile.avatar
-            headerView.performerNameLabel.text = profile.stageName
-        } else {
-            headerView.avatarImageView.image = nil
-            headerView.performerNameLabel.text = performer
-        }
-        return headerView
+        print("ProfileVC: Updating data from cloud")
+        performanceStore.fetchPerformances(byPerformer: performerID)
     }
     
     /// method to set the size of each item in the collection view; aiming for rows of three on a phone.
@@ -129,5 +119,5 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
             ChirpView.play(performance: cell.performance!)
         }
     }
-
+    
 }
