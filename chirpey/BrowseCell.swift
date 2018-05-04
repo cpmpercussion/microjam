@@ -38,6 +38,16 @@ class BrowseCell: UICollectionViewCell {
         return button
     }()
     
+    let replyButton : UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(#imageLiteral(resourceName: "microjam-reply"), for: .normal)
+        button.setTitleColor(UIColor(white: 0.1, alpha: 1), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 10 // Button size is 36
+        button.tintColor = UIColor.darkGray
+        return button
+    }()
+    
     let separatorLine : UIView = {
         let line = UIView()
         line.backgroundColor = UIColor(white: 0.8, alpha: 1)
