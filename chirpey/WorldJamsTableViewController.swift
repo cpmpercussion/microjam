@@ -10,7 +10,6 @@ import UIKit
 import CloudKit
 
 class WorldJamsTableViewController: UITableViewController {
-
     /// Local reference to the performanceStore singleton.
     let performanceStore = PerformanceStore.shared
     /// Global ID for wordJamCells.
@@ -33,31 +32,23 @@ class WorldJamsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 420 // iPhone 7 height
         performanceStore.delegate = self
         profilesStore.delegate = self
-        
-        // Initialise the headerView (not used unless needed to display an error).
-        headerView.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 100)
-        
+        headerView.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 100) // header view used to display iCloud errors
         // Initialise the refreshControl
         self.refreshControl?.addTarget(performanceStore, action: #selector(performanceStore.fetchWorldJamsFromCloud), for: UIControlEvents.valueChanged)
         tableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tableViewTapped)))
     }
 
+    // Action if a play button is pressed in a cell
     @objc func playButtonPressed(sender: UIButton) {
-
         let indexPath = IndexPath(row: sender.tag, section: 0)
         if let cell = tableView.cellForRow(at: indexPath) as? PerformanceTableCell,
             let player = cell.player {
-            
             if !player.isPlaying {
                 currentlyPlaying = cell
                 player.play()
@@ -70,37 +61,22 @@ class WorldJamsTableViewController: UITableViewController {
         }
     }
 
-    
+    // Action if a reply button is pressed in a cell
     @objc func replyButtonPressed(sender: UIButton) {
-
         let indexPath = IndexPath(row: sender.tag, section: 0)
         if let cell = tableView.cellForRow(at: indexPath) as? PerformanceTableCell,
             let player = cell.player {
-            
             if let current = currentlyPlaying {
                 current.player!.stop()
                 current.playButton.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal)
                 currentlyPlaying = nil
             }
-
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let controller = storyboard.instantiateViewController(withIdentifier: "chirpJamController") as! ChirpJamViewController
             let recorder = ChirpRecorder(frame: CGRect.zero, player: player)
             controller.recorder = recorder
             navigationController?.pushViewController(controller, animated: true)
         }
-    }
-    
-    // MARK: Scroll view delegate methods
-    
-    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        
-        if let cell = currentlyPlaying {
-            cell.playButton.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal)
-            cell.player!.stop()
-            currentlyPlaying = nil
-        }
-        
     }
 
     // MARK: - Table view data source
@@ -115,47 +91,26 @@ class WorldJamsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: worldJamCellIdentifier, for: indexPath) as! PerformanceTableCell
-
-        if let player = cell.player {
-            for chirp in player.chirpViews {
-                chirp.closePdFile()
-                chirp.removeFromSuperview()
-            }
-        }
-        
         let performance = performanceStore.feed[indexPath.row]
         cell.player = ChirpPlayer()
         cell.player!.delegate = self
-        let chirpView = ChirpView(with: cell.chirpContainer.bounds, andPerformance: performance)
-        cell.chirpContainer.backgroundColor = performance.backgroundColour.darkerColor
-        cell.player!.chirpViews.append(chirpView)
-        cell.chirpContainer.addSubview(chirpView)
-
-        var current = performance
-
-        // TODO: maybe don't load too too many performances.
-        while current.replyto != "" {
-            if let next = performanceStore.getPerformance(forID: CKRecordID(recordName: current.replyto)) {
-                cell.chirpContainer.backgroundColor = next.backgroundColour.darkerColor
-                let chirp = ChirpView(with: cell.chirpContainer.bounds, andPerformance: next)
-                cell.player!.chirpViews.append(chirp)
-                cell.chirpContainer.addSubview(chirp)
-                current = next
-            } else {
-                // try to fetch from cloud if the reply can't be found.
-                // Try to find the relevant reply and add to the store. - this is low priority and will update later.
-                performanceStore.fetchPerformance(forID: CKRecordID(recordName: current.replyto))
-                // Break.
-                break
-            }
-        }
         
+        /// Get all replies and add them to the player and chirp container.
+        let performanceChain = performanceStore.getAllReplies(forPerformance: performance)
+        for perfItem in performanceChain {
+            let chirpView = ChirpView(with: cell.chirpContainer.bounds, andPerformance: perfItem)
+            cell.chirpContainer.backgroundColor = perfItem.backgroundColour.darkerColor
+            cell.player!.chirpViews.append(chirpView)
+            cell.chirpContainer.addSubview(chirpView)
+        }
+
         // Add constraints for cell.chirpContainer's subviews.
         for view in cell.chirpContainer.subviews {
             view.translatesAutoresizingMaskIntoConstraints = false
             view.constrainEdgesTo(cell.chirpContainer)
         }
 
+        /// Setup the metadata area.
         if let profile = profilesStore.getProfile(forPerformance: performance) {
             cell.avatarImageView.image = profile.avatar
             cell.performer.text = profile.stageName
@@ -163,29 +118,21 @@ class WorldJamsTableViewController: UITableViewController {
             cell.avatarImageView.image = nil
             cell.performer.text = performance.performer
         }
-
         cell.title.text = performance.dateString
         cell.instrument.text = performance.instrument
-
         cell.context.text = nonCreditString()
-
         cell.playButton.tag = indexPath.row
         cell.playButton.addTarget(self, action: #selector(playButtonPressed), for: .touchUpInside)
-
         cell.replyButton.tag = indexPath.row
         cell.replyButton.addTarget(self, action: #selector(replyButtonPressed), for: .touchUpInside)
-
         return cell
     }
 
     // MARK: UI Methods
 
     @objc func tableViewTapped(sender: UIGestureRecognizer) {
-
         let location = sender.location(in: tableView)
-
         if let indexPath = tableView.indexPathForRow(at: location) {
-
             // Find out which cell was tapped
             if let cell = tableView.cellForRow(at: indexPath) as? PerformanceTableCell {
                 // get performance from that cell
@@ -198,7 +145,6 @@ class WorldJamsTableViewController: UITableViewController {
                     controller.performer = performance.performer
                     controller.performerID = performance.creatorID
                     navigationController?.pushViewController(controller, animated: true)
-
                 // Tapped the preview image
                 }
             }
@@ -264,6 +210,19 @@ extension WorldJamsTableViewController: PlayerDelegate {
         if let cell = currentlyPlaying {
             cell.player!.stop()
             cell.playButton.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal)
+            currentlyPlaying = nil
+        }
+    }
+}
+
+// MARK: - Scroll view delegate methods
+
+extension WorldJamsTableViewController {
+    
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        if let cell = currentlyPlaying {
+            cell.playButton.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal)
+            cell.player!.stop()
             currentlyPlaying = nil
         }
     }

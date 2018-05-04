@@ -295,6 +295,25 @@ extension PerformanceStore {
         database.add(queryOperation)
     }
     
+    /// Retrieve all the replies for a given performance from the performance store and iCloud.
+    func getAllReplies(forPerformance performance: ChirpPerformance) -> [ChirpPerformance] {
+        var output = [ChirpPerformance]()
+        output.append(performance) // add the top performance.
+        var current = performance
+        while current.replyto != "" {
+            // Check if the reply is available in the performanceStore
+            if let next = getPerformance(forID: CKRecordID(recordName: current.replyto)) {
+                output.append(next)
+                current = next
+            } else {
+                // Try to find the relevant reply and add to the store. - this is low priority and will update later.
+                fetchPerformance(forID: CKRecordID(recordName: current.replyto))
+                break
+            }
+        }
+        return output
+    }
+    
 }
 
 /// Extension for uploading functionality

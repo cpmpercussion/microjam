@@ -71,7 +71,9 @@ class ChirpView: UIImageView {
         started = false
         lastPoint = CG_INIT_POINT
         swiped = false
-        openSoundScheme(withName: newPerf.instrument)
+        // keep Pd file closed until needed.
+        closePdFile()
+        //openSoundScheme(withName: newPerf.instrument)
     }
     
     // MARK: - drawing functions
@@ -104,22 +106,6 @@ class ChirpView: UIImageView {
         context.strokePath()
         image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
-    }
-    
-
-    /// Schedule a performance for playback, is this used?
-    static func play(performance: ChirpPerformance) {
-        let chirp = ChirpView(with: CGRect(x: 0, y: 0, width: 300, height: 300), andPerformance: performance)
-        var timers = [Timer]()
-        
-        for touch in performance.performanceData {
-            let t = Timer.scheduledTimer(withTimeInterval: touch.time, repeats: false, block: { timer in
-                chirp.makeSound(at: CGPoint(x: touch.x * 300, y: touch.y * 300), withRadius: CGFloat(touch.z), thatWasMoving: touch.moving)
-            })
-            timers.append(t)
-        }
-        
-        performance.playbackTimers = timers
     }
 
     // MARK: - playback functions
@@ -163,8 +149,23 @@ class ChirpView: UIImageView {
 /// Contains Pd and libpd file management for ChirpView.
 extension ChirpView {
     
+    /// Prepare to play back sounds by loading the appropriate Pd file.
+    func prepareToPlaySounds() {
+        if let performance = performance {
+            openSoundScheme(withName: performance.instrument)
+        } else {
+            print("ChirpView: No performance loaded.")
+        }
+    }
+    
     /// Given a point in the UIImage, sends a touch point to Pd to process for sound.
     func makeSound(at point : CGPoint, withRadius radius : CGFloat, thatWasMoving moving: Bool) {
+        // Pd file must be opened by chirp.prepareToPlaySounds() before sounds can be played.
+        guard openPatch != nil else {
+            print("ChirpView: attempt to play without opening Pd file")
+            return // could throw and exception here.
+        }
+        
         let x = Double(point.x) / Double(frame.size.width)
         let y = Double(point.y) / Double(frame.size.width)
         let z = Double(min(radius / 120.0, 1.0))

@@ -57,6 +57,7 @@ class ChirpPlayer: NSObject {
             isPlaying = true
             timers = [Timer]()
             for chirp in chirpViews {
+                chirp.prepareToPlaySounds()
                 play(chirp: chirp)
             }
             startProgressTimer()
