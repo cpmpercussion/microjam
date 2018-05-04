@@ -24,7 +24,7 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
             navigationItem.title = performer
         }
     }
-    /// Performer to search for (must be set when instantiating this ViewController.
+    /// Performer to search for (must be set when instantiating this ViewController).
     var performerID: CKRecordID?
     /// Performances by performer
     var loadedPerformances = [ChirpPerformance]()

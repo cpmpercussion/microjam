@@ -19,7 +19,6 @@ class MicrojamTabBarController: UITabBarController {
 //        controller.tabBarItem = UITabBarItem(title: "explore", image: #imageLiteral(resourceName: "remotejamsTabIcon"), selectedImage: nil)
 //        let navigation = UINavigationController(rootViewController: controller)
 //        viewControllers?.insert(navigation, at: 0)
-        // MARK: Initialise view controllers that exist as tabs.
         setupSettingsTab()
         //setupProfileTab()
         //setupUserPerfsTab() // disabled for now.
