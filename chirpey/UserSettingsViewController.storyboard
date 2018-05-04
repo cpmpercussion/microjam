@@ -69,14 +69,14 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="qR4-ur-PsO" userLabel="Avatar and Name">
                                         <rect key="frame" x="0.0" y="130" width="320" height="100"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8ua-fL-e5b">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h9v-QH-scO">
                                                 <rect key="frame" x="0.0" y="0.0" width="10" height="100"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="10" id="sTo-IY-5Sf"/>
+                                                    <constraint firstAttribute="width" constant="10" id="kqO-3X-2Tt"/>
                                                 </constraints>
                                             </view>
-                                            <view hidden="YES" clipsSubviews="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="SKz-gD-qjb" userLabel="Avatar container view">
+                                            <view hidden="YES" clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="SKz-gD-qjb" userLabel="Avatar container view">
                                                 <rect key="frame" x="14" y="0.0" width="100" height="100"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eVN-qB-FWL" userLabel="Avatar Image">
@@ -134,12 +134,14 @@
                                                     <constraint firstItem="XD8-1Z-pnf" firstAttribute="centerY" secondItem="SKz-gD-qjb" secondAttribute="centerY" id="4r0-bU-0SU"/>
                                                     <constraint firstAttribute="bottom" secondItem="eVN-qB-FWL" secondAttribute="bottom" id="9es-az-u1W"/>
                                                     <constraint firstAttribute="bottom" secondItem="eVN-qB-FWL" secondAttribute="bottom" id="9oW-Cr-9Tw"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="Gwc-Pg-pvm"/>
                                                     <constraint firstAttribute="height" constant="100" id="TIU-9h-pVF"/>
                                                     <constraint firstItem="eVN-qB-FWL" firstAttribute="leading" secondItem="SKz-gD-qjb" secondAttribute="leading" id="Wzt-qy-IdF"/>
                                                     <constraint firstItem="eVN-qB-FWL" firstAttribute="top" secondItem="SKz-gD-qjb" secondAttribute="top" id="bZw-vN-QN0"/>
                                                     <constraint firstItem="eHC-is-qbp" firstAttribute="top" secondItem="SKz-gD-qjb" secondAttribute="top" id="cER-2Z-18B"/>
                                                     <constraint firstItem="eVN-qB-FWL" firstAttribute="leading" secondItem="eHC-is-qbp" secondAttribute="trailing" id="g76-KW-WPs"/>
                                                     <constraint firstAttribute="trailing" secondItem="eHC-is-qbp" secondAttribute="trailing" id="gWr-rD-sFX"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="igy-Rc-mMU"/>
                                                     <constraint firstItem="XD8-1Z-pnf" firstAttribute="centerX" secondItem="SKz-gD-qjb" secondAttribute="centerX" id="mKZ-tu-G3k"/>
                                                     <constraint firstItem="eVN-qB-FWL" firstAttribute="top" secondItem="SKz-gD-qjb" secondAttribute="top" id="t07-ro-0S3"/>
                                                     <constraint firstAttribute="trailing" secondItem="eVN-qB-FWL" secondAttribute="trailing" id="vpc-Lw-MSu"/>

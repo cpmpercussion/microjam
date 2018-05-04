@@ -12,10 +12,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Reply to performance-->
+        <!--performance-->
         <scene sceneID="cQe-la-IDt">
             <objects>
-                <viewController storyboardIdentifier="userPerfChirpJamController" automaticallyAdjustsScrollViewInsets="NO" id="biZ-h3-m2K" userLabel="Reply to performance" customClass="ChirpJamViewController" customModule="microjam" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="userPerfChirpJamController" automaticallyAdjustsScrollViewInsets="NO" id="biZ-h3-m2K" userLabel="performance" customClass="ChirpJamViewController" customModule="microjam" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="JiL-jf-Cxb"/>
                         <viewControllerLayoutGuide type="bottom" id="guu-fE-DC1"/>
@@ -159,20 +159,20 @@
                         <viewLayoutGuide key="safeArea" id="SId-8l-Idk"/>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="tnQ-l3-so5"/>
                                 <exclude reference="lLf-rZ-ZjW"/>
+                                <exclude reference="tnQ-l3-so5"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="constraints">
-                                <include reference="tnQ-l3-so5"/>
                                 <include reference="lLf-rZ-ZjW"/>
+                                <include reference="tnQ-l3-so5"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=regular">
                             <mask key="constraints">
-                                <exclude reference="tnQ-l3-so5"/>
                                 <exclude reference="lLf-rZ-ZjW"/>
+                                <exclude reference="tnQ-l3-so5"/>
                             </mask>
                         </variation>
                     </view>
@@ -208,7 +208,7 @@
                 <exit id="aop-uN-eVC" userLabel="Exit" sceneMemberID="exit"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Spw-Na-Njd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2553" y="-824"/>
+            <point key="canvasLocation" x="2383" y="-824"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ner-1k-Wun">
