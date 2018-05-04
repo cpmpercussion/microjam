@@ -276,8 +276,7 @@ extension PerformanceStore {
             if let performance = self.performanceFrom(record: record) {
                 self.addToStored(performances: [performance])
                 DispatchQueue.main.async {
-                    self.delegate?.modelUpdated()
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: performanceStoreUpdatedNotificationKey), object: nil)
+                    // could notify delegate here - but triggers too many times.
                 }
             }
         }
@@ -288,6 +287,8 @@ extension PerformanceStore {
                 return
             } else {
                 print("PerformanceStore: finished loading perfs for", perfID)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: performanceStoreUpdatedNotificationKey), object: nil)
+                self.delegate?.modelUpdated()
             }
         }
         

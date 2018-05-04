@@ -106,7 +106,8 @@ class UserSettingsViewController: UIViewController {
     /// Setup the user performance collection view at the bottom of the profile screen.
     func setupProfileCollectionView() {
         let layout = UICollectionViewFlowLayout()
-        let controller = ProfilePerfCollectionViewController(collectionViewLayout: layout)
+//        let controller = ProfilePerfCollectionViewController(collectionViewLayout: layout)
+        let controller = ProfilePerfController(collectionViewLayout: layout) // new attempt to simplify system.
         addChildViewController(controller)
         controller.view.translatesAutoresizingMaskIntoConstraints = false
         containerStack.addArrangedSubview(controller.view)

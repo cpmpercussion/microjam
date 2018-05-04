@@ -15,23 +15,15 @@ class MicrojamTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("TABVC: Loaded main tab bar.")
-//        let controller = ExploreController()
-//        controller.tabBarItem = UITabBarItem(title: "explore", image: #imageLiteral(resourceName: "remotejamsTabIcon"), selectedImage: nil)
-//        let navigation = UINavigationController(rootViewController: controller)
-//        viewControllers?.insert(navigation, at: 0)
         setupSettingsTab()
         //setupProfileTab()
-        //setupUserPerfsTab() // disabled for now.
     }
     
-    /// Setup user perfs tab
-    func setupUserPerfsTab() {
-        if let userPerfsTableViewController = UserPerfsTableViewController.storyboardInstance() {
-            userPerfsTableViewController.tabBarItem = UITabBarItem(title: TabBarItemTitles.userPerfsTab, image: #imageLiteral(resourceName: "profileTabIcon"), selectedImage: nil)
-            viewControllers?.append(userPerfsTableViewController)
-        } else {
-            print("TABVC: User Perfs Tab could not be initialised.")
-        }
+    func exploreTab() {
+        //        let controller = ExploreController()
+        //        controller.tabBarItem = UITabBarItem(title: "explore", image: #imageLiteral(resourceName: "remotejamsTabIcon"), selectedImage: nil)
+        //        let navigation = UINavigationController(rootViewController: controller)
+        //        viewControllers?.insert(navigation, at: 0)
     }
     
     /// Setup settings screen
