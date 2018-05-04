@@ -24,50 +24,15 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="SlM-8S-N3U" userLabel="container stack">
                                 <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x9I-VA-OYo" userLabel="No Account Container">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
-                                        <subviews>
-                                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="2zS-nc-bi7" userLabel="No Account">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MicroJam uses iCloud to store your performances, so it works best if you've logged into iCloud." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aqa-Ba-AN0">
-                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="80.5"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <color key="textColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LQl-cV-vpz">
-                                                        <rect key="frame" x="0.0" y="80.5" width="320" height="39.5"/>
-                                                        <color key="backgroundColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <state key="normal" title="Go to iCloud login in the Settings App">
-                                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        </state>
-                                                        <connections>
-                                                            <action selector="logIn:" destination="PTT-5t-yZZ" eventType="touchUpInside" id="Kzc-AC-Sm0"/>
-                                                        </connections>
-                                                    </button>
-                                                </subviews>
-                                            </stackView>
-                                        </subviews>
-                                        <color key="backgroundColor" red="0.5725490196078431" green="0.5725490196078431" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="120" id="7d8-Dz-QjW"/>
-                                            <constraint firstItem="2zS-nc-bi7" firstAttribute="leading" secondItem="x9I-VA-OYo" secondAttribute="leading" id="eAk-lC-wHw"/>
-                                            <constraint firstAttribute="trailing" secondItem="2zS-nc-bi7" secondAttribute="trailing" id="euw-Ww-NdP"/>
-                                            <constraint firstItem="2zS-nc-bi7" firstAttribute="top" secondItem="x9I-VA-OYo" secondAttribute="top" id="lB1-Fz-LZZ"/>
-                                            <constraint firstAttribute="bottom" secondItem="2zS-nc-bi7" secondAttribute="bottom" id="zNs-ER-Pje"/>
-                                        </constraints>
-                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m3w-rR-PqM">
-                                        <rect key="frame" x="0.0" y="120" width="320" height="10"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="10"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="10" id="GA4-g0-f7m"/>
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="qR4-ur-PsO" userLabel="Avatar and Name">
-                                        <rect key="frame" x="0.0" y="130" width="320" height="100"/>
+                                        <rect key="frame" x="0.0" y="10" width="320" height="100"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h9v-QH-scO">
                                                 <rect key="frame" x="0.0" y="0.0" width="10" height="100"/>
@@ -171,10 +136,10 @@
                                         </constraints>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NBQ-Os-6Vf">
-                                        <rect key="frame" x="0.0" y="230" width="320" height="318"/>
+                                        <rect key="frame" x="0.0" y="110" width="320" height="438"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="P0a-lG-ALF" userLabel="settings">
-                                                <rect key="frame" x="16" y="0.0" width="288" height="318"/>
+                                                <rect key="frame" x="16" y="0.0" width="288" height="438"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jam Colour:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8zb-J9-POw">
                                                         <rect key="frame" x="0.0" y="0.0" width="288" height="30"/>
@@ -186,13 +151,13 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <slider opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Go9-OM-27h">
-                                                        <rect key="frame" x="-2" y="30" width="292" height="166"/>
+                                                        <rect key="frame" x="-2" y="30" width="292" height="286"/>
                                                         <connections>
                                                             <action selector="jamSliderMoved:" destination="PTT-5t-yZZ" eventType="valueChanged" id="FNU-Rr-8kA"/>
                                                         </connections>
                                                     </slider>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Background Colour:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UQ9-ca-DYh">
-                                                        <rect key="frame" x="0.0" y="195" width="288" height="30"/>
+                                                        <rect key="frame" x="0.0" y="315" width="288" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="c0W-CB-X4X"/>
                                                         </constraints>
@@ -201,13 +166,13 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <slider opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Imy-x2-W5d">
-                                                        <rect key="frame" x="-2" y="225" width="292" height="31"/>
+                                                        <rect key="frame" x="-2" y="345" width="292" height="31"/>
                                                         <connections>
                                                             <action selector="backgroundSliderMoved:" destination="PTT-5t-yZZ" eventType="valueChanged" id="tfr-ci-Gs3"/>
                                                         </connections>
                                                     </slider>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Favourite SoundScheme:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8sk-DP-u2j">
-                                                        <rect key="frame" x="0.0" y="255" width="288" height="30"/>
+                                                        <rect key="frame" x="0.0" y="375" width="288" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="0V0-5J-7ef"/>
                                                         </constraints>
@@ -216,7 +181,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AYd-1x-gD3">
-                                                        <rect key="frame" x="0.0" y="285" width="288" height="33"/>
+                                                        <rect key="frame" x="0.0" y="405" width="288" height="33"/>
                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                                         <state key="normal" title="SoundScheme"/>
                                                         <connections>
@@ -254,7 +219,6 @@
                         <outlet property="containerStack" destination="SlM-8S-N3U" id="9h2-sl-6VK"/>
                         <outlet property="identityStack" destination="qR4-ur-PsO" id="gx6-48-enw"/>
                         <outlet property="jamColourSlider" destination="Go9-OM-27h" id="J4f-lb-6Jw"/>
-                        <outlet property="noAccountView" destination="x9I-VA-OYo" id="nFA-h9-Sc4"/>
                         <outlet property="settingsStack" destination="P0a-lG-ALF" id="PLg-IB-69a"/>
                         <outlet property="soundSchemeDropDownButton" destination="AYd-1x-gD3" id="jVi-nX-Ntc"/>
                         <outlet property="stageNameField" destination="cdE-c8-L8d" id="f9P-lX-jX4"/>
@@ -262,7 +226,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vzj-Fw-MMg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-854" y="-107"/>
+            <point key="canvasLocation" x="-1515" y="-106"/>
         </scene>
     </scenes>
 </document>

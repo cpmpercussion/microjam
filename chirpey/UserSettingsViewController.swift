@@ -25,8 +25,6 @@ class UserSettingsViewController: UIViewController {
     @IBOutlet weak var identityStack: UIStackView!
     /// stack for the colour selectors and soundscheme dropdown
     @IBOutlet weak var settingsStack: UIStackView!
-    /// View shown if user is not logged into iCloud.
-    @IBOutlet weak var noAccountView: UIView!
     /// Activity indicator used when loading avatar.
     @IBOutlet weak var avatarSpinner: UIActivityIndicatorView!
     /// Container view for avatar image.
@@ -47,17 +45,26 @@ class UserSettingsViewController: UIViewController {
     /// Dropdown menu for selecting SoundScheme
     let soundSchemeDropDown = DropDown() // dropdown menu for soundscheme
     @IBOutlet weak var soundSchemeDropDownButton: UIButton!
-    
+    /// Header view used if not logged in - View shown if user is not logged into iCloud.
+    let noAccountHeaderView = NoAccountWarningStackView()
     /// Link to the users' profile data.
     let profile: PerformerProfile = UserProfile.shared.profile
     
+    /// Initialises ViewController with separate storyboard with same name. Used to programmatically load the user settings screen in the tab bar controller.
+    static func storyboardInstance() -> UserSettingsViewController? {
+        print("USVC: Attempting to initialise from storyboard.")
+        let storyboard = UIStoryboard(name:"UserSettingsViewController", bundle: nil)
+        let controller = storyboard.instantiateInitialViewController() as? UserSettingsViewController
+        return controller
+    }
+    
     /// updates the profile screen's fields according to the present UserProfile data.
-    func updateUI() {
+    @objc func updateUI() {
         // Display appropriate views if user is not logged in.
         if UserProfile.shared.loggedIn {
-            noAccountView.isHidden = true
+            noAccountHeaderView.isHidden = true
         } else {
-            noAccountView.isHidden = false
+            noAccountHeaderView.isHidden = false
         }
         avatarImageView.image = profile.avatar
         avatarImageView.contentMode = .scaleAspectFill
@@ -72,26 +79,13 @@ class UserSettingsViewController: UIViewController {
         soundSchemeDropDownButton.setTitle(SoundSchemes.namesForKeys[profile.soundScheme], for: .normal)
     }
     
-    
-    /// Initialises ViewController with separate storyboard with same name. Used to programmatically load the user settings screen in the tab bar controller.
-    static func storyboardInstance() -> UserSettingsViewController? {
-        print("USVC: Attempting to initialise from storyboard.")
-        let storyboard = UIStoryboard(name:"UserSettingsViewController", bundle: nil)
-        let controller = storyboard.instantiateInitialViewController() as? UserSettingsViewController
-        return controller
-        //let navController = storyboard.instantiateInitialViewController() as? UINavigationController
-        //return navController?.topViewController as? UserSettingsViewController
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         stageNameField.delegate = self // become delegate for the stagename field.
-        
         // Soundscheme Dropdown initialisation.
         soundSchemeDropDown.anchorView = self.soundSchemeDropDownButton // anchor dropdown to intrument button
         soundSchemeDropDown.dataSource = Array(SoundSchemes.namesForKeys.values) // set dropdown datasource to available SoundSchemes
         soundSchemeDropDown.direction = .bottom
-        
         // Action triggered on selection
         soundSchemeDropDown.selectionAction = {(index: Int, item: String) -> Void in
             print("DropDown selected:", index, item)
@@ -100,43 +94,23 @@ class UserSettingsViewController: UIViewController {
                 self.updateUI()
             }
         }
-        
+        // Set up the no account view and collection view.
+        noAccountHeaderView.frame = CGRect(x: 0, y: 0, width: containerStack.frame.width, height: 100) // TODO: This doesn't work in a stack view derp.
+        containerStack.insertArrangedSubview(noAccountHeaderView, at: 0)
         setupProfileCollectionView()
-        
         updateUI()
-        
         // add observer for UserProfile updates.
-        NotificationCenter.default.addObserver(self, selector: #selector(userProfileDataUpdated), name: NSNotification.Name(rawValue: userProfileUpdatedNotificationKey), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: NSNotification.Name(rawValue: userProfileUpdatedNotificationKey), object: nil)
     }
     
     /// Setup the user performance collection view at the bottom of the profile screen.
     func setupProfileCollectionView() {
-        print("setting up the collection view")
-        // Setup the collection view
         let layout = UICollectionViewFlowLayout()
         let controller = ProfilePerfCollectionViewController(collectionViewLayout: layout)
         addChildViewController(controller)
         controller.view.translatesAutoresizingMaskIntoConstraints = false
         containerStack.addArrangedSubview(controller.view)
-//        NSLayoutConstraint.activate([
-//            controller.view.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-//            controller.view.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-//            controller.view.topAnchor.constraint(equalTo: view.topAnchor, constant: 10),
-//            controller.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10)
-//            ])
         controller.didMove(toParentViewController: self)
-    }
-    
-    /// Called by a notification when the UserProfile successfully loads a record.
-    @objc func userProfileDataUpdated() {
-        print("USVC: UserProfile updated, updating UI.")
-        updateUI()
-    }
-
-    
-    /// Used by login button, opens Settings app so that user can log into iCloud.
-    @IBAction func logIn(_ sender: Any) {
-        UIApplication.shared.open(URL(string: "App-Prefs:root=Settings")!, options: [:], completionHandler: nil)
     }
     
     /// Open image picker to change avatar.
@@ -164,16 +138,10 @@ class UserSettingsViewController: UIViewController {
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-        print("USVC: view will disappear")
         UserProfile.shared.updateUserProfile()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print("USVC: view will appear")
-        
-        if (!UserProfile.shared.loggedIn) {
-            print("USVC: Profile not logged in, asking UserProfile for update")
-        }
         updateUI()
     }
     
@@ -181,10 +149,6 @@ class UserSettingsViewController: UIViewController {
         soundSchemeDropDown.show()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // When segue occurs, request to upload basic profile info to CloudKit
-        print("USVC: preparing to segue")
-    }
 }
 
 

@@ -18,7 +18,7 @@ class WorldJamsTableViewController: UITableViewController {
     /// Local reference to the PerformerProfileStore.
     let profilesStore = PerformerProfileStore.shared
     /// UILabel as a header view for warning messages.
-    let headerView: UILabel = UILabel()
+    let headerView = NoAccountWarningStackView()
     /// A list of currently playing ChirpPlayers.
     var players = [ChirpPlayer]()
     /// A record of the currently playing table cell.
@@ -46,12 +46,6 @@ class WorldJamsTableViewController: UITableViewController {
         
         // Initialise the headerView (not used unless needed to display an error).
         headerView.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 100)
-        headerView.backgroundColor = UIColor.gray
-        headerView.text = "A world of jams awaits you."
-        headerView.textColor = UIColor.white
-        headerView.textAlignment = NSTextAlignment.center
-        headerView.lineBreakMode = .byWordWrapping
-        headerView.numberOfLines = 0
         
         // Initialise the refreshControl
         self.refreshControl?.addTarget(performanceStore, action: #selector(performanceStore.fetchWorldJamsFromCloud), for: UIControlEvents.valueChanged)
@@ -304,7 +298,7 @@ extension WorldJamsTableViewController: ModelDelegate {
         } else {
             message = error.localizedDescription
         }
-        headerView.text = message
+        headerView.warningLabel.text = message
         headerView.isHidden = false
     }
 

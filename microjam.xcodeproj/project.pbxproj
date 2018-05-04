@@ -456,6 +456,7 @@
 		5669CA981DA7AAA6009EEC3B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5669CA961DA7AAA6009EEC3B /* Main.storyboard */; };
 		5669CA9A1DA7AAA6009EEC3B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5669CA991DA7AAA6009EEC3B /* Assets.xcassets */; };
 		5669CA9D1DA7AAA6009EEC3B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5669CA9B1DA7AAA6009EEC3B /* LaunchScreen.storyboard */; };
+		566A70DA209C50C30066EFD4 /* NoAccountWarningStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566A70D9209C50C30066EFD4 /* NoAccountWarningStackView.swift */; };
 		567286661E05E0AF0024A515 /* MicrojamTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567286651E05E0AF0024A515 /* MicrojamTabBarController.swift */; };
 		568D1DC41DF995E500A2BC0B /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 568D1DC31DF995E500A2BC0B /* Settings.bundle */; };
 		569B92C41DFEA99C00AA257C /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569B92C31DFEA99C00AA257C /* SettingsTableViewController.swift */; };
@@ -945,6 +946,7 @@
 		5669CA9E1DA7AAA6009EEC3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5669CAAE1DA7AAA6009EEC3B /* microjamUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = microjamUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5669CAB41DA7AAA6009EEC3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		566A70D9209C50C30066EFD4 /* NoAccountWarningStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NoAccountWarningStackView.swift; path = chirpey/NoAccountWarningStackView.swift; sourceTree = "<group>"; };
 		567286651E05E0AF0024A515 /* MicrojamTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MicrojamTabBarController.swift; path = chirpey/MicrojamTabBarController.swift; sourceTree = "<group>"; };
 		568D1DC31DF995E500A2BC0B /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		569B92C31DFEA99C00AA257C /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsTableViewController.swift; path = chirpey/SettingsTableViewController.swift; sourceTree = "<group>"; };
@@ -1036,6 +1038,7 @@
 				4DEFCADE1F41BDEF007B7C34 /* FilterViewCell.swift */,
 				56ADAB7E20975B9F0085D372 /* UserPerfsViewController.storyboard */,
 				564AF3B220989E7B0050B541 /* ChirpJamViewController.storyboard */,
+				566A70D9209C50C30066EFD4 /* NoAccountWarningStackView.swift */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -2287,6 +2290,7 @@
 				4DEFCAE51F41EC90007B7C34 /* WorldJamsTableViewController.swift in Sources */,
 				4DEFCAE41F41EC82007B7C34 /* Constants.swift in Sources */,
 				56002F471F306C0F00003B88 /* MicrojamTutorialViewController.swift in Sources */,
+				566A70DA209C50C30066EFD4 /* NoAccountWarningStackView.swift in Sources */,
 				5613B31E1F3D9C380068ED5D /* ChirpRecordingView.swift in Sources */,
 				560568E0206E4AD300A50521 /* MicrojamTutorialTestingScreenController.swift in Sources */,
 				56621B111DE47D5B009B9AB6 /* ChirpJamViewController.swift in Sources */,
