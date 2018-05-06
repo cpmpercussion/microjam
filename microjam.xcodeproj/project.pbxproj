@@ -448,7 +448,6 @@
 		564AF3B520989FC80050B541 /* UserPerfTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564AF3B420989FC80050B541 /* UserPerfTableViewCell.swift */; };
 		564AF3B7209900990050B541 /* PerformerInfoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564AF3B6209900990050B541 /* PerformerInfoHeader.swift */; };
 		564AF3B92099EF830050B541 /* UserPerfCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564AF3B82099EF830050B541 /* UserPerfCollectionViewCell.swift */; };
-		564AF3BB209A02CC0050B541 /* ProfilePerfCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564AF3BA209A02CB0050B541 /* ProfilePerfCollectionViewController.swift */; };
 		56621B0D1DE39D33009B9AB6 /* ChirpPerformance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56621B0C1DE39D33009B9AB6 /* ChirpPerformance.swift */; };
 		56621B0F1DE47376009B9AB6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56621B0E1DE47376009B9AB6 /* AppDelegate.swift */; };
 		56621B111DE47D5B009B9AB6 /* ChirpJamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56621B101DE47D5B009B9AB6 /* ChirpJamViewController.swift */; };
@@ -932,7 +931,6 @@
 		564AF3B420989FC80050B541 /* UserPerfTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserPerfTableViewCell.swift; path = chirpey/UserPerfTableViewCell.swift; sourceTree = "<group>"; };
 		564AF3B6209900990050B541 /* PerformerInfoHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PerformerInfoHeader.swift; path = chirpey/PerformerInfoHeader.swift; sourceTree = "<group>"; };
 		564AF3B82099EF830050B541 /* UserPerfCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserPerfCollectionViewCell.swift; path = chirpey/UserPerfCollectionViewCell.swift; sourceTree = "<group>"; };
-		564AF3BA209A02CB0050B541 /* ProfilePerfCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfilePerfCollectionViewController.swift; path = chirpey/ProfilePerfCollectionViewController.swift; sourceTree = "<group>"; };
 		56621B091DE344E2009B9AB6 /* chirpey-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "chirpey-Bridging-Header.h"; sourceTree = "<group>"; };
 		56621B0C1DE39D33009B9AB6 /* ChirpPerformance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChirpPerformance.swift; path = chirpey/ChirpPerformance.swift; sourceTree = "<group>"; };
 		56621B0E1DE47376009B9AB6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -1057,7 +1055,6 @@
 				569B92C31DFEA99C00AA257C /* SettingsTableViewController.swift */,
 				4DDB71001F43179A00925F4D /* UserPerfController.swift */,
 				5642EFBD209CDA1300B38873 /* ProfilePerfController.swift */,
-				564AF3BA209A02CB0050B541 /* ProfilePerfCollectionViewController.swift */,
 				562FDCA51F316870000409C8 /* UserSettingsViewController.swift */,
 				56B329E41E44834D001345DC /* WorldJamsTableViewController.swift */,
 			);
@@ -2300,7 +2297,6 @@
 				56621B131DE4A496009B9AB6 /* ChirpView.swift in Sources */,
 				562FDCA61F316870000409C8 /* UserSettingsViewController.swift in Sources */,
 				4DF23D0C1F4AF51F006033F8 /* ChirpRecorder.swift in Sources */,
-				564AF3BB209A02CC0050B541 /* ProfilePerfCollectionViewController.swift in Sources */,
 				562FDCAE1F3727DC000409C8 /* TouchRecord.swift in Sources */,
 				564AF3B520989FC80050B541 /* UserPerfTableViewCell.swift in Sources */,
 				567286661E05E0AF0024A515 /* MicrojamTabBarController.swift in Sources */,

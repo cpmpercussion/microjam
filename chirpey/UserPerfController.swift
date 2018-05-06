@@ -55,8 +55,10 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
                 currentlyPlaying = nil
             }
             // Reload data.
-            loadedPerformances = performanceStore.performances(byPerformer: performerID)
-            collectionView?.reloadData()
+            DispatchQueue.main.async {
+                self.loadedPerformances = self.performanceStore.performances(byPerformer: performerID)
+                self.collectionView?.reloadData()
+            }
         }
     }
     
@@ -141,7 +143,7 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         stopCurrentlyPlayingPerformance()
         if let cell = collectionView.cellForItem(at: indexPath) as? UserPerfCollectionViewCell,
-            let player = cell.player, let topPerformance = cell.performance {
+            let topPerformance = cell.performance {
             // Instantiate a ChirpJamViewController from storyboard
             let storyboard = UIStoryboard(name: "ChirpJamViewController", bundle: nil)
             let controller = storyboard.instantiateViewController(withIdentifier: "userPerfChirpJamController") as! ChirpJamViewController

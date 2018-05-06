@@ -38,18 +38,18 @@ class MicrojamTabBarController: UITabBarController {
         }
     }
     
-    /// Setup the profile screen
-    func setupProfileTab() {
-        print("setting up the profile screen")
-        // Setup the collection view
-        let layout = UICollectionViewFlowLayout()
-        let controller = ProfilePerfCollectionViewController(collectionViewLayout: layout)
-        controller.view.translatesAutoresizingMaskIntoConstraints = false
-        let navigation = UINavigationController(rootViewController: controller)
-        controller.tabBarItem = UITabBarItem(title: TabBarItemTitles.profileTab, image: #imageLiteral(resourceName: "profileTabIcon"), selectedImage: nil)
-        viewControllers?.append(navigation)
-        print("TABVC: Profile Tab could not be initialised")
-    }
+//    /// Setup the profile screen
+//    func setupProfileTab() {
+//        print("setting up the profile screen")
+//        // Setup the collection view
+//        let layout = UICollectionViewFlowLayout()
+//        let controller = ProfilePerfCollectionViewController(collectionViewLayout: layout)
+//        controller.view.translatesAutoresizingMaskIntoConstraints = false
+//        let navigation = UINavigationController(rootViewController: controller)
+//        controller.tabBarItem = UITabBarItem(title: TabBarItemTitles.profileTab, image: #imageLiteral(resourceName: "profileTabIcon"), selectedImage: nil)
+//        viewControllers?.append(navigation)
+//        print("TABVC: Profile Tab could not be initialised")
+//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
