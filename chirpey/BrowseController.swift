@@ -16,6 +16,7 @@ protocol BrowseControllerDelegate {
     func didSelect(performance: ChirpPerformance)
 }
 
+/// A CollectionViewController for browsing through multiple MicroJams. Not used in present Beta.
 class BrowseController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     var loadedPerformances = [ChirpPerformance]()

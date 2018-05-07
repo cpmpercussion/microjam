@@ -157,6 +157,19 @@ struct PerformanceLabels {
     ]
 }
 
+/// Maximum allowed recording time.
+let RECORDING_TIME = 5.0
+
+/// Colours for buttons in Jam Screen
+struct ButtonColors {
+    static let rewind = UIColor.init("#A10702")
+    static let record = UIColor.init("#ED2D07")
+    static let play = UIColor.init("#FAA613")
+    static let layer = UIColor.init("#7DCFB6")
+    static let jam = UIColor.init("#688E26")
+    static let roboplay = UIColor.init("#550527")
+}
+
 /// Error messages and dialogues
 
 struct ErrorDialogues {

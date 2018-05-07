@@ -16,7 +16,7 @@ import UIKit
 import CloudKit
 import DropDown
 
-/// Displays iCloud User Settings screen to allow user to update avatar, name, and other details.
+/// View controller for the "profile" tab: allows user to view/update avatar, name, and other details and shows their performances.
 class UserSettingsViewController: UIViewController {
     
     /// Stack for the whole profile screen
@@ -106,7 +106,6 @@ class UserSettingsViewController: UIViewController {
     /// Setup the user performance collection view at the bottom of the profile screen.
     func setupProfileCollectionView() {
         let layout = UICollectionViewFlowLayout()
-//        let controller = ProfilePerfCollectionViewController(collectionViewLayout: layout)
         let controller = ProfilePerfController(collectionViewLayout: layout) // new attempt to simplify system.
         addChildViewController(controller)
         controller.view.translatesAutoresizingMaskIntoConstraints = false
@@ -138,20 +137,22 @@ class UserSettingsViewController: UIViewController {
         profile.backgroundColour = colour
     }
 
+    /// When the view disappears, updates the profile on iCloud
     override func viewWillDisappear(_ animated: Bool) {
         UserProfile.shared.updateUserProfile()
     }
     
+    /// When the view will appear, updates UI with latest profile / performance information
     override func viewWillAppear(_ animated: Bool) {
         updateUI()
     }
     
+    /// Opens the SoundScheme dropdown menu.
     @IBAction func soundSchemeTapped(_ sender: Any) {
         soundSchemeDropDown.show()
     }
     
 }
-
 
 /// Extensions to UserSettingsViewController to interact with an image picker and navigatino controller.
 extension UserSettingsViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {

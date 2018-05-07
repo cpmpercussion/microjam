@@ -9,22 +9,9 @@ import UIKit
 import DropDown
 import CloudKit
 
-/// Maximum allowed recording time.
-let RECORDING_TIME = 5.0
-
-/// Colours for buttons in Jam Screen
-struct ButtonColors {
-    static let rewind = UIColor.init("#A10702")
-    static let record = UIColor.init("#ED2D07")
-    static let play = UIColor.init("#FAA613")
-    static let layer = UIColor.init("#7DCFB6")
-    static let jam = UIColor.init("#688E26")
-    static let roboplay = UIColor.init("#550527")
-}
-
-
 // TODO: how to tell between loaded and saved and just loaded?
 
+/// Main performance and playback ViewController for MicroJam
 class ChirpJamViewController: UIViewController {
     /// Enters composing mode if a performance is added from within the ChirpJamController
     var isComposing = false
@@ -52,7 +39,6 @@ class ChirpJamViewController: UIViewController {
         }
     }
 
-    
     /// Button to clear the screen after a recording (rewind)
     @IBOutlet weak var rewindButton: UIButton!
     /// Button to enable recording
@@ -79,6 +65,16 @@ class ChirpJamViewController: UIViewController {
     @IBOutlet weak var addJamButton: UIButton!
     /// Roboplay button; requests an AI response performance
     @IBOutlet weak var roboplayButton: UIButton!
+    
+    /// Initialises ViewController directly from the storyboard with the same name. Used to instantiate programmatically.
+    static func storyboardInstance() -> ChirpJamViewController? {
+        print("JAMVC: Attempting to initialise from storyboard.")
+        let storyboard = UIStoryboard(name:"ChirpJamViewController", bundle: nil)
+        //        let controller = storyboard.instantiateViewController(withIdentifier: "chirpJamController") as? ChirpJamViewController
+        let controller = storyboard.instantiateViewController(withIdentifier: "userPerfChirpJamController") as? ChirpJamViewController
+        //        let controller = storyboard.instantiateInitialViewController() as? ChirpJamViewController
+        return controller
+    }
 
     // MARK: - Navigation
     

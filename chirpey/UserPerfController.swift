@@ -142,11 +142,11 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
     /// method called when an item is selected in the CollectionView - should open a non-recordable ChirpJamView to play back and show info.
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         stopCurrentlyPlayingPerformance()
+        // Get the cell, performance and a ChirpJamVC
         if let cell = collectionView.cellForItem(at: indexPath) as? UserPerfCollectionViewCell,
-            let topPerformance = cell.performance {
+            let topPerformance = cell.performance,
+            let controller = ChirpJamViewController.storyboardInstance() {
             // Instantiate a ChirpJamViewController from storyboard
-            let storyboard = UIStoryboard(name: "ChirpJamViewController", bundle: nil)
-            let controller = storyboard.instantiateViewController(withIdentifier: "userPerfChirpJamController") as! ChirpJamViewController
             // Make a ChirpRecorder for the reply and set to the new ChirpJamViewController
             let allPerformances = performanceStore.getAllReplies(forPerformance: topPerformance)
             let recorder = ChirpRecorder(withArrayOfPerformances: allPerformances) // FIXME: This makes it a recorder, only want playback here.

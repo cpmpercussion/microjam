@@ -9,6 +9,7 @@
 import UIKit
 import CloudKit
 
+/// A UITableViewController for displaying MicroJams downloaded from the CloudKit feed - first screen in the app!
 class WorldJamsTableViewController: UITableViewController {
     /// Local reference to the performanceStore singleton.
     let performanceStore = PerformanceStore.shared
@@ -71,11 +72,13 @@ class WorldJamsTableViewController: UITableViewController {
                 current.playButton.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal)
                 currentlyPlaying = nil
             }
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let controller = storyboard.instantiateViewController(withIdentifier: "chirpJamController") as! ChirpJamViewController
-            let recorder = ChirpRecorder(frame: CGRect.zero, player: player)
-            controller.recorder = recorder
-            navigationController?.pushViewController(controller, animated: true)
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            let controller = storyboard.instantiateViewController(withIdentifier: "chirpJamController") as! ChirpJamViewController
+            if let controller = ChirpJamViewController.storyboardInstance() {
+                let recorder = ChirpRecorder(frame: CGRect.zero, player: player)
+                controller.recorder = recorder
+                navigationController?.pushViewController(controller, animated: true)
+            }
         }
     }
 
