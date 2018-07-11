@@ -420,8 +420,8 @@ class ChirpJamViewController: UIViewController {
     
     // MARK: Robojam Methods
     
-    //    let roboResponseEndpoint: String = "https://138.197.179.234:5000/api/predict"
-    let roboResponseEndpoint: String = "https://0.0.0.0:5000/api/predict"
+    let roboResponseEndpoint: String = "https://138.197.179.234:5000/api/predict"
+    // let roboResponseEndpoint: String = "https://0.0.0.0:5000/api/predict"
     
     /// Roboplay Button Pressed, request an AI response and add as a layer.
     @IBAction func roboplayPressed(_ sender: UIButton) {
