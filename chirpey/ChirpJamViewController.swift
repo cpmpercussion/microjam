@@ -420,8 +420,8 @@ class ChirpJamViewController: UIViewController {
     
     // MARK: Robojam Methods
     
-    let roboResponseEndpoint: String = "http://138.197.179.234:5000/api/predict"    // TODO: Change this to https
-    //let roboResponseEndpoint: String = "https://0.0.0.0:5000/api/predict"
+    //    let roboResponseEndpoint: String = "http://138.197.179.234:5000/api/predict"    // TODO: Change this to https
+    let roboResponseEndpoint: String = "https://0.0.0.0:5000/api/predict"
     
     /// Roboplay Button Pressed, request an AI response and add as a layer.
     @IBAction func roboplayPressed(_ sender: UIButton) {
@@ -453,7 +453,7 @@ class ChirpJamViewController: UIViewController {
             return
         }
         
-        let session = URLSession.shared
+        let session = URLSession(configuration: URLSessionConfiguration.ephemeral, delegate: NSURLSessionPinningDelegate(), delegateQueue: nil)
         let task = session.dataTask(with: roboResponseUrlRequest) { data, response, error in
             // do stuff with response, data & error here
             DispatchQueue.main.async{
@@ -571,6 +571,46 @@ extension ChirpJamViewController: BrowseControllerDelegate {
         }
     }
 }
+
+// MARK: - Robojam HTTPS Certificate Pinning URLSession delegate
+// adapted from lifeisfoo https://stackoverflow.com/a/34223292/1646138
+class NSURLSessionPinningDelegate: NSObject, URLSessionDelegate {
+    
+    func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Swift.Void) {
+        // Adapted from OWASP https://www.owasp.org/index.php/Certificate_and_Public_Key_Pinning#iOS
+        if (challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust) {
+            if let serverTrust = challenge.protectionSpace.serverTrust {
+                var secresult = SecTrustResultType.invalid
+                let status = SecTrustEvaluate(serverTrust, &secresult)
+                
+                if (errSecSuccess == status) {
+                    if let serverCertificate = SecTrustGetCertificateAtIndex(serverTrust, 0) {
+                        let serverCertificateData = SecCertificateCopyData(serverCertificate)
+                        let data = CFDataGetBytePtr(serverCertificateData);
+                        let size = CFDataGetLength(serverCertificateData);
+                        let cert1 = NSData(bytes: data, length: size)
+                        let file_der = Bundle.main.path(forResource: "robojamCertificate", ofType: "der")
+                        
+                        if let file = file_der {
+                            if let cert2 = NSData(contentsOfFile: file) {
+                                if cert1.isEqual(to: cert2 as Data) {
+                                    completionHandler(URLSession.AuthChallengeDisposition.useCredential, URLCredential(trust:serverTrust))
+                                    return
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        // Pinning failed
+        completionHandler(URLSession.AuthChallengeDisposition.cancelAuthenticationChallenge, nil)
+    }
+    
+}
+
+// MARK: - Robojam Functions Extension
 
 extension ChirpJamViewController {
     
