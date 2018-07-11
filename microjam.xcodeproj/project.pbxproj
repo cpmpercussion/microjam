@@ -459,6 +459,7 @@
 		566A70DA209C50C30066EFD4 /* NoAccountWarningStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566A70D9209C50C30066EFD4 /* NoAccountWarningStackView.swift */; };
 		567286661E05E0AF0024A515 /* MicrojamTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567286651E05E0AF0024A515 /* MicrojamTabBarController.swift */; };
 		568D1DC41DF995E500A2BC0B /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 568D1DC31DF995E500A2BC0B /* Settings.bundle */; };
+		56A0505320F5B58E00455FDF /* robojamCertificate.der in Resources */ = {isa = PBXBuildFile; fileRef = 56A0505220F5B58E00455FDF /* robojamCertificate.der */; };
 		56A46DF4206F8ABA0084BC16 /* MicrojamTutorialGetStartedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A46DF3206F8ABA0084BC16 /* MicrojamTutorialGetStartedViewController.swift */; };
 		56A46DF6206F8B170084BC16 /* MicrojamTutorialCloudLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A46DF5206F8B170084BC16 /* MicrojamTutorialCloudLoginViewController.swift */; };
 		56BAAFC61F44370000DC41CA /* PerformerProfileStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BAAFC51F44370000DC41CA /* PerformerProfileStore.swift */; };
@@ -946,6 +947,7 @@
 		566A70D9209C50C30066EFD4 /* NoAccountWarningStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NoAccountWarningStackView.swift; path = chirpey/NoAccountWarningStackView.swift; sourceTree = "<group>"; };
 		567286651E05E0AF0024A515 /* MicrojamTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MicrojamTabBarController.swift; path = chirpey/MicrojamTabBarController.swift; sourceTree = "<group>"; };
 		568D1DC31DF995E500A2BC0B /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		56A0505220F5B58E00455FDF /* robojamCertificate.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = robojamCertificate.der; sourceTree = "<group>"; };
 		56A46DF3206F8ABA0084BC16 /* MicrojamTutorialGetStartedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicrojamTutorialGetStartedViewController.swift; sourceTree = "<group>"; };
 		56A46DF5206F8B170084BC16 /* MicrojamTutorialCloudLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MicrojamTutorialCloudLoginViewController.swift; path = chirpey/MicrojamTutorialCloudLoginViewController.swift; sourceTree = "<group>"; };
 		56B329E41E44834D001345DC /* WorldJamsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WorldJamsTableViewController.swift; path = chirpey/WorldJamsTableViewController.swift; sourceTree = "<group>"; };
@@ -1565,6 +1567,7 @@
 		5669CA8C1DA7AAA5009EEC3B /* microjam */ = {
 			isa = PBXGroup;
 			children = (
+				56A0505220F5B58E00455FDF /* robojamCertificate.der */,
 				56621B0E1DE47376009B9AB6 /* AppDelegate.swift */,
 				5669CA991DA7AAA6009EEC3B /* Assets.xcassets */,
 				5669CA9E1DA7AAA6009EEC3B /* Info.plist */,
@@ -2100,6 +2103,7 @@
 				5625E9D21F68750000AFE8BF /* u_lowpassq-help.pd in Resources */,
 				5625E9961F68750000AFE8BF /* s_rhodey-help.pd in Resources */,
 				5625E89F1F6874FF00AFE8BF /* c_frombus.pd in Resources */,
+				56A0505320F5B58E00455FDF /* robojamCertificate.der in Resources */,
 				5625E9DE1F68750000AFE8BF /* u_record-help.pd in Resources */,
 				5625E97D1F68750000AFE8BF /* s_fplaytable-help.pd in Resources */,
 				5625E9321F68750000AFE8BF /* m_beat2ms-help.pd in Resources */,
