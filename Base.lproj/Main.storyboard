@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="z8b-cn-TNb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="z8b-cn-TNb">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -31,6 +31,9 @@
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7hp-N0-fr7">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                <accessibility key="accessibilityConfiguration" hint="Displays your avatar" identifier="Performer avatar" label="Performer avatar">
+                                                    <bool key="isElement" value="YES"/>
+                                                </accessibility>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="H5Q-Ee-YMp"/>
                                                     <constraint firstAttribute="width" constant="50" id="RwF-JV-1Lb"/>
@@ -38,12 +41,14 @@
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="performer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Mx-bs-Bwy">
                                                 <rect key="frame" x="134.33333333333334" y="13" width="89" height="24"/>
+                                                <accessibility key="accessibilityConfiguration" hint="Displays your stage name" identifier="Performer name" label="Performer name"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="right" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZY3-BC-5OF">
                                                 <rect key="frame" x="291" y="8.6666666666666714" width="83" height="33"/>
+                                                <accessibility key="accessibilityConfiguration" hint="Tap here to choose a different sound." identifier="Instrument chooser" label="Instrument Menu"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <state key="normal" title="instrument">
                                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -57,6 +62,10 @@
                                     <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="xQz-CD-1rT">
                                         <rect key="frame" x="0.0" y="92.666666666666629" width="374" height="374"/>
                                         <color key="backgroundColor" red="0.59487018602307074" green="0.7976250858479812" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <accessibility key="accessibilityConfiguration" hint="Draw here with your finger to create sounds" identifier="Performance pad" label="Performance pad">
+                                            <accessibilityTraits key="traits" playsSound="YES"/>
+                                            <bool key="isElement" value="YES"/>
+                                        </accessibility>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="xQz-CD-1rT" secondAttribute="height" multiplier="1:1" id="f5e-P8-eQa"/>
                                         </constraints>
@@ -72,6 +81,7 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s3v-f5-bcy" userLabel="Rewind">
                                                 <rect key="frame" x="0.0" y="0.0" width="45" height="44"/>
+                                                <accessibility key="accessibilityConfiguration" hint="Undo performance" identifier="Rewind button" label="Rewind"/>
                                                 <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <state key="normal" title="Rewind" image="microjam-rewind"/>
                                                 <connections>
@@ -80,6 +90,7 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DIT-bx-YUr" userLabel="Record Enable">
                                                 <rect key="frame" x="55" y="0.0" width="44.666666666666657" height="44"/>
+                                                <accessibility key="accessibilityConfiguration" hint="Record a performance" identifier="Record button" label="Record"/>
                                                 <color key="tintColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" title="Record" image="microjam-record"/>
                                                 <connections>
@@ -88,7 +99,7 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O9V-pQ-Tlh">
                                                 <rect key="frame" x="109.66666666666666" y="0.0" width="45" height="44"/>
-                                                <accessibility key="accessibilityConfiguration" identifier="playButton" label="Play"/>
+                                                <accessibility key="accessibilityConfiguration" hint="Play the performance" identifier="playButton" label="Play"/>
                                                 <color key="tintColor" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" title="play" image="microjam-play"/>
                                                 <connections>
@@ -108,7 +119,7 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xh5-cz-PkR" userLabel="Reply Button">
                                                 <rect key="frame" x="219.33333333333334" y="0.0" width="45.000000000000028" height="44"/>
-                                                <accessibility key="accessibilityConfiguration" identifier="replyButton" label="Reply"/>
+                                                <accessibility key="accessibilityConfiguration" hint="Reply to performance by recording a new layer" identifier="replyButton" label="Reply"/>
                                                 <state key="normal" title="reset" image="microjam-reply"/>
                                                 <connections>
                                                     <action selector="replyButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UCv-rQ-qeE"/>
@@ -116,7 +127,7 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HfI-q6-7dd">
                                                 <rect key="frame" x="274.33333333333331" y="0.0" width="44.666666666666686" height="44"/>
-                                                <accessibility key="accessibilityConfiguration" identifier="jamButton" label="Jam"/>
+                                                <accessibility key="accessibilityConfiguration" hint="Play along with this performance" identifier="jamButton" label="Jam"/>
                                                 <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="jam" image="microjam-loop"/>
                                                 <connections>
@@ -125,6 +136,7 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cTj-r6-Uk1" userLabel="Roboplay Button">
                                                 <rect key="frame" x="329" y="0.0" width="45" height="44"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="Roboplay button" label="Roboplay"/>
                                                 <state key="normal" title="Button" image="microjam-roboplay"/>
                                                 <connections>
                                                     <action selector="roboplayPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Tr4-Um-Wds"/>
@@ -226,6 +238,7 @@
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="took the stage" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8qM-fi-pVE" userLabel="context">
                                             <rect key="frame" x="52" y="392.66666666666669" width="93" height="17"/>
+                                            <accessibility key="accessibilityConfiguration" identifier="Performance title" label="Performance title"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="17" id="qdX-dO-tUu"/>
                                             </constraints>
@@ -235,6 +248,7 @@
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="instrument" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6dJ-ZF-dqm">
                                             <rect key="frame" x="275" y="392.66666666666669" width="87" height="22"/>
+                                            <accessibility key="accessibilityConfiguration" identifier="Instrument name" label="instrument name"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="22" id="bZ0-LP-Mio"/>
                                             </constraints>
@@ -247,18 +261,23 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="performername" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zm0-8q-7kP">
                                                     <rect key="frame" x="54" y="3" width="127" height="22"/>
+                                                    <accessibility key="accessibilityConfiguration" hint="displays performers stage name" identifier="Performer name" label="Performer name"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date and time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RbJ-Tv-ySY" userLabel="Date">
                                                     <rect key="frame" x="54" y="27.666666666666664" width="89" height="17"/>
+                                                    <accessibility key="accessibilityConfiguration" identifier="Time stamp" label="Time stamp"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cxR-qX-Aey">
                                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                    <accessibility key="accessibilityConfiguration" hint="Image of performers avatar" identifier="Performer avatar" label="Performer avatar">
+                                                        <bool key="isElement" value="YES"/>
+                                                    </accessibility>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="9Oe-de-hDH"/>
                                                         <constraint firstAttribute="width" constant="50" id="uUm-1F-ted"/>
@@ -286,6 +305,7 @@
                                         </view>
                                         <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JOw-B7-ob4">
                                             <rect key="frame" x="318" y="340.66666666666669" width="36" height="36"/>
+                                            <accessibility key="accessibilityConfiguration" hint="Replies to this performance" identifier="Reply button" label="Reply"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="36" id="YNc-to-Xg0"/>
                                                 <constraint firstAttribute="height" constant="36" id="tub-8c-s9b"/>
@@ -294,6 +314,7 @@
                                         </button>
                                         <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ske-ad-PVr">
                                             <rect key="frame" x="60" y="340.66666666666669" width="36" height="36"/>
+                                            <accessibility key="accessibilityConfiguration" hint="Plays this performance" identifier="Play button" label="Play"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="36" id="gNE-VS-NXh"/>
                                                 <constraint firstAttribute="width" constant="36" id="vNH-EB-538"/>
@@ -427,6 +448,6 @@
         <image name="remotejamsTabIcon" width="37" height="37"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="fbe-LH-T5z"/>
+        <segue reference="Hyh-JE-FSE"/>
     </inferredMetricsTieBreakers>
 </document>
