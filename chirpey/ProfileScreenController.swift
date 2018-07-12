@@ -138,6 +138,8 @@ class ProfileScreenController: UserPerfController {
     }
     
     @IBAction func deleteDataButtonTapped(_ sender: Any) {
+        print("Should open some kind of deletion screen")
+        UserProfile.shared.deleteRecords(really: false)
     }
     
 }

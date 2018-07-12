@@ -294,7 +294,6 @@
                                             <state key="normal" title="delete data"/>
                                             <connections>
                                                 <action selector="deleteDataButtonTapped:" destination="ILZ-VW-8SS" eventType="touchUpInside" id="0fo-Gz-XBh"/>
-                                                <action selector="openPrivacyPolicy:" destination="ILZ-VW-8SS" eventType="touchUpInside" id="All-GV-jQY"/>
                                             </connections>
                                         </button>
                                     </subviews>

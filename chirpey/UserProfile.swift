@@ -356,6 +356,46 @@ extension UserProfile {
             // perform query operation
             database.add(queryOperation)
         }
-        
     }
+    
+    /// Function to delete all records from the logged in user. WARNING DANGER!
+    func deleteRecords(really reallyVar: Bool) {
+        // Delete user information
+        if let userRecord = self.record {
+            // erase the userRecord
+            print("Should delete the user record")
+        }
+        
+        let database = container.publicCloudDatabase
+        let performerID = CKRecordID(recordName: "__defaultOwner__")
+        let userSearchPredicate = NSPredicate(format: "%K == %@", argumentArray: ["creatorUserRecordID", performerID])
+        
+        for recordType in [PerfCloudKeys.type] {
+            let query = CKQuery(recordType: recordType, predicate: userSearchPredicate)
+            let queryOperation = CKQueryOperation(query: query)
+            
+            queryOperation.recordFetchedBlock = { record in
+                // Actually delete the record:
+                print("Fake deleting:", record.recordID)
+                // Only uncomment next line when activating for reals.
+                if reallyVar {
+                    print("Really deleting:", record.recordID)
+                    // database.delete(withRecordID: record.recordID, completionHandler: nil)
+                }
+            }
+            
+            queryOperation.queryCompletionBlock = { (cursor, error) in
+                if let error = error {
+                    print("Deleting error:", error)
+                    return
+                } else {
+                    print("Deleter: Finished deleting records")
+                }
+            }
+            // perform query operation
+            database.add(queryOperation)
+        }
+    }
+    
+    
 }
