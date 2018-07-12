@@ -18,7 +18,7 @@ class MicrojamTabBarController: UITabBarController {
         print("TABVC: Loaded main tab bar.")
         // setupWorldTab()
         // setupJamTab() // FIXME test that this does actually work properly.
-        setupProfileTab()
+        setupProfileTab() // Set up the profile tab.
     }
     
     /// Setup the world tab
@@ -42,7 +42,7 @@ class MicrojamTabBarController: UITabBarController {
     }
     
     /// Setup profile screen
-    func setupProfileTab() {
+    func setupProfileTabStackVersion() {
         if let controller = UserSettingsViewController.storyboardInstance() {
             controller.tabBarItem = UITabBarItem(title: TabBarItemTitles.profileTab, image: #imageLiteral(resourceName: "profileTabIcon"), selectedImage: nil)
 //            controller.view.translatesAutoresizingMaskIntoConstraints = false
@@ -50,6 +50,18 @@ class MicrojamTabBarController: UITabBarController {
             viewControllers?.append(navigation)
         } else {
             print("TABVC: User Settings Tab could not be initialised.")
+        }
+    }
+    
+    /// Setup new profile screen
+    func setupProfileTab() {
+        if let controller = ProfileScreenController.storyboardInstance() {
+            controller.tabBarItem = UITabBarItem(title: TabBarItemTitles.profileTab, image: #imageLiteral(resourceName: "profileTabIcon"), selectedImage: nil)
+            //            controller.view.translatesAutoresizingMaskIntoConstraints = false
+            let navigation = UINavigationController(rootViewController: controller)
+            viewControllers?.append(navigation)
+        } else {
+            print("TABVC: Profile Tab could not be initialised.")
         }
     }
 
