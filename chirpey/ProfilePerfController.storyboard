@@ -230,14 +230,14 @@
                                             <rect key="frame" x="0.0" y="36" width="375" height="34"/>
                                             <state key="normal" title="more information at microjam.info"/>
                                             <connections>
-                                                <action selector="openMicrojamWebsite:" destination="ILZ-VW-8SS" eventType="touchUpInside" id="HZp-BA-tJs"/>
+                                                <action selector="openMicrojamWebsite:" destination="ILZ-VW-8SS" eventType="touchUpInside" id="RwN-Kf-BPR"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ONy-ge-E6F">
                                             <rect key="frame" x="0.0" y="70" width="375" height="30"/>
                                             <state key="normal" title="privacy policy"/>
                                             <connections>
-                                                <action selector="openPrivacyPolicy:" destination="ILZ-VW-8SS" eventType="touchUpInside" id="Th2-y9-VcB"/>
+                                                <action selector="openPrivacyPolicy:" destination="ILZ-VW-8SS" eventType="touchUpInside" id="HAs-7Y-tgW"/>
                                             </connections>
                                         </button>
                                     </subviews>

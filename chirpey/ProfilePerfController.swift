@@ -54,13 +54,20 @@ class ProfilePerfController: UserPerfController {
         return CGSize(width: collectionView.frame.width, height: 100)
     }
     
-    //    MARK: - Interface Builder Actions
+    //    MARK: - Interface Builder Actions for footer
     
+    /// Action to open the microjam website in the default browser
     @IBAction func openMicrojamWebsite(_ sender: Any) {
-//        if let url = URL(string: "https://microjam.info")
+        if let url = URL(string: "https://microjam.info") {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
     }
     
+    /// Action to open the privacy policy in the default browser
     @IBAction func openPrivacyPolicy(_ sender: Any) {
+        if let url = URL(string: "https://microjam.info/privacy") {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
     }
     
 }
