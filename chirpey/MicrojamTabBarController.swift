@@ -17,7 +17,7 @@ class MicrojamTabBarController: UITabBarController {
         super.viewDidLoad()
         print("TABVC: Loaded main tab bar.")
         // setupWorldTab()
-        // setupJamTab() // FIXME test that this does actually work properly.
+        setupJamTab() // FIXME test that this does actually work properly.
         setupProfileTab() // Set up the profile tab.
     }
     
@@ -36,6 +36,7 @@ class MicrojamTabBarController: UITabBarController {
             controller.tabBarItem = UITabBarItem(title: TabBarItemTitles.jamTab, image: #imageLiteral(resourceName: "localjamsTabIcon"), selectedImage: nil)
             let navigation = UINavigationController(rootViewController: controller)
             viewControllers?.append(navigation)
+            controller.title = "jam!"
         } else {
             print("TABVC: Jam tab could not be initialised.")
         }

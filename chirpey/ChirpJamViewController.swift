@@ -39,6 +39,8 @@ class ChirpJamViewController: UIViewController {
         }
     }
 
+    /// Button for accessing contextual jam menu
+    @IBOutlet weak var menuButton: UIButton!
     /// Button to clear the screen after a recording (rewind)
     @IBOutlet weak var rewindButton: UIButton!
     /// Button to enable recording

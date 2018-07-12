@@ -80,6 +80,13 @@ class WorldJamsTableViewController: UITableViewController {
             }
         }
     }
+    
+    /// Action when the plus bar item button is pressed.
+    @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
+        print("Add Button Pressed")
+        tabBarController?.selectedIndex = 1 // go to the second tab (jam!)
+    }
+    
 
     // MARK: - Table view data source
 
