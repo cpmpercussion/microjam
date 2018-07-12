@@ -25,7 +25,7 @@ Synthesis components can be found in the `synth` components and edited with [Pur
 
 1. Install [homebrew](https://brew.sh).
 2. Install Xcode 8 from Mac App Store.
-3. Install Pure Data (`brew cask install pd`) and git (`brew install git`) and [Cocoapods](https://cocoapods.org/) (`git install cocoapods`)
+3. Install Pure Data (`brew cask install pd`) and git (`brew install git`) and [Cocoapods](https://cocoapods.org/) (`brew install cocoapods`)
 4. Clone project `git clone ...`
 5. Install git submodules: `git submodule update --init --recursive`
 6. Open up the main project workspace: `open microjam.xcworkspace` (n.b., `microjam.xcodeproj` will not have access to pods so will not build).
