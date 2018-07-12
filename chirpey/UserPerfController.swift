@@ -154,6 +154,8 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
             // FIXME: do something to make the ChirpJamViewController playback only.
             // Push the VC to the navigation controller.
             navigationController?.pushViewController(controller, animated: true)
+            // Set the navigation bar title
+            controller.title = "View Performance"
         }
     }
     

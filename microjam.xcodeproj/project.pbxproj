@@ -1014,13 +1014,13 @@
 		560772DA1F206F10000D862D /* models */ = {
 			isa = PBXGroup;
 			children = (
-				562FDCA91F32D202000409C8 /* PerformerProfile.swift */,
-				56621B0C1DE39D33009B9AB6 /* ChirpPerformance.swift */,
 				4DEFCAE01F41C5D9007B7C34 /* BrowseCategory.swift */,
-				4DEFCAE21F41E8EB007B7C34 /* Filter.swift */,
-				562FDCAD1F3727DC000409C8 /* TouchRecord.swift */,
+				56621B0C1DE39D33009B9AB6 /* ChirpPerformance.swift */,
 				4DE5FAEF1F46E6470024F16B /* ChirpPlayer.swift */,
 				4DF23D0B1F4AF51F006033F8 /* ChirpRecorder.swift */,
+				4DEFCAE21F41E8EB007B7C34 /* Filter.swift */,
+				562FDCA91F32D202000409C8 /* PerformerProfile.swift */,
+				562FDCAD1F3727DC000409C8 /* TouchRecord.swift */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -1028,25 +1028,25 @@
 		560772DB1F206F1B000D862D /* views */ = {
 			isa = PBXGroup;
 			children = (
-				5669CA961DA7AAA6009EEC3B /* Main.storyboard */,
-				5669CA9B1DA7AAA6009EEC3B /* LaunchScreen.storyboard */,
-				5634AE9B1F3C500000DD5401 /* MicrojamTutorialViewController.storyboard */,
-				562FDCA71F316EAE000409C8 /* UserSettingsViewController.storyboard */,
-				56A0505420F5E1C600455FDF /* ProfileScreenController.storyboard */,
 				564AF3B220989E7B0050B541 /* ChirpJamViewController.storyboard */,
-				56621B121DE4A496009B9AB6 /* ChirpView.swift */,
-				5627B5F51F72F062007807E4 /* RoboJamView.swift */,
-				5613B31D1F3D9C380068ED5D /* ChirpRecordingView.swift */,
-				56621B161DEC27B0009B9AB6 /* PerformanceTableCell.swift */,
-				564AF3B420989FC80050B541 /* UserPerfTableViewCell.swift */,
+				5634AE9B1F3C500000DD5401 /* MicrojamTutorialViewController.storyboard */,
+				56A0505420F5E1C600455FDF /* ProfileScreenController.storyboard */,
+				562FDCA71F316EAE000409C8 /* UserSettingsViewController.storyboard */,
 				4DA6A95C1F3C89DB00CD7589 /* BrowseCell.swift */,
-				564AF3B82099EF830050B541 /* UserPerfCollectionViewCell.swift */,
-				564AF3B6209900990050B541 /* PerformerInfoHeader.swift */,
-				56A0505820F5F18700455FDF /* ProfileHeaderCollectionReusableView.swift */,
-				56A0505A20F5F1DE00455FDF /* ProfileFooterCollectionReusableView.swift */,
+				5613B31D1F3D9C380068ED5D /* ChirpRecordingView.swift */,
+				56621B121DE4A496009B9AB6 /* ChirpView.swift */,
 				4DD839761F3DF81D004D3E40 /* FilterView.swift */,
 				4DEFCADE1F41BDEF007B7C34 /* FilterViewCell.swift */,
 				566A70D9209C50C30066EFD4 /* NoAccountWarningStackView.swift */,
+				56621B161DEC27B0009B9AB6 /* PerformanceTableCell.swift */,
+				564AF3B6209900990050B541 /* PerformerInfoHeader.swift */,
+				56A0505A20F5F1DE00455FDF /* ProfileFooterCollectionReusableView.swift */,
+				56A0505820F5F18700455FDF /* ProfileHeaderCollectionReusableView.swift */,
+				5627B5F51F72F062007807E4 /* RoboJamView.swift */,
+				564AF3B82099EF830050B541 /* UserPerfCollectionViewCell.swift */,
+				564AF3B420989FC80050B541 /* UserPerfTableViewCell.swift */,
+				5669CA9B1DA7AAA6009EEC3B /* LaunchScreen.storyboard */,
+				5669CA961DA7AAA6009EEC3B /* Main.storyboard */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -1553,17 +1553,17 @@
 			isa = PBXGroup;
 			children = (
 				56C88E7E1DFEFD7200406BF0 /* microjam.entitlements */,
-				560772DD1F206F93000D862D /* stores */,
-				5688A5B420A08F5400F0BD1D /* tutorial-controllers */,
 				560772DC1F206F3B000D862D /* controllers */,
-				560772DB1F206F1B000D862D /* views */,
-				560772DA1F206F10000D862D /* models */,
-				5669CA8C1DA7AAA5009EEC3B /* microjam */,
-				5625E6B41F6874FE00AFE8BF /* synth */,
-				5669CAB11DA7AAA6009EEC3B /* microjamUITests */,
-				5669CA8B1DA7AAA5009EEC3B /* Products */,
-				A84F68A69B4F57615CCB0C2D /* Pods */,
 				37B82C17ADD34A6423FC8D08 /* Frameworks */,
+				5669CA8C1DA7AAA5009EEC3B /* microjam */,
+				5669CAB11DA7AAA6009EEC3B /* microjamUITests */,
+				560772DA1F206F10000D862D /* models */,
+				A84F68A69B4F57615CCB0C2D /* Pods */,
+				5669CA8B1DA7AAA5009EEC3B /* Products */,
+				560772DD1F206F93000D862D /* stores */,
+				5625E6B41F6874FE00AFE8BF /* synth */,
+				5688A5B420A08F5400F0BD1D /* tutorial-controllers */,
+				560772DB1F206F1B000D862D /* views */,
 			);
 			sourceTree = "<group>";
 		};
