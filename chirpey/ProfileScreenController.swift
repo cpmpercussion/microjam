@@ -1,5 +1,5 @@
 //
-//  ProfilePerfController.swift
+//  ProfileScreenController.swift
 //  microjam
 //
 //  Created by Charles Martin on 4/5/18.
@@ -10,14 +10,14 @@ import UIKit
 import CloudKit
 
 /// View Controller for the profile screen; subclass of UserPerfController to handle the flow layout and fetching of performances from the local user.
-class ProfilePerfController: UserPerfController {
+class ProfileScreenController: UserPerfController {
     /// Link to the users' profile data - not used right now, might be used later.
     let profile: PerformerProfile = UserProfile.shared.profile
     /// Initialises ViewController with separate storyboard with same name. Used to programmatically load the user settings screen in the tab bar controller.
-    static func storyboardInstance() -> ProfilePerfController? {
+    static func storyboardInstance() -> ProfileScreenController? {
         print("Profile Controller: Attempting to initialise from storyboard.")
-        let storyboard = UIStoryboard(name:"ProfilePerfController", bundle: nil)
-        let controller = storyboard.instantiateInitialViewController() as? ProfilePerfController
+        let storyboard = UIStoryboard(name:"ProfileScreenController", bundle: nil)
+        let controller = storyboard.instantiateInitialViewController() as? ProfileScreenController
         return controller
     }
     static let headerID = "ProfileSceneHeader"
@@ -37,13 +37,13 @@ class ProfilePerfController: UserPerfController {
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionElementKindSectionHeader:
-            headerView = (collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: ProfilePerfController.headerID, for: indexPath) as! ProfileHeaderCollectionReusableView)
+            headerView = (collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: ProfileScreenController.headerID, for: indexPath) as! ProfileHeaderCollectionReusableView)
             headerView?.updateUI() // update with latest information
             headerView?.stageNameField.delegate = self // become delegate for the stagename field.
             
             return headerView!
         case UICollectionElementKindSectionFooter:
-            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter, withReuseIdentifier: ProfilePerfController.footerID, for: indexPath) as! ProfileFooterCollectionReusableView
+            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter, withReuseIdentifier: ProfileScreenController.footerID, for: indexPath) as! ProfileFooterCollectionReusableView
             return footerView
         default:
             return UICollectionReusableView()
@@ -53,7 +53,7 @@ class ProfilePerfController: UserPerfController {
     
     /// Override of the footer function size to be 100 - just needs a few labels.
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: 120)
+        return CGSize(width: collectionView.frame.width, height: 200)
     }
     
     // MARK: - Life cycle
@@ -134,7 +134,7 @@ class ProfilePerfController: UserPerfController {
 
 /// Stage Name Chooser extension
 /// Adds functions to handle user changing the UITextField for their stage name on the settings screen.
-extension ProfilePerfController: UITextFieldDelegate {
+extension ProfileScreenController: UITextFieldDelegate {
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         return true
@@ -152,7 +152,7 @@ extension ProfilePerfController: UITextFieldDelegate {
 }
 
 /// Extensions to UserSettingsViewController to interact with an image picker and navigatino controller.
-extension ProfilePerfController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension ProfileScreenController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         defer {
