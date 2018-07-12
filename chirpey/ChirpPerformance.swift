@@ -14,7 +14,7 @@ import DateToolsSwift
 struct RoboJamPerfData {
     static let performer = "RoboJammer"
     static let instrument = "keys"
-    static let fakeLocation = CLLocation(latitude: 90.0, longitude: 45.0)
+    static let fakeLocation = CLLocation(latitude: 0, longitude: 0)
     static let color = "#F44708"
     static let bg = "#550527"
     static let creator = CKRecordID(recordName: "RoboJammer")
@@ -91,7 +91,7 @@ class ChirpPerformance : NSObject {
             let replyto = aDecoder.decodeObject(forKey: PropertyKey.replyToKey) as? String
             else {return nil}
 
-        let location = (aDecoder.decodeObject(forKey: "location") as? CLLocation) ?? CLLocation.init(latitude: 60, longitude: 11)
+        let location = (aDecoder.decodeObject(forKey: "location") as? CLLocation) ?? RoboJamPerfData.fakeLocation
 
         // print("PERF: Decoding", data.count, "notes:", performer, instrument)
 
@@ -161,7 +161,7 @@ class ChirpPerformance : NSObject {
         // FIXME: actually detect the proper location
         let perfColour : UIColor = UserProfile.shared.profile.jamColour
         let bgColour : UIColor = UserProfile.shared.profile.backgroundColour
-        self.init(data : [], date : Date(), performer : "", instrument : "", image : UIImage(), location: CLLocation.init(latitude: 90.0, longitude: 45.0),
+        self.init(data : [], date : Date(), performer : "", instrument : "", image : UIImage(), location: RoboJamPerfData.fakeLocation,
                   colour: perfColour.hexString(), background: bgColour.hexString(), replyto: "")
     }
 

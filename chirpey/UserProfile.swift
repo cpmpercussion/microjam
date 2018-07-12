@@ -305,3 +305,44 @@ extension UIImage {
         return scaleImage(toSize: newSize)
     }
 }
+
+/// Functions for exporting user profile data
+extension UserProfile {
+    
+    /// Utility function to print records.
+    func printRecords(_ records: [CKRecord]) {
+        for record in records {
+            for key in record.allKeys() {
+                let value = record[key]
+                print(key + " = " + (value?.description ?? ""))
+            }
+        }
+    }
+    
+    /// Function to export all of a user's records for their information.
+    func exportRecords() {
+        let database = container.publicCloudDatabase
+        let performerID = CKRecordID(recordName: "__defaultOwner__")
+        database.fetchAllRecordZones { zones, error in
+            guard let zones = zones, error == nil else {
+                print(error!)
+                return
+            }
+
+            // The true predicate represents a query for all records.
+            let userSearchPredicate = NSPredicate(format: "%K == %@", argumentArray: ["creatorUserRecordID", performerID])
+            for zone in zones {
+                for recordType in [PerfCloudKeys.type, UserCloudKeys.type] {
+                    let query = CKQuery(recordType: recordType, predicate: userSearchPredicate)
+                    database.perform(query, inZoneWith: zone.zoneID) { records, error in
+                        guard let records = records, error == nil else {
+                            print("An error occurred fetching these records.")
+                            return
+                        }
+                        self.printRecords(records)
+                    }
+                }
+            }
+        }
+    }
+}

@@ -124,6 +124,8 @@ class ProfileScreenController: UserPerfController {
     
     @IBAction func exportDataButtonTapped(_ sender: Any) {
         // FIXME: Fill this in.
+        print("Printing User Records")
+        UserProfile.shared.exportRecords()
     }
     
     @IBAction func deleteDataButtonTapped(_ sender: Any) {
