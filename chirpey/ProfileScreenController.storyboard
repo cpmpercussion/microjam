@@ -287,7 +287,6 @@
                                             <state key="normal" title="export data"/>
                                             <connections>
                                                 <action selector="exportDataButtonTapped:" destination="ILZ-VW-8SS" eventType="touchUpInside" id="DXY-rS-nBY"/>
-                                                <action selector="openPrivacyPolicy:" destination="ILZ-VW-8SS" eventType="touchUpInside" id="uYN-6G-Y5Q"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q8u-4V-X1c" userLabel="delete all account data">

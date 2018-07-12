@@ -59,10 +59,11 @@ class ProfileScreenController: UserPerfController {
     // MARK: - Life cycle
     
     /// Override of viewDidLoad in order to set the perfomerID to the local user.
-    override func viewDidLoad() {
+    @objc override func viewDidLoad() {
         super.viewDidLoad()
         performerID = CKRecordID(recordName: "__defaultOwner__")
-        // Set up the header.
+
+        NotificationCenter.default.addObserver(self, selector: #selector(exportDataReady), name: NSNotification.Name(rawValue: userDataExportReadyKey), object: nil)
     }
     
     /// When the view disappears, updates the profile on iCloud
@@ -126,6 +127,14 @@ class ProfileScreenController: UserPerfController {
         // FIXME: Fill this in.
         print("Printing User Records")
         UserProfile.shared.exportRecords()
+    }
+    
+    /// Called when export data is ready to be downloaded elsewhere.
+    @objc func exportDataReady() {
+        if let exportData = UserProfile.shared.exportedData {
+            let activityViewController = UIActivityViewController(activityItems: [exportData as NSString], applicationActivities: nil)
+            present(activityViewController, animated: true, completion: {})
+        }
     }
     
     @IBAction func deleteDataButtonTapped(_ sender: Any) {
