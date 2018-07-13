@@ -101,7 +101,7 @@ class PerformerProfileStore : NSObject {
             }
         }
     }
-    
+
 }
 
 // Check if UIImage is empty or not.

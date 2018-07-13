@@ -31,7 +31,6 @@ protocol ModelDelegate {
     func errorUpdating(error: NSError)
     /// Called when the `PerformanceStore` successfully updates from the cloud backend.
     func modelUpdated()
-
 }
 
 /**
@@ -292,7 +291,9 @@ extension PerformanceStore {
             } else {
                 print("PerformanceStore: finished loading perfs for", perfID)
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: performanceStoreUpdatedNotificationKey), object: nil)
-                self.delegate?.modelUpdated()
+                DispatchQueue.main.async {
+                    self.delegate?.modelUpdated()
+                }
             }
         }
         
@@ -395,7 +396,9 @@ extension PerformanceStore {
                 print("Deletion was successful, updating")
                 self.removePerformanceFromStore(withID: recordID)
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: performanceStoreUpdatedNotificationKey), object: nil)
-                self.delegate?.modelUpdated()
+                DispatchQueue.main.async {
+                    self.delegate?.modelUpdated()
+                }
             }
         })
     }
