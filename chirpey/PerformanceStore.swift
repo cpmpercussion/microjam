@@ -158,6 +158,46 @@ class PerformanceStore: NSObject {
         return output
     }
 
+
+
+    /// Add a list of performances into the currently stored performances.
+    func addToStored(performances: [ChirpPerformance]) {
+        //print("Store: Adding performances to stored list")
+        //self.storedPerformances = performances // update the stored performances // old
+        let titles = self.storedPerformances.map{$0.title()}
+        var countPerfsAdded = 0
+        for perf in performances {
+            self.performances[CKRecordID(recordName: perf.title())] = perf
+            if !titles.contains(perf.title()) {
+                self.storedPerformances.append(perf)
+                countPerfsAdded += 1
+            }
+        }
+        //print("Store: ", countPerfsAdded, " perfs added to stored performances.")
+        self.sortStoredPerformances()
+    }
+
+    /// Sorts the stored performances by date
+    func sortStoredPerformances() {
+        self.storedPerformances.sort(by: {(rec1: ChirpPerformance, rec2: ChirpPerformance) -> Bool in
+            rec1.date > rec2.date
+        })
+    }
+
+    /// Sorts a list of ChirpPerformances by date.
+    func sortPerformancesByDate(_ perfs : [ChirpPerformance]) -> [ChirpPerformance] {
+        return perfs.sorted(by: {(rec1: ChirpPerformance, rec2: ChirpPerformance) -> Bool in
+            rec1.date > rec2.date
+        })
+    }
+
+}
+
+// MARK: - Fetching Operations
+
+/// Extension for specific queries
+extension PerformanceStore {
+
     /// Refresh list of world jams from CloudKit and then update in world jam table view.
     @objc func fetchWorldJamsFromCloud() {
         print("Store: Attempting to fetch World Jams from Cloud.")
@@ -198,23 +238,6 @@ class PerformanceStore: NSObject {
         publicDB.add(operation) // perform the operation.
         // TODO: Define a more sensible way of downloading the performances
     }
-
-    /// Add a list of performances into the currently stored performances.
-    func addToStored(performances: [ChirpPerformance]) {
-        //print("Store: Adding performances to stored list")
-        //self.storedPerformances = performances // update the stored performances // old
-        let titles = self.storedPerformances.map{$0.title()}
-        var countPerfsAdded = 0
-        for perf in performances {
-            self.performances[CKRecordID(recordName: perf.title())] = perf
-            if !titles.contains(perf.title()) {
-                self.storedPerformances.append(perf)
-                countPerfsAdded += 1
-            }
-        }
-        //print("Store: ", countPerfsAdded, " perfs added to stored performances.")
-        self.sortStoredPerformances()
-    }
     
     /// Return a performance for a given CKRecordID
     func getPerformance(forID recordID: CKRecordID) -> ChirpPerformance? {
@@ -245,25 +268,6 @@ class PerformanceStore: NSObject {
             }
         }
     }
-    
-    /// Sorts the stored performances by date
-    func sortStoredPerformances() {
-        self.storedPerformances.sort(by: {(rec1: ChirpPerformance, rec2: ChirpPerformance) -> Bool in
-            rec1.date > rec2.date
-        })
-    }
-    
-    /// Sorts a list of ChirpPerformances by date.
-    func sortPerformancesByDate(_ perfs : [ChirpPerformance]) -> [ChirpPerformance] {
-        return perfs.sorted(by: {(rec1: ChirpPerformance, rec2: ChirpPerformance) -> Bool in
-            rec1.date > rec2.date
-        })
-    }
-    
-}
-
-/// Extension for specific queries
-extension PerformanceStore {
     
     /// Fetch performances by a given performer from CloudKit
     func fetchPerformances(byPerformer perfID: CKRecordID) {
@@ -317,6 +321,8 @@ extension PerformanceStore {
     
 }
 
+// MARK: - Uploading
+
 /// Extension for uploading functionality
 extension PerformanceStore {
     
@@ -360,6 +366,42 @@ extension PerformanceStore {
         })
     }
 }
+
+// MARK: - Deleting
+
+extension PerformanceStore {
+
+    /// Removes a performances from the local store by CKRecordID
+    func removePerformanceFromStore(withID recordID: CKRecordID) {
+        // Remove from the dictionary version
+        performances.removeValue(forKey: recordID)
+        // Remove from the array version
+        if let index = storedPerformances.index(where: { (performance) -> Bool in
+            performance.performanceID == recordID
+        }) {
+            storedPerformances.remove(at: index)
+        }
+    }
+
+    /// Delete a performance from the database and local store by CKRecord ID. Only works for performances owned by the user.
+    func deleteUserPerformance(withID recordID: CKRecordID) {
+        print("Starting Deletion Operation.")
+        // remove from database
+        database.delete(withRecordID: recordID, completionHandler: { (record, error) in
+            print("Deletion operation complete")
+            if let error = error {
+                print("Deletion failed:", error)
+            } else {
+                print("Deletion was successful, updating")
+                self.removePerformanceFromStore(withID: recordID)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: performanceStoreUpdatedNotificationKey), object: nil)
+                self.delegate?.modelUpdated()
+            }
+        })
+    }
+}
+
+// MARK: - Parsing
 
 /// Extension for Parsing Methods
 extension PerformanceStore {
