@@ -212,6 +212,9 @@ class ChirpJamViewController: UIViewController {
             }
         }
 
+        // Hide menu button!!
+        menuButton.isHidden = true
+        // FIXME: menu button is hidden for now, maybe unhide later when figured out?
         // Menu Dropdown initialisation
         menuDropDown.anchorView = menuButton
         menuDropDown.direction = .bottom
