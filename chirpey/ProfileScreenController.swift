@@ -138,8 +138,10 @@ class ProfileScreenController: UserPerfController {
     }
     
     @IBAction func deleteDataButtonTapped(_ sender: Any) {
-        print("Should open some kind of deletion screen")
-        UserProfile.shared.deleteRecords(really: false)
+        //        UserProfile.shared.deleteRecords(really: false)
+        let alert = UIAlertController(title: "Deleting Data", message: "You can delete your performances by tapping the menu for each performance above. None of your personal data is stored by microjam.", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
 }
