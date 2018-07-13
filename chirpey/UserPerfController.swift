@@ -142,6 +142,7 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
         cell.performanceImageView.image = performance.image
         cell.playButton.addTarget(self, action: #selector(playButtonPressed), for: .touchUpInside)
         cell.replyButton.addTarget(self, action: #selector(replyButtonPressed), for: .touchUpInside)
+        cell.menuButton.addTarget(self, action: #selector(menuButtonPressed), for: .touchUpInside)
         return cell
     }
     
@@ -166,53 +167,42 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
         }
     }
     
-    @objc func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer) {
-        if gestureRecognizer.state != UIGestureRecognizerState.ended {
-//        if gestureRecognizer != UIGestureRecognizerState.begin {
-            // Exit early unless the gesture is ended (touch released)
-            return
-        }
-        // Delete selected Cell
-        let point = gestureRecognizer.location(in: self.collectionView)
-        if let indexPath = self.collectionView?.indexPathForItem(at: point),
-            let cell = self.collectionView?.cellForItem(at: indexPath) as? UserPerfCollectionViewCell {
-
-            print("Detail menu for performance. Belongs to user:", cell.performance?.creatorID == UserProfile.shared.record?.creatorUserRecordID)
-
-            // Make an alert controller
-            let alertActionCell = UIAlertController(title: "Options", message: nil, preferredStyle: .actionSheet)
-
-            let shareAction = UIAlertAction(title: "Share", style: .default, handler: {action in
-                print("Sharing the cell image") // just image
-                if let image = cell.performance?.image {
-                    let activityViewController = UIActivityViewController(activityItems: [image] , applicationActivities: nil)
-                    activityViewController.popoverPresentationController?.sourceView = self.view
-                    self.present(activityViewController, animated: true, completion: nil)
-                }
-            })
-
-            // delete action
-            let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: { action in
-                // Do the deleting.
-                print("Cell ID was:", cell.performance?.performanceID ?? "not found!")
-                if let recID = cell.performance?.performanceID {
-                    self.performanceStore.deleteUserPerformance(withID: recID)
-                }
-                print("Cell Removed")
-                self.collectionView?.reloadData()
-            })
-            // Cancel Action
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
-                print("Cancel actionsheet")
-            })
-            alertActionCell.addAction(shareAction)
-            if cell.performance?.creatorID == UserProfile.shared.record?.creatorUserRecordID {
-                // Only add delete if it relates to the present user.
-                alertActionCell.addAction(deleteAction)
+    func openContextualMenu(forCell cell: UserPerfCollectionViewCell) {
+        print("Detail menu for performance. Belongs to user:", cell.performance?.creatorID == UserProfile.shared.record?.creatorUserRecordID)
+        // Make an alert controller
+        let titleString = cell.performance?.humanTitle() ?? "Options"
+        let alertActionCell = UIAlertController(title: titleString, message: nil, preferredStyle: .actionSheet)
+        
+        let shareAction = UIAlertAction(title: "Share", style: .default, handler: {action in
+            print("Sharing the cell image") // just image
+            if let image = cell.performance?.image {
+                let activityViewController = UIActivityViewController(activityItems: [image] , applicationActivities: nil)
+                activityViewController.popoverPresentationController?.sourceView = self.view
+                self.present(activityViewController, animated: true, completion: nil)
             }
-            alertActionCell.addAction(cancelAction)
-            self.present(alertActionCell, animated: true, completion: nil)
+        })
+        
+        // delete action
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: { action in
+            // Do the deleting.
+            print("Cell ID was:", cell.performance?.performanceID ?? "not found!")
+            if let recID = cell.performance?.performanceID {
+                self.performanceStore.deleteUserPerformance(withID: recID)
+            }
+            print("Cell Removed")
+            self.collectionView?.reloadData()
+        })
+        // Cancel Action
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+            print("Cancel actionsheet")
+        })
+        alertActionCell.addAction(shareAction)
+        if cell.performance?.creatorID == UserProfile.shared.record?.creatorUserRecordID {
+            // Only add delete if it relates to the present user.
+            alertActionCell.addAction(deleteAction)
         }
+        alertActionCell.addAction(cancelAction)
+        self.present(alertActionCell, animated: true, completion: nil)
     }
 
     /// Stop currently playing cell
@@ -254,6 +244,24 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
             controller.recorder = recorder
             // Push the VC to the navigation controller.
             navigationController?.pushViewController(controller, animated: true)
+        }
+    }
+    
+    // Action if the menu button is pressed in a cell
+    @objc func menuButtonPressed(sender: UIButton) {
+        let indexPath = IndexPath(row: sender.tag, section: 0)
+        if let cell = collectionView?.cellForItem(at: indexPath) as? UserPerfCollectionViewCell {
+            openContextualMenu(forCell: cell)
+        }
+    }
+    
+    @objc func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer) {
+        if gestureRecognizer.state != UIGestureRecognizerState.ended {return}
+        // Delete selected Cell
+        let point = gestureRecognizer.location(in: self.collectionView)
+        if let indexPath = self.collectionView?.indexPathForItem(at: point),
+            let cell = self.collectionView?.cellForItem(at: indexPath) as? UserPerfCollectionViewCell {
+            openContextualMenu(forCell: cell)
         }
     }
 

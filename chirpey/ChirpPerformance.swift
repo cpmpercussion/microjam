@@ -188,6 +188,14 @@ class ChirpPerformance : NSObject {
         return String(format: "perf-%@-%@-%@", performer, instrument, dateString)
     }
     
+    /// A human-readable title for a performance, for use in menus.
+    func humanTitle() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "h:mm a, d MMM yyyy"
+        let dateString = formatter.string(from: date)
+        return String(format: "%@, %@, %@", performer, instrument, dateString)
+    }
+    
     /// Writes a string to the documents directory with a title formed from the current date. Returns the filepath.
     func writeToFile(csv : String) -> String {
         var filePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]

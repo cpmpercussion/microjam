@@ -46,6 +46,15 @@ class UserPerfCollectionViewCell: UICollectionViewCell {
         button.tintColor = UIColor.darkGray
         return button
     }()
+    let menuButton : UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(#imageLiteral(resourceName: "settingsTabIcon"), for: .normal)
+        button.setTitleColor(UIColor(white: 0.1, alpha: 1), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 10
+        button.tintColor = UIColor.darkGray
+        return button
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -68,6 +77,7 @@ class UserPerfCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(performanceImageView)
         contentView.addSubview(playButton)
         contentView.addSubview(replyButton)
+        contentView.addSubview(menuButton)
         
         // Contraints for the performance image
         performanceImageView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: imageMargin).isActive = true
@@ -88,6 +98,13 @@ class UserPerfCollectionViewCell: UICollectionViewCell {
         replyButton.rightAnchor.constraint(equalTo: performanceImageView.rightAnchor, constant: -(listenButtonMargin)).isActive = true
         replyButton.widthAnchor.constraint(equalToConstant: listenButtonWidth).isActive = true
         replyButton.heightAnchor.constraint(equalTo: playButton.widthAnchor).isActive = true
+        
+        // Constraints for the menu button
+        menuButton.layer.cornerRadius = listenButtonWidth / 2
+        menuButton.topAnchor.constraint(equalTo: performanceImageView.topAnchor, constant: listenButtonMargin).isActive = true
+        menuButton.rightAnchor.constraint(equalTo: performanceImageView.rightAnchor, constant: -(listenButtonMargin)).isActive = true
+        menuButton.widthAnchor.constraint(equalToConstant: listenButtonWidth).isActive = true
+        menuButton.heightAnchor.constraint(equalToConstant: listenButtonWidth).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {
