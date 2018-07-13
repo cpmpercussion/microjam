@@ -55,7 +55,11 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qWh-rf-YcZ">
                                                 <rect key="frame" x="306" y="6.5" width="37" height="37"/>
+                                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" image="settingsTabIcon"/>
+                                                <connections>
+                                                    <action selector="menuButtonTapped:" destination="biZ-h3-m2K" eventType="touchUpInside" id="hnL-vF-0DW"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>

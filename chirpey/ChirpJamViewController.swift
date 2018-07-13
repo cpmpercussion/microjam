@@ -29,6 +29,8 @@ class ChirpJamViewController: UIViewController {
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     /// Dropdown menu for selecting SoundScheme
     let soundSchemeDropDown = DropDown() // dropdown menu for soundscheme
+    /// Dropdown menu for deletion, sharing, export, etc.
+    let menuDropDown = DropDown()
 
     /// Image view for storing avatar image
     @IBOutlet weak var avatarImageView: UIImageView! {
@@ -209,6 +211,23 @@ class ChirpJamViewController: UIViewController {
                 self.instrumentChanged()
             }
         }
+
+        // Menu Dropdown initialisation
+        menuDropDown.anchorView = menuButton
+        menuDropDown.direction = .bottom
+        menuDropDown.dataSource = ["share","export","delete"]
+        menuDropDown.selectionAction = {(index: Int, item: String) -> Void in
+            switch item {
+            case "share":
+                self.sharePerformance()
+            case "export":
+                self.exportPerformance()
+            case "delete":
+                self.deletePerformance()
+            default:
+                break
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -340,12 +359,10 @@ class ChirpJamViewController: UIViewController {
             if !recorder.recordingEnabled {
                 // recording was not enabled.
                 print("JAMVC: Record pressed; enabled.")
-
                 recEnableButton.tintColor = UIColor.red
                 recorder.recordingEnabled = true
             } else {
                 print("JAMVC: Record pressed; disabled.")
-
                 recEnableButton.tintColor = UIColor.red.darkerColor
                 recorder.recordingEnabled = false
             }
@@ -388,7 +405,13 @@ class ChirpJamViewController: UIViewController {
     /// IBAction for the SoundScheme button. Opens a dropdown menu for selection when in "new" state.
     @IBAction func soundSchemeTapped(_ sender: Any) {
         // TODO: should there be some kind of change in loaded mode? Like changing the user's layer sound, or adjusting the previous performers' sound?
+        // IF new then, allow dropdown to show.
         soundSchemeDropDown.show()
+    }
+
+    /// Action triggered when the menu button is tapped. Opens a dropdown menu for selection
+    @IBAction func menuButtonTapped(_ sender: UIButton) {
+        menuDropDown.show()
     }
 
     /// IBAction for the reply button. // shouldn't be currently used.
@@ -522,6 +545,38 @@ class ChirpJamViewController: UIViewController {
             }
         }
     }
+}
+
+// MARK: Menu button action methods
+
+extension ChirpJamViewController {
+
+    func exportPerformance() {
+
+    }
+
+    func sharePerformance() {
+
+    }
+
+    func deletePerformance() {
+        print("Attempt to delete a performance")
+        if let recorder = recorder {
+            if let creator = recorder.recordingView.performance?.creatorID {
+                print("rec view:", creator)
+            }
+            if let perfID = recorder.recordingView.performance?.performanceID {
+                print("rec view:", perfID)
+            }
+            if let creator = recorder.chirpViews.first?.performance?.creatorID {
+                print("perf view:",creator)
+            }
+            if let perfID = recorder.recordingView.performance?.performanceID {
+                print("perf view:", perfID)
+            }
+        }
+    }
+
 }
 
 // MARK: Player delegate methods
