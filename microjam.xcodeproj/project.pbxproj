@@ -1028,6 +1028,8 @@
 		560772DB1F206F1B000D862D /* views */ = {
 			isa = PBXGroup;
 			children = (
+				5669CA961DA7AAA6009EEC3B /* Main.storyboard */,
+				5669CA9B1DA7AAA6009EEC3B /* LaunchScreen.storyboard */,
 				564AF3B220989E7B0050B541 /* ChirpJamViewController.storyboard */,
 				5634AE9B1F3C500000DD5401 /* MicrojamTutorialViewController.storyboard */,
 				56A0505420F5E1C600455FDF /* ProfileScreenController.storyboard */,
@@ -1044,8 +1046,6 @@
 				5627B5F51F72F062007807E4 /* RoboJamView.swift */,
 				564AF3B82099EF830050B541 /* UserPerfCollectionViewCell.swift */,
 				564AF3B420989FC80050B541 /* UserPerfTableViewCell.swift */,
-				5669CA9B1DA7AAA6009EEC3B /* LaunchScreen.storyboard */,
-				5669CA961DA7AAA6009EEC3B /* Main.storyboard */,
 			);
 			name = views;
 			sourceTree = "<group>";
