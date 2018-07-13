@@ -53,7 +53,7 @@ class ChirpView: UIImageView {
     /// Convenience Initialiser only used when loading performances for playback only. Touch is disabled!
     convenience init(with frame: CGRect, andPerformance perf: ChirpPerformance){
         self.init(frame: frame)
-        print("ChirpView: Loading programmatically with frame: ", self.frame)
+        //        print("ChirpView: Loading programmatically with frame: ", self.frame) // runs too many times to be helpful...
         isMultipleTouchEnabled = false // multitouch is disabled!
         isUserInteractionEnabled = false // user-interaction is disabled!
         loadPerformance(perf)
@@ -64,7 +64,7 @@ class ChirpView: UIImageView {
     
     /// load a new performance in the ChirpView for playback
     func loadPerformance(_ newPerf: ChirpPerformance) {
-        print("ChirpView: Loading existing performance")
+        // print("ChirpView: Loading existing performance") // Runs too many times to be helpful...
         performance = newPerf
         image = newPerf.image
         playbackColour = newPerf.colour.brighterColor.cgColor
