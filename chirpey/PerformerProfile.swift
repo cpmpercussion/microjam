@@ -11,8 +11,6 @@ import CloudKit
 import Avatar
 import SwiftRandom
 
-
-
 /// Storage for performer profile data (either for local user or other users).
 class PerformerProfile: NSObject, NSCoding {
     /// Performer avatar image
@@ -25,6 +23,8 @@ class PerformerProfile: NSObject, NSCoding {
     var backgroundColour : UIColor
     /// Performer's favourite soundscheme key
     var soundScheme : Int64
+    /// Stores whether the profile was fetched this session - default value is false.
+    var fetchedThisSession : Bool = false
     
     /// Main initialiser
     init (avatar: UIImage, stageName: String, jamColour: UIColor, backgroundColour: UIColor, soundScheme: Int64) {
@@ -40,7 +40,7 @@ class PerformerProfile: NSObject, NSCoding {
         self.init(avatar: avatar, stageName: stageName, jamColour: UIColor(jamHex, defaultColor: UIColor.blue), backgroundColour: UIColor(backgroundHex), soundScheme: soundScheme)
     }
     
-    /// Initialiser for a blank performance
+    /// Initialiser for a blank profile
     convenience override init() {
         self.init(avatar: PerformerProfile.randomUserAvatar() ?? UIImage(),
                   stageName: PerformerProfile.randomPerformerName(),
@@ -137,7 +137,7 @@ extension PerformerProfile {
     
     static func randomUserAvatar() -> UIImage? {
         let size = CGSize(width: UserProfile.avatarWidth, height: UserProfile.avatarWidth)
-        return Avatar.generate(for: size, scale: 20) // ?? UIImage()
+        return Avatar.generate(for: size, scale: 20)
     }
     
     static func randomJamColour() -> UIColor {
