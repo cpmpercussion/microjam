@@ -153,15 +153,8 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
         // Get the cell, performance and a ChirpJamVC
         if let cell = collectionView.cellForItem(at: indexPath) as? UserPerfCollectionViewCell,
             let topPerformance = cell.performance {
-            // FIXME: Use a different method of ChirpJamViewController here, not sure which one.
-            let controller = ChirpJamViewController.instantiateJamController()
-            // Instantiate a ChirpJamViewController from storyboard
-            // Make a ChirpRecorder for the reply and set to the new ChirpJamViewController
             let allPerformances = performanceStore.getAllReplies(forPerformance: topPerformance)
-            let recorder = ChirpRecorder(withArrayOfPerformances: allPerformances) // FIXME: This makes it a recorder, only want playback here.
-            controller.recorder = recorder
-            // FIXME: do something to make the ChirpJamViewController playback only.
-            // Push the VC to the navigation controller.
+            let controller = ChirpJamViewController.instantiateController(forArrayOfPerformances: allPerformances)
             navigationController?.pushViewController(controller, animated: true)
             // Set the navigation bar title
             controller.title = "View Performance"
@@ -237,9 +230,10 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
         let indexPath = IndexPath(row: sender.tag, section: 0)
         if let cell = collectionView?.cellForItem(at: indexPath) as? UserPerfCollectionViewCell,
             let player = cell.player {
-            let controller = ChirpJamViewController.instantiateController(forPlayer: player)
+            let controller = ChirpJamViewController.instantiateReplyController(forPlayer: player)
             // Push the VC to the navigation controller.
             navigationController?.pushViewController(controller, animated: true)
+            controller.title = "Reply"
         }
     }
     
