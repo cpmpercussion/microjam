@@ -31,6 +31,8 @@ class ChirpJamViewController: UIViewController {
     let soundSchemeDropDown = DropDown() // dropdown menu for soundscheme
     /// Dropdown menu for deletion, sharing, export, etc.
     let menuDropDown = DropDown()
+    /// Header Profile to be displayed at the top of the screen
+    var headerProfile : PerformerProfile?
 
     /// Image view for storing avatar image
     @IBOutlet weak var avatarImageView: UIImageView! {
@@ -263,8 +265,14 @@ class ChirpJamViewController: UIViewController {
         newRecordingView()
         
         // Setup user data
-        performerLabel.text = recorder!.recordingView.performance!.performer // set performer label to current user.
-        avatarImageView.image = UserProfile.shared.profile.avatar // set performer avatar to be current user.
+        if let headerProfile = headerProfile {
+            performerLabel.text = headerProfile.stageName
+            avatarImageView.image = headerProfile.avatar
+        } else {
+            print("JAMVC: Failed to load headerProfile")
+            performerLabel.text = UserProfile.shared.profile.stageName // set performer label to current user.
+            avatarImageView.image = UserProfile.shared.profile.avatar // set performer avatar to be current user.
+        }
         
         // Add constraints for chirpViewContainer's subviews.
         for view in chirpViewContainer.subviews {
@@ -748,20 +756,31 @@ extension UIButton {
 /// Extension for static instantiation functions. Three options: jam, playback, and reply.
 extension ChirpJamViewController {
     
-    /// Instantiates a ChirpJamViewController from the storyboard and sets up to play back a given ChirpPlayer.
-    static func instantiateController(forPlayer player: ChirpPlayer) -> ChirpJamViewController {
+    enum JamViewMode {
+        case jamming
+        case replying
+        case playing
+    }
+    
+    static func instantiateController(forArrayOfPerformances performanceArray: [ChirpPerformance]) -> ChirpJamViewController {
         // Instantiate a ChirpJamViewController from storyboard
         print("JAMVC: Initialising a playback controller from storyboard.")
         let storyboard = UIStoryboard(name: "ChirpJamViewController", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "userPerfChirpJamController") as! ChirpJamViewController
         
         // Make a ChirpRecorder for the reply and set to the new ChirpJamViewController
-        let recorder = ChirpRecorder(frame: CGRect.zero, player: player)
+        let recorder = ChirpRecorder(withArrayOfPerformances: performanceArray) // FIXME: This makes it a recorder, only want playback here.
         controller.recorder = recorder
         
+        if let playbackPerformerProfileID = performanceArray.first?.creatorID,
+            let playbackPerformerProfile = PerformerProfileStore.shared.getProfile(forID: playbackPerformerProfileID) {
+            controller.headerProfile = playbackPerformerProfile
+            print("JAMVC: Setting header profile to: \(playbackPerformerProfile)")
+        }
         // Setup the interface following "willAppear"
-
+        //controller.mode = JamViewMode.playing
         return controller
+        // TODO: still need to set the instrument label to the correct instrument.
     }
     
     static func instantiateReplyController(forPlayer player: ChirpPlayer) -> ChirpJamViewController {
@@ -775,7 +794,8 @@ extension ChirpJamViewController {
         controller.recorder = recorder
         
         // Setup the interface following "willAppear"
-        
+        //controller.mode = JamViewMode.replying
+        controller.headerProfile = UserProfile.shared.profile
         return controller
     }
     
@@ -786,7 +806,8 @@ extension ChirpJamViewController {
         let controller = storyboard.instantiateViewController(withIdentifier: "userPerfChirpJamController") as! ChirpJamViewController
         
         // do more setup from "willAppear" function
-        
+        //controller.mode = JamViewMode.jamming
+        controller.headerProfile = UserProfile.shared.profile
         return controller
     }
 }
