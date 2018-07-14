@@ -48,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
-        
+        saveData()
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -66,6 +66,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
             perform(#selector(presentTutorial), with: nil, afterDelay: 0)
         }
     }
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        print("AD: Application will terminate, saving data.")
+        saveData()
+    }
+    
+    /// Save the loaded data to a file for quick reloading later.
+    func saveData() {
+        print("AD: Saving all local data")
+        performanceStore.savePerformances() // save locally stored performances.
+        userProfile.saveProfile() // save local copy of the user's profile.
+        profileStore.saveProfiles() // save local copy of performer profiles.
+    }
 
     /// Presents the MicrojamTutorialViewController to new users.
     @objc func presentTutorial() {
@@ -80,11 +93,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
         }
     }
     
-    func applicationWillTerminate(_ application: UIApplication) {
-        print("AD: Application will terminate, saving data.")
-        performanceStore.savePerformances() // save locally stored performances.
-        userProfile.saveProfile() // save local copy of performance profile.
-        profileStore.saveProfiles() // save local copy of performer profiles.
-    }
+
 
 }

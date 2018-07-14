@@ -66,9 +66,9 @@ class PerformanceStore: NSObject {
         if let savedPerformances = loadPerformances() {
             storedPerformances += savedPerformances
             sortStoredPerformances()
-            NSLog("Store: Successfully loaded", storedPerformances.count, "performances")
+            NSLog("PerformanceStore: Successfully loaded", storedPerformances.count, "performances")
         } else {
-            NSLog("Store: Failed to load performances")
+            NSLog("PerformanceStore: Failed to load performances")
         }
         feed = generateFeed()
         print("PerformanceStore: Feed has \(feed.count) items.")
@@ -83,12 +83,12 @@ class PerformanceStore: NSObject {
     
     /// Load Profiles from file
     private static func loadPerformanceDict() -> [CKRecordID: ChirpPerformance] {
-        print("Loading perf dict...")
+        print("Loading performance dict...")
         let result = NSKeyedUnarchiver.unarchiveObject(withFile: PerformanceStore.perfDictURL.path)
         if let loadedPerformances = result as? [CKRecordID: ChirpPerformance] {
             return loadedPerformances
         } else {
-            print("PerformerProfileStore: Failed to load perfs.")
+            print("PerformanceStore: Failed to load perfs.")
             return [CKRecordID: ChirpPerformance]()
         }
     }
