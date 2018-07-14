@@ -190,17 +190,15 @@ extension ChirpView {
         }
     }
     
-    /// Opens a Pd file given the filename
+    /// Opens a Pd file given the filename (only if the file is not already open)
     func openPd(file fileToOpen: String) {
         if openPatchName != fileToOpen {
-            print("ChirpView: Opening Pd File:", fileToOpen)
             closePdFile()
             openPatch = PdFile.openNamed(fileToOpen, path: Bundle.main.bundlePath) as? PdFile
             openPatchName = fileToOpen
             openPatchDollarZero = openPatch?.dollarZero
-        } else {
-            print("ChirpView:", fileToOpen, "was already open.")
         }
+        // Only opens it if it's not already open.
     }
     
     /// Closes whatever Pd file is open.
