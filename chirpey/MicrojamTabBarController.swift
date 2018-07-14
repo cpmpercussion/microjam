@@ -32,14 +32,11 @@ class MicrojamTabBarController: UITabBarController {
     
     /// Setup the jam screen
     func setupJamTab() {
-        if let controller = ChirpJamViewController.storyboardInstance() {
-            controller.tabBarItem = UITabBarItem(title: TabBarItemTitles.jamTab, image: #imageLiteral(resourceName: "localjamsTabIcon"), selectedImage: nil)
-            let navigation = UINavigationController(rootViewController: controller)
-            viewControllers?.append(navigation)
-            controller.title = "jam!"
-        } else {
-            print("TABVC: Jam tab could not be initialised.")
-        }
+        let controller = ChirpJamViewController.instantiateJamController()
+        controller.tabBarItem = UITabBarItem(title: TabBarItemTitles.jamTab, image: #imageLiteral(resourceName: "localjamsTabIcon"), selectedImage: nil)
+        let navigation = UINavigationController(rootViewController: controller)
+        viewControllers?.append(navigation)
+        controller.title = "jam!"
     }
     
     /// Setup profile screen

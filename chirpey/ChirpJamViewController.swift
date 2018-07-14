@@ -70,16 +70,6 @@ class ChirpJamViewController: UIViewController {
     /// Roboplay button; requests an AI response performance
     @IBOutlet weak var roboplayButton: UIButton!
     
-    /// Initialises ViewController directly from the storyboard with the same name. Used to instantiate programmatically.
-    static func storyboardInstance() -> ChirpJamViewController? {
-        print("JAMVC: Attempting to initialise from storyboard.")
-        let storyboard = UIStoryboard(name:"ChirpJamViewController", bundle: nil)
-        //        let controller = storyboard.instantiateViewController(withIdentifier: "chirpJamController") as? ChirpJamViewController
-        let controller = storyboard.instantiateViewController(withIdentifier: "userPerfChirpJamController") as? ChirpJamViewController
-        //        let controller = storyboard.instantiateInitialViewController() as? ChirpJamViewController
-        return controller
-    }
-
     // MARK: - Navigation
     
     /// Prepare to segue - this is where the Jam screen actually saves performances! So it's an important check.
@@ -254,8 +244,6 @@ class ChirpJamViewController: UIViewController {
                 }
             }
             rewindButton.isEnabled = true
-            
-            // enable the cancel button
             cancelPerformanceButton.isEnabled = true
             
         } else {
@@ -754,5 +742,51 @@ extension UIButton {
     func stopSwirling() {
         layer.removeAnimation(forKey: "swirl_x")
         layer.removeAnimation(forKey: "swirl_y")
+    }
+}
+
+/// Extension for static instantiation functions. Three options: jam, playback, and reply.
+extension ChirpJamViewController {
+    
+    /// Instantiates a ChirpJamViewController from the storyboard and sets up to play back a given ChirpPlayer.
+    static func instantiateController(forPlayer player: ChirpPlayer) -> ChirpJamViewController {
+        // Instantiate a ChirpJamViewController from storyboard
+        print("JAMVC: Initialising a playback controller from storyboard.")
+        let storyboard = UIStoryboard(name: "ChirpJamViewController", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "userPerfChirpJamController") as! ChirpJamViewController
+        
+        // Make a ChirpRecorder for the reply and set to the new ChirpJamViewController
+        let recorder = ChirpRecorder(frame: CGRect.zero, player: player)
+        controller.recorder = recorder
+        
+        // Setup the interface following "willAppear"
+
+        return controller
+    }
+    
+    static func instantiateReplyController(forPlayer player: ChirpPlayer) -> ChirpJamViewController {
+        // Instantiate a ChirpJamViewController from storyboard
+        print("JAMVC: Initialising a reply controller from storyboard.")
+        let storyboard = UIStoryboard(name: "ChirpJamViewController", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "userPerfChirpJamController") as! ChirpJamViewController
+        
+        // Make a ChirpRecorder for the reply and set to the new ChirpJamViewController
+        let recorder = ChirpRecorder(frame: CGRect.zero, player: player)
+        controller.recorder = recorder
+        
+        // Setup the interface following "willAppear"
+        
+        return controller
+    }
+    
+    /// Instantiate a jam controller.
+    static func instantiateJamController() -> ChirpJamViewController {
+        print("JAMVC: Initialising a jam controller from storyboard.")
+        let storyboard = UIStoryboard(name:"ChirpJamViewController", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "userPerfChirpJamController") as! ChirpJamViewController
+        
+        // do more setup from "willAppear" function
+        
+        return controller
     }
 }

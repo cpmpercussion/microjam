@@ -72,12 +72,12 @@ class WorldJamsTableViewController: UITableViewController {
                 current.playButton.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal)
                 currentlyPlaying = nil
             }
-            if let controller = ChirpJamViewController.storyboardInstance() {
-                let recorder = ChirpRecorder(frame: CGRect.zero, player: player)
-                controller.recorder = recorder
-                navigationController?.pushViewController(controller, animated: true)
-                controller.title = "Reply" // set the navigation bar title.
-            }
+            // FIXME: Make this a reply controller.
+            let controller = ChirpJamViewController.instantiateJamController()
+            let recorder = ChirpRecorder(frame: CGRect.zero, player: player)
+            controller.recorder = recorder
+            navigationController?.pushViewController(controller, animated: true)
+            controller.title = "Reply" // set the navigation bar title.
         }
     }
     

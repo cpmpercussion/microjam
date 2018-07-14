@@ -152,8 +152,9 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
         stopCurrentlyPlayingPerformance()
         // Get the cell, performance and a ChirpJamVC
         if let cell = collectionView.cellForItem(at: indexPath) as? UserPerfCollectionViewCell,
-            let topPerformance = cell.performance,
-            let controller = ChirpJamViewController.storyboardInstance() {
+            let topPerformance = cell.performance {
+            // FIXME: Use a different method of ChirpJamViewController here, not sure which one.
+            let controller = ChirpJamViewController.instantiateJamController()
             // Instantiate a ChirpJamViewController from storyboard
             // Make a ChirpRecorder for the reply and set to the new ChirpJamViewController
             let allPerformances = performanceStore.getAllReplies(forPerformance: topPerformance)
@@ -236,12 +237,7 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
         let indexPath = IndexPath(row: sender.tag, section: 0)
         if let cell = collectionView?.cellForItem(at: indexPath) as? UserPerfCollectionViewCell,
             let player = cell.player {
-            // Instantiate a ChirpJamViewController from storyboard
-            let storyboard = UIStoryboard(name: "ChirpJamViewController", bundle: nil)
-            let controller = storyboard.instantiateViewController(withIdentifier: "userPerfChirpJamController") as! ChirpJamViewController
-            // Make a ChirpRecorder for the reply and set to the new ChirpJamViewController
-            let recorder = ChirpRecorder(frame: CGRect.zero, player: player)
-            controller.recorder = recorder
+            let controller = ChirpJamViewController.instantiateController(forPlayer: player)
             // Push the VC to the navigation controller.
             navigationController?.pushViewController(controller, animated: true)
         }
