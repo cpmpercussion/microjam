@@ -129,7 +129,7 @@ class WorldJamsTableViewController: UITableViewController {
         }
         cell.title.text = performance.dateString
         cell.instrument.text = performance.instrument
-        cell.context.text = nonCreditString()
+        cell.context.text = nonCreditString(forDate: performance.date)
         cell.playButton.tag = indexPath.row
         cell.playButton.addTarget(self, action: #selector(playButtonPressed), for: .touchUpInside)
         cell.replyButton.tag = indexPath.row
@@ -181,12 +181,14 @@ class WorldJamsTableViewController: UITableViewController {
         return output
     }
 
-    /// Loads a credit string for a solo performance
-    func nonCreditString() -> String {
-        let ind : Int = Int(arc4random_uniform(UInt32(PerformanceLabels.solo.count)))
+    /// Loads a credit string for a solo performance, uses the performance date to choose a string consistently.
+    func nonCreditString(forDate date: Date) -> String {
+        let integerInterval = Int(date.timeIntervalSince1970)
+        let ind : Int = integerInterval % PerformanceLabels.solo.count
+        //        let ind : Int = Int(arc4random_uniform(UInt32(PerformanceLabels.solo.count)))
         return PerformanceLabels.solo[ind]
     }
-
+    
     // MARK: - Navigation
 
     /// Segue to view loaded jams.
