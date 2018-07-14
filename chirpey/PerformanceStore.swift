@@ -253,7 +253,7 @@ extension PerformanceStore {
         // This is a low-priority operation.
         database.fetch(withRecordID: recordID) { [unowned self] (record: CKRecord?, error: Error?) in
             if let e = error {
-                print("PerformanceStore: Performance Error: \(e)")
+                print("PerformanceStore: Error fetching performance: \(recordID): \(e)")
             }
             if let rec = record,
                 let perf = ChirpPerformance(fromRecord: rec) {
@@ -279,6 +279,7 @@ extension PerformanceStore {
             if let performance = self.performanceFrom(record: record) {
                 self.addToStored(performances: [performance])
                 DispatchQueue.main.async {
+                    // NotificationCenter.default.post(name: NSNotification.Name(rawValue: performanceStoreUpdatedNotificationKey), object: nil)
                     // could notify delegate here - but triggers too many times.
                 }
             }
