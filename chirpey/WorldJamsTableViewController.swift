@@ -130,6 +130,7 @@ class WorldJamsTableViewController: UITableViewController {
         cell.context.text = nonCreditString(forDate: performance.date)
         cell.playButton.tag = indexPath.row
         cell.playButton.addTarget(self, action: #selector(playButtonPressed), for: .touchUpInside)
+        cell.playButton.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal)
         cell.replyButton.tag = indexPath.row
         cell.replyButton.addTarget(self, action: #selector(replyButtonPressed), for: .touchUpInside)
         return cell
@@ -183,7 +184,6 @@ class WorldJamsTableViewController: UITableViewController {
     func nonCreditString(forDate date: Date) -> String {
         let integerInterval = Int(date.timeIntervalSince1970)
         let ind : Int = integerInterval % PerformanceLabels.solo.count
-        //        let ind : Int = Int(arc4random_uniform(UInt32(PerformanceLabels.solo.count)))
         return PerformanceLabels.solo[ind]
     }
     
@@ -247,11 +247,7 @@ extension WorldJamsTableViewController: ModelDelegate {
         refreshControl?.endRefreshing()
         tableView.tableHeaderView = nil
         
-        if let cell = currentlyPlaying {
-            cell.playButton.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal)
-            cell.player!.stop()
-            currentlyPlaying = nil
-        }
+        // Maybe stop, not sure if right to do this.
         tableView.reloadData()
     }
 

@@ -173,7 +173,7 @@ struct ButtonColors {
 /// Error messages and dialogues
 
 struct ErrorDialogues {
-    static let icloudNotLoggedIn = "MicroJam uses iCloud to store performances. Log into iCloud in the Settings app to see other jams!"
+    static let icloudNotLoggedIn = "MicroJam uses iCloud to store your performances."
 }
 
 

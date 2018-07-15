@@ -16,7 +16,7 @@ class NoAccountWarningStackView: UIStackView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = UIColor.gray
         label.textColor = UIColor.white
-        label.text = "MicroJam uses iCloud to store your performances, so it works best if you've logged into iCloud."
+        label.text = "MicroJam uses iCloud to store your performances."
         label.textAlignment = NSTextAlignment.center
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
@@ -27,7 +27,7 @@ class NoAccountWarningStackView: UIStackView {
         let button = UIButton(type: .system)
         button.backgroundColor = UIColor.darkGray
         button.setTitleColor(UIColor.white, for: .normal)
-        button.setTitle("Go to iCloud login in the Settings app.", for: .normal)
+        button.setTitle("Log into iCloud to save jams.", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -39,6 +39,8 @@ class NoAccountWarningStackView: UIStackView {
         alignment = UIStackViewAlignment.center
         addArrangedSubview(warningLabel)
         addArrangedSubview(loginButton)
+        warningLabel.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        warningLabel.leftAnchor.constraint(equalTo: rightAnchor).isActive = true
         loginButton.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         loginButton.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         loginButton.addTarget(self, action: #selector(openSettingsApp), for: .touchUpInside)

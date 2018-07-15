@@ -61,6 +61,9 @@ class PerformanceTableCell: UITableViewCell {
     override func prepareForReuse() {
         /// Close ChirpViews in the cell's player (if they exist)
         if let player = player {
+            // Stop Playing
+            player.stop()
+            // Close Pd Files
             for chirp in player.chirpViews {
                 chirp.closePdFile()
                 chirp.removeFromSuperview()
