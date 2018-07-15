@@ -9,6 +9,8 @@ def shared_pods
   pod 'NSDate+TimeAgo'
   pod 'DateToolsSwift'
   pod 'DropDown'
+  pod 'Avatar'
+  pod  'SwiftRandom'
 end
 
 target 'microjam' do
@@ -16,10 +18,10 @@ target 'microjam' do
   use_frameworks!
   shared_pods
 
-  target 'microjamTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
+  #target 'microjamTests' do
+  #  inherit! :search_paths
+  #  # Pods for testing
+  #end
 
   target 'microjamUITests' do
     inherit! :search_paths

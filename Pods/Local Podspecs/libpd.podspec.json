@@ -24,6 +24,7 @@
     "libpd_wrapper/**/*.{h,c}",
     "objc/**/*.{h,m}"
   ],
+  "public_header_files": "objc/**/*.{h}",
   "platforms": {
     "ios": "6.0"
   },

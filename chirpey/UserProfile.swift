@@ -10,6 +10,7 @@ import UIKit
 import CloudKit
 
 let userProfileUpdatedNotificationKey = "au.com.charlesmartin.userProfileUpdatedNotificationKey"
+let userDataExportReadyKey = "au.com.charlesmartin.userDataExportReadyKey"
 
 /// Singleton class to hold the logged-in user's profile.
 class UserProfile: NSObject {
@@ -25,6 +26,8 @@ class UserProfile: NSObject {
     let container = CKContainer.default()
     /// Records whether user is logged in or not.
     var loggedIn = false
+    /// CKRecordID for the user
+    var recordID: CKRecordID?
     /// CKRecord of user information.
     var record: CKRecord? {
         didSet {
@@ -33,6 +36,8 @@ class UserProfile: NSObject {
     }
     /// Storage for user's performer profile.
     var profile: PerformerProfile = UserProfile.loadProfile()
+    /// Storage for possible export data
+    var exportedData: String?
     
     // MARK: Initialisers
     
@@ -52,6 +57,7 @@ class UserProfile: NSObject {
         if let loadedProfile =  NSKeyedUnarchiver.unarchiveObject(withFile: UserProfile.profileURL.path) as? PerformerProfile {
             return loadedProfile
         } else {
+            // no profile stored, open a blank profile.
             return PerformerProfile()
         }
     }
@@ -108,9 +114,8 @@ class UserProfile: NSObject {
             
             DispatchQueue.main.async {
                 print("USVC: Found user: \(recordID.recordName). Discovering info.")
+                self.recordID = recordID
                 self.fetchUserRecord(with: recordID) // get the user record.
-                self.discoverIdentity(for: recordID)
-                self.discoverFriends()
             }
         }
     }
@@ -133,57 +138,41 @@ class UserProfile: NSObject {
         }
     }
     
-    /// Look up the user's name and other details on CloudKit
-    private func discoverIdentity(for recordID: CKRecordID) {
-        container.requestApplicationPermission(.userDiscoverability) { status, error in
-            guard status == .granted, error == nil else {
-                // TODO: error handling.
-                DispatchQueue.main.async {
-                    print("UserProfile: Not authorised to show user's name.")
-                }
-                return
-            }
-            
-            self.container.discoverUserIdentity(withUserRecordID: recordID) { identity, error in
-                defer {
-                    DispatchQueue.main.async {
-                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                    }
-                }
-            }
-        }
-    }
-    
-    /// Look up users contacts who also have microjam records.
-    private func discoverFriends() {
-        container.discoverAllIdentities { identities, error in
-            guard let identities = identities, error == nil else {
-                // TODO: error handling.
-                return
-            }
-            print("UserProfile: User has \(identities.count) contact(s) using the app:")
-        }
-    }
-    
     /// Update fields from User's CKRecord:
     private func assignFromRecord() {
         if let record = record {
             // User Record Found, extract user data to display
             var cloudNeedsUpdating = false
+            var avatarNeedsUpdating = false
             // Avatar
             if let avatarPath = record[UserCloudKeys.avatar] as? CKAsset,
                 let avatarImage = UIImage(contentsOfFile: avatarPath.fileURL.path) {
                 profile.avatar = avatarImage
                 print("UserProfile: Avatar found on Cloudkit.")
+            } else {
+                // Generate temporary avatar image
+                if let avatarImage = PerformerProfile.randomUserAvatar() {
+                    profile.avatar = avatarImage
+                    avatarNeedsUpdating = true
+                    print("UserProfile: New avatar generated")
+                }
             }
             
             // Stage Name
             if let name = record[UserCloudKeys.stagename] as? String {
                 profile.stageName = name
                 print("UserProfile: Stagename found on Cloudkit.")
-            } else if let name = UserDefaults.standard.string(forKey: SettingsKeys.performerKey) {
+                if name.isEmpty || name == "performer" {
+                    let genName = PerformerProfile.randomPerformerName()
+                    profile.stageName = genName
+                    print("UserProfile: New stagename generated: ", name)
+                    cloudNeedsUpdating = true
+                }
+            } else {
+                // Generate random stagename
+                let name = PerformerProfile.randomPerformerName()
                 profile.stageName = name
-                print("UserProfile: Stagename found in UserDefaults (updating in cloud)")
+                print("UserProfile: New stagename generated: ", name)
                 cloudNeedsUpdating = true
             }
             
@@ -222,6 +211,9 @@ class UserProfile: NSObject {
             
             if (cloudNeedsUpdating) {
                 updateUserProfile()
+            }
+            if (avatarNeedsUpdating) {
+                updateAvatar(profile.avatar)
             }
         } else {
             print("UserProfile: Error: User record does not exist!")
@@ -315,4 +307,95 @@ extension UIImage {
         let newSize = CGSize(width: width, height: height)
         return scaleImage(toSize: newSize)
     }
+}
+
+/// Functions for exporting user profile data, some adapted from arturgrigor/CloudKitGDPR
+extension UserProfile {
+    
+    /// Utility function to print records.
+    func convertRecordsToString(_ records: [CKRecord]) -> String {
+        var output : String = ""
+        for record in records {
+            for key in record.allKeys() {
+                let value = record[key]
+                output += key + " = " + (value?.description ?? "") + "\n"
+            }
+        }
+        return output
+    }
+    
+    /// Function to export all of a user's records for their information.
+    func exportRecords() {
+        var result: [CKRecord] = []
+        if let userRecord = self.record {
+            result.append(userRecord) // just append the user's record.
+        }
+        let database = container.publicCloudDatabase
+        let performerID = CKRecordID(recordName: "__defaultOwner__")
+        let userSearchPredicate = NSPredicate(format: "%K == %@", argumentArray: ["creatorUserRecordID", performerID])
+        
+        for recordType in [PerfCloudKeys.type] {
+            let query = CKQuery(recordType: recordType, predicate: userSearchPredicate)
+            let queryOperation = CKQueryOperation(query: query)
+            
+            queryOperation.recordFetchedBlock = { record in
+                result.append(record)
+            }
+            
+            queryOperation.queryCompletionBlock = { (cursor, error) in
+                if let error = error {
+                    print("Exporting error:", error)
+                    return
+                } else {
+                    print("Exporter: Finished querying records")
+                    // convert to string and download or something.
+                    self.exportedData = self.convertRecordsToString(result)
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: userDataExportReadyKey), object: nil)
+                }
+            }
+            // perform query operation
+            database.add(queryOperation)
+        }
+    }
+    
+    /// Function to delete all records from the logged in user. WARNING DANGER!
+    func deleteRecords(really reallyVar: Bool) {
+        // Delete user information
+//        if let userRecord = self.record {
+//            // erase the userRecord
+//            print("Should delete the user record")
+//        }
+        
+        let database = container.publicCloudDatabase
+        let performerID = CKRecordID(recordName: "__defaultOwner__")
+        let userSearchPredicate = NSPredicate(format: "%K == %@", argumentArray: ["creatorUserRecordID", performerID])
+        
+        for recordType in [PerfCloudKeys.type] {
+            let query = CKQuery(recordType: recordType, predicate: userSearchPredicate)
+            let queryOperation = CKQueryOperation(query: query)
+            
+            queryOperation.recordFetchedBlock = { record in
+                // Actually delete the record:
+                print("Fake deleting:", record.recordID)
+                // Only uncomment next line when activating for reals.
+                if reallyVar {
+                    print("Really deleting:", record.recordID)
+                    // database.delete(withRecordID: record.recordID, completionHandler: nil)
+                }
+            }
+            
+            queryOperation.queryCompletionBlock = { (cursor, error) in
+                if let error = error {
+                    print("Deleting error:", error)
+                    return
+                } else {
+                    print("Deleter: Finished deleting records")
+                }
+            }
+            // perform query operation
+            database.add(queryOperation)
+        }
+    }
+    
+    
 }

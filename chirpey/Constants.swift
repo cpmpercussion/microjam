@@ -16,11 +16,13 @@ struct SettingsKeys {
     static let performerColourKey = "performer_colour"
     static let backgroundColourKey = "background_colour"
     static let soundSchemeKey = "sound_scheme"
+    static let tutorialCompleted = "tutorial_completed"
     static let defaultSettings : [String : Any] = [
-        SettingsKeys.performerKey:"performer",
+        SettingsKeys.performerKey:"",
         SettingsKeys.performerColourKey: 0.5,
         SettingsKeys.backgroundColourKey: 0.2,
-        SettingsKeys.soundSchemeKey: 0
+        SettingsKeys.soundSchemeKey: 0,
+        SettingsKeys.tutorialCompleted: false
     ]
 }
 
@@ -129,6 +131,8 @@ struct TabBarItemTitles {
     static let jamTab = "jam!"
     static let settingsTab = "settings"
     static let profileTab = "profile"
+    static let userPerfsTab = "perfs"
+    static let repliesTab = "replies"
 }
 
 /// Labels for performance contexts.
@@ -152,4 +156,25 @@ struct PerformanceLabels {
         "jammed with",
     ]
 }
+
+/// Maximum allowed recording time.
+let RECORDING_TIME = 5.0
+
+/// Colours for buttons in Jam Screen
+struct ButtonColors {
+    static let rewind = UIColor.init("#A10702")
+    static let record = UIColor.init("#ED2D07")
+    static let play = UIColor.init("#FAA613")
+    static let layer = UIColor.init("#7DCFB6")
+    static let jam = UIColor.init("#688E26")
+    static let roboplay = UIColor.init("#550527")
+}
+
+/// Error messages and dialogues
+
+struct ErrorDialogues {
+    static let icloudNotLoggedIn = "MicroJam uses iCloud to store performances. Log into iCloud in the Settings app to see other jams!"
+}
+
+
 

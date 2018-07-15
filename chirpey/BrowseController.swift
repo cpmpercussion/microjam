@@ -16,6 +16,7 @@ protocol BrowseControllerDelegate {
     func didSelect(performance: ChirpPerformance)
 }
 
+/// A CollectionViewController for browsing through multiple MicroJams. Not used in present Beta.
 class BrowseController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     var loadedPerformances = [ChirpPerformance]()
@@ -117,11 +118,11 @@ class BrowseController: UICollectionViewController, UICollectionViewDelegateFlow
         filterView.isHidden = true
     }
     
-    func dimViewTapped() {
+    @objc func dimViewTapped() {
         toggleFilterView()
     }
     
-    func toggleFilterView() {
+    @objc func toggleFilterView() {
         
         if dimView.isHidden {
             dimView.isHidden = false
@@ -132,13 +133,13 @@ class BrowseController: UICollectionViewController, UICollectionViewDelegateFlow
         }
     }
     
-    func previewPerformance(sender: UIButton) {
-        
+    @objc func previewPerformance(sender: UIButton) {
         // The button is in the contentView of the cell, need to get the content view's superview...
-        if let superView = sender.superview?.superview {
-            let cell = superView as! BrowseCell
-            ChirpView.play(performance: cell.performance!)
-        }
+        //if let superView = sender.superview?.superview {
+            //let cell = superView as! BrowseCell
+            // FIXME: Revise this statement to use a chirpplayer object.
+            //ChirpView.play(performance: cell.performance!)
+        //}
     }
 
     // MARK: UICollectionViewDataSource

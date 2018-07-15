@@ -20,7 +20,7 @@
 #include <stdio.h>
 
 #ifdef _MSC_VER  /* This is only for Microsoft's compiler, not cygwin, e.g. */
-#define snprintf sprintf_s
+#define snprintf _snprintf
 #endif
 
 static t_symbol *class_loadsym;     /* name under which an extern is invoked */
@@ -153,6 +153,9 @@ static void pdinstance_renumber(void)
         pd_instances[i]->pd_instanceno = i;
 }
 
+extern void text_template_init(void);
+extern void garray_init(void);
+
 EXTERN t_pdinstance *pdinstance_new(void)
 {
     t_pdinstance *x = (t_pdinstance *)getbytes(sizeof(t_pdinstance));
@@ -182,7 +185,8 @@ EXTERN t_pdinstance *pdinstance_new(void)
     pd_ninstances++;
     pdinstance_renumber();
     pd_bind(&glob_pdobject, gensym("pd"));
-
+    text_template_init();
+    garray_init();
     pd_globalunlock();
     sys_unlock();
     return (x);
@@ -749,7 +753,7 @@ t_symbol *gensym(const char *s)
 static t_symbol *addfileextent(t_symbol *s)
 {
     char namebuf[MAXPDSTRING], *str = s->s_name;
-    int ln = strlen(str);
+    int ln = (int)strlen(str);
     if (!strcmp(str + ln - 3, ".pd")) return (s);
     strcpy(namebuf, str);
     strcpy(namebuf+ln, ".pd");
@@ -914,7 +918,7 @@ void pd_typedmess(t_pd *x, t_symbol *s, int argc, t_atom *argv)
                 ap++;
                 break;
             case A_FLOAT:
-                if (!argc) goto badarg;
+                if (!argc) goto badarg;  /* falls through */
             case A_DEFFLOAT:
                 if (!argc) *dp = 0;
                 else
@@ -928,7 +932,7 @@ void pd_typedmess(t_pd *x, t_symbol *s, int argc, t_atom *argv)
                 dp++;
                 break;
             case A_SYMBOL:
-                if (!argc) goto badarg;
+                if (!argc) goto badarg;  /* falls through */
             case A_DEFSYM:
                 if (!argc) *ap = (t_int)(&s_);
                 else

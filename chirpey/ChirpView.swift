@@ -53,7 +53,7 @@ class ChirpView: UIImageView {
     /// Convenience Initialiser only used when loading performances for playback only. Touch is disabled!
     convenience init(with frame: CGRect, andPerformance perf: ChirpPerformance){
         self.init(frame: frame)
-        print("ChirpView: Loading programmatically with frame: ", self.frame)
+        //        print("ChirpView: Loading programmatically with frame: ", self.frame) // runs too many times to be helpful...
         isMultipleTouchEnabled = false // multitouch is disabled!
         isUserInteractionEnabled = false // user-interaction is disabled!
         loadPerformance(perf)
@@ -64,14 +64,16 @@ class ChirpView: UIImageView {
     
     /// load a new performance in the ChirpView for playback
     func loadPerformance(_ newPerf: ChirpPerformance) {
-        print("ChirpView: Loading existing performance")
+        // print("ChirpView: Loading existing performance") // Runs too many times to be helpful...
         performance = newPerf
         image = newPerf.image
         playbackColour = newPerf.colour.brighterColor.cgColor
         started = false
         lastPoint = CG_INIT_POINT
         swiped = false
-        openSoundScheme(withName: newPerf.instrument)
+        // keep Pd file closed until needed.
+        closePdFile()
+        //openSoundScheme(withName: newPerf.instrument)
     }
     
     // MARK: - drawing functions
@@ -104,50 +106,6 @@ class ChirpView: UIImageView {
         context.strokePath()
         image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
-    }
-    
-    func draw(tailSegments: [TailSegment], withColor color: CGColor) {
-        UIGraphicsBeginImageContextWithOptions(frame.size, false, (UIScreen.main).scale)
-        guard let context = UIGraphicsGetCurrentContext() else {
-            return
-        }
-        
-        context.setFillColor(color)
-        context.setStrokeColor(color)
-        context.setBlendMode(CGBlendMode.normal)
-        context.setLineCap(CGLineCap.round)
-        context.setLineWidth(10.0)
-        
-        context.beginPath()
-        
-        for (i, current) in tailSegments.enumerated() {
-            
-            if i == 0 || !current.touch.moving {
-                context.move(to: CGPoint(x: current.touch.x, y: current.touch.y))
-            }
-            
-            context.addLine(to: CGPoint(x: current.touch.x, y: current.touch.y))
-        }
-        
-        context.strokePath()
-        image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-    }
-    
-    static func play(performance: ChirpPerformance) {
-        
-        let chirp = ChirpView(with: CGRect(x: 0, y: 0, width: 300, height: 300), andPerformance: performance)
-        
-        var timers = [Timer]()
-        for touch in performance.performanceData {
-            let t = Timer.scheduledTimer(withTimeInterval: touch.time, repeats: false, block: { timer in
-                chirp.makeSound(at: CGPoint(x: touch.x * 300, y: touch.y * 300), withRadius: CGFloat(touch.z), thatWasMoving: touch.moving)
-            })
-            timers.append(t)
-        }
-        
-        performance.playbackTimers = timers
-        
     }
 
     // MARK: - playback functions
@@ -191,8 +149,23 @@ class ChirpView: UIImageView {
 /// Contains Pd and libpd file management for ChirpView.
 extension ChirpView {
     
+    /// Prepare to play back sounds by loading the appropriate Pd file.
+    func prepareToPlaySounds() {
+        if let performance = performance {
+            openSoundScheme(withName: performance.instrument)
+        } else {
+            print("ChirpView: No performance loaded.")
+        }
+    }
+    
     /// Given a point in the UIImage, sends a touch point to Pd to process for sound.
     func makeSound(at point : CGPoint, withRadius radius : CGFloat, thatWasMoving moving: Bool) {
+        // Pd file must be opened by chirp.prepareToPlaySounds() before sounds can be played.
+        guard openPatch != nil else {
+            print("ChirpView: attempt to play without opening Pd file")
+            return // could throw and exception here.
+        }
+        
         let x = Double(point.x) / Double(frame.size.width)
         let y = Double(point.y) / Double(frame.size.width)
         let z = Double(min(radius / 120.0, 1.0))
@@ -217,17 +190,15 @@ extension ChirpView {
         }
     }
     
-    /// Opens a Pd file given the filename
+    /// Opens a Pd file given the filename (only if the file is not already open)
     func openPd(file fileToOpen: String) {
         if openPatchName != fileToOpen {
-            print("ChirpView: Opening Pd File:", fileToOpen)
             closePdFile()
             openPatch = PdFile.openNamed(fileToOpen, path: Bundle.main.bundlePath) as? PdFile
             openPatchName = fileToOpen
             openPatchDollarZero = openPatch?.dollarZero
-        } else {
-            print("ChirpView:", fileToOpen, "was already open.")
         }
+        // Only opens it if it's not already open.
     }
     
     /// Closes whatever Pd file is open.

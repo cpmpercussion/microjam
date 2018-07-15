@@ -33,15 +33,27 @@ class ChirpRecorder: ChirpPlayer {
         super.init()
     }
     
+    /// Convenience initialiser for creating a ChirpRecorder with the same performances as a given ChirpPlayer
     convenience init(frame: CGRect, player: ChirpPlayer) {
         self.init(frame: frame)
         chirpViews = player.chirpViews
+    }
+    
+    /// Convenience initialiser for creating a ChirpRecorder with an array of backing ChirpPerformances
+    convenience init(withArrayOfPerformances performanceArray: [ChirpPerformance]) {
+        let dummyFrame = CGRect.zero
+        self.init(frame: dummyFrame)
+        for perf in performanceArray {
+            let chirp = ChirpView(with: dummyFrame, andPerformance: perf)
+            chirpViews.append(chirp)
+        }
     }
     
     /// Starts a new recording if recordingEnabled, time is controlled by the superclass's progressTimer.
     func record() -> Bool {
         if recordingEnabled {
             if !isRecording {
+                print("ChirpRecorder: Starting recording")
                 isRecording = true
                 recordingView.recording = true
                 // Starting progresstimer and playback of performances if any
@@ -71,6 +83,7 @@ class ChirpRecorder: ChirpPlayer {
             }
         }
         if recordingIsDone, let performance = recordingView.performance {
+            print("ChirpRecorder: Adding performance image as my display image: \(performance.title())")
             recordingView.image = performance.image
         }
     }

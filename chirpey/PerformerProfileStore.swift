@@ -77,6 +77,8 @@ class PerformerProfileStore : NSObject {
     /// Return a profile for a given user's CKRecordID
     func getProfile(forID performerID: CKRecordID) -> PerformerProfile? {
         if let profile = profiles[performerID] {
+            // if not fetched this session, fetch anyway, but return the local one as well.
+            if !profile.fetchedThisSession { fetchProfile(forID: performerID) }
             return profile
         } else {
             fetchProfile(forID: performerID)
@@ -94,12 +96,23 @@ class PerformerProfileStore : NSObject {
             if let rec = record,
                 let prof = PerformerProfile(fromRecord: rec) {
                 DispatchQueue.main.async {
+                    prof.fetchedThisSession = true // set fetched this session, so it's not refetched later.
                     self.profiles[performerID] = prof
-                    print("PerformerProfileStore: \(prof.stageName)'s profile found.")
+                    print("PerformerProfileStore: \(prof.stageName)'s profile fetched.")
                     self.delegate?.modelUpdated()
                 }
             }
         }
     }
-    
+
 }
+
+// Check if UIImage is empty or not.
+public extension UIImage {
+    
+    public var hasContent: Bool {
+        return cgImage != nil || ciImage != nil
+    }
+
+}
+

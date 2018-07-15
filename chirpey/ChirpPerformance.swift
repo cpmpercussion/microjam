@@ -11,6 +11,16 @@ import CloudKit
 import UIColor_Hex_Swift
 import DateToolsSwift
 
+struct RoboJamPerfData {
+    static let performer = "RoboJammer"
+    static let instrument = "keys"
+    static let fakeLocation = CLLocation(latitude: 0, longitude: 0)
+    static let color = "#F44708"
+    static let bg = "#550527"
+    static let creator = CKRecordID(recordName: "RoboJammer")
+    static let id = CKRecordID(recordName: "none")
+}
+
 /**
  Contains the data from a single chirp performance.
  Data is stored as an array of `TouchRecord`.
@@ -26,6 +36,8 @@ class ChirpPerformance : NSObject {
     var performer : String
     /// Title of the MicroJam performance that this replies to, empty string if it is not a reply.
     var replyto : String = ""
+    /// CKRecordID of the parent performance. Only exists if the performance is a reply.
+    var replyParentID : CKRecordID?
     /// Name of the SoundScheme used to record this performance.
     var instrument : String
     /// UIImage of completed performance touch trace.
@@ -79,7 +91,7 @@ class ChirpPerformance : NSObject {
             let replyto = aDecoder.decodeObject(forKey: PropertyKey.replyToKey) as? String
             else {return nil}
 
-        let location = (aDecoder.decodeObject(forKey: "location") as? CLLocation) ?? CLLocation.init(latitude: 60, longitude: 11)
+        let location = (aDecoder.decodeObject(forKey: "location") as? CLLocation) ?? RoboJamPerfData.fakeLocation
 
         // print("PERF: Decoding", data.count, "notes:", performer, instrument)
 
@@ -137,7 +149,7 @@ class ChirpPerformance : NSObject {
         var data : [TouchRecord] = []
         let lines = csv.components(separatedBy: "\n")
         // TODO: test this initialiser
-        data = lines.flatMap {TouchRecord.init(fromCSVLine: $0)}
+        data = lines.compactMap {TouchRecord.init(fromCSVLine: $0)}
         self.init(data: data, date: date, performer: performer, instrument: instrument, image: image, location: location,
                   colour: colour, background: background, replyto: replyto)
         self.performanceID = performanceID
@@ -149,7 +161,7 @@ class ChirpPerformance : NSObject {
         // FIXME: actually detect the proper location
         let perfColour : UIColor = UserProfile.shared.profile.jamColour
         let bgColour : UIColor = UserProfile.shared.profile.backgroundColour
-        self.init(data : [], date : Date(), performer : "", instrument : "", image : UIImage(), location: CLLocation.init(latitude: 90.0, longitude: 45.0),
+        self.init(data : [], date : Date(), performer : "", instrument : "", image : UIImage(), location: RoboJamPerfData.fakeLocation,
                   colour: perfColour.hexString(), background: bgColour.hexString(), replyto: "")
     }
 
@@ -174,6 +186,14 @@ class ChirpPerformance : NSObject {
         formatter.dateFormat = "YYYY-MM-DD-HH-mm-SS"
         let dateString = formatter.string(from: date)
         return String(format: "perf-%@-%@-%@", performer, instrument, dateString)
+    }
+    
+    /// A human-readable title for a performance, for use in menus.
+    func humanTitle() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "h:mm a, d MMM yyyy"
+        let dateString = formatter.string(from: date)
+        return String(format: "%@, %@, %@", performer, instrument, dateString)
     }
     
     /// Writes a string to the documents directory with a title formed from the current date. Returns the filepath.
@@ -287,6 +307,6 @@ extension UIColor {
         guard getHue(&h, saturation: &s, brightness: &b, alpha: &a)
             else {return self}
 
-        return UIColor(hue: h, saturation: max(0.7*s,0.4), brightness: b, alpha: (0.8 * a))
+        return UIColor(hue: h, saturation: max(0.7*s,0.4), brightness: b, alpha: a)
     }
 }

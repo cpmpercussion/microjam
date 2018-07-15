@@ -1,4 +1,4 @@
-#N canvas 148 115 1105 966 10;
+#N canvas 536 60 1105 966 10;
 #X declare -path metaPdLibs/control;
 #X declare -path metaPdLibs/fx;
 #X declare -path metaPdLibs/instrument;
@@ -156,6 +156,7 @@
 #X obj 435 39 touch_to_notes 24 49;
 #X obj 603 175 unpack 0 0;
 #X obj 673 213 / 127;
+#X obj 263 720 *~ 0.91;
 #X connect 0 0 13 0;
 #X connect 2 0 15 0;
 #X connect 3 0 2 0;
@@ -185,7 +186,7 @@
 #X connect 27 0 34 1;
 #X connect 28 0 8 0;
 #X connect 28 0 30 0;
-#X connect 29 0 61 0;
+#X connect 29 0 97 0;
 #X connect 30 0 31 0;
 #X connect 31 0 34 0;
 #X connect 32 0 8 1;
@@ -258,3 +259,4 @@
 #X connect 94 0 95 0;
 #X connect 95 1 96 0;
 #X connect 96 0 92 0;
+#X connect 97 0 61 0;

@@ -48,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
-        
+        saveData()
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -60,34 +60,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
     }
     
     func applicationDidFinishLaunching(_ application: UIApplication) {
-        if (UserDefaults.standard.string(forKey: SettingsKeys.performerKey) == SettingsKeys.defaultSettings[SettingsKeys.performerKey] as? String) {
-            // Still set to default name, prompt to change setting!
-            print("AD: Name still set to default, ask user to change")
-//            perform(#selector(presentUserNameChooserController), with: nil, afterDelay: 0)
-            /// FIXME: figure out a better walkthrough to set user details.
-        }
-    }
-
-    /// Presents the UserNameChooserViewController if the user hasn't set a name yet
-    func presentUserNameChooserController() {
-        // TODO: Replace this with a screen by screen onboarding process including check for iCloud login.
-        if let usernamecontroller = UserNameChooserViewController.storyboardInstance() {
-            if let window = self.window, let rootViewController = window.rootViewController {
-                var currentController = rootViewController
-                
-                while let presentedController = currentController.presentedViewController {
-                    currentController = presentedController
-                }
-                currentController.present(usernamecontroller, animated: true, completion: nil)
-            }
+        // MARK: Check to start tutorial.
+        if (!UserDefaults.standard.bool(forKey: SettingsKeys.tutorialCompleted)) {
+            print("AD: Starting Tutorial")
+            perform(#selector(presentTutorial), with: nil, afterDelay: 0)
         }
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
         print("AD: Application will terminate, saving data.")
+        saveData()
+    }
+    
+    /// Save the loaded data to a file for quick reloading later.
+    func saveData() {
+        print("AD: Saving all local data")
         performanceStore.savePerformances() // save locally stored performances.
-        userProfile.saveProfile() // save local copy of performance profile.
+        userProfile.saveProfile() // save local copy of the user's profile.
         profileStore.saveProfiles() // save local copy of performer profiles.
     }
+
+    /// Presents the MicrojamTutorialViewController to new users.
+    @objc func presentTutorial() {
+        if let tutorialController = MicrojamTutorialViewController.storyboardInstance() {
+            if let window = self.window, let rootViewController = window.rootViewController {
+                var currentController = rootViewController
+                while let presentedController = currentController.presentedViewController {
+                    currentController = presentedController
+                }
+                currentController.present(tutorialController, animated: true, completion: nil)
+            }
+        }
+    }
+    
+
 
 }

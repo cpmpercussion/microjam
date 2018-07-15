@@ -51,12 +51,23 @@ class ChirpPlayer: NSObject {
         }
     }
     
+    /// Convenience initialiser for creating a ChirpPlayer with an array of ChirpPerformances
+    convenience init(withArrayOfPerformances performanceArray: [ChirpPerformance]) {
+        let dummyFrame = CGRect.zero
+        self.init()
+        for perf in performanceArray {
+            let chirp = ChirpView(with: dummyFrame, andPerformance: perf)
+            chirpViews.append(chirp)
+        }
+    }
+    
     /// Start playback.
     func play() {
         if !isPlaying {
             isPlaying = true
             timers = [Timer]()
             for chirp in chirpViews {
+                chirp.prepareToPlaySounds()
                 play(chirp: chirp)
             }
             startProgressTimer()

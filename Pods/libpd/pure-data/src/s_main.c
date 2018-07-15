@@ -22,7 +22,7 @@
 #include <winbase.h>
 #endif
 #ifdef _MSC_VER  /* This is only for Microsoft's compiler, not cygwin, e.g. */
-#define snprintf sprintf_s
+#define snprintf _snprintf
 #endif
 
 #define stringify(s) str(s)
@@ -126,8 +126,8 @@ typedef struct _fontinfo
     in the six fonts.  */
 
 static t_fontinfo sys_fontspec[] = {
-    {8, 6, 10}, {10, 7, 13}, {12, 9, 16},
-    {16, 10, 21}, {24, 15, 25}, {36, 25, 45}};
+    {8, 5, 11}, {10, 6, 13}, {12, 7, 16},
+    {16, 10, 19}, {24, 14, 29}, {36, 22, 44}};
 #define NFONT (sizeof(sys_fontspec)/sizeof(*sys_fontspec))
 #define NZOOM 2
 static t_fontinfo sys_gotfonts[NZOOM][NFONT];
@@ -236,9 +236,9 @@ void glob_initfromgui(void *dummy, t_symbol *s, int argc, t_atom *argv)
     for (j = 0; j < NZOOM; j++)
         for (i = 0; i < NFONT; i++)
     {
-        int size   = atom_getintarg(3 * (i + j * NFONT) + 2, argc, argv);
-        int width  = atom_getintarg(3 * (i + j * NFONT) + 3, argc, argv);
-        int height = atom_getintarg(3 * (i + j * NFONT) + 4, argc, argv);
+        int size   = atom_getfloatarg(3 * (i + j * NFONT) + 2, argc, argv);
+        int width  = atom_getfloatarg(3 * (i + j * NFONT) + 3, argc, argv);
+        int height = atom_getfloatarg(3 * (i + j * NFONT) + 4, argc, argv);
         if (!(size && width && height))
         {
             size   = (j+1)*sys_fontspec[i].fi_pointsize;
@@ -246,7 +246,7 @@ void glob_initfromgui(void *dummy, t_symbol *s, int argc, t_atom *argv)
             height = (j+1)*sys_fontspec[i].fi_height;
             if (!did_fontwarning)
             {
-                error("Ignoring invalid font-metrics from GUI!");
+                verbose(1, "ignoring invalid font-metrics from GUI");
                 did_fontwarning = 1;
             }
         }
@@ -284,11 +284,14 @@ void glob_initfromgui(void *dummy, t_symbol *s, int argc, t_atom *argv)
     sys_messagelist = 0;
 }
 
+// font char metric triples: pointsize width(pixels) height(pixels)
 static int defaultfontshit[] = {
-9, 5, 10, 11, 7, 13, 14, 8, 16, 17, 10, 20, 22, 13, 25, 39, 23, 45,
-17, 10, 20, 23, 14, 26, 27, 16, 31, 34, 20, 40, 43, 26, 50, 78, 47, 90};
+ 8,  5, 11, 10,  6, 13, 12,  7, 16, 16, 10, 19, 24, 14, 29, 36, 22, 44,
+16, 10, 22, 20, 12, 26, 24, 14, 32, 32, 20, 38, 48, 28, 58, 72, 44, 88
+}; // normal & zoomed (2x)
 #define NDEFAULTFONT (sizeof(defaultfontshit)/sizeof(*defaultfontshit))
 
+static t_clock *sys_fakefromguiclk;
 static void sys_fakefromgui(void)
 {
         /* fake the GUI's message giving cwd and font sizes in case
@@ -309,6 +312,7 @@ static void sys_fakefromgui(void)
         SETFLOAT(zz+i+1, defaultfontshit[i]);
     SETFLOAT(zz+NDEFAULTFONT+1,0);
     glob_initfromgui(0, 0, 2+NDEFAULTFONT, zz);
+    clock_free(sys_fakefromguiclk);
 }
 
 static void sys_afterargparse(void);
@@ -341,7 +345,7 @@ int sys_main(int argc, char **argv)
     complain to stderr and lose setuid here. */
     if (getuid() != geteuid())
     {
-        fprintf(stderr, "warning: canceling setuid privelege\n");
+        fprintf(stderr, "warning: canceling setuid privilege\n");
         setuid(getuid());
     }
 #endif  /* _WIN32 */
@@ -365,7 +369,8 @@ int sys_main(int argc, char **argv)
         return (0);
     sys_setsignalhandlers();
     if (sys_dontstartgui)
-        sys_fakefromgui();
+        clock_set((sys_fakefromguiclk =
+            clock_new(0, (t_method)sys_fakefromgui)), 0);
     else if (sys_startgui(sys_libdir->s_name)) /* start the gui */
         return (1);
     if (sys_hipriority)
@@ -517,11 +522,11 @@ static void sys_parsedevlist(int *np, int *vecp, int max, char *str)
         else
         {
             char *endp;
-            vecp[n] = strtol(str, &endp, 10);
+            vecp[n] = (int)strtol(str, &endp, 10);
             if (endp == str)
                 break;
             n++;
-            if (!endp)
+            if ('\0' == *endp)
                 break;
             str = endp + 1;
         }
@@ -1332,7 +1337,7 @@ int sys_argparse(int argc, char **argv)
         usage:
             for (i = 0; i < sizeof(usagemessage)/sizeof(*usagemessage); i++)
                 fprintf(stderr, "%s", usagemessage[i]);
-            return (0);
+            return (1);
         }
     }
     if (sys_batch)

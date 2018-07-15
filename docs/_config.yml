@@ -25,7 +25,7 @@ signup_form: https://goo.gl/forms/voANy3EZzRqPJVLG3
 
 # Build settings
 markdown: kramdown
-gems:
+plugins:
   - jekyll-feed
 exclude:
   - Gemfile

@@ -9,6 +9,9 @@
 import UIKit
 import CloudKit
 
+let performanceStoreUpdatedNotificationKey = "au.com.charlesmartin.performanceStoreUpdatedNotificationKey"
+let performanceStoreFailedUpdateNotificationKey = "au.com.charlesmartin.performanceStoreFailedUpdateNotificationKey"
+
 /// Exposes CloudKit container to all UIViewControllers
 extension UIViewController {
 
@@ -28,7 +31,6 @@ protocol ModelDelegate {
     func errorUpdating(error: NSError)
     /// Called when the `PerformanceStore` successfully updates from the cloud backend.
     func modelUpdated()
-
 }
 
 /**
@@ -56,7 +58,6 @@ class PerformanceStore: NSObject {
     /// a feed of ChirpPerformances for the world screen generated from stored performances.
     var feed : [ChirpPerformance] = []
 
-
     /// Loads saved performances and then updates from cloud backend.
     override private init() {
         performances = PerformanceStore.loadPerformanceDict() // load the performance dictionary
@@ -65,9 +66,9 @@ class PerformanceStore: NSObject {
         if let savedPerformances = loadPerformances() {
             storedPerformances += savedPerformances
             sortStoredPerformances()
-            NSLog("Store: Successfully loaded", storedPerformances.count, "performances")
+            NSLog("PerformanceStore: Successfully loaded", storedPerformances.count, "performances")
         } else {
-            NSLog("Store: Failed to load performances")
+            NSLog("PerformanceStore: Failed to load performances")
         }
         feed = generateFeed()
         print("PerformanceStore: Feed has \(feed.count) items.")
@@ -82,19 +83,32 @@ class PerformanceStore: NSObject {
     
     /// Load Profiles from file
     private static func loadPerformanceDict() -> [CKRecordID: ChirpPerformance] {
-        print("Loading perf dict...")
+        print("Loading performance dict...")
         let result = NSKeyedUnarchiver.unarchiveObject(withFile: PerformanceStore.perfDictURL.path)
         if let loadedPerformances = result as? [CKRecordID: ChirpPerformance] {
             return loadedPerformances
         } else {
-            print("PerformerProfileStore: Failed to load perfs.")
+            print("PerformanceStore: Failed to load perfs.")
             return [CKRecordID: ChirpPerformance]()
         }
     }
 
-    /// Add a new performance to the list and then save the list.
+    /// Upload a new performance and add it to the performance store. This only works if the performer is logged in.
     func addNew(performance : ChirpPerformance) {
         self.upload(performance: performance)
+        // Add this perf to the model as well.
+        if let performersUserRecordID = UserProfile.shared.record?.creatorUserRecordID  {
+            print("User is logged in, updating performance info and adding to store.")
+            let perfID = CKRecordID(recordName: performance.title())
+            performance.performanceID = perfID
+            performance.creatorID = performersUserRecordID
+            self.performances[perfID] = performance
+            DispatchQueue.main.async {
+                self.feed = self.generateFeed()
+                self.delegate?.modelUpdated() // stop spinner
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: performanceStoreUpdatedNotificationKey), object: nil)
+            }
+        }
     }
 
     /// Save recorded performances to file.
@@ -131,9 +145,60 @@ class PerformanceStore: NSObject {
         // done!
         return outFeed
     }
+    
+    /// Return performances in the store for a given user by CKRecordID
+    func performances(byPerformer perfID: CKRecordID) -> [ChirpPerformance] {
+        var output = [ChirpPerformance]()
+        for perf in storedPerformances {
+            if perf.creatorID == perfID {
+                output.append(perf)
+            }
+        }
+        return output
+    }
+
+
+
+    /// Add a list of performances into the currently stored performances.
+    func addToStored(performances: [ChirpPerformance]) {
+        //print("Store: Adding performances to stored list")
+        //self.storedPerformances = performances // update the stored performances // old
+        let titles = self.storedPerformances.map{$0.title()}
+        var countPerfsAdded = 0
+        for perf in performances {
+            self.performances[CKRecordID(recordName: perf.title())] = perf
+            if !titles.contains(perf.title()) {
+                self.storedPerformances.append(perf)
+                countPerfsAdded += 1
+            }
+        }
+        //print("Store: ", countPerfsAdded, " perfs added to stored performances.")
+        self.sortStoredPerformances()
+    }
+
+    /// Sorts the stored performances by date
+    func sortStoredPerformances() {
+        self.storedPerformances.sort(by: {(rec1: ChirpPerformance, rec2: ChirpPerformance) -> Bool in
+            rec1.date > rec2.date
+        })
+    }
+
+    /// Sorts a list of ChirpPerformances by date.
+    func sortPerformancesByDate(_ perfs : [ChirpPerformance]) -> [ChirpPerformance] {
+        return perfs.sorted(by: {(rec1: ChirpPerformance, rec2: ChirpPerformance) -> Bool in
+            rec1.date > rec2.date
+        })
+    }
+
+}
+
+// MARK: - Fetching Operations
+
+/// Extension for specific queries
+extension PerformanceStore {
 
     /// Refresh list of world jams from CloudKit and then update in world jam table view.
-    func fetchWorldJamsFromCloud() {
+    @objc func fetchWorldJamsFromCloud() {
         print("Store: Attempting to fetch World Jams from Cloud.")
         var fetchedPerformances = [ChirpPerformance]()
         let predicate = NSPredicate(value: true)
@@ -154,8 +219,7 @@ class PerformanceStore: NSObject {
             if let error = error {
                 DispatchQueue.main.async {
                     self.delegate?.errorUpdating(error: error as NSError)
-                    print("Store: Cloud Query error:\(error)")
-                    self.delegate?.modelUpdated() // stop spinner
+                    print("Store: Cloud Query error: \(error)")
                 }
                 return
             }
@@ -165,6 +229,7 @@ class PerformanceStore: NSObject {
             print("Store: ", self.storedPerformances.count, " total stored performances.")
             DispatchQueue.main.async { // give the delegate the trigger to update the table.
                 self.delegate?.modelUpdated()
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: performanceStoreUpdatedNotificationKey), object: nil)
             }
             print("Store: Successfully updated from cloud")
         }
@@ -172,25 +237,8 @@ class PerformanceStore: NSObject {
         publicDB.add(operation) // perform the operation.
         // TODO: Define a more sensible way of downloading the performances
     }
-
-    /// Add a list of performances into the currently stored performances.
-    func addToStored(performances: [ChirpPerformance]) {
-        print("Store: Adding performances to stored list")
-        //self.storedPerformances = performances // update the stored performances // old
-        let titles = self.storedPerformances.map{$0.title()}
-        var countPerfsAdded = 0
-        for perf in performances {
-            self.performances[CKRecordID(recordName: perf.title())] = perf
-            if !titles.contains(perf.title()) {
-                self.storedPerformances.append(perf)
-                countPerfsAdded += 1
-            }
-        }
-        print("Store: ", countPerfsAdded, " perfs added to stored performances.")
-        self.sortStoredPerformances()
-    }
     
-    /// Return a profile for a given user's CKRecordID
+    /// Return a performance for a given CKRecordID
     func getPerformance(forID recordID: CKRecordID) -> ChirpPerformance? {
         if let performance = performances[recordID] {
             return performance
@@ -200,47 +248,82 @@ class PerformanceStore: NSObject {
         }
     }
 
-    /// Retrieves a ChirpPerformance from a given title string.
-    func getPerformance(fortitle title: String) -> ChirpPerformance? {
-        let recID = CKRecordID(recordName: title)
-        return(getPerformance(forID: recID))
-    }
-    
     /// Fetch a particular performance from CloudKit
     func fetchPerformance(forID recordID: CKRecordID) {
         // This is a low-priority operation.
         database.fetch(withRecordID: recordID) { [unowned self] (record: CKRecord?, error: Error?) in
             if let e = error {
-                print("PerformanceStore: Performance Error: \(e)")
+                print("PerformanceStore: Error fetching performance: \(recordID): \(e)")
             }
             if let rec = record,
                 let perf = ChirpPerformance(fromRecord: rec) {
                 DispatchQueue.main.async {
                     self.performances[recordID] = perf
                     self.addToStored(performances: [perf])
-                    print("PerformerProfileStore: \(perf.title()) found.")
+                    print("PerformanceStore: \(perf.title()) found.")
                     self.delegate?.modelUpdated()
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: performanceStoreUpdatedNotificationKey), object: nil)
                 }
             }
         }
     }
-
     
-    /// Sorts the stored performances by date
-    func sortStoredPerformances() {
-        self.storedPerformances.sort(by: {(rec1: ChirpPerformance, rec2: ChirpPerformance) -> Bool in
-            rec1.date > rec2.date
-        })
+    /// Fetch performances by a given performer from CloudKit
+    func fetchPerformances(byPerformer perfID: CKRecordID) {
+        let performerSearchPredicate = NSPredicate(format: "%K == %@", argumentArray: ["creatorUserRecordID", perfID])
+        let query = CKQuery(recordType: PerfCloudKeys.type, predicate: performerSearchPredicate)
+        query.sortDescriptors = [NSSortDescriptor(key: PerfCloudKeys.date, ascending: false)]
+        let queryOperation = CKQueryOperation(query: query)
+        
+        queryOperation.recordFetchedBlock = { record in
+            if let performance = self.performanceFrom(record: record) {
+                self.addToStored(performances: [performance])
+                DispatchQueue.main.async {
+                    // NotificationCenter.default.post(name: NSNotification.Name(rawValue: performanceStoreUpdatedNotificationKey), object: nil)
+                    // could notify delegate here - but triggers too many times.
+                }
+            }
+        }
+        
+        queryOperation.queryCompletionBlock = { (cursor, error) in
+            if let error = error {
+                print("PerformanceStore error:", error)
+                return
+            } else {
+                print("PerformanceStore: finished loading perfs for", perfID)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: performanceStoreUpdatedNotificationKey), object: nil)
+                DispatchQueue.main.async {
+                    self.delegate?.modelUpdated()
+                }
+            }
+        }
+        
+        // perform query operation
+        database.add(queryOperation)
     }
     
-    /// Sorts a list of ChirpPerformances by date.
-    func sortPerformancesByDate(_ perfs : [ChirpPerformance]) -> [ChirpPerformance] {
-        return perfs.sorted(by: {(rec1: ChirpPerformance, rec2: ChirpPerformance) -> Bool in
-            rec1.date > rec2.date
-        })
+    /// Retrieve all the replies for a given performance from the performance store and iCloud.
+    func getAllReplies(forPerformance performance: ChirpPerformance) -> [ChirpPerformance] {
+        var output = [ChirpPerformance]()
+        output.append(performance) // add the top performance.
+        var current = performance
+        while current.replyto != "" {
+            // Check if the reply is available in the performanceStore
+            if let next = getPerformance(forID: CKRecordID(recordName: current.replyto)) {
+                output.append(next)
+                current = next
+            } else {
+                // Try to find the relevant reply and add to the store. - this is low priority and will update later.
+                fetchPerformance(forID: CKRecordID(recordName: current.replyto))
+                break
+            }
+        }
+        return output
     }
     
 }
+
+// MARK: - Uploading
 
 /// Extension for uploading functionality
 extension PerformanceStore {
@@ -281,22 +364,48 @@ extension PerformanceStore {
                 print("Store: Error saving to the database.")
                 print(error ?? "")
             }
-            // todo take the record and add the CreatorID to the performance store's version.
-            if let creator_id = record?.creatorUserRecordID {
-                DispatchQueue.main.async {
-                    // add the creator id to the record
-                    performance.creatorID = creator_id
-                    self.storedPerformances.insert(performance, at: 0) // add to performance list
-                    self.performances[performanceID] = performance // add to performance dictionary
-                    self.delegate?.modelUpdated() // stop spinner
-                    self.savePerformances()
-                }
-            }
-            
             print("Store: Saved to cloudkit:", performance.title()) // runs when upload is complete
         })
     }
 }
+
+// MARK: - Deleting
+
+extension PerformanceStore {
+
+    /// Removes a performances from the local store by CKRecordID
+    func removePerformanceFromStore(withID recordID: CKRecordID) {
+        // Remove from the dictionary version
+        performances.removeValue(forKey: recordID)
+        // Remove from the array version
+        if let index = storedPerformances.index(where: { (performance) -> Bool in
+            performance.performanceID == recordID
+        }) {
+            storedPerformances.remove(at: index)
+        }
+    }
+
+    /// Delete a performance from the database and local store by CKRecord ID. Only works for performances owned by the user.
+    func deleteUserPerformance(withID recordID: CKRecordID) {
+        print("Starting Deletion Operation.")
+        // remove from database
+        database.delete(withRecordID: recordID, completionHandler: { (record, error) in
+            print("Deletion operation complete")
+            if let error = error {
+                print("Deletion failed:", error)
+            } else {
+                print("Deletion was successful, updating")
+                self.removePerformanceFromStore(withID: recordID)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: performanceStoreUpdatedNotificationKey), object: nil)
+                DispatchQueue.main.async {
+                    self.delegate?.modelUpdated()
+                }
+            }
+        })
+    }
+}
+
+// MARK: - Parsing
 
 /// Extension for Parsing Methods
 extension PerformanceStore {

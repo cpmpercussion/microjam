@@ -3,50 +3,52 @@ layout: page
 title: privacy policy
 ---
 
-### Last updated: August 01, 2017
+Microjam is created by Charles Martin and other researchers as part of academic research at the University of Oslo. It is distributed freely for your enjoyment and as part of our research into new ways of making music with mobile computing devices.
 
-microjam ("us", "we", or "our") operates the microjam.info website and the microjam app available on the Apple iTunes App Store (the "Service").
+This page informs you about information we collect and store from you when using the microjam.info website and the microjam app available on the Apple iTunes App Store.
 
-This page informs you of our policies regarding the collection, use and disclosure of Personal Information when you use our Service.
+## Information we access and collect
 
-We will not use or share your information with anyone except as described in this Privacy Policy.
+When using MicroJam, we use Apple's iCloud service to store musical performances that you create. **Performances** that you have created in microjam and your public **username** and **avatar image** are visible to others who use the app. 
 
-We use your Personal Information for providing and improving the Service and for the purposes of academic research. By using the Service, you agree to the collection and use of information in accordance with this policy. Unless otherwise defined in this Privacy Policy, terms used in this Privacy Policy have the same meanings as in our Terms and Conditions, accessible at microjam.info
+We **do not access or collect your real name, email address, or any other personal data**, and we cannot access any other data from your iCloud account.
 
-## Information Collection And Use
+When you use the _robojam_ feature of microjam, your musical performance (but not your username) is sent anonymously to an external server to generate a response performance which is returned directly to your device. We do not store your performance on this server.
 
-While using microjam your public username and performances will be stored in our service. Performances that you have created in microjam and your public username are visible to others who use the app. Your real name, email address, and other data, are not visible to other users of the app, or to us.
+We study publicly available performances stored in microjam in order to study how users can make music with smartphones and mobile devices. We collect anonymous statistics about how robojam is used as part of our research and may report aggregated information regarding microjam performances and usage in our research publications. For example, we might analyse whether performances using a drum sound are different to those using a keyboard sound, and discuss the results in a paper. We might also use public performances to test and improve our robojam system.
 
-## Log Data
-
-We collect publicly available performances created and saved in microjam in order to study how users can make music with smartphones and mobile devices.
-
-## Service Providers
-
-We may employ third party companies and individuals to facilitate our Service, to provide the Service on our behalf, to perform Service-related services or to assist us in analyzing how our Service is used.
-
-These third parties have access to your Personal Information only to perform these tasks on our behalf and are obligated not to disclose or use it for any other purpose.
+You may delete performances from microjam at any time, if you do so, these performances will not be visible to other users or to us.
 
 ## Security
 
-The security of your Personal Information is important to us, but remember that no method of transmission over the Internet, or method of electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your Personal Information, we cannot guarantee its absolute security.
+Our app does not transmit or store any of your personal data, or any type of password. All storage of information in microjam occurs using Apple's iCloud service within the iOS operating system. Communication with robojam is encrypted and occurs over HTTPS.
 
-## Links To Other Sites
+## Exporting or deleting your information
 
-Our Service may contain links to other sites that are not operated by us. If you click on a third party link, you will be directed to that third party's site. We have no control over, and assume no responsibility for the content, privacy policies or practices of any third party sites or services.
+You may export or delete your information from inside the microjam iOS app.
 
-## Children's Privacy
+## Sharing of personal information
 
-Our Service does not address anyone under the age of 13 ("Children").
+We will not distribute your information to others without your consent. Performances that you save in microjam are public and will be visible to other users as well as us. This is because microjam is intended to be a _collaborative_ experience, where you view and reply to the performances of other users. If you do not want your performances to be public, you can use microjam without saving them, and can delete ones that you have already saved. 
 
-We do not knowingly collect personally identifiable information from children under 13. If you are a parent or guardian and you are aware that your Children has provided us with Personal Information, please contact us. If we discover that a Children under 13 has provided us with Personal Information, we will delete such information from our servers immediately.
+## Children’s privacy
 
-## Changes To This Privacy Policy
+Microjam is not intended for use by children under the age of 13.
 
-We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.
+## Information for users from the European Union
 
-You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.
+By using microjam and storing your performances and other information, you agree that we may collect, use, and store this information outside of the European Union.
 
-## Contact Us
+## Your consent
+
+By using microjam, you consent to the storage and use of your information according to our privacy policy.
+
+## Changes to this privacy policy
+
+If we change our privacy policy, these changes will be reflected in this website. A summary of changes so far is:
+
+- July 10, 2018: First published to reflect first public release of microjam.
+
+## Contact us
 
 If you have any questions about this Privacy Policy, please contact Charles Martin at [http://www.mn.uio.no/ifi/english/people/aca/charlepm/](http://www.mn.uio.no/ifi/english/people/aca/charlepm/).

@@ -56,5 +56,16 @@ class PerformanceTableCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
     }
+    
+    /// Prepare the cell for reuse by closing all Pd files.
+    override func prepareForReuse() {
+        /// Close ChirpViews in the cell's player (if they exist)
+        if let player = player {
+            for chirp in player.chirpViews {
+                chirp.closePdFile()
+                chirp.removeFromSuperview()
+            }
+        }
+    }
 
 }
