@@ -43,6 +43,7 @@ class WorldJamsTableViewController: UITableViewController {
         // Initialise the refreshControl
         self.refreshControl?.addTarget(performanceStore, action: #selector(performanceStore.fetchWorldJamsFromCloud), for: UIControlEvents.valueChanged)
         tableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tableViewTapped)))
+        tableView.separatorStyle = .none // Remove the separator
     }
 
     // Action if a play button is pressed in a cell
