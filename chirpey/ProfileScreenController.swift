@@ -74,6 +74,7 @@ class ProfileScreenController: UserPerfController {
     /// When the view will appear, updates UI with latest profile / performance information
     override func viewWillAppear(_ animated: Bool) {
         headerView?.updateUI()
+        super.viewWillAppear(animated)
     }
     
     // MARK: - Interface builder actions for header
