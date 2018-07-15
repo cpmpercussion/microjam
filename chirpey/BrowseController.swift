@@ -134,13 +134,12 @@ class BrowseController: UICollectionViewController, UICollectionViewDelegateFlow
     }
     
     @objc func previewPerformance(sender: UIButton) {
-        
         // The button is in the contentView of the cell, need to get the content view's superview...
-        if let superView = sender.superview?.superview {
-            let cell = superView as! BrowseCell
+        //if let superView = sender.superview?.superview {
+            //let cell = superView as! BrowseCell
             // FIXME: Revise this statement to use a chirpplayer object.
-//            ChirpView.play(performance: cell.performance!)
-        }
+            //ChirpView.play(performance: cell.performance!)
+        //}
     }
 
     // MARK: UICollectionViewDataSource
