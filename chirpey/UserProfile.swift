@@ -361,10 +361,10 @@ extension UserProfile {
     /// Function to delete all records from the logged in user. WARNING DANGER!
     func deleteRecords(really reallyVar: Bool) {
         // Delete user information
-        if let userRecord = self.record {
-            // erase the userRecord
-            print("Should delete the user record")
-        }
+//        if let userRecord = self.record {
+//            // erase the userRecord
+//            print("Should delete the user record")
+//        }
         
         let database = container.publicCloudDatabase
         let performerID = CKRecordID(recordName: "__defaultOwner__")
