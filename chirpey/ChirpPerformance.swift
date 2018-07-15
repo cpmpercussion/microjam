@@ -149,7 +149,7 @@ class ChirpPerformance : NSObject {
         var data : [TouchRecord] = []
         let lines = csv.components(separatedBy: "\n")
         // TODO: test this initialiser
-        data = lines.flatMap {TouchRecord.init(fromCSVLine: $0)}
+        data = lines.compactMap {TouchRecord.init(fromCSVLine: $0)}
         self.init(data: data, date: date, performer: performer, instrument: instrument, image: image, location: location,
                   colour: colour, background: background, replyto: replyto)
         self.performanceID = performanceID
