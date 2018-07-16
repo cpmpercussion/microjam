@@ -155,6 +155,7 @@
                                     </constraint>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" priority="900" constant="512" id="wS9-mt-haF"/>
                                 </constraints>
+                                <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="4sg-6O-E0m"/>
                                     </mask>
