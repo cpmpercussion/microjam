@@ -132,7 +132,10 @@ class WorldJamsTableViewController: UITableViewController {
         if let profile = profilesStore.getProfile(forPerformance: performance) {
             cell.display(performerProfile: profile)
         } else {
-            cell.avatarImageView.image = nil
+            //cell.avatarImageView.image = nil
+            if performance.performer == UserProfile.shared.profile.stageName {
+                cell.avatarImageView.image = UserProfile.shared.profile.avatar
+            }
             cell.performer.text = performance.performer
         }
         

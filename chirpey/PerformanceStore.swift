@@ -97,17 +97,17 @@ class PerformanceStore: NSObject {
     func addNew(performance : ChirpPerformance) {
         self.upload(performance: performance)
         // Add this perf to the model as well.
+        //print("User is logged in, updating performance info and adding to store.")
+        let perfID = CKRecordID(recordName: performance.title())
+        performance.performanceID = perfID
         if let performersUserRecordID = UserProfile.shared.record?.creatorUserRecordID  {
-            print("User is logged in, updating performance info and adding to store.")
-            let perfID = CKRecordID(recordName: performance.title())
-            performance.performanceID = perfID
             performance.creatorID = performersUserRecordID
-            self.performances[perfID] = performance
-            DispatchQueue.main.async {
-                self.feed = self.generateFeed()
-                self.delegate?.modelUpdated() // stop spinner
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: performanceStoreUpdatedNotificationKey), object: nil)
-            }
+        }
+        self.performances[perfID] = performance
+        DispatchQueue.main.async {
+            self.feed = self.generateFeed()
+            self.delegate?.modelUpdated() // stop spinner
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: performanceStoreUpdatedNotificationKey), object: nil)
         }
     }
 
