@@ -112,7 +112,9 @@ class WorldJamsTableViewController: UITableViewController {
         cell.player = ChirpPlayer()
         cell.player?.delegate = self
         
-        /// Get all replies and add them to the player and chirp container.
+        
+        // Get all replies and add them to the player and chirp container.
+        // TODO: Maybe the cell can do this for itself.
         let performanceChain = performanceStore.getAllReplies(forPerformance: performance)
         for perfItem in performanceChain {
             let chirpView = ChirpView(with: cell.chirpContainer.bounds, andPerformance: perfItem)
@@ -120,7 +122,6 @@ class WorldJamsTableViewController: UITableViewController {
             cell.player!.chirpViews.append(chirpView)
             cell.chirpContainer.addSubview(chirpView)
         }
-
         // Add constraints for cell.chirpContainer's subviews.
         for view in cell.chirpContainer.subviews {
             view.translatesAutoresizingMaskIntoConstraints = false
@@ -134,6 +135,7 @@ class WorldJamsTableViewController: UITableViewController {
             cell.avatarImageView.image = nil
             cell.performer.text = performance.performer
         }
+        
         cell.title.text = performance.dateString
         cell.instrument.text = performance.instrument
         cell.context.text = nonCreditString(forDate: performance.date)
@@ -252,7 +254,6 @@ extension WorldJamsTableViewController: ModelDelegate {
 
     /// Conforms to ModelDelegate Protocol
     func modelUpdated() {
-        //print("WJTVC: Model updated, reloading data.")
         refreshControl?.endRefreshing()
         tableView.tableHeaderView = nil
         
