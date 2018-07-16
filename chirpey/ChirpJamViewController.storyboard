@@ -153,7 +153,7 @@
                                         <variation key="heightClass=regular-widthClass=compact" constant="500"/>
                                         <variation key="heightClass=regular-widthClass=regular" constant="600"/>
                                     </constraint>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" priority="900" constant="512" id="wS9-mt-haF"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" priority="900" constant="700" id="wS9-mt-haF"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
