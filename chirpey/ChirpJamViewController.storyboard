@@ -146,14 +146,19 @@
                                     </stackView>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="width" constant="854" id="4sg-6O-E0m"/>
                                     <constraint firstItem="KZA-aj-oyP" firstAttribute="trailing" secondItem="YbA-uu-qOE" secondAttribute="trailingMargin" id="OOg-C5-OnX"/>
                                     <constraint firstItem="KZA-aj-oyP" firstAttribute="leading" secondItem="YbA-uu-qOE" secondAttribute="leadingMargin" id="RYY-kb-jwr"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="900" constant="600" id="jdd-Qb-X9r">
                                         <variation key="heightClass=regular-widthClass=compact" constant="500"/>
                                         <variation key="heightClass=regular-widthClass=regular" constant="600"/>
                                     </constraint>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="900" constant="512" id="wS9-mt-haF"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" priority="900" constant="512" id="wS9-mt-haF"/>
                                 </constraints>
+                                    <mask key="constraints">
+                                        <exclude reference="4sg-6O-E0m"/>
+                                    </mask>
+                                </variation>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.97367788460000004" green="0.97367788460000004" blue="0.97367788460000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
