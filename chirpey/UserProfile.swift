@@ -133,7 +133,6 @@ class UserProfile: NSObject {
                 print("UserProfile: Found user record, notifying.")
                 self.record = record
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: userProfileUpdatedNotificationKey), object: nil)
-                
             }
         }
     }
