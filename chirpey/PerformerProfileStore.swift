@@ -9,6 +9,8 @@
 import UIKit
 import CloudKit
 
+let performerProfileUpdatedKey = "au.com.charlesmartin.PerformerProfilesUpdatedNotificationKey"
+
 class PerformerProfileStore : NSObject {
     /// Shared Instance
     static let shared = PerformerProfileStore()
@@ -20,14 +22,10 @@ class PerformerProfileStore : NSObject {
     let database = CKContainer.default().publicCloudDatabase
     /// Storage for profiles
     var profiles: [CKRecordID: PerformerProfile]
-    /// Storage for delegate conforming to ModelDelegate
-    var delegate: ModelDelegate?
     
     private override init() {
         profiles = PerformerProfileStore.loadProfiles()
         super.init()
-        // TODO: Need to do some checking for updates in the background
-        // TODO: What if there are multiple delegates? Maybe change to NSNotifications
     }
     
     /// Load Profiles from file
@@ -99,7 +97,7 @@ class PerformerProfileStore : NSObject {
                     prof.fetchedThisSession = true // set fetched this session, so it's not refetched later.
                     self.profiles[performerID] = prof
                     print("PerformerProfileStore: \(prof.stageName)'s profile fetched.")
-                    self.delegate?.modelUpdated()
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: performerProfileUpdatedKey), object: nil)
                 }
             }
         }

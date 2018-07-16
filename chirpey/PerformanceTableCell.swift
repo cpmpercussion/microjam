@@ -51,6 +51,22 @@ class PerformanceTableCell: UITableViewCell {
         replyButton.setImage(#imageLiteral(resourceName: "microjam-reply"), for: .normal)
         replyButton.tintColor = UIColor.darkGray
     }
+    
+    /// Updates UI with data from a given PerformerProfile
+    func display(performerProfile profile: PerformerProfile) {
+        avatarImageView.image = profile.avatar
+        performer.text = profile.stageName
+    }
+    
+    /// Infers correct PerformerProfile from the ChirpPlayer and gets appropriate profile.
+    func displayProfileFromPlayer() {
+        if let perf = player?.chirpViews.first?.performance,
+            let profile = PerformerProfileStore.shared.getProfile(forPerformance: perf) {
+            print("Successfully updated profile for: \(profile.stageName) in a PerformanceTableCell")
+            //PerformerProfileStore.shared.getProfile(forID: perfID) {
+            self.display(performerProfile: profile)
+        }
+    }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

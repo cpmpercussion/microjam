@@ -171,8 +171,9 @@ extension ChirpRecordingView {
         }
         
         // Get the present recorded image.
-        if let presentPerf = performance {
-            presentPerf.image.draw(in: CGRect(x:0, y:0, width:frame.size.width, height:frame.size.height))
+        if let presentPerf = performance,
+            let image = presentPerf.image {
+            image.draw(in: CGRect(x:0, y:0, width:frame.size.width, height:frame.size.height))
         }
 
         // Now draw all the tail segments.

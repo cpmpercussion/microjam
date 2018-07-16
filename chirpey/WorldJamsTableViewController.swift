@@ -38,12 +38,13 @@ class WorldJamsTableViewController: UITableViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 420 // iPhone 7 height
         performanceStore.delegate = self
-        profilesStore.delegate = self
         headerView.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 100) // header view used to display iCloud errors
         // Initialise the refreshControl
         self.refreshControl?.addTarget(performanceStore, action: #selector(performanceStore.fetchWorldJamsFromCloud), for: UIControlEvents.valueChanged)
         tableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tableViewTapped)))
         tableView.separatorStyle = .none // Remove the separator
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateProfilesInCells), name: NSNotification.Name(rawValue: performerProfileUpdatedKey), object: nil)
     }
 
     // Action if a play button is pressed in a cell
@@ -85,6 +86,15 @@ class WorldJamsTableViewController: UITableViewController {
         tabBarController?.selectedIndex = 1 // go to the second tab (jam!)
     }
     
+    /// Visit each available table view cell and make sure it is displaying the correct profile information after an update.
+    @objc func updateProfilesInCells() {
+        print("WJTVC: Received a profile update, making sure visible cells are up to date.")
+        for cell in tableView.visibleCells {
+            if let cell = cell as? PerformanceTableCell {
+                cell.displayProfileFromPlayer()
+            }
+        }
+    }
 
     // MARK: - Table view data source
 
@@ -100,9 +110,11 @@ class WorldJamsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: worldJamCellIdentifier, for: indexPath) as! PerformanceTableCell
         let performance = performanceStore.feed[indexPath.row]
         cell.player = ChirpPlayer()
-        cell.player!.delegate = self
+        cell.player?.delegate = self
         
-        /// Get all replies and add them to the player and chirp container.
+        
+        // Get all replies and add them to the player and chirp container.
+        // TODO: Maybe the cell can do this for itself.
         let performanceChain = performanceStore.getAllReplies(forPerformance: performance)
         for perfItem in performanceChain {
             let chirpView = ChirpView(with: cell.chirpContainer.bounds, andPerformance: perfItem)
@@ -110,7 +122,6 @@ class WorldJamsTableViewController: UITableViewController {
             cell.player!.chirpViews.append(chirpView)
             cell.chirpContainer.addSubview(chirpView)
         }
-
         // Add constraints for cell.chirpContainer's subviews.
         for view in cell.chirpContainer.subviews {
             view.translatesAutoresizingMaskIntoConstraints = false
@@ -119,12 +130,12 @@ class WorldJamsTableViewController: UITableViewController {
 
         /// Setup the metadata area.
         if let profile = profilesStore.getProfile(forPerformance: performance) {
-            cell.avatarImageView.image = profile.avatar
-            cell.performer.text = profile.stageName
+            cell.display(performerProfile: profile)
         } else {
             cell.avatarImageView.image = nil
             cell.performer.text = performance.performer
         }
+        
         cell.title.text = performance.dateString
         cell.instrument.text = performance.instrument
         cell.context.text = nonCreditString(forDate: performance.date)
@@ -243,7 +254,6 @@ extension WorldJamsTableViewController: ModelDelegate {
 
     /// Conforms to ModelDelegate Protocol
     func modelUpdated() {
-        //print("WJTVC: Model updated, reloading data.")
         refreshControl?.endRefreshing()
         tableView.tableHeaderView = nil
         

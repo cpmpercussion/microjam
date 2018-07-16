@@ -67,6 +67,10 @@ class ChirpView: UIImageView {
         // print("ChirpView: Loading existing performance") // Runs too many times to be helpful...
         performance = newPerf
         image = newPerf.image
+        if newPerf.image == nil, let recID = newPerf.performanceID {
+            // Fetch the image if it hasn't been downloaded yet.
+            PerformanceStore.shared.fetchImageFor(performance: recID, andAssignTo: self)
+        }
         playbackColour = newPerf.colour.brighterColor.cgColor
         started = false
         lastPoint = CG_INIT_POINT
