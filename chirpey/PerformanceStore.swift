@@ -305,6 +305,22 @@ extension PerformanceStore {
         }
     }
     
+    /// Fetch the image for a given performance and assign it to a given ChirpView. (use this one)
+    func fetchImageFor(performance recordID: CKRecordID, andAssignTo chirpView: ChirpView) {
+        database.fetch(withRecordID: recordID) { [unowned self] (record: CKRecord?, error: Error?) in
+            if let record = record,
+                let imageAsset = record.object(forKey: PerfCloudKeys.image) as? CKAsset,
+                let image = UIImage(contentsOfFile: imageAsset.fileURL.path) {
+                DispatchQueue.main.async {
+                    // update performance in store.
+                    self.performances[recordID]?.image = image
+                    // update view
+                    chirpView.image = image
+                }
+            }
+        }
+    }
+    
     /// Fetch performances by a given performer from CloudKit
     func fetchPerformances(byPerformer perfID: CKRecordID) {
         let performerSearchPredicate = NSPredicate(format: "%K == %@", argumentArray: ["creatorUserRecordID", perfID])
