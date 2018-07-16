@@ -200,7 +200,7 @@ extension PerformanceStore {
     /// Refresh list of world jams from CloudKit and then update in world jam table view.
     @objc func fetchWorldJamsFromCloud() {
         print("Store: Attempting to fetch World Jams from Cloud.")
-        var fetchedPerformances = [ChirpPerformance]()
+        //var fetchedPerformances = [ChirpPerformance]()
         let predicate = NSPredicate(value: true)
         let sort = NSSortDescriptor(key: PerfCloudKeys.date, ascending: false)
         /// FIXME: predicate should only download latest 100 jams from the last month or something.
@@ -208,9 +208,16 @@ extension PerformanceStore {
         query.sortDescriptors = [sort]
         let operation = CKQueryOperation(query: query)
         operation.resultsLimit = max_jams_to_fetch
+        
         operation.recordFetchedBlock = { record in
             if let perf = self.performanceFrom(record: record) {
-                fetchedPerformances.append(perf)
+                self.addToStored(performances: [perf]) // update the stored performances
+                //fetchedPerformances.append(perf)
+                DispatchQueue.main.async {
+                    self.feed = self.generateFeed()
+                    self.delegate?.modelUpdated()
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: performanceStoreUpdatedNotificationKey), object: nil)
+                }
             }
         } // Appends fetched records to the array of Performances
 
@@ -223,11 +230,13 @@ extension PerformanceStore {
                 }
                 return
             }
-            print("Store: ", fetchedPerformances.count, " performances downloaded.")
-            self.addToStored(performances: fetchedPerformances) // update the stored performances
-            self.feed = self.generateFeed()
-            print("Store: ", self.storedPerformances.count, " total stored performances.")
+            
+            //print("Store: ", fetchedPerformances.count, " performances downloaded.")
+            //print("Store: ", self.storedPerformances.count, " total stored performances.")
+            //self.addToStored(performances: fetchedPerformances) // update the stored performances
+            
             DispatchQueue.main.async { // give the delegate the trigger to update the table.
+                self.feed = self.generateFeed()
                 self.delegate?.modelUpdated()
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: performanceStoreUpdatedNotificationKey), object: nil)
             }
