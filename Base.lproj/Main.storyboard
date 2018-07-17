@@ -47,35 +47,44 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fmu-Vs-F8c" userLabel="metadata container">
                                             <rect key="frame" x="52" y="16" width="310" height="50"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="performername" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zm0-8q-7kP">
-                                                    <rect key="frame" x="54" y="3" width="127" height="22"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="performername" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zm0-8q-7kP">
+                                                    <rect key="frame" x="54" y="3.3333333333333321" width="127" height="21.666666666666668"/>
+                                                    <accessibility key="accessibilityConfiguration" hint="Displays performer stage name" identifier="Stage name" label="Stage name"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date and time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RbJ-Tv-ySY" userLabel="Date">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="date and time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RbJ-Tv-ySY" userLabel="Date">
                                                     <rect key="frame" x="54" y="27.666666666666664" width="89" height="17"/>
+                                                    <accessibility key="accessibilityConfiguration">
+                                                        <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
+                                                    </accessibility>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cxR-qX-Aey">
+                                                <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Zvi-FN-w8i">
                                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="50" id="9Oe-de-hDH"/>
-                                                        <constraint firstAttribute="width" constant="50" id="uUm-1F-ted"/>
-                                                    </constraints>
-                                                </imageView>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cxR-qX-Aey">
+                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                            <accessibility key="accessibilityConfiguration" hint="Displays performer avatar" identifier="Avatar image" label="Avatar image">
+                                                                <bool key="isElement" value="YES"/>
+                                                            </accessibility>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="50" id="9Oe-de-hDH"/>
+                                                                <constraint firstAttribute="width" constant="50" id="uUm-1F-ted"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstItem="Zm0-8q-7kP" firstAttribute="leading" secondItem="cxR-qX-Aey" secondAttribute="trailing" constant="4" id="9f3-dm-zal"/>
                                                 <constraint firstItem="Zm0-8q-7kP" firstAttribute="centerY" secondItem="fmu-Vs-F8c" secondAttribute="centerY" constant="-11" id="QA7-4Q-nmx"/>
                                                 <constraint firstAttribute="height" constant="50" id="RoH-fE-34h"/>
-                                                <constraint firstItem="cxR-qX-Aey" firstAttribute="leading" secondItem="fmu-Vs-F8c" secondAttribute="leading" id="hdV-An-huK"/>
                                                 <constraint firstItem="RbJ-Tv-ySY" firstAttribute="centerY" secondItem="fmu-Vs-F8c" secondAttribute="centerY" constant="11" id="iBh-oW-MYz"/>
-                                                <constraint firstItem="RbJ-Tv-ySY" firstAttribute="leading" secondItem="cxR-qX-Aey" secondAttribute="trailing" constant="4" id="opJ-Rb-0iB"/>
-                                                <constraint firstItem="cxR-qX-Aey" firstAttribute="centerY" secondItem="fmu-Vs-F8c" secondAttribute="centerY" id="sM4-IE-u10"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qwU-ld-Uy2">
@@ -88,6 +97,7 @@
                                         </view>
                                         <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JOw-B7-ob4">
                                             <rect key="frame" x="318" y="340.66666666666669" width="36" height="36"/>
+                                            <accessibility key="accessibilityConfiguration" hint="Tap to reply to this performance" identifier="Reply button" label="Reply button"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="36" id="YNc-to-Xg0"/>
                                                 <constraint firstAttribute="height" constant="36" id="tub-8c-s9b"/>
@@ -96,6 +106,7 @@
                                         </button>
                                         <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ske-ad-PVr">
                                             <rect key="frame" x="60" y="340.66666666666669" width="36" height="36"/>
+                                            <accessibility key="accessibilityConfiguration" hint="Plays this performance" identifier="Play button" label="Play button"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="36" id="gNE-VS-NXh"/>
                                                 <constraint firstAttribute="width" constant="36" id="vNH-EB-538"/>
