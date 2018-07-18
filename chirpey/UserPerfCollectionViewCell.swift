@@ -20,11 +20,19 @@ class UserPerfCollectionViewCell: UICollectionViewCell {
     /// the size of the listen button.
     let listenButtonWidth : CGFloat = 20
     /// A UIImageView to display the performance image
+    
     let performanceImageView : UIImageView = {
         let imageView = UIImageView()
         imageView.layer.borderWidth = 1
         imageView.layer.borderColor = UIColor(white: 0.8, alpha: 1).cgColor
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        /// Accessibility elements
+        imageView.isAccessibilityElement = true
+        imageView.accessibilityTraits = UIAccessibilityTraitButton
+        imageView.accessibilityLabel = "performance image"
+        imageView.accessibilityHint = "Tap to access this performance"
+        imageView.accessibilityIdentifier = "performance image"
+        
         return imageView
     }()
     /// Play Button
@@ -34,6 +42,13 @@ class UserPerfCollectionViewCell: UICollectionViewCell {
         button.setTitleColor(UIColor(white: 0.1, alpha: 1), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = UIColor.darkGray
+        /// Accessibility elements
+        button.isAccessibilityElement = true
+        button.accessibilityTraits = UIAccessibilityTraitButton
+        button.accessibilityLabel = "Play button"
+        button.accessibilityHint = "Tap to play performance"
+        button.accessibilityIdentifier = "Play button"
+        
         return button
     }()
     /// Reply Button
@@ -44,6 +59,13 @@ class UserPerfCollectionViewCell: UICollectionViewCell {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 10 // Button size is 36
         button.tintColor = UIColor.darkGray
+        /// Accessibility elements
+        button.isAccessibilityElement = true
+        button.accessibilityTraits = UIAccessibilityTraitButton
+        button.accessibilityLabel = "Reply button"
+        button.accessibilityHint = "Tap to reply"
+        button.accessibilityIdentifier = "Reply button"
+
         return button
     }()
     let menuButton : UIButton = {
@@ -53,6 +75,13 @@ class UserPerfCollectionViewCell: UICollectionViewCell {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 10
         button.tintColor = UIColor.darkGray
+        /// Accessibility elements
+        button.isAccessibilityElement = true
+        button.accessibilityTraits = UIAccessibilityTraitButton
+        button.accessibilityLabel = "Menu button"
+        button.accessibilityHint = "Tap to access menu"
+        button.accessibilityIdentifier = "Menu button"
+
         return button
     }()
     
