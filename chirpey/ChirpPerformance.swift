@@ -41,7 +41,7 @@ class ChirpPerformance : NSObject {
     /// Name of the SoundScheme used to record this performance.
     var instrument : String
     /// UIImage of completed performance touch trace.
-    var image : UIImage
+    var image : UIImage?
     /// Location of CSV file storing this performance's TouchRecords.
     var csvPathURL : URL?
     /// Location where performances was recorded (unused).
@@ -84,14 +84,17 @@ class ChirpPerformance : NSObject {
         guard let date = aDecoder.decodeObject(forKey: PropertyKey.dateKey) as? Date,
             let performer = aDecoder.decodeObject(forKey: PropertyKey.performerKey) as? String,
             let instrument = aDecoder.decodeObject(forKey: PropertyKey.instrumentKey) as? String,
-            let imageData = aDecoder.decodeObject(forKey: PropertyKey.imageKey) as? Data,
-            let image = UIImage(data: imageData),
             let colour = aDecoder.decodeObject(forKey: PropertyKey.colourKey) as? String,
             let bgColour = aDecoder.decodeObject(forKey: PropertyKey.backgroundColourKey) as? String,
             let replyto = aDecoder.decodeObject(forKey: PropertyKey.replyToKey) as? String
             else {return nil}
 
-        let location = (aDecoder.decodeObject(forKey: "location") as? CLLocation) ?? RoboJamPerfData.fakeLocation
+        let location = RoboJamPerfData.fakeLocation // remove use of location.
+        
+        var image : UIImage? = nil
+        if let imageData = aDecoder.decodeObject(forKey: PropertyKey.imageKey) as? Data {
+            image = UIImage(data: imageData)
+        }
 
         // print("PERF: Decoding", data.count, "notes:", performer, instrument)
 
@@ -109,10 +112,12 @@ class ChirpPerformance : NSObject {
         if let parentRef = aDecoder.decodeObject(forKey: PropertyKey.parentReferenceKey) as? CKReference {
             self.parentReference = parentRef
         }
+        
+
     }
 
     /// Main initialiser
-    init(data: [TouchRecord], date: Date, performer: String, instrument: String, image: UIImage, location: CLLocation, colour: String, background: String, replyto: String) {
+    init(data: [TouchRecord], date: Date, performer: String, instrument: String, image: UIImage?, location: CLLocation, colour: String, background: String, replyto: String) {
         self.performanceData = data
         self.date = date
         self.performer = performer
@@ -127,6 +132,9 @@ class ChirpPerformance : NSObject {
     
     /// Convenience Initialiser for use with CloudKit records.
     convenience init?(fromRecord record: CKRecord) {
+        let replyto = record.object(forKey: PerfCloudKeys.replyto) as! String
+        let performance_id = record.recordID
+        let creator_id = record.creatorUserRecordID
         let touches = record.object(forKey: PerfCloudKeys.touches) as! String
         let date = (record.object(forKey: PerfCloudKeys.date) as! NSDate) as Date
         let performer = record.object(forKey: PerfCloudKeys.performer) as! String
@@ -134,18 +142,21 @@ class ChirpPerformance : NSObject {
         let location = record.object(forKey: PerfCloudKeys.location) as! CLLocation
         let colour = record.object(forKey: PerfCloudKeys.colour) as? String ?? UIColor.red.hexString()
         let bgColour = record.object(forKey: PerfCloudKeys.backgroundColour) as? String ?? UIColor.gray.hexString()
-        let imageAsset = record.object(forKey: PerfCloudKeys.image) as! CKAsset
-        let image = UIImage(contentsOfFile: imageAsset.fileURL.path)!
-        let replyto = record.object(forKey: PerfCloudKeys.replyto) as! String
-        let performance_id = record.recordID
-        let creator_id = record.creatorUserRecordID
+        
+        var image : UIImage? = nil
+        if let imageAsset = record.object(forKey: PerfCloudKeys.image) as? CKAsset {
+            image = UIImage(contentsOfFile: imageAsset.fileURL.path)
+        }
+        //else {
+        //    PerformanceStore.shared.fetchImageFor(performance: performance_id)
+        //}
         // Initialise the Performance
         self.init(csv: touches, date: date, performer: performer, instrument: instrument, image: image, location: location,
                   colour: colour, background: bgColour, replyto: replyto, performanceID: performance_id, creatorID: creator_id)
     }
     
     /// Initialiser with csv of data for the TouchRecords, useful in initialising performances from CloudKit
-    convenience init?(csv: String, date: Date, performer: String, instrument: String, image: UIImage, location: CLLocation, colour: String, background: String, replyto: String, performanceID: CKRecordID, creatorID: CKRecordID?) {
+    convenience init?(csv: String, date: Date, performer: String, instrument: String, image: UIImage?, location: CLLocation, colour: String, background: String, replyto: String, performanceID: CKRecordID, creatorID: CKRecordID?) {
         var data : [TouchRecord] = []
         let lines = csv.components(separatedBy: "\n")
         // TODO: test this initialiser
@@ -263,7 +274,6 @@ extension ChirpPerformance: NSCoding {
         aCoder.encode(date, forKey: PropertyKey.dateKey)
         aCoder.encode(performer, forKey: PropertyKey.performerKey)
         aCoder.encode(instrument, forKey: PropertyKey.instrumentKey)
-        aCoder.encode(UIImagePNGRepresentation(image), forKey: PropertyKey.imageKey)
         aCoder.encode(location, forKey: PropertyKey.locationKey)
         aCoder.encode(colour.hexString(), forKey: PropertyKey.colourKey)
         aCoder.encode(replyto, forKey: PropertyKey.replyToKey)
@@ -276,6 +286,9 @@ extension ChirpPerformance: NSCoding {
         }
         if let parentRef = self.parentReference {
             aCoder.encode(parentRef, forKey: PropertyKey.parentReferenceKey)
+        }
+        if let image = self.image {
+            aCoder.encode(UIImagePNGRepresentation(image), forKey: PropertyKey.imageKey)
         }
     }
 }

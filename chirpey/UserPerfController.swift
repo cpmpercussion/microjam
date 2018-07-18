@@ -196,6 +196,13 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
             alertActionCell.addAction(deleteAction)
         }
         alertActionCell.addAction(cancelAction)
+        
+        if let popoverPresentationController = alertActionCell.popoverPresentationController {
+            popoverPresentationController.sourceView = self.view
+            popoverPresentationController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+            popoverPresentationController.permittedArrowDirections = .init(rawValue: 0)
+        }
+        
         self.present(alertActionCell, animated: true, completion: nil)
     }
 

@@ -97,17 +97,17 @@ class PerformanceStore: NSObject {
     func addNew(performance : ChirpPerformance) {
         self.upload(performance: performance)
         // Add this perf to the model as well.
+        //print("User is logged in, updating performance info and adding to store.")
+        let perfID = CKRecordID(recordName: performance.title())
+        performance.performanceID = perfID
         if let performersUserRecordID = UserProfile.shared.record?.creatorUserRecordID  {
-            print("User is logged in, updating performance info and adding to store.")
-            let perfID = CKRecordID(recordName: performance.title())
-            performance.performanceID = perfID
             performance.creatorID = performersUserRecordID
-            self.performances[perfID] = performance
-            DispatchQueue.main.async {
-                self.feed = self.generateFeed()
-                self.delegate?.modelUpdated() // stop spinner
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: performanceStoreUpdatedNotificationKey), object: nil)
-            }
+        }
+        self.performances[perfID] = performance
+        DispatchQueue.main.async {
+            self.feed = self.generateFeed()
+            self.delegate?.modelUpdated() // stop spinner
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: performanceStoreUpdatedNotificationKey), object: nil)
         }
     }
 
@@ -166,7 +166,12 @@ class PerformanceStore: NSObject {
         let titles = self.storedPerformances.map{$0.title()}
         var countPerfsAdded = 0
         for perf in performances {
-            self.performances[CKRecordID(recordName: perf.title())] = perf
+            if let perfID = perf.performanceID {
+                self.performances[perfID] = perf
+            }
+            
+            // self.performances[CKRecordID(recordName: perf.title())] = perf
+            /// TODO: Remove this bit.
             if !titles.contains(perf.title()) {
                 self.storedPerformances.append(perf)
                 countPerfsAdded += 1
@@ -196,7 +201,7 @@ class PerformanceStore: NSObject {
 
 /// Extension for specific queries
 extension PerformanceStore {
-
+    
     /// Refresh list of world jams from CloudKit and then update in world jam table view.
     @objc func fetchWorldJamsFromCloud() {
         print("Store: Attempting to fetch World Jams from Cloud.")
@@ -208,9 +213,19 @@ extension PerformanceStore {
         query.sortDescriptors = [sort]
         let operation = CKQueryOperation(query: query)
         operation.resultsLimit = max_jams_to_fetch
+        operation.desiredKeys = [PerfCloudKeys.date, PerfCloudKeys.instrument, PerfCloudKeys.instrument, PerfCloudKeys.location, PerfCloudKeys.performer, PerfCloudKeys.replyto, PerfCloudKeys.touches, PerfCloudKeys.colour, PerfCloudKeys.backgroundColour, PerfCloudKeys.createdBy] // leaving out PerfCloudKeys.image
+        
         operation.recordFetchedBlock = { record in
             if let perf = self.performanceFrom(record: record) {
-                fetchedPerformances.append(perf)
+                DispatchQueue.main.async {
+                    self.performances[record.recordID] = perf
+                    //self.addToStored(performances: [perf]) // update the stored performances
+                    fetchedPerformances.append(perf)
+                    self.feed = self.generateFeed()
+                    // TODO: Should delegates be updated when every performance is retrieved?
+                    //self.delegate?.modelUpdated()
+                    //NotificationCenter.default.post(name: NSNotification.Name(rawValue: performanceStoreUpdatedNotificationKey), object: nil)
+                }
             }
         } // Appends fetched records to the array of Performances
 
@@ -223,11 +238,13 @@ extension PerformanceStore {
                 }
                 return
             }
+            
             print("Store: ", fetchedPerformances.count, " performances downloaded.")
-            self.addToStored(performances: fetchedPerformances) // update the stored performances
-            self.feed = self.generateFeed()
-            print("Store: ", self.storedPerformances.count, " total stored performances.")
+            //print("Store: ", self.storedPerformances.count, " total stored performances.")
+            //self.addToStored(performances: fetchedPerformances) // update the stored performances
+            
             DispatchQueue.main.async { // give the delegate the trigger to update the table.
+                self.feed = self.generateFeed()
                 self.delegate?.modelUpdated()
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: performanceStoreUpdatedNotificationKey), object: nil)
             }
@@ -263,6 +280,42 @@ extension PerformanceStore {
                     print("PerformanceStore: \(perf.title()) found.")
                     self.delegate?.modelUpdated()
                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: performanceStoreUpdatedNotificationKey), object: nil)
+                }
+            }
+        }
+    }
+    
+    /// Fetch the Image for a given performance.
+    func fetchImageFor(performance recordID: CKRecordID) {
+        database.fetch(withRecordID: recordID) { [unowned self] (record: CKRecord?, error: Error?) in
+            if let e = error {
+                print("PerformanceStore: Error fetching image for perf: \(recordID): \(e)")
+            }
+            if let record = record,
+                let imageAsset = record.object(forKey: PerfCloudKeys.image) as? CKAsset,
+                let image = UIImage(contentsOfFile: imageAsset.fileURL.path)
+            {
+                DispatchQueue.main.async {
+                    self.performances[recordID]?.image = image
+                    self.delegate?.modelUpdated()
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: performanceStoreUpdatedNotificationKey), object: nil)
+                }
+                
+            }
+        }
+    }
+    
+    /// Fetch the image for a given performance and assign it to a given ChirpView. (use this one)
+    func fetchImageFor(performance recordID: CKRecordID, andAssignTo chirpView: ChirpView) {
+        database.fetch(withRecordID: recordID) { [unowned self] (record: CKRecord?, error: Error?) in
+            if let record = record,
+                let imageAsset = record.object(forKey: PerfCloudKeys.image) as? CKAsset,
+                let image = UIImage(contentsOfFile: imageAsset.fileURL.path) {
+                DispatchQueue.main.async {
+                    // update performance in store.
+                    self.performances[recordID]?.image = image
+                    // update view
+                    chirpView.image = image
                 }
             }
         }
@@ -343,7 +396,8 @@ extension PerformanceStore {
         performanceRecord[PerfCloudKeys.colour] = performance.colourString as CKRecordValue
         performanceRecord[PerfCloudKeys.backgroundColour] = performance.backgroundColourString as CKRecordValue
         
-        guard let imageData = UIImagePNGRepresentation(performance.image) else {
+        guard let image = performance.image,
+            let imageData = UIImagePNGRepresentation(image) else {
             print("PerformanceStore: Blank performance, not able to save.")
             return
         }

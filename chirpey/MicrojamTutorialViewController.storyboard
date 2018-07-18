@@ -23,29 +23,29 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="RXn-U1-YUO">
-                                <rect key="frame" x="21" y="126" width="333" height="415"/>
+                                <rect key="frame" x="21" y="170.5" width="333" height="326.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="hot-wf-XbB" userLabel="logged in stack">
-                                        <rect key="frame" x="0.0" y="0.0" width="333" height="76.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="333" height="57.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You're logged into iCloud and ready to go!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZwN-hn-ooL">
-                                                <rect key="frame" x="0.0" y="0.0" width="333" height="76.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="333" height="57.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Fer-Ty-ov3" userLabel="no account stack">
-                                        <rect key="frame" x="0.0" y="76.5" width="333" height="166"/>
+                                        <rect key="frame" x="0.0" y="57.5" width="333" height="137"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You're not logged into iCloud. You won't be able to save your jams." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uMg-W1-W9q">
-                                                <rect key="frame" x="0.0" y="0.0" width="333" height="115"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You're not logged into iCloud. You won't be able to share your jams." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uMg-W1-W9q">
+                                                <rect key="frame" x="0.0" y="0.0" width="333" height="86"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rlJ-cJ-DRb">
-                                                <rect key="frame" x="0.0" y="115" width="333" height="51"/>
+                                                <rect key="frame" x="0.0" y="86" width="333" height="51"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                                 <state key="normal" title="Go to iCloud login"/>
                                                 <connections>
@@ -54,21 +54,20 @@
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SfM-1f-uKK">
-                                        <rect key="frame" x="0.0" y="242.5" width="333" height="81.5"/>
-                                        <string key="text">MicroJam uses iCloud to store your performances and share them with others. You can't store or share performances unless you're logged into iCloud.</string>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MicroJam uses iCloud to store your performances and share them with others." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SfM-1f-uKK">
+                                        <rect key="frame" x="0.0" y="194.5" width="333" height="41"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We do not use or share your real name, email address, or any other personal information." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bBn-GW-2Mu">
-                                        <rect key="frame" x="0.0" y="324" width="333" height="61"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We do not access or share your real name, email address, or any other personal information." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bBn-GW-2Mu">
+                                        <rect key="frame" x="0.0" y="235.5" width="333" height="61"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V3V-KG-fru">
-                                        <rect key="frame" x="0.0" y="385" width="333" height="30"/>
+                                        <rect key="frame" x="0.0" y="296.5" width="333" height="30"/>
                                         <state key="normal" title="skip for now">
                                             <color key="titleColor" red="0.57414853570000002" green="0.57416242360000003" blue="0.57415497299999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -110,16 +109,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="IG6-Lb-f7o">
-                                <rect key="frame" x="21" y="187" width="333" height="294.5"/>
+                                <rect key="frame" x="21" y="196" width="333" height="275.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose a stage name for your Microjams" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qsP-zo-lDm">
-                                        <rect key="frame" x="0.0" y="0.0" width="333" height="76.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="333" height="57.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="choose a stage name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eiY-g1-KKK">
-                                        <rect key="frame" x="0.0" y="76.5" width="333" height="80"/>
+                                        <rect key="frame" x="0.0" y="57.5" width="333" height="80"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="80" id="yc2-Gg-06x"/>
                                         </constraints>
@@ -128,26 +127,26 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="continue"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="td6-j5-ckS">
-                                        <rect key="frame" x="0.0" y="156.5" width="333" height="30"/>
+                                        <rect key="frame" x="0.0" y="137.5" width="333" height="30"/>
                                         <state key="normal" title="Generate a name for me!"/>
                                         <connections>
                                             <action selector="generateStageName:" destination="1Ky-aD-J6s" eventType="touchUpInside" id="WDv-C3-XUk"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose a stylish or fun stagename or hit &quot;generate&quot; to let us choose. You can change your name later as well!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ljs-wi-Tof">
-                                        <rect key="frame" x="0.0" y="186.5" width="333" height="61"/>
+                                        <rect key="frame" x="0.0" y="167.5" width="333" height="61"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MicroJam is just for fun, so avoid real names :-)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="imA-mX-Lbt">
-                                        <rect key="frame" x="0.0" y="247.5" width="333" height="17"/>
+                                        <rect key="frame" x="0.0" y="228.5" width="333" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p0Y-Ob-C11">
-                                        <rect key="frame" x="0.0" y="264.5" width="333" height="30"/>
+                                        <rect key="frame" x="0.0" y="245.5" width="333" height="30"/>
                                         <state key="normal" title="skip for now">
                                             <color key="titleColor" red="0.57414853570000002" green="0.57416242360000003" blue="0.57415497299999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -186,26 +185,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Nbs-bV-VvB">
-                                <rect key="frame" x="21" y="131.5" width="333" height="404.5"/>
+                                <rect key="frame" x="21" y="141" width="333" height="385.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Choose an avatar to represent you" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hQH-HE-cn6">
-                                        <rect key="frame" x="0.0" y="0.0" width="333" height="76.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="333" height="57.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eyH-y0-k9I">
-                                        <rect key="frame" x="0.0" y="76.5" width="333" height="210"/>
+                                        <rect key="frame" x="0.0" y="57.5" width="333" height="210"/>
                                         <subviews>
                                             <view hidden="YES" clipsSubviews="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="yfM-n7-ouY" userLabel="Avatar container view">
-                                                <rect key="frame" x="66.5" y="5" width="200" height="200"/>
+                                                <rect key="frame" x="67" y="5" width="200" height="200"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uGD-Ls-bYR" userLabel="Avatar Image">
                                                         <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                                         <color key="backgroundColor" red="0.90227607659999998" green="0.89745107089999998" blue="0.90710108239999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     </imageView>
                                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="BCR-xO-7Kd" userLabel="avatar activity indicator">
-                                                        <rect key="frame" x="90.5" y="90" width="20" height="20"/>
+                                                        <rect key="frame" x="90" y="90" width="20" height="20"/>
                                                         <color key="color" red="0.2274509804" green="0.4823529412" blue="0.83529411760000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </activityIndicatorView>
                                                 </subviews>
@@ -230,7 +229,7 @@
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="ZDL-vy-hKt">
-                                        <rect key="frame" x="0.0" y="286.5" width="333" height="30"/>
+                                        <rect key="frame" x="0.0" y="267.5" width="333" height="30"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="33F-ln-6ru">
                                                 <rect key="frame" x="0.0" y="0.0" width="166.5" height="30"/>
@@ -249,19 +248,19 @@
                                         </subviews>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We've made an avatar for you, but you can choose another image if you want." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mxh-hc-oF6">
-                                        <rect key="frame" x="0.0" y="316.5" width="333" height="41"/>
+                                        <rect key="frame" x="0.0" y="297.5" width="333" height="41"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MicroJam is just for fun, so avoid real faces :-)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YiR-Ya-9H4">
-                                        <rect key="frame" x="0.0" y="357.5" width="333" height="17"/>
+                                        <rect key="frame" x="0.0" y="338.5" width="333" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2bg-b5-BfO">
-                                        <rect key="frame" x="0.0" y="374.5" width="333" height="30"/>
+                                        <rect key="frame" x="0.0" y="355.5" width="333" height="30"/>
                                         <state key="normal" title="skip for now">
                                             <color key="titleColor" red="0.57414853570000002" green="0.57416242360000003" blue="0.57415497299999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -304,7 +303,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="RfQ-N2-ctW">
-                                <rect key="frame" x="21" y="284.5" width="333" height="99"/>
+                                <rect key="frame" x="21" y="284" width="333" height="99"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You're ready to jam!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0i0-jZ-Qyd">
                                         <rect key="frame" x="0.0" y="0.0" width="333" height="48"/>
@@ -351,16 +350,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="8q0-Hz-h2v">
-                                <rect key="frame" x="5" y="90.5" width="365" height="486"/>
+                                <rect key="frame" x="5" y="119.5" width="365" height="428.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="MicroJam is an app for making tiny pieces of music." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="80r-5S-oI7">
-                                        <rect key="frame" x="0.0" y="0.0" width="365" height="115"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="365" height="57.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BGg-yw-qTv">
-                                        <rect key="frame" x="0.0" y="115" width="365" height="300"/>
+                                        <rect key="frame" x="0.0" y="57.5" width="365" height="300"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mDZ-92-NJJ">
                                                 <rect key="frame" x="32" y="0.5" width="300" height="300"/>
@@ -379,13 +378,13 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Just swipe and tap in the square above to make cool sounds!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WWz-Tk-nNO">
-                                        <rect key="frame" x="0.0" y="415" width="365" height="41"/>
+                                        <rect key="frame" x="0.0" y="357.5" width="365" height="41"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BoM-na-UL1">
-                                        <rect key="frame" x="0.0" y="456" width="365" height="30"/>
+                                        <rect key="frame" x="0.0" y="398.5" width="365" height="30"/>
                                         <state key="normal" title="skip for now">
                                             <color key="titleColor" red="0.57414853570000002" green="0.57416242360000003" blue="0.57415497299999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
