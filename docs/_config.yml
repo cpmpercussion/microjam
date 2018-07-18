@@ -22,6 +22,7 @@ url: "https://microjam.info" # the base hostname & protocol for your site, e.g. 
 twitter_username: cpmpercussion
 github_username:  cpmpercussion
 signup_form: https://goo.gl/forms/voANy3EZzRqPJVLG3
+app_store_link: https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1186738854&mt=8
 
 # Build settings
 markdown: kramdown
