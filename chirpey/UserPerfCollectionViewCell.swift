@@ -29,9 +29,9 @@ class UserPerfCollectionViewCell: UICollectionViewCell {
         /// Accessibility elements
         imageView.isAccessibilityElement = true
         imageView.accessibilityTraits = UIAccessibilityTraitButton
-        imageView.accessibilityLabel = "performance image"
+        imageView.accessibilityLabel = "performance"
         imageView.accessibilityHint = "Tap to access this performance"
-        imageView.accessibilityIdentifier = "performance image"
+        imageView.accessibilityIdentifier = "performance"
         
         return imageView
     }()

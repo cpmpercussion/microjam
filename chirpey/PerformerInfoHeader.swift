@@ -18,6 +18,12 @@ class PerformerInfoHeader: UICollectionReusableView {
         imageView.layer.borderWidth = 1
         imageView.layer.borderColor = UIColor(white: 0.8, alpha: 1).cgColor
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        imageView.isAccessibilityElement = true
+        imageView.accessibilityTraits = UIAccessibilityTraitImage
+        imageView.accessibilityLabel = "Avatar image"
+        imageView.accessibilityIdentifier = "Avatar image"
+        imageView.accessibilityHint = "Displays the users avatar image"
         return imageView
     }()
     /// A UILabel for the performer's stagename

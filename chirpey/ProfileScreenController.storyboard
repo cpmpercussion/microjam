@@ -109,6 +109,9 @@
                                                         </activityIndicatorView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <accessibility key="accessibilityConfiguration" hint="Tap to select a new avatar image" identifier="Avatar image chooser" label="Avatar image">
+                                                        <bool key="isElement" value="YES"/>
+                                                    </accessibility>
                                                     <constraints>
                                                         <constraint firstItem="dYX-7a-eae" firstAttribute="top" secondItem="RUy-r8-EZt" secondAttribute="top" id="0xZ-Uv-eaF"/>
                                                         <constraint firstItem="2qH-hw-KUp" firstAttribute="top" secondItem="RUy-r8-EZt" secondAttribute="top" id="8DU-X0-I9w"/>
