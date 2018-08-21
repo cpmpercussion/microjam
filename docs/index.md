@@ -71,7 +71,7 @@ demovideo: n2xSHoB2_uY
 				<section>
 					<h3>Development</h3>
 					MicroJam is available on Github and archived at Zenodo. You can cite MicroJam via this DOI:
-					<a href="https://zenodo.org/badge/latestdoi/70703690" class="image"><img src="https://zenodo.org/badge/70703690.svg" alt="DOI" /></a>
+					<a href="https://zenodo.org/badge/latestdoi/70703690" class="image"><img src="{{ site.baseurl }}/images/zenodo.1313918.svg" alt="DOI" /></a>
 				</section>
 				<hr />
 				<section>
