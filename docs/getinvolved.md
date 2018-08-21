@@ -9,7 +9,7 @@ title: Try it out
 
 Trying out the beta is fun for you and helps us understand the creative possibilities of tiny performances!
 
-If you're on iOS, you're welcome to try out the beta version of MicroJam. Just get in touch and I'll send you an invite, if you're on twitter, you can find me at @cpmpercussion. Otherwise, check [my website for contact information](http://www.mn.uio.no/ifi/english/people/aca/charlepm/).
+If you're on iOS, you're welcome to try out the beta version of MicroJam. Just get in touch and I'll send you an invite, if you're on twitter, you can find me at @cpmpercussion. Otherwise, check [my website for contact information](https://www.mn.uio.no/ifi/english/people/aca/charlepm/).
 
 <a href="https://twitter.com/messages/compose?recipient_id=13996052" class="twitter-dm-button" data-screen-name="cpmpercussion" data-show-count="false">Message @cpmpercussion</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
