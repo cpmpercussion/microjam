@@ -1,6 +1,5 @@
 ---
 layout: landing-page
-demovideo: n2xSHoB2_uY
 ---
 
 <section id="howitworks" class="wrapper style1">
@@ -40,7 +39,7 @@ demovideo: n2xSHoB2_uY
 		<h2>In action</h2>
 	</header>
 	<div class="container">
-		{% include youtubePlayer.html id=page.demovideo %}
+		{% include youtubePlayer.html id=site.demovideo %}
 	</div>
 </section>
 
@@ -51,7 +50,6 @@ demovideo: n2xSHoB2_uY
 				<section>
 					<h2>About MicroJam</h2>
 					<a href="#" class="image fit"><img src="{{ site.baseurl }}/images/microjam-demo.jpg" alt="" /></a>
-					<!-- <a href="#" class="image"><img src="{{ site.baseurl }}/images/microjam.gif" alt="" /></a> -->
 					<p>MicroJam is a mobile app for sharing tiny touch-screen performances. Mobile applications that streamline creativity and social interaction have enabled a very broad audience to develop their own creative practices. While these apps have been very successful in visual arts (particularly photography), the idea of social music-making has not had such a broad impact. MicroJam includes several novel performance concepts intended to engage the casual music maker and inspired by current trends in social creativity support tools. Touch-screen performances are limited to 5-seconds, instrument settings are posed as sonic "filters", and past performances are arranged as a timeline with replies and layers. These features of MicroJam encourage users not only to perform music more frequently, but to engage with others in impromptu ensemble music making.</p>
 				</section>
 			</div>
@@ -86,4 +84,4 @@ demovideo: n2xSHoB2_uY
 			</div>
 		</div>
 	</div>
-</section>	
+</section>

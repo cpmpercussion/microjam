@@ -8,19 +8,18 @@
         {% include /header.html %}
 
         <!-- Banner -->
-        <section id="banner">
+        <section id="banner" style="padding-top:3em; padding-bottom:3em">
             <div class="inner">
-                <h2>MicroJam</h2>
-                <p>A social app for making music.</p>
-                <ul class="actions">
-                    <li><a href="{{ site.app_store_link }}" class="button big special">Get the app!</a></li>
-                    <li><a href="#howitworks" class="button big alt">Learn More</a></li>
-                </ul>
+                    <h2>MicroJam</h2>
+                    <p><img src="{{ site.baseurl }}/images/microjam-title.png" class="image fit" style="max-width:500px; display:inline;"></p>
+                    <p>A social app for making music.</p>
+                        <ul class="actions">
+                            <li><a href="{{ site.app_store_link }}" class="button big special">Get the app!</a></li>
+                            <li><a href="#howitworks" class="button big alt">Learn More</a></li>
+                        </ul>
             </div>
         </section>
         {{ content }}
         {% include /footer.html %}
-
     </body>
-
 </html>
