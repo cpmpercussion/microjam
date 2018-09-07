@@ -54,6 +54,7 @@ class PerformanceTableCell: UITableViewCell {
     
     /// Updates UI with data from a given PerformerProfile
     func display(performerProfile profile: PerformerProfile) {
+        avatarImageView.image = #imageLiteral(resourceName: "empty-profile-image")
         avatarImageView.image = profile.avatar
         performer.text = profile.stageName
     }

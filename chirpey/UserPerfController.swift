@@ -37,6 +37,8 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
         collectionView?.register(UserPerfCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView?.backgroundColor = .white
         NotificationCenter.default.addObserver(self, selector: #selector(updateDataFromStore), name: NSNotification.Name(rawValue: performanceStoreUpdatedNotificationKey), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateProfileDisplay), name: NSNotification.Name(rawValue: performerProfileUpdatedKey), object: nil)
+
 
         // Set up long press gesture recogniser:
         let lpgr = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
@@ -69,6 +71,18 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
         }
     }
     
+    /// Updates the profile display if it has been updated in the profile
+    @objc func updateProfileDisplay() {
+        // Do something.
+        if let suppViews = collectionView?.visibleSupplementaryViews(ofKind: UICollectionElementKindSectionHeader),
+            let headerView = suppViews.first as? PerformerInfoHeader,
+            let performerID = performerID,
+            let profile = profilesStore.getProfile(forID: performerID) {
+            headerView.avatarImageView.image = profile.avatar
+            headerView.performerNameLabel.text = profile.stageName
+        }
+    }
+    
     /// Asks the performance store to fetch performances related to the current performerID from the cloud.
     func updateDataFromCloud() {
         if let performerID = performerID {
@@ -90,7 +104,7 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
             headerView.avatarImageView.image = profile.avatar
             headerView.performerNameLabel.text = profile.stageName
         } else {
-            headerView.avatarImageView.image = nil
+            headerView.avatarImageView.image = #imageLiteral(resourceName: "empty-profile-image") // set to placeholder image while loading.
             headerView.performerNameLabel.text = performer
         }
         return headerView

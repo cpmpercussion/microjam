@@ -15,6 +15,7 @@ class PerformerInfoHeader: UICollectionReusableView {
     /// A UIImageView for the performer's avatar
     let avatarImageView : UIImageView = {
         let imageView = UIImageView()
+        imageView.image = #imageLiteral(resourceName: "empty-profile-image")
         imageView.layer.borderWidth = 1
         imageView.layer.borderColor = UIColor(white: 0.8, alpha: 1).cgColor
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -23,7 +24,7 @@ class PerformerInfoHeader: UICollectionReusableView {
         imageView.accessibilityTraits = UIAccessibilityTraitImage
         imageView.accessibilityLabel = "Avatar image"
         imageView.accessibilityIdentifier = "Avatar image"
-        imageView.accessibilityHint = "Displays the users avatar image"
+        imageView.accessibilityHint = "Displays the user's avatar image"
         return imageView
     }()
     /// A UILabel for the performer's stagename
