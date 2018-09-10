@@ -36,6 +36,11 @@ class MicrojamTabBarController: UITabBarController {
         controller.tabBarItem = UITabBarItem(title: TabBarItemTitles.jamTab, image: #imageLiteral(resourceName: "localjamsTabIcon"), selectedImage: nil)
         let navigation = UINavigationController(rootViewController: controller)
         viewControllers?.append(navigation)
+        // Accessibility elements
+        controller.isAccessibilityElement = true
+        controller.accessibilityTraits = UIAccessibilityTraitButton
+        controller.accessibilityLabel = "Jam button"
+        controller.accessibilityHint = "Tap to create a new Jam"
         controller.title = "jam!"
     }
     
@@ -46,6 +51,11 @@ class MicrojamTabBarController: UITabBarController {
 //            controller.view.translatesAutoresizingMaskIntoConstraints = false
             let navigation = UINavigationController(rootViewController: controller)
             viewControllers?.append(navigation)
+            // Accessibility elements
+            controller.isAccessibilityElement = true
+            controller.accessibilityTraits = UIAccessibilityTraitButton
+            controller.accessibilityLabel = "Profile button"
+            controller.accessibilityHint = "Tap to access your user profile"
         } else {
             print("TABVC: User Settings Tab could not be initialised.")
         }
@@ -58,6 +68,11 @@ class MicrojamTabBarController: UITabBarController {
             //            controller.view.translatesAutoresizingMaskIntoConstraints = false
             let navigation = UINavigationController(rootViewController: controller)
             viewControllers?.append(navigation)
+            // Accessibility elements
+            controller.isAccessibilityElement = true
+            controller.accessibilityTraits = UIAccessibilityTraitButton
+            controller.accessibilityLabel = "Profile button"
+            controller.accessibilityHint = "Tap to access your user profile"
         } else {
             print("TABVC: Profile Tab could not be initialised.")
         }

@@ -37,6 +37,8 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
         collectionView?.register(UserPerfCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView?.backgroundColor = .white
         NotificationCenter.default.addObserver(self, selector: #selector(updateDataFromStore), name: NSNotification.Name(rawValue: performanceStoreUpdatedNotificationKey), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateProfileDisplay), name: NSNotification.Name(rawValue: performerProfileUpdatedKey), object: nil)
+
 
         // Set up long press gesture recogniser:
         let lpgr = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
@@ -69,6 +71,18 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
         }
     }
     
+    /// Updates the profile display if it has been updated in the profile
+    @objc func updateProfileDisplay() {
+        // Do something.
+        if let suppViews = collectionView?.visibleSupplementaryViews(ofKind: UICollectionElementKindSectionHeader),
+            let headerView = suppViews.first as? PerformerInfoHeader,
+            let performerID = performerID,
+            let profile = profilesStore.getProfile(forID: performerID) {
+            headerView.avatarImageView.image = profile.avatar
+            headerView.performerNameLabel.text = profile.stageName
+        }
+    }
+    
     /// Asks the performance store to fetch performances related to the current performerID from the cloud.
     func updateDataFromCloud() {
         if let performerID = performerID {
@@ -90,7 +104,7 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
             headerView.avatarImageView.image = profile.avatar
             headerView.performerNameLabel.text = profile.stageName
         } else {
-            headerView.avatarImageView.image = nil
+            headerView.avatarImageView.image = #imageLiteral(resourceName: "empty-profile-image") // set to placeholder image while loading.
             headerView.performerNameLabel.text = performer
         }
         return headerView
@@ -170,7 +184,12 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
         let shareAction = UIAlertAction(title: "Share", style: .default, handler: {action in
             print("Sharing the cell image") // just image
             if let image = cell.performance?.image {
-                let activityViewController = UIActivityViewController(activityItems: [image] , applicationActivities: nil)
+                // Create solid color UIImage in background color
+                let backgroundColorAsImage = UIImage.imageWithColor(color:cell.performanceImageView.backgroundColor!,size:CGSize(width: image.size.width, height: image.size.height))
+                // Create new UIImage by layering background color image and image
+                let imageWithBgc = UIImage.createImageFrom(images:[image, backgroundColorAsImage])
+                // Share
+                let activityViewController = UIActivityViewController(activityItems: [imageWithBgc!] , applicationActivities: nil)
                 activityViewController.popoverPresentationController?.sourceView = self.view
                 self.present(activityViewController, animated: true, completion: nil)
             }
@@ -284,5 +303,34 @@ extension UserPerfController : PlayerDelegate {
     
     func progressTimerStep() {
         // not used
+    }
+}
+
+
+
+extension UIImage {
+    class func imageWithColor(color: UIColor, size: CGSize=CGSize(width: 1, height: 1)) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        color.setFill()
+        UIRectFill(CGRect(origin: CGPoint.zero, size: size))
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image!
+    }
+}
+
+extension UIImage {
+    class func createImageFrom(images : [UIImage]) -> UIImage? {
+    if let size = images.first?.size {
+        UIGraphicsBeginImageContext(size)
+        let areaSize = CGRect(x: 0, y: 0, width:size.width, height: size.height)
+        for image in images.reversed() {
+            image.draw(in: areaSize, blendMode: CGBlendMode.normal, alpha: 1.0)
+        }
+        let outImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        return outImage
+    }
+    return nil
     }
 }

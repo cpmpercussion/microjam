@@ -105,9 +105,10 @@ class WorldJamsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return performanceStore.feed.count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: worldJamCellIdentifier, for: indexPath) as! PerformanceTableCell
+        cell.avatarImageView.image = #imageLiteral(resourceName: "empty-profile-image") // set avatar image view to the empty one early to avoid wrong images.
         let performance = performanceStore.feed[indexPath.row]
         cell.player = ChirpPlayer()
         cell.player?.delegate = self
