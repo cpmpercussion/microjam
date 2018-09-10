@@ -1,0 +1,7 @@
+---
+layout: post
+title:  "v1.0.1 in the AppStore today!"
+---
+
+A new update for MicroJam appeared in the iOS App Store today, this includes some updates to accessibility and some bug fixes in the interface which should make the app a bit smoother to use. Looking forward to seeing some [new cool jams](https://www.instagram.com/p/BnicvZ1FhO_/?utm_source=ig_twitter_share&igshid=vsl4evvpwppx)!
+
