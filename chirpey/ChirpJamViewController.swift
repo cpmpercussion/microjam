@@ -129,7 +129,6 @@ class ChirpJamViewController: UIViewController {
                     
                 } else {
                     // Just reset to a new recording
-                    recorder.recordingEnabled = false
                     recorder.recordingIsDone = false
                     playButton.isEnabled = false
                     roboplayButton.isEnabled = false
@@ -316,6 +315,7 @@ class ChirpJamViewController: UIViewController {
 
     /// Resets to a new performance state.
     func newRecordingView() {
+        print("JAMVC: Reset to new recording view")
         if let recorder = recorder {
             recorder.recordingView.closePdFile()
             recorder.recordingView.removeFromSuperview()
@@ -327,10 +327,24 @@ class ChirpJamViewController: UIViewController {
             }
             chirpViewContainer.addSubview(recorder.recordingView)
             savePerformanceButton.isEnabled = false // no saving a blank recording
+            setRecordingDisabled() // set recording button to be disabled.
         }
     }
 
     // MARK: - UI Interaction Functions
+    
+    func setRecordingEnabled() {
+        // recording was not enabled.
+        print("JAMVC: Recording enabled.")
+        recEnableButton.tintColor = UIColor.red
+        recorder?.recordingEnabled = true
+    }
+    
+    func setRecordingDisabled() {
+        print("JAMVC: Recording disabled.")
+        recEnableButton.tintColor = UIColor.red.darkerColor
+        recorder?.recordingEnabled = false
+    }
     
     /// IBAction for the rewind button
     @IBAction func rewindScreen(_ sender: UIButton) {
@@ -345,8 +359,6 @@ class ChirpJamViewController: UIViewController {
                 playButton.isEnabled = false
                 roboplayButton.isEnabled = false
                 jamButton.isEnabled = false
-                // and recording is disabled.
-                recEnableButton.tintColor = UIColor.red.darkerColor
             }
         }
         removeRoboJam()
@@ -356,14 +368,9 @@ class ChirpJamViewController: UIViewController {
     @IBAction func recordEnablePressed(_ sender: UIButton) {
         if let recorder = recorder {
             if !recorder.recordingEnabled {
-                // recording was not enabled.
-                print("JAMVC: Record pressed; enabled.")
-                recEnableButton.tintColor = UIColor.red
-                recorder.recordingEnabled = true
+                setRecordingEnabled()
             } else {
-                print("JAMVC: Record pressed; disabled.")
-                recEnableButton.tintColor = UIColor.red.darkerColor
-                recorder.recordingEnabled = false
+                setRecordingDisabled()
             }
         }
     }
