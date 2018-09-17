@@ -328,6 +328,7 @@ class ChirpJamViewController: UIViewController {
             chirpViewContainer.addSubview(recorder.recordingView)
             savePerformanceButton.isEnabled = false // no saving a blank recording
             setRecordingDisabled() // set recording button to be disabled.
+            recEnableButton.isEnabled = true // enable recording button.
         }
     }
 
@@ -610,6 +611,10 @@ extension ChirpJamViewController: PlayerDelegate {
             replyButton.isEnabled = true
             savePerformanceButton.isEnabled = true
             roboplayButton.isEnabled = true
+            
+            setRecordingDisabled() //
+            recEnableButton.isEnabled = false
+            // do other things to make sure recording is preserved properly.
         }
         
         rewindButton.isEnabled = true
