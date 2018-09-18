@@ -35,8 +35,8 @@ class NoAccountWarningStackView: UIStackView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = UIColor.gray
-        axis = UILayoutConstraintAxis.vertical
-        alignment = UIStackViewAlignment.center
+        axis = NSLayoutConstraint.Axis.vertical
+        alignment = UIStackView.Alignment.center
         addArrangedSubview(warningLabel)
         addArrangedSubview(loginButton)
         warningLabel.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
@@ -52,7 +52,12 @@ class NoAccountWarningStackView: UIStackView {
     
     /// Used by login button, opens Settings app so that user can log into iCloud.
     @objc fileprivate func openSettingsApp() {
-        UIApplication.shared.open(URL(string: "App-Prefs:root=Settings")!, options: [:], completionHandler: nil)
+        UIApplication.shared.open(URL(string: "App-Prefs:root=Settings")!, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
     }
     
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

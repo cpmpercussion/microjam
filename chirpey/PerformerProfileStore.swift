@@ -21,7 +21,7 @@ class PerformerProfileStore : NSObject {
     /// CloudKit database
     let database = CKContainer.default().publicCloudDatabase
     /// Storage for profiles
-    var profiles: [CKRecordID: PerformerProfile]
+    var profiles: [CKRecord.ID: PerformerProfile]
     
     private override init() {
         profiles = PerformerProfileStore.loadProfiles()
@@ -29,7 +29,7 @@ class PerformerProfileStore : NSObject {
     }
     
     /// Load Profiles from file
-    private static func loadProfiles() -> [CKRecordID: PerformerProfile] {
+    private static func loadProfiles() -> [CKRecord.ID: PerformerProfile] {
         print("Loading profiles...")
 //        var result : Any?
 //        do {
@@ -46,12 +46,12 @@ class PerformerProfileStore : NSObject {
         
         let result = NSKeyedUnarchiver.unarchiveObject(withFile: PerformerProfileStore.profilesURL.path)
         
-        if let loadedProfiles = result as? [CKRecordID: PerformerProfile] {
+        if let loadedProfiles = result as? [CKRecord.ID: PerformerProfile] {
             print("PerformerProfileStore: Loaded \(loadedProfiles.count) profiles.")
             return loadedProfiles
         } else {
             print("PerformerProfileStore: Failed to load profiles.")
-            return [CKRecordID: PerformerProfile]()
+            return [CKRecord.ID: PerformerProfile]()
         }
     }
     
@@ -73,7 +73,7 @@ class PerformerProfileStore : NSObject {
     }
     
     /// Return a profile for a given user's CKRecordID
-    func getProfile(forID performerID: CKRecordID) -> PerformerProfile? {
+    func getProfile(forID performerID: CKRecord.ID) -> PerformerProfile? {
         if let profile = profiles[performerID] {
             // if not fetched this session, fetch anyway, but return the local one as well.
             if !profile.fetchedThisSession { fetchProfile(forID: performerID) }
@@ -85,7 +85,7 @@ class PerformerProfileStore : NSObject {
     }
     
     /// Fetch a profile from CloudKit
-    func fetchProfile(forID performerID: CKRecordID) {
+    func fetchProfile(forID performerID: CKRecord.ID) {
         // This is a low-priority operation.
         database.fetch(withRecordID: performerID) { [unowned self] (record: CKRecord?, error: Error?) in
             if let e = error {

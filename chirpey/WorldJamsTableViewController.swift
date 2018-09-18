@@ -35,12 +35,12 @@ class WorldJamsTableViewController: UITableViewController {
         super.viewDidLoad()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 420 // iPhone 7 height
         performanceStore.delegate = self
         headerView.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 100) // header view used to display iCloud errors
         // Initialise the refreshControl
-        self.refreshControl?.addTarget(performanceStore, action: #selector(performanceStore.fetchWorldJamsFromCloud), for: UIControlEvents.valueChanged)
+        self.refreshControl?.addTarget(performanceStore, action: #selector(performanceStore.fetchWorldJamsFromCloud), for: UIControl.Event.valueChanged)
         tableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tableViewTapped)))
         tableView.separatorStyle = .none // Remove the separator
         

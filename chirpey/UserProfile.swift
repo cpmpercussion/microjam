@@ -27,7 +27,7 @@ class UserProfile: NSObject {
     /// Records whether user is logged in or not.
     var loggedIn = false
     /// CKRecordID for the user
-    var recordID: CKRecordID?
+    var recordID: CKRecord.ID?
     /// CKRecord of user information.
     var record: CKRecord? {
         didSet {
@@ -121,7 +121,7 @@ class UserProfile: NSObject {
     }
     
     /// fetches the user's record on CloudKit
-    private func fetchUserRecord(with recordID: CKRecordID) {
+    private func fetchUserRecord(with recordID: CKRecord.ID) {
         container.publicCloudDatabase.fetch(withRecordID: recordID) { record, error in
             guard let record = record, error == nil else {
                 // TODO: error handling.
@@ -238,7 +238,7 @@ class UserProfile: NSObject {
         
         do { // Saving image data
             let imageURL = PerformanceStore.tempURL()
-            let imageData = UIImagePNGRepresentation(newImage)!
+            let imageData = newImage.pngData()!
             try imageData.write(to: imageURL, options: .atomicWrite)
             let asset = CKAsset(fileURL: imageURL)
             record[UserCloudKeys.avatar] = asset
@@ -330,7 +330,7 @@ extension UserProfile {
             result.append(userRecord) // just append the user's record.
         }
         let database = container.publicCloudDatabase
-        let performerID = CKRecordID(recordName: "__defaultOwner__")
+        let performerID = CKRecord.ID(recordName: "__defaultOwner__")
         let userSearchPredicate = NSPredicate(format: "%K == %@", argumentArray: ["creatorUserRecordID", performerID])
         
         for recordType in [PerfCloudKeys.type] {
@@ -366,7 +366,7 @@ extension UserProfile {
 //        }
         
         let database = container.publicCloudDatabase
-        let performerID = CKRecordID(recordName: "__defaultOwner__")
+        let performerID = CKRecord.ID(recordName: "__defaultOwner__")
         let userSearchPredicate = NSPredicate(format: "%K == %@", argumentArray: ["creatorUserRecordID", performerID])
         
         for recordType in [PerfCloudKeys.type] {

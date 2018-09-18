@@ -38,7 +38,7 @@ class MicrojamTabBarController: UITabBarController {
         viewControllers?.append(navigation)
         // Accessibility elements
         controller.isAccessibilityElement = true
-        controller.accessibilityTraits = UIAccessibilityTraitButton
+        controller.accessibilityTraits = UIAccessibilityTraits.button
         controller.accessibilityLabel = "Jam button"
         controller.accessibilityHint = "Tap to create a new Jam"
         controller.title = "jam!"
@@ -53,7 +53,7 @@ class MicrojamTabBarController: UITabBarController {
             viewControllers?.append(navigation)
             // Accessibility elements
             controller.isAccessibilityElement = true
-            controller.accessibilityTraits = UIAccessibilityTraitButton
+            controller.accessibilityTraits = UIAccessibilityTraits.button
             controller.accessibilityLabel = "Profile button"
             controller.accessibilityHint = "Tap to access your user profile"
         } else {
@@ -70,7 +70,7 @@ class MicrojamTabBarController: UITabBarController {
             viewControllers?.append(navigation)
             // Accessibility elements
             controller.isAccessibilityElement = true
-            controller.accessibilityTraits = UIAccessibilityTraitButton
+            controller.accessibilityTraits = UIAccessibilityTraits.button
             controller.accessibilityLabel = "Profile button"
             controller.accessibilityHint = "Tap to access your user profile"
         } else {

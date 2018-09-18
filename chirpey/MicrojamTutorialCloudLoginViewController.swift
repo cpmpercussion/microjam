@@ -50,7 +50,7 @@ class MicrojamTutorialCloudLoginViewController: UIViewController {
     
     /// Used by login button, opens Settings app so that user can log into iCloud.
     @IBAction func logIn(_ sender: Any) {
-        UIApplication.shared.open(URL(string: "App-Prefs:root=Settings")!, options: [:], completionHandler: nil)
+        UIApplication.shared.open(URL(string: "App-Prefs:root=Settings")!, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
     }
 
     /*
@@ -63,4 +63,9 @@ class MicrojamTutorialCloudLoginViewController: UIViewController {
     }
     */
 
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

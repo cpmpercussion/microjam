@@ -24,7 +24,7 @@ class ChirpJamViewController: UIViewController {
     /// String value of CKRecordID for storage of the original performance for a reply.
     var replyto : String?
     /// CKRecordID version of the above
-    var replyParentID : CKRecordID?
+    var replyParentID : CKRecord.ID?
     /// App delegate - in case we need to upload a performance.
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     /// Dropdown menu for selecting SoundScheme
@@ -696,7 +696,7 @@ extension ChirpJamViewController {
             if let robojam = self.robojam {
                 recorder.chirpViews.append(robojam)
                 chirpViewContainer.addSubview(robojam)
-                chirpViewContainer.bringSubview(toFront: recorder.recordingView)
+                chirpViewContainer.bringSubviewToFront(recorder.recordingView)
                 robojam.generateImage()
             }
         }
@@ -725,7 +725,7 @@ extension UIButton {
     /// Shakes the button a little bit.
     func shake() {
         let animation = CAKeyframeAnimation(keyPath: "transform.translation.y")
-        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
         animation.duration = 1.0
         animation.values = [-10.0, 10.0, -5.0, 5.0, -2.5, 2.5, -1, 1, 0.0 ]
         layer.add(animation, forKey: "shake")
@@ -737,7 +737,7 @@ extension UIButton {
     
     func startBopping() {
         let animation = CAKeyframeAnimation(keyPath: "transform.translation.x")
-        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
         animation.duration = 0.2
         animation.values = [-2.5,2.5,0]
         animation.repeatCount = 100
@@ -746,12 +746,12 @@ extension UIButton {
     
     func startSwirling() {
         let animationX = CAKeyframeAnimation(keyPath: "transform.translation.x")
-        animationX.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        animationX.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         animationX.duration = 0.2
         animationX.values = [0,-2.5,2.5,0]
         animationX.repeatCount = 100
         let animationY = CAKeyframeAnimation(keyPath: "transform.translation.y")
-        animationY.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        animationY.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         animationY.duration = 0.2
         animationY.values = [-2.5,0,0,2.5]
         animationY.repeatCount = 100

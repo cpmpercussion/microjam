@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
     
     // MARK: Application Lifecycle
     
-    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         UserDefaults.standard.register(defaults: SettingsKeys.defaultSettings)
         startAudioEngine() // start Pd
         return true

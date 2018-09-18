@@ -28,7 +28,7 @@ class UserPerfCollectionViewCell: UICollectionViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         /// Accessibility elements
         imageView.isAccessibilityElement = true
-        imageView.accessibilityTraits = UIAccessibilityTraitButton
+        imageView.accessibilityTraits = UIAccessibilityTraits.button
         imageView.accessibilityLabel = "performance"
         imageView.accessibilityHint = "Tap to access this performance"
         imageView.accessibilityIdentifier = "performance"
@@ -44,7 +44,7 @@ class UserPerfCollectionViewCell: UICollectionViewCell {
         button.tintColor = UIColor.darkGray
         /// Accessibility elements
         button.isAccessibilityElement = true
-        button.accessibilityTraits = UIAccessibilityTraitButton
+        button.accessibilityTraits = UIAccessibilityTraits.button
         button.accessibilityLabel = "Play button"
         button.accessibilityHint = "Tap to play performance"
         button.accessibilityIdentifier = "Play button"
@@ -61,7 +61,7 @@ class UserPerfCollectionViewCell: UICollectionViewCell {
         button.tintColor = UIColor.darkGray
         /// Accessibility elements
         button.isAccessibilityElement = true
-        button.accessibilityTraits = UIAccessibilityTraitButton
+        button.accessibilityTraits = UIAccessibilityTraits.button
         button.accessibilityLabel = "Reply button"
         button.accessibilityHint = "Tap to reply"
         button.accessibilityIdentifier = "Reply button"
@@ -77,7 +77,7 @@ class UserPerfCollectionViewCell: UICollectionViewCell {
         button.tintColor = UIColor.darkGray
         /// Accessibility elements
         button.isAccessibilityElement = true
-        button.accessibilityTraits = UIAccessibilityTraitButton
+        button.accessibilityTraits = UIAccessibilityTraits.button
         button.accessibilityLabel = "Menu button"
         button.accessibilityHint = "Tap to access menu"
         button.accessibilityIdentifier = "Menu button"

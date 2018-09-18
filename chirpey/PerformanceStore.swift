@@ -50,7 +50,7 @@ class PerformanceStore: NSObject {
     /// Delegate to notify when cloud operations are successful.
     var delegate : ModelDelegate?
     /// performances
-    var performances: [CKRecordID : ChirpPerformance]
+    var performances: [CKRecord.ID : ChirpPerformance]
     /// URL of local documents directory.
     static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
     /// URL of storage location
@@ -82,14 +82,14 @@ class PerformanceStore: NSObject {
     }
     
     /// Load Profiles from file
-    private static func loadPerformanceDict() -> [CKRecordID: ChirpPerformance] {
+    private static func loadPerformanceDict() -> [CKRecord.ID: ChirpPerformance] {
         print("Loading performance dict...")
         let result = NSKeyedUnarchiver.unarchiveObject(withFile: PerformanceStore.perfDictURL.path)
-        if let loadedPerformances = result as? [CKRecordID: ChirpPerformance] {
+        if let loadedPerformances = result as? [CKRecord.ID: ChirpPerformance] {
             return loadedPerformances
         } else {
             print("PerformanceStore: Failed to load perfs.")
-            return [CKRecordID: ChirpPerformance]()
+            return [CKRecord.ID: ChirpPerformance]()
         }
     }
 
@@ -98,7 +98,7 @@ class PerformanceStore: NSObject {
         self.upload(performance: performance)
         // Add this perf to the model as well.
         //print("User is logged in, updating performance info and adding to store.")
-        let perfID = CKRecordID(recordName: performance.title())
+        let perfID = CKRecord.ID(recordName: performance.title())
         performance.performanceID = perfID
         if let performersUserRecordID = UserProfile.shared.record?.creatorUserRecordID  {
             performance.creatorID = performersUserRecordID
@@ -133,7 +133,7 @@ class PerformanceStore: NSObject {
         // remove each parent performance from the dict
         for parent in parentTitles {
             if titles.contains(parent) {
-                tempFeed.removeValue(forKey: CKRecordID(recordName: parent))
+                tempFeed.removeValue(forKey: CKRecord.ID(recordName: parent))
             }
         }
         // the dict now only contains child (leaf) performances, turn into an array
@@ -147,7 +147,7 @@ class PerformanceStore: NSObject {
     }
     
     /// Return performances in the store for a given user by CKRecordID
-    func performances(byPerformer perfID: CKRecordID) -> [ChirpPerformance] {
+    func performances(byPerformer perfID: CKRecord.ID) -> [ChirpPerformance] {
         var output = [ChirpPerformance]()
         for perf in storedPerformances {
             if perf.creatorID == perfID {
@@ -256,7 +256,7 @@ extension PerformanceStore {
     }
     
     /// Return a performance for a given CKRecordID
-    func getPerformance(forID recordID: CKRecordID) -> ChirpPerformance? {
+    func getPerformance(forID recordID: CKRecord.ID) -> ChirpPerformance? {
         if let performance = performances[recordID] {
             return performance
         } else {
@@ -266,7 +266,7 @@ extension PerformanceStore {
     }
 
     /// Fetch a particular performance from CloudKit
-    func fetchPerformance(forID recordID: CKRecordID) {
+    func fetchPerformance(forID recordID: CKRecord.ID) {
         // This is a low-priority operation.
         database.fetch(withRecordID: recordID) { [unowned self] (record: CKRecord?, error: Error?) in
             if let e = error {
@@ -286,7 +286,7 @@ extension PerformanceStore {
     }
     
     /// Fetch the Image for a given performance.
-    func fetchImageFor(performance recordID: CKRecordID) {
+    func fetchImageFor(performance recordID: CKRecord.ID) {
         database.fetch(withRecordID: recordID) { [unowned self] (record: CKRecord?, error: Error?) in
             if let e = error {
                 print("PerformanceStore: Error fetching image for perf: \(recordID): \(e)")
@@ -306,7 +306,7 @@ extension PerformanceStore {
     }
     
     /// Fetch the image for a given performance and assign it to a given ChirpView. (use this one)
-    func fetchImageFor(performance recordID: CKRecordID, andAssignTo chirpView: ChirpView) {
+    func fetchImageFor(performance recordID: CKRecord.ID, andAssignTo chirpView: ChirpView) {
         database.fetch(withRecordID: recordID) { [unowned self] (record: CKRecord?, error: Error?) in
             if let record = record,
                 let imageAsset = record.object(forKey: PerfCloudKeys.image) as? CKAsset,
@@ -322,7 +322,7 @@ extension PerformanceStore {
     }
     
     /// Fetch performances by a given performer from CloudKit
-    func fetchPerformances(byPerformer perfID: CKRecordID) {
+    func fetchPerformances(byPerformer perfID: CKRecord.ID) {
         let performerSearchPredicate = NSPredicate(format: "%K == %@", argumentArray: ["creatorUserRecordID", perfID])
         let query = CKQuery(recordType: PerfCloudKeys.type, predicate: performerSearchPredicate)
         query.sortDescriptors = [NSSortDescriptor(key: PerfCloudKeys.date, ascending: false)]
@@ -362,12 +362,12 @@ extension PerformanceStore {
         var current = performance
         while current.replyto != "" {
             // Check if the reply is available in the performanceStore
-            if let next = getPerformance(forID: CKRecordID(recordName: current.replyto)) {
+            if let next = getPerformance(forID: CKRecord.ID(recordName: current.replyto)) {
                 output.append(next)
                 current = next
             } else {
                 // Try to find the relevant reply and add to the store. - this is low priority and will update later.
-                fetchPerformance(forID: CKRecordID(recordName: current.replyto))
+                fetchPerformance(forID: CKRecord.ID(recordName: current.replyto))
                 break
             }
         }
@@ -385,7 +385,7 @@ extension PerformanceStore {
     func upload(performance : ChirpPerformance) {
         // Setup the record
         print("Store: Saving the performance:", performance.title())
-        let performanceID = CKRecordID(recordName: performance.title())
+        let performanceID = CKRecord.ID(recordName: performance.title())
         let performanceRecord = CKRecord(recordType: PerfCloudKeys.type,recordID: performanceID)
         performanceRecord[PerfCloudKeys.date] = performance.date as CKRecordValue
         performanceRecord[PerfCloudKeys.performer] = performance.performer as CKRecordValue
@@ -397,7 +397,7 @@ extension PerformanceStore {
         performanceRecord[PerfCloudKeys.backgroundColour] = performance.backgroundColourString as CKRecordValue
         
         guard let image = performance.image,
-            let imageData = UIImagePNGRepresentation(image) else {
+            let imageData = image.pngData() else {
             print("PerformanceStore: Blank performance, not able to save.")
             return
         }
@@ -428,7 +428,7 @@ extension PerformanceStore {
 extension PerformanceStore {
 
     /// Removes a performances from the local store by CKRecordID
-    func removePerformanceFromStore(withID recordID: CKRecordID) {
+    func removePerformanceFromStore(withID recordID: CKRecord.ID) {
         // Remove from the dictionary version
         performances.removeValue(forKey: recordID)
         // Remove from the array version
@@ -440,7 +440,7 @@ extension PerformanceStore {
     }
 
     /// Delete a performance from the database and local store by CKRecord ID. Only works for performances owned by the user.
-    func deleteUserPerformance(withID recordID: CKRecordID) {
+    func deleteUserPerformance(withID recordID: CKRecord.ID) {
         print("Starting Deletion Operation.")
         // remove from database
         database.delete(withRecordID: recordID, completionHandler: { (record, error) in

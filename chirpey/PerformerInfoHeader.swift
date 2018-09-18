@@ -21,7 +21,7 @@ class PerformerInfoHeader: UICollectionReusableView {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
         imageView.isAccessibilityElement = true
-        imageView.accessibilityTraits = UIAccessibilityTraitImage
+        imageView.accessibilityTraits = UIAccessibilityTraits.image
         imageView.accessibilityLabel = "Avatar image"
         imageView.accessibilityIdentifier = "Avatar image"
         imageView.accessibilityHint = "Displays the user's avatar image"

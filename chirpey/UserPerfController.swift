@@ -25,7 +25,7 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
         }
     }
     /// Performer to search for (must be set when instantiating this ViewController).
-    var performerID: CKRecordID?
+    var performerID: CKRecord.ID?
     /// Performances by performer
     var loadedPerformances = [ChirpPerformance]()
     /// Ref to a (single) currently playing cell
@@ -33,7 +33,7 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView?.register(PerformerInfoHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier)
+        collectionView?.register(PerformerInfoHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier)
         collectionView?.register(UserPerfCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView?.backgroundColor = .white
         NotificationCenter.default.addObserver(self, selector: #selector(updateDataFromStore), name: NSNotification.Name(rawValue: performanceStoreUpdatedNotificationKey), object: nil)
@@ -74,7 +74,7 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
     /// Updates the profile display if it has been updated in the profile
     @objc func updateProfileDisplay() {
         // Do something.
-        if let suppViews = collectionView?.visibleSupplementaryViews(ofKind: UICollectionElementKindSectionHeader),
+        if let suppViews = collectionView?.visibleSupplementaryViews(ofKind: UICollectionView.elementKindSectionHeader),
             let headerView = suppViews.first as? PerformerInfoHeader,
             let performerID = performerID,
             let profile = profilesStore.getProfile(forID: performerID) {
@@ -97,7 +97,7 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
 
     /// method to set up the header view; displays the performer's avatar and stagename.
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier, for: indexPath) as! PerformerInfoHeader
+        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier, for: indexPath) as! PerformerInfoHeader
         headerView.frame.size.height = PerformerInfoHeader.headerHeight
         if let performerID = performerID,
             let profile = profilesStore.getProfile(forID: performerID) {
@@ -272,7 +272,7 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
     }
     
     @objc func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer) {
-        if gestureRecognizer.state != UIGestureRecognizerState.ended {return}
+        if gestureRecognizer.state != UIGestureRecognizer.State.ended {return}
         // Delete selected Cell
         let point = gestureRecognizer.location(in: self.collectionView)
         if let indexPath = self.collectionView?.indexPathForItem(at: point),
