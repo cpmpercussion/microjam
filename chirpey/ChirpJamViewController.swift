@@ -9,6 +9,9 @@ import UIKit
 import DropDown
 import CloudKit
 
+var kEXPERIMENT_MODE: Bool = true /// set this to experiment mode for user studies, etc.
+
+
 // TODO: how to tell between loaded and saved and just loaded?
 
 /// Main performance and playback ViewController for MicroJam
@@ -100,6 +103,9 @@ class ChirpJamViewController: UIViewController {
                         PerformanceStore.shared.addNew(performance: finishedPerformance)
                     }
                     navigationController?.popViewController(animated: true)
+                } else if kEXPERIMENT_MODE {
+                    //let finishedPerformance = recorder.recordingView.performance
+                    PerformanceStore.shared.addNew(performance: finishedPerformance) // save anyway.
                 }
             }
         }
@@ -349,8 +355,14 @@ class ChirpJamViewController: UIViewController {
     
     /// IBAction for the rewind button
     @IBAction func rewindScreen(_ sender: UIButton) {
+        // TODO: put a secret save here for experiment mode.
         print("JAMVC: Rewind pressed, clearing screen")
-        if let recorder = recorder {
+        if let recorder = recorder,
+            let finishedPerformance = recorder.recordingView.performance {
+            if kEXPERIMENT_MODE {
+                PerformanceStore.shared.addNew(performance: finishedPerformance) // save anyway.
+            }
+            // Clean up the views.
             recordingProgress.progress = 0.0
             recorder.stop()
             newRecordingView()
