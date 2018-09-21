@@ -9,7 +9,7 @@ import UIKit
 import DropDown
 import CloudKit
 
-var kEXPERIMENT_MODE: Bool = true /// set this to experiment mode for user studies, etc.
+var kEXPERIMENT_MODE: Bool = false /// set this to experiment mode for user studies, etc.
 
 
 // TODO: how to tell between loaded and saved and just loaded?
