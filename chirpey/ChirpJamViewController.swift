@@ -344,12 +344,22 @@ class ChirpJamViewController: UIViewController {
         // recording was not enabled.
         print("JAMVC: Recording enabled.")
         recEnableButton.tintColor = UIColor.red
+        // make recEnableGlow
+        // Find bounding square.
+        //let b = recEnableButton.bounds
+        recEnableButton.layer.shadowOffset = .zero
+        recEnableButton.layer.shadowColor = UIColor.init("#E5470D").cgColor
+        recEnableButton.layer.shadowRadius = 20
+        recEnableButton.layer.shadowOpacity = 1
+        recEnableButton.layer.shadowPath = UIBezierPath(rect: recEnableButton.bounds).cgPath
         recorder?.recordingEnabled = true
     }
     
     func setRecordingDisabled() {
         print("JAMVC: Recording disabled.")
         recEnableButton.tintColor = UIColor.red.darkerColor
+        // stop recEnableGlowing
+        recEnableButton.layer.shadowOpacity = 0
         recorder?.recordingEnabled = false
     }
     
