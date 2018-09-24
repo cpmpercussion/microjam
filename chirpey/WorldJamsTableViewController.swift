@@ -224,9 +224,13 @@ class WorldJamsTableViewController: UITableViewController {
 }
 
 extension WorldJamsTableViewController: PlayerDelegate {
+    
+    func progressTimerStarted() {
+        // not used
+    }
 
     func progressTimerStep() {
-
+        // not used
     }
 
     func progressTimerEnded() {

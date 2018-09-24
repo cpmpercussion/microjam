@@ -297,6 +297,10 @@ extension UserPerfController {
 
 extension UserPerfController : PlayerDelegate {
     
+    func progressTimerStarted() {
+        // not used.
+    }
+    
     func progressTimerEnded() {
         stopCurrentlyPlayingPerformance()
     }

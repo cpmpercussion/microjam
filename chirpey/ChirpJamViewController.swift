@@ -342,30 +342,22 @@ class ChirpJamViewController: UIViewController {
     
     func setRecordingEnabled() {
         // recording was not enabled.
+        //TODO: make blinking light for record enable.
         print("JAMVC: Recording enabled.")
-        recEnableButton.tintColor = UIColor.red
-        // make recEnableGlow
-        // Find bounding square.
-        //let b = recEnableButton.bounds
-        recEnableButton.layer.shadowOffset = .zero
-        recEnableButton.layer.shadowColor = UIColor.init("#E5470D").cgColor
-        recEnableButton.layer.shadowRadius = 20
-        recEnableButton.layer.shadowOpacity = 1
-        recEnableButton.layer.shadowPath = UIBezierPath(rect: recEnableButton.bounds).cgPath
+        recEnableButton.pulseGlow()
         recorder?.recordingEnabled = true
     }
     
     func setRecordingDisabled() {
         print("JAMVC: Recording disabled.")
-        recEnableButton.tintColor = UIColor.red.darkerColor
         // stop recEnableGlowing
-        recEnableButton.layer.shadowOpacity = 0
+        recEnableButton.deactivateGlowing()
+        recEnableButton.tintColor = UIColor.red.darkerColor
         recorder?.recordingEnabled = false
     }
     
     /// IBAction for the rewind button
     @IBAction func rewindScreen(_ sender: UIButton) {
-        // TODO: put a secret save here for experiment mode.
         print("JAMVC: Rewind pressed, clearing screen")
         if let recorder = recorder,
             let finishedPerformance = recorder.recordingView.performance {
@@ -612,6 +604,16 @@ extension ChirpJamViewController {
 
 extension ChirpJamViewController: PlayerDelegate {
     
+    /// Updated UI to reflect that recording or playback has started.
+    func progressTimerStarted() {
+    print("Progress Timer started")
+        if let rec = recorder, rec.isRecording {
+            print("Recorder is recording")
+            recEnableButton.solidGlow() // solid recording light.
+        }
+    }
+    
+    
     /// Updates the progress bar in response to steps from the ChirpPlayer
     func progressTimerStep() {
         recordingProgress.progress = Float(recorder!.progress / recorder!.maxPlayerTime)
@@ -844,4 +846,60 @@ extension ChirpJamViewController {
         controller.headerProfile = UserProfile.shared.profile
         return controller
     }
+}
+
+/// Constant for the maximum glow opacity for record pulse animations.
+let maximumGlowOpacity: Float = 0.9
+
+/// UIView Animation Extensions
+extension UIButton{
+    
+    func setupGlowShadow() {
+        self.layer.shadowOffset = .zero
+        self.layer.shadowColor = UIColor.init("#E5470D").cgColor
+        self.layer.shadowRadius = 20
+        self.layer.shadowOpacity = maximumGlowOpacity
+        //        recEnableButton.layer.shadowPath = UIBezierPath(rect: recEnableButton.bounds).cgPath
+        let glowWidth = self.bounds.height
+        let glowOffset = 0.5 * (self.bounds.width - glowWidth)
+        self.layer.shadowPath = UIBezierPath(ovalIn: CGRect(x: glowOffset,
+                                                            y:0,
+                                                            width: glowWidth,
+                                                            height: glowWidth)).cgPath
+    }
+    
+    func pulseGlow() {
+        setupGlowShadow()
+        // Tint Color Animation
+        UIView.animate(withDuration: 0.25, delay: 0.0, options: [.curveLinear, .repeat, .autoreverse], animations: {self.tintColor = UIColor.red}, completion: nil)
+        self.tintColor = UIColor.red.darkerColor
+
+        // Shadow animation
+        let animation = CABasicAnimation(keyPath: "shadowOpacity")
+        animation.fromValue = 0.05
+        animation.toValue = maximumGlowOpacity
+        animation.duration = 0.25
+        animation.repeatCount = 100000
+        animation.autoreverses = true
+        self.layer.add(animation, forKey: animation.keyPath)
+        self.layer.shadowOpacity = 0.05
+    }
+    
+    func deactivateGlowing() {
+        //print(self.layer.animationKeys())
+        self.layer.removeAllAnimations()
+        //print(self.imageView?.layer.animationKeys())
+        self.imageView?.layer.removeAllAnimations()
+        self.layer.shadowOpacity = 0.0
+        self.tintColor = UIColor.red.darkerColor
+    }
+    
+    func solidGlow() {
+        self.layer.removeAllAnimations()
+        self.imageView?.layer.removeAllAnimations()
+        setupGlowShadow()
+        self.layer.shadowOpacity = maximumGlowOpacity
+        self.tintColor = UIColor.red
+    }
+
 }
