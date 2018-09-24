@@ -10,7 +10,8 @@ import DropDown
 import CloudKit
 
 var kEXPERIMENT_MODE: Bool = false /// set this to experiment mode for user studies, etc.
-
+var RECORDING_PARTICLES: Bool = false /// set this to enable recording particle system.
+var OPEN_ON_RECORD_ENABLE: Bool = false /// set this to open the jam screen with recording already enabled.
 
 // TODO: how to tell between loaded and saved and just loaded?
 
@@ -151,6 +152,9 @@ class ChirpJamViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("JAMVC: viewDidLoad")
+        
+        // Setup particle emitter
+        if RECORDING_PARTICLES {setupRecordingParticleEmitter()}
         
         // configuration for the chirpViewContainer
         chirpViewContainer.layer.cornerRadius = 8
@@ -550,11 +554,14 @@ class ChirpJamViewController: UIViewController {
             return
         }
     }
+}
+
+/// Extension for Touch User Interface Overrides
+extension ChirpJamViewController {
     
     /// touchesBegan method starts a recording if this is the first touch in a new microjam.
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         // start timer if not recording
-        
         if let recorder = recorder,
              let point = touches.first?.location(in: recorder.recordingView) {
             if (recorder.recordingView.bounds.contains(point)) {
@@ -563,8 +570,24 @@ class ChirpJamViewController: UIViewController {
                     playButton.isEnabled = true
                     playButton.setImage(#imageLiteral(resourceName: "microjam-stop"), for: .normal)
                 }
+                
+                /// Set the particle emitter point
+                if let pointInCJVCView = touches.first?.location(in: self.view) {
+                    recordingParticleEmitter?.emitterPosition = pointInCJVCView // set the particle emitter point
+                }
             }
         }
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let touch = touches.first, chirpViewContainer.bounds.contains(touch.location(in: chirpViewContainer)) {
+            //print("updating emitter point to", touch)
+            recordingParticleEmitter?.emitterPosition = touch.location(in: self.view) // set the particle emitter point
+        }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        // no action right now.
     }
 }
 
@@ -610,6 +633,7 @@ extension ChirpJamViewController: PlayerDelegate {
         if let rec = recorder, rec.isRecording {
             print("Recorder is recording")
             recEnableButton.solidGlow() // solid recording light.
+            createParticles()
         }
     }
     
@@ -621,6 +645,7 @@ extension ChirpJamViewController: PlayerDelegate {
 
     /// Updates UI when the ChirpPlayer reports playback/recording has finished.
     func progressTimerEnded() {
+        stopParticles()
         recordingProgress.progress = 0.0
         recorder!.stop()
         
@@ -902,4 +927,54 @@ extension UIButton{
         self.tintColor = UIColor.red
     }
 
+}
+
+/// Particle Emitter Layer for pretty FX when recording.
+var recordingParticleEmitter: CAEmitterLayer?
+/// Extension for Particle Effects from Jam recording
+extension ChirpJamViewController {
+
+    /// Initial setup of the particle layer.
+    func setupRecordingParticleEmitter() {
+        print("JAMVC: setting up particle emitter")
+        recordingParticleEmitter = CAEmitterLayer()
+        if let recordingParticleEmitter = recordingParticleEmitter {
+            recordingParticleEmitter.emitterPosition = CGPoint(x: view.center.x, y: view.center.y)
+            recordingParticleEmitter.emitterShape = CAEmitterLayerEmitterShape.point
+            
+            let cell = CAEmitterCell()
+            cell.name = "recording"
+            cell.lifetime = 1.5
+            //cell.color = UIColor.red.cgColor
+            cell.velocity = 200
+            cell.velocityRange = 50
+            cell.emissionLongitude = CGFloat.pi / 2
+            cell.emissionRange = CGFloat.pi / 10
+            cell.spin = 4
+            cell.spinRange = 4
+            cell.scale = 0.2
+            cell.scaleRange = 0.5
+            cell.scaleSpeed = -0.1
+            cell.alphaRange = 0.20
+            cell.alphaSpeed = -1.0
+            cell.contents = UIImage(named: "tinystar")?.cgImage
+            
+            recordingParticleEmitter.emitterCells = [cell]
+            view.layer.addSublayer(recordingParticleEmitter)
+        }
+    }
+    
+    /// Start generating particles.
+    func createParticles() {
+        // set color to current performance
+        if let col = recorder?.recordingView.performance?.colour {
+            recordingParticleEmitter?.setValue(col.cgColor, forKeyPath: "emitterCells.recording.color")
+        }
+        recordingParticleEmitter?.setValue(100, forKeyPath: "emitterCells.recording.birthRate")
+    }
+    
+    /// Stop generating particles.
+    func stopParticles() {
+        recordingParticleEmitter?.setValue(0, forKeyPath: "emitterCells.recording.birthRate")
+    }
 }
