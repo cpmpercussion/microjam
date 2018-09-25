@@ -9,9 +9,9 @@ import UIKit
 import DropDown
 import CloudKit
 
-var kEXPERIMENT_MODE: Bool = false /// set this to experiment mode for user studies, etc.
+var ALWAYS_SAVE_MODE: Bool = true /// set this to experiment mode for user studies, etc. - do not enable for archive or distribution!
 var RECORDING_PARTICLES: Bool = false /// set this to enable recording particle system.
-var OPEN_ON_RECORD_ENABLE: Bool = false /// set this to open the jam screen with recording already enabled.
+var OPEN_ON_RECORD_ENABLE: Bool = true /// set this to open the jam screen with recording already enabled.
 
 // TODO: how to tell between loaded and saved and just loaded?
 
@@ -104,8 +104,9 @@ class ChirpJamViewController: UIViewController {
                         PerformanceStore.shared.addNew(performance: finishedPerformance)
                     }
                     navigationController?.popViewController(animated: true)
-                } else if kEXPERIMENT_MODE {
+                } else if ALWAYS_SAVE_MODE {
                     //let finishedPerformance = recorder.recordingView.performance
+                    ///FIXME: only save a "significant" performance, i.e., including all data.
                     PerformanceStore.shared.addNew(performance: finishedPerformance) // save anyway.
                 }
             }
@@ -310,6 +311,10 @@ class ChirpJamViewController: UIViewController {
             savePerformanceButton.isEnabled = true
         } else {
             savePerformanceButton.isEnabled = false
+            // Force recording on for demos and experiments
+            if OPEN_ON_RECORD_ENABLE {
+                setRecordingEnabled() // force recording to be enabled.
+            }
         }
     }
     
@@ -340,6 +345,11 @@ class ChirpJamViewController: UIViewController {
             setRecordingDisabled() // set recording button to be disabled.
             recEnableButton.isEnabled = true // enable recording button.
         }
+        
+        // Force recording on for demos and experiments
+        if OPEN_ON_RECORD_ENABLE {
+            setRecordingEnabled() // force recording to be enabled.
+        }
     }
 
     // MARK: - UI Interaction Functions
@@ -365,7 +375,7 @@ class ChirpJamViewController: UIViewController {
         print("JAMVC: Rewind pressed, clearing screen")
         if let recorder = recorder,
             let finishedPerformance = recorder.recordingView.performance {
-            if kEXPERIMENT_MODE {
+            if ALWAYS_SAVE_MODE {
                 PerformanceStore.shared.addNew(performance: finishedPerformance) // save anyway.
             }
             // Clean up the views.
