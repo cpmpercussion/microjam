@@ -238,6 +238,8 @@ class ChirpJamViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        setColourTheme()
+        
         if let recorder = recorder {
             // Loaded with an existing recorder (i.e., to make a reply)
             if !isComposing && !recorder.viewsAreLoaded {
@@ -986,5 +988,36 @@ extension ChirpJamViewController {
     /// Stop generating particles.
     func stopParticles() {
         recordingParticleEmitter?.setValue(0, forKeyPath: "emitterCells.recording.birthRate")
+    }
+}
+
+// Set up dark and light mode.
+extension ChirpJamViewController {
+    
+    func setColourTheme() {
+        setDarkMode()
+    }
+    
+    func setDarkMode() {
+        view.backgroundColor = DarkMode.background
+        //        tableView.backgroundColor = UIColor.black
+        performerLabel.textColor = DarkMode.text
+        instrumentButton.setTitleColor(DarkMode.text, for: .normal)
+        recordingProgress.backgroundColor = DarkMode.midbackground
+        recordingProgress.progressTintColor = DarkMode.highlight
+        menuButton.setTitleColor(DarkMode.text, for: .normal)
+        navigationController?.navigationBar.barStyle = .black
+        navigationController?.view.backgroundColor = DarkMode.background
+    }
+    
+    func setLightMode() {
+        view.backgroundColor = LightMode.background
+        //        tableView.backgroundColor = UIColor.black
+        instrumentButton.setTitleColor(LightMode.text, for: .normal)
+        menuButton.setTitleColor(LightMode.text, for: .normal)
+        recordingProgress.backgroundColor = LightMode.midbackground
+        recordingProgress.progressTintColor = LightMode.highlight
+        navigationController?.navigationBar.barStyle = .default
+        navigationController?.view.backgroundColor = LightMode.background
     }
 }

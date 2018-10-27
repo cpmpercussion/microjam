@@ -12,6 +12,10 @@ import UIKit
 class MicrojamTabBarController: UITabBarController {
     
     /// User Settings View Controller
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setDarkMode()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,5 +90,16 @@ class MicrojamTabBarController: UITabBarController {
         // Pass the selected object to the new view controller.
     }
     
+    func setDarkMode() {
+        self.tabBar.backgroundColor = DarkMode.background
+        self.tabBar.barTintColor = DarkMode.background
+        self.tabBar.tintColor = DarkMode.highlight
+    }
+    
+    func setLightMode() {
+        self.tabBar.backgroundColor = LightMode.background
+        self.tabBar.barTintColor = LightMode.background
+        self.tabBar.tintColor = LightMode.highlight
+    }
 
 }
