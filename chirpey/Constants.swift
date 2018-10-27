@@ -176,5 +176,17 @@ struct ErrorDialogues {
     static let icloudNotLoggedIn = "MicroJam uses iCloud to store your performances."
 }
 
+struct DarkMode {
+    static let background = UIColor.init("#141d26")
+    static let midbackground = UIColor.init("#243447")
+    static let text = UIColor.init("#ffffff")
+    static let highlight = UIColor.init("#ec6b2d")
+}
 
+struct LightMode {
+    static let background = UIColor.init("#ffffff")
+    static let midbackground = UIColor.init("#d5d5d5")
+    static let text = UIColor.init("#000000")
+    static let highlight = UIColor.init("#c51f5d")
+}
 
