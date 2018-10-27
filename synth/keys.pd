@@ -8,7 +8,7 @@
 #X obj 229 202 r \$0-input;
 #X obj 229 224 list trim;
 #X obj 227 245 t a a;
-#N canvas 790 207 1140 735 rhodey 0;
+#N canvas 540 509 1140 735 rhodey 1;
 #N canvas 424 366 478 366 pmosc 0;
 #X obj 119 199 cos~;
 #X obj 119 167 +~;
@@ -320,7 +320,7 @@ License along with this program. If not \, see <http://www.gnu.org/licenses/>.
 #X obj 280 274 route /x /y /z /mov;
 #X obj 323 361 * 1000;
 #X msg 240 370 mod \$1;
-#X msg 129 267 vib-depth \$1;
+#X msg 143 291 vib-depth \$1;
 #N canvas 668 57 450 300 includes 0;
 #X obj 34 16 declare -path metaPdLibs/control;
 #X obj 36 36 declare -path metaPdLibs/fx;

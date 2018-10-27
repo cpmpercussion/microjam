@@ -1,4 +1,4 @@
-#N canvas 0 22 1297 551 10;
+#N canvas 291 477 1297 551 10;
 #N canvas 0 117 646 567 reverb-aux 0;
 #X obj 32 36 inlet~;
 #X obj 33 488 outlet~;
@@ -25,7 +25,7 @@
 #X obj 279 74 delay 50;
 #X obj 34 42 *~;
 #X obj 430 29 vsl 15 128 0 1 0 0 empty empty empty 0 -9 0 10 -262144
--1 -1 9200 1;
+-1 -1 0 1;
 #X obj 81 92 f 12;
 #X obj 36 298 *~ 0.5;
 #X obj 60 115 pitchshift~;
@@ -79,20 +79,20 @@
 #X obj 198 446 outlet~;
 #X obj 266 446 outlet~;
 #X obj 48 38 inlet;
-#X obj 91 39 inlet;
-#X obj 145 40 inlet;
-#X obj 196 35 inlet;
+#X obj 145 39 inlet;
+#X obj 238 37 inlet;
+#X obj 339 34 inlet;
 #X obj 618 67 loadbang;
 #X obj 178 141 list prepend mod1b;
 #X obj 329 192 s \$0-synth-set;
 #X obj 296 231 r \$0-synth-set;
 #X obj 621 217 s \$0-synth-set;
 #X obj 446 69 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 5440 1;
+-1 -1 0 1;
 #X obj 151 301 microjam_spad;
 #X obj 326 138 list prepend mod3b;
-#X obj 197 85 + 0.4;
-#X obj 197 60 * 0.6;
+#X obj 340 84 + 0.4;
+#X obj 340 59 * 0.6;
 #X msg 619 96 mod3d 0 \, mod3c 0 \, mod3b 0.520079 \, mod3a 0 \, mod2d
 0 \, mod2c 0 \, mod2b 0 \, mod2a 0 \, mod1d 0.2 \, mod1c 0.465512 \,
 mod1b 0.166614 \, mod1a 0.654016 \, osc3d 0 \, osc3c 0 \, osc3b 0 \,
@@ -101,6 +101,10 @@ osc3a 0 \, osc2d 0 \, osc2c 0 \, osc2b 0 \, osc2a 0.779528 \, osc1d
 0 \, env3s 0 \, env3d 0 \, env3a 0 \, env2r 0.0323622 \, env2s 0.567795
 \, env2d 0.0708661 \, env2a 0.4 \, env1r 0.2 \, env1s 0.322835 \, env1d
 0.111024 \, env1a 0.080315 \,;
+#X text 37 18 midi notes;
+#X text 140 14 bend;
+#X text 248 12 dy;
+#X text 355 12 y;
 #X connect 0 0 3 0;
 #X connect 0 1 4 0;
 #X connect 1 0 3 0;

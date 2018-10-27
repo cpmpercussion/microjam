@@ -1,5 +1,4 @@
 #N canvas 157 200 939 686 10;
-#X declare -path .;
 #X obj 110 441 outlet~;
 #X obj 204 444 outlet~;
 #N canvas 773 403 889 476 crystal 0;
@@ -64,10 +63,10 @@
 #X restore 240 368 pd crystal;
 #X obj 111 188 stringsynth;
 #X obj 32 23 inlet notes;
-#X obj 110 21 inlet lr;
-#X obj 177 20 inlet dy;
-#X obj 246 25 inlet pressure;
-#X obj 346 25 inlet release;
+#X obj 138 22 inlet lr;
+#X obj 241 28 inlet dy;
+#X obj 325 25 inlet pressure;
+#X obj 425 25 inlet release;
 #X floatatom 209 74 5 0 0 0 - - -, f 5;
 #X obj 202 249 *~ 0.6;
 #X obj 100 323 e_dubdel \$0-dubdel;
@@ -85,6 +84,10 @@
 0.99 \, dell 2 \, delr 3 \,;
 #X obj 296 271 loadbang;
 #X obj 261 159 *;
+#X text 28 1 midi notes;
+#X text 166 4 bend;
+#X text 243 10 delta y;
+#X text 373 5 pressure;
 #X connect 2 0 0 0;
 #X connect 2 0 1 0;
 #X connect 3 0 10 0;
