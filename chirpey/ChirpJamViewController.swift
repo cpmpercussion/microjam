@@ -9,7 +9,7 @@ import UIKit
 import DropDown
 import CloudKit
 
-var ALWAYS_SAVE_MODE: Bool = true /// set this to experiment mode for user studies, etc. - do not enable for archive or distribution!
+var ALWAYS_SAVE_MODE: Bool = false /// set this to experiment mode for user studies, etc. - do not enable for archive or distribution!
 var RECORDING_PARTICLES: Bool = false /// set this to enable recording particle system.
 var OPEN_ON_RECORD_ENABLE: Bool = true /// set this to open the jam screen with recording already enabled.
 
