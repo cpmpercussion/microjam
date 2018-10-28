@@ -1007,6 +1007,7 @@ extension ChirpJamViewController {
         recordingProgress.progressTintColor = DarkMode.highlight
         menuButton.setTitleColor(DarkMode.text, for: .normal)
         navigationController?.navigationBar.barStyle = .black
+        navigationController?.navigationBar.tintColor = DarkMode.highlight
         navigationController?.view.backgroundColor = DarkMode.background
     }
     
@@ -1018,6 +1019,7 @@ extension ChirpJamViewController {
         recordingProgress.backgroundColor = LightMode.midbackground
         recordingProgress.progressTintColor = LightMode.highlight
         navigationController?.navigationBar.barStyle = .default
+        navigationController?.navigationBar.tintColor = LightMode.highlight
         navigationController?.view.backgroundColor = LightMode.background
     }
 }

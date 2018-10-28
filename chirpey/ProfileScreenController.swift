@@ -199,3 +199,36 @@ fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ inp
 fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
 	return input.rawValue
 }
+
+///// Extension for Color Themes
+//extension ProfileScreenController {
+//
+//    func setColourTheme() {
+//        setDarkMode()
+//    }
+//
+//    func setDarkMode() {
+//        view.backgroundColor = DarkMode.background
+//        //        tableView.backgroundColor = UIColor.black
+//        //        performerLabel.textColor = DarkMode.text
+//        //        instrumentButton.setTitleColor(DarkMode.text, for: .normal)
+//        //        recordingProgress.backgroundColor = DarkMode.midbackground
+//        //        recordingProgress.progressTintColor = DarkMode.highlight
+//        //        menuButton.setTitleColor(DarkMode.text, for: .normal)
+//        navigationController?.navigationBar.barStyle = .black
+//        navigationController?.navigationBar.tintColor = DarkMode.highlight
+//        navigationController?.view.backgroundColor = DarkMode.background
+//    }
+//
+//    func setLightMode() {
+//        view.backgroundColor = LightMode.background
+//        //        tableView.backgroundColor = UIColor.black
+//        //        instrumentButton.setTitleColor(LightMode.text, for: .normal)
+//        //        menuButton.setTitleColor(LightMode.text, for: .normal)
+//        //        recordingProgress.backgroundColor = LightMode.midbackground
+//        //        recordingProgress.progressTintColor = LightMode.highlight
+//        navigationController?.navigationBar.barStyle = .default
+//        navigationController?.navigationBar.tintColor = LightMode.highlight
+//        navigationController?.view.backgroundColor = LightMode.background
+//    }
+//}

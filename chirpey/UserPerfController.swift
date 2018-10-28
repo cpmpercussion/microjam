@@ -50,6 +50,9 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
     
     override func viewWillAppear(_ animated: Bool) {
         // Attempt to load the data and display it.
+        /// TODO: is there some reason not to call super here?
+        super.viewWillAppear(animated)
+        setColourTheme()
         updateDataFromStore()
         updateDataFromCloud()
     }
@@ -336,5 +339,38 @@ extension UIImage {
         return outImage
     }
     return nil
+    }
+}
+
+/// Extension for Color Themes
+extension UserPerfController {
+    
+    func setColourTheme() {
+        setDarkMode()
+    }
+    
+    func setDarkMode() {
+        view.backgroundColor = DarkMode.background
+        //        tableView.backgroundColor = UIColor.black
+        //        performerLabel.textColor = DarkMode.text
+        //        instrumentButton.setTitleColor(DarkMode.text, for: .normal)
+        //        recordingProgress.backgroundColor = DarkMode.midbackground
+        //        recordingProgress.progressTintColor = DarkMode.highlight
+        //        menuButton.setTitleColor(DarkMode.text, for: .normal)
+        navigationController?.navigationBar.barStyle = .black
+        navigationController?.navigationBar.tintColor = DarkMode.highlight
+        navigationController?.view.backgroundColor = DarkMode.background
+    }
+    
+    func setLightMode() {
+        view.backgroundColor = LightMode.background
+        //        tableView.backgroundColor = UIColor.black
+        //        instrumentButton.setTitleColor(LightMode.text, for: .normal)
+        //        menuButton.setTitleColor(LightMode.text, for: .normal)
+        //        recordingProgress.backgroundColor = LightMode.midbackground
+        //        recordingProgress.progressTintColor = LightMode.highlight
+        navigationController?.navigationBar.barStyle = .default
+        navigationController?.navigationBar.tintColor = LightMode.highlight
+        navigationController?.view.backgroundColor = LightMode.background
     }
 }
