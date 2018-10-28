@@ -50,6 +50,8 @@ class PerformanceTableCell: UITableViewCell {
         replyButton.layer.cornerRadius = 18 // Button size is 36
         replyButton.setImage(#imageLiteral(resourceName: "microjam-reply"), for: .normal)
         replyButton.tintColor = UIColor.darkGray
+        
+        setColourTheme()
     }
     
     /// Updates UI with data from a given PerformerProfile
@@ -89,3 +91,36 @@ class PerformanceTableCell: UITableViewCell {
     }
 
 }
+
+// Set up dark and light mode.
+extension PerformanceTableCell {
+    
+    func setColourTheme() {
+        setDarkMode()
+    }
+    
+    func setDarkMode() {
+        backgroundColor = DarkMode.background
+        //avatarImageView //: UIImageView!
+        chirpContainer.backgroundColor = DarkMode.midbackground//: UIView!
+        title.textColor = DarkMode.text //: UILabel!
+        performer.textColor = DarkMode.text //: UILabel!
+        instrument.textColor = DarkMode.text //: UILabel!
+        context.textColor = DarkMode.text //: UILabel!
+        //playButton // : UIButton!
+        //replyButton //: UIButton!
+    }
+    
+    func setLightMode() {
+        backgroundColor = LightMode.background
+        //avatarImageView //: UIImageView!
+        chirpContainer.backgroundColor = LightMode.midbackground//: UIView!
+        title.textColor = LightMode.text //: UILabel!
+        performer.textColor = LightMode.text //: UILabel!
+        instrument.textColor = LightMode.text //: UILabel!
+        context.textColor = LightMode.text //: UILabel!
+        //playButton // : UIButton!
+        //replyButton //: UIButton!
+    }
+}
+

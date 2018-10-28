@@ -310,11 +310,6 @@ extension WorldJamsTableViewController {
     
     func setLightMode() {
         view.backgroundColor = LightMode.background
-        //        tableView.backgroundColor = UIColor.black
-//        instrumentButton.setTitleColor(LightMode.text, for: .normal)
-//        menuButton.setTitleColor(LightMode.text, for: .normal)
-//        recordingProgress.backgroundColor = LightMode.midbackground
-//        recordingProgress.progressTintColor = LightMode.highlight
         navigationController?.navigationBar.barStyle = .default
         navigationController?.navigationBar.tintColor = LightMode.highlight
         navigationController?.view.backgroundColor = LightMode.background
