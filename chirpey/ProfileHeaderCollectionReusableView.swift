@@ -40,6 +40,13 @@ class ProfileHeaderCollectionReusableView: UICollectionReusableView {
     @IBOutlet weak var soundSchemeDropDownButton: UIButton!
     /// Header view used if not logged in - View shown if user is not logged into iCloud.
     let noAccountHeaderView = NoAccountWarningStackView()
+    /// Labels Outlet Collection
+    @IBOutlet var profileHeaderLabels: [UILabel]!
+    /// Buttons outlet collection
+    @IBOutlet var profileHeaderButtons: [UIButton]!
+    /// Container for Settings stack
+    @IBOutlet var profileHeaderContainerViews: [UIView]!
+    
     
     /// updates the profile screen's fields according to the present UserProfile data.
     @objc func updateUI() {
@@ -85,6 +92,43 @@ class ProfileHeaderCollectionReusableView: UICollectionReusableView {
         
         // add observer for UserProfile updates.
         NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: NSNotification.Name(rawValue: userProfileUpdatedNotificationKey), object: nil)
+        
+        setColourTheme() // set up light or dark mode.
     }
 
+}
+
+// Set up dark and light mode.
+extension ProfileHeaderCollectionReusableView {
+    
+    func setColourTheme() {
+        setDarkMode()
+    }
+    
+    func setDarkMode() {
+        backgroundColor = DarkMode.background
+        for view in profileHeaderContainerViews {
+            view.backgroundColor = DarkMode.background
+        }
+        //avatarImageView //: UIImageView!
+        stageNameField.textColor = DarkMode.text
+        for view in profileHeaderLabels {
+            view.textColor = DarkMode.text
+        }
+        for button in profileHeaderButtons {
+            button.setTitleColor(DarkMode.highlight, for: .normal)
+        }
+    }
+    
+    func setLightMode() {
+//        backgroundColor = LightMode.background
+//        //avatarImageView //: UIImageView!
+//        chirpContainer.backgroundColor = LightMode.midbackground//: UIView!
+//        title.textColor = LightMode.text //: UILabel!
+//        performer.textColor = LightMode.text //: UILabel!
+//        instrument.textColor = LightMode.text //: UILabel!
+//        context.textColor = LightMode.text //: UILabel!
+//        //playButton // : UIButton!
+//        //replyButton //: UIButton!
+    }
 }

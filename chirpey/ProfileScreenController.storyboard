@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ILZ-VW-8SS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ILZ-VW-8SS">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -78,7 +78,7 @@
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                             <subviews>
                                                                                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ghg-7L-8eN">
-                                                                                    <rect key="frame" x="15" y="-3" width="30" height="27"/>
+                                                                                    <rect key="frame" x="15" y="-3" width="30" height="26"/>
                                                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="11"/>
                                                                                     <state key="normal" title="Edit"/>
                                                                                     <connections>
@@ -255,6 +255,14 @@
                                 <outlet property="settingsStack" destination="j8A-mf-7EU" id="OKs-1f-iXh"/>
                                 <outlet property="soundSchemeDropDownButton" destination="eeE-Ju-Dmt" id="BZ3-47-o3p"/>
                                 <outlet property="stageNameField" destination="juZ-se-eXV" id="2r2-vq-QNh"/>
+                                <outletCollection property="profileHeaderLabels" destination="7cz-y0-lW8" collectionClass="NSMutableArray" id="e0V-d8-HGL"/>
+                                <outletCollection property="profileHeaderLabels" destination="GbH-Ho-Mlb" collectionClass="NSMutableArray" id="Pd6-ht-tSZ"/>
+                                <outletCollection property="profileHeaderLabels" destination="5DU-ac-gxi" collectionClass="NSMutableArray" id="iEr-PM-8e7"/>
+                                <outletCollection property="profileHeaderLabels" destination="j5n-vy-q5r" collectionClass="NSMutableArray" id="0UP-oz-95q"/>
+                                <outletCollection property="profileHeaderLabels" destination="FxK-C1-pep" collectionClass="NSMutableArray" id="JSS-69-Qei"/>
+                                <outletCollection property="profileHeaderButtons" destination="eeE-Ju-Dmt" collectionClass="NSMutableArray" id="kRk-2D-A8Z"/>
+                                <outletCollection property="profileHeaderContainerViews" destination="zWa-V8-4ck" collectionClass="NSMutableArray" id="5ei-OT-uyY"/>
+                                <outletCollection property="profileHeaderContainerViews" destination="tyD-ra-2pJ" collectionClass="NSMutableArray" id="BGC-YP-tGs"/>
                             </connections>
                         </collectionReusableView>
                         <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="ProfileSceneFooter" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="ProfileSceneFooter" id="bhQ-HQ-Ohs" customClass="ProfileFooterCollectionReusableView" customModule="microjam" customModuleProvider="target">
