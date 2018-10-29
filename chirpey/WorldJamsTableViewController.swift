@@ -45,11 +45,12 @@ class WorldJamsTableViewController: UITableViewController {
         tableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tableViewTapped)))
         tableView.separatorStyle = .none // Remove the separator
         
-        NotificationCenter.default.addObserver(self, selector: #selector(updateProfilesInCells), name: NSNotification.Name(rawValue: performerProfileUpdatedKey), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateProfilesInCells), name: .performerProfileUpdated, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(setColourTheme), name: .setColourTheme, object: nil) // notification for colour theme.
     }
     
     deinit {
+        NotificationCenter.default.removeObserver(self, name: .performerProfileUpdated, object: nil)
         NotificationCenter.default.removeObserver(self, name: .setColourTheme, object: nil)
     }
 

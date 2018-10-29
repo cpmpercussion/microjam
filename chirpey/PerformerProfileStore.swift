@@ -9,7 +9,6 @@
 import UIKit
 import CloudKit
 
-let performerProfileUpdatedKey = "au.com.charlesmartin.PerformerProfilesUpdatedNotificationKey"
 
 class PerformerProfileStore : NSObject {
     /// Shared Instance
@@ -97,7 +96,7 @@ class PerformerProfileStore : NSObject {
                     prof.fetchedThisSession = true // set fetched this session, so it's not refetched later.
                     self.profiles[performerID] = prof
                     print("PerformerProfileStore: \(prof.stageName)'s profile fetched.")
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: performerProfileUpdatedKey), object: nil)
+                    NotificationCenter.default.post(name: .performerProfileUpdated, object: nil)
                 }
             }
         }

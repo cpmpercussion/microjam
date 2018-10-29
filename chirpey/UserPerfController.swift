@@ -36,8 +36,8 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
         collectionView?.register(PerformerInfoHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier)
         collectionView?.register(UserPerfCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView?.backgroundColor = .white
-        NotificationCenter.default.addObserver(self, selector: #selector(updateDataFromStore), name: NSNotification.Name(rawValue: performanceStoreUpdatedNotificationKey), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(updateProfileDisplay), name: NSNotification.Name(rawValue: performerProfileUpdatedKey), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateDataFromStore), name: .performanceStoreUpdated, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateProfileDisplay), name: .performerProfileUpdated, object: nil)
 
 
         // Set up long press gesture recogniser:
@@ -55,6 +55,11 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
         setColourTheme()
         updateDataFromStore()
         updateDataFromCloud()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .performanceStoreUpdated, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .performerProfileUpdated, object: nil)
     }
     
     /// Updates the CollectionView from the local performance store data.

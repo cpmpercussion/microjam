@@ -9,8 +9,6 @@
 import UIKit
 import CloudKit
 
-let performanceStoreUpdatedNotificationKey = "au.com.charlesmartin.performanceStoreUpdatedNotificationKey"
-let performanceStoreFailedUpdateNotificationKey = "au.com.charlesmartin.performanceStoreFailedUpdateNotificationKey"
 
 /// Exposes CloudKit container to all UIViewControllers
 extension UIViewController {
@@ -107,7 +105,7 @@ class PerformanceStore: NSObject {
         DispatchQueue.main.async {
             self.feed = self.generateFeed()
             self.delegate?.modelUpdated() // stop spinner
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: performanceStoreUpdatedNotificationKey), object: nil)
+            NotificationCenter.default.post(name: .performanceStoreUpdated, object: nil)
         }
     }
 
@@ -224,7 +222,7 @@ extension PerformanceStore {
                     self.feed = self.generateFeed()
                     // TODO: Should delegates be updated when every performance is retrieved?
                     //self.delegate?.modelUpdated()
-                    //NotificationCenter.default.post(name: NSNotification.Name(rawValue: performanceStoreUpdatedNotificationKey), object: nil)
+                    //NotificationCenter.default.post(name: .performanceStoreUpdated, object: nil)
                 }
             }
         } // Appends fetched records to the array of Performances
@@ -246,7 +244,7 @@ extension PerformanceStore {
             DispatchQueue.main.async { // give the delegate the trigger to update the table.
                 self.feed = self.generateFeed()
                 self.delegate?.modelUpdated()
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: performanceStoreUpdatedNotificationKey), object: nil)
+                NotificationCenter.default.post(name: .performanceStoreUpdated, object: nil)
             }
             print("Store: Successfully updated from cloud")
         }
@@ -279,7 +277,7 @@ extension PerformanceStore {
                     self.addToStored(performances: [perf])
                     print("PerformanceStore: \(perf.title()) found.")
                     self.delegate?.modelUpdated()
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: performanceStoreUpdatedNotificationKey), object: nil)
+                    NotificationCenter.default.post(name: .performanceStoreUpdated, object: nil)
                 }
             }
         }
@@ -298,7 +296,7 @@ extension PerformanceStore {
                 DispatchQueue.main.async {
                     self.performances[recordID]?.image = image
                     self.delegate?.modelUpdated()
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: performanceStoreUpdatedNotificationKey), object: nil)
+                    NotificationCenter.default.post(name: .performanceStoreUpdated, object: nil)
                 }
                 
             }
@@ -332,7 +330,7 @@ extension PerformanceStore {
             if let performance = self.performanceFrom(record: record) {
                 self.addToStored(performances: [performance])
                 DispatchQueue.main.async {
-                    // NotificationCenter.default.post(name: NSNotification.Name(rawValue: performanceStoreUpdatedNotificationKey), object: nil)
+                    // NotificationCenter.default.post(name: .performanceStoreUpdated, object: nil)
                     // could notify delegate here - but triggers too many times.
                 }
             }
@@ -344,7 +342,7 @@ extension PerformanceStore {
                 return
             } else {
                 print("PerformanceStore: finished loading perfs for", perfID)
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: performanceStoreUpdatedNotificationKey), object: nil)
+                NotificationCenter.default.post(name: .performanceStoreUpdated, object: nil)
                 DispatchQueue.main.async {
                     self.delegate?.modelUpdated()
                 }
@@ -450,7 +448,7 @@ extension PerformanceStore {
             } else {
                 print("Deletion was successful, updating")
                 self.removePerformanceFromStore(withID: recordID)
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: performanceStoreUpdatedNotificationKey), object: nil)
+                NotificationCenter.default.post(name: .performanceStoreUpdated, object: nil)
                 DispatchQueue.main.async {
                     self.delegate?.modelUpdated()
                 }

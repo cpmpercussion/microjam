@@ -91,7 +91,7 @@ class ProfileHeaderCollectionReusableView: UICollectionReusableView {
         containerStack.insertArrangedSubview(noAccountHeaderView, at: 0)
         
         // add observer for UserProfile updates.
-        NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: NSNotification.Name(rawValue: userProfileUpdatedNotificationKey), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: .userProfileUpdated, object: nil)
         
         setColourTheme() // set up light or dark mode.
     }

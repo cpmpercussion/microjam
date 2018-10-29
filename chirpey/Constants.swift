@@ -193,12 +193,13 @@ struct LightMode {
 }
 
 
-/// Notofications and notification keys
-let userProfileUpdatedNotificationKey = "au.com.charlesmartin.userProfileUpdatedNotificationKey"
-let userDataExportReadyKey = "au.com.charlesmartin.userDataExportReadyKey"
+/// Notifications and notification keys
 
 extension Notification.Name {
-    static let userProfileUpdated = Notification.Name(userProfileUpdatedNotificationKey)
-    static let userDataExportReady = Notification.Name(userDataExportReadyKey)
+    static let userProfileUpdated = Notification.Name("au.com.charlesmartin.userProfileUpdatedNotificationKey")
+    static let userDataExportReady = Notification.Name("au.com.charlesmartin.userDataExportReadyKey")
+    static let performanceStoreUpdated = Notification.Name("au.com.charlesmartin.performanceStoreUpdatedNotificationKey")
+    static let performanceStoreFailedUpdate = Notification.Name("au.com.charlesmartin.performanceStoreFailedUpdateNotificationKey")
+    static let performerProfileUpdated = Notification.Name("au.com.charlesmartin.PerformerProfilesUpdatedNotificationKey")
     static let setColourTheme = Notification.Name("au.com.charlesmartin.setColourTheme")
 }

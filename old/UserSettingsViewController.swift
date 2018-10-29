@@ -100,7 +100,11 @@ class UserSettingsViewController: UIViewController {
         setupProfileCollectionView()
         updateUI()
         // add observer for UserProfile updates.
-        NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: NSNotification.Name(rawValue: userProfileUpdatedNotificationKey), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: .userProfileUpdated, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .userProfileUpdated, object: nil)
     }
     
     /// Setup the user performance collection view at the bottom of the profile screen.

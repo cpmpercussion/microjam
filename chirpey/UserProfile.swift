@@ -131,7 +131,7 @@ class UserProfile: NSObject {
             DispatchQueue.main.async {
                 print("UserProfile: Found user record, notifying.")
                 self.record = record
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: userProfileUpdatedNotificationKey), object: nil)
+                NotificationCenter.default.post(name: .userProfileUpdated, object: nil)
             }
         }
     }
@@ -348,7 +348,7 @@ extension UserProfile {
                     print("Exporter: Finished querying records")
                     // convert to string and download or something.
                     self.exportedData = self.convertRecordsToString(result)
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: userDataExportReadyKey), object: nil)
+                    NotificationCenter.default.post(name: .userDataExportReady, object: nil)
                 }
             }
             // perform query operation
