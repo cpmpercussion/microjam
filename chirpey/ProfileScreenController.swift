@@ -24,6 +24,7 @@ class ProfileScreenController: UserPerfController {
     static let footerID = "ProfileSceneFooter"
     /// Storage for the headerView
     var headerView : ProfileHeaderCollectionReusableView?
+    var footerView : ProfileFooterCollectionReusableView?
 
 
     // MARK: - Collection View Setup
@@ -40,11 +41,10 @@ class ProfileScreenController: UserPerfController {
             headerView = (collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ProfileScreenController.headerID, for: indexPath) as! ProfileHeaderCollectionReusableView)
             headerView?.updateUI() // update with latest information
             headerView?.stageNameField.delegate = self // become delegate for the stagename field.
-            
             return headerView!
         case UICollectionView.elementKindSectionFooter:
-            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: ProfileScreenController.footerID, for: indexPath) as! ProfileFooterCollectionReusableView
-            return footerView
+            footerView = (collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: ProfileScreenController.footerID, for: indexPath) as! ProfileFooterCollectionReusableView)
+            return footerView!
         default:
             return UICollectionReusableView()
         }
@@ -62,8 +62,8 @@ class ProfileScreenController: UserPerfController {
     @objc override func viewDidLoad() {
         super.viewDidLoad()
         performerID = CKRecord.ID(recordName: "__defaultOwner__")
-
-        NotificationCenter.default.addObserver(self, selector: #selector(exportDataReady), name: NSNotification.Name(rawValue: userDataExportReadyKey), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(exportDataReady), name: .userDataExportReady, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(setColourTheme), name: .setColourTheme, object: nil) // notification for colour theme.
     }
     
     /// When the view disappears, updates the profile on iCloud
@@ -75,6 +75,12 @@ class ProfileScreenController: UserPerfController {
     override func viewWillAppear(_ animated: Bool) {
         headerView?.updateUI()
         super.viewWillAppear(animated)
+    }
+    
+    deinit {
+        // Clean up notification center observers
+        NotificationCenter.default.removeObserver(self, name: .userDataExportReady, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .setColourTheme, object: nil)
     }
     
     // MARK: - Interface builder actions for header
@@ -198,4 +204,12 @@ fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ inp
 // Helper function inserted by Swift 4.2 migrator.
 fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
 	return input.rawValue
+}
+
+extension ProfileScreenController {
+    @objc override func setColourTheme() {
+        UserDefaults.standard.bool(forKey: SettingsKeys.darkMode) ? setDarkMode() : setLightMode()
+        headerView?.setColourTheme()
+        footerView?.setColourTheme()
+    }
 }

@@ -9,8 +9,7 @@
 import UIKit
 import CloudKit
 
-let userProfileUpdatedNotificationKey = "au.com.charlesmartin.userProfileUpdatedNotificationKey"
-let userDataExportReadyKey = "au.com.charlesmartin.userDataExportReadyKey"
+
 
 /// Singleton class to hold the logged-in user's profile.
 class UserProfile: NSObject {

@@ -65,10 +65,34 @@ class PerformerInfoHeader: UICollectionReusableView {
         avatarImageView.clipsToBounds = true
         
         performerNameLabel.font = performerNameLabel.font.withSize(24)
+        
+        setColourTheme() // Set dark/light theme
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("Required init not implemented")
     }
     
+}
+
+// Set up dark and light mode.
+extension PerformerInfoHeader {
+    
+    @objc func setColourTheme() {
+        if UserDefaults.standard.bool(forKey: SettingsKeys.darkMode) {
+            setDarkMode()
+        } else {
+            setLightMode()
+        }
+    }
+    
+    func setDarkMode() {
+        backgroundColor = DarkMode.background
+        performerNameLabel.textColor = DarkMode.text
+    }
+    
+    func setLightMode() {
+        backgroundColor = LightMode.background
+        performerNameLabel.textColor = LightMode.text
+    }
 }

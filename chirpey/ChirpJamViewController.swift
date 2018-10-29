@@ -233,6 +233,8 @@ class ChirpJamViewController: UIViewController {
                 break
             }
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(setColourTheme), name: .setColourTheme, object: nil) // notification for colour theme.
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -318,6 +320,10 @@ class ChirpJamViewController: UIViewController {
                 setRecordingEnabled() // force recording to be enabled.
             }
         }
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .setColourTheme, object: nil)
     }
     
     /// Called if instrument is changed in the dropdown menu
@@ -994,8 +1000,8 @@ extension ChirpJamViewController {
 // Set up dark and light mode.
 extension ChirpJamViewController {
     
-    func setColourTheme() {
-        setDarkMode()
+    @objc func setColourTheme() {
+        UserDefaults.standard.bool(forKey: SettingsKeys.darkMode) ? setDarkMode() : setLightMode()
     }
     
     func setDarkMode() {
@@ -1014,6 +1020,7 @@ extension ChirpJamViewController {
     func setLightMode() {
         view.backgroundColor = LightMode.background
         //        tableView.backgroundColor = UIColor.black
+        performerLabel.textColor = LightMode.text
         instrumentButton.setTitleColor(LightMode.text, for: .normal)
         menuButton.setTitleColor(LightMode.text, for: .normal)
         recordingProgress.backgroundColor = LightMode.midbackground

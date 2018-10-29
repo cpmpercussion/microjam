@@ -327,6 +327,14 @@
                                 <constraint firstAttribute="bottom" secondItem="4dk-kt-kWA" secondAttribute="bottom" id="f1u-SX-ywS"/>
                                 <constraint firstAttribute="trailing" secondItem="4dk-kt-kWA" secondAttribute="trailing" id="zST-AB-dwe"/>
                             </constraints>
+                            <connections>
+                                <outletCollection property="profileFooterLabels" destination="Yvx-Mq-U8q" collectionClass="NSMutableArray" id="5Mx-FT-eDZ"/>
+                                <outletCollection property="profileFooterLabels" destination="1RV-v0-RGQ" collectionClass="NSMutableArray" id="doD-0a-Cgf"/>
+                                <outletCollection property="profileFooterButtons" destination="jfD-6T-NIJ" collectionClass="NSMutableArray" id="QUU-5X-qRk"/>
+                                <outletCollection property="profileFooterButtons" destination="ONy-ge-E6F" collectionClass="NSMutableArray" id="cP6-wI-4m7"/>
+                                <outletCollection property="profileFooterButtons" destination="cNh-gX-M4S" collectionClass="NSMutableArray" id="YVz-rN-e88"/>
+                                <outletCollection property="profileFooterButtons" destination="q8u-4V-X1c" collectionClass="NSMutableArray" id="DU3-C0-4HM"/>
+                            </connections>
                         </collectionReusableView>
                         <connections>
                             <outlet property="dataSource" destination="ILZ-VW-8SS" id="iYC-oj-1Fo"/>

@@ -17,12 +17,14 @@ struct SettingsKeys {
     static let backgroundColourKey = "background_colour"
     static let soundSchemeKey = "sound_scheme"
     static let tutorialCompleted = "tutorial_completed"
+    static let darkMode = "dark_mode"
     static let defaultSettings : [String : Any] = [
         SettingsKeys.performerKey:"",
         SettingsKeys.performerColourKey: 0.5,
         SettingsKeys.backgroundColourKey: 0.2,
         SettingsKeys.soundSchemeKey: 0,
-        SettingsKeys.tutorialCompleted: false
+        SettingsKeys.tutorialCompleted: false,
+        SettingsKeys.darkMode: true
     ]
 }
 
@@ -190,3 +192,13 @@ struct LightMode {
     static let highlight = UIColor.init("#c51f5d")
 }
 
+
+/// Notofications and notification keys
+let userProfileUpdatedNotificationKey = "au.com.charlesmartin.userProfileUpdatedNotificationKey"
+let userDataExportReadyKey = "au.com.charlesmartin.userDataExportReadyKey"
+
+extension Notification.Name {
+    static let userProfileUpdated = Notification.Name(userProfileUpdatedNotificationKey)
+    static let userDataExportReady = Notification.Name(userDataExportReadyKey)
+    static let setColourTheme = Notification.Name("au.com.charlesmartin.setColourTheme")
+}

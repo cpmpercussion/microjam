@@ -29,6 +29,8 @@ class PerformanceTableCell: UITableViewCell {
     /// A reply button layered over the ChirpContainer
     @IBOutlet weak var replyButton: UIButton!
     
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -39,17 +41,12 @@ class PerformanceTableCell: UITableViewCell {
         
         chirpContainer.layer.cornerRadius = 8
         chirpContainer.layer.borderWidth = 1
-        chirpContainer.layer.borderColor = UIColor(white: 0.8, alpha: 1).cgColor
-        chirpContainer.backgroundColor = .white
         chirpContainer.clipsToBounds = true
         
         playButton.layer.cornerRadius = 18 // Button size is 36
         playButton.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal)
-        playButton.tintColor = UIColor.darkGray
-
         replyButton.layer.cornerRadius = 18 // Button size is 36
         replyButton.setImage(#imageLiteral(resourceName: "microjam-reply"), for: .normal)
-        replyButton.tintColor = UIColor.darkGray
         
         setColourTheme()
     }
@@ -95,32 +92,37 @@ class PerformanceTableCell: UITableViewCell {
 // Set up dark and light mode.
 extension PerformanceTableCell {
     
-    func setColourTheme() {
-        setDarkMode()
+    @objc func setColourTheme() {
+        UserDefaults.standard.bool(forKey: SettingsKeys.darkMode) ? setDarkMode() : setLightMode()
     }
     
     func setDarkMode() {
         backgroundColor = DarkMode.background
         //avatarImageView //: UIImageView!
-        chirpContainer.backgroundColor = DarkMode.midbackground//: UIView!
-        title.textColor = DarkMode.text //: UILabel!
-        performer.textColor = DarkMode.text //: UILabel!
-        instrument.textColor = DarkMode.text //: UILabel!
-        context.textColor = DarkMode.text //: UILabel!
-        //playButton // : UIButton!
-        //replyButton //: UIButton!
+        title.textColor = DarkMode.text
+        performer.textColor = DarkMode.text
+        instrument.textColor = DarkMode.text
+        context.textColor = DarkMode.text
+        /// TODO: adjust these colours
+        chirpContainer.layer.borderColor = UIColor(white: 0.8, alpha: 1).cgColor
+        //chirpContainer.backgroundColor = DarkMode.midbackground // set later by table view controller
+        playButton.tintColor = UIColor.darkGray
+        replyButton.tintColor = UIColor.darkGray
+
     }
     
     func setLightMode() {
         backgroundColor = LightMode.background
         //avatarImageView //: UIImageView!
-        chirpContainer.backgroundColor = LightMode.midbackground//: UIView!
-        title.textColor = LightMode.text //: UILabel!
-        performer.textColor = LightMode.text //: UILabel!
-        instrument.textColor = LightMode.text //: UILabel!
-        context.textColor = LightMode.text //: UILabel!
-        //playButton // : UIButton!
-        //replyButton //: UIButton!
+        title.textColor = LightMode.text
+        performer.textColor = LightMode.text
+        instrument.textColor = LightMode.text
+        context.textColor = LightMode.text
+        /// TODO: adjust these colours
+        chirpContainer.layer.borderColor = UIColor(white: 0.8, alpha: 1).cgColor
+        //chirpContainer.backgroundColor = LightMode.midbackground // set later by table view controller
+        playButton.tintColor = UIColor.darkGray
+        replyButton.tintColor = UIColor.darkGray
     }
 }
 

@@ -46,6 +46,11 @@ class WorldJamsTableViewController: UITableViewController {
         tableView.separatorStyle = .none // Remove the separator
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateProfilesInCells), name: NSNotification.Name(rawValue: performerProfileUpdatedKey), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(setColourTheme), name: .setColourTheme, object: nil) // notification for colour theme.
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .setColourTheme, object: nil)
     }
 
     // Action if a play button is pressed in a cell
@@ -113,6 +118,7 @@ class WorldJamsTableViewController: UITableViewController {
         let performance = performanceStore.feed[indexPath.row]
         cell.player = ChirpPlayer()
         cell.player?.delegate = self
+        cell.setColourTheme() // set colour theme if reloading.
         
         
         // Get all replies and add them to the player and chirp container.
@@ -291,18 +297,19 @@ extension WorldJamsTableViewController: ModelDelegate {
 // Set up dark and light mode.
 extension WorldJamsTableViewController {
     
-    func setColourTheme() {
-        setDarkMode()
+    @objc func setColourTheme() {
+        UserDefaults.standard.bool(forKey: SettingsKeys.darkMode) ? setDarkMode() : setLightMode()
+        
+        // set colour for visible table view cells.
+        for cell in self.tableView.visibleCells {
+            if let cell = cell as? PerformanceTableCell {
+                cell.setColourTheme()
+            }
+        }
     }
     
     func setDarkMode() {
         view.backgroundColor = DarkMode.background
-        //        tableView.backgroundColor = UIColor.black
-//        performerLabel.textColor = DarkMode.text
-//        instrumentButton.setTitleColor(DarkMode.text, for: .normal)
-//        recordingProgress.backgroundColor = DarkMode.midbackground
-//        recordingProgress.progressTintColor = DarkMode.highlight
-//        menuButton.setTitleColor(DarkMode.text, for: .normal)
         navigationController?.navigationBar.barStyle = .black
         navigationController?.navigationBar.tintColor = DarkMode.highlight
         navigationController?.view.backgroundColor = DarkMode.background

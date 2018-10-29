@@ -345,8 +345,8 @@ extension UIImage {
 /// Extension for Color Themes
 extension UserPerfController {
     
-    func setColourTheme() {
-        setDarkMode()
+    @objc func setColourTheme() {
+        UserDefaults.standard.bool(forKey: SettingsKeys.darkMode) ? setDarkMode() : setLightMode()
     }
     
     func setDarkMode() {

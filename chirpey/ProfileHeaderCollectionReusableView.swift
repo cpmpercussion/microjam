@@ -101,8 +101,8 @@ class ProfileHeaderCollectionReusableView: UICollectionReusableView {
 // Set up dark and light mode.
 extension ProfileHeaderCollectionReusableView {
     
-    func setColourTheme() {
-        setDarkMode()
+    @objc func setColourTheme() {
+        UserDefaults.standard.bool(forKey: SettingsKeys.darkMode) ? setDarkMode() : setLightMode()
     }
     
     func setDarkMode() {
@@ -121,14 +121,17 @@ extension ProfileHeaderCollectionReusableView {
     }
     
     func setLightMode() {
-//        backgroundColor = LightMode.background
-//        //avatarImageView //: UIImageView!
-//        chirpContainer.backgroundColor = LightMode.midbackground//: UIView!
-//        title.textColor = LightMode.text //: UILabel!
-//        performer.textColor = LightMode.text //: UILabel!
-//        instrument.textColor = LightMode.text //: UILabel!
-//        context.textColor = LightMode.text //: UILabel!
-//        //playButton // : UIButton!
-//        //replyButton //: UIButton!
+        backgroundColor = LightMode.background
+        for view in profileHeaderContainerViews {
+            view.backgroundColor = LightMode.background
+        }
+        //avatarImageView //: UIImageView!
+        stageNameField.textColor = LightMode.text
+        for view in profileHeaderLabels {
+            view.textColor = LightMode.text
+        }
+        for button in profileHeaderButtons {
+            button.setTitleColor(LightMode.highlight, for: .normal)
+        }
     }
 }

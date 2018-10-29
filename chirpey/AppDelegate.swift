@@ -52,6 +52,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
+        // Tell all views to update ColourTheme
+        NotificationCenter.default.post(name: .setColourTheme, object: nil)
         //
     }
     

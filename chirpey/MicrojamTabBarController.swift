@@ -14,7 +14,7 @@ class MicrojamTabBarController: UITabBarController {
     /// User Settings View Controller
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setDarkMode()
+        setColourTheme()
     }
 
     override func viewDidLoad() {
@@ -23,6 +23,11 @@ class MicrojamTabBarController: UITabBarController {
         // setupWorldTab()
         setupJamTab() // FIXME test that this does actually work properly.
         setupProfileTab() // Set up the profile tab.
+        NotificationCenter.default.addObserver(self, selector: #selector(setColourTheme), name: .setColourTheme, object: nil) // notification for colour theme.
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .setColourTheme, object: nil)
     }
     
     /// Setup the world tab
@@ -90,6 +95,19 @@ class MicrojamTabBarController: UITabBarController {
         // Pass the selected object to the new view controller.
     }
     
+    
+    
+
+
+}
+
+// Set up dark and light mode.
+extension MicrojamTabBarController {
+    
+    @objc func setColourTheme() {
+        UserDefaults.standard.bool(forKey: SettingsKeys.darkMode) ? setDarkMode() : setLightMode()
+    }
+    
     func setDarkMode() {
         self.tabBar.backgroundColor = DarkMode.background
         self.tabBar.barTintColor = DarkMode.background
@@ -101,5 +119,4 @@ class MicrojamTabBarController: UITabBarController {
         self.tabBar.barTintColor = LightMode.background
         self.tabBar.tintColor = LightMode.highlight
     }
-
 }
