@@ -287,32 +287,41 @@
                                             <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jfD-6T-NIJ">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jfD-6T-NIJ">
                                             <rect key="frame" x="0.0" y="66" width="375" height="44"/>
                                             <state key="normal" title="more information at microjam.info"/>
                                             <connections>
                                                 <action selector="openMicrojamWebsite:" destination="ILZ-VW-8SS" eventType="touchUpInside" id="RwN-Kf-BPR"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ONy-ge-E6F">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ONy-ge-E6F">
                                             <rect key="frame" x="0.0" y="110" width="375" height="30"/>
                                             <accessibility key="accessibilityConfiguration" hint="Tap to read privacy policy" identifier="Privacy" label="Privacy"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="Nys-zy-0SU"/>
+                                            </constraints>
                                             <state key="normal" title="privacy policy"/>
                                             <connections>
                                                 <action selector="openPrivacyPolicy:" destination="ILZ-VW-8SS" eventType="touchUpInside" id="HAs-7Y-tgW"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cNh-gX-M4S">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cNh-gX-M4S">
                                             <rect key="frame" x="0.0" y="140" width="375" height="30"/>
                                             <accessibility key="accessibilityConfiguration" hint="Tap to export data" identifier="Export" label="Export"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="FMm-fV-hHZ"/>
+                                            </constraints>
                                             <state key="normal" title="export data"/>
                                             <connections>
                                                 <action selector="exportDataButtonTapped:" destination="ILZ-VW-8SS" eventType="touchUpInside" id="DXY-rS-nBY"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q8u-4V-X1c" userLabel="delete all account data">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q8u-4V-X1c" userLabel="delete all account data">
                                             <rect key="frame" x="0.0" y="170" width="375" height="30"/>
                                             <accessibility key="accessibilityConfiguration" hint="Tap to delete data" identifier="delete" label="delete"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="1be-zF-oFz"/>
+                                            </constraints>
                                             <state key="normal" title="delete data"/>
                                             <connections>
                                                 <action selector="deleteDataButtonTapped:" destination="ILZ-VW-8SS" eventType="touchUpInside" id="0fo-Gz-XBh"/>
