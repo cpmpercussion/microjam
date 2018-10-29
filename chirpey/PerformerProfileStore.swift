@@ -29,39 +29,26 @@ class PerformerProfileStore : NSObject {
     
     /// Load Profiles from file
     private static func loadProfiles() -> [CKRecord.ID: PerformerProfile] {
-        print("Loading profiles...")
-//        var result : Any?
-//        do {
-//            let dat = try Data(contentsOf: PerformerProfileStore.profilesURL)
-//            let unarchiver = NSKeyedUnarchiver(forReadingWith: dat)
-//            result = try unarchiver.decodeTopLevelObject()
-//            unarchiver.finishDecoding()
-//            print("Successfully decoded archive.")
-//        } catch let (err) {
-//            print("PerformerProfileStore failed to decode archive.")
-//            print(err)
-//            result = nil
-//        }
-        
+        print("ProfileStore: Loading profiles...")
         let result = NSKeyedUnarchiver.unarchiveObject(withFile: PerformerProfileStore.profilesURL.path)
         
         if let loadedProfiles = result as? [CKRecord.ID: PerformerProfile] {
-            print("PerformerProfileStore: Loaded \(loadedProfiles.count) profiles.")
+            print("ProfileStore: Loaded \(loadedProfiles.count) profiles.")
             return loadedProfiles
         } else {
-            print("PerformerProfileStore: Failed to load profiles.")
+            print("ProfileStore: Failed to load profiles.")
             return [CKRecord.ID: PerformerProfile]()
         }
     }
     
     /// Save Profiles to file.
     func saveProfiles() {
-        print("PerformerProfileStore: Saving \(profiles.count) profiles.")
+        print("ProfileStore: Saving \(profiles.count) profiles.")
         let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(profiles, toFile: PerformerProfileStore.profilesURL.path)
         if (!isSuccessfulSave) {
-            print("PerformerProfileStore: Save was not successful.")
+            print("ProfileStore: Save was not successful.")
         } else {
-            print("PerformerProfileStore: Save was successful.")
+            print("ProfileStore: Save was successful.")
         }
     }
     
@@ -88,14 +75,14 @@ class PerformerProfileStore : NSObject {
         // This is a low-priority operation.
         database.fetch(withRecordID: performerID) { [unowned self] (record: CKRecord?, error: Error?) in
             if let e = error {
-                print("PerformerProfileStore: Profile Error: \(e)")
+                print("ProfileStore: Profile Error: \(e)")
             }
             if let rec = record,
                 let prof = PerformerProfile(fromRecord: rec) {
                 DispatchQueue.main.async {
                     prof.fetchedThisSession = true // set fetched this session, so it's not refetched later.
                     self.profiles[performerID] = prof
-                    print("PerformerProfileStore: \(prof.stageName)'s profile fetched.")
+                    print("ProfileStore: \(prof.stageName)'s profile fetched.")
                     NotificationCenter.default.post(name: .performerProfileUpdated, object: nil)
                 }
             }

@@ -95,7 +95,7 @@ class WorldJamsTableViewController: UITableViewController {
     
     /// Visit each available table view cell and make sure it is displaying the correct profile information after an update.
     @objc func updateProfilesInCells() {
-        print("WJTVC: Received a profile update, making sure visible cells are up to date.")
+        //print("WJTVC: Received a profile update, making sure visible cells are up to date.")
         for cell in tableView.visibleCells {
             if let cell = cell as? PerformanceTableCell {
                 cell.displayProfileFromPlayer()

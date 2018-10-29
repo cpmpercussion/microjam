@@ -62,7 +62,7 @@ class PerformanceTableCell: UITableViewCell {
     func displayProfileFromPlayer() {
         if let perf = player?.chirpViews.first?.performance,
             let profile = PerformerProfileStore.shared.getProfile(forPerformance: perf) {
-            print("Successfully updated profile for: \(profile.stageName) in a PerformanceTableCell")
+            //print("Successfully updated profile for: \(profile.stageName) in a PerformanceTableCell")
             //PerformerProfileStore.shared.getProfile(forID: perfID) {
             self.display(performerProfile: profile)
         }

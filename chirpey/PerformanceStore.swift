@@ -64,12 +64,12 @@ class PerformanceStore: NSObject {
         if let savedPerformances = loadPerformances() {
             storedPerformances += savedPerformances
             sortStoredPerformances()
-            NSLog("PerformanceStore: Successfully loaded", storedPerformances.count, "performances")
+            NSLog("PerfStore: Successfully loaded", storedPerformances.count, "performances")
         } else {
-            NSLog("PerformanceStore: Failed to load performances")
+            NSLog("PerfStore: Failed to load performances")
         }
         feed = generateFeed()
-        print("PerformanceStore: Feed has \(feed.count) items.")
+        print("PerfStore: Feed has \(feed.count) items.")
         fetchWorldJamsFromCloud() // get jams from CloudKit
     }
 
@@ -81,12 +81,12 @@ class PerformanceStore: NSObject {
     
     /// Load Profiles from file
     private static func loadPerformanceDict() -> [CKRecord.ID: ChirpPerformance] {
-        print("Loading performance dict...")
+        print("PerfStore: Loading performance dict...")
         let result = NSKeyedUnarchiver.unarchiveObject(withFile: PerformanceStore.perfDictURL.path)
         if let loadedPerformances = result as? [CKRecord.ID: ChirpPerformance] {
             return loadedPerformances
         } else {
-            print("PerformanceStore: Failed to load perfs.")
+            print("PerfStore: Failed to load perfs.")
             return [CKRecord.ID: ChirpPerformance]()
         }
     }
@@ -123,6 +123,8 @@ class PerformanceStore: NSObject {
     
     /// Traverse the performance store's dictionary to create a "feed", or list of relevant jams for the world screen.
     func generateFeed() -> [ChirpPerformance] {
+        print("PerfStore: starting generate Feed.")
+        let startDate = Date.init()
         /// FIXME: is there a more swifty/functional way of doing all this? probably.
         var tempFeed = performances
         let titles = tempFeed.values.map{$0.title()}
@@ -141,6 +143,7 @@ class PerformanceStore: NSObject {
                 rec1.date > rec2.date
             })
         // done!
+        print("PerfStore: Time taken for generateFeed:", -startDate.timeIntervalSinceNow)
         return outFeed
     }
     
@@ -202,7 +205,7 @@ extension PerformanceStore {
     
     /// Refresh list of world jams from CloudKit and then update in world jam table view.
     @objc func fetchWorldJamsFromCloud() {
-        print("Store: Attempting to fetch World Jams from Cloud.")
+        print("PerfStore: Attempting to fetch World Jams from Cloud.")
         var fetchedPerformances = [ChirpPerformance]()
         let predicate = NSPredicate(value: true)
         let sort = NSSortDescriptor(key: PerfCloudKeys.date, ascending: false)
@@ -216,10 +219,13 @@ extension PerformanceStore {
         operation.recordFetchedBlock = { record in
             if let perf = self.performanceFrom(record: record) {
                 DispatchQueue.main.async {
+                    print("PerfStore: Donwloaded a record.")
                     self.performances[record.recordID] = perf
                     //self.addToStored(performances: [perf]) // update the stored performances
                     fetchedPerformances.append(perf)
-                    self.feed = self.generateFeed()
+                    // FIXME: just make the feed every 10 times or something! This is mad.
+                        // self.feed = self.generateFeed()
+                    // End fixme.
                     // TODO: Should delegates be updated when every performance is retrieved?
                     //self.delegate?.modelUpdated()
                     //NotificationCenter.default.post(name: .performanceStoreUpdated, object: nil)
@@ -232,24 +238,25 @@ extension PerformanceStore {
             if let error = error {
                 DispatchQueue.main.async {
                     self.delegate?.errorUpdating(error: error as NSError)
-                    print("Store: Cloud Query error: \(error)")
+                    print("PerfStore: Cloud Query error: \(error)")
                 }
                 return
             }
-            
-            print("Store: ", fetchedPerformances.count, " performances downloaded.")
+            print("PerfStore: downloaded", fetchedPerformances.count)
             //print("Store: ", self.storedPerformances.count, " total stored performances.")
             //self.addToStored(performances: fetchedPerformances) // update the stored performances
-            
             DispatchQueue.main.async { // give the delegate the trigger to update the table.
                 self.feed = self.generateFeed()
                 self.delegate?.modelUpdated()
                 NotificationCenter.default.post(name: .performanceStoreUpdated, object: nil)
             }
-            print("Store: Successfully updated from cloud")
+            
+            print("PerfStore: Successfully updated from cloud")
         }
-
+        
+        print("PerfStore: About to start updating performances")
         publicDB.add(operation) // perform the operation.
+        print("PerfStore: Download operation added.")
         // TODO: Define a more sensible way of downloading the performances
     }
     
@@ -268,14 +275,14 @@ extension PerformanceStore {
         // This is a low-priority operation.
         database.fetch(withRecordID: recordID) { [unowned self] (record: CKRecord?, error: Error?) in
             if let e = error {
-                print("PerformanceStore: Error fetching performance: \(recordID): \(e)")
+                print("PerfStore: Error fetching performance: \(recordID): \(e)")
             }
             if let rec = record,
                 let perf = ChirpPerformance(fromRecord: rec) {
                 DispatchQueue.main.async {
                     self.performances[recordID] = perf
                     self.addToStored(performances: [perf])
-                    print("PerformanceStore: \(perf.title()) found.")
+                    print("PerfStore: \(perf.title()) found.")
                     self.delegate?.modelUpdated()
                     NotificationCenter.default.post(name: .performanceStoreUpdated, object: nil)
                 }
@@ -287,7 +294,7 @@ extension PerformanceStore {
     func fetchImageFor(performance recordID: CKRecord.ID) {
         database.fetch(withRecordID: recordID) { [unowned self] (record: CKRecord?, error: Error?) in
             if let e = error {
-                print("PerformanceStore: Error fetching image for perf: \(recordID): \(e)")
+                print("PerfStore: Error fetching image for perf: \(recordID): \(e)")
             }
             if let record = record,
                 let imageAsset = record.object(forKey: PerfCloudKeys.image) as? CKAsset,
@@ -338,10 +345,10 @@ extension PerformanceStore {
         
         queryOperation.queryCompletionBlock = { (cursor, error) in
             if let error = error {
-                print("PerformanceStore error:", error)
+                print("PerfStore: error:", error)
                 return
             } else {
-                print("PerformanceStore: finished loading perfs for", perfID)
+                print("PerfStore: finished loading perfs for", perfID)
                 NotificationCenter.default.post(name: .performanceStoreUpdated, object: nil)
                 DispatchQueue.main.async {
                     self.delegate?.modelUpdated()
@@ -382,7 +389,7 @@ extension PerformanceStore {
     /// Upload a saved jam to CloudKit
     func upload(performance : ChirpPerformance) {
         // Setup the record
-        print("Store: Saving the performance:", performance.title())
+        print("PerfStore: Saving the performance:", performance.title())
         let performanceID = CKRecord.ID(recordName: performance.title())
         let performanceRecord = CKRecord(recordType: PerfCloudKeys.type,recordID: performanceID)
         performanceRecord[PerfCloudKeys.date] = performance.date as CKRecordValue
@@ -396,7 +403,7 @@ extension PerformanceStore {
         
         guard let image = performance.image,
             let imageData = image.pngData() else {
-            print("PerformanceStore: Blank performance, not able to save.")
+            print("PerfStore: Blank performance, not able to save.")
             return
         }
         
@@ -407,16 +414,16 @@ extension PerformanceStore {
             performanceRecord[PerfCloudKeys.image] = asset
         }
         catch {
-            print("Store: Error writing image data:", error)
+            print("PerfStore: Error writing image data:", error)
         }
         
         // Upload to the container
         publicDB.save(performanceRecord, completionHandler: {(record, error) -> Void in
             if (error != nil) {
-                print("Store: Error saving to the database.")
+                print("PerfStore: Error saving to the database.")
                 print(error ?? "")
             }
-            print("Store: Saved to cloudkit:", performance.title()) // runs when upload is complete
+            print("PerfStore: Saved to cloudkit:", performance.title()) // runs when upload is complete
         })
     }
 }
@@ -439,14 +446,14 @@ extension PerformanceStore {
 
     /// Delete a performance from the database and local store by CKRecord ID. Only works for performances owned by the user.
     func deleteUserPerformance(withID recordID: CKRecord.ID) {
-        print("Starting Deletion Operation.")
+        print("PerfStore: Starting Deletion Operation.")
         // remove from database
         database.delete(withRecordID: recordID, completionHandler: { (record, error) in
-            print("Deletion operation complete")
+            print("PerfStore: Deletion operation complete")
             if let error = error {
-                print("Deletion failed:", error)
+                print("PerfStore: Deletion failed:", error)
             } else {
-                print("Deletion was successful, updating")
+                print("PerfStore: Deletion was successful, updating")
                 self.removePerformanceFromStore(withID: recordID)
                 NotificationCenter.default.post(name: .performanceStoreUpdated, object: nil)
                 DispatchQueue.main.async {
@@ -466,7 +473,7 @@ extension PerformanceStore {
     func performanceFrom(record: CKRecord) -> ChirpPerformance? {
         // Initialise the Performance
         guard let perf = ChirpPerformance(fromRecord: record) else {
-            print("PerformanceStore: Could not make Performance from CKRecord.")
+            print("PerfStore: Could not make Performance from CKRecord.")
             return nil
         }
         return perf
