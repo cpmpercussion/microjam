@@ -160,7 +160,6 @@ class ChirpJamViewController: UIViewController {
         // configuration for the chirpViewContainer
         chirpViewContainer.layer.cornerRadius = 8
         chirpViewContainer.layer.borderWidth = 1
-        chirpViewContainer.layer.borderColor = UIColor(white: 0.8, alpha: 1).cgColor
         chirpViewContainer.clipsToBounds = true
         chirpViewContainer.contentMode = .scaleAspectFill
         
@@ -374,7 +373,7 @@ class ChirpJamViewController: UIViewController {
         print("JAMVC: Recording disabled.")
         // stop recEnableGlowing
         recEnableButton.deactivateGlowing()
-        recEnableButton.tintColor = UIColor.red.darkerColor
+        recEnableButton.tintColor = ButtonColors.record.darkerColor
         recorder?.recordingEnabled = false
     }
     
@@ -428,7 +427,7 @@ class ChirpJamViewController: UIViewController {
         if let recorder = recorder {
             if recorder.isPlaying {
                 playButton.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal)
-                playButton.tintColor = UIColor.init("#F79256")
+                playButton.tintColor = ButtonColors.play
                 jamButton.isEnabled = true
                 if recorder.isRecording {
                     replyButton.isEnabled = true
@@ -438,7 +437,7 @@ class ChirpJamViewController: UIViewController {
             
             } else {
                 playButton.setImage(#imageLiteral(resourceName: "microjam-pause"), for: .normal)
-                playButton.tintColor = UIColor.init("#F79256").brighterColor
+                playButton.tintColor = ButtonColors.play.brighterColor
                 jamButton.isEnabled = false
                 recorder.play()
             }
@@ -468,7 +467,7 @@ class ChirpJamViewController: UIViewController {
         // TODO: implement some kind of generative performing here!
         if (jamming) {
             // Stop Jamming
-            jamButton.tintColor = UIColor.init("#1D4E89")
+            jamButton.tintColor = ButtonColors.jam
             jamming = false
             playButton.isEnabled = true
             recordingProgress.progress = 0.0
@@ -477,7 +476,7 @@ class ChirpJamViewController: UIViewController {
             }
         } else {
             // Start Jamming
-            jamButton.tintColor = UIColor.init("#1D4E89").brighterColor
+            jamButton.tintColor = ButtonColors.jam.brighterColor
             jamming = true
             playButton.isEnabled = false
             if let recorder = recorder {
@@ -899,7 +898,7 @@ extension UIButton{
     
     func setupGlowShadow() {
         self.layer.shadowOffset = .zero
-        self.layer.shadowColor = UIColor.init("#E5470D").cgColor
+        self.layer.shadowColor = ButtonColors.recordGlow.cgColor
         self.layer.shadowRadius = 20
         self.layer.shadowOpacity = maximumGlowOpacity
         //        recEnableButton.layer.shadowPath = UIBezierPath(rect: recEnableButton.bounds).cgPath
@@ -914,8 +913,8 @@ extension UIButton{
     func pulseGlow() {
         setupGlowShadow()
         // Tint Color Animation
-        UIView.animate(withDuration: 0.25, delay: 0.0, options: [.curveLinear, .repeat, .autoreverse], animations: {self.tintColor = UIColor.red}, completion: nil)
-        self.tintColor = UIColor.red.darkerColor
+        UIView.animate(withDuration: 0.25, delay: 0.0, options: [.curveLinear, .repeat, .autoreverse], animations: {self.tintColor = ButtonColors.record}, completion: nil)
+        self.tintColor = ButtonColors.recordDisabled
 
         // Shadow animation
         let animation = CABasicAnimation(keyPath: "shadowOpacity")
@@ -934,7 +933,7 @@ extension UIButton{
         //print(self.imageView?.layer.animationKeys())
         self.imageView?.layer.removeAllAnimations()
         self.layer.shadowOpacity = 0.0
-        self.tintColor = UIColor.red.darkerColor
+        self.tintColor = ButtonColors.recordDisabled
     }
     
     func solidGlow() {
@@ -942,7 +941,7 @@ extension UIButton{
         self.imageView?.layer.removeAllAnimations()
         setupGlowShadow()
         self.layer.shadowOpacity = maximumGlowOpacity
-        self.tintColor = UIColor.red
+        self.tintColor = ButtonColors.record
     }
 
 }
@@ -963,7 +962,6 @@ extension ChirpJamViewController {
             let cell = CAEmitterCell()
             cell.name = "recording"
             cell.lifetime = 1.5
-            //cell.color = UIColor.red.cgColor
             cell.velocity = 200
             cell.velocityRange = 50
             cell.emissionLongitude = CGFloat.pi / 2
@@ -1006,9 +1004,10 @@ extension ChirpJamViewController {
     
     func setDarkMode() {
         view.backgroundColor = DarkMode.background
-        //        tableView.backgroundColor = UIColor.black
+        //        tableView.backgroundColor = DarkMode.background
         performerLabel.textColor = DarkMode.text
         instrumentButton.setTitleColor(DarkMode.text, for: .normal)
+        chirpViewContainer.layer.borderColor = DarkMode.midforeground.cgColor
         recordingProgress.backgroundColor = DarkMode.midbackground
         recordingProgress.progressTintColor = DarkMode.highlight
         menuButton.setTitleColor(DarkMode.text, for: .normal)
@@ -1019,9 +1018,10 @@ extension ChirpJamViewController {
     
     func setLightMode() {
         view.backgroundColor = LightMode.background
-        //        tableView.backgroundColor = UIColor.black
+        //        tableView.backgroundColor = LightMode.background
         performerLabel.textColor = LightMode.text
         instrumentButton.setTitleColor(LightMode.text, for: .normal)
+        chirpViewContainer.layer.borderColor = LightMode.midforeground.cgColor
         menuButton.setTitleColor(LightMode.text, for: .normal)
         recordingProgress.backgroundColor = LightMode.midbackground
         recordingProgress.progressTintColor = LightMode.highlight

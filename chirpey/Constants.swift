@@ -164,12 +164,14 @@ let RECORDING_TIME = 5.0
 
 /// Colours for buttons in Jam Screen
 struct ButtonColors {
-    static let rewind = UIColor.init("#A10702")
-    static let record = UIColor.init("#ED2D07")
-    static let play = UIColor.init("#FAA613")
-    static let layer = UIColor.init("#7DCFB6")
-    static let jam = UIColor.init("#688E26")
-    static let roboplay = UIColor.init("#550527")
+    static let rewind = UIColor.init("#2a317d") //UIColor.init("#A10702")
+    static let record = UIColor.red //UIColor.init("#f13f04")//("#fb4d3d") //UIColor.init("#ED2D07")
+    static let recordDisabled = UIColor.init("#951a1e")
+    static let recordGlow = UIColor.init("#ff5900") //("#e5470d") // just for glow effect on rec button
+    static let play = UIColor.init("#03cea4") // UIColor.init("#FAA613")
+    static let layer = UIColor.init("#7dcfb6")
+    static let jam = UIColor.init("#eac435") // UIColor.init("#688E26") //
+    static let roboplay = UIColor.init("#ca1551") //UIColor.init("#550527") //
 }
 
 /// Error messages and dialogues
@@ -179,17 +181,19 @@ struct ErrorDialogues {
 }
 
 struct DarkMode {
-    static let background = UIColor.init("#141d26")
+    static let background = UIColor.init("#141d26") // 0C1821
     static let midbackground = UIColor.init("#243447")
+    static let midforeground = UIColor.init("fffde2")
     static let text = UIColor.init("#ffffff")
     static let highlight = UIColor.init("#ec6b2d")
 }
 
 struct LightMode {
-    static let background = UIColor.init("#ffffff")
+    static let background = UIColor.init("#f2f2f4") // ffffff
     static let midbackground = UIColor.init("#d5d5d5")
-    static let text = UIColor.init("#000000")
-    static let highlight = UIColor.init("#c51f5d")
+    static let midforeground = UIColor.init("223843")
+    static let text = UIColor.init("#0C1821")
+    static let highlight = UIColor.init("#d95d39")
 }
 
 
