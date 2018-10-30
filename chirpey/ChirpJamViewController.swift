@@ -171,7 +171,7 @@ class ChirpJamViewController: UIViewController {
         rewindButton.tintColor = ButtonColors.rewind
         // rec enable
         recEnableButton.imageView?.contentMode = .scaleAspectFit
-        recEnableButton.tintColor = ButtonColors.record.darkerColor
+        recEnableButton.tintColor = ButtonColors.recordDisabled
         
         // play
         playButton.imageView?.contentMode = .scaleAspectFit
@@ -373,7 +373,6 @@ class ChirpJamViewController: UIViewController {
         print("JAMVC: Recording disabled.")
         // stop recEnableGlowing
         recEnableButton.deactivateGlowing()
-        recEnableButton.tintColor = ButtonColors.record.darkerColor
         recorder?.recordingEnabled = false
     }
     
@@ -913,8 +912,8 @@ extension UIButton{
     func pulseGlow() {
         setupGlowShadow()
         // Tint Color Animation
-        UIView.animate(withDuration: 0.25, delay: 0.0, options: [.curveLinear, .repeat, .autoreverse], animations: {self.tintColor = ButtonColors.record}, completion: nil)
         self.tintColor = ButtonColors.recordDisabled
+        UIView.animate(withDuration: 0.25, delay: 0.0, options: [.curveLinear, .repeat, .autoreverse], animations: {self.tintColor = ButtonColors.record}, completion: nil)
 
         // Shadow animation
         let animation = CABasicAnimation(keyPath: "shadowOpacity")
@@ -928,9 +927,7 @@ extension UIButton{
     }
     
     func deactivateGlowing() {
-        //print(self.layer.animationKeys())
         self.layer.removeAllAnimations()
-        //print(self.imageView?.layer.animationKeys())
         self.imageView?.layer.removeAllAnimations()
         self.layer.shadowOpacity = 0.0
         self.tintColor = ButtonColors.recordDisabled

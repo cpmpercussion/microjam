@@ -169,7 +169,7 @@ let RECORDING_TIME = 5.0
 struct ButtonColors {
     static let rewind = UIColor.init("#2a317d") //UIColor.init("#A10702")
     static let record = UIColor.red //UIColor.init("#f13f04")//("#fb4d3d") //UIColor.init("#ED2D07")
-    static let recordDisabled = UIColor.init("#951a1e")
+    static let recordDisabled = UIColor.init("#b01435")
     static let recordGlow = UIColor.init("#ff5900") //("#e5470d") // just for glow effect on rec button
     static let play = UIColor.init("#03cea4") // UIColor.init("#FAA613")
     static let layer = UIColor.init("#7dcfb6")
