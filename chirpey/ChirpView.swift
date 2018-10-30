@@ -212,7 +212,7 @@ extension ChirpView {
             print("ChirpView: Starting to Close Patch:\(dollarZero)")
             // fadeout
             PdBase.sendBang(toReceiver: "fadeout-\(dollarZero)")
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(11), execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                 print("ChirpView: Closing Patch:\(dollarZero)")
                 patchFile.close()
             })

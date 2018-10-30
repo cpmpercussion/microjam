@@ -20,8 +20,8 @@
 #X obj 332 97 t b;
 #X obj 330 75 r fadein-\$1;
 #X obj 323 9 r fadeout-\$1;
-#X msg 324 53 0 10;
-#X msg 331 119 1 10;
+#X msg 324 53 0 50;
+#X msg 331 119 1 50;
 #X connect 1 0 0 1;
 #X connect 1 0 15 0;
 #X connect 2 0 0 0;
