@@ -206,7 +206,7 @@ extension PerformanceStore {
     /// Refresh list of world jams from CloudKit and then update in world jam table view.
     @objc func fetchWorldJamsFromCloud() {
         print("PerfStore: Attempting to fetch World Jams from Cloud.")
-        var fetchedPerformances = [ChirpPerformance]()
+        //var fetchedPerformances = [ChirpPerformance]()
         let predicate = NSPredicate(value: true)
         let sort = NSSortDescriptor(key: PerfCloudKeys.date, ascending: false)
         /// FIXME: predicate should only download latest 100 jams from the last month or something.
@@ -219,16 +219,10 @@ extension PerformanceStore {
         operation.recordFetchedBlock = { record in
             if let perf = self.performanceFrom(record: record) {
                 DispatchQueue.main.async {
-                    print("PerfStore: Donwloaded a record.")
+                    //print("PerfStore: Downloaded a record.")
                     self.performances[record.recordID] = perf
-                    //self.addToStored(performances: [perf]) // update the stored performances
-                    fetchedPerformances.append(perf)
-                    // FIXME: just make the feed every 10 times or something! This is mad.
-                        // self.feed = self.generateFeed()
-                    // End fixme.
-                    // TODO: Should delegates be updated when every performance is retrieved?
-                    //self.delegate?.modelUpdated()
-                    //NotificationCenter.default.post(name: .performanceStoreUpdated, object: nil)
+                    //fetchedPerformances.append(perf)
+                    NotificationCenter.default.post(name: .performanceStorePerfAdded, object: nil)
                 }
             }
         } // Appends fetched records to the array of Performances
@@ -242,15 +236,13 @@ extension PerformanceStore {
                 }
                 return
             }
-            print("PerfStore: downloaded", fetchedPerformances.count)
-            //print("Store: ", self.storedPerformances.count, " total stored performances.")
+            //print("PerfStore: downloaded", fetchedPerformances.count)
             //self.addToStored(performances: fetchedPerformances) // update the stored performances
             DispatchQueue.main.async { // give the delegate the trigger to update the table.
                 self.feed = self.generateFeed()
                 self.delegate?.modelUpdated()
                 NotificationCenter.default.post(name: .performanceStoreUpdated, object: nil)
             }
-            
             print("PerfStore: Successfully updated from cloud")
         }
         

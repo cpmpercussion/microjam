@@ -21,6 +21,8 @@ class PerformerProfileStore : NSObject {
     let database = CKContainer.default().publicCloudDatabase
     /// Storage for profiles
     var profiles: [CKRecord.ID: PerformerProfile]
+    /// List of CKRecord.ID currently being fetched
+    var currentlyFetching: Set<CKRecord.ID> = []
     
     private override init() {
         profiles = PerformerProfileStore.loadProfiles()
@@ -72,7 +74,12 @@ class PerformerProfileStore : NSObject {
     
     /// Fetch a profile from CloudKit
     func fetchProfile(forID performerID: CKRecord.ID) {
+        if currentlyFetching.contains(performerID) {
+            return
+            // early return if already fetching a profile.
+        }
         // This is a low-priority operation.
+        currentlyFetching.insert(performerID)
         database.fetch(withRecordID: performerID) { [unowned self] (record: CKRecord?, error: Error?) in
             if let e = error {
                 print("ProfileStore: Profile Error: \(e)")
@@ -86,6 +93,7 @@ class PerformerProfileStore : NSObject {
                     NotificationCenter.default.post(name: .performerProfileUpdated, object: nil)
                 }
             }
+            DispatchQueue.main.async {self.currentlyFetching.remove(performerID)} // remove this profile ID from the currently fetching set.
         }
     }
 

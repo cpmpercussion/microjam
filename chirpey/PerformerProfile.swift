@@ -58,7 +58,7 @@ class PerformerProfile: NSObject, NSCoding {
         aCoder.encode(jamColour, forKey: UserCloudKeys.jamColour)
         aCoder.encode(backgroundColour, forKey: UserCloudKeys.backgroundColour)
         aCoder.encode(soundScheme, forKey: UserCloudKeys.soundScheme)
-        print("Archived \(stageName)'s profile.")
+        //print("Archived \(stageName)'s profile.")
     }
     
     /// Initialiser from NSCoder, used when reopening on app launch
@@ -77,7 +77,7 @@ class PerformerProfile: NSObject, NSCoding {
                 return nil
         }
         let soundScheme = aDecoder.decodeInt64(forKey: UserCloudKeys.soundScheme)
-        print("Successfully decoded \(stageName)'s profile.")
+        //print("Successfully decoded \(stageName)'s profile.")
         self.init(avatar: avatar, stageName: stageName, jamColour: jamColour, backgroundColour: backgroundColour, soundScheme: soundScheme)
     }
 }

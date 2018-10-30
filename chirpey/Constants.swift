@@ -203,6 +203,7 @@ extension Notification.Name {
     static let userProfileUpdated = Notification.Name("au.com.charlesmartin.userProfileUpdatedNotificationKey")
     static let userDataExportReady = Notification.Name("au.com.charlesmartin.userDataExportReadyKey")
     static let performanceStoreUpdated = Notification.Name("au.com.charlesmartin.performanceStoreUpdatedNotificationKey")
+    static let performanceStorePerfAdded = Notification.Name("au.com.charlesmartin.performanceStorePerfAdded")
     static let performanceStoreFailedUpdate = Notification.Name("au.com.charlesmartin.performanceStoreFailedUpdateNotificationKey")
     static let performerProfileUpdated = Notification.Name("au.com.charlesmartin.PerformerProfilesUpdatedNotificationKey")
     static let setColourTheme = Notification.Name("au.com.charlesmartin.setColourTheme")
