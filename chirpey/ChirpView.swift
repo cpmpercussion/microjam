@@ -197,19 +197,27 @@ extension ChirpView {
     /// Opens a Pd file given the filename (only if the file is not already open)
     func openPd(file fileToOpen: String) {
         if openPatchName != fileToOpen {
-            closePdFile()
+            //closePdFile()
             openPatch = PdFile.openNamed(fileToOpen, path: Bundle.main.bundlePath) as? PdFile
             openPatchName = fileToOpen
             openPatchDollarZero = openPatch?.dollarZero
+            PdBase.sendBang(toReceiver: "fadein-\(openPatchDollarZero ?? Int32(0))")
         }
         // Only opens it if it's not already open.
     }
     
     /// Closes whatever Pd file is open.
     func closePdFile() {
-        openPatch?.close()
+        if let dollarZero = openPatchDollarZero, let patchFile = openPatch {
+            print("ChirpView: Starting to Close Patch:\(dollarZero)")
+            // fadeout
+            PdBase.sendBang(toReceiver: "fadeout-\(dollarZero)")
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(11), execute: {
+                print("ChirpView: Closing Patch:\(dollarZero)")
+                patchFile.close()
+            })
+        }
     }
-    
 }
 
 /// Extension to contain constraint and layout helpers.

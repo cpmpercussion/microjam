@@ -145,7 +145,7 @@
 #X obj 34 104 declare -path metaPdLibs;
 #X obj 39 131 declare -path rj;
 #X restore 467 -41 pd includes;
-#X obj 632 806 output_stage;
+#X obj 632 806 output_stage \$0;
 #X obj 57 113 + 24;
 #X obj 57 93 * 49;
 #X obj 705 339 c_adsr 1 5 80 70 50;

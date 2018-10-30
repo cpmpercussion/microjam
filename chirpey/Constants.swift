@@ -44,7 +44,8 @@ struct SoundSchemes {
         4 : "quack",
         5 : "wub",
         6 : "pad",
-        7 : "fmlead"
+        7 : "fmlead",
+        8 : "leadguitar"
     ]
     static let keysForNames : [String : Int64] = [
         "chirp" : 0,
@@ -54,7 +55,8 @@ struct SoundSchemes {
         "quack" : 4,
         "wub" : 5,
         "pad" : 6,
-        "fmlead" : 7
+        "fmlead" : 7,
+        "leadguitar" : 8
     ]
     static let pdFilesForKeys : [Int64 : String] = [
         0 : "chirp.pd",
@@ -64,7 +66,8 @@ struct SoundSchemes {
         4 : "quack.pd",
         5 : "wub.pd",
         6 : "pad.pd",
-        7 : "fmlead.pd"
+        7 : "fmlead.pd",
+        8 : "leadguitar.pd"
     ]
 }
 

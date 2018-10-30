@@ -1,4 +1,4 @@
-#N canvas -1714 230 450 576 10;
+#N canvas 0 23 708 551 10;
 #X obj 128 391 dac~;
 #X obj 223 360 *~;
 #X obj 128 359 *~;
@@ -16,6 +16,12 @@
 #X obj 266 154 loadbang;
 #X obj 245 398 outlet~;
 #X floatatom 340 258 5 0 0 0 - - -, f 5;
+#X obj 325 31 t b;
+#X obj 332 97 t b;
+#X obj 330 75 r fadein-\$1;
+#X obj 323 9 r fadeout-\$1;
+#X msg 324 53 0 10;
+#X msg 331 119 1 10;
 #X connect 1 0 0 1;
 #X connect 1 0 15 0;
 #X connect 2 0 0 0;
@@ -33,3 +39,9 @@
 #X connect 12 0 10 0;
 #X connect 13 0 9 0;
 #X connect 14 0 13 0;
+#X connect 17 0 21 0;
+#X connect 18 0 22 0;
+#X connect 19 0 18 0;
+#X connect 20 0 17 0;
+#X connect 21 0 11 0;
+#X connect 22 0 11 0;

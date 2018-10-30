@@ -60,7 +60,7 @@
 #X obj 27 364 int;
 #X obj 27 386 * 0.25;
 #X obj 69 144 r \$0-Tone;
-#N canvas 0 23 568 311 fm-osc 1;
+#N canvas 0 23 568 311 fm-osc 0;
 #X obj 20 114 * 0.5;
 #X obj 20 144 osc~;
 #X obj 70 144 osc~;
@@ -294,7 +294,7 @@
 #X connect 6 0 2 0;
 #X connect 7 0 1 0;
 #X restore 368 177 pd onoffenv;
-#X obj 242 514 output_stage;
+#X obj 242 514 output_stage \$0;
 #X obj 106 415 vu 15 120 empty empty -1 -8 0 10 -66577 -1 1 0;
 #X obj 151 474 - 100;
 #X obj 151 452 env~;

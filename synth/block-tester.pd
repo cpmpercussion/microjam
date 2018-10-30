@@ -1,13 +1,13 @@
-#N canvas -2329 509 831 380 10;
+#N canvas -1666 36 831 380 10;
 #X msg 204 228 /y \$1;
 #X floatatom 130 123 5 0 0 0 - - -, f 5;
 #X floatatom 65 124 5 0 0 0 - - -, f 5;
 #X obj 44 159 hsl 128 15 0 127 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 5800 1;
+-1 -1 0 1;
 #X floatatom 278 115 5 0 0 0 - - -, f 5;
 #X floatatom 213 116 5 0 0 0 - - -, f 5;
 #X obj 192 151 hsl 128 15 0 127 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 3900 1;
+-1 -1 0 1;
 #X obj 203 192 / 127;
 #X obj 78 82 ctlin 113;
 #X obj 226 74 ctlin 114;
@@ -16,7 +16,7 @@
 #X floatatom 419 113 5 0 0 0 - - -, f 5;
 #X floatatom 354 114 5 0 0 0 - - -, f 5;
 #X obj 333 149 hsl 128 15 0 127 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 400 1;
+-1 -1 0 1;
 #X obj 344 190 / 127;
 #X obj 367 72 ctlin 115;
 #X msg 345 226 /z \$1;

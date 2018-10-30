@@ -330,7 +330,7 @@ License along with this program. If not \, see <http://www.gnu.org/licenses/>.
 #X obj 39 131 declare -path rj;
 #X restore 9 14 pd includes;
 #X obj 10 36 block-tester \$0;
-#X obj 187 630 output_stage;
+#X obj 187 630 output_stage \$0;
 #X obj 52 518 vu 15 120 empty empty -1 -8 0 10 -66577 -1 1 0;
 #X obj 108 547 - 100;
 #X obj 108 525 env~;

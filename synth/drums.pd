@@ -87,7 +87,7 @@
 #X obj 712 487 vu 15 120 empty empty -1 -8 0 10 -66577 -1 1 0;
 #X obj 661 550 - 100;
 #X obj 661 528 env~;
-#X obj 88 647 output_stage;
+#X obj 88 647 output_stage \$0;
 #X obj 364 154 r \$0-input;
 #X obj 371 187 list trim;
 #N canvas 79 825 873 443 drumsynth 1;

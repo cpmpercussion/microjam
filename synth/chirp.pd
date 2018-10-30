@@ -1,4 +1,4 @@
-#N canvas -2350 -259 577 815 10;
+#N canvas 535 85 577 815 10;
 #X declare -path metaPdLibs/control;
 #X declare -path metaPdLibs/fx;
 #X declare -path metaPdLibs/instrument;
@@ -16,7 +16,7 @@
 #X obj 34 104 declare -path metaPdLibs;
 #X obj 39 131 declare -path rj;
 #X restore 24 13 pd includes;
-#X obj 140 731 output_stage;
+#X obj 140 731 output_stage \$0;
 #X obj 38 671 vu 15 120 empty empty -1 -8 0 10 -66577 -1 1 0;
 #X obj 83 730 - 100;
 #X obj 83 708 env~;
@@ -29,6 +29,7 @@
 #X obj 155 468 microjam_chirp_chain;
 #X connect 0 0 1 0;
 #X connect 1 0 9 0;
+#X connect 1 0 10 0;
 #X connect 2 0 0 0;
 #X connect 4 0 7 0;
 #X connect 6 0 5 0;
@@ -40,5 +41,6 @@
 #X connect 9 2 11 0;
 #X connect 9 2 14 2;
 #X connect 9 3 14 3;
+#X connect 10 1 14 4;
 #X connect 14 0 4 0;
 #X connect 14 1 4 1;
