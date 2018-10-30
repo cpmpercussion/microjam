@@ -1,6 +1,6 @@
 {
   "name": "libpd",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "license": {
     "type": "Standard Improved BSD License",
     "file": "License.txt"
@@ -15,7 +15,7 @@
   ],
   "source": {
     "git": "https://github.com/libpd/libpd.git",
-    "tag": "0.10.0",
+    "tag": "0.11.0",
     "submodules": true
   },
   "source_files": [
@@ -26,7 +26,7 @@
   ],
   "public_header_files": "objc/**/*.{h}",
   "platforms": {
-    "ios": "6.0"
+    "ios": "8.0"
   },
   "requires_arc": false,
   "frameworks": [
