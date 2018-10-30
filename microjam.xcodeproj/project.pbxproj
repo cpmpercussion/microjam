@@ -467,6 +467,7 @@
 		56A46DF4206F8ABA0084BC16 /* MicrojamTutorialGetStartedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A46DF3206F8ABA0084BC16 /* MicrojamTutorialGetStartedViewController.swift */; };
 		56A46DF6206F8B170084BC16 /* MicrojamTutorialCloudLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A46DF5206F8B170084BC16 /* MicrojamTutorialCloudLoginViewController.swift */; };
 		56BAAFC61F44370000DC41CA /* PerformerProfileStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BAAFC51F44370000DC41CA /* PerformerProfileStore.swift */; };
+		56C288C82188943600464E3B /* microjam_chirp_chain.pd in Resources */ = {isa = PBXBuildFile; fileRef = 56C288C72188943600464E3B /* microjam_chirp_chain.pd */; };
 		56C88E801DFEFD8200406BF0 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56C88E7F1DFEFD8200406BF0 /* CloudKit.framework */; };
 		56D707EF1F15960900FDEB76 /* PerformanceStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D707EE1F15960900FDEB76 /* PerformanceStore.swift */; };
 		56E94AB51F20753E0049442A /* microjamUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E94AB41F20753E0049442A /* microjamUITests.swift */; };
@@ -960,6 +961,7 @@
 		56A46DF5206F8B170084BC16 /* MicrojamTutorialCloudLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MicrojamTutorialCloudLoginViewController.swift; path = chirpey/MicrojamTutorialCloudLoginViewController.swift; sourceTree = "<group>"; };
 		56B329E41E44834D001345DC /* WorldJamsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WorldJamsTableViewController.swift; path = chirpey/WorldJamsTableViewController.swift; sourceTree = "<group>"; };
 		56BAAFC51F44370000DC41CA /* PerformerProfileStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PerformerProfileStore.swift; path = chirpey/PerformerProfileStore.swift; sourceTree = "<group>"; };
+		56C288C72188943600464E3B /* microjam_chirp_chain.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = microjam_chirp_chain.pd; sourceTree = "<group>"; };
 		56C88E7E1DFEFD7200406BF0 /* microjam.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = microjam.entitlements; sourceTree = "<group>"; };
 		56C88E7F1DFEFD8200406BF0 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		56D707EE1F15960900FDEB76 /* PerformanceStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PerformanceStore.swift; path = chirpey/PerformanceStore.swift; sourceTree = "<group>"; };
@@ -1081,6 +1083,7 @@
 				5625E6B81F6874FE00AFE8BF /* drums.pd */,
 				5625E6BA1F6874FE00AFE8BF /* fmlead.pd */,
 				5625E6BB1F6874FE00AFE8BF /* keys.pd */,
+				56C288C72188943600464E3B /* microjam_chirp_chain.pd */,
 				5625E6D81F6874FE00AFE8BF /* microjam_fm_chain.pd */,
 				5625E6D91F6874FE00AFE8BF /* microjam_fm_patch.pd */,
 				5625E6DA1F6874FE00AFE8BF /* microjam_fmlead.pd */,
@@ -1864,6 +1867,7 @@
 				5625E8E41F6874FF00AFE8BF /* e_noclickdelsig.pd in Resources */,
 				5625E9391F68750000AFE8BF /* m_intv2ratio.pd in Resources */,
 				56A0505520F5E1C600455FDF /* ProfileScreenController.storyboard in Resources */,
+				56C288C82188943600464E3B /* microjam_chirp_chain.pd in Resources */,
 				5625E8FB1F68750000AFE8BF /* e_sdelay-help.pd in Resources */,
 				5625E92E1F68750000AFE8BF /* m_accel_status-help.pd in Resources */,
 				5625E9681F68750000AFE8BF /* s.txt in Resources */,

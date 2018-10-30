@@ -1,4 +1,4 @@
-#N canvas 129 408 364 235 10;
+#N canvas -1779 -245 383 252 10;
 #X declare -path metaPdLibs/control;
 #X declare -path metaPdLibs/fx;
 #X declare -path metaPdLibs/instrument;
