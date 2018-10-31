@@ -9,6 +9,10 @@ import UIKit
 import DropDown
 import CloudKit
 
+var ALWAYS_SAVE_MODE: Bool = false /// set this to experiment mode for user studies, etc. - do not enable for archive or distribution!
+var RECORDING_PARTICLES: Bool = false /// set this to enable recording particle system.
+var OPEN_ON_RECORD_ENABLE: Bool = true /// set this to open the jam screen with recording already enabled.
+
 // TODO: how to tell between loaded and saved and just loaded?
 
 /// Main performance and playback ViewController for MicroJam
@@ -24,7 +28,7 @@ class ChirpJamViewController: UIViewController {
     /// String value of CKRecordID for storage of the original performance for a reply.
     var replyto : String?
     /// CKRecordID version of the above
-    var replyParentID : CKRecordID?
+    var replyParentID : CKRecord.ID?
     /// App delegate - in case we need to upload a performance.
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     /// Dropdown menu for selecting SoundScheme
@@ -100,6 +104,10 @@ class ChirpJamViewController: UIViewController {
                         PerformanceStore.shared.addNew(performance: finishedPerformance)
                     }
                     navigationController?.popViewController(animated: true)
+                } else if ALWAYS_SAVE_MODE {
+                    //let finishedPerformance = recorder.recordingView.performance
+                    ///FIXME: only save a "significant" performance, i.e., including all data.
+                    PerformanceStore.shared.addNew(performance: finishedPerformance) // save anyway.
                 }
             }
         }
@@ -129,7 +137,6 @@ class ChirpJamViewController: UIViewController {
                     
                 } else {
                     // Just reset to a new recording
-                    recorder.recordingEnabled = false
                     recorder.recordingIsDone = false
                     playButton.isEnabled = false
                     roboplayButton.isEnabled = false
@@ -147,10 +154,12 @@ class ChirpJamViewController: UIViewController {
         super.viewDidLoad()
         print("JAMVC: viewDidLoad")
         
+        // Setup particle emitter
+        if RECORDING_PARTICLES {setupRecordingParticleEmitter()}
+        
         // configuration for the chirpViewContainer
         chirpViewContainer.layer.cornerRadius = 8
         chirpViewContainer.layer.borderWidth = 1
-        chirpViewContainer.layer.borderColor = UIColor(white: 0.8, alpha: 1).cgColor
         chirpViewContainer.clipsToBounds = true
         chirpViewContainer.contentMode = .scaleAspectFill
         
@@ -162,7 +171,7 @@ class ChirpJamViewController: UIViewController {
         rewindButton.tintColor = ButtonColors.rewind
         // rec enable
         recEnableButton.imageView?.contentMode = .scaleAspectFit
-        recEnableButton.tintColor = ButtonColors.record.darkerColor
+        recEnableButton.tintColor = ButtonColors.recordDisabled
         
         // play
         playButton.imageView?.contentMode = .scaleAspectFit
@@ -223,10 +232,14 @@ class ChirpJamViewController: UIViewController {
                 break
             }
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(setColourTheme), name: .setColourTheme, object: nil) // notification for colour theme.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        setColourTheme()
         
         if let recorder = recorder {
             // Loaded with an existing recorder (i.e., to make a reply)
@@ -301,7 +314,15 @@ class ChirpJamViewController: UIViewController {
             savePerformanceButton.isEnabled = true
         } else {
             savePerformanceButton.isEnabled = false
+            // Force recording on for demos and experiments
+            if OPEN_ON_RECORD_ENABLE {
+                setRecordingEnabled() // force recording to be enabled.
+            }
         }
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .setColourTheme, object: nil)
     }
     
     /// Called if instrument is changed in the dropdown menu
@@ -316,6 +337,7 @@ class ChirpJamViewController: UIViewController {
 
     /// Resets to a new performance state.
     func newRecordingView() {
+        print("JAMVC: Reset to new recording view")
         if let recorder = recorder {
             recorder.recordingView.closePdFile()
             recorder.recordingView.removeFromSuperview()
@@ -327,15 +349,42 @@ class ChirpJamViewController: UIViewController {
             }
             chirpViewContainer.addSubview(recorder.recordingView)
             savePerformanceButton.isEnabled = false // no saving a blank recording
+            setRecordingDisabled() // set recording button to be disabled.
+            recEnableButton.isEnabled = true // enable recording button.
+        }
+        
+        // Force recording on for demos and experiments
+        if OPEN_ON_RECORD_ENABLE {
+            setRecordingEnabled() // force recording to be enabled.
         }
     }
 
     // MARK: - UI Interaction Functions
     
+    func setRecordingEnabled() {
+        // recording was not enabled.
+        //TODO: make blinking light for record enable.
+        print("JAMVC: Recording enabled.")
+        recEnableButton.pulseGlow()
+        recorder?.recordingEnabled = true
+    }
+    
+    func setRecordingDisabled() {
+        print("JAMVC: Recording disabled.")
+        // stop recEnableGlowing
+        recEnableButton.deactivateGlowing()
+        recorder?.recordingEnabled = false
+    }
+    
     /// IBAction for the rewind button
     @IBAction func rewindScreen(_ sender: UIButton) {
         print("JAMVC: Rewind pressed, clearing screen")
-        if let recorder = recorder {
+        if let recorder = recorder,
+            let finishedPerformance = recorder.recordingView.performance {
+            if ALWAYS_SAVE_MODE {
+                PerformanceStore.shared.addNew(performance: finishedPerformance) // save anyway.
+            }
+            // Clean up the views.
             recordingProgress.progress = 0.0
             recorder.stop()
             newRecordingView()
@@ -345,8 +394,6 @@ class ChirpJamViewController: UIViewController {
                 playButton.isEnabled = false
                 roboplayButton.isEnabled = false
                 jamButton.isEnabled = false
-                // and recording is disabled.
-                recEnableButton.tintColor = UIColor.red.darkerColor
             }
         }
         removeRoboJam()
@@ -356,14 +403,9 @@ class ChirpJamViewController: UIViewController {
     @IBAction func recordEnablePressed(_ sender: UIButton) {
         if let recorder = recorder {
             if !recorder.recordingEnabled {
-                // recording was not enabled.
-                print("JAMVC: Record pressed; enabled.")
-                recEnableButton.tintColor = UIColor.red
-                recorder.recordingEnabled = true
+                setRecordingEnabled()
             } else {
-                print("JAMVC: Record pressed; disabled.")
-                recEnableButton.tintColor = UIColor.red.darkerColor
-                recorder.recordingEnabled = false
+                setRecordingDisabled()
             }
         }
     }
@@ -384,7 +426,7 @@ class ChirpJamViewController: UIViewController {
         if let recorder = recorder {
             if recorder.isPlaying {
                 playButton.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal)
-                playButton.tintColor = UIColor.init("#F79256")
+                playButton.tintColor = ButtonColors.play
                 jamButton.isEnabled = true
                 if recorder.isRecording {
                     replyButton.isEnabled = true
@@ -394,7 +436,7 @@ class ChirpJamViewController: UIViewController {
             
             } else {
                 playButton.setImage(#imageLiteral(resourceName: "microjam-pause"), for: .normal)
-                playButton.tintColor = UIColor.init("#F79256").brighterColor
+                playButton.tintColor = ButtonColors.play.brighterColor
                 jamButton.isEnabled = false
                 recorder.play()
             }
@@ -424,7 +466,7 @@ class ChirpJamViewController: UIViewController {
         // TODO: implement some kind of generative performing here!
         if (jamming) {
             // Stop Jamming
-            jamButton.tintColor = UIColor.init("#1D4E89")
+            jamButton.tintColor = ButtonColors.jam
             jamming = false
             playButton.isEnabled = true
             recordingProgress.progress = 0.0
@@ -433,7 +475,7 @@ class ChirpJamViewController: UIViewController {
             }
         } else {
             // Start Jamming
-            jamButton.tintColor = UIColor.init("#1D4E89").brighterColor
+            jamButton.tintColor = ButtonColors.jam.brighterColor
             jamming = true
             playButton.isEnabled = false
             if let recorder = recorder {
@@ -528,11 +570,14 @@ class ChirpJamViewController: UIViewController {
             return
         }
     }
+}
+
+/// Extension for Touch User Interface Overrides
+extension ChirpJamViewController {
     
     /// touchesBegan method starts a recording if this is the first touch in a new microjam.
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         // start timer if not recording
-        
         if let recorder = recorder,
              let point = touches.first?.location(in: recorder.recordingView) {
             if (recorder.recordingView.bounds.contains(point)) {
@@ -541,8 +586,24 @@ class ChirpJamViewController: UIViewController {
                     playButton.isEnabled = true
                     playButton.setImage(#imageLiteral(resourceName: "microjam-stop"), for: .normal)
                 }
+                
+                /// Set the particle emitter point
+                if let pointInCJVCView = touches.first?.location(in: self.view) {
+                    recordingParticleEmitter?.emitterPosition = pointInCJVCView // set the particle emitter point
+                }
             }
         }
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let touch = touches.first, chirpViewContainer.bounds.contains(touch.location(in: chirpViewContainer)) {
+            //print("updating emitter point to", touch)
+            recordingParticleEmitter?.emitterPosition = touch.location(in: self.view) // set the particle emitter point
+        }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        // no action right now.
     }
 }
 
@@ -582,6 +643,17 @@ extension ChirpJamViewController {
 
 extension ChirpJamViewController: PlayerDelegate {
     
+    /// Updated UI to reflect that recording or playback has started.
+    func progressTimerStarted() {
+    print("Progress Timer started")
+        if let rec = recorder, rec.isRecording {
+            print("Recorder is recording")
+            recEnableButton.solidGlow() // solid recording light.
+            createParticles()
+        }
+    }
+    
+    
     /// Updates the progress bar in response to steps from the ChirpPlayer
     func progressTimerStep() {
         recordingProgress.progress = Float(recorder!.progress / recorder!.maxPlayerTime)
@@ -589,6 +661,7 @@ extension ChirpJamViewController: PlayerDelegate {
 
     /// Updates UI when the ChirpPlayer reports playback/recording has finished.
     func progressTimerEnded() {
+        stopParticles()
         recordingProgress.progress = 0.0
         recorder!.stop()
         
@@ -603,6 +676,10 @@ extension ChirpJamViewController: PlayerDelegate {
             replyButton.isEnabled = true
             savePerformanceButton.isEnabled = true
             roboplayButton.isEnabled = true
+            
+            setRecordingDisabled() //
+            recEnableButton.isEnabled = false
+            // do other things to make sure recording is preserved properly.
         }
         
         rewindButton.isEnabled = true
@@ -684,7 +761,7 @@ extension ChirpJamViewController {
             if let robojam = self.robojam {
                 recorder.chirpViews.append(robojam)
                 chirpViewContainer.addSubview(robojam)
-                chirpViewContainer.bringSubview(toFront: recorder.recordingView)
+                chirpViewContainer.bringSubviewToFront(recorder.recordingView)
                 robojam.generateImage()
             }
         }
@@ -713,7 +790,7 @@ extension UIButton {
     /// Shakes the button a little bit.
     func shake() {
         let animation = CAKeyframeAnimation(keyPath: "transform.translation.y")
-        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
         animation.duration = 1.0
         animation.values = [-10.0, 10.0, -5.0, 5.0, -2.5, 2.5, -1, 1, 0.0 ]
         layer.add(animation, forKey: "shake")
@@ -725,7 +802,7 @@ extension UIButton {
     
     func startBopping() {
         let animation = CAKeyframeAnimation(keyPath: "transform.translation.x")
-        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
         animation.duration = 0.2
         animation.values = [-2.5,2.5,0]
         animation.repeatCount = 100
@@ -734,12 +811,12 @@ extension UIButton {
     
     func startSwirling() {
         let animationX = CAKeyframeAnimation(keyPath: "transform.translation.x")
-        animationX.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        animationX.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         animationX.duration = 0.2
         animationX.values = [0,-2.5,2.5,0]
         animationX.repeatCount = 100
         let animationY = CAKeyframeAnimation(keyPath: "transform.translation.y")
-        animationY.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        animationY.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         animationY.duration = 0.2
         animationY.values = [-2.5,0,0,2.5]
         animationY.repeatCount = 100
@@ -809,5 +886,144 @@ extension ChirpJamViewController {
         //controller.mode = JamViewMode.jamming
         controller.headerProfile = UserProfile.shared.profile
         return controller
+    }
+}
+
+/// Constant for the maximum glow opacity for record pulse animations.
+let maximumGlowOpacity: Float = 0.9
+
+/// UIView Animation Extensions
+extension UIButton{
+    
+    func setupGlowShadow() {
+        self.layer.shadowOffset = .zero
+        self.layer.shadowColor = ButtonColors.recordGlow.cgColor
+        self.layer.shadowRadius = 20
+        self.layer.shadowOpacity = maximumGlowOpacity
+        //        recEnableButton.layer.shadowPath = UIBezierPath(rect: recEnableButton.bounds).cgPath
+        let glowWidth = self.bounds.height
+        let glowOffset = 0.5 * (self.bounds.width - glowWidth)
+        self.layer.shadowPath = UIBezierPath(ovalIn: CGRect(x: glowOffset,
+                                                            y:0,
+                                                            width: glowWidth,
+                                                            height: glowWidth)).cgPath
+    }
+    
+    func pulseGlow() {
+        setupGlowShadow()
+        // Tint Color Animation
+        self.tintColor = ButtonColors.recordDisabled
+        UIView.animate(withDuration: 0.25, delay: 0.0, options: [.curveLinear, .repeat, .autoreverse], animations: {self.tintColor = ButtonColors.record}, completion: nil)
+
+        // Shadow animation
+        let animation = CABasicAnimation(keyPath: "shadowOpacity")
+        animation.fromValue = 0.05
+        animation.toValue = maximumGlowOpacity
+        animation.duration = 0.25
+        animation.repeatCount = 100000
+        animation.autoreverses = true
+        self.layer.add(animation, forKey: animation.keyPath)
+        self.layer.shadowOpacity = 0.05
+    }
+    
+    func deactivateGlowing() {
+        self.layer.removeAllAnimations()
+        self.imageView?.layer.removeAllAnimations()
+        self.layer.shadowOpacity = 0.0
+        self.tintColor = ButtonColors.recordDisabled
+    }
+    
+    func solidGlow() {
+        self.layer.removeAllAnimations()
+        self.imageView?.layer.removeAllAnimations()
+        setupGlowShadow()
+        self.layer.shadowOpacity = maximumGlowOpacity
+        self.tintColor = ButtonColors.record
+    }
+
+}
+
+/// Particle Emitter Layer for pretty FX when recording.
+var recordingParticleEmitter: CAEmitterLayer?
+/// Extension for Particle Effects from Jam recording
+extension ChirpJamViewController {
+
+    /// Initial setup of the particle layer.
+    func setupRecordingParticleEmitter() {
+        print("JAMVC: setting up particle emitter")
+        recordingParticleEmitter = CAEmitterLayer()
+        if let recordingParticleEmitter = recordingParticleEmitter {
+            recordingParticleEmitter.emitterPosition = CGPoint(x: view.center.x, y: view.center.y)
+            recordingParticleEmitter.emitterShape = CAEmitterLayerEmitterShape.point
+            
+            let cell = CAEmitterCell()
+            cell.name = "recording"
+            cell.lifetime = 1.5
+            cell.velocity = 200
+            cell.velocityRange = 50
+            cell.emissionLongitude = CGFloat.pi / 2
+            cell.emissionRange = CGFloat.pi / 10
+            cell.spin = 4
+            cell.spinRange = 4
+            cell.scale = 0.2
+            cell.scaleRange = 0.5
+            cell.scaleSpeed = -0.1
+            cell.alphaRange = 0.20
+            cell.alphaSpeed = -1.0
+            cell.contents = UIImage(named: "tinystar")?.cgImage
+            
+            recordingParticleEmitter.emitterCells = [cell]
+            view.layer.addSublayer(recordingParticleEmitter)
+        }
+    }
+    
+    /// Start generating particles.
+    func createParticles() {
+        // set color to current performance
+        if let col = recorder?.recordingView.performance?.colour {
+            recordingParticleEmitter?.setValue(col.cgColor, forKeyPath: "emitterCells.recording.color")
+        }
+        recordingParticleEmitter?.setValue(100, forKeyPath: "emitterCells.recording.birthRate")
+    }
+    
+    /// Stop generating particles.
+    func stopParticles() {
+        recordingParticleEmitter?.setValue(0, forKeyPath: "emitterCells.recording.birthRate")
+    }
+}
+
+// Set up dark and light mode.
+extension ChirpJamViewController {
+    
+    @objc func setColourTheme() {
+        UserDefaults.standard.bool(forKey: SettingsKeys.darkMode) ? setDarkMode() : setLightMode()
+    }
+    
+    func setDarkMode() {
+        view.backgroundColor = DarkMode.background
+        //        tableView.backgroundColor = DarkMode.background
+        performerLabel.textColor = DarkMode.text
+        instrumentButton.setTitleColor(DarkMode.text, for: .normal)
+        chirpViewContainer.layer.borderColor = DarkMode.midforeground.cgColor
+        recordingProgress.backgroundColor = DarkMode.midbackground
+        recordingProgress.progressTintColor = DarkMode.highlight
+        menuButton.setTitleColor(DarkMode.text, for: .normal)
+        navigationController?.navigationBar.barStyle = .black
+        navigationController?.navigationBar.tintColor = DarkMode.highlight
+        navigationController?.view.backgroundColor = DarkMode.background
+    }
+    
+    func setLightMode() {
+        view.backgroundColor = LightMode.background
+        //        tableView.backgroundColor = LightMode.background
+        performerLabel.textColor = LightMode.text
+        instrumentButton.setTitleColor(LightMode.text, for: .normal)
+        chirpViewContainer.layer.borderColor = LightMode.midforeground.cgColor
+        menuButton.setTitleColor(LightMode.text, for: .normal)
+        recordingProgress.backgroundColor = LightMode.midbackground
+        recordingProgress.progressTintColor = LightMode.highlight
+        navigationController?.navigationBar.barStyle = .default
+        navigationController?.navigationBar.tintColor = LightMode.highlight
+        navigationController?.view.backgroundColor = LightMode.background
     }
 }

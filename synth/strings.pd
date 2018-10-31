@@ -24,7 +24,7 @@
 #X obj 290 260 - 100;
 #X obj 290 238 env~;
 #X obj 95 158 touch_to_notes 48 25;
-#X obj 148 280 output_stage;
+#X obj 148 280 output_stage \$0;
 #X obj 274 24 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X obj 297 24 touch_tester_auto \$0;

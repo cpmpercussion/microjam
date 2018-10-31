@@ -1,0 +1,6 @@
+#N canvas -840 153 592 677 10;
+#X obj 222 175 vsl 50 250 0.01 1 0 0 master-vol empty Master_Volume
+0 -9 0 10 -258113 -1 -1 24900 1;
+#X obj 334 244 r master-vol;
+#X floatatom 345 281 5 0 0 0 Vol - -, f 5;
+#X connect 1 0 2 0;

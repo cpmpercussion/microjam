@@ -9,7 +9,6 @@
 import UIKit
 import CloudKit
 
-let performerProfileUpdatedKey = "au.com.charlesmartin.PerformerProfilesUpdatedNotificationKey"
 
 class PerformerProfileStore : NSObject {
     /// Shared Instance
@@ -21,7 +20,9 @@ class PerformerProfileStore : NSObject {
     /// CloudKit database
     let database = CKContainer.default().publicCloudDatabase
     /// Storage for profiles
-    var profiles: [CKRecordID: PerformerProfile]
+    var profiles: [CKRecord.ID: PerformerProfile]
+    /// List of CKRecord.ID currently being fetched
+    var currentlyFetching: Set<CKRecord.ID> = []
     
     private override init() {
         profiles = PerformerProfileStore.loadProfiles()
@@ -29,40 +30,27 @@ class PerformerProfileStore : NSObject {
     }
     
     /// Load Profiles from file
-    private static func loadProfiles() -> [CKRecordID: PerformerProfile] {
-        print("Loading profiles...")
-//        var result : Any?
-//        do {
-//            let dat = try Data(contentsOf: PerformerProfileStore.profilesURL)
-//            let unarchiver = NSKeyedUnarchiver(forReadingWith: dat)
-//            result = try unarchiver.decodeTopLevelObject()
-//            unarchiver.finishDecoding()
-//            print("Successfully decoded archive.")
-//        } catch let (err) {
-//            print("PerformerProfileStore failed to decode archive.")
-//            print(err)
-//            result = nil
-//        }
-        
+    private static func loadProfiles() -> [CKRecord.ID: PerformerProfile] {
+        print("ProfileStore: Loading profiles...")
         let result = NSKeyedUnarchiver.unarchiveObject(withFile: PerformerProfileStore.profilesURL.path)
         
-        if let loadedProfiles = result as? [CKRecordID: PerformerProfile] {
-            print("PerformerProfileStore: Loaded \(loadedProfiles.count) profiles.")
+        if let loadedProfiles = result as? [CKRecord.ID: PerformerProfile] {
+            print("ProfileStore: Loaded \(loadedProfiles.count) profiles.")
             return loadedProfiles
         } else {
-            print("PerformerProfileStore: Failed to load profiles.")
-            return [CKRecordID: PerformerProfile]()
+            print("ProfileStore: Failed to load profiles.")
+            return [CKRecord.ID: PerformerProfile]()
         }
     }
     
     /// Save Profiles to file.
     func saveProfiles() {
-        print("PerformerProfileStore: Saving \(profiles.count) profiles.")
+        print("ProfileStore: Saving \(profiles.count) profiles.")
         let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(profiles, toFile: PerformerProfileStore.profilesURL.path)
         if (!isSuccessfulSave) {
-            print("PerformerProfileStore: Save was not successful.")
+            print("ProfileStore: Save was not successful.")
         } else {
-            print("PerformerProfileStore: Save was successful.")
+            print("ProfileStore: Save was successful.")
         }
     }
     
@@ -73,7 +61,7 @@ class PerformerProfileStore : NSObject {
     }
     
     /// Return a profile for a given user's CKRecordID
-    func getProfile(forID performerID: CKRecordID) -> PerformerProfile? {
+    func getProfile(forID performerID: CKRecord.ID) -> PerformerProfile? {
         if let profile = profiles[performerID] {
             // if not fetched this session, fetch anyway, but return the local one as well.
             if !profile.fetchedThisSession { fetchProfile(forID: performerID) }
@@ -85,21 +73,27 @@ class PerformerProfileStore : NSObject {
     }
     
     /// Fetch a profile from CloudKit
-    func fetchProfile(forID performerID: CKRecordID) {
+    func fetchProfile(forID performerID: CKRecord.ID) {
+        if currentlyFetching.contains(performerID) {
+            return
+            // early return if already fetching a profile.
+        }
         // This is a low-priority operation.
+        currentlyFetching.insert(performerID)
         database.fetch(withRecordID: performerID) { [unowned self] (record: CKRecord?, error: Error?) in
             if let e = error {
-                print("PerformerProfileStore: Profile Error: \(e)")
+                print("ProfileStore: Profile Error: \(e)")
             }
             if let rec = record,
                 let prof = PerformerProfile(fromRecord: rec) {
                 DispatchQueue.main.async {
                     prof.fetchedThisSession = true // set fetched this session, so it's not refetched later.
                     self.profiles[performerID] = prof
-                    print("PerformerProfileStore: \(prof.stageName)'s profile fetched.")
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: performerProfileUpdatedKey), object: nil)
+                    print("ProfileStore: \(prof.stageName)'s profile fetched.")
+                    NotificationCenter.default.post(name: .performerProfileUpdated, object: nil)
                 }
             }
+            DispatchQueue.main.async {self.currentlyFetching.remove(performerID)} // remove this profile ID from the currently fetching set.
         }
     }
 

@@ -197,19 +197,27 @@ extension ChirpView {
     /// Opens a Pd file given the filename (only if the file is not already open)
     func openPd(file fileToOpen: String) {
         if openPatchName != fileToOpen {
-            closePdFile()
+            //closePdFile()
             openPatch = PdFile.openNamed(fileToOpen, path: Bundle.main.bundlePath) as? PdFile
             openPatchName = fileToOpen
             openPatchDollarZero = openPatch?.dollarZero
+            PdBase.sendBang(toReceiver: "fadein-\(openPatchDollarZero ?? Int32(0))")
         }
         // Only opens it if it's not already open.
     }
     
     /// Closes whatever Pd file is open.
     func closePdFile() {
-        openPatch?.close()
+        if let dollarZero = openPatchDollarZero, let patchFile = openPatch {
+            print("ChirpView: Starting to Close Patch:\(dollarZero)")
+            // fadeout
+            PdBase.sendBang(toReceiver: "fadeout-\(dollarZero)")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                print("ChirpView: Closing Patch:\(dollarZero)")
+                patchFile.close()
+            })
+        }
     }
-    
 }
 
 /// Extension to contain constraint and layout helpers.
@@ -220,47 +228,47 @@ extension UIView {
         /// FIXME - make this automatically fail if the referenceView is not an ancestor view of the current view.
         // Width and Height
         let widthConstraint = NSLayoutConstraint(item: self,
-                                                attribute: NSLayoutAttribute.width,
-                                                relatedBy: NSLayoutRelation.equal,
+                                                attribute: NSLayoutConstraint.Attribute.width,
+                                                relatedBy: NSLayoutConstraint.Relation.equal,
                                                 toItem: referenceView,
-                                                attribute: NSLayoutAttribute.width,
+                                                attribute: NSLayoutConstraint.Attribute.width,
                                                 multiplier: 1,
                                                 constant: 0)
         let heightConstraint = NSLayoutConstraint(item: self,
-                                                attribute: NSLayoutAttribute.height,
-                                                relatedBy: NSLayoutRelation.equal,
+                                                attribute: NSLayoutConstraint.Attribute.height,
+                                                relatedBy: NSLayoutConstraint.Relation.equal,
                                                 toItem: referenceView,
-                                                attribute: NSLayoutAttribute.height,
+                                                attribute: NSLayoutConstraint.Attribute.height,
                                                 multiplier: 1,
                                                 constant: 0)
     
         // Edges
         let leftConstraint = NSLayoutConstraint(item: self,
-                                                attribute: NSLayoutAttribute.left,
-                                                relatedBy: NSLayoutRelation.equal,
+                                                attribute: NSLayoutConstraint.Attribute.left,
+                                                relatedBy: NSLayoutConstraint.Relation.equal,
                                                 toItem: referenceView,
-                                                attribute: NSLayoutAttribute.left,
+                                                attribute: NSLayoutConstraint.Attribute.left,
                                                 multiplier: 1,
                                                 constant: 0)
         let rightConstraint = NSLayoutConstraint(item: self,
-                                                 attribute: NSLayoutAttribute.right,
-                                                 relatedBy: NSLayoutRelation.equal,
+                                                 attribute: NSLayoutConstraint.Attribute.right,
+                                                 relatedBy: NSLayoutConstraint.Relation.equal,
                                                  toItem: referenceView,
-                                                 attribute: NSLayoutAttribute.right,
+                                                 attribute: NSLayoutConstraint.Attribute.right,
                                                  multiplier: 1,
                                                  constant: 0)
         let topConstraint = NSLayoutConstraint(item: self,
-                                               attribute: NSLayoutAttribute.top,
-                                               relatedBy: NSLayoutRelation.equal,
+                                               attribute: NSLayoutConstraint.Attribute.top,
+                                               relatedBy: NSLayoutConstraint.Relation.equal,
                                                toItem: referenceView,
-                                               attribute: NSLayoutAttribute.top,
+                                               attribute: NSLayoutConstraint.Attribute.top,
                                                multiplier: 1,
                                                constant: 0)
         let bottomConstraint = NSLayoutConstraint(item: self,
-                                                  attribute: NSLayoutAttribute.bottom,
-                                                  relatedBy: NSLayoutRelation.equal,
+                                                  attribute: NSLayoutConstraint.Attribute.bottom,
+                                                  relatedBy: NSLayoutConstraint.Relation.equal,
                                                   toItem: referenceView,
-                                                  attribute: NSLayoutAttribute.bottom,
+                                                  attribute: NSLayoutConstraint.Attribute.bottom,
                                                   multiplier: 1,
                                                   constant: 0)
 

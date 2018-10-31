@@ -29,6 +29,8 @@ class PerformanceTableCell: UITableViewCell {
     /// A reply button layered over the ChirpContainer
     @IBOutlet weak var replyButton: UIButton!
     
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -39,17 +41,14 @@ class PerformanceTableCell: UITableViewCell {
         
         chirpContainer.layer.cornerRadius = 8
         chirpContainer.layer.borderWidth = 1
-        chirpContainer.layer.borderColor = UIColor(white: 0.8, alpha: 1).cgColor
-        chirpContainer.backgroundColor = .white
         chirpContainer.clipsToBounds = true
         
         playButton.layer.cornerRadius = 18 // Button size is 36
         playButton.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal)
-        playButton.tintColor = UIColor.darkGray
-
         replyButton.layer.cornerRadius = 18 // Button size is 36
         replyButton.setImage(#imageLiteral(resourceName: "microjam-reply"), for: .normal)
-        replyButton.tintColor = UIColor.darkGray
+        
+        setColourTheme()
     }
     
     /// Updates UI with data from a given PerformerProfile
@@ -63,7 +62,7 @@ class PerformanceTableCell: UITableViewCell {
     func displayProfileFromPlayer() {
         if let perf = player?.chirpViews.first?.performance,
             let profile = PerformerProfileStore.shared.getProfile(forPerformance: perf) {
-            print("Successfully updated profile for: \(profile.stageName) in a PerformanceTableCell")
+            //print("Successfully updated profile for: \(profile.stageName) in a PerformanceTableCell")
             //PerformerProfileStore.shared.getProfile(forID: perfID) {
             self.display(performerProfile: profile)
         }
@@ -89,3 +88,41 @@ class PerformanceTableCell: UITableViewCell {
     }
 
 }
+
+// Set up dark and light mode.
+extension PerformanceTableCell {
+    
+    @objc func setColourTheme() {
+        UserDefaults.standard.bool(forKey: SettingsKeys.darkMode) ? setDarkMode() : setLightMode()
+    }
+    
+    func setDarkMode() {
+        backgroundColor = DarkMode.background
+        //avatarImageView //: UIImageView!
+        title.textColor = DarkMode.text
+        performer.textColor = DarkMode.text
+        instrument.textColor = DarkMode.text
+        context.textColor = DarkMode.text
+        /// TODO: adjust these colours
+        chirpContainer.layer.borderColor = UIColor(white: 0.8, alpha: 1).cgColor
+        //chirpContainer.backgroundColor = DarkMode.midbackground // set later by table view controller
+        playButton.tintColor = UIColor.darkGray
+        replyButton.tintColor = UIColor.darkGray
+
+    }
+    
+    func setLightMode() {
+        backgroundColor = LightMode.background
+        //avatarImageView //: UIImageView!
+        title.textColor = LightMode.text
+        performer.textColor = LightMode.text
+        instrument.textColor = LightMode.text
+        context.textColor = LightMode.text
+        /// TODO: adjust these colours
+        chirpContainer.layer.borderColor = UIColor(white: 0.8, alpha: 1).cgColor
+        //chirpContainer.backgroundColor = LightMode.midbackground // set later by table view controller
+        playButton.tintColor = UIColor.darkGray
+        replyButton.tintColor = UIColor.darkGray
+    }
+}
+

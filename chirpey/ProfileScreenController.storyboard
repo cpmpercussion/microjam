@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ILZ-VW-8SS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ILZ-VW-8SS">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -78,7 +78,7 @@
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                             <subviews>
                                                                                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ghg-7L-8eN">
-                                                                                    <rect key="frame" x="15" y="-3" width="30" height="27"/>
+                                                                                    <rect key="frame" x="15" y="-3" width="30" height="26"/>
                                                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="11"/>
                                                                                     <state key="normal" title="Edit"/>
                                                                                     <connections>
@@ -255,6 +255,14 @@
                                 <outlet property="settingsStack" destination="j8A-mf-7EU" id="OKs-1f-iXh"/>
                                 <outlet property="soundSchemeDropDownButton" destination="eeE-Ju-Dmt" id="BZ3-47-o3p"/>
                                 <outlet property="stageNameField" destination="juZ-se-eXV" id="2r2-vq-QNh"/>
+                                <outletCollection property="profileHeaderLabels" destination="7cz-y0-lW8" collectionClass="NSMutableArray" id="e0V-d8-HGL"/>
+                                <outletCollection property="profileHeaderLabels" destination="GbH-Ho-Mlb" collectionClass="NSMutableArray" id="Pd6-ht-tSZ"/>
+                                <outletCollection property="profileHeaderLabels" destination="5DU-ac-gxi" collectionClass="NSMutableArray" id="iEr-PM-8e7"/>
+                                <outletCollection property="profileHeaderLabels" destination="j5n-vy-q5r" collectionClass="NSMutableArray" id="0UP-oz-95q"/>
+                                <outletCollection property="profileHeaderLabels" destination="FxK-C1-pep" collectionClass="NSMutableArray" id="JSS-69-Qei"/>
+                                <outletCollection property="profileHeaderButtons" destination="eeE-Ju-Dmt" collectionClass="NSMutableArray" id="kRk-2D-A8Z"/>
+                                <outletCollection property="profileHeaderContainerViews" destination="zWa-V8-4ck" collectionClass="NSMutableArray" id="5ei-OT-uyY"/>
+                                <outletCollection property="profileHeaderContainerViews" destination="tyD-ra-2pJ" collectionClass="NSMutableArray" id="BGC-YP-tGs"/>
                             </connections>
                         </collectionReusableView>
                         <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="ProfileSceneFooter" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="ProfileSceneFooter" id="bhQ-HQ-Ohs" customClass="ProfileFooterCollectionReusableView" customModule="microjam" customModuleProvider="target">
@@ -279,32 +287,41 @@
                                             <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jfD-6T-NIJ">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jfD-6T-NIJ">
                                             <rect key="frame" x="0.0" y="66" width="375" height="44"/>
                                             <state key="normal" title="more information at microjam.info"/>
                                             <connections>
                                                 <action selector="openMicrojamWebsite:" destination="ILZ-VW-8SS" eventType="touchUpInside" id="RwN-Kf-BPR"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ONy-ge-E6F">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ONy-ge-E6F">
                                             <rect key="frame" x="0.0" y="110" width="375" height="30"/>
                                             <accessibility key="accessibilityConfiguration" hint="Tap to read privacy policy" identifier="Privacy" label="Privacy"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="Nys-zy-0SU"/>
+                                            </constraints>
                                             <state key="normal" title="privacy policy"/>
                                             <connections>
                                                 <action selector="openPrivacyPolicy:" destination="ILZ-VW-8SS" eventType="touchUpInside" id="HAs-7Y-tgW"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cNh-gX-M4S">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cNh-gX-M4S">
                                             <rect key="frame" x="0.0" y="140" width="375" height="30"/>
                                             <accessibility key="accessibilityConfiguration" hint="Tap to export data" identifier="Export" label="Export"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="FMm-fV-hHZ"/>
+                                            </constraints>
                                             <state key="normal" title="export data"/>
                                             <connections>
                                                 <action selector="exportDataButtonTapped:" destination="ILZ-VW-8SS" eventType="touchUpInside" id="DXY-rS-nBY"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q8u-4V-X1c" userLabel="delete all account data">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q8u-4V-X1c" userLabel="delete all account data">
                                             <rect key="frame" x="0.0" y="170" width="375" height="30"/>
                                             <accessibility key="accessibilityConfiguration" hint="Tap to delete data" identifier="delete" label="delete"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="1be-zF-oFz"/>
+                                            </constraints>
                                             <state key="normal" title="delete data"/>
                                             <connections>
                                                 <action selector="deleteDataButtonTapped:" destination="ILZ-VW-8SS" eventType="touchUpInside" id="0fo-Gz-XBh"/>
@@ -319,6 +336,14 @@
                                 <constraint firstAttribute="bottom" secondItem="4dk-kt-kWA" secondAttribute="bottom" id="f1u-SX-ywS"/>
                                 <constraint firstAttribute="trailing" secondItem="4dk-kt-kWA" secondAttribute="trailing" id="zST-AB-dwe"/>
                             </constraints>
+                            <connections>
+                                <outletCollection property="profileFooterLabels" destination="Yvx-Mq-U8q" collectionClass="NSMutableArray" id="5Mx-FT-eDZ"/>
+                                <outletCollection property="profileFooterLabels" destination="1RV-v0-RGQ" collectionClass="NSMutableArray" id="doD-0a-Cgf"/>
+                                <outletCollection property="profileFooterButtons" destination="jfD-6T-NIJ" collectionClass="NSMutableArray" id="QUU-5X-qRk"/>
+                                <outletCollection property="profileFooterButtons" destination="ONy-ge-E6F" collectionClass="NSMutableArray" id="cP6-wI-4m7"/>
+                                <outletCollection property="profileFooterButtons" destination="cNh-gX-M4S" collectionClass="NSMutableArray" id="YVz-rN-e88"/>
+                                <outletCollection property="profileFooterButtons" destination="q8u-4V-X1c" collectionClass="NSMutableArray" id="DU3-C0-4HM"/>
+                            </connections>
                         </collectionReusableView>
                         <connections>
                             <outlet property="dataSource" destination="ILZ-VW-8SS" id="iYC-oj-1Fo"/>

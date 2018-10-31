@@ -12,6 +12,10 @@ import UIKit
 class MicrojamTabBarController: UITabBarController {
     
     /// User Settings View Controller
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setColourTheme()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +23,11 @@ class MicrojamTabBarController: UITabBarController {
         // setupWorldTab()
         setupJamTab() // FIXME test that this does actually work properly.
         setupProfileTab() // Set up the profile tab.
+        NotificationCenter.default.addObserver(self, selector: #selector(setColourTheme), name: .setColourTheme, object: nil) // notification for colour theme.
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .setColourTheme, object: nil)
     }
     
     /// Setup the world tab
@@ -38,7 +47,7 @@ class MicrojamTabBarController: UITabBarController {
         viewControllers?.append(navigation)
         // Accessibility elements
         controller.isAccessibilityElement = true
-        controller.accessibilityTraits = UIAccessibilityTraitButton
+        controller.accessibilityTraits = UIAccessibilityTraits.button
         controller.accessibilityLabel = "Jam button"
         controller.accessibilityHint = "Tap to create a new Jam"
         controller.title = "jam!"
@@ -53,7 +62,7 @@ class MicrojamTabBarController: UITabBarController {
             viewControllers?.append(navigation)
             // Accessibility elements
             controller.isAccessibilityElement = true
-            controller.accessibilityTraits = UIAccessibilityTraitButton
+            controller.accessibilityTraits = UIAccessibilityTraits.button
             controller.accessibilityLabel = "Profile button"
             controller.accessibilityHint = "Tap to access your user profile"
         } else {
@@ -70,7 +79,7 @@ class MicrojamTabBarController: UITabBarController {
             viewControllers?.append(navigation)
             // Accessibility elements
             controller.isAccessibilityElement = true
-            controller.accessibilityTraits = UIAccessibilityTraitButton
+            controller.accessibilityTraits = UIAccessibilityTraits.button
             controller.accessibilityLabel = "Profile button"
             controller.accessibilityHint = "Tap to access your user profile"
         } else {
@@ -86,5 +95,28 @@ class MicrojamTabBarController: UITabBarController {
         // Pass the selected object to the new view controller.
     }
     
+    
+    
 
+
+}
+
+// Set up dark and light mode.
+extension MicrojamTabBarController {
+    
+    @objc func setColourTheme() {
+        UserDefaults.standard.bool(forKey: SettingsKeys.darkMode) ? setDarkMode() : setLightMode()
+    }
+    
+    func setDarkMode() {
+        self.tabBar.backgroundColor = DarkMode.background
+        self.tabBar.barTintColor = DarkMode.background
+        self.tabBar.tintColor = DarkMode.highlight
+    }
+    
+    func setLightMode() {
+        self.tabBar.backgroundColor = LightMode.background
+        self.tabBar.barTintColor = LightMode.background
+        self.tabBar.tintColor = LightMode.highlight
+    }
 }

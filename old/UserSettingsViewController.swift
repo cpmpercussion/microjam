@@ -100,17 +100,21 @@ class UserSettingsViewController: UIViewController {
         setupProfileCollectionView()
         updateUI()
         // add observer for UserProfile updates.
-        NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: NSNotification.Name(rawValue: userProfileUpdatedNotificationKey), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: .userProfileUpdated, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .userProfileUpdated, object: nil)
     }
     
     /// Setup the user performance collection view at the bottom of the profile screen.
     func setupProfileCollectionView() {
         let layout = UICollectionViewFlowLayout()
         let controller = SimpleProfileCollectionViewController(collectionViewLayout: layout) // using simplified userperfcontroller.
-        addChildViewController(controller)
+        addChild(controller)
         controller.view.translatesAutoresizingMaskIntoConstraints = false
         containerStack.addArrangedSubview(controller.view)
-        controller.didMove(toParentViewController: self)
+        controller.didMove(toParent: self)
     }
     
     /// Open image picker to change avatar.
@@ -157,11 +161,14 @@ class UserSettingsViewController: UIViewController {
 /// Extensions to UserSettingsViewController to interact with an image picker and navigatino controller.
 extension UserSettingsViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
         defer {
             picker.dismiss(animated: true, completion: nil)
         }
-        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+        if let image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage {
             print("USVC: Updating image")
             UserProfile.shared.updateAvatar(image)
             avatarImageView.image = image
@@ -188,3 +195,13 @@ extension UserSettingsViewController: UITextFieldDelegate {
     }
 }
 
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+	return input.rawValue
+}

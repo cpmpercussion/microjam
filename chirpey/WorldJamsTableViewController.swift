@@ -28,6 +28,7 @@ class WorldJamsTableViewController: UITableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setColourTheme()
         tableView.reloadData()
     }
 
@@ -35,16 +36,22 @@ class WorldJamsTableViewController: UITableViewController {
         super.viewDidLoad()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 420 // iPhone 7 height
         performanceStore.delegate = self
         headerView.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 100) // header view used to display iCloud errors
         // Initialise the refreshControl
-        self.refreshControl?.addTarget(performanceStore, action: #selector(performanceStore.fetchWorldJamsFromCloud), for: UIControlEvents.valueChanged)
+        self.refreshControl?.addTarget(performanceStore, action: #selector(performanceStore.fetchWorldJamsFromCloud), for: UIControl.Event.valueChanged)
         tableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tableViewTapped)))
         tableView.separatorStyle = .none // Remove the separator
         
-        NotificationCenter.default.addObserver(self, selector: #selector(updateProfilesInCells), name: NSNotification.Name(rawValue: performerProfileUpdatedKey), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateProfilesInCells), name: .performerProfileUpdated, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(setColourTheme), name: .setColourTheme, object: nil) // notification for colour theme.
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .performerProfileUpdated, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .setColourTheme, object: nil)
     }
 
     // Action if a play button is pressed in a cell
@@ -88,7 +95,7 @@ class WorldJamsTableViewController: UITableViewController {
     
     /// Visit each available table view cell and make sure it is displaying the correct profile information after an update.
     @objc func updateProfilesInCells() {
-        print("WJTVC: Received a profile update, making sure visible cells are up to date.")
+        //print("WJTVC: Received a profile update, making sure visible cells are up to date.")
         for cell in tableView.visibleCells {
             if let cell = cell as? PerformanceTableCell {
                 cell.displayProfileFromPlayer()
@@ -112,6 +119,7 @@ class WorldJamsTableViewController: UITableViewController {
         let performance = performanceStore.feed[indexPath.row]
         cell.player = ChirpPlayer()
         cell.player?.delegate = self
+        cell.setColourTheme() // set colour theme if reloading.
         
         
         // Get all replies and add them to the player and chirp container.
@@ -224,9 +232,13 @@ class WorldJamsTableViewController: UITableViewController {
 }
 
 extension WorldJamsTableViewController: PlayerDelegate {
+    
+    func progressTimerStarted() {
+        // not used
+    }
 
     func progressTimerStep() {
-
+        // not used
     }
 
     func progressTimerEnded() {
@@ -280,4 +292,34 @@ extension WorldJamsTableViewController: ModelDelegate {
         headerView.isHidden = false
     }
 
+}
+
+
+// Set up dark and light mode.
+extension WorldJamsTableViewController {
+    
+    @objc func setColourTheme() {
+        UserDefaults.standard.bool(forKey: SettingsKeys.darkMode) ? setDarkMode() : setLightMode()
+        
+        // set colour for visible table view cells.
+        for cell in self.tableView.visibleCells {
+            if let cell = cell as? PerformanceTableCell {
+                cell.setColourTheme()
+            }
+        }
+    }
+    
+    func setDarkMode() {
+        view.backgroundColor = DarkMode.background
+        navigationController?.navigationBar.barStyle = .black
+        navigationController?.navigationBar.tintColor = DarkMode.highlight
+        navigationController?.view.backgroundColor = DarkMode.background
+    }
+    
+    func setLightMode() {
+        view.backgroundColor = LightMode.background
+        navigationController?.navigationBar.barStyle = .default
+        navigationController?.navigationBar.tintColor = LightMode.highlight
+        navigationController?.view.backgroundColor = LightMode.background
+    }
 }

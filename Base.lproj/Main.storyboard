@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="z8b-cn-TNb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="z8b-cn-TNb">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -27,7 +26,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="took the stage" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8qM-fi-pVE" userLabel="context">
-                                            <rect key="frame" x="52" y="393" width="93" height="17"/>
+                                            <rect key="frame" x="51.666666666666657" y="392.66666666666669" width="93" height="17"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="17" id="qdX-dO-tUu"/>
                                             </constraints>
@@ -36,7 +35,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="instrument" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6dJ-ZF-dqm">
-                                            <rect key="frame" x="276" y="393" width="87" height="22"/>
+                                            <rect key="frame" x="275.33333333333331" y="392.66666666666669" width="87" height="22"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="22" id="bZ0-LP-Mio"/>
                                             </constraints>
@@ -45,17 +44,17 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fmu-Vs-F8c" userLabel="metadata container">
-                                            <rect key="frame" x="52" y="16" width="311" height="50"/>
+                                            <rect key="frame" x="51.666666666666657" y="16" width="310.66666666666674" height="50"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="performername" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zm0-8q-7kP">
-                                                    <rect key="frame" x="53.999999999999993" y="3.3333333333333321" width="126.33333333333331" height="21.666666666666668"/>
+                                                    <rect key="frame" x="54.000000000000007" y="3.3333333333333321" width="126.33333333333334" height="21.666666666666668"/>
                                                     <accessibility key="accessibilityConfiguration" hint="Displays performer stage name" identifier="Stage name" label="Stage name"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date and time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RbJ-Tv-ySY" userLabel="Date">
-                                                    <rect key="frame" x="54.000000000000007" y="28" width="88.666666666666686" height="17"/>
+                                                    <rect key="frame" x="54.000000000000007" y="27.666666666666664" width="88.666666666666686" height="17"/>
                                                     <accessibility key="accessibilityConfiguration">
                                                         <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
                                                     </accessibility>
@@ -79,7 +78,7 @@
                                                     </subviews>
                                                 </stackView>
                                             </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="Zvi-FN-w8i" firstAttribute="top" secondItem="fmu-Vs-F8c" secondAttribute="top" id="75J-rp-UqR"/>
                                                 <constraint firstItem="Zm0-8q-7kP" firstAttribute="centerY" secondItem="fmu-Vs-F8c" secondAttribute="centerY" constant="-11" id="QA7-4Q-nmx"/>
@@ -91,7 +90,7 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qwU-ld-Uy2">
-                                            <rect key="frame" x="52" y="74" width="311" height="311"/>
+                                            <rect key="frame" x="51.666666666666657" y="74" width="310.66666666666674" height="310.66666666666669"/>
                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <accessibility key="accessibilityConfiguration" hint="Displays performance" identifier="Jam area" label="Jam area">
                                                 <bool key="isElement" value="YES"/>
@@ -102,7 +101,7 @@
                                             </constraints>
                                         </view>
                                         <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JOw-B7-ob4">
-                                            <rect key="frame" x="319" y="341" width="36" height="36"/>
+                                            <rect key="frame" x="318.33333333333331" y="340.66666666666669" width="36" height="36"/>
                                             <accessibility key="accessibilityConfiguration" hint="Tap to reply to this performance" identifier="Reply button" label="Reply button"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="36" id="YNc-to-Xg0"/>
@@ -111,7 +110,7 @@
                                             <state key="normal" title="reply" image="microjam-reply"/>
                                         </button>
                                         <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ske-ad-PVr">
-                                            <rect key="frame" x="60" y="341" width="36" height="36"/>
+                                            <rect key="frame" x="59.666666666666657" y="340.66666666666669" width="36" height="36"/>
                                             <accessibility key="accessibilityConfiguration" hint="Plays this performance" identifier="Play button" label="Play button"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="36" id="gNE-VS-NXh"/>
@@ -215,8 +214,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="microjam-play" width="158" height="178"/>
-        <image name="microjam-reply" width="158" height="178"/>
-        <image name="remotejamsTabIcon" width="37" height="37"/>
+        <image name="microjam-play" width="316" height="356"/>
+        <image name="microjam-reply" width="316" height="356"/>
+        <image name="remotejamsTabIcon" width="75" height="75"/>
     </resources>
 </document>

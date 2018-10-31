@@ -83,6 +83,7 @@ extension ChirpRecordingView {
     
     /// Responds to moving touch signals, responds with sound and recordings.
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        superview?.touchesMoved(touches, with: event)
         let currentPoint = clipTouchLocationToBounds((touches.first?.location(in: superview!))!)
         let size = touches.first?.majorRadius
 
@@ -101,6 +102,11 @@ extension ChirpRecordingView {
         
         // Always make a sound.
         makeSound(at: currentPoint, withRadius: size!, thatWasMoving: true)
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        // touchesEnded in case needed.
+        superview?.touchesEnded(touches, with: event)
     }
     
     /**

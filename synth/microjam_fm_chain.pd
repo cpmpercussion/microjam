@@ -1,4 +1,4 @@
-#N canvas 846 38 1136 492 10;
+#N canvas 463 462 1136 480 10;
 #N canvas 0 117 646 567 reverb-aux 0;
 #X obj 32 36 inlet~;
 #X obj 33 488 outlet~;
@@ -79,11 +79,11 @@
 #X restore 356 355 pd crystal;
 #X msg 465 219 ratio 1 \, index 78 \, mR 241 \, mS 54 \, mD 60 \, mA
 9 \, R 161 \, S 80 \, D 97 \, A 5 \,;
-#X msg 226 216 bend \$1;
+#X msg 198 178 bend \$1;
 #X msg 387 61 ratio 4 \, index 62 \, mR 292 \, mS 8 \, mD 20 \, mA
 0 \, R 120 \, S 50 \, D 55 \, A 7 \,;
 #X obj 205 256 microjam_fmlead;
-#X obj 95 259 microjam_fmlead;
+#X obj 86 255 microjam_fmlead;
 #N canvas 615 210 450 323 midi_down_octave 0;
 #X obj 85 26 inlet;
 #X obj 80 176 outlet;
@@ -95,7 +95,7 @@
 #X connect 3 0 4 0;
 #X connect 3 1 2 1;
 #X connect 4 0 2 0;
-#X restore 96 216 pd midi_down_octave;
+#X restore 87 212 pd midi_down_octave;
 #N canvas 615 210 450 323 midi_up_octave 0;
 #X obj 85 26 inlet;
 #X obj 80 176 outlet;
@@ -108,7 +108,7 @@
 #X connect 3 1 2 1;
 #X connect 4 0 2 0;
 #X restore 482 279 pd midi_up_octave;
-#N canvas 0 260 450 300 octmix 0;
+#N canvas 0 260 450 300 octmix 1;
 #X obj 57 48 inlet~;
 #X obj 57 213 outlet~;
 #X obj 67 140 *~;
@@ -129,13 +129,17 @@
 #X obj 228 440 outlet~;
 #X obj 296 440 outlet~;
 #X obj 78 32 inlet;
-#X obj 121 33 inlet;
-#X obj 173 31 inlet;
-#X obj 226 29 inlet;
+#X obj 135 29 inlet;
+#X obj 201 30 inlet;
+#X obj 269 29 inlet;
 #X msg 502 141 ratio 9 \, index 40 \, mR 292 \, mS 8 \, mD 20 \, mA
 0 \, R 120 \, S 50 \, D 55 \, A 15 \,;
 #X obj 103 320 monovol 88;
 #X obj 232 287 monovol 88;
+#X text 57 8 midi notes;
+#X text 140 10 bend;
+#X text 193 9 delta y;
+#X text 262 9 pressure;
 #X connect 0 0 11 0;
 #X connect 0 1 12 0;
 #X connect 1 0 11 0;

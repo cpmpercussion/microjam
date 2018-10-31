@@ -25,7 +25,7 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
         }
     }
     /// Performer to search for (must be set when instantiating this ViewController).
-    var performerID: CKRecordID?
+    var performerID: CKRecord.ID?
     /// Performances by performer
     var loadedPerformances = [ChirpPerformance]()
     /// Ref to a (single) currently playing cell
@@ -33,11 +33,11 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView?.register(PerformerInfoHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier)
+        collectionView?.register(PerformerInfoHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier)
         collectionView?.register(UserPerfCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView?.backgroundColor = .white
-        NotificationCenter.default.addObserver(self, selector: #selector(updateDataFromStore), name: NSNotification.Name(rawValue: performanceStoreUpdatedNotificationKey), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(updateProfileDisplay), name: NSNotification.Name(rawValue: performerProfileUpdatedKey), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateDataFromStore), name: .performanceStoreUpdated, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateProfileDisplay), name: .performerProfileUpdated, object: nil)
 
 
         // Set up long press gesture recogniser:
@@ -50,8 +50,16 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
     
     override func viewWillAppear(_ animated: Bool) {
         // Attempt to load the data and display it.
+        /// TODO: is there some reason not to call super here?
+        super.viewWillAppear(animated)
+        setColourTheme()
         updateDataFromStore()
         updateDataFromCloud()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .performanceStoreUpdated, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .performerProfileUpdated, object: nil)
     }
     
     /// Updates the CollectionView from the local performance store data.
@@ -74,7 +82,7 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
     /// Updates the profile display if it has been updated in the profile
     @objc func updateProfileDisplay() {
         // Do something.
-        if let suppViews = collectionView?.visibleSupplementaryViews(ofKind: UICollectionElementKindSectionHeader),
+        if let suppViews = collectionView?.visibleSupplementaryViews(ofKind: UICollectionView.elementKindSectionHeader),
             let headerView = suppViews.first as? PerformerInfoHeader,
             let performerID = performerID,
             let profile = profilesStore.getProfile(forID: performerID) {
@@ -97,7 +105,7 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
 
     /// method to set up the header view; displays the performer's avatar and stagename.
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier, for: indexPath) as! PerformerInfoHeader
+        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier, for: indexPath) as! PerformerInfoHeader
         headerView.frame.size.height = PerformerInfoHeader.headerHeight
         if let performerID = performerID,
             let profile = profilesStore.getProfile(forID: performerID) {
@@ -272,7 +280,7 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
     }
     
     @objc func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer) {
-        if gestureRecognizer.state != UIGestureRecognizerState.ended {return}
+        if gestureRecognizer.state != UIGestureRecognizer.State.ended {return}
         // Delete selected Cell
         let point = gestureRecognizer.location(in: self.collectionView)
         if let indexPath = self.collectionView?.indexPathForItem(at: point),
@@ -296,6 +304,10 @@ extension UserPerfController {
 // MARK: Extension for PlayerDelegate methods
 
 extension UserPerfController : PlayerDelegate {
+    
+    func progressTimerStarted() {
+        // not used.
+    }
     
     func progressTimerEnded() {
         stopCurrentlyPlayingPerformance()
@@ -332,5 +344,29 @@ extension UIImage {
         return outImage
     }
     return nil
+    }
+}
+
+/// Extension for Color Themes
+extension UserPerfController {
+    
+    @objc func setColourTheme() {
+        UserDefaults.standard.bool(forKey: SettingsKeys.darkMode) ? setDarkMode() : setLightMode()
+    }
+    
+    func setDarkMode() {
+        view.backgroundColor = DarkMode.background
+        collectionView.backgroundColor = DarkMode.background
+        navigationController?.navigationBar.barStyle = .black
+        navigationController?.navigationBar.tintColor = DarkMode.highlight
+        navigationController?.view.backgroundColor = DarkMode.background
+    }
+    
+    func setLightMode() {
+        view.backgroundColor = LightMode.background
+        collectionView.backgroundColor = LightMode.background
+        navigationController?.navigationBar.barStyle = .default
+        navigationController?.navigationBar.tintColor = LightMode.highlight
+        navigationController?.view.backgroundColor = LightMode.background
     }
 }

@@ -17,12 +17,14 @@ struct SettingsKeys {
     static let backgroundColourKey = "background_colour"
     static let soundSchemeKey = "sound_scheme"
     static let tutorialCompleted = "tutorial_completed"
+    static let darkMode = "dark_mode"
     static let defaultSettings : [String : Any] = [
         SettingsKeys.performerKey:"",
         SettingsKeys.performerColourKey: 0.5,
         SettingsKeys.backgroundColourKey: 0.2,
         SettingsKeys.soundSchemeKey: 0,
-        SettingsKeys.tutorialCompleted: false
+        SettingsKeys.tutorialCompleted: false,
+        SettingsKeys.darkMode: true
     ]
 }
 
@@ -42,7 +44,8 @@ struct SoundSchemes {
         4 : "quack",
         5 : "wub",
         6 : "pad",
-        7 : "fmlead"
+        7 : "fmlead",
+        8 : "leadguitar"
     ]
     static let keysForNames : [String : Int64] = [
         "chirp" : 0,
@@ -52,7 +55,8 @@ struct SoundSchemes {
         "quack" : 4,
         "wub" : 5,
         "pad" : 6,
-        "fmlead" : 7
+        "fmlead" : 7,
+        "leadguitar" : 8
     ]
     static let pdFilesForKeys : [Int64 : String] = [
         0 : "chirp.pd",
@@ -62,7 +66,8 @@ struct SoundSchemes {
         4 : "quack.pd",
         5 : "wub.pd",
         6 : "pad.pd",
-        7 : "fmlead.pd"
+        7 : "fmlead.pd",
+        8 : "leadguitar.pd"
     ]
 }
 
@@ -162,12 +167,14 @@ let RECORDING_TIME = 5.0
 
 /// Colours for buttons in Jam Screen
 struct ButtonColors {
-    static let rewind = UIColor.init("#A10702")
-    static let record = UIColor.init("#ED2D07")
-    static let play = UIColor.init("#FAA613")
-    static let layer = UIColor.init("#7DCFB6")
-    static let jam = UIColor.init("#688E26")
-    static let roboplay = UIColor.init("#550527")
+    static let rewind = UIColor.init("#2a317d") //UIColor.init("#A10702")
+    static let record = UIColor.red //UIColor.init("#f13f04")//("#fb4d3d") //UIColor.init("#ED2D07")
+    static let recordDisabled = UIColor.init("#b01435")
+    static let recordGlow = UIColor.init("#ff5900") //("#e5470d") // just for glow effect on rec button
+    static let play = UIColor.init("#03cea4") // UIColor.init("#FAA613")
+    static let layer = UIColor.init("#7dcfb6")
+    static let jam = UIColor.init("#eac435") // UIColor.init("#688E26") //
+    static let roboplay = UIColor.init("#ca1551") //UIColor.init("#550527") //
 }
 
 /// Error messages and dialogues
@@ -176,5 +183,31 @@ struct ErrorDialogues {
     static let icloudNotLoggedIn = "MicroJam uses iCloud to store your performances."
 }
 
+struct DarkMode {
+    static let background = UIColor.init("#141d26") // 0C1821
+    static let midbackground = UIColor.init("#243447")
+    static let midforeground = UIColor.init("fffde2")
+    static let text = UIColor.init("#ffffff")
+    static let highlight = UIColor.init("#ec6b2d")
+}
+
+struct LightMode {
+    static let background = UIColor.init("#f2f2f4") // ffffff
+    static let midbackground = UIColor.init("#d5d5d5")
+    static let midforeground = UIColor.init("223843")
+    static let text = UIColor.init("#0C1821")
+    static let highlight = UIColor.init("#d95d39")
+}
 
 
+/// Notifications and notification keys
+
+extension Notification.Name {
+    static let userProfileUpdated = Notification.Name("au.com.charlesmartin.userProfileUpdatedNotificationKey")
+    static let userDataExportReady = Notification.Name("au.com.charlesmartin.userDataExportReadyKey")
+    static let performanceStoreUpdated = Notification.Name("au.com.charlesmartin.performanceStoreUpdatedNotificationKey")
+    static let performanceStorePerfAdded = Notification.Name("au.com.charlesmartin.performanceStorePerfAdded")
+    static let performanceStoreFailedUpdate = Notification.Name("au.com.charlesmartin.performanceStoreFailedUpdateNotificationKey")
+    static let performerProfileUpdated = Notification.Name("au.com.charlesmartin.PerformerProfilesUpdatedNotificationKey")
+    static let setColourTheme = Notification.Name("au.com.charlesmartin.setColourTheme")
+}

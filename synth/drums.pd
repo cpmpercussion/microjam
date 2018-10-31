@@ -1,4 +1,4 @@
-#N canvas 556 67 1166 705 10;
+#N canvas 59 73 1166 705 10;
 #X declare -path metaPdLibs/control;
 #X declare -path metaPdLibs/fx;
 #X declare -path metaPdLibs/instrument;
@@ -87,10 +87,10 @@
 #X obj 712 487 vu 15 120 empty empty -1 -8 0 10 -66577 -1 1 0;
 #X obj 661 550 - 100;
 #X obj 661 528 env~;
-#X obj 88 647 output_stage;
+#X obj 88 647 output_stage \$0;
 #X obj 364 154 r \$0-input;
 #X obj 371 187 list trim;
-#N canvas 645 828 873 443 drumsynth 1;
+#N canvas 79 825 873 443 drumsynth 1;
 #X obj 30 29 inlet notes;
 #X obj 121 27 inlet bend;
 #X obj 210 26 inlet dy;
@@ -315,7 +315,7 @@
 #X obj 128 455 c_xfade;
 #X floatatom 209 445 5 0 0 0 - - -, f 5;
 #X obj 154 491 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 500 1;
+-1 -1 0 1;
 #X obj 141 304 *~ 0.32;
 #X connect 0 0 11 0;
 #X connect 0 0 11 1;

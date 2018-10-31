@@ -40,6 +40,13 @@ class ProfileHeaderCollectionReusableView: UICollectionReusableView {
     @IBOutlet weak var soundSchemeDropDownButton: UIButton!
     /// Header view used if not logged in - View shown if user is not logged into iCloud.
     let noAccountHeaderView = NoAccountWarningStackView()
+    /// Labels Outlet Collection
+    @IBOutlet var profileHeaderLabels: [UILabel]!
+    /// Buttons outlet collection
+    @IBOutlet var profileHeaderButtons: [UIButton]!
+    /// Container for Settings stack
+    @IBOutlet var profileHeaderContainerViews: [UIView]!
+    
     
     /// updates the profile screen's fields according to the present UserProfile data.
     @objc func updateUI() {
@@ -84,7 +91,47 @@ class ProfileHeaderCollectionReusableView: UICollectionReusableView {
         containerStack.insertArrangedSubview(noAccountHeaderView, at: 0)
         
         // add observer for UserProfile updates.
-        NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: NSNotification.Name(rawValue: userProfileUpdatedNotificationKey), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: .userProfileUpdated, object: nil)
+        
+        setColourTheme() // set up light or dark mode.
     }
 
+}
+
+// Set up dark and light mode.
+extension ProfileHeaderCollectionReusableView {
+    
+    @objc func setColourTheme() {
+        UserDefaults.standard.bool(forKey: SettingsKeys.darkMode) ? setDarkMode() : setLightMode()
+    }
+    
+    func setDarkMode() {
+        backgroundColor = DarkMode.background
+        for view in profileHeaderContainerViews {
+            view.backgroundColor = DarkMode.background
+        }
+        //avatarImageView //: UIImageView!
+        stageNameField.textColor = DarkMode.text
+        for view in profileHeaderLabels {
+            view.textColor = DarkMode.text
+        }
+        for button in profileHeaderButtons {
+            button.setTitleColor(DarkMode.highlight, for: .normal)
+        }
+    }
+    
+    func setLightMode() {
+        backgroundColor = LightMode.background
+        for view in profileHeaderContainerViews {
+            view.backgroundColor = LightMode.background
+        }
+        //avatarImageView //: UIImageView!
+        stageNameField.textColor = LightMode.text
+        for view in profileHeaderLabels {
+            view.textColor = LightMode.text
+        }
+        for button in profileHeaderButtons {
+            button.setTitleColor(LightMode.highlight, for: .normal)
+        }
+    }
 }

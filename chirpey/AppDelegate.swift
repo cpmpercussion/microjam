@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
     
     // MARK: Application Lifecycle
     
-    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         UserDefaults.standard.register(defaults: SettingsKeys.defaultSettings)
         startAudioEngine() // start Pd
         return true
@@ -52,6 +52,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
+        // Tell all views to update ColourTheme
+        NotificationCenter.default.post(name: .setColourTheme, object: nil)
         //
     }
     

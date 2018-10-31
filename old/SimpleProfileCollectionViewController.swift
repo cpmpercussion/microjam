@@ -17,7 +17,7 @@ class SimpleProfileCollectionViewController: UserPerfController {
     /// Override of viewDidLoad in order to set the perfomerID to the local user.
     override func viewDidLoad() {
         super.viewDidLoad()
-        performerID = CKRecordID(recordName: "__defaultOwner__")
+        performerID = CKRecord.ID(recordName: "__defaultOwner__")
     }
     
     /// Override of the header function to blank it out: makes sure header is size 0.

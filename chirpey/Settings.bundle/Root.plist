@@ -10,6 +10,22 @@
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
+			<string>UI</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Dark Mode Enabled</string>
+			<key>Key</key>
+			<string>dark_mode</string>
+			<key>DefaultValue</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
 			<string>Profile</string>
 		</dict>
 		<dict>
@@ -89,8 +105,8 @@
 				<integer>3</integer>
 				<integer>4</integer>
 				<integer>5</integer>
-                <integer>6</integer>
-                <integer>7</integer>
+				<integer>6</integer>
+				<integer>7</integer>
 			</array>
 			<key>Titles</key>
 			<array>

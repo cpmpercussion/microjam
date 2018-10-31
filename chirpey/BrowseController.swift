@@ -22,7 +22,7 @@ class BrowseController: UICollectionViewController, UICollectionViewDelegateFlow
     var loadedPerformances = [ChirpPerformance]()
     
     var filters = [Filter]()
-    var queryCursor: CKQueryCursor?
+    var queryCursor: CKQueryOperation.Cursor?
     var resultsLimit = 24
     
     var delegate: BrowseControllerDelegate?

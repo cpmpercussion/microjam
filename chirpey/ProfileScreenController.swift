@@ -24,6 +24,7 @@ class ProfileScreenController: UserPerfController {
     static let footerID = "ProfileSceneFooter"
     /// Storage for the headerView
     var headerView : ProfileHeaderCollectionReusableView?
+    var footerView : ProfileFooterCollectionReusableView?
 
 
     // MARK: - Collection View Setup
@@ -36,15 +37,14 @@ class ProfileScreenController: UserPerfController {
     /// Override to present header view from storyboard.
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
-        case UICollectionElementKindSectionHeader:
-            headerView = (collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: ProfileScreenController.headerID, for: indexPath) as! ProfileHeaderCollectionReusableView)
+        case UICollectionView.elementKindSectionHeader:
+            headerView = (collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ProfileScreenController.headerID, for: indexPath) as! ProfileHeaderCollectionReusableView)
             headerView?.updateUI() // update with latest information
             headerView?.stageNameField.delegate = self // become delegate for the stagename field.
-            
             return headerView!
-        case UICollectionElementKindSectionFooter:
-            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter, withReuseIdentifier: ProfileScreenController.footerID, for: indexPath) as! ProfileFooterCollectionReusableView
-            return footerView
+        case UICollectionView.elementKindSectionFooter:
+            footerView = (collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: ProfileScreenController.footerID, for: indexPath) as! ProfileFooterCollectionReusableView)
+            return footerView!
         default:
             return UICollectionReusableView()
         }
@@ -61,9 +61,9 @@ class ProfileScreenController: UserPerfController {
     /// Override of viewDidLoad in order to set the perfomerID to the local user.
     @objc override func viewDidLoad() {
         super.viewDidLoad()
-        performerID = CKRecordID(recordName: "__defaultOwner__")
-
-        NotificationCenter.default.addObserver(self, selector: #selector(exportDataReady), name: NSNotification.Name(rawValue: userDataExportReadyKey), object: nil)
+        performerID = CKRecord.ID(recordName: "__defaultOwner__")
+        NotificationCenter.default.addObserver(self, selector: #selector(exportDataReady), name: .userDataExportReady, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(setColourTheme), name: .setColourTheme, object: nil) // notification for colour theme.
     }
     
     /// When the view disappears, updates the profile on iCloud
@@ -75,6 +75,12 @@ class ProfileScreenController: UserPerfController {
     override func viewWillAppear(_ animated: Bool) {
         headerView?.updateUI()
         super.viewWillAppear(animated)
+    }
+    
+    deinit {
+        // Clean up notification center observers
+        NotificationCenter.default.removeObserver(self, name: .userDataExportReady, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .setColourTheme, object: nil)
     }
     
     // MARK: - Interface builder actions for header
@@ -113,14 +119,14 @@ class ProfileScreenController: UserPerfController {
     /// Action to open the microjam website in the default browser
     @IBAction func openMicrojamWebsite(_ sender: Any) {
         if let url = URL(string: "https://microjam.info") {
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
         }
     }
     
     /// Action to open the privacy policy in the default browser
     @IBAction func openPrivacyPolicy(_ sender: Any) {
         if let url = URL(string: "https://microjam.info/privacy") {
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
         }
     }
     
@@ -140,8 +146,8 @@ class ProfileScreenController: UserPerfController {
     
     @IBAction func deleteDataButtonTapped(_ sender: Any) {
         //        UserProfile.shared.deleteRecords(really: false)
-        let alert = UIAlertController(title: "Deleting Data", message: "You can delete your performances by tapping the menu for each performance above. None of your personal data is stored by microjam.", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+        let alert = UIAlertController(title: "Deleting Data", message: "You can delete your performances by tapping the menu for each performance above. None of your personal data is stored by microjam.", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -170,14 +176,40 @@ extension ProfileScreenController: UITextFieldDelegate {
 /// Extensions to UserSettingsViewController to interact with an image picker and navigatino controller.
 extension ProfileScreenController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
         defer {
             picker.dismiss(animated: true, completion: nil)
         }
-        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+        if let image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage {
             print("ProfileHeader: Updating image")
             UserProfile.shared.updateAvatar(image)
             headerView?.avatarImageView.image = image
         }
+    }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+	return input.rawValue
+}
+
+extension ProfileScreenController {
+    @objc override func setColourTheme() {
+        UserDefaults.standard.bool(forKey: SettingsKeys.darkMode) ? setDarkMode() : setLightMode()
+        headerView?.setColourTheme()
+        footerView?.setColourTheme()
     }
 }
