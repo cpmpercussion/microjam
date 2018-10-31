@@ -51,4 +51,4 @@ If we change our privacy policy, these changes will be reflected in this website
 
 ## Contact us
 
-If you have any questions about this Privacy Policy, please contact Charles Martin at [http://www.mn.uio.no/ifi/english/people/aca/charlepm/](http://www.mn.uio.no/ifi/english/people/aca/charlepm/).
+If you have any questions about this Privacy Policy, please contact Charles Martin at [https://www.mn.uio.no/ifi/english/people/aca/charlepm/](https://www.mn.uio.no/ifi/english/people/aca/charlepm/).
