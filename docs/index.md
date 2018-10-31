@@ -11,23 +11,23 @@ layout: landing-page
 		<div class="row">
 			<div class="4u">
 				<section class="special box">
-					<img src="{{ site.baseurl }}/images/microjam-rc1-feed.png" class="image fit">
+					<img src="{{ site.baseurl }}/images/microjam-iphone8-browse.png" class="image fit">
 					<h3>Listen</h3>
 					<p>You can browse other jams that have been uploaded or hit the "Jam!" tab to start a new one.</p>
 				</section>
 			</div>
 			<div class="4u">
 				<section class="special box">
-					<img src="{{ site.baseurl }}/images/microjam-rc1-jam.png" class="image fit">
+					<img src="{{ site.baseurl }}/images/microjam-iphone8-perform.png" class="image fit">
 					<h3>Perform</h3>
-					<p>Tap, swirl, or swipe in the blue square to make your own tiny performance! Afterwards, hit "play" to hear what you've created.</p>
+					<p>Tap, swirl, or swipe in the blue square to make your own tiny performance! Afterwards, hit "play" to hear what you've created. There's 9 instruments to try!</p>
 				</section>
 			</div>
 			<div class="4u">
 				<section class="special box">
-					<img src="{{ site.baseurl }}/images/microjam-rc1-reply.png" class="image fit">
-					<h3>Reply</h3>
-					<p>Hit reply to record a new layer on top of a friend's jam, start a band or contribute to massive online performances!</p>
+					<img src="{{ site.baseurl }}/images/microjam-iphone8-robojam.png" class="image fit">
+					<h3>RoboJam</h3>
+					<p>Use our AI Music Bot to make "RoboJam" layers top of your performance! Or reply to performances to build complex sounds!</p>
 				</section>
 			</div>
 		</div>
