@@ -22,8 +22,8 @@
 #X obj 241 323 line~;
 #X obj 250 297 pack 0 2;
 #X obj 156 219 noise~;
-#X obj 156 248 bp~ 3000 7;
-#X obj 170 276 bp~ 5107 10;
+#X obj 144 254 bp~ 3000 7;
+#X obj 158 282 bp~ 5107 10;
 #X obj 117 87 t b b b;
 #X msg 41 131 1 1 \, 0 20 5;
 #X connect 0 0 18 0;
