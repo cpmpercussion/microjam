@@ -55,7 +55,7 @@ class MicrojamTabBarController: UITabBarController {
     
     /// Setup profile screen
     func setupProfileTabStackVersion() {
-        if let controller = UserSettingsViewController.storyboardInstance() {
+        if let controller = ProfileScreenController.storyboardInstance() {
             controller.tabBarItem = UITabBarItem(title: TabBarItemTitles.profileTab, image: #imageLiteral(resourceName: "profileTabIcon"), selectedImage: nil)
 //            controller.view.translatesAutoresizingMaskIntoConstraints = false
             let navigation = UINavigationController(rootViewController: controller)

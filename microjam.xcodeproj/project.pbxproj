@@ -437,8 +437,6 @@
 		5625E9FD1F68750000AFE8BF /* stringsynth.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5625E85B1F6874FF00AFE8BF /* stringsynth.pd */; };
 		5625E9FE1F68750000AFE8BF /* wub.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5625E85C1F6874FF00AFE8BF /* wub.pd */; };
 		5627B5F61F72F062007807E4 /* RoboJamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5627B5F51F72F062007807E4 /* RoboJamView.swift */; };
-		562FDCA61F316870000409C8 /* UserSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562FDCA51F316870000409C8 /* UserSettingsViewController.swift */; };
-		562FDCA81F316EAE000409C8 /* UserSettingsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 562FDCA71F316EAE000409C8 /* UserSettingsViewController.storyboard */; };
 		562FDCAA1F32D202000409C8 /* PerformerProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562FDCA91F32D202000409C8 /* PerformerProfile.swift */; };
 		562FDCAC1F335A0D000409C8 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562FDCAB1F335A0D000409C8 /* UserProfile.swift */; };
 		562FDCAE1F3727DC000409C8 /* TouchRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562FDCAD1F3727DC000409C8 /* TouchRecord.swift */; };
@@ -461,7 +459,6 @@
 		568D1DC41DF995E500A2BC0B /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 568D1DC31DF995E500A2BC0B /* Settings.bundle */; };
 		56A0505320F5B58E00455FDF /* robojamCertificate.der in Resources */ = {isa = PBXBuildFile; fileRef = 56A0505220F5B58E00455FDF /* robojamCertificate.der */; };
 		56A0505520F5E1C600455FDF /* ProfileScreenController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56A0505420F5E1C600455FDF /* ProfileScreenController.storyboard */; };
-		56A0505720F5EC3000455FDF /* SimpleProfileCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A0505620F5EC3000455FDF /* SimpleProfileCollectionViewController.swift */; };
 		56A0505920F5F18700455FDF /* ProfileHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A0505820F5F18700455FDF /* ProfileHeaderCollectionReusableView.swift */; };
 		56A0505B20F5F1DE00455FDF /* ProfileFooterCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A0505A20F5F1DE00455FDF /* ProfileFooterCollectionReusableView.swift */; };
 		56A46DF4206F8ABA0084BC16 /* MicrojamTutorialGetStartedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A46DF3206F8ABA0084BC16 /* MicrojamTutorialGetStartedViewController.swift */; };
@@ -926,8 +923,6 @@
 		5625E85B1F6874FF00AFE8BF /* stringsynth.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stringsynth.pd; sourceTree = "<group>"; };
 		5625E85C1F6874FF00AFE8BF /* wub.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wub.pd; sourceTree = "<group>"; };
 		5627B5F51F72F062007807E4 /* RoboJamView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoboJamView.swift; path = chirpey/RoboJamView.swift; sourceTree = "<group>"; };
-		562FDCA51F316870000409C8 /* UserSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettingsViewController.swift; sourceTree = "<group>"; };
-		562FDCA71F316EAE000409C8 /* UserSettingsViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserSettingsViewController.storyboard; sourceTree = "<group>"; };
 		562FDCA91F32D202000409C8 /* PerformerProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PerformerProfile.swift; path = chirpey/PerformerProfile.swift; sourceTree = "<group>"; };
 		562FDCAB1F335A0D000409C8 /* UserProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserProfile.swift; path = chirpey/UserProfile.swift; sourceTree = "<group>"; };
 		562FDCAD1F3727DC000409C8 /* TouchRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TouchRecord.swift; path = chirpey/TouchRecord.swift; sourceTree = "<group>"; };
@@ -956,7 +951,6 @@
 		568D1DC31DF995E500A2BC0B /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		56A0505220F5B58E00455FDF /* robojamCertificate.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = robojamCertificate.der; sourceTree = "<group>"; };
 		56A0505420F5E1C600455FDF /* ProfileScreenController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = ProfileScreenController.storyboard; path = chirpey/ProfileScreenController.storyboard; sourceTree = "<group>"; };
-		56A0505620F5EC3000455FDF /* SimpleProfileCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleProfileCollectionViewController.swift; sourceTree = "<group>"; };
 		56A0505820F5F18700455FDF /* ProfileHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileHeaderCollectionReusableView.swift; path = chirpey/ProfileHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		56A0505A20F5F1DE00455FDF /* ProfileFooterCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileFooterCollectionReusableView.swift; path = chirpey/ProfileFooterCollectionReusableView.swift; sourceTree = "<group>"; };
 		56A46DF3206F8ABA0084BC16 /* MicrojamTutorialGetStartedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicrojamTutorialGetStartedViewController.swift; sourceTree = "<group>"; };
@@ -1558,9 +1552,6 @@
 		565BAF1720F8CAF200368665 /* old */ = {
 			isa = PBXGroup;
 			children = (
-				562FDCA51F316870000409C8 /* UserSettingsViewController.swift */,
-				562FDCA71F316EAE000409C8 /* UserSettingsViewController.storyboard */,
-				56A0505620F5EC3000455FDF /* SimpleProfileCollectionViewController.swift */,
 			);
 			path = old;
 			sourceTree = "<group>";
@@ -1835,7 +1826,6 @@
 				5625E9CB1F68750000AFE8BF /* u_listser.pd in Resources */,
 				5625E9EC1F68750000AFE8BF /* u_show-help.pd in Resources */,
 				5625E9E21F68750000AFE8BF /* u_robinpolymono-help.pd in Resources */,
-				562FDCA81F316EAE000409C8 /* UserSettingsViewController.storyboard in Resources */,
 				5625E95E1F68750000AFE8BF /* r_#time-help.pd in Resources */,
 				5625E9B91F68750000AFE8BF /* u_highpassq.pd in Resources */,
 				5625E8821F6874FF00AFE8BF /* mpe_outlets.pd in Resources */,
@@ -2278,7 +2268,6 @@
 				4DE5FAF01F46E6470024F16B /* ChirpPlayer.swift in Sources */,
 				4D77CC3D1F3B5564008BD48C /* BrowseController.swift in Sources */,
 				56621B131DE4A496009B9AB6 /* ChirpView.swift in Sources */,
-				562FDCA61F316870000409C8 /* UserSettingsViewController.swift in Sources */,
 				4DF23D0C1F4AF51F006033F8 /* ChirpRecorder.swift in Sources */,
 				562FDCAE1F3727DC000409C8 /* TouchRecord.swift in Sources */,
 				564AF3B520989FC80050B541 /* UserPerfTableViewCell.swift in Sources */,
@@ -2297,7 +2286,6 @@
 				564AF3B7209900990050B541 /* PerformerInfoHeader.swift in Sources */,
 				56621B171DEC27B0009B9AB6 /* PerformanceTableCell.swift in Sources */,
 				5627B5F61F72F062007807E4 /* RoboJamView.swift in Sources */,
-				56A0505720F5EC3000455FDF /* SimpleProfileCollectionViewController.swift in Sources */,
 				56A46DF6206F8B170084BC16 /* MicrojamTutorialCloudLoginViewController.swift in Sources */,
 				56A46DF4206F8ABA0084BC16 /* MicrojamTutorialGetStartedViewController.swift in Sources */,
 			);
