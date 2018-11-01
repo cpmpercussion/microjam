@@ -50,7 +50,7 @@ class MicrojamTutorialCloudLoginViewController: UIViewController {
     
     /// Used by login button, opens Settings app so that user can log into iCloud.
     @IBAction func logIn(_ sender: Any) {
-        UIApplication.shared.open(URL(string: "App-Prefs:root=Settings")!, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
+        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
     }
 
     /*

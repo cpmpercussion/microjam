@@ -9,6 +9,8 @@
 import UIKit
 import DropDown
 
+let hideLoginHeaderStackView = true
+
 class ProfileHeaderCollectionReusableView: UICollectionReusableView {
     
     /// Stack for the whole profile screen
@@ -51,9 +53,11 @@ class ProfileHeaderCollectionReusableView: UICollectionReusableView {
     /// updates the profile screen's fields according to the present UserProfile data.
     @objc func updateUI() {
         // Display appropriate views if user is not logged in.
-        if UserProfile.shared.loggedIn {
+        if UserProfile.shared.loggedIn || hideLoginHeaderStackView {
+            print("Hiding Login Header View from Stack")
             noAccountHeaderView.isHidden = true
         } else {
+            print("Showing Login Header View in Stack")
             noAccountHeaderView.isHidden = false
         }
         let profile = UserProfile.shared.profile // Fill in from local user's profile.

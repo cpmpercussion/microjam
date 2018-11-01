@@ -52,7 +52,7 @@ class NoAccountWarningStackView: UIStackView {
     
     /// Used by login button, opens Settings app so that user can log into iCloud.
     @objc fileprivate func openSettingsApp() {
-        UIApplication.shared.open(URL(string: "App-Prefs:root=Settings")!, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
+        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
     }
     
 }
