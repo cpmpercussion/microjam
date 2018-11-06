@@ -12,6 +12,7 @@ import CloudKit
 var ALWAYS_SAVE_MODE: Bool = false /// set this to experiment mode for user studies, etc. - do not enable for archive or distribution!
 var RECORDING_PARTICLES: Bool = false /// set this to enable recording particle system.
 var OPEN_ON_RECORD_ENABLE: Bool = true /// set this to open the jam screen with recording already enabled.
+var MIXER_AVAILABLE: Bool = true /// set this to enable access to the mixer screen.
 
 // TODO: how to tell between loaded and saved and just loaded?
 
@@ -179,7 +180,11 @@ class ChirpJamViewController: UIViewController {
         // add layer
         addJamButton.imageView?.contentMode = .scaleAspectFit
         addJamButton.tintColor = ButtonColors.layer
-        addJamButton.isHidden = true // hide the add layer button for now.
+        if !MIXER_AVAILABLE {
+            addJamButton.isHidden = true // hide the mixer button
+        } else {
+            addJamButton.isHidden = false // expose the mixer button
+        }
         // jam
         jamButton.imageView?.contentMode = .scaleAspectFit
         jamButton.tintColor = ButtonColors.jam
@@ -417,6 +422,12 @@ class ChirpJamViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         let controller = BrowseController(collectionViewLayout: layout)
         controller.delegate = self
+        navigationController?.pushViewController(controller, animated: true)
+    }
+
+    /// Open the mixer screen to experiment with performance methods.
+    @IBAction func openMixer(_ sender: UIButton) {
+        let controller = MixerTableViewController()
         navigationController?.pushViewController(controller, animated: true)
     }
 
