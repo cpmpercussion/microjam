@@ -9,14 +9,34 @@
 
 import UIKit
 
-class MixerTableViewController: UITableViewController {
+let mixerTableReuseIdentifier = "mixerTableReuseIdentifier"
 
+class MixerTableViewController: UITableViewController {
+    
+    /// The layered jams to mix here.
+    var chirpsToMix: [ChirpView]?
+    /// Local reference to the PerformerProfileStore.
+    let profilesStore = PerformerProfileStore.shared
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setColourTheme() // set colours
+    }
+    
+    convenience init(withChirps chirps: [ChirpView]) {
+        self.init()
+        chirpsToMix = chirps
+        self.modalPresentationStyle = .pageSheet
+        tableView.register(MixerTableViewCell.self, forCellReuseIdentifier: mixerTableReuseIdentifier)
+        tableView.rowHeight = 80
+        // do some more init.
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
@@ -24,24 +44,36 @@ class MixerTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        guard let chirpsToMix = chirpsToMix else {
+            return 0
+        }
+        print("Mixer: \(chirpsToMix.count) layers")
+        return chirpsToMix.count
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
+        let cell = tableView.dequeueReusableCell(withIdentifier: mixerTableReuseIdentifier, for: indexPath) as! MixerTableViewCell
+        cell.chirp = chirpsToMix![indexPath.row]
+        cell.instrumentLabel.text = cell.chirp?.performance?.instrument
+        cell.volumeSlider.tintColor = cell.chirp?.performance?.colour
+        cell.volumeSlider.thumbTintColor = cell.chirp?.performance?.colour
+        cell.volumeSlider.value = Float(cell.chirp?.volume ?? 1.0)
+        
+        if let perf = cell.chirp?.performance,
+            let profile = profilesStore.getProfile(forPerformance: perf) {
+            cell.avatarView.image = profile.avatar
+        } else {
+            cell.avatarView.image = #imageLiteral(resourceName: "empty-profile-image")
+        }
+        
+        cell.setColourTheme() // set colour theme if reloading.
 
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.
@@ -88,4 +120,24 @@ class MixerTableViewController: UITableViewController {
     }
     */
 
+}
+
+// Set up dark and light mode.
+extension MixerTableViewController {
+    
+    @objc func setColourTheme() {
+        if UserDefaults.standard.bool(forKey: SettingsKeys.darkMode) {
+            setDarkMode()
+        } else {
+            setLightMode()
+        }
+    }
+    
+    func setDarkMode() {
+        tableView.backgroundColor = DarkMode.background
+    }
+    
+    func setLightMode() {
+        tableView.backgroundColor = LightMode.background
+    }
 }

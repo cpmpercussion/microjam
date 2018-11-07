@@ -88,6 +88,8 @@ class ChirpJamViewController: UIViewController {
         if let recorder = recorder,
             let finishedPerformance = recorder.recordingView.performance {
             /// FIXME: Save the robojam to a robo account as needed.
+            
+            /// TODO: make sure this doesn't stop when going to the mixer screen.
             recorder.stop()
             removeRoboJam()
             
@@ -427,8 +429,12 @@ class ChirpJamViewController: UIViewController {
 
     /// Open the mixer screen to experiment with performance methods.
     @IBAction func openMixer(_ sender: UIButton) {
-        let controller = MixerTableViewController()
-        navigationController?.pushViewController(controller, animated: true)
+        
+        if let recorder = recorder {
+            let controller = MixerTableViewController(withChirps: recorder.chirpViews)
+            navigationController?.pushViewController(controller, animated: true)
+        }
+
     }
 
 

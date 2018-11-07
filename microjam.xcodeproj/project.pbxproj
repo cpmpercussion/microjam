@@ -24,6 +24,7 @@
 		560568DE206E4AAF00A50521 /* MicrojamTutorialAvatarScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560568DD206E4AAF00A50521 /* MicrojamTutorialAvatarScreenController.swift */; };
 		560568E0206E4AD300A50521 /* MicrojamTutorialTestingScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560568DF206E4AD300A50521 /* MicrojamTutorialTestingScreenController.swift */; };
 		5613B31E1F3D9C380068ED5D /* ChirpRecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5613B31D1F3D9C380068ED5D /* ChirpRecordingView.swift */; };
+		56207CDF2192EC2D00EDD212 /* MixerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56207CDE2192EC2D00EDD212 /* MixerTableViewCell.swift */; };
 		5625E85D1F6874FF00AFE8BF /* block-tester.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5625E6B51F6874FE00AFE8BF /* block-tester.pd */; };
 		5625E85F1F6874FF00AFE8BF /* chirp.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5625E6B71F6874FE00AFE8BF /* chirp.pd */; };
 		5625E8601F6874FF00AFE8BF /* drums.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5625E6B81F6874FE00AFE8BF /* drums.pd */; };
@@ -511,6 +512,7 @@
 		560568DD206E4AAF00A50521 /* MicrojamTutorialAvatarScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MicrojamTutorialAvatarScreenController.swift; path = chirpey/MicrojamTutorialAvatarScreenController.swift; sourceTree = "<group>"; };
 		560568DF206E4AD300A50521 /* MicrojamTutorialTestingScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicrojamTutorialTestingScreenController.swift; sourceTree = "<group>"; };
 		5613B31D1F3D9C380068ED5D /* ChirpRecordingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChirpRecordingView.swift; path = chirpey/ChirpRecordingView.swift; sourceTree = "<group>"; };
+		56207CDE2192EC2D00EDD212 /* MixerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MixerTableViewCell.swift; path = chirpey/MixerTableViewCell.swift; sourceTree = "<group>"; };
 		5625E6B51F6874FE00AFE8BF /* block-tester.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "block-tester.pd"; sourceTree = "<group>"; };
 		5625E6B71F6874FE00AFE8BF /* chirp.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chirp.pd; sourceTree = "<group>"; };
 		5625E6B81F6874FE00AFE8BF /* drums.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = drums.pd; sourceTree = "<group>"; };
@@ -1048,6 +1050,7 @@
 				5627B5F51F72F062007807E4 /* RoboJamView.swift */,
 				564AF3B82099EF830050B541 /* UserPerfCollectionViewCell.swift */,
 				564AF3B420989FC80050B541 /* UserPerfTableViewCell.swift */,
+				56207CDE2192EC2D00EDD212 /* MixerTableViewCell.swift */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -2258,6 +2261,7 @@
 				4DEFCAE41F41EC82007B7C34 /* Constants.swift in Sources */,
 				56002F471F306C0F00003B88 /* MicrojamTutorialViewController.swift in Sources */,
 				566A70DA209C50C30066EFD4 /* NoAccountWarningStackView.swift in Sources */,
+				56207CDF2192EC2D00EDD212 /* MixerTableViewCell.swift in Sources */,
 				56A0505920F5F18700455FDF /* ProfileHeaderCollectionReusableView.swift in Sources */,
 				5642EFBE209CDA1300B38873 /* ProfileScreenController.swift in Sources */,
 				5613B31E1F3D9C380068ED5D /* ChirpRecordingView.swift in Sources */,

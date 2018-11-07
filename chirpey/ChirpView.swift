@@ -39,6 +39,10 @@ class ChirpView: UIImageView {
     var openPatchDollarZero : Int32?
     /// Stores the name of the currently open Pd patch.
     var openPatchName = ""
+    /// Stores the previously set volume level
+    var volume = 1.0
+    /// Stores the mute state
+    var muted = false
     
     // MARK: Initialisers
     
@@ -216,6 +220,28 @@ extension ChirpView {
                 print("ChirpView: Closing Patch:\(dollarZero)")
                 patchFile.close()
             })
+        }
+    }
+    
+    func muteOn() {
+        // don't touch the volume setting
+        if let dollarZero = openPatchDollarZero {
+            PdBase.send(0.0, toReceiver: "\(dollarZero)" + PdConstants.volumePostFix)
+            muted = true
+        }
+    }
+    
+    func muteOff() {
+        if let dollarZero = openPatchDollarZero {
+            PdBase.send(Float(volume), toReceiver: "\(dollarZero)" + PdConstants.volumePostFix)
+            muted = false
+        }
+    }
+    
+    func setVolume(toLevel: Float){
+        volume = Double(min(max(toLevel, 0.0), 1.0))
+        if let dollarZero = openPatchDollarZero {
+            PdBase.send(Float(volume), toReceiver: "\(dollarZero)" + PdConstants.volumePostFix)
         }
     }
 }
