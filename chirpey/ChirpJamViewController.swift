@@ -121,7 +121,7 @@ class ChirpJamViewController: UIViewController {
         print("JAMVC: Cancel Button Pressed.")
         removeRoboJam() // Throw away robojam if present.
         
-        // Stop any timers
+        // Stop any chirps
         if let recorder = recorder {
             recorder.stop()
             
@@ -594,7 +594,7 @@ extension ChirpJamViewController {
     
     /// touchesBegan method starts a recording if this is the first touch in a new microjam.
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        // start timer if not recording
+        // start recording if needed.
         if let recorder = recorder,
              let point = touches.first?.location(in: recorder.recordingView) {
             if (recorder.recordingView.bounds.contains(point)) {

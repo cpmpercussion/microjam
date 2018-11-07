@@ -11,6 +11,7 @@ def shared_pods
   pod 'DropDown'
   pod 'Avatar'
   pod  'SwiftRandom'
+  pod 'Repeat'
 end
 
 target 'microjam' do
