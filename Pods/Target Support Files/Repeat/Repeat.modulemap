@@ -1,0 +1,6 @@
+framework module Repeat {
+  umbrella header "Repeat-umbrella.h"
+
+  export *
+  module * { export * }
+}

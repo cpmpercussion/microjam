@@ -75,7 +75,9 @@ struct SoundSchemes {
 struct PdConstants {
     static let toGUILabel = "toGUI"
     static let debugLabel = "debug"
-    static let receiverPostFix = "-input"
+    static let receiverPostFix = "-input" // should be list input
+    static let volumePostFix = "-volume" // should be float input
+    static let mutePostFix = "-mute" /// should be a bool input
 }
 
 // MARK: CloudKit Constants

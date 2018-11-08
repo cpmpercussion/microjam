@@ -24,6 +24,7 @@
 		560568DE206E4AAF00A50521 /* MicrojamTutorialAvatarScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560568DD206E4AAF00A50521 /* MicrojamTutorialAvatarScreenController.swift */; };
 		560568E0206E4AD300A50521 /* MicrojamTutorialTestingScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560568DF206E4AD300A50521 /* MicrojamTutorialTestingScreenController.swift */; };
 		5613B31E1F3D9C380068ED5D /* ChirpRecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5613B31D1F3D9C380068ED5D /* ChirpRecordingView.swift */; };
+		56207CDF2192EC2D00EDD212 /* MixerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56207CDE2192EC2D00EDD212 /* MixerTableViewCell.swift */; };
 		5625E85D1F6874FF00AFE8BF /* block-tester.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5625E6B51F6874FE00AFE8BF /* block-tester.pd */; };
 		5625E85F1F6874FF00AFE8BF /* chirp.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5625E6B71F6874FE00AFE8BF /* chirp.pd */; };
 		5625E8601F6874FF00AFE8BF /* drums.pd in Resources */ = {isa = PBXBuildFile; fileRef = 5625E6B81F6874FE00AFE8BF /* drums.pd */; };
@@ -464,6 +465,7 @@
 		56A46DF4206F8ABA0084BC16 /* MicrojamTutorialGetStartedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A46DF3206F8ABA0084BC16 /* MicrojamTutorialGetStartedViewController.swift */; };
 		56A46DF6206F8B170084BC16 /* MicrojamTutorialCloudLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A46DF5206F8B170084BC16 /* MicrojamTutorialCloudLoginViewController.swift */; };
 		56BAAFC61F44370000DC41CA /* PerformerProfileStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BAAFC51F44370000DC41CA /* PerformerProfileStore.swift */; };
+		56BBD39E2191F65B00D63EDA /* MixerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BBD39D2191F65B00D63EDA /* MixerTableViewController.swift */; };
 		56C288C82188943600464E3B /* microjam_chirp_chain.pd in Resources */ = {isa = PBXBuildFile; fileRef = 56C288C72188943600464E3B /* microjam_chirp_chain.pd */; };
 		56C288CA2188A03100464E3B /* microjam_leadguitar_chain.pd in Resources */ = {isa = PBXBuildFile; fileRef = 56C288C92188A03100464E3B /* microjam_leadguitar_chain.pd */; };
 		56C288CC2188A03B00464E3B /* leadguitar.pd in Resources */ = {isa = PBXBuildFile; fileRef = 56C288CB2188A03B00464E3B /* leadguitar.pd */; };
@@ -510,6 +512,7 @@
 		560568DD206E4AAF00A50521 /* MicrojamTutorialAvatarScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MicrojamTutorialAvatarScreenController.swift; path = chirpey/MicrojamTutorialAvatarScreenController.swift; sourceTree = "<group>"; };
 		560568DF206E4AD300A50521 /* MicrojamTutorialTestingScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicrojamTutorialTestingScreenController.swift; sourceTree = "<group>"; };
 		5613B31D1F3D9C380068ED5D /* ChirpRecordingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChirpRecordingView.swift; path = chirpey/ChirpRecordingView.swift; sourceTree = "<group>"; };
+		56207CDE2192EC2D00EDD212 /* MixerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MixerTableViewCell.swift; path = chirpey/MixerTableViewCell.swift; sourceTree = "<group>"; };
 		5625E6B51F6874FE00AFE8BF /* block-tester.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "block-tester.pd"; sourceTree = "<group>"; };
 		5625E6B71F6874FE00AFE8BF /* chirp.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chirp.pd; sourceTree = "<group>"; };
 		5625E6B81F6874FE00AFE8BF /* drums.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = drums.pd; sourceTree = "<group>"; };
@@ -957,6 +960,7 @@
 		56A46DF5206F8B170084BC16 /* MicrojamTutorialCloudLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MicrojamTutorialCloudLoginViewController.swift; path = chirpey/MicrojamTutorialCloudLoginViewController.swift; sourceTree = "<group>"; };
 		56B329E41E44834D001345DC /* WorldJamsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WorldJamsTableViewController.swift; path = chirpey/WorldJamsTableViewController.swift; sourceTree = "<group>"; };
 		56BAAFC51F44370000DC41CA /* PerformerProfileStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PerformerProfileStore.swift; path = chirpey/PerformerProfileStore.swift; sourceTree = "<group>"; };
+		56BBD39D2191F65B00D63EDA /* MixerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MixerTableViewController.swift; path = chirpey/MixerTableViewController.swift; sourceTree = "<group>"; };
 		56C288C72188943600464E3B /* microjam_chirp_chain.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = microjam_chirp_chain.pd; sourceTree = "<group>"; };
 		56C288C92188A03100464E3B /* microjam_leadguitar_chain.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = microjam_leadguitar_chain.pd; sourceTree = "<group>"; };
 		56C288CB2188A03B00464E3B /* leadguitar.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = leadguitar.pd; sourceTree = "<group>"; };
@@ -1046,6 +1050,7 @@
 				5627B5F51F72F062007807E4 /* RoboJamView.swift */,
 				564AF3B82099EF830050B541 /* UserPerfCollectionViewCell.swift */,
 				564AF3B420989FC80050B541 /* UserPerfTableViewCell.swift */,
+				56207CDE2192EC2D00EDD212 /* MixerTableViewCell.swift */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -1059,6 +1064,7 @@
 				4DDB71001F43179A00925F4D /* UserPerfController.swift */,
 				5642EFBD209CDA1300B38873 /* ProfileScreenController.swift */,
 				56B329E41E44834D001345DC /* WorldJamsTableViewController.swift */,
+				56BBD39D2191F65B00D63EDA /* MixerTableViewController.swift */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -2206,6 +2212,7 @@
 				"${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework",
 				"${BUILT_PRODUCTS_DIR}/InAppSettingsKit/InAppSettingsKit.framework",
 				"${BUILT_PRODUCTS_DIR}/NSDate+TimeAgo/NSDate_TimeAgo.framework",
+				"${BUILT_PRODUCTS_DIR}/Repeat/Repeat.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftRandom/SwiftRandom.framework",
 				"${BUILT_PRODUCTS_DIR}/UIColor_Hex_Swift/UIColor_Hex_Swift.framework",
 				"${BUILT_PRODUCTS_DIR}/libpd/libpd.framework",
@@ -2217,6 +2224,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DropDown.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/InAppSettingsKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NSDate_TimeAgo.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Repeat.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftRandom.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIColor_Hex_Swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/libpd.framework",
@@ -2255,6 +2263,7 @@
 				4DEFCAE41F41EC82007B7C34 /* Constants.swift in Sources */,
 				56002F471F306C0F00003B88 /* MicrojamTutorialViewController.swift in Sources */,
 				566A70DA209C50C30066EFD4 /* NoAccountWarningStackView.swift in Sources */,
+				56207CDF2192EC2D00EDD212 /* MixerTableViewCell.swift in Sources */,
 				56A0505920F5F18700455FDF /* ProfileHeaderCollectionReusableView.swift in Sources */,
 				5642EFBE209CDA1300B38873 /* ProfileScreenController.swift in Sources */,
 				5613B31E1F3D9C380068ED5D /* ChirpRecordingView.swift in Sources */,
@@ -2266,6 +2275,7 @@
 				56A0505B20F5F1DE00455FDF /* ProfileFooterCollectionReusableView.swift in Sources */,
 				56BAAFC61F44370000DC41CA /* PerformerProfileStore.swift in Sources */,
 				4DE5FAF01F46E6470024F16B /* ChirpPlayer.swift in Sources */,
+				56BBD39E2191F65B00D63EDA /* MixerTableViewController.swift in Sources */,
 				4D77CC3D1F3B5564008BD48C /* BrowseController.swift in Sources */,
 				56621B131DE4A496009B9AB6 /* ChirpView.swift in Sources */,
 				4DF23D0C1F4AF51F006033F8 /* ChirpRecorder.swift in Sources */,

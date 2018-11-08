@@ -12,6 +12,7 @@ import CloudKit
 var ALWAYS_SAVE_MODE: Bool = false /// set this to experiment mode for user studies, etc. - do not enable for archive or distribution!
 var RECORDING_PARTICLES: Bool = false /// set this to enable recording particle system.
 var OPEN_ON_RECORD_ENABLE: Bool = true /// set this to open the jam screen with recording already enabled.
+var MIXER_AVAILABLE: Bool = true /// set this to enable access to the mixer screen.
 
 // TODO: how to tell between loaded and saved and just loaded?
 
@@ -87,6 +88,8 @@ class ChirpJamViewController: UIViewController {
         if let recorder = recorder,
             let finishedPerformance = recorder.recordingView.performance {
             /// FIXME: Save the robojam to a robo account as needed.
+            
+            /// TODO: make sure this doesn't stop when going to the mixer screen.
             recorder.stop()
             removeRoboJam()
             
@@ -118,7 +121,7 @@ class ChirpJamViewController: UIViewController {
         print("JAMVC: Cancel Button Pressed.")
         removeRoboJam() // Throw away robojam if present.
         
-        // Stop any timers
+        // Stop any chirps
         if let recorder = recorder {
             recorder.stop()
             
@@ -179,7 +182,11 @@ class ChirpJamViewController: UIViewController {
         // add layer
         addJamButton.imageView?.contentMode = .scaleAspectFit
         addJamButton.tintColor = ButtonColors.layer
-        addJamButton.isHidden = true // hide the add layer button for now.
+        if !MIXER_AVAILABLE {
+            addJamButton.isHidden = true // hide the mixer button
+        } else {
+            addJamButton.isHidden = false // expose the mixer button
+        }
         // jam
         jamButton.imageView?.contentMode = .scaleAspectFit
         jamButton.tintColor = ButtonColors.jam
@@ -420,6 +427,16 @@ class ChirpJamViewController: UIViewController {
         navigationController?.pushViewController(controller, animated: true)
     }
 
+    /// Open the mixer screen to experiment with performance methods.
+    @IBAction func openMixer(_ sender: UIButton) {
+        
+        if let recorder = recorder {
+            let controller = MixerTableViewController(withChirps: recorder.chirpViews)
+            navigationController?.pushViewController(controller, animated: true)
+        }
+
+    }
+
 
     /// IBAction for the play button. Starts playback of performance and replies iff in loaded mode. Stops if already playing.
     @IBAction func playButtonPressed(_ sender: UIButton) {
@@ -577,7 +594,7 @@ extension ChirpJamViewController {
     
     /// touchesBegan method starts a recording if this is the first touch in a new microjam.
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        // start timer if not recording
+        // start recording if needed.
         if let recorder = recorder,
              let point = touches.first?.location(in: recorder.recordingView) {
             if (recorder.recordingView.bounds.contains(point)) {
