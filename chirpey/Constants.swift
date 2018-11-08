@@ -176,7 +176,7 @@ struct ButtonColors {
     static let play = UIColor.init("#a4f644") // "#03cea4") // UIColor.init("#FAA613")
     static let jam = UIColor.init("#FFD045") //"#eac435") // UIColor.init("#688E26") //
     static let layer = UIColor.init("#4FEBF9") //#7dcfb6")
-    static let roboplay = UIColor.init("#ca1551") //UIColor.init("#550527") //
+    static let robojam = UIColor.init("#ca1551") //UIColor.init("#550527") //
 }
 
 /// Error messages and dialogues

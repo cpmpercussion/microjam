@@ -74,8 +74,8 @@ class ChirpJamViewController: UIViewController {
     @IBOutlet weak var instrumentButton: UIButton!
     /// Button to add specific parent performances when composing a performance
     @IBOutlet weak var addJamButton: UIButton!
-    /// Roboplay button; requests an AI response performance
-    @IBOutlet weak var roboplayButton: UIButton!
+    /// Robojam button; requests an AI response performance
+    @IBOutlet weak var robojamButton: UIButton!
     
     // MARK: - Navigation
     
@@ -91,7 +91,7 @@ class ChirpJamViewController: UIViewController {
             
             /// TODO: make sure this doesn't stop when going to the mixer screen.
             recorder.stop()
-            removeRoboJam()
+            removeRobojam()
             
             if let barButton = sender as? UIBarButtonItem {
                 if savePerformanceButton === barButton {
@@ -119,7 +119,7 @@ class ChirpJamViewController: UIViewController {
     /// IBAction for Cancel (bar) button. stops playback/recording and dismisses present performance.
     @IBAction func cancelPerformance(_ sender: UIBarButtonItem) {
         print("JAMVC: Cancel Button Pressed.")
-        removeRoboJam() // Throw away robojam if present.
+        removeRobojam() // Throw away robojam if present.
         
         // Stop any chirps
         if let recorder = recorder {
@@ -142,7 +142,7 @@ class ChirpJamViewController: UIViewController {
                     // Just reset to a new recording
                     recorder.recordingIsDone = false
                     playButton.isEnabled = false
-                    roboplayButton.isEnabled = false
+                    robojamButton.isEnabled = false
                     jamButton.isEnabled = false
                     replyButton.isEnabled = true
                     newRecordingView()
@@ -190,9 +190,9 @@ class ChirpJamViewController: UIViewController {
         // jam
         jamButton.imageView?.contentMode = .scaleAspectFit
         jamButton.tintColor = ButtonColors.jam
-        // roboplay
-        roboplayButton.imageView?.contentMode = .scaleAspectFit
-        roboplayButton.tintColor = ButtonColors.roboplay
+        // robojam
+        robojamButton.imageView?.contentMode = .scaleAspectFit
+        robojamButton.tintColor = ButtonColors.robojam
         
         /// TODO: delete reply button
         // reply
@@ -275,7 +275,7 @@ class ChirpJamViewController: UIViewController {
             chirpViewContainer.backgroundColor = UserProfile.shared.profile.backgroundColour.darkerColor
             // disable buttons that cannot be used in this state
             playButton.isEnabled = false
-            roboplayButton.isEnabled = false
+            robojamButton.isEnabled = false
             jamButton.isEnabled = false
             rewindButton.isEnabled = true
         }
@@ -304,7 +304,7 @@ class ChirpJamViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        removeRoboJam()
+        removeRobojam()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -399,11 +399,11 @@ class ChirpJamViewController: UIViewController {
             if !recorder.viewsAreLoaded {
                 // There is nothing to be played or jammed
                 playButton.isEnabled = false
-                roboplayButton.isEnabled = false
+                robojamButton.isEnabled = false
                 jamButton.isEnabled = false
             }
         }
-        removeRoboJam()
+        removeRobojam()
     }
     
     /// IBAction for the record enable button
@@ -432,6 +432,7 @@ class ChirpJamViewController: UIViewController {
         
         if let recorder = recorder {
             let controller = MixerTableViewController(withChirps: recorder.chirpViews)
+            controller.controllerToMix = self
             navigationController?.pushViewController(controller, animated: true)
         }
 
@@ -503,90 +504,17 @@ class ChirpJamViewController: UIViewController {
     
     // MARK: Robojam Methods
     
-    let roboResponseEndpoint: String = "https://138.197.179.234:5000/api/predict"
-    // let roboResponseEndpoint: String = "https://0.0.0.0:5000/api/predict" // for local testing.
-    
-    /// Roboplay Button Pressed, request an AI response and add as a layer.
-    @IBAction func roboplayPressed(_ sender: UIButton) {
-        // nice shake animation
-        //sender.shake()
-
-        guard let perfToRespond = self.recorder?.recordingView.saveRecording()?.csv() else {
+    /// Robojam Button Pressed, request an AI response and add as a layer.
+    @IBAction func robojamPressed(_ sender: UIButton) {
+        guard let perf = self.recorder?.recordingView.saveRecording() else {
             print("No perf to respond to.")
             return
         }
-        // print("found performance: \(perfToRespond)")
-        guard let roboResponseURL = URL(string: roboResponseEndpoint) else {
-            print("Error: cannot create URL")
-            return
-        }
-        // print("have URL: \(roboResponseURL)")
-        
-        var roboResponseUrlRequest = URLRequest(url: roboResponseURL)
-        roboResponseUrlRequest.httpMethod = "POST"
-        
-        let perfRequest: [String: Any] = ["perf": perfToRespond]
-        let jsonPerfRequest: Data
-        do {
-            jsonPerfRequest = try JSONSerialization.data(withJSONObject: perfRequest, options: [])
-            roboResponseUrlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
-            roboResponseUrlRequest.httpBody = jsonPerfRequest
-        } catch {
-            print("Error: cannot create JSON")
-            return
-        }
-        
-        let session = URLSession(configuration: URLSessionConfiguration.ephemeral, delegate: RobojamCertificatePinningDelegate(), delegateQueue: nil)
-        let task = session.dataTask(with: roboResponseUrlRequest) { data, response, error in
-            // do stuff with response, data & error here
-            DispatchQueue.main.async{
-                self.roboplayButton.stopBopping() // first stop the bopping.
-            }
-            guard error == nil else {
-                print("error calling POST on /api/predict")
-                print(error!)
-                return
-            }
-            guard let responseData = data else {
-                print("Error: did not receive data")
-                return
-            }
-            // parse the result as JSON, since that's what the API provides
-            self.roboplayResponseHandler(responseData)
-        }
-        roboplayButton.startBopping()
-        task.resume()
+        RobojamMaker.requestRobojam(from: perf, for: self)
+        robojamButton.startBopping()
     }
     
-    /// Parses Responses from the Roboplay server.
-    func roboplayResponseHandler(_ data: Data) {
-        print("Roboplay: Parsing response.")
-        do {
-            guard let responsePerfJSON = try JSONSerialization.jsonObject(with: data, options: [])
-                as? [String: Any] else {
-                    print("error trying to convert data to JSON")
-                    return
-            }
-            // print("The response is: " + responsePerfJSON.description)
-            guard let responsePerfCSV = responsePerfJSON["response"] as? String else {
-                print("Could not parse JSON")
-                return
-            }
-            // print("Response found!")
-            // print("The response was: " + responsePerfCSV)
-            if let responsePerf = createRoboJam(responsePerfCSV) {
-                DispatchQueue.main.async{
-                    self.addRoboJam(responsePerf)
-                    print("Response added!")
-                    self.roboplayButton.shake()
-                }
-            }
-            // do something with it.
-        } catch  {
-            print("error trying to convert data to JSON")
-            return
-        }
-    }
+
 }
 
 /// Extension for Touch User Interface Overrides
@@ -692,7 +620,7 @@ extension ChirpJamViewController: PlayerDelegate {
         if let rec = recorder, rec.recordingIsDone {
             replyButton.isEnabled = true
             savePerformanceButton.isEnabled = true
-            roboplayButton.isEnabled = true
+            robojamButton.isEnabled = true
             
             setRecordingDisabled() //
             recEnableButton.isEnabled = false
@@ -722,45 +650,14 @@ extension ChirpJamViewController: BrowseControllerDelegate {
     }
 }
 
-// MARK: - Robojam HTTPS Certificate Pinning URLSession delegate
-// adapted from lifeisfoo https://stackoverflow.com/a/34223292/1646138
-class RobojamCertificatePinningDelegate: NSObject, URLSessionDelegate {
-    
-    /// Robojam server certificate file
-    private let robojamCertificateFile = "robojamCertificate"
-    
-    func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Swift.Void) {
-        // Adapted from OWASP https://www.owasp.org/index.php/Certificate_and_Public_Key_Pinning#iOS
-        if (challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust),
-            let serverTrust = challenge.protectionSpace.serverTrust {
-                var secresult = SecTrustResultType.invalid
-                let status = SecTrustEvaluate(serverTrust, &secresult)
-                
-                if (errSecSuccess == status), let serverCertificate = SecTrustGetCertificateAtIndex(serverTrust, 0) {
-                        let serverCertificateData = SecCertificateCopyData(serverCertificate)
-                        let data = CFDataGetBytePtr(serverCertificateData);
-                        let size = CFDataGetLength(serverCertificateData);
-                        let cert1 = NSData(bytes: data, length: size)
-                        let file_der = Bundle.main.path(forResource: robojamCertificateFile, ofType: "der")
-                        
-                        if let file = file_der, let cert2 = NSData(contentsOfFile: file), cert1.isEqual(to: cert2 as Data) {
-                                    completionHandler(URLSession.AuthChallengeDisposition.useCredential, URLCredential(trust:serverTrust))
-                                    return
-                        }
-                }
-        }
-        // Pinning failed
-        completionHandler(URLSession.AuthChallengeDisposition.cancelAuthenticationChallenge, nil)
-    }
-    
-}
+
 
 // MARK: - Robojam Functions Extension
 
 extension ChirpJamViewController {
     
     /// Remove existing RoboJam
-    func removeRoboJam() {
+    func removeRobojam() {
         if let recorder = recorder, let existingRoboJam = self.robojam {
             existingRoboJam.closePdFile()
             if let index = recorder.chirpViews.index(of: existingRoboJam) {
@@ -771,8 +668,13 @@ extension ChirpJamViewController {
     }
     
     // Add an extra jam from the RoboJam servers
-    func addRoboJam(_ performance: ChirpPerformance) {
-        removeRoboJam() // remove a robojam that might already be there.
+    func addRobojam(_ performance: ChirpPerformance) {
+        removeRobojam() // remove a robojam that might already be there.
+        // change the robojam's instrument to be other than the previously recorded view.
+        if let currentInstrument = recorder?.recordingView.performance?.instrument {
+            performance.instrument = RobojamMaker.chooseOtherInstrument(currentInstrument)
+        }
+        // Add the robojam to the view hierarchy.
         if let recorder = recorder {
             self.robojam = RoboJamView(with: chirpViewContainer.bounds, andPerformance: performance)
             if let robojam = self.robojam {
@@ -780,26 +682,17 @@ extension ChirpJamViewController {
                 chirpViewContainer.addSubview(robojam)
                 chirpViewContainer.bringSubviewToFront(recorder.recordingView)
                 robojam.generateImage()
+                print("Response added!")
+                robojamButton.shake()
             }
         }
     }
     
-    /// Transform a RoboJam response into ChirpPerformance for playback.
-    func createRoboJam(_ perfCSV: String) -> ChirpPerformance? {
-        var instrument = RoboJamPerfData.instrument
-        if let currentInstrument = recorder?.recordingView.performance?.instrument {
-            instrument = chooseOtherInstrument(currentInstrument)
-        }
-        
-        return ChirpPerformance(csv: perfCSV, date: Date(), performer: RoboJamPerfData.performer, instrument: instrument, image: UIImage(), location: RoboJamPerfData.fakeLocation, colour: RoboJamPerfData.color, background: RoboJamPerfData.bg, replyto: "", performanceID: RoboJamPerfData.id, creatorID: RoboJamPerfData.creator)
+    func robojamFailed() {
+        /// Could not get a robojam
+        robojamButton.stopBopping()
     }
-    
-    func chooseOtherInstrument(_ inst: String) -> String {
-        var instChoices = SoundSchemes.keysForNames.keys.filter { $0 != inst } as [String]
-        let choice = instChoices[Int(arc4random_uniform(UInt32(instChoices.count)))]
-        print("RoboJam is playing: \(choice)")
-        return choice
-    }
+
 }
 
 /// Shake animation for a UIButton

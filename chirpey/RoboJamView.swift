@@ -8,7 +8,7 @@
 
 import UIKit
 
-/// Subclass of ChirpView for a roboplay performance to be loaded.
+/// Subclass of ChirpView for a robojam performance to be loaded.
 class RoboJamView: ChirpView {
     /// Array of timers used for currently playing performance.
     var timers = [Timer]()
