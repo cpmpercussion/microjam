@@ -46,7 +46,10 @@ class MixerTableViewCell: UITableViewCell {
     
     let muteButton : UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Mute", for: .normal)
+        //button.setTitle("Mute", for: .normal)
+        button.setImage(#imageLiteral(resourceName: "mute-button"), for: .normal)
+        button.setTitleColor(ButtonColors.recordDisabled, for: .normal)
+        button.tintColor = ButtonColors.recordDisabled
         button.translatesAutoresizingMaskIntoConstraints = false
         /// Accessibility elements
         button.isAccessibilityElement = true
@@ -59,7 +62,10 @@ class MixerTableViewCell: UITableViewCell {
     
     let robojamButton : UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("RoboJam", for: .normal)
+        //button.setTitle("RoboJam", for: .normal)
+        button.setImage(#imageLiteral(resourceName: "microjam-roboplay"), for: .normal)
+        button.setTitleColor(ButtonColors.roboplay, for: .normal)
+        button.tintColor = ButtonColors.roboplay
         button.translatesAutoresizingMaskIntoConstraints = false
         /// Accessibility elements
         button.isAccessibilityElement = true
@@ -83,7 +89,19 @@ class MixerTableViewCell: UITableViewCell {
         return button
     }()
     
-    
+    /// Set the mute button's state externally.
+    func setMute(muted: Bool) {
+        if muted {
+            muteButton.solidGlow()
+        } else {
+            muteButton.deactivateGlowing()
+        }
+    }
+
+    /// Set the volume level externally.
+    func setVolume(vol: Float) {
+        volumeSlider.setValue(vol, animated: true)
+    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -105,6 +123,7 @@ class MixerTableViewCell: UITableViewCell {
             } else {
                 chirp.muteOn()
             }
+            setMute(muted: chirp.muted)
         }
     }
     
@@ -117,7 +136,7 @@ class MixerTableViewCell: UITableViewCell {
         contentView.addSubview(muteButton)
         contentView.addSubview(volumeSlider)
         contentView.addSubview(robojamButton)
-        contentView.addSubview(deleteButton)
+        //contentView.addSubview(deleteButton)
         
         // Constraints for the mute button
         avatarView.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
@@ -129,26 +148,31 @@ class MixerTableViewCell: UITableViewCell {
 
         
         instrumentLabel.leadingAnchor.constraint(equalTo: avatarView.trailingAnchor, constant: margin).isActive = true
-        instrumentLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        instrumentLabel.widthAnchor.constraint(equalToConstant: 80).isActive = true
         instrumentLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
 
         muteButton.leadingAnchor.constraint(equalTo: instrumentLabel.trailingAnchor, constant: margin).isActive = true
-        muteButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        // muteButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
         muteButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        muteButton.heightAnchor.constraint(equalToConstant: 0.5*elementHeight).isActive = true
+        muteButton.widthAnchor.constraint(equalToConstant: 0.5*elementHeight).isActive = true
 
 
         volumeSlider.leadingAnchor.constraint(equalTo: muteButton.trailingAnchor, constant: margin).isActive = true
-        volumeSlider.widthAnchor.constraint(equalToConstant: 300).isActive = true
+        // volumeSlider.widthAnchor.constraint(equalToConstant: 300).isActive = true
         volumeSlider.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
 
 
         robojamButton.leadingAnchor.constraint(equalTo: volumeSlider.trailingAnchor, constant: margin).isActive = true
-        robojamButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        // robojamButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
         robojamButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        robojamButton.heightAnchor.constraint(equalToConstant: 0.5*elementHeight).isActive = true
+        robojamButton.widthAnchor.constraint(equalToConstant: 0.5*elementHeight).isActive = true
+        robojamButton.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
 
-        deleteButton.leadingAnchor.constraint(equalTo: robojamButton.trailingAnchor, constant: margin).isActive = true
-        deleteButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        deleteButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        //deleteButton.leadingAnchor.constraint(equalTo: robojamButton.trailingAnchor, constant: margin).isActive = true
+        // deleteButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        //deleteButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         
         volumeSlider.maximumValue = 1.0
         volumeSlider.minimumValue = 0.0

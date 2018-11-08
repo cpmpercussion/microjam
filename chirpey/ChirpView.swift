@@ -206,6 +206,12 @@ extension ChirpView {
             openPatchName = fileToOpen
             openPatchDollarZero = openPatch?.dollarZero
             PdBase.sendBang(toReceiver: "fadein-\(openPatchDollarZero ?? Int32(0))")
+            // Set mute state
+            if muted {
+                PdBase.send(0.0, toReceiver: "\(openPatchDollarZero ?? Int32(0))" + PdConstants.volumePostFix)
+            } else {
+                PdBase.send(Float(volume), toReceiver: "\(openPatchDollarZero ?? Int32(0))" + PdConstants.volumePostFix)
+            }
         }
         // Only opens it if it's not already open.
     }
@@ -224,17 +230,16 @@ extension ChirpView {
     }
     
     func muteOn() {
-        // don't touch the volume setting
+        muted = true
         if let dollarZero = openPatchDollarZero {
             PdBase.send(0.0, toReceiver: "\(dollarZero)" + PdConstants.volumePostFix)
-            muted = true
         }
     }
     
     func muteOff() {
+        muted = false
         if let dollarZero = openPatchDollarZero {
             PdBase.send(Float(volume), toReceiver: "\(dollarZero)" + PdConstants.volumePostFix)
-            muted = false
         }
     }
     

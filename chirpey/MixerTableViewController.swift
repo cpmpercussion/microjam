@@ -61,7 +61,8 @@ class MixerTableViewController: UITableViewController {
         cell.instrumentLabel.text = cell.chirp?.performance?.instrument
         cell.volumeSlider.tintColor = cell.chirp?.performance?.colour
         cell.volumeSlider.thumbTintColor = cell.chirp?.performance?.colour
-        cell.volumeSlider.value = Float(cell.chirp?.volume ?? 1.0)
+        cell.setVolume(vol: Float(cell.chirp?.volume ?? 1.0))
+        cell.setMute(muted: cell.chirp?.muted ?? false)
         
         if let perf = cell.chirp?.performance,
             let profile = profilesStore.getProfile(forPerformance: perf) {
