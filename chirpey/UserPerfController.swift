@@ -305,15 +305,15 @@ extension UserPerfController {
 
 extension UserPerfController : PlayerDelegate {
     
-    func progressTimerStarted() {
+    func playbackStarted() {
         // not used.
     }
     
-    func progressTimerEnded() {
+    func playbackEnded() {
         stopCurrentlyPlayingPerformance()
     }
     
-    func progressTimerStep() {
+    func playbackStep() {
         // not used
     }
 }

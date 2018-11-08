@@ -11,11 +11,11 @@ import UIKit
 /// Enabled classes to receive updates on the playback state of ChirpPlayers and ChirpRecorders.
 protocol PlayerDelegate {
     /// Called when playback starts.
-    func progressTimerStarted()
+    func playbackStarted()
     /// Called when playback is completed.
-    func progressTimerEnded()
+    func playbackEnded()
     /// Called at each timestep (0.01s) during playback
-    func progressTimerStep()
+    func playbackStep()
 }
 
 /// Plays back one or more ChirpViews
@@ -78,7 +78,7 @@ class ChirpPlayer: NSObject {
     
     /// Start the progress timer.
     func startProgressTimer() {
-        self.delegate?.progressTimerStarted() // tell delegate the progress timer has started.
+        self.delegate?.playbackStarted() // tell delegate the progress timer has started.
         progressTimer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: { (timer) in
             self.step()
         })
@@ -86,9 +86,9 @@ class ChirpPlayer: NSObject {
     
     /// Move one time step (0.01s) through the progress timer.
     func step() {
-        self.delegate!.progressTimerStep()
+        self.delegate!.playbackStep()
         if progress >= maxPlayerTime {
-            self.delegate!.progressTimerEnded()
+            self.delegate!.playbackEnded()
         }
         progress += 0.01
     }

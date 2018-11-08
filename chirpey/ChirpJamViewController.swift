@@ -82,7 +82,7 @@ class ChirpJamViewController: UIViewController {
     /// Prepare to segue - this is where the Jam screen actually saves performances! So it's an important check.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         print("JAMVC: Preparing for Segue.")
-        // FIXME: save the performance if the timer hasn't run out.
+        // FIXME: save the performance if the playback hasn't stopped.
         jamming = false // stop jamming.
         
         if let recorder = recorder,
@@ -661,10 +661,9 @@ extension ChirpJamViewController {
 extension ChirpJamViewController: PlayerDelegate {
     
     /// Updated UI to reflect that recording or playback has started.
-    func progressTimerStarted() {
-    print("Progress Timer started")
+    func playbackStarted() {
         if let rec = recorder, rec.isRecording {
-            print("Recorder is recording")
+            print("Recording")
             recEnableButton.solidGlow() // solid recording light.
             createParticles()
         }
@@ -672,12 +671,12 @@ extension ChirpJamViewController: PlayerDelegate {
     
     
     /// Updates the progress bar in response to steps from the ChirpPlayer
-    func progressTimerStep() {
+    func playbackStep() {
         recordingProgress.progress = Float(recorder!.progress / recorder!.maxPlayerTime)
     }
 
     /// Updates UI when the ChirpPlayer reports playback/recording has finished.
-    func progressTimerEnded() {
+    func playbackEnded() {
         stopParticles()
         recordingProgress.progress = 0.0
         recorder!.stop()
