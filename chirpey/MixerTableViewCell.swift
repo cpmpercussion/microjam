@@ -64,6 +64,7 @@ class MixerTableViewCell: UITableViewCell {
         let button = UIButton(type: .system)
         //button.setTitle("RoboJam", for: .normal)
         button.setImage(#imageLiteral(resourceName: "microjam-roboplay"), for: .normal)
+        button.imageView?.contentMode = .scaleAspectFill
         button.setTitleColor(ButtonColors.roboplay, for: .normal)
         button.tintColor = ButtonColors.roboplay
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -127,6 +128,13 @@ class MixerTableViewCell: UITableViewCell {
         }
     }
     
+    @objc private func requestRoboJam(sender: UIButton) {
+        if let perf = chirp?.performance {
+            print("Request a RoboJam")
+            // request the jam
+        }
+    }
+    
     /// Add subviews and constraints for the view.
     private func initSubviews() {
         let margins = layoutMarginsGuide
@@ -178,6 +186,7 @@ class MixerTableViewCell: UITableViewCell {
         volumeSlider.minimumValue = 0.0
         volumeSlider.addTarget(self, action: #selector(self.setVolume(sender:)), for: .valueChanged)
         muteButton.addTarget(self, action: #selector(self.toggleMute(sender:)), for: .touchUpInside)
+        robojamButton.addTarget(self, action: #selector(self.requestRoboJam(sender:)), for: .touchUpInside)
     }
 
     override func awakeFromNib() {
