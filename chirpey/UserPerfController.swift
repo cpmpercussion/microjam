@@ -313,7 +313,7 @@ extension UserPerfController : PlayerDelegate {
         stopCurrentlyPlayingPerformance()
     }
     
-    func playbackStep() {
+    func playbackStep(_ time: Double) {
         // not used
     }
 }

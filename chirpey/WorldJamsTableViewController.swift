@@ -237,7 +237,7 @@ extension WorldJamsTableViewController: PlayerDelegate {
         // not used
     }
 
-    func playbackStep() {
+    func playbackStep(_ time: Double) {
         // not used
     }
 

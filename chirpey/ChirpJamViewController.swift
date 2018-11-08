@@ -671,37 +671,37 @@ extension ChirpJamViewController: PlayerDelegate {
     
     
     /// Updates the progress bar in response to steps from the ChirpPlayer
-    func playbackStep() {
-        recordingProgress.progress = Float(recorder!.progress / recorder!.maxPlayerTime)
+    func playbackStep(_ time: Double) {
+        DispatchQueue.main.async { self.recordingProgress.progress = Float(time / 5.0) }
     }
 
     /// Updates UI when the ChirpPlayer reports playback/recording has finished.
     func playbackEnded() {
-        stopParticles()
-        recordingProgress.progress = 0.0
-        recorder!.stop()
-        
-        // continue playing if jamming is enabled
-        if jamming {
-            recorder!.play()
-            return
-        }
-        
-        // enable saving and replying if recording is finished.
-        if let rec = recorder, rec.recordingIsDone {
-            replyButton.isEnabled = true
-            savePerformanceButton.isEnabled = true
-            roboplayButton.isEnabled = true
+        DispatchQueue.main.async {
+            self.stopParticles()
+            self.recordingProgress.progress = 0.0
+            self.recorder!.stop()
             
-            setRecordingDisabled() //
-            recEnableButton.isEnabled = false
-            // do other things to make sure recording is preserved properly.
+            // continue playing if jamming is enabled
+            if self.jamming {
+                self.recorder!.play()
+                return
+            }
+            
+            // enable saving and replying if recording is finished.
+            if let rec = self.recorder, rec.recordingIsDone {
+                self.setRecordingDisabled()
+                self.replyButton.isEnabled = true
+                self.savePerformanceButton.isEnabled = true
+                self.roboplayButton.isEnabled = true
+                self.recEnableButton.isEnabled = false
+            }
+            
+            self.rewindButton.isEnabled = true
+            self.jamButton.isEnabled = true
+            self.playButton.isEnabled = true
+            self.playButton.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal)
         }
-        
-        rewindButton.isEnabled = true
-        jamButton.isEnabled = true
-        playButton.isEnabled = true
-        playButton.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal)
     }
 }
 
