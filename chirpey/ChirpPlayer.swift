@@ -119,6 +119,7 @@ class ChirpPlayer: NSObject {
                 }
                 
                 for chirp in chirpViews {
+                    chirp.resetAnimationLayer() // reset the CALayer
                     chirp.image = chirp.performance!.image
                 }
             }
