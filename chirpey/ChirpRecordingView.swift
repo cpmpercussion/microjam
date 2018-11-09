@@ -191,11 +191,9 @@ extension ChirpRecordingView {
         context.beginPath()
         
         for (i, current) in tailSegments.enumerated() {
-            
             if i == 0 || !current.touch.moving {
                 context.move(to: CGPoint(x: current.touch.x, y: current.touch.y))
             }
-            
             context.addLine(to: CGPoint(x: current.touch.x, y: current.touch.y))
         }
         
@@ -205,7 +203,6 @@ extension ChirpRecordingView {
     }
     
 }
-
 
 // MARK: Pd (Sound) Functions
 

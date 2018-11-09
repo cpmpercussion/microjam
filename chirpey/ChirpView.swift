@@ -21,12 +21,15 @@ class ChirpView: UIImageView {
     var performance : ChirpPerformance?
     /// Colour for drawing playing touches.
     var playbackColour : CGColor?
+
     
     // Drawing
     /// Stores the location of the last drawn point for animating strokes.
     var lastPoint : CGPoint?
     /// Stores the details of the last touch for animating strokes.
     var lastTouch : TouchRecord?
+    /// A CALayer for doing animations
+    var animationLayer : CALayer?
     
     // Interaction
     /// True if the view is currently playing/recording a moving touch
@@ -87,27 +90,46 @@ class ChirpView: UIImageView {
     }
     
     // MARK: - drawing functions
+    
+    /// Trying to maybe do faster UIImage drawing?
+    func draw(image: UIImage, inContext context: CGContext, withRect rect: CGRect) {
+        guard let im = image.cgImage else {
+            return
+        }
+        context.saveGState()
+        context.translateBy(x: 0.0, y: CGFloat(im.height))
+        context.scaleBy(x: 1.0, y: -1.0)
+        context.draw(im, in: rect)
+        context.restoreGState()
+    }
 
     /// Draws a dot at a given point in the UIImage.
     func drawDot(at point : CGPoint, withColour color : CGColor) {
         UIGraphicsBeginImageContextWithOptions(frame.size, false, (UIScreen.main).scale)
-        let context = UIGraphicsGetCurrentContext();
+        guard let context = UIGraphicsGetCurrentContext() else {
+            return
+        }
+        let rect = CGRect(x:0, y:0, width:frame.size.width, height:frame.size.height)
         ///FIXME: This is the slowest line of code in the project, big performance block. calls drawInRect.
-        image?.draw(in: CGRect(x:0, y:0, width:frame.size.width, height:frame.size.height))
-        context!.setFillColor(color);
-        context!.setBlendMode(CGBlendMode.normal)
-        context!.fillEllipse(in: CGRect(x:point.x - 5, y:point.y - 5, width:10, height:10));
-        image = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
+        if let im = image {im.draw(in: rect)}
+        context.setFillColor(color);
+        context.setBlendMode(CGBlendMode.normal)
+        context.fillEllipse(in: CGRect(x:point.x - 5, y:point.y - 5, width:10, height:10));
+        image = UIGraphicsGetImageFromCurrentImageContext() // save back to the UIImage
+        
+        UIGraphicsEndImageContext()
     }
 
     /// Draws a line between two points in the UIImage.
     func drawLine(from fromPoint : CGPoint, to toPoint : CGPoint, withColour color : CGColor) {
+        
+        
         UIGraphicsBeginImageContextWithOptions(frame.size, false, (UIScreen.main).scale)
         guard let context = UIGraphicsGetCurrentContext() else {
             return
         }
-        image?.draw(in: CGRect(x:0, y:0, width:frame.size.width, height:frame.size.height))
+        let rect = CGRect(x:0, y:0, width:frame.size.width, height:frame.size.height)
+        if let im = image {im.draw(in: rect)}
         context.move(to: fromPoint)
         context.addLine(to: toPoint)
         context.setLineCap(CGLineCap.round)
@@ -115,8 +137,8 @@ class ChirpView: UIImageView {
         context.setStrokeColor(color)
         context.setBlendMode(CGBlendMode.normal)
         context.strokePath()
-        image = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
+        image = UIGraphicsGetImageFromCurrentImageContext() // save back to the UIImage
+        UIGraphicsEndImageContext()
     }
 
     // MARK: - playback functions
