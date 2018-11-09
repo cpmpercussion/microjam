@@ -53,10 +53,12 @@ class ChirpView: UIImageView {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        resetAnimationLayer() // set up the animation layer
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        resetAnimationLayer() // set up the animation layer
     }
     
     /// Convenience Initialiser only used when loading performances for playback only. Touch is disabled!
@@ -67,7 +69,6 @@ class ChirpView: UIImageView {
         isUserInteractionEnabled = false // user-interaction is disabled!
         loadPerformance(perf)
         contentMode = .scaleAspectFit // make sure the image fits the frame
-        resetAnimationLayer() // set up the animation layer
     }
     
     // MARK: Lifecycle
@@ -145,17 +146,26 @@ class ChirpView: UIImageView {
         }
     }
     
-    func moveAnimationLayerToImage() {
-        UIGraphicsBeginImageContextWithOptions(frame.size, false, (UIScreen.main).scale)
+    /// Reset the Animation Layer and restore the performance image.
+    func setImage() {
+        resetAnimationLayer()
+        if let performance = performance {
+            image = performance.image
+        }
+    }
+
+    /// Make an image out of the animationLayer CALayers
+    func moveAnimationLayerToImage() -> UIImage? {
+        print("Going to try to output the layers")
         UIGraphicsBeginImageContextWithOptions(frame.size, false, (UIScreen.main).scale)
         guard let context = UIGraphicsGetCurrentContext(),
             let animationLayer = animationLayer else {
-            return
+            return UIImage()
         }
-        //let rect = CGRect(x:0, y:0, width:frame.size.width, height:frame.size.height)
-        animationLayer.draw(in: context)
-        image = UIGraphicsGetImageFromCurrentImageContext()
+        animationLayer.render(in: context)
+        let output = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
+        return output
     }
 
     // MARK: - playback functions

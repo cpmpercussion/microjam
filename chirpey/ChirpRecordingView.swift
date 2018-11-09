@@ -30,6 +30,7 @@ class ChirpRecordingView: ChirpView {
     /// Programmatic init getting ready for recording.
     override init(frame: CGRect) {
         super.init(frame: frame)
+        resetAnimationLayer()
         print("ChirpRecordingView: Loading programmatically with frame: ", self.frame)
         isMultipleTouchEnabled = true
         isUserInteractionEnabled = true
@@ -39,6 +40,7 @@ class ChirpRecordingView: ChirpView {
     /// Initialises view for recording, rather than playback.
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        resetAnimationLayer()
         isMultipleTouchEnabled = true
         isUserInteractionEnabled = true
         clearForRecording() // gets view ready for recording.
@@ -130,7 +132,7 @@ extension ChirpRecordingView {
             let image = self.image else {
                 return nil
         }
-        output.image = image
+        output.image = moveAnimationLayerToImage()
         output.performer = UserProfile.shared.profile.stageName
         output.instrument = SoundSchemes.namesForKeys[UserProfile.shared.profile.soundScheme]!
         output.date = Date()
