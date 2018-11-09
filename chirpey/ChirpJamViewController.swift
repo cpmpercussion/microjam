@@ -677,31 +677,29 @@ extension ChirpJamViewController: PlayerDelegate {
 
     /// Updates UI when the ChirpPlayer reports playback/recording has finished.
     func playbackEnded() {
-        DispatchQueue.main.async {
-            self.stopParticles()
-            self.recordingProgress.progress = 0.0
-            self.recorder!.stop()
-            
-            // continue playing if jamming is enabled
-            if self.jamming {
-                self.recorder!.play()
-                return
-            }
-            
-            // enable saving and replying if recording is finished.
-            if let rec = self.recorder, rec.recordingIsDone {
-                self.setRecordingDisabled()
-                self.replyButton.isEnabled = true
-                self.savePerformanceButton.isEnabled = true
-                self.roboplayButton.isEnabled = true
-                self.recEnableButton.isEnabled = false
-            }
-            
-            self.rewindButton.isEnabled = true
-            self.jamButton.isEnabled = true
-            self.playButton.isEnabled = true
-            self.playButton.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal)
+        self.stopParticles()
+        self.recordingProgress.progress = 0.0
+        self.recorder!.stop()
+        
+        // continue playing if jamming is enabled
+        if self.jamming {
+            self.recorder!.play()
+            return
         }
+        
+        // enable saving and replying if recording is finished.
+        if let rec = self.recorder, rec.recordingIsDone {
+            self.setRecordingDisabled()
+            self.replyButton.isEnabled = true
+            self.savePerformanceButton.isEnabled = true
+            self.roboplayButton.isEnabled = true
+            self.recEnableButton.isEnabled = false
+        }
+        
+        self.rewindButton.isEnabled = true
+        self.jamButton.isEnabled = true
+        self.playButton.isEnabled = true
+        self.playButton.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal)
     }
 }
 

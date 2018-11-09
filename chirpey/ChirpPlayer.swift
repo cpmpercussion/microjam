@@ -26,7 +26,7 @@ class ChirpPlayer: NSObject {
     /// Stores whether the player is currently playing.
     var isPlaying = false
     /// Array of timers used for currently playing performance.
-    var timers = [Timer]()
+    var timers = [Repeater]()
     /// Array of ChirpViews used for loaded performances.
     var chirpViews = [ChirpView]()
     /// Stores whether views have been loaded. (Maybe only used in ChirpRecorder?)
@@ -37,6 +37,10 @@ class ChirpPlayer: NSObject {
     var progress = 0.0
     /// Stores delegate to inform them about start/stop events and current progress.
     var delegate: PlayerDelegate?
+    /// Dispatch Queue for the playback events
+    var touchPlaybackQueue = DispatchQueue(label: "au.com.charlesmartin.microjam.touchplayback")
+    /// Dispatch Queue for timer
+    var perfTimerQueue = DispatchQueue(label: "au.com.charlesmartin.microjam.perftimer")
     /// Description of the ChirpPlayer with it's first ChirpPerformance.
     override var description: String {
         guard let perfString = chirpViews.first?.performance?.description else {
@@ -48,9 +52,10 @@ class ChirpPlayer: NSObject {
     /// Play a particular ChirpView's performance
     func play(chirp: ChirpView) {
         for touch in chirp.performance!.performanceData {
-            timers.append(Timer.scheduledTimer(withTimeInterval: touch.time,
-                                               repeats: false,
-                                               block: chirp.makeTouchPlayerWith(touch: touch)))
+            timers.append(
+                Repeater.once(after: .seconds(touch.time), queue: touchPlaybackQueue) { timer in
+                    chirp.play(touch: touch) }
+            )
         }
     }
     
@@ -68,11 +73,12 @@ class ChirpPlayer: NSObject {
     func play() {
         if !isPlaying {
             isPlaying = true
-            timers = [Timer]()
+            timers = [Repeater]()
             for chirp in chirpViews {
                 chirp.prepareToPlaySounds()
                 play(chirp: chirp)
             }
+            print("ChirpPlayer: Playing back: \(timers.count) touch events.")
             startProgressTimer()
         }
     }
@@ -80,7 +86,7 @@ class ChirpPlayer: NSObject {
     /// Start the progress timer.
     func startProgressTimer() {
         self.delegate?.playbackStarted() // tell delegate the progress timer has started.
-        progressTimer = Repeater.every(.seconds(0.01), count: 502) { timer  in
+        progressTimer = Repeater.every(.seconds(0.01), count: 502, queue: perfTimerQueue) { timer  in
             self.step()
         }
         progressTimer?.onStateChanged = { (timer,newState) in
@@ -96,7 +102,7 @@ class ChirpPlayer: NSObject {
         progress += 0.01
         self.delegate!.playbackStep(progress)
         if progress > maxPlayerTime {
-            self.delegate!.playbackEnded()
+            DispatchQueue.main.async { self.delegate!.playbackEnded() }
         }
     }
     
@@ -109,7 +115,7 @@ class ChirpPlayer: NSObject {
                 progress = 0.0
                 
                 for t in timers {
-                    t.invalidate()
+                    t.removeAllObservers(thenStop: true)
                 }
                 
                 for chirp in chirpViews {

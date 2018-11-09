@@ -25,6 +25,8 @@ class ChirpView: UIImageView {
     // Drawing
     /// Stores the location of the last drawn point for animating strokes.
     var lastPoint : CGPoint?
+    /// Stores the details of the last touch for animating strokes.
+    var lastTouch : TouchRecord?
     
     // Interaction
     /// True if the view is currently playing/recording a moving touch
@@ -117,39 +119,50 @@ class ChirpView: UIImageView {
     }
 
     // MARK: - playback functions
-    
-    /**
-     Mirrors touchesBegan for replayed performances.
-    **/
-    func playbackBegan(_ point : CGPoint, _ radius : CGFloat) {
-        swiped = false
-        lastPoint = point
-        drawDot(at: point, withColour: playbackColour ?? DEFAULT_PLAYBACK_COLOUR)
-        makeSound(at: point, withRadius: radius, thatWasMoving: false)
+    /// Converts x and y points to frame context
+    func touchRecordToFrameCoordinate(x: Double, y: Double) -> CGPoint {
+        return CGPoint(x: Double(frame.size.width) * x, y: Double(frame.size.width) * y)
     }
-    /**
-     Mirrors touchesMoved for replayed performances.
-    **/
-    func playbackMoved(_ point : CGPoint, _ radius : CGFloat) {
-        swiped = true
-        if let lastPoint = self.lastPoint {
-            drawLine(from: lastPoint, to: point, withColour: playbackColour ?? DEFAULT_PLAYBACK_COLOUR)
+    
+    /// Mirrors touchesBegan for replayed performances.
+    func playbackBegan(_ touch: TouchRecord) {
+        swiped = false
+        makeSound(at: touch)
+        DispatchQueue.main.async {
+            let p = self.touchRecordToFrameCoordinate(x: touch.x, y: touch.y)
+            self.drawDot(at: p, withColour: self.playbackColour ?? DEFAULT_PLAYBACK_COLOUR)
         }
-        lastPoint = point
-        makeSound(at: point, withRadius: radius, thatWasMoving: true)
+        lastTouch = touch
+    }
+    
+    /// Mirrors touchesMoved for replayed performances.
+    func playbackMoved(_ touch: TouchRecord) {
+        swiped = true
+        makeSound(at: touch)
+        if let lastTouch = self.lastTouch {
+            DispatchQueue.main.async {
+                let p = self.touchRecordToFrameCoordinate(x: touch.x, y: touch.y)
+                let lp = self.touchRecordToFrameCoordinate(x: lastTouch.x, y: lastTouch.y)
+                self.drawLine(from: lp, to: p, withColour: self.playbackColour ?? DEFAULT_PLAYBACK_COLOUR)
+            }
+        }
+        lastTouch = touch
     }
     
     /// Returns function for playing a `TouchRecord` at a certain time. Used for playing back touches.
     func makeTouchPlayerWith(touch: TouchRecord) -> ((Timer) -> Void) {
-        let z = CGFloat(touch.z)
-        let point = CGPoint(x: Double(frame.size.width) * touch.x, y: Double(frame.size.width) * touch.y)
-        let playbackFunction : (CGPoint, CGFloat) -> Void = touch.moving ? playbackMoved : playbackBegan
+        let playbackFunction : (TouchRecord) -> Void = touch.moving ? playbackMoved : playbackBegan
         func playbackTouch(withTimer timer: Timer) {
-            playbackFunction(point, z)
+            playbackFunction(touch)
         }
         return playbackTouch
     }
-
+    
+    /// Alternative function for playing back a touch record.
+    func play(touch: TouchRecord) {
+        let playbackFunction : (TouchRecord) -> Void = touch.moving ? playbackMoved : playbackBegan
+        playbackFunction(touch)
+    }
 }
 
 // MARK: - Pd Patch Managing Functions.
@@ -183,6 +196,26 @@ extension ChirpView {
         // FIXME: figure out how to get Pd to parse the list sequentially.
         PdBase.sendList(["/x",x], toReceiver: receiver)
         PdBase.sendList(["/y",y], toReceiver: receiver)
+        PdBase.sendList(["/z",z], toReceiver: receiver)
+        PdBase.sendList(["/m",m], toReceiver: receiver)
+        //print("Radius: \(radius), Z: \(z)")
+        //print("/x: \(x) /y: \(y) /z: \(z) /m: \(m)")
+    }
+    
+    /// Given a touch point, send it to Pd to process for sound.
+    func makeSound(at touch : TouchRecord) {
+        // Pd file must be opened by chirp.prepareToPlaySounds() before sounds can be played.
+        guard openPatch != nil else {
+            print("ChirpView: attempt to play without opening Pd file")
+            return // could throw and exception here.
+        }
+        let z = Double(min(touch.z / 120.0, 1.0))
+        let m = touch.moving ? 1 : 0
+        let receiver : String = "\(openPatchDollarZero ?? Int32(0))" + PdConstants.receiverPostFix
+        //let list = ["/x",x,"/y",y,"/z",z] as [Any]
+        // FIXME: figure out how to get Pd to parse the list sequentially.
+        PdBase.sendList(["/x",touch.x], toReceiver: receiver)
+        PdBase.sendList(["/y",touch.y], toReceiver: receiver)
         PdBase.sendList(["/z",z], toReceiver: receiver)
         PdBase.sendList(["/m",m], toReceiver: receiver)
         //print("Radius: \(radius), Z: \(z)")
