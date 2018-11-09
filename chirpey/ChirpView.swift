@@ -170,26 +170,12 @@ class ChirpView: UIImageView {
 /// Contains Pd and libpd file management for ChirpView.
 extension ChirpView {
     
-    /// Prepare to play back sounds by loading the appropriate Pd file.
-    func prepareToPlaySounds() {
-        if let performance = performance {
-            openSoundScheme(withName: performance.instrument)
-        } else {
-            print("ChirpView: No performance loaded.")
-        }
-    }
-    
-    /// Given a point in the UIImage, sends a touch point to Pd to process for sound.
-    func makeSound(at point : CGPoint, withRadius radius : CGFloat, thatWasMoving moving: Bool) {
-        // Pd file must be opened by chirp.prepareToPlaySounds() before sounds can be played.
+    /// Given x, y, z, moving, send a touch point to Pd to process for sound.
+    func makeSound(x: Double, y: Double, z: Double, moving: Bool) {
         guard openPatch != nil else {
             print("ChirpView: attempt to play without opening Pd file")
-            return // could throw and exception here.
+            return // could throw an exception here.
         }
-        
-        let x = Double(point.x) / Double(frame.size.width)
-        let y = Double(point.y) / Double(frame.size.width)
-        let z = Double(min(radius / 120.0, 1.0))
         let m = moving ? 1 : 0
         let receiver : String = "\(openPatchDollarZero ?? Int32(0))" + PdConstants.receiverPostFix
         //let list = ["/x",x,"/y",y,"/z",z] as [Any]
@@ -202,24 +188,27 @@ extension ChirpView {
         //print("/x: \(x) /y: \(y) /z: \(z) /m: \(m)")
     }
     
+    /// Given a point in the UIImage, sends a touch point to Pd to process for sound.
+    func makeSound(at point : CGPoint, withRadius radius : CGFloat, thatWasMoving moving: Bool) {
+        let x = Double(point.x) / Double(frame.size.width)
+        let y = Double(point.y) / Double(frame.size.width)
+        let z = Double(min(radius / 120.0, 1.0))
+        makeSound(x: x, y: y, z: z, moving: moving)
+    }
+    
     /// Given a touch point, send it to Pd to process for sound.
     func makeSound(at touch : TouchRecord) {
-        // Pd file must be opened by chirp.prepareToPlaySounds() before sounds can be played.
-        guard openPatch != nil else {
-            print("ChirpView: attempt to play without opening Pd file")
-            return // could throw and exception here.
-        }
         let z = Double(min(touch.z / 120.0, 1.0))
-        let m = touch.moving ? 1 : 0
-        let receiver : String = "\(openPatchDollarZero ?? Int32(0))" + PdConstants.receiverPostFix
-        //let list = ["/x",x,"/y",y,"/z",z] as [Any]
-        // FIXME: figure out how to get Pd to parse the list sequentially.
-        PdBase.sendList(["/x",touch.x], toReceiver: receiver)
-        PdBase.sendList(["/y",touch.y], toReceiver: receiver)
-        PdBase.sendList(["/z",z], toReceiver: receiver)
-        PdBase.sendList(["/m",m], toReceiver: receiver)
-        //print("Radius: \(radius), Z: \(z)")
-        //print("/x: \(x) /y: \(y) /z: \(z) /m: \(m)")
+        makeSound(x: touch.x, y: touch.y, z: z, moving: touch.moving)
+    }
+    
+    /// Prepare to play back sounds by loading the appropriate Pd file.
+    func prepareToPlaySounds() {
+        if let performance = performance {
+            openSoundScheme(withName: performance.instrument)
+        } else {
+            print("ChirpView: No performance loaded.")
+        }
     }
     
     /// Attempts to open a SoundScheme given its name.
