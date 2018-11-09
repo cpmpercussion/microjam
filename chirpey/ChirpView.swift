@@ -117,20 +117,6 @@ class ChirpView: UIImageView {
         ellipse.opacity = 1.0
         ellipse.fillColor = color
         animationLayer.addSublayer(ellipse)
-
-//        UIGraphicsBeginImageContextWithOptions(frame.size, false, (UIScreen.main).scale)
-//        guard let context = UIGraphicsGetCurrentContext() else {
-//            return
-//        }
-//        let rect = CGRect(x:0, y:0, width:frame.size.width, height:frame.size.height)
-//        ///FIXME: This is the slowest line of code in the project, big performance block. calls drawInRect.
-//        if let im = image {im.draw(in: rect)}
-//        context.setFillColor(color);
-//        context.setBlendMode(CGBlendMode.normal)
-//        context.fillEllipse(in: CGRect(x:point.x - 5, y:point.y - 5, width:10, height:10));
-//        image = UIGraphicsGetImageFromCurrentImageContext() // save back to the UIImage
-//
-//        UIGraphicsEndImageContext()
     }
 
     /// Draws a line between two points in the UIImage.
@@ -149,21 +135,6 @@ class ChirpView: UIImageView {
         line.opacity = 1.0
         line.strokeColor = color
         animationLayer.addSublayer(line)
-//        UIGraphicsBeginImageContextWithOptions(frame.size, false, (UIScreen.main).scale)
-//        guard let context = UIGraphicsGetCurrentContext() else {
-//            return
-//        }
-//        let rect = CGRect(x:0, y:0, width:frame.size.width, height:frame.size.height)
-//        if let im = image {im.draw(in: rect)}
-//        context.move(to: fromPoint)
-//        context.addLine(to: toPoint)
-//        context.setLineCap(CGLineCap.round)
-//        context.setLineWidth(10.0)
-//        context.setStrokeColor(color)
-//        context.setBlendMode(CGBlendMode.normal)
-//        context.strokePath()
-//        image = UIGraphicsGetImageFromCurrentImageContext() // save back to the UIImage
-//        UIGraphicsEndImageContext()
     }
     
     func resetAnimationLayer() {
