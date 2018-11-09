@@ -92,6 +92,7 @@ class ChirpView: UIImageView {
     func drawDot(at point : CGPoint, withColour color : CGColor) {
         UIGraphicsBeginImageContextWithOptions(frame.size, false, (UIScreen.main).scale)
         let context = UIGraphicsGetCurrentContext();
+        ///FIXME: This is the slowest line of code in the project, big performance block. calls drawInRect.
         image?.draw(in: CGRect(x:0, y:0, width:frame.size.width, height:frame.size.height))
         context!.setFillColor(color);
         context!.setBlendMode(CGBlendMode.normal)
