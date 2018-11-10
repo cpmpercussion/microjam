@@ -458,6 +458,7 @@
 		5669CA9D1DA7AAA6009EEC3B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5669CA9B1DA7AAA6009EEC3B /* LaunchScreen.storyboard */; };
 		566A70DA209C50C30066EFD4 /* NoAccountWarningStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566A70D9209C50C30066EFD4 /* NoAccountWarningStackView.swift */; };
 		567286661E05E0AF0024A515 /* MicrojamTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567286651E05E0AF0024A515 /* MicrojamTabBarController.swift */; };
+		5678463021977C2700A710C5 /* UIButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5678462F21977C2700A710C5 /* UIButtonExtensions.swift */; };
 		568D1DC41DF995E500A2BC0B /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 568D1DC31DF995E500A2BC0B /* Settings.bundle */; };
 		56A0505320F5B58E00455FDF /* robojamCertificate.der in Resources */ = {isa = PBXBuildFile; fileRef = 56A0505220F5B58E00455FDF /* robojamCertificate.der */; };
 		56A0505520F5E1C600455FDF /* ProfileScreenController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56A0505420F5E1C600455FDF /* ProfileScreenController.storyboard */; };
@@ -953,6 +954,7 @@
 		5669CAB41DA7AAA6009EEC3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		566A70D9209C50C30066EFD4 /* NoAccountWarningStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NoAccountWarningStackView.swift; path = chirpey/NoAccountWarningStackView.swift; sourceTree = "<group>"; };
 		567286651E05E0AF0024A515 /* MicrojamTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MicrojamTabBarController.swift; path = chirpey/MicrojamTabBarController.swift; sourceTree = "<group>"; };
+		5678462F21977C2700A710C5 /* UIButtonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtensions.swift; sourceTree = "<group>"; };
 		568D1DC31DF995E500A2BC0B /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		56A0505220F5B58E00455FDF /* robojamCertificate.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = robojamCertificate.der; sourceTree = "<group>"; };
 		56A0505420F5E1C600455FDF /* ProfileScreenController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = ProfileScreenController.storyboard; path = chirpey/ProfileScreenController.storyboard; sourceTree = "<group>"; };
@@ -1035,6 +1037,7 @@
 		560772DB1F206F1B000D862D /* views */ = {
 			isa = PBXGroup;
 			children = (
+				5678462F21977C2700A710C5 /* UIButtonExtensions.swift */,
 				5669CA961DA7AAA6009EEC3B /* Main.storyboard */,
 				5669CA9B1DA7AAA6009EEC3B /* LaunchScreen.storyboard */,
 				564AF3B220989E7B0050B541 /* ChirpJamViewController.storyboard */,
@@ -2300,6 +2303,7 @@
 				56621B171DEC27B0009B9AB6 /* PerformanceTableCell.swift in Sources */,
 				5627B5F61F72F062007807E4 /* RoboJamView.swift in Sources */,
 				56A46DF6206F8B170084BC16 /* MicrojamTutorialCloudLoginViewController.swift in Sources */,
+				5678463021977C2700A710C5 /* UIButtonExtensions.swift in Sources */,
 				56A46DF4206F8ABA0084BC16 /* MicrojamTutorialGetStartedViewController.swift in Sources */,
 				5653B6CD2194900600F0E687 /* RoboJamMaker.swift in Sources */,
 			);
