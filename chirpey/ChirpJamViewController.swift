@@ -82,6 +82,13 @@ class ChirpJamViewController: UIViewController {
     /// Prepare to segue - this is where the Jam screen actually saves performances! So it's an important check.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         print("JAMVC: Preparing for Segue.")
+        
+        /// Fixme this does nothing.
+        if (sender as? MixerTableViewController) != nil {
+            print("JAMVC: Preparing to segue to mixer, basically do nothing.")
+            return
+        }
+        
         // FIXME: save the performance if the playback hasn't stopped.
         jamming = false // stop jamming.
         
