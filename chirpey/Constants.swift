@@ -169,14 +169,14 @@ let RECORDING_TIME = 5.0
 
 /// Colours for buttons in Jam Screen
 struct ButtonColors {
-    static let rewind = UIColor.init("#2a317d") //UIColor.init("#A10702")
+    static let rewind = UIColor.init("#774BE5") //"#2a317d") //UIColor.init("#A10702")
     static let record = UIColor.red //UIColor.init("#f13f04")//("#fb4d3d") //UIColor.init("#ED2D07")
     static let recordDisabled = UIColor.init("#b01435")
     static let recordGlow = UIColor.init("#ff5900") //("#e5470d") // just for glow effect on rec button
-    static let play = UIColor.init("#03cea4") // UIColor.init("#FAA613")
-    static let layer = UIColor.init("#7dcfb6")
-    static let jam = UIColor.init("#eac435") // UIColor.init("#688E26") //
-    static let roboplay = UIColor.init("#ca1551") //UIColor.init("#550527") //
+    static let play = UIColor.init("#a4f644") // "#03cea4") // UIColor.init("#FAA613")
+    static let jam = UIColor.init("#FFD045") //"#eac435") // UIColor.init("#688E26") //
+    static let layer = UIColor.init("#4FEBF9") //#7dcfb6")
+    static let robojam = UIColor.init("#ca1551") //UIColor.init("#550527") //
 }
 
 /// Error messages and dialogues

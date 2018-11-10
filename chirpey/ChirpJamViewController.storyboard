@@ -90,7 +90,6 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u5c-DI-hYM" userLabel="Rewind">
                                                 <rect key="frame" x="0.0" y="0.0" width="40.5" height="44"/>
                                                 <accessibility key="accessibilityConfiguration" hint="Tap here to undo performance" identifier="Rewind button" label="Rewind button"/>
-                                                <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
                                                 <state key="normal" title="Rewind" image="microjam-rewind"/>
                                                 <connections>
                                                     <action selector="rewindScreen:" destination="biZ-h3-m2K" eventType="touchUpInside" id="MWW-FP-2Jc"/>
@@ -99,7 +98,6 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fg3-ri-xVn" userLabel="Record Enable">
                                                 <rect key="frame" x="50.5" y="0.0" width="40.5" height="44"/>
                                                 <accessibility key="accessibilityConfiguration" hint="Tap here to record a performance" identifier="Record button" label="Record button"/>
-                                                <color key="tintColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" title="Record" image="microjam-record"/>
                                                 <connections>
                                                     <action selector="recordEnablePressed:" destination="biZ-h3-m2K" eventType="touchUpInside" id="ZW1-kj-USJ"/>
@@ -108,7 +106,6 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fA1-Jk-Cp5">
                                                 <rect key="frame" x="101" y="0.0" width="40.5" height="44"/>
                                                 <accessibility key="accessibilityConfiguration" hint="Tap here to play performance" identifier="playButton" label="Play"/>
-                                                <color key="tintColor" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" title="play" image="microjam-play"/>
                                                 <connections>
                                                     <action selector="playButtonPressed:" destination="biZ-h3-m2K" eventType="touchUpInside" id="Pa8-wd-Y6m"/>
@@ -134,20 +131,19 @@
                                             <button opaque="NO" contentMode="right" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9a9-II-qfe" userLabel="Mixer Button">
                                                 <rect key="frame" x="252" y="0.0" width="40.5" height="44"/>
                                                 <accessibility key="accessibilityConfiguration" hint="Tap here to choose a different sound." identifier="instrumentChooser" label="Instrument Menu"/>
-                                                <color key="tintColor" red="0.38397389650000002" green="0.78096622230000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <state key="normal" title="add jam" image="microjam-layer">
+                                                <state key="normal" title="add jam" image="mixer-button">
                                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="openMixer:" destination="biZ-h3-m2K" eventType="touchUpInside" id="nOu-Gd-yal"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1tC-Gd-VT7" userLabel="Roboplay Button">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1tC-Gd-VT7" userLabel="Robojam Button">
                                                 <rect key="frame" x="302.5" y="0.0" width="40.5" height="44"/>
-                                                <accessibility key="accessibilityConfiguration" hint="Tap here to request a RoboJam layer" identifier="Roboplay button" label="Roboplay button"/>
+                                                <accessibility key="accessibilityConfiguration" hint="Tap here to request a Robojam layer" identifier="Robojam button" label="Robojam button"/>
                                                 <state key="normal" title="Button" image="microjam-roboplay"/>
                                                 <connections>
-                                                    <action selector="roboplayPressed:" destination="biZ-h3-m2K" eventType="touchUpInside" id="8w9-nU-ePS"/>
+                                                    <action selector="robojamPressed:" destination="biZ-h3-m2K" eventType="touchUpInside" id="oJB-oO-jce"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -227,7 +223,7 @@
                         <outlet property="recordingProgress" destination="dDf-x3-d2A" id="T87-QR-yDq"/>
                         <outlet property="replyButton" destination="9JM-fD-Gwu" id="fzj-ci-z27"/>
                         <outlet property="rewindButton" destination="u5c-DI-hYM" id="GUh-Tx-SaO"/>
-                        <outlet property="roboplayButton" destination="1tC-Gd-VT7" id="AaM-lI-LT3"/>
+                        <outlet property="robojamButton" destination="1tC-Gd-VT7" id="6Qg-sk-pmQ"/>
                         <outlet property="savePerformanceButton" destination="Ayi-La-iYA" id="qnI-A5-xcq"/>
                     </connections>
                 </viewController>
@@ -256,13 +252,13 @@
         </scene>
     </scenes>
     <resources>
-        <image name="microjam-layer" width="316" height="356"/>
         <image name="microjam-loop" width="316" height="356"/>
         <image name="microjam-play" width="316" height="356"/>
         <image name="microjam-record" width="316" height="356"/>
         <image name="microjam-reply" width="316" height="356"/>
         <image name="microjam-rewind" width="316" height="356"/>
         <image name="microjam-roboplay" width="316" height="356"/>
+        <image name="mixer-button" width="300" height="300"/>
         <image name="settingsTabIcon" width="75" height="75"/>
     </resources>
 </document>

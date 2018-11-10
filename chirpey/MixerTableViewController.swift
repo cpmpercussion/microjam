@@ -13,6 +13,8 @@ let mixerTableReuseIdentifier = "mixerTableReuseIdentifier"
 
 class MixerTableViewController: UITableViewController {
     
+    /// The ChirpJamViewController that sent us here.
+    var controllerToMix: ChirpJamViewController?
     /// The layered jams to mix here.
     var chirpsToMix: [ChirpView]?
     /// Local reference to the PerformerProfileStore.
@@ -63,6 +65,7 @@ class MixerTableViewController: UITableViewController {
         cell.volumeSlider.thumbTintColor = cell.chirp?.performance?.colour
         cell.setVolume(vol: Float(cell.chirp?.volume ?? 1.0))
         cell.setMute(muted: cell.chirp?.muted ?? false)
+        cell.controllerToMix = controllerToMix
         
         if let perf = cell.chirp?.performance,
             let profile = profilesStore.getProfile(forPerformance: perf) {
