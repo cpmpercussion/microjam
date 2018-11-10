@@ -53,10 +53,12 @@ class ChirpView: UIImageView {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        resetAnimationLayer() // set up the animation layer
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        resetAnimationLayer() // set up the animation layer
     }
     
     /// Convenience Initialiser only used when loading performances for playback only. Touch is disabled!
@@ -105,40 +107,65 @@ class ChirpView: UIImageView {
 
     /// Draws a dot at a given point in the UIImage.
     func drawDot(at point : CGPoint, withColour color : CGColor) {
-        UIGraphicsBeginImageContextWithOptions(frame.size, false, (UIScreen.main).scale)
-        guard let context = UIGraphicsGetCurrentContext() else {
+        guard let animationLayer = animationLayer else {
             return
         }
-        let rect = CGRect(x:0, y:0, width:frame.size.width, height:frame.size.height)
-        ///FIXME: This is the slowest line of code in the project, big performance block. calls drawInRect.
-        if let im = image {im.draw(in: rect)}
-        context.setFillColor(color);
-        context.setBlendMode(CGBlendMode.normal)
-        context.fillEllipse(in: CGRect(x:point.x - 5, y:point.y - 5, width:10, height:10));
-        image = UIGraphicsGetImageFromCurrentImageContext() // save back to the UIImage
-        
-        UIGraphicsEndImageContext()
+        let ellipse = CAShapeLayer()
+        let ellipseRect = CGRect(x:point.x - 5, y:point.y - 5, width:10, height:10)
+        let ellipsePath = UIBezierPath(roundedRect: ellipseRect, cornerRadius: 5.0)
+        ellipse.path = ellipsePath.cgPath
+        ellipse.fillColor = color
+        ellipse.opacity = 1.0
+        ellipse.fillColor = color
+        animationLayer.addSublayer(ellipse)
     }
 
     /// Draws a line between two points in the UIImage.
     func drawLine(from fromPoint : CGPoint, to toPoint : CGPoint, withColour color : CGColor) {
-        
-        
-        UIGraphicsBeginImageContextWithOptions(frame.size, false, (UIScreen.main).scale)
-        guard let context = UIGraphicsGetCurrentContext() else {
+        guard let animationLayer = animationLayer else {
             return
         }
-        let rect = CGRect(x:0, y:0, width:frame.size.width, height:frame.size.height)
-        if let im = image {im.draw(in: rect)}
-        context.move(to: fromPoint)
-        context.addLine(to: toPoint)
-        context.setLineCap(CGLineCap.round)
-        context.setLineWidth(10.0)
-        context.setStrokeColor(color)
-        context.setBlendMode(CGBlendMode.normal)
-        context.strokePath()
-        image = UIGraphicsGetImageFromCurrentImageContext() // save back to the UIImage
+        let line = CAShapeLayer()
+        let linePath = UIBezierPath()
+        linePath.move(to: fromPoint)
+        linePath.addLine(to: toPoint)
+        line.path = linePath.cgPath
+        line.lineCap = .round
+        line.lineWidth = 10.0
+        line.fillColor = nil
+        line.opacity = 1.0
+        line.strokeColor = color
+        animationLayer.addSublayer(line)
+    }
+    
+    func resetAnimationLayer() {
+        animationLayer?.removeFromSuperlayer()
+        animationLayer = CALayer(layer: layer)
+        if let animationLayer = animationLayer {
+            layer.addSublayer(animationLayer) // try out CALayers?
+        }
+    }
+    
+    /// Reset the Animation Layer and restore the performance image.
+    func setImage() {
+        resetAnimationLayer()
+        if let performance = performance {
+            image = performance.image
+        }
+    }
+
+    /// Make an image out of the animationLayer CALayers
+    func moveAnimationLayerToImage() -> UIImage? {
+        print("Going to try to output the layers")
+        UIGraphicsBeginImageContextWithOptions(frame.size, false, (UIScreen.main).scale)
+        guard let context = UIGraphicsGetCurrentContext(),
+            let animationLayer = animationLayer else {
+            return UIImage()
+        }
+        animationLayer.render(in: context)
+        let output = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
+        return output
     }
 
     // MARK: - playback functions

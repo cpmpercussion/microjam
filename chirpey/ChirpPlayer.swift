@@ -119,7 +119,7 @@ class ChirpPlayer: NSObject {
                 }
                 
                 for chirp in chirpViews {
-                    chirp.image = chirp.performance!.image
+                    chirp.setImage()
                 }
             }
         }
