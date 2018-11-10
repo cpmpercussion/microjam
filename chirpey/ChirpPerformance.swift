@@ -220,33 +220,33 @@ class ChirpPerformance : NSObject {
 
 // MARK: Playback functions
 
-/// Extension for playback functions
-extension ChirpPerformance {
-    
-    // TODO: make playback behave like "play/pause" rather than start and cancel.
-    
-    /// Schedules playback of the performance in a given `ChirpView`
-    func playback(inView view : ChirpView) {
-        view.playbackColour = self.colour.brighterColor.cgColor // make sure colour is set before playback.
-        var timers : [Timer] = []
-        for touch in self.performanceData {
-            let processor : (Timer) -> Void = view.makeTouchPlayerWith(touch: touch)
-            let t = Timer.scheduledTimer(withTimeInterval: touch.time, repeats: false, block: processor)
-            timers.append(t)
-        }
-        print("PERF: playing back; scheduled", timers.count, "notes.")
-        self.playbackTimers = timers
-    }
-    
-    /// Cancels the current playback. (Can not be un-cancelled)
-    func cancelPlayback() {
-        print("PERF: Cancelling", self.playbackTimers.count, "timers.")
-        for t in self.playbackTimers {
-            t.invalidate()
-        }
-    }
-    
-}
+///// Extension for playback functions
+//extension ChirpPerformance {
+//    
+//    // TODO: make playback behave like "play/pause" rather than start and cancel.
+//    
+//    /// Schedules playback of the performance in a given `ChirpView`
+//    func playback(inView view : ChirpView) {
+//        view.playbackColour = self.colour.brighterColor.cgColor // make sure colour is set before playback.
+//        var timers : [Timer] = []
+//        for touch in self.performanceData {
+//            let processor : (Timer) -> Void = view.makeTouchPlayerWith(touch: touch)
+//            let t = Timer.scheduledTimer(withTimeInterval: touch.time, repeats: false, block: processor)
+//            timers.append(t)
+//        }
+//        print("PERF: playing back; scheduled", timers.count, "notes.")
+//        self.playbackTimers = timers
+//    }
+//    
+//    /// Cancels the current playback. (Can not be un-cancelled)
+//    func cancelPlayback() {
+//        print("PERF: Cancelling", self.playbackTimers.count, "timers.")
+//        for t in self.playbackTimers {
+//            t.invalidate()
+//        }
+//    }
+//    
+//}
 
 // MARK: NSCoding stuff
 

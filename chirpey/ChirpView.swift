@@ -21,10 +21,15 @@ class ChirpView: UIImageView {
     var performance : ChirpPerformance?
     /// Colour for drawing playing touches.
     var playbackColour : CGColor?
+
     
     // Drawing
     /// Stores the location of the last drawn point for animating strokes.
     var lastPoint : CGPoint?
+    /// Stores the details of the last touch for animating strokes.
+    var lastTouch : TouchRecord?
+    /// A CALayer for doing animations
+    var animationLayer : CALayer?
     
     // Interaction
     /// True if the view is currently playing/recording a moving touch
@@ -48,10 +53,12 @@ class ChirpView: UIImageView {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        resetAnimationLayer() // set up the animation layer
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        resetAnimationLayer() // set up the animation layer
     }
     
     /// Convenience Initialiser only used when loading performances for playback only. Touch is disabled!
@@ -85,71 +92,127 @@ class ChirpView: UIImageView {
     }
     
     // MARK: - drawing functions
+    
+    /// Trying to maybe do faster UIImage drawing?
+    func draw(image: UIImage, inContext context: CGContext, withRect rect: CGRect) {
+        guard let im = image.cgImage else {
+            return
+        }
+        context.saveGState()
+        context.translateBy(x: 0.0, y: CGFloat(im.height))
+        context.scaleBy(x: 1.0, y: -1.0)
+        context.draw(im, in: rect)
+        context.restoreGState()
+    }
 
     /// Draws a dot at a given point in the UIImage.
     func drawDot(at point : CGPoint, withColour color : CGColor) {
-        UIGraphicsBeginImageContextWithOptions(frame.size, false, (UIScreen.main).scale)
-        let context = UIGraphicsGetCurrentContext();
-        image?.draw(in: CGRect(x:0, y:0, width:frame.size.width, height:frame.size.height))
-        context!.setFillColor(color);
-        context!.setBlendMode(CGBlendMode.normal)
-        context!.fillEllipse(in: CGRect(x:point.x - 5, y:point.y - 5, width:10, height:10));
-        image = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
+        guard let animationLayer = animationLayer else {
+            return
+        }
+        let ellipse = CAShapeLayer()
+        let ellipseRect = CGRect(x:point.x - 5, y:point.y - 5, width:10, height:10)
+        let ellipsePath = UIBezierPath(roundedRect: ellipseRect, cornerRadius: 5.0)
+        ellipse.path = ellipsePath.cgPath
+        ellipse.fillColor = color
+        ellipse.opacity = 1.0
+        ellipse.fillColor = color
+        animationLayer.addSublayer(ellipse)
     }
 
     /// Draws a line between two points in the UIImage.
     func drawLine(from fromPoint : CGPoint, to toPoint : CGPoint, withColour color : CGColor) {
-        UIGraphicsBeginImageContextWithOptions(frame.size, false, (UIScreen.main).scale)
-        guard let context = UIGraphicsGetCurrentContext() else {
+        guard let animationLayer = animationLayer else {
             return
         }
-        image?.draw(in: CGRect(x:0, y:0, width:frame.size.width, height:frame.size.height))
-        context.move(to: fromPoint)
-        context.addLine(to: toPoint)
-        context.setLineCap(CGLineCap.round)
-        context.setLineWidth(10.0)
-        context.setStrokeColor(color)
-        context.setBlendMode(CGBlendMode.normal)
-        context.strokePath()
-        image = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
+        let line = CAShapeLayer()
+        let linePath = UIBezierPath()
+        linePath.move(to: fromPoint)
+        linePath.addLine(to: toPoint)
+        line.path = linePath.cgPath
+        line.lineCap = .round
+        line.lineWidth = 10.0
+        line.fillColor = nil
+        line.opacity = 1.0
+        line.strokeColor = color
+        animationLayer.addSublayer(line)
+    }
+    
+    func resetAnimationLayer() {
+        animationLayer?.removeFromSuperlayer()
+        animationLayer = CALayer(layer: layer)
+        if let animationLayer = animationLayer {
+            layer.addSublayer(animationLayer) // try out CALayers?
+        }
+    }
+    
+    /// Reset the Animation Layer and restore the performance image.
+    func setImage() {
+        resetAnimationLayer()
+        if let performance = performance {
+            image = performance.image
+        }
+    }
+
+    /// Make an image out of the animationLayer CALayers
+    func moveAnimationLayerToImage() -> UIImage? {
+        print("Going to try to output the layers")
+        UIGraphicsBeginImageContextWithOptions(frame.size, false, (UIScreen.main).scale)
+        guard let context = UIGraphicsGetCurrentContext(),
+            let animationLayer = animationLayer else {
+            return UIImage()
+        }
+        animationLayer.render(in: context)
+        let output = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return output
     }
 
     // MARK: - playback functions
-    
-    /**
-     Mirrors touchesBegan for replayed performances.
-    **/
-    func playbackBegan(_ point : CGPoint, _ radius : CGFloat) {
-        swiped = false
-        lastPoint = point
-        drawDot(at: point, withColour: playbackColour ?? DEFAULT_PLAYBACK_COLOUR)
-        makeSound(at: point, withRadius: radius, thatWasMoving: false)
+    /// Converts x and y points to frame context
+    func touchRecordToFrameCoordinate(x: Double, y: Double) -> CGPoint {
+        return CGPoint(x: Double(frame.size.width) * x, y: Double(frame.size.width) * y)
     }
-    /**
-     Mirrors touchesMoved for replayed performances.
-    **/
-    func playbackMoved(_ point : CGPoint, _ radius : CGFloat) {
-        swiped = true
-        if let lastPoint = self.lastPoint {
-            drawLine(from: lastPoint, to: point, withColour: playbackColour ?? DEFAULT_PLAYBACK_COLOUR)
+    
+    /// Mirrors touchesBegan for replayed performances.
+    func playbackBegan(_ touch: TouchRecord) {
+        swiped = false
+        makeSound(at: touch)
+        DispatchQueue.main.async {
+            let p = self.touchRecordToFrameCoordinate(x: touch.x, y: touch.y)
+            self.drawDot(at: p, withColour: self.playbackColour ?? DEFAULT_PLAYBACK_COLOUR)
         }
-        lastPoint = point
-        makeSound(at: point, withRadius: radius, thatWasMoving: true)
+        lastTouch = touch
+    }
+    
+    /// Mirrors touchesMoved for replayed performances.
+    func playbackMoved(_ touch: TouchRecord) {
+        swiped = true
+        makeSound(at: touch)
+        if let lastTouch = self.lastTouch {
+            DispatchQueue.main.async {
+                let p = self.touchRecordToFrameCoordinate(x: touch.x, y: touch.y)
+                let lp = self.touchRecordToFrameCoordinate(x: lastTouch.x, y: lastTouch.y)
+                self.drawLine(from: lp, to: p, withColour: self.playbackColour ?? DEFAULT_PLAYBACK_COLOUR)
+            }
+        }
+        lastTouch = touch
     }
     
     /// Returns function for playing a `TouchRecord` at a certain time. Used for playing back touches.
     func makeTouchPlayerWith(touch: TouchRecord) -> ((Timer) -> Void) {
-        let z = CGFloat(touch.z)
-        let point = CGPoint(x: Double(frame.size.width) * touch.x, y: Double(frame.size.width) * touch.y)
-        let playbackFunction : (CGPoint, CGFloat) -> Void = touch.moving ? playbackMoved : playbackBegan
+        let playbackFunction : (TouchRecord) -> Void = touch.moving ? playbackMoved : playbackBegan
         func playbackTouch(withTimer timer: Timer) {
-            playbackFunction(point, z)
+            playbackFunction(touch)
         }
         return playbackTouch
     }
-
+    
+    /// Alternative function for playing back a touch record.
+    func play(touch: TouchRecord) {
+        let playbackFunction : (TouchRecord) -> Void = touch.moving ? playbackMoved : playbackBegan
+        playbackFunction(touch)
+    }
 }
 
 // MARK: - Pd Patch Managing Functions.
@@ -157,26 +220,12 @@ class ChirpView: UIImageView {
 /// Contains Pd and libpd file management for ChirpView.
 extension ChirpView {
     
-    /// Prepare to play back sounds by loading the appropriate Pd file.
-    func prepareToPlaySounds() {
-        if let performance = performance {
-            openSoundScheme(withName: performance.instrument)
-        } else {
-            print("ChirpView: No performance loaded.")
-        }
-    }
-    
-    /// Given a point in the UIImage, sends a touch point to Pd to process for sound.
-    func makeSound(at point : CGPoint, withRadius radius : CGFloat, thatWasMoving moving: Bool) {
-        // Pd file must be opened by chirp.prepareToPlaySounds() before sounds can be played.
+    /// Given x, y, z, moving, send a touch point to Pd to process for sound.
+    func makeSound(x: Double, y: Double, z: Double, moving: Bool) {
         guard openPatch != nil else {
             print("ChirpView: attempt to play without opening Pd file")
-            return // could throw and exception here.
+            return // could throw an exception here.
         }
-        
-        let x = Double(point.x) / Double(frame.size.width)
-        let y = Double(point.y) / Double(frame.size.width)
-        let z = Double(min(radius / 120.0, 1.0))
         let m = moving ? 1 : 0
         let receiver : String = "\(openPatchDollarZero ?? Int32(0))" + PdConstants.receiverPostFix
         //let list = ["/x",x,"/y",y,"/z",z] as [Any]
@@ -187,6 +236,29 @@ extension ChirpView {
         PdBase.sendList(["/m",m], toReceiver: receiver)
         //print("Radius: \(radius), Z: \(z)")
         //print("/x: \(x) /y: \(y) /z: \(z) /m: \(m)")
+    }
+    
+    /// Given a point in the UIImage, sends a touch point to Pd to process for sound.
+    func makeSound(at point : CGPoint, withRadius radius : CGFloat, thatWasMoving moving: Bool) {
+        let x = Double(point.x) / Double(frame.size.width)
+        let y = Double(point.y) / Double(frame.size.width)
+        let z = Double(min(radius / 120.0, 1.0))
+        makeSound(x: x, y: y, z: z, moving: moving)
+    }
+    
+    /// Given a touch point, send it to Pd to process for sound.
+    func makeSound(at touch : TouchRecord) {
+        let z = Double(min(touch.z / 120.0, 1.0))
+        makeSound(x: touch.x, y: touch.y, z: z, moving: touch.moving)
+    }
+    
+    /// Prepare to play back sounds by loading the appropriate Pd file.
+    func prepareToPlaySounds() {
+        if let performance = performance {
+            openSoundScheme(withName: performance.instrument)
+        } else {
+            print("ChirpView: No performance loaded.")
+        }
     }
     
     /// Attempts to open a SoundScheme given its name.

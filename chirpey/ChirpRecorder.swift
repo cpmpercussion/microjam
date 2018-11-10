@@ -77,14 +77,14 @@ class ChirpRecorder: ChirpPlayer {
         super.stop()
         if isRecording {
             isRecording = false
-            if recordingView.saveRecording() != nil {
-                recordingIsDone = true
-                recordingEnabled = false
+            if self.recordingView.saveRecording() != nil {
+                self.recordingIsDone = true
+                self.recordingEnabled = false
             }
         }
         if recordingIsDone, let performance = recordingView.performance {
             print("ChirpRecorder: Adding performance image as my display image: \(performance.title())")
-            recordingView.image = performance.image
+            self.recordingView.image = performance.image
         }
     }
 }

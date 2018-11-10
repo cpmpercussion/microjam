@@ -233,15 +233,15 @@ class WorldJamsTableViewController: UITableViewController {
 
 extension WorldJamsTableViewController: PlayerDelegate {
     
-    func progressTimerStarted() {
+    func playbackStarted() {
         // not used
     }
 
-    func progressTimerStep() {
+    func playbackStep(_ time: Double) {
         // not used
     }
 
-    func progressTimerEnded() {
+    func playbackEnded() {
 
         if let cell = currentlyPlaying {
             cell.player!.stop()

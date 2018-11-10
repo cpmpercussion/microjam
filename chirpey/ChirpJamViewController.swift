@@ -82,7 +82,7 @@ class ChirpJamViewController: UIViewController {
     /// Prepare to segue - this is where the Jam screen actually saves performances! So it's an important check.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         print("JAMVC: Preparing for Segue.")
-        // FIXME: save the performance if the timer hasn't run out.
+        // FIXME: save the performance if the playback hasn't stopped.
         jamming = false // stop jamming.
         
         if let recorder = recorder,
@@ -589,10 +589,9 @@ extension ChirpJamViewController {
 extension ChirpJamViewController: PlayerDelegate {
     
     /// Updated UI to reflect that recording or playback has started.
-    func progressTimerStarted() {
-    print("Progress Timer started")
+    func playbackStarted() {
         if let rec = recorder, rec.isRecording {
-            print("Recorder is recording")
+            print("Recording")
             recEnableButton.solidGlow() // solid recording light.
             createParticles()
         }
@@ -600,37 +599,35 @@ extension ChirpJamViewController: PlayerDelegate {
     
     
     /// Updates the progress bar in response to steps from the ChirpPlayer
-    func progressTimerStep() {
-        recordingProgress.progress = Float(recorder!.progress / recorder!.maxPlayerTime)
+    func playbackStep(_ time: Double) {
+        DispatchQueue.main.async { self.recordingProgress.progress = Float(time / 5.0) }
     }
 
     /// Updates UI when the ChirpPlayer reports playback/recording has finished.
-    func progressTimerEnded() {
-        stopParticles()
-        recordingProgress.progress = 0.0
-        recorder!.stop()
+    func playbackEnded() {
+        self.stopParticles()
+        self.recordingProgress.progress = 0.0
+        self.recorder!.stop()
         
         // continue playing if jamming is enabled
-        if jamming {
-            recorder!.play()
+        if self.jamming {
+            self.recorder!.play()
             return
         }
         
         // enable saving and replying if recording is finished.
         if let rec = recorder, rec.recordingIsDone {
-            replyButton.isEnabled = true
-            savePerformanceButton.isEnabled = true
-            robojamButton.isEnabled = true
-            
-            setRecordingDisabled() //
-            recEnableButton.isEnabled = false
-            // do other things to make sure recording is preserved properly.
+            setRecordingDisabled() ///TODO what's this line do?
+            self.setRecordingDisabled()
+            self.replyButton.isEnabled = true
+            self.savePerformanceButton.isEnabled = true
+            self.robojamButton.isEnabled = true
+            self.recEnableButton.isEnabled = false
         }
-        
-        rewindButton.isEnabled = true
-        jamButton.isEnabled = true
-        playButton.isEnabled = true
-        playButton.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal)
+        self.rewindButton.isEnabled = true
+        self.jamButton.isEnabled = true
+        self.playButton.isEnabled = true
+        self.playButton.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal)
     }
 }
 
