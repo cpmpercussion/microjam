@@ -69,7 +69,7 @@ class RoboJamView: ChirpView {
     
     /// update the performance image.
     func addGeneratedImage(_ timer: Timer) {
-        if let image = self.image, let perf = self.performance {
+        if let image = self.moveAnimationLayerToImage(), let perf = self.performance {
             perf.image = image
             print("RoboJamView: added complete image")
         }

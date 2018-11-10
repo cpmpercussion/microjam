@@ -8,12 +8,6 @@
 
 import UIKit
 
-/// Storage for a single tail segment which consists of a touch location and a timer for removing it.
-struct TailSegment {
-    var touch: TouchRecord
-    var timer: Timer
-}
-
 /// Subclass of ChirpView that enables recording and user interaction
 class ChirpRecordingView: ChirpView {
     
@@ -70,7 +64,6 @@ extension ChirpRecordingView {
         } else {
             // not recording, add disappearing touches.
             addTailSegment(at: lastPoint!, withSize: size!, thatWasMoving: false)
-            draw(tailSegments: tailSegments, withColor: recordingColour!)
         }
         // always make a sound.
         makeSound(at: lastPoint!, withRadius: size!, thatWasMoving: false)
@@ -98,7 +91,6 @@ extension ChirpRecordingView {
         } else {
             // not recording, add disappearing touches.
             addTailSegment(at: currentPoint, withSize: size!, thatWasMoving: true)
-            draw(tailSegments: tailSegments, withColor: recordingColour!)
             lastPoint = currentPoint
         }
         
@@ -129,10 +121,11 @@ extension ChirpRecordingView {
     func saveRecording() -> ChirpPerformance? {
         recording = false
         guard let output = self.performance,
-            let image = self.image else {
+            let im = moveAnimationLayerToImage() else {
                 return nil
         }
-        output.image = moveAnimationLayerToImage()
+        image = im // set the image to be the saved image
+        output.image = im // save the saved image to the output performance
         output.performer = UserProfile.shared.profile.stageName
         output.instrument = SoundSchemes.namesForKeys[UserProfile.shared.profile.soundScheme]!
         output.date = Date()
@@ -158,6 +151,12 @@ extension ChirpRecordingView {
 
 extension ChirpRecordingView {
     
+    /// Storage for a single tail segment which consists of a touch location and a timer for removing it.
+    struct TailSegment {
+        var touch: TouchRecord
+        var timer: Timer
+    }
+    
     /// Add animated tail segment that removes itself after a certain time.
     private func addTailSegment(at point: CGPoint, withSize size: CGFloat, thatWasMoving moving: Bool) {
         let touch = TouchRecord(time: 0, x: Double(point.x), y: Double(point.y), z: Double(size), moving: moving)
@@ -169,6 +168,7 @@ extension ChirpRecordingView {
         }
         let tailSegment = TailSegment(touch: touch, timer: timer)
         tailSegments.append(tailSegment)
+        draw(tailSegments: tailSegments, withColor: recordingColour!) // redraw the tail segments
     }
     
     /// Draws all present tail segments. If there is a recorded image it should draw them on top of that, if not draw from nothing.

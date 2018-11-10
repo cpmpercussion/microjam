@@ -83,8 +83,8 @@ class ChirpRecorder: ChirpPlayer {
             }
         }
         if recordingIsDone, let performance = recordingView.performance {
-            print("ChirpRecorder: Adding performance image as my display image: \(performance.title())")
-            self.recordingView.image = performance.image
+            // print("ChirpRecorder: Adding performance image as my display image: \(performance.title())")
+            self.recordingView.setImage() // clear the animation layer and reset the saved image
         }
     }
 }
