@@ -195,6 +195,13 @@ extension ChirpRecordingView {
         line.fillColor = nil
         line.opacity = 1.0
         line.strokeColor = color
+        
+        let animation = CABasicAnimation(keyPath: "opacity")
+        animation.fromValue = 1.0
+        animation.toValue = 0.0
+        animation.duration = 0.3
+        line.add(animation, forKey: animation.keyPath)
+        
         return line
     }
     
