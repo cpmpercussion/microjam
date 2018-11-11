@@ -63,7 +63,7 @@ extension ChirpRecordingView {
             recordTouch(at: lastPoint!, withRadius: size!, thatWasMoving:false)
         } else {
             // not recording, add disappearing touches.
-            addTailSegment(at: lastPoint!, withSize: size!)
+            addTailSegment(at: lastPoint!, withSize: size!, thatWasMoving: false)
         }
         // always make a sound.
         makeSound(at: lastPoint!, withRadius: size!, thatWasMoving: false)
@@ -90,7 +90,7 @@ extension ChirpRecordingView {
             recordTouch(at: currentPoint, withRadius: size!, thatWasMoving: true)
         } else {
             // not recording, add disappearing touches.
-            addTailSegment(at: currentPoint, withSize: size!)
+            addTailSegment(at: currentPoint, withSize: size!, thatWasMoving: true)
             lastPoint = currentPoint
         }
         
@@ -154,13 +154,14 @@ extension ChirpRecordingView {
     /// Storage for a single tail segment which consists of a touch location and a timer for removing it.
     struct TailSegment {
         var point: CGPoint
+        var moving: Bool
         var size: CGFloat
         var layer: CALayer?
         var timer: Timer
     }
     
     /// Add animated tail segment that removes itself after a certain time.
-    private func addTailSegment(at point: CGPoint, withSize size: CGFloat) {
+    private func addTailSegment(at point: CGPoint, withSize size: CGFloat, thatWasMoving moving: Bool) {
         // make a timer to self destruct the segment.
         let timer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { (timer) in
             self.removeOldestTailSegment() // remove the oldest segment
@@ -168,7 +169,8 @@ extension ChirpRecordingView {
         
         // figure out last point, if no previous segment, just use same point.
         var lastPoint = point
-        if let seg = tailSegments.last {
+        // make a line only when point is moving, and there was a previous point.
+        if let seg = tailSegments.last, moving {
             lastPoint = seg.point
         }
         
@@ -176,7 +178,7 @@ extension ChirpRecordingView {
         let tailLayer = makeSegmentLayer(from: lastPoint, to: point, withColour: self.recordingColour ?? DEFAULT_RECORDING_COLOUR)
         
         // make a struct for the segment
-        let tailSegment = TailSegment(point: point, size: size, layer: tailLayer, timer: timer)
+        let tailSegment = TailSegment(point: point, moving: moving, size: size, layer: tailLayer, timer: timer)
         tailSegments.append(tailSegment) // add to storage
         layer.addSublayer(tailLayer) // draw the tail segment
     }
