@@ -17,6 +17,8 @@ class MixerTableViewController: UITableViewController {
     var controllerToMix: ChirpJamViewController?
     /// The layered jams to mix here.
     var chirpsToMix: [ChirpView]?
+    /// An optional recording chirp.
+    var recordingChirp: ChirpRecordingView?
     /// Local reference to the PerformerProfileStore.
     let profilesStore = PerformerProfileStore.shared
     
@@ -32,6 +34,12 @@ class MixerTableViewController: UITableViewController {
         tableView.register(MixerTableViewCell.self, forCellReuseIdentifier: mixerTableReuseIdentifier)
         tableView.rowHeight = 80
         // do some more init.
+    }
+    
+    convenience init(withChirps chirps: [ChirpView], andRecording recorder: ChirpRecordingView) {
+        self.init(withChirps: chirps)
+        self.recordingChirp = recorder
+        chirpsToMix?.insert(recorder, at: 0) // just put the recording chirp at the top.
     }
     
     override func viewDidLoad() {
@@ -60,6 +68,8 @@ class MixerTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: mixerTableReuseIdentifier, for: indexPath) as! MixerTableViewCell
         cell.chirp = chirpsToMix![indexPath.row]
+        
+        //
         cell.instrumentLabel.text = cell.chirp?.performance?.instrument
         cell.volumeSlider.tintColor = cell.chirp?.performance?.colour
         cell.volumeSlider.thumbTintColor = cell.chirp?.performance?.colour
@@ -70,6 +80,9 @@ class MixerTableViewController: UITableViewController {
         if let perf = cell.chirp?.performance,
             let profile = profilesStore.getProfile(forPerformance: perf) {
             cell.avatarView.image = profile.avatar
+        } else if cell.chirp is ChirpRecordingView {
+            // it's a recording view.
+            cell.avatarView.image = UserProfile.shared.profile.avatar
         } else {
             cell.avatarView.image = #imageLiteral(resourceName: "empty-profile-image")
         }

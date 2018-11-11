@@ -437,7 +437,7 @@ class ChirpJamViewController: UIViewController {
     /// Open the mixer screen to experiment with performance methods.
     @IBAction func openMixer(_ sender: UIButton) {
         if let recorder = recorder {
-            let controller = MixerTableViewController(withChirps: recorder.chirpViews)
+            let controller = MixerTableViewController(withChirps: recorder.chirpViews, andRecording: recorder.recordingView)
             controller.controllerToMix = self
             navigationController?.pushViewController(controller, animated: true)
         }
