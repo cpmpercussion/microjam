@@ -23,6 +23,8 @@ class PerformerProfileStore : NSObject {
     var profiles: [CKRecord.ID: PerformerProfile]
     /// List of CKRecord.ID currently being fetched
     var currentlyFetching: Set<CKRecord.ID> = []
+    /// Special RoboJam Profile
+    static let robojamProfile = PerformerProfile(avatar: #imageLiteral(resourceName: "robojam-avatar"), stageName: RoboJamPerfData.performer, jamColour: UIColor(RoboJamPerfData.color), backgroundColour: UIColor(RoboJamPerfData.bg), soundScheme: 1)
     
     private override init() {
         profiles = PerformerProfileStore.loadProfiles()
