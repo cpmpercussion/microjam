@@ -87,4 +87,12 @@ class ChirpRecorder: ChirpPlayer {
             self.recordingView.setImage() // clear the animation layer and reset the saved image
         }
     }
+    
+    /// closeEachChirpView from the list.
+    func clearChirpViews() {
+        for chirp in chirpViews {
+            chirp.closeGracefully()
+        }
+        chirpViews = [ChirpView]() // set to nothing.
+    }
 }

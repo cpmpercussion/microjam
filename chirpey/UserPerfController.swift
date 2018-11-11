@@ -67,7 +67,7 @@ class UserPerfController: UICollectionViewController, UICollectionViewDelegateFl
         if let performerID = performerID {
             // Stop any playing performances
             if let cell = currentlyPlaying {
-                cell.playButton.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal)
+                DispatchQueue.main.async { cell.playButton.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal) }
                 cell.player!.stop()
                 currentlyPlaying = nil
             }

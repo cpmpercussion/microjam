@@ -172,7 +172,8 @@ class ChirpPerformance : NSObject {
         // FIXME: actually detect the proper location
         let perfColour : UIColor = UserProfile.shared.profile.jamColour
         let bgColour : UIColor = UserProfile.shared.profile.backgroundColour
-        self.init(data : [], date : Date(), performer : "", instrument : "", image : UIImage(), location: RoboJamPerfData.fakeLocation,
+        let performer = UserProfile.shared.profile.stageName
+        self.init(data : [], date : Date(), performer : performer, instrument : "", image : UIImage(), location: RoboJamPerfData.fakeLocation,
                   colour: perfColour.hexString(), background: bgColour.hexString(), replyto: "")
     }
 

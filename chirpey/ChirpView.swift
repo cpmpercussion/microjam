@@ -324,6 +324,14 @@ extension ChirpView {
             PdBase.send(Float(volume), toReceiver: "\(dollarZero)" + PdConstants.volumePostFix)
         }
     }
+    
+    /// ChirpViews should be closed gracefully to avoid bad audio junk.
+    func closeGracefully() {
+        closePdFile()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.51, execute: {
+            self.removeFromSuperview()
+        })
+    }
 }
 
 /// Extension to contain constraint and layout helpers.

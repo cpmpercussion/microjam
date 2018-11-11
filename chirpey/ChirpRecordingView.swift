@@ -140,7 +140,7 @@ extension ChirpRecordingView {
         lastPoint = CG_INIT_POINT
         swiped = false
         image = UIImage()
-        performance = ChirpPerformance()
+        performance = ChirpPerformance() // get a blank performance.
         recordingColour = performance?.colour.cgColor ?? DEFAULT_RECORDING_COLOUR
         playbackColour = performance?.colour.brighterColor.cgColor ?? DEFAULT_PLAYBACK_COLOUR
         openUserSoundScheme()

@@ -111,16 +111,8 @@
                                                     <action selector="playButtonPressed:" destination="biZ-h3-m2K" eventType="touchUpInside" id="Pa8-wd-Y6m"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9JM-fD-Gwu" userLabel="Reply Button">
-                                                <rect key="frame" x="151.5" y="0.0" width="40" height="44"/>
-                                                <accessibility key="accessibilityConfiguration" hint="Tap here to reply to performance" identifier="replyButton" label="Reply"/>
-                                                <state key="normal" title="reset" image="microjam-reply"/>
-                                                <connections>
-                                                    <action selector="replyButtonPressed:" destination="biZ-h3-m2K" eventType="touchUpInside" id="Ajb-W5-v7m"/>
-                                                </connections>
-                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ltw-xN-isr">
-                                                <rect key="frame" x="201.5" y="0.0" width="40.5" height="44"/>
+                                                <rect key="frame" x="151.5" y="0.0" width="40" height="44"/>
                                                 <accessibility key="accessibilityConfiguration" hint="Tap here to play along with performance" identifier="jamButton" label="Jam"/>
                                                 <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="jam" image="microjam-loop"/>
@@ -129,7 +121,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="right" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9a9-II-qfe" userLabel="Mixer Button">
-                                                <rect key="frame" x="252" y="0.0" width="40.5" height="44"/>
+                                                <rect key="frame" x="201.5" y="0.0" width="40.5" height="44"/>
                                                 <accessibility key="accessibilityConfiguration" hint="Tap here to choose a different sound." identifier="instrumentChooser" label="Instrument Menu"/>
                                                 <state key="normal" title="add jam" image="mixer-button">
                                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -138,12 +130,20 @@
                                                     <action selector="openMixer:" destination="biZ-h3-m2K" eventType="touchUpInside" id="nOu-Gd-yal"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1tC-Gd-VT7" userLabel="Robojam Button">
-                                                <rect key="frame" x="302.5" y="0.0" width="40.5" height="44"/>
+                                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1tC-Gd-VT7" userLabel="Robojam Button">
+                                                <rect key="frame" x="252" y="0.0" width="40.5" height="44"/>
                                                 <accessibility key="accessibilityConfiguration" hint="Tap here to request a Robojam layer" identifier="Robojam button" label="Robojam button"/>
                                                 <state key="normal" title="Button" image="microjam-roboplay"/>
                                                 <connections>
                                                     <action selector="robojamPressed:" destination="biZ-h3-m2K" eventType="touchUpInside" id="oJB-oO-jce"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9JM-fD-Gwu" userLabel="Reply Button">
+                                                <rect key="frame" x="302.5" y="0.0" width="40.5" height="44"/>
+                                                <accessibility key="accessibilityConfiguration" hint="Tap here to reply to performance" identifier="replyButton" label="Reply"/>
+                                                <state key="normal" title="reset" image="add-perf-button"/>
+                                                <connections>
+                                                    <action selector="replyButtonPressed:" destination="biZ-h3-m2K" eventType="touchUpInside" id="Ajb-W5-v7m"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -252,10 +252,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="add-perf-button" width="300" height="300"/>
         <image name="microjam-loop" width="316" height="356"/>
         <image name="microjam-play" width="316" height="356"/>
         <image name="microjam-record" width="316" height="356"/>
-        <image name="microjam-reply" width="316" height="356"/>
         <image name="microjam-rewind" width="316" height="356"/>
         <image name="microjam-roboplay" width="316" height="356"/>
         <image name="mixer-button" width="300" height="300"/>

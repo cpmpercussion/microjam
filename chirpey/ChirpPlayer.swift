@@ -78,7 +78,7 @@ class ChirpPlayer: NSObject {
                 chirp.prepareToPlaySounds()
                 play(chirp: chirp)
             }
-            print("ChirpPlayer: Playing back: \(timers.count) touch events.")
+            //print("ChirpPlayer: Playing back: \(timers.count) touch events.")
             startProgressTimer()
         }
     }

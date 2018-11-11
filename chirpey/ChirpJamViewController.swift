@@ -13,6 +13,7 @@ var ALWAYS_SAVE_MODE: Bool = false /// set this to experiment mode for user stud
 var RECORDING_PARTICLES: Bool = false /// set this to enable recording particle system.
 var OPEN_ON_RECORD_ENABLE: Bool = true /// set this to open the jam screen with recording already enabled.
 var MIXER_AVAILABLE: Bool = true /// set this to enable access to the mixer screen.
+var REPLIES_IN_JAM_SCREEN: Bool = true /// set this to enable replies in the jam screen.
 
 // TODO: how to tell between loaded and saved and just loaded?
 
@@ -104,15 +105,10 @@ class ChirpJamViewController: UIViewController {
                 if savePerformanceButton === barButton {
                     print("JAMVC: Save button segue!")
                     /// TODO: Store composing performances
-                    if isComposing {
-                        /// FIXME: hack to stop saving in composing mode
-                        newRecordingView()
-                    } else {
-                        // save the performance and add to the world screen.
-                        // this uploads, adds to the PerformanceStore and calls generateFeed so that
-                        // feed will appear updated instantly.
-                        PerformanceStore.shared.addNew(performance: finishedPerformance)
-                    }
+                    PerformanceStore.shared.addNew(performance: finishedPerformance)
+                    // if isComposing { } // do something
+                    clearRecordingView() // clear the recording view.
+                    recorder.clearChirpViews() // clear out the playback views.
                     navigationController?.popViewController(animated: true)
                 } else if ALWAYS_SAVE_MODE {
                     //let finishedPerformance = recorder.recordingView.performance
@@ -125,37 +121,42 @@ class ChirpJamViewController: UIViewController {
     
     /// IBAction for Cancel (bar) button. stops playback/recording and dismisses present performance.
     @IBAction func cancelPerformance(_ sender: UIBarButtonItem) {
+        // FIXME: Cancel button causes audio glitch.
         print("JAMVC: Cancel Button Pressed.")
         removeRobojam() // Throw away robojam if present.
         
         // Stop any chirps
         if let recorder = recorder {
             recorder.stop()
-            
-            // find out what tab we're in
-            if replyto != nil {
-                // In the world tab
-                navigationController!.popViewController(animated: true)
-            } else {
-                // In the jab tab
-                if isComposing {
-                    // Remove the last added performance
-                    if let chirp = recorder.chirpViews.popLast() {
-                        print("Shourld remove chirp")
-                        chirp.removeFromSuperview()
-                    }
-                    
-                } else {
-                    // Just reset to a new recording
-                    recorder.recordingIsDone = false
-                    playButton.isEnabled = false
-                    robojamButton.isEnabled = false
-                    jamButton.isEnabled = false
-                    replyButton.isEnabled = true
-                    newRecordingView()
-                }
-            }
+            // totally refresh the recording state.
+            recorder.clearChirpViews()
+            clearRecordingView()
+            // go back.
+            navigationController!.popViewController(animated: true)
         }
+//            // find out what tab we're in
+//            if replyto != nil {
+//                // In the world tab
+//                navigationController!.popViewController(animated: true)
+//            } else {
+//                // In the jam tab
+//                if isComposing {
+//                    // Remove the last added performance
+//                    if let chirp = recorder.chirpViews.popLast() {
+//                        print("Should remove chirp")
+//                        chirp.removeFromSuperview()
+//                    }
+//
+//                } else {
+//                    // Just reset to a new recording
+//                    recorder.recordingIsDone = false
+//                    playButton.isEnabled = false
+//                    robojamButton.isEnabled = false
+//                    jamButton.isEnabled = false
+//                    replyButton.isEnabled = false
+//                    clearRecordingView()
+//                }
+//            }
     }
 
     // MARK: - Lifecycle
@@ -204,7 +205,10 @@ class ChirpJamViewController: UIViewController {
         /// TODO: delete reply button
         // reply
         replyButton.imageView?.contentMode = .scaleAspectFit
-        replyButton.isHidden = true // not using reply button in this view currently
+        
+        if !REPLIES_IN_JAM_SCREEN {
+            replyButton.isHidden = true // only use reply button if set as available.
+        }
         
         // need to initialise the recording progress at zero.
         recordingProgress!.progress = 0.0
@@ -254,7 +258,7 @@ class ChirpJamViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        cancelPerformanceButton.isEnabled = true
         setColourTheme()
         
         if let recorder = recorder {
@@ -264,7 +268,7 @@ class ChirpJamViewController: UIViewController {
                     view.frame = chirpViewContainer.bounds
                     chirpViewContainer.addSubview(view)
                 }
-                
+                chirpViewContainer.addSubview(recorder.recordingView) // try adding the recorder view here.
                 recorder.viewsAreLoaded = true // Make sure the views are not added to the chirp container if they are already added
                 recorder.delegate = self
                 replyto = recorder.chirpViews.first?.performance?.title() // set reply parent title.
@@ -275,12 +279,11 @@ class ChirpJamViewController: UIViewController {
                 }
             }
             rewindButton.isEnabled = true
-            cancelPerformanceButton.isEnabled = true
-            
         } else {
             // Loaded with a new recorder. (i.e., in the jam tab)
             recorder = ChirpRecorder(frame: chirpViewContainer.bounds)
             recorder?.delegate = self
+            chirpViewContainer.addSubview(recorder!.recordingView)
             chirpViewContainer.backgroundColor = UserProfile.shared.profile.backgroundColour.darkerColor
             // disable buttons that cannot be used in this state
             playButton.isEnabled = false
@@ -291,7 +294,9 @@ class ChirpJamViewController: UIViewController {
         
         print("JamVC: Loaded with:", recorder ?? "nothing")
         
-        newRecordingView()
+        // TODO: should the recording view be cleared before appear?
+        //clearRecordingView()
+        
         
         // Setup user data
         if let headerProfile = headerProfile {
@@ -317,14 +322,6 @@ class ChirpJamViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        // disable cancel button in jam tab
-        /// FIXME: This seems only possible _after_ the view appears?
-        if tabBarController?.selectedViewController?.tabBarItem.title == TabBarItemTitles.jamTab {
-            cancelPerformanceButton.isEnabled = false
-        } else {
-            cancelPerformanceButton.isEnabled = true
-        }
-        
         // disable/enable the save button
         if let rec = recorder, rec.recordingIsDone {
             savePerformanceButton.isEnabled = true
@@ -352,23 +349,18 @@ class ChirpJamViewController: UIViewController {
     // MARK: - Creation of recording and playback views
 
     /// Resets to a new performance state.
-    func newRecordingView() {
-        print("JAMVC: Reset to new recording view")
+    func clearRecordingView() {
+        print("JAMVC: Reset recording view")
         if let recorder = recorder {
-            recorder.recordingView.closePdFile()
-            recorder.recordingView.removeFromSuperview()
+            recorder.recordingView.clearForRecording() // clear the recording view.
+            recorder.recordingView.performance!.replyto = replyto ?? "" // set reply to
             recorder.recordingIsDone = false
-            recorder.recordingView = ChirpRecordingView(frame: chirpViewContainer.bounds)
-            recorder.recordingView.performance!.performer = UserProfile.shared.profile.stageName
-            if let rep = replyto {
-                recorder.recordingView.performance!.replyto = rep
-            }
-            chirpViewContainer.addSubview(recorder.recordingView)
-            savePerformanceButton.isEnabled = false // no saving a blank recording
+            // Setup local button states.
+            savePerformanceButton.isEnabled = false // no saving a blank recording.
+            replyButton.isEnabled = false // no replying to a blank recording.
             setRecordingDisabled() // set recording button to be disabled.
             recEnableButton.isEnabled = true // enable recording button.
         }
-        
         // Force recording on for demos and experiments
         if OPEN_ON_RECORD_ENABLE {
             setRecordingEnabled() // force recording to be enabled.
@@ -401,7 +393,7 @@ class ChirpJamViewController: UIViewController {
             // Clean up the views.
             recordingProgress.progress = 0.0
             recorder.stop()
-            newRecordingView()
+            clearRecordingView()
             replyButton.isEnabled = false
             if !recorder.viewsAreLoaded {
                 // There is nothing to be played or jammed
@@ -481,7 +473,14 @@ class ChirpJamViewController: UIViewController {
     /// IBAction for the reply button. // shouldn't be currently used.
     @IBAction func replyButtonPressed(_ sender: Any) {
         print("JAMVC: Reply button pressed");
-        // no actions right now.
+        if let recorder = recorder,
+            let finishedPerformance = recorder.recordingView.performance {
+            addExtra(performance: finishedPerformance)
+            replyto = finishedPerformance.title()
+            print("JAMVC: Now replying to: \(replyto ?? "nothing")")
+            clearRecordingView()
+            PerformanceStore.shared.addNew(performance: finishedPerformance) // save anyway.
+        }
     }
 
     /// IBAction for the Jam Button - this loops the presently loaded performance
@@ -690,6 +689,15 @@ extension ChirpJamViewController {
                 print("Response added!")
                 robojamButton.shake()
             }
+        }
+    }
+    
+    func addExtra(performance: ChirpPerformance) {
+        if let recorder = recorder {
+            let chirp = ChirpView(with: chirpViewContainer.bounds, andPerformance: performance)
+            recorder.chirpViews.append(chirp)
+            chirpViewContainer.addSubview(chirp)
+            chirpViewContainer.bringSubviewToFront(recorder.recordingView)
         }
     }
     
