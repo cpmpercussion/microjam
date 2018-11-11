@@ -213,3 +213,10 @@ extension Notification.Name {
     static let performerProfileUpdated = Notification.Name("au.com.charlesmartin.PerformerProfilesUpdatedNotificationKey")
     static let setColourTheme = Notification.Name("au.com.charlesmartin.setColourTheme")
 }
+
+/// Dispatch Queue Keys
+
+struct QueueLabels {
+    static let touchPlayback = "au.com.charlesmartin.microjam.touchplayback"
+    static let performanceTimer = "au.com.charlesmartin.microjam.perftimer"
+}

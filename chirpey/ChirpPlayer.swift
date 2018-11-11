@@ -38,9 +38,9 @@ class ChirpPlayer: NSObject {
     /// Stores delegate to inform them about start/stop events and current progress.
     var delegate: PlayerDelegate?
     /// Dispatch Queue for the playback events
-    var touchPlaybackQueue = DispatchQueue(label: "au.com.charlesmartin.microjam.touchplayback")
+    var touchPlaybackQueue = DispatchQueue(label: QueueLabels.touchPlayback)
     /// Dispatch Queue for timer
-    var perfTimerQueue = DispatchQueue(label: "au.com.charlesmartin.microjam.perftimer")
+    var perfTimerQueue = DispatchQueue(label: QueueLabels.performanceTimer)
     /// Description of the ChirpPlayer with it's first ChirpPerformance.
     override var description: String {
         guard let perfString = chirpViews.first?.performance?.description else {

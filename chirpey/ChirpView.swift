@@ -243,7 +243,10 @@ extension ChirpView {
         let x = Double(point.x) / Double(frame.size.width)
         let y = Double(point.y) / Double(frame.size.width)
         let z = Double(min(radius / 120.0, 1.0))
-        makeSound(x: x, y: y, z: z, moving: moving)
+        // Dispatch makeSound to the touchPlayback queue to ensure safety wrt concurrent playback and performing.
+        DispatchQueue(label: QueueLabels.touchPlayback).async {
+            self.makeSound(x: x, y: y, z: z, moving: moving)
+        }
     }
     
     /// Given a touch point, send it to Pd to process for sound.

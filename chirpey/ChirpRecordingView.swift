@@ -66,7 +66,7 @@ extension ChirpRecordingView {
             addTailSegment(at: lastPoint!, withSize: size!, thatWasMoving: false)
         }
         // always make a sound.
-        makeSound(at: lastPoint!, withRadius: size!, thatWasMoving: false)
+        self.makeSound(at: self.lastPoint!, withRadius: size!, thatWasMoving: false)
     }
 
     /// Clips a CGPoint to the bounds of the ChirpRecordingView.
