@@ -63,7 +63,7 @@ extension ChirpRecordingView {
             recordTouch(at: lastPoint!, withRadius: size!, thatWasMoving:false)
         } else {
             // not recording, add disappearing touches.
-            addTailSegment(at: lastPoint!, withSize: size!, thatWasMoving: false)
+            addTailSegment(at: lastPoint!, withSize: size!)
         }
         // always make a sound.
         makeSound(at: lastPoint!, withRadius: size!, thatWasMoving: false)
@@ -90,7 +90,7 @@ extension ChirpRecordingView {
             recordTouch(at: currentPoint, withRadius: size!, thatWasMoving: true)
         } else {
             // not recording, add disappearing touches.
-            addTailSegment(at: currentPoint, withSize: size!, thatWasMoving: true)
+            addTailSegment(at: currentPoint, withSize: size!)
             lastPoint = currentPoint
         }
         
@@ -153,57 +153,57 @@ extension ChirpRecordingView {
     
     /// Storage for a single tail segment which consists of a touch location and a timer for removing it.
     struct TailSegment {
-        var touch: TouchRecord
+        var point: CGPoint
+        var size: CGFloat
+        var layer: CALayer?
         var timer: Timer
     }
     
     /// Add animated tail segment that removes itself after a certain time.
-    private func addTailSegment(at point: CGPoint, withSize size: CGFloat, thatWasMoving moving: Bool) {
-        let touch = TouchRecord(time: 0, x: Double(point.x), y: Double(point.y), z: Double(size), moving: moving)
+    private func addTailSegment(at point: CGPoint, withSize size: CGFloat) {
+        // make a timer to self destruct the segment.
         let timer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { (timer) in
-            if !self.tailSegments.isEmpty {
-                self.tailSegments.removeFirst()
-                self.draw(tailSegments: self.tailSegments, withColor: self.recordingColour!)
-            }
+            self.removeOldestTailSegment() // remove the oldest segment
         }
-        let tailSegment = TailSegment(touch: touch, timer: timer)
-        tailSegments.append(tailSegment)
-        draw(tailSegments: tailSegments, withColor: recordingColour!) // redraw the tail segments
+        
+        // figure out last point, if no previous segment, just use same point.
+        var lastPoint = point
+        if let seg = tailSegments.last {
+            lastPoint = seg.point
+        }
+        
+        // make a CALayer for the segment
+        let tailLayer = makeSegmentLayer(from: lastPoint, to: point, withColour: self.recordingColour ?? DEFAULT_RECORDING_COLOUR)
+        
+        // make a struct for the segment
+        let tailSegment = TailSegment(point: point, size: size, layer: tailLayer, timer: timer)
+        tailSegments.append(tailSegment) // add to storage
+        layer.addSublayer(tailLayer) // draw the tail segment
     }
     
-    /// Draws all present tail segments. If there is a recorded image it should draw them on top of that, if not draw from nothing.
-    func draw(tailSegments: [TailSegment], withColor color: CGColor) {
-        UIGraphicsBeginImageContextWithOptions(frame.size, false, (UIScreen.main).scale)
-        guard let context = UIGraphicsGetCurrentContext() else {
-            return
-        }
-        
-        // Get the present recorded image.
-        if let presentPerf = performance,
-            let image = presentPerf.image {
-            image.draw(in: CGRect(x:0, y:0, width:frame.size.width, height:frame.size.height))
-        }
-
-        // Now draw all the tail segments.
-        context.setFillColor(color)
-        context.setStrokeColor(color)
-        context.setBlendMode(CGBlendMode.normal)
-        context.setLineCap(CGLineCap.round)
-        context.setLineWidth(10.0)
-        context.beginPath()
-        
-        for (i, current) in tailSegments.enumerated() {
-            if i == 0 || !current.touch.moving {
-                context.move(to: CGPoint(x: current.touch.x, y: current.touch.y))
-            }
-            context.addLine(to: CGPoint(x: current.touch.x, y: current.touch.y))
-        }
-        
-        context.strokePath()
-        image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
+    /// Draw a tail segment returning a CALayer
+    func makeSegmentLayer(from: CGPoint, to: CGPoint, withColour color: CGColor) -> CALayer {
+        let line = CAShapeLayer()
+        let linePath = UIBezierPath()
+        linePath.move(to: from)
+        linePath.addLine(to: to)
+        line.path = linePath.cgPath
+        line.lineCap = .round
+        line.lineWidth = 10.0
+        line.fillColor = nil
+        line.opacity = 1.0
+        line.strokeColor = color
+        return line
     }
     
+    /// A timed function to remove the oldest tail segment from the stored list.
+    func removeOldestTailSegment() {
+        if let seg = self.tailSegments.first {
+            self.tailSegments.removeFirst() // remove from array
+            seg.layer?.removeFromSuperlayer() // remove layer from view
+            seg.timer.invalidate() // cancel the timer
+        }
+    }
 }
 
 // MARK: Pd (Sound) Functions
