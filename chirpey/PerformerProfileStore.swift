@@ -68,6 +68,8 @@ class PerformerProfileStore : NSObject {
             // if not fetched this session, fetch anyway, but return the local one as well.
             if !profile.fetchedThisSession { fetchProfile(forID: performerID) }
             return profile
+        } else if performerID == RoboJamPerfData.creator {
+            return PerformerProfileStore.robojamProfile
         } else {
             fetchProfile(forID: performerID)
             return nil
