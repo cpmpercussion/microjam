@@ -12,12 +12,12 @@ import UIColor_Hex_Swift
 import DateToolsSwift
 
 struct RoboJamPerfData {
-    static let performer = "RoboJammer"
+    static let performer = "RoboJam"
     static let instrument = "keys"
     static let fakeLocation = CLLocation(latitude: 0, longitude: 0)
     static let color = "#F44708"
     static let bg = "#550527"
-    static let creator = CKRecord.ID(recordName: "RoboJammer")
+    static let creator = CKRecord.ID(recordName: "RoboJam")
     static let id = CKRecord.ID(recordName: "none")
 }
 
