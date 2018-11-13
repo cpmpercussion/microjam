@@ -60,6 +60,13 @@ class PatchManager: NSObject {
         }
     }
     
+    func closeAllPatches() {
+        let dzs = dollarsZero
+        for dz in dzs {
+            closePatch(dollarZero: dz)
+        }
+    }
+    
     /// Opens a Pd file given the filename (only if the file is not already open)
     func openPd(file fileToOpen: String) -> Int32? {
         // Only opens it if it's not already open.

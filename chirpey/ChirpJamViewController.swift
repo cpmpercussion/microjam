@@ -124,16 +124,21 @@ class ChirpJamViewController: UIViewController {
         // FIXME: Cancel button causes audio glitch.
         print("JAMVC: Cancel Button Pressed.")
         removeRobojam() // Throw away robojam if present.
-        
-        // Stop any chirps
+        recorder?.stop() // Stop any chirps
+        recorder?.clearChirpViews() // totally refresh the recording state.
+        PatchManager.shared.closeAllPatches()
+        // stop everything.
+        // load new recording view.
         if let recorder = recorder {
-            recorder.stop()
-            // totally refresh the recording state.
-            recorder.clearChirpViews()
-            clearRecordingView()
-            // go back.
-            navigationController!.popViewController(animated: true)
+            recorder.recordingView.removeFromSuperview()
+            recorder.recordingView = ChirpRecordingView(frame: chirpViewContainer.bounds)
+            recorder.recordingView.clipsToBounds = true
+            recorder.recordingView.contentMode = .scaleAspectFill
+            chirpViewContainer.addSubview(recorder.recordingView)
         }
+        clearRecordingView()
+        // go back.
+        navigationController!.popViewController(animated: true)
         print("Audio Controller is Active: \(appDelegate.audioController?.isActive ?? false)")
     }
 
