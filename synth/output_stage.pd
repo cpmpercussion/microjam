@@ -16,11 +16,11 @@
 #X obj 236 457 outlet~;
 #X floatatom 432 344 5 0 0 0 - - -, f 5;
 #X obj 325 31 t b;
-#X obj 332 97 t b;
-#X obj 330 75 r fadein-\$1;
+#X obj 380 83 t b;
+#X obj 380 61 r fadein-\$1;
 #X obj 323 9 r fadeout-\$1;
 #X msg 324 53 0 50;
-#X msg 331 119 1 50;
+#X msg 379 105 1 50;
 #X obj 323 356 line~;
 #X obj 130 405 *~;
 #X obj 207 404 *~;

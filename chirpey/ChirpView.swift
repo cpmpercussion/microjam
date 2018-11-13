@@ -275,33 +275,27 @@ extension ChirpView {
     
     /// Opens a Pd file given the filename (only if the file is not already open)
     func openPd(file fileToOpen: String) {
+        // Only opens it if it's not already open.
         if openPatchName != fileToOpen {
-            //closePdFile()
-            openPatch = PdFile.openNamed(fileToOpen, path: Bundle.main.bundlePath) as? PdFile
-            openPatchName = fileToOpen
-            openPatchDollarZero = openPatch?.dollarZero
-            PdBase.sendBang(toReceiver: "fadein-\(openPatchDollarZero ?? Int32(0))")
-            // Set mute state
+            closePdFile() // close what was previously open
+            openPatchDollarZero = PatchManager.shared.openPd(file: fileToOpen) // open the file
+            openPatch = PatchManager.shared.zeroToPatch[openPatchDollarZero ?? 0] // set the $0
+            openPatchName = fileToOpen // set the file
+            // Set mute state.
             if muted {
                 PdBase.send(0.0, toReceiver: "\(openPatchDollarZero ?? Int32(0))" + PdConstants.volumePostFix)
             } else {
                 PdBase.send(Float(volume), toReceiver: "\(openPatchDollarZero ?? Int32(0))" + PdConstants.volumePostFix)
             }
         }
-        // Only opens it if it's not already open.
     }
     
     /// Closes whatever Pd file is open.
     func closePdFile() {
-        if let dollarZero = openPatchDollarZero, let patchFile = openPatch {
-            print("ChirpView: Starting to Close Patch:\(dollarZero)")
-            // fadeout
-            PdBase.sendBang(toReceiver: "fadeout-\(dollarZero)")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-                print("ChirpView: Closing Patch:\(dollarZero)")
-                patchFile.close()
-            })
+        guard let dZero = openPatchDollarZero else {
+            return
         }
+        PatchManager.shared.closePatch(dollarZero: dZero) // get the patch manager to close the file.
     }
     
     func muteOn() {
@@ -327,8 +321,9 @@ extension ChirpView {
     
     /// ChirpViews should be closed gracefully to avoid bad audio junk.
     func closeGracefully() {
+        // TODO: is this still needed? should be taken care of by patchManager.
         closePdFile()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.51, execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
             self.removeFromSuperview()
         })
     }

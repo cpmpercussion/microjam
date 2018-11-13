@@ -188,7 +188,7 @@ struct ErrorDialogues {
 struct DarkMode {
     static let background = UIColor.init("#141d26") // 0C1821
     static let midbackground = UIColor.init("#243447")
-    static let midforeground = UIColor.init("fffde2")
+    static let midforeground = UIColor.init("#fffde2")
     static let text = UIColor.init("#ffffff")
     static let highlight = UIColor.init("#ec6b2d")
 }
@@ -220,3 +220,4 @@ struct QueueLabels {
     static let touchPlayback = "au.com.charlesmartin.microjam.touchplayback"
     static let performanceTimer = "au.com.charlesmartin.microjam.perftimer"
 }
+

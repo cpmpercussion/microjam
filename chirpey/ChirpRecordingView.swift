@@ -141,6 +141,7 @@ extension ChirpRecordingView {
         swiped = false
         image = UIImage()
         performance = ChirpPerformance() // get a blank performance.
+        performance?.instrument = SoundSchemes.namesForKeys[UserProfile.shared.profile.soundScheme]!
         recordingColour = performance?.colour.cgColor ?? DEFAULT_RECORDING_COLOUR
         playbackColour = performance?.colour.brighterColor.cgColor ?? DEFAULT_PLAYBACK_COLOUR
         openUserSoundScheme()
@@ -222,11 +223,14 @@ extension ChirpRecordingView {
     /// Opens the SoundScheme specified in the user's profile.
     func openUserSoundScheme() {
         let userChoiceKey = UserProfile.shared.profile.soundScheme
-        if let userChoiceFile = SoundSchemes.pdFilesForKeys[userChoiceKey] {
+        print("RecView: got sound \(userChoiceKey)")
+        if let userChoiceFile = SoundSchemes.pdFilesForKeys[userChoiceKey], let userChoiceName = SoundSchemes.namesForKeys[userChoiceKey] {
             openPd(file: userChoiceFile)
+            self.performance?.instrument = userChoiceName // update recording performance.
+            print("RecView: opening \(userChoiceFile)")
         }
     }
-
+    
 }
 
 // MARK : Gesture Recognition

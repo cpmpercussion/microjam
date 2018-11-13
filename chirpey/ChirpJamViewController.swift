@@ -134,29 +134,7 @@ class ChirpJamViewController: UIViewController {
             // go back.
             navigationController!.popViewController(animated: true)
         }
-//            // find out what tab we're in
-//            if replyto != nil {
-//                // In the world tab
-//                navigationController!.popViewController(animated: true)
-//            } else {
-//                // In the jam tab
-//                if isComposing {
-//                    // Remove the last added performance
-//                    if let chirp = recorder.chirpViews.popLast() {
-//                        print("Should remove chirp")
-//                        chirp.removeFromSuperview()
-//                    }
-//
-//                } else {
-//                    // Just reset to a new recording
-//                    recorder.recordingIsDone = false
-//                    playButton.isEnabled = false
-//                    robojamButton.isEnabled = false
-//                    jamButton.isEnabled = false
-//                    replyButton.isEnabled = false
-//                    clearRecordingView()
-//                }
-//            }
+        print("Audio Controller is Active: \(appDelegate.audioController?.isActive ?? false)")
     }
 
     // MARK: - Lifecycle
@@ -228,7 +206,8 @@ class ChirpJamViewController: UIViewController {
         soundSchemeDropDown.selectionAction = {(index: Int, item: String) -> Void in
             print("DropDown selected:", index, item)
             if let sound = SoundSchemes.keysForNames[item] {
-                UserProfile.shared.profile.soundScheme = Int64(sound)
+                UserProfile.shared.profile.soundScheme = Int64(sound) // set user sound.
+                print("JamVC: set sound \(sound)")
                 self.instrumentChanged()
             }
         }
@@ -267,6 +246,7 @@ class ChirpJamViewController: UIViewController {
                 for view in recorder.chirpViews {
                     view.frame = chirpViewContainer.bounds
                     chirpViewContainer.addSubview(view)
+                    view.prepareToPlaySounds() // prepare Pd for each chirpView
                 }
                 chirpViewContainer.addSubview(recorder.recordingView) // try adding the recorder view here.
                 recorder.viewsAreLoaded = true // Make sure the views are not added to the chirp container if they are already added
@@ -297,6 +277,7 @@ class ChirpJamViewController: UIViewController {
         // TODO: should the recording view be cleared before appear?
         //clearRecordingView()
         
+        recorder?.recordingView.openUserSoundScheme() // make sure recording view opens user sounds.
         
         // Setup user data
         if let headerProfile = headerProfile {
@@ -619,12 +600,6 @@ extension ChirpJamViewController: PlayerDelegate {
         self.recordingProgress.progress = 0.0
         self.recorder!.stop()
         
-        // continue playing if jamming is enabled
-        if self.jamming {
-            self.recorder!.play()
-            return
-        }
-        
         // enable saving and replying if recording is finished.
         if let rec = recorder, rec.recordingIsDone {
             self.setRecordingDisabled()
@@ -638,6 +613,12 @@ extension ChirpJamViewController: PlayerDelegate {
         self.playButton.isEnabled = true
         self.playButton.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal)
         self.playButton.deactivateGlowing(withDeactivatedColour: ButtonColors.play)
+        
+        // continue playing if jamming is enabled
+        if self.jamming {
+            self.recorder!.play()
+            return
+        }
     }
 }
 
