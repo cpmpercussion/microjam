@@ -68,7 +68,7 @@ class PatchManager: NSObject {
         if let dZero = openPatchDollarZero, let pFile = openPatch {
             self.addPatch(dollarZero: dZero, patchFile: pFile)
             // Fade in after 250ms
-             DispatchQueue(label: QueueLabels.touchPlayback).asyncAfter(deadline: .now() + 0.25, execute: {
+             DispatchQueue(label: QueueLabels.touchPlayback).asyncAfter(deadline: .now() + 0.5, execute: {
                 PdBase.sendBang(toReceiver: "fadein-\(dZero)")
                 print("Fading in \(dZero)")
             })
