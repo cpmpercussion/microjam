@@ -664,6 +664,7 @@ extension ChirpJamViewController {
             self.robojam = RoboJamView(with: chirpViewContainer.bounds, andPerformance: performance)
             if let robojam = self.robojam {
                 recorder.chirpViews.append(robojam)
+                robojam.prepareToPlaySounds() // load sounds on the robojam layer.
                 chirpViewContainer.addSubview(robojam)
                 chirpViewContainer.bringSubviewToFront(recorder.recordingView)
                 robojam.generateImage()
@@ -676,9 +677,10 @@ extension ChirpJamViewController {
     func addExtra(performance: ChirpPerformance) {
         if let recorder = recorder {
             let chirp = ChirpView(with: chirpViewContainer.bounds, andPerformance: performance)
-            recorder.chirpViews.append(chirp)
-            chirpViewContainer.addSubview(chirp)
-            chirpViewContainer.bringSubviewToFront(recorder.recordingView)
+            chirp.prepareToPlaySounds() // load sounds.
+            recorder.chirpViews.append(chirp) // add to recorder.
+            chirpViewContainer.addSubview(chirp) // add to subview.
+            chirpViewContainer.bringSubviewToFront(recorder.recordingView) // bring to front.
         }
     }
     

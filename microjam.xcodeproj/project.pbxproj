@@ -1040,26 +1040,26 @@
 		560772DB1F206F1B000D862D /* views */ = {
 			isa = PBXGroup;
 			children = (
-				5678462F21977C2700A710C5 /* UIButtonExtensions.swift */,
-				5669CA961DA7AAA6009EEC3B /* Main.storyboard */,
-				5669CA9B1DA7AAA6009EEC3B /* LaunchScreen.storyboard */,
-				564AF3B220989E7B0050B541 /* ChirpJamViewController.storyboard */,
-				5634AE9B1F3C500000DD5401 /* MicrojamTutorialViewController.storyboard */,
-				56A0505420F5E1C600455FDF /* ProfileScreenController.storyboard */,
 				4DA6A95C1F3C89DB00CD7589 /* BrowseCell.swift */,
+				564AF3B220989E7B0050B541 /* ChirpJamViewController.storyboard */,
 				5613B31D1F3D9C380068ED5D /* ChirpRecordingView.swift */,
 				56621B121DE4A496009B9AB6 /* ChirpView.swift */,
 				4DD839761F3DF81D004D3E40 /* FilterView.swift */,
 				4DEFCADE1F41BDEF007B7C34 /* FilterViewCell.swift */,
+				5669CA9B1DA7AAA6009EEC3B /* LaunchScreen.storyboard */,
+				5669CA961DA7AAA6009EEC3B /* Main.storyboard */,
+				5634AE9B1F3C500000DD5401 /* MicrojamTutorialViewController.storyboard */,
+				56207CDE2192EC2D00EDD212 /* MixerTableViewCell.swift */,
 				566A70D9209C50C30066EFD4 /* NoAccountWarningStackView.swift */,
 				56621B161DEC27B0009B9AB6 /* PerformanceTableCell.swift */,
 				564AF3B6209900990050B541 /* PerformerInfoHeader.swift */,
 				56A0505A20F5F1DE00455FDF /* ProfileFooterCollectionReusableView.swift */,
 				56A0505820F5F18700455FDF /* ProfileHeaderCollectionReusableView.swift */,
+				56A0505420F5E1C600455FDF /* ProfileScreenController.storyboard */,
 				5627B5F51F72F062007807E4 /* RoboJamView.swift */,
+				5678462F21977C2700A710C5 /* UIButtonExtensions.swift */,
 				564AF3B82099EF830050B541 /* UserPerfCollectionViewCell.swift */,
 				564AF3B420989FC80050B541 /* UserPerfTableViewCell.swift */,
-				56207CDE2192EC2D00EDD212 /* MixerTableViewCell.swift */,
 			);
 			name = views;
 			sourceTree = "<group>";
