@@ -12,8 +12,8 @@ import CloudKit
 var ALWAYS_SAVE_MODE: Bool = false /// set this to experiment mode for user studies, etc. - do not enable for archive or distribution!
 var RECORDING_PARTICLES: Bool = false /// set this to enable recording particle system.
 var OPEN_ON_RECORD_ENABLE: Bool = true /// set this to open the jam screen with recording already enabled.
-var MIXER_AVAILABLE: Bool = true /// set this to enable access to the mixer screen.
-var REPLIES_IN_JAM_SCREEN: Bool = true /// set this to enable replies in the jam screen.
+//var MIXER_AVAILABLE: Bool = true /// set this to enable access to the mixer screen.
+//var REPLIES_IN_JAM_SCREEN: Bool = true /// set this to enable replies in the jam screen.
 
 // TODO: how to tell between loaded and saved and just loaded?
 
@@ -73,8 +73,8 @@ class ChirpJamViewController: UIViewController {
     @IBOutlet weak var cancelPerformanceButton: UIBarButtonItem!
     /// Button for choosing/displaying soundscheme
     @IBOutlet weak var instrumentButton: UIButton!
-    /// Button to add specific parent performances when composing a performance
-    @IBOutlet weak var addJamButton: UIButton!
+    /// Button to expose the layer mixer interface.
+    @IBOutlet weak var mixerButton: UIButton!
     /// Robojam button; requests an AI response performance
     @IBOutlet weak var robojamButton: UIButton!
     
@@ -171,12 +171,12 @@ class ChirpJamViewController: UIViewController {
         playButton.imageView?.contentMode = .scaleAspectFit
         playButton.tintColor = ButtonColors.play
         // add layer
-        addJamButton.imageView?.contentMode = .scaleAspectFit
-        addJamButton.tintColor = ButtonColors.layer
-        if !MIXER_AVAILABLE {
-            addJamButton.isHidden = true // hide the mixer button
+        mixerButton.imageView?.contentMode = .scaleAspectFit
+        mixerButton.tintColor = ButtonColors.mixer
+        if UserDefaults.standard.bool(forKey: SettingsKeys.showMixer) {
+            mixerButton.isHidden = false // expose mixer
         } else {
-            addJamButton.isHidden = false // expose the mixer button
+            mixerButton.isHidden = true // hide mixer
         }
         // jam
         jamButton.imageView?.contentMode = .scaleAspectFit
@@ -185,12 +185,13 @@ class ChirpJamViewController: UIViewController {
         robojamButton.imageView?.contentMode = .scaleAspectFit
         robojamButton.tintColor = ButtonColors.robojam
         
-        /// TODO: delete reply button
         // reply
         replyButton.imageView?.contentMode = .scaleAspectFit
-        
-        if !REPLIES_IN_JAM_SCREEN {
-            replyButton.isHidden = true // only use reply button if set as available.
+        replyButton.tintColor = ButtonColors.addReply
+        if UserDefaults.standard.bool(forKey: SettingsKeys.showAddLayer) {
+            replyButton.isHidden = false // show add reply
+        } else {
+            replyButton.isHidden = true
         }
         
         // need to initialise the recording progress at zero.
@@ -377,8 +378,8 @@ class ChirpJamViewController: UIViewController {
                 PerformanceStore.shared.addNew(performance: finishedPerformance) // save anyway.
             }
             // Clean up the views.
-            recordingProgress.progress = 0.0
-            recorder.stop()
+            //recordingProgress.progress = 0.0
+            //recorder.stop()
             clearRecordingView()
             replyButton.isEnabled = false
             if !recorder.viewsAreLoaded {

@@ -210,13 +210,13 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="addJamButton" destination="9a9-II-qfe" id="vBm-jK-i3k"/>
                         <outlet property="avatarImageView" destination="hkd-ef-Gke" id="PvO-OA-3NM"/>
                         <outlet property="cancelPerformanceButton" destination="OWB-3w-3qr" id="F2Q-lv-8wz"/>
                         <outlet property="chirpViewContainer" destination="KZA-aj-oyP" id="kbb-GD-BuD"/>
                         <outlet property="instrumentButton" destination="0DV-eO-7cP" id="3V8-cL-l5L"/>
                         <outlet property="jamButton" destination="ltw-xN-isr" id="faf-f7-JwM"/>
                         <outlet property="menuButton" destination="qWh-rf-YcZ" id="FfB-gj-A8T"/>
+                        <outlet property="mixerButton" destination="9a9-II-qfe" id="gnE-Ck-pc9"/>
                         <outlet property="performerLabel" destination="oL5-5d-xZL" id="tvn-IV-HnN"/>
                         <outlet property="playButton" destination="fA1-Jk-Cp5" id="oqn-aS-541"/>
                         <outlet property="recEnableButton" destination="fg3-ri-xVn" id="LW9-hQ-PQM"/>

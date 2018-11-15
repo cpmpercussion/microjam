@@ -114,6 +114,10 @@ class ProfileScreenController: UserPerfController {
         present(imagePicker, animated: true, completion: nil)
     }
     
+    @IBAction func openInterfaceSettings(_ sender: Any) {
+        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
+
+    }
     //    MARK: - Interface Builder Actions for footer
     
     /// Action to open the microjam website in the default browser

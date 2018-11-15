@@ -18,6 +18,8 @@ struct SettingsKeys {
     static let soundSchemeKey = "sound_scheme"
     static let tutorialCompleted = "tutorial_completed"
     static let darkMode = "dark_mode"
+    static let showMixer = "show_mixer"
+    static let showAddLayer = "show_add_layer"
     static let defaultSettings : [String : Any] = [
         SettingsKeys.performerKey:"",
         SettingsKeys.performerColourKey: 0.5,
@@ -175,8 +177,9 @@ struct ButtonColors {
     static let recordGlow = UIColor.init("#ff5900") //("#e5470d") // just for glow effect on rec button
     static let play = UIColor.init("#a4f644") // "#03cea4") // UIColor.init("#FAA613")
     static let jam = UIColor.init("#FFD045") //"#eac435") // UIColor.init("#688E26") //
-    static let layer = UIColor.init("#4FEBF9") //#7dcfb6")
+    static let mixer = UIColor.init("#4FEBF9") //#7dcfb6")
     static let robojam = UIColor.init("#ca1551") //UIColor.init("#550527") //
+    static let addReply = UIColor.init("#2a3eff")
 }
 
 /// Error messages and dialogues
