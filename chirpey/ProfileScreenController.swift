@@ -31,7 +31,7 @@ class ProfileScreenController: UserPerfController {
     
     /// Override of the header function size to be 300
     override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: 310)
+        return CGSize(width: collectionView.frame.width, height: 350)
     }
     
     /// Override to present header view from storyboard.
