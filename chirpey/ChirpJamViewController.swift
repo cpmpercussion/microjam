@@ -371,6 +371,7 @@ class ChirpJamViewController: UIViewController {
     
     /// IBAction for the rewind button
     @IBAction func rewindScreen(_ sender: UIButton) {
+        // FIXME: hitting rewind while playing leaves the screen in an inconsistent state? 
         print("JAMVC: Rewind pressed, clearing screen")
         if let recorder = recorder,
             let finishedPerformance = recorder.recordingView.performance {
@@ -402,26 +403,7 @@ class ChirpJamViewController: UIViewController {
             }
         }
     }
-
-    /// Opens the composition screen for choosing parent jams.
-    @IBAction func addJam(_ sender: UIButton) {
-        // Displaying the browse view controller
-        isComposing = true
-        let layout = UICollectionViewFlowLayout()
-        let controller = BrowseController(collectionViewLayout: layout)
-        controller.delegate = self
-        navigationController?.pushViewController(controller, animated: true)
-    }
-
-    /// Open the mixer screen to experiment with performance methods.
-    @IBAction func openMixer(_ sender: UIButton) {
-        if let recorder = recorder {
-            let controller = MixerTableViewController(withChirps: recorder.chirpViews, andRecording: recorder.recordingView)
-            controller.controllerToMix = self
-            navigationController?.pushViewController(controller, animated: true)
-        }
-    }
-
+    
     /// IBAction for the play button. Starts playback of performance and replies iff in loaded mode. Stops if already playing.
     @IBAction func playButtonPressed(_ sender: UIButton) {
         if (jamming) { // send to jam button if jamming.
@@ -477,6 +459,25 @@ class ChirpJamViewController: UIViewController {
             if let recorder = recorder {
                 if !recorder.isPlaying { recorder.play() } // only start if not playing.
             }
+        }
+    }
+    
+    /// Opens the composition screen for choosing parent jams.
+    @IBAction func addJam(_ sender: UIButton) {
+        // Displaying the browse view controller
+        isComposing = true
+        let layout = UICollectionViewFlowLayout()
+        let controller = BrowseController(collectionViewLayout: layout)
+        controller.delegate = self
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    /// Open the mixer screen to experiment with performance methods.
+    @IBAction func openMixer(_ sender: UIButton) {
+        if let recorder = recorder {
+            let controller = MixerTableViewController(withChirps: recorder.chirpViews, andRecording: recorder.recordingView)
+            controller.controllerToMix = self
+            navigationController?.pushViewController(controller, animated: true)
         }
     }
 
