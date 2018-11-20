@@ -424,12 +424,16 @@ class ChirpJamViewController: UIViewController {
 
     /// IBAction for the play button. Starts playback of performance and replies iff in loaded mode. Stops if already playing.
     @IBAction func playButtonPressed(_ sender: UIButton) {
+        if (jamming) { // send to jam button if jamming.
+            jamButtonPressed(sender)
+            return
+        }
         if let recorder = recorder {
             if recorder.isPlaying {
                 // pause
                 playButton.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal)
                 playButton.deactivateGlowing(withDeactivatedColour: ButtonColors.play)
-                jamButton.isEnabled = true
+                //jamButton.isEnabled = true
                 if recorder.isRecording {
                     replyButton.isEnabled = true
                 }
@@ -439,8 +443,39 @@ class ChirpJamViewController: UIViewController {
                 // play
                 playButton.setImage(#imageLiteral(resourceName: "microjam-pause"), for: .normal)
                 playButton.solidGlow(withColour: ButtonColors.play.brighterColor, andTint: ButtonColors.play)
-                jamButton.isEnabled = false
+                //jamButton.isEnabled = false
                 recorder.play()
+            }
+        }
+    }
+    
+    /// IBAction for the Jam Button - this loops the presently loaded performance
+    @IBAction func jamButtonPressed(_ sender: UIButton) {
+        // TODO: implement some kind of generative performing here!
+        if (jamming) {
+            // stop looping
+            jamButton.deactivateGlowing(withDeactivatedColour: ButtonColors.jam)
+            jamming = false
+            // set play button to pause icon and glow here, doesn't have to be disabled.
+            playButton.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal)
+            playButton.deactivateGlowing(withDeactivatedColour: ButtonColors.play)
+            playButton.isEnabled = true
+            // set recording status.
+            recordingProgress.progress = 0.0
+            if let recorder = recorder {
+                recorder.stop()
+            }
+        } else {
+            // start looping
+            jamButton.solidGlow(withColour: ButtonColors.jam, andTint: ButtonColors.jam.brighterColor)
+            jamming = true
+            // set play button to pause icon and glow here, doesn't have to be disabled.
+            playButton.setImage(#imageLiteral(resourceName: "microjam-pause"), for: .normal)
+            playButton.solidGlow(withColour: ButtonColors.play.brighterColor, andTint: ButtonColors.play)
+            //playButton.isEnabled = false
+            // set recording status.
+            if let recorder = recorder {
+                if !recorder.isPlaying { recorder.play() } // only start if not playing.
             }
         }
     }
@@ -467,37 +502,6 @@ class ChirpJamViewController: UIViewController {
             print("JAMVC: Now replying to: \(replyto ?? "nothing")")
             clearRecordingView()
             PerformanceStore.shared.addNew(performance: finishedPerformance) // save anyway.
-        }
-    }
-
-    /// IBAction for the Jam Button - this loops the presently loaded performance
-    @IBAction func jamButtonPressed(_ sender: UIButton) {
-        // TODO: implement some kind of generative performing here!
-        if (jamming) {
-            // stop looping
-            jamButton.deactivateGlowing(withDeactivatedColour: ButtonColors.jam)
-            jamming = false
-            // set play button to pause icon and glow here, doesn't have to be disabled.
-            playButton.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal)
-            playButton.deactivateGlowing(withDeactivatedColour: ButtonColors.play)
-            playButton.isEnabled = true
-            // set recording status.
-            recordingProgress.progress = 0.0
-            if let recorder = recorder {
-                recorder.stop()
-            }
-        } else {
-            // stop looping
-            jamButton.solidGlow(withColour: ButtonColors.jam, andTint: ButtonColors.jam.brighterColor)
-            jamming = true
-            // set play button to pause icon and glow here, doesn't have to be disabled.
-            playButton.setImage(#imageLiteral(resourceName: "microjam-pause"), for: .normal)
-            playButton.solidGlow(withColour: ButtonColors.play.brighterColor, andTint: ButtonColors.play)
-            playButton.isEnabled = false
-            // set recording status.
-            if let recorder = recorder {
-                recorder.play()
-            }
         }
     }
     
@@ -615,15 +619,17 @@ extension ChirpJamViewController: PlayerDelegate {
             self.recEnableButton.isEnabled = false
         }
         self.rewindButton.isEnabled = true
-        self.jamButton.isEnabled = true
-        self.playButton.isEnabled = true
-        self.playButton.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal)
-        self.playButton.deactivateGlowing(withDeactivatedColour: ButtonColors.play)
         
         // continue playing if jamming is enabled
         if self.jamming {
             self.recorder!.play()
             return
+        } else {
+            // reset to initial state.
+            self.jamButton.isEnabled = true
+            self.playButton.isEnabled = true
+            self.playButton.setImage(#imageLiteral(resourceName: "microjam-play"), for: .normal)
+            self.playButton.deactivateGlowing(withDeactivatedColour: ButtonColors.play)
         }
     }
 }
