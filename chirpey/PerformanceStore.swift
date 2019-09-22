@@ -290,7 +290,7 @@ extension PerformanceStore {
             }
             if let record = record,
                 let imageAsset = record.object(forKey: PerfCloudKeys.image) as? CKAsset,
-                let image = UIImage(contentsOfFile: imageAsset.fileURL.path)
+                let image = UIImage(contentsOfFile: imageAsset.fileURL!.path)
             {
                 DispatchQueue.main.async {
                     self.performances[recordID]?.image = image
@@ -307,7 +307,7 @@ extension PerformanceStore {
         database.fetch(withRecordID: recordID) { [unowned self] (record: CKRecord?, error: Error?) in
             if let record = record,
                 let imageAsset = record.object(forKey: PerfCloudKeys.image) as? CKAsset,
-                let image = UIImage(contentsOfFile: imageAsset.fileURL.path) {
+                let image = UIImage(contentsOfFile: imageAsset.fileURL!.path) {
                 DispatchQueue.main.async {
                     // update performance in store.
                     self.performances[recordID]?.image = image
@@ -429,7 +429,7 @@ extension PerformanceStore {
         // Remove from the dictionary version
         performances.removeValue(forKey: recordID)
         // Remove from the array version
-        if let index = storedPerformances.index(where: { (performance) -> Bool in
+        if let index = storedPerformances.firstIndex(where: { (performance) -> Bool in
             performance.performanceID == recordID
         }) {
             storedPerformances.remove(at: index)

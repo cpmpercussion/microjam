@@ -144,7 +144,7 @@ class UserProfile: NSObject {
             var avatarNeedsUpdating = false
             // Avatar
             if let avatarPath = record[UserCloudKeys.avatar] as? CKAsset,
-                let avatarImage = UIImage(contentsOfFile: avatarPath.fileURL.path) {
+                let avatarImage = UIImage(contentsOfFile: avatarPath.fileURL!.path) {
                 profile.avatar = avatarImage
                 print("UserProfile: Avatar found on Cloudkit.")
             } else {

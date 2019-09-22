@@ -267,7 +267,7 @@ extension ChirpView {
     /// Attempts to open a SoundScheme given its name.
     func openSoundScheme(withName name: String) {
         print("ChirpView: Attemping to open the Pd File with name:", name)
-        if let index = SoundSchemes.namesForKeys.values.index(of: name),
+        if let index = SoundSchemes.namesForKeys.values.firstIndex(of: name),
             let fileToOpen = SoundSchemes.pdFilesForKeys[SoundSchemes.namesForKeys.keys[index]] {
             openPd(file: fileToOpen)
         }

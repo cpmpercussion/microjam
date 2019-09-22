@@ -106,7 +106,7 @@ extension PerformerProfile {
     convenience init?(fromRecord record: CKRecord) {
         guard
             let imagePath = record[UserCloudKeys.avatar] as? CKAsset,
-            let avatar = UIImage(contentsOfFile: imagePath.fileURL.path),
+            let avatar = UIImage(contentsOfFile: imagePath.fileURL!.path),
             let stageName = record[UserCloudKeys.stagename] as? String,
             let jamColourHex = record[UserCloudKeys.jamColour] as? String,
             let backgroundColourHex = record[UserCloudKeys.backgroundColour] as? String,

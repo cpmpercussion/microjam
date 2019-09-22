@@ -658,7 +658,7 @@ extension ChirpJamViewController {
     func removeRobojam() {
         if let recorder = recorder, let existingRoboJam = self.robojam {
             existingRoboJam.closePdFile()
-            if let index = recorder.chirpViews.index(of: existingRoboJam) {
+            if let index = recorder.chirpViews.firstIndex(of: existingRoboJam) {
                 recorder.chirpViews.remove(at: index)
             }
             existingRoboJam.removeFromSuperview()
