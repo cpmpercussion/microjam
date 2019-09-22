@@ -1730,6 +1730,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -2472,6 +2473,7 @@
 				DEVELOPMENT_TEAM = EDH387FRHA;
 				HEADER_SEARCH_PATHS = "$(PODS_ROOT)/**";
 				INFOPLIST_FILE = chirpey/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = au.com.charlesmartin.microjam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2494,6 +2496,7 @@
 				DEVELOPMENT_TEAM = EDH387FRHA;
 				HEADER_SEARCH_PATHS = "$(PODS_ROOT)/**";
 				INFOPLIST_FILE = chirpey/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = au.com.charlesmartin.microjam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
