@@ -10,8 +10,9 @@ def shared_pods
   pod 'DateToolsSwift'
   pod 'DropDown'
   pod 'Avatar'
-  pod  'SwiftRandom'
+  pod 'SwiftRandom'
   pod 'Repeat'
+  pod 'Audiobus'
 end
 
 target 'microjam' do
