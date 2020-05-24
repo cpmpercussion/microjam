@@ -23,7 +23,7 @@ DEPENDENCIES:
   - UIColor_Hex_Swift
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Audiobus
     - Avatar
     - DateToolsSwift
@@ -59,4 +59,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 4853b80c971c1382d402c2ece17b51f2a51c84a8
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.9.2
