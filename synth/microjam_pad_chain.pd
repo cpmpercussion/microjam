@@ -13,7 +13,7 @@
 #X connect 5 0 6 0;
 #X connect 6 0 2 1;
 #X restore 293 352 pd reverb-aux;
-#N canvas 395 379 889 499 crystal 0;
+#N canvas 395 379 889 499 crystal 1;
 #X obj 80 16 loadbang;
 #X obj 33 16 inlet~;
 #X obj 36 327 outlet~;
@@ -64,6 +64,7 @@
 #X connect 16 0 24 0;
 #X connect 16 0 25 0;
 #X connect 17 0 12 0;
+#X connect 18 0 13 0;
 #X connect 19 0 21 0;
 #X connect 20 0 21 1;
 #X connect 21 0 18 0;
