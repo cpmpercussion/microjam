@@ -442,6 +442,7 @@
 		562FDCAC1F335A0D000409C8 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562FDCAB1F335A0D000409C8 /* UserProfile.swift */; };
 		562FDCAE1F3727DC000409C8 /* TouchRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562FDCAD1F3727DC000409C8 /* TouchRecord.swift */; };
 		5634AE9C1F3C500000DD5401 /* MicrojamTutorialViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5634AE9B1F3C500000DD5401 /* MicrojamTutorialViewController.storyboard */; };
+		56405E9C247AAA1800E9F5E6 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56405E9B247AAA1800E9F5E6 /* AudioToolbox.framework */; };
 		5642EFBE209CDA1300B38873 /* ProfileScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5642EFBD209CDA1300B38873 /* ProfileScreenController.swift */; };
 		56430A99219AD14300A81CAC /* PatchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56430A98219AD14300A81CAC /* PatchManager.swift */; };
 		564AF3B320989E7B0050B541 /* ChirpJamViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 564AF3B220989E7B0050B541 /* ChirpJamViewController.storyboard */; };
@@ -934,6 +935,7 @@
 		562FDCAD1F3727DC000409C8 /* TouchRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TouchRecord.swift; path = chirpey/TouchRecord.swift; sourceTree = "<group>"; };
 		5634AE9B1F3C500000DD5401 /* MicrojamTutorialViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = MicrojamTutorialViewController.storyboard; path = chirpey/MicrojamTutorialViewController.storyboard; sourceTree = "<group>"; };
 		563E060F1EFBE71700F0D471 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		56405E9B247AAA1800E9F5E6 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		5642EFBD209CDA1300B38873 /* ProfileScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileScreenController.swift; path = chirpey/ProfileScreenController.swift; sourceTree = "<group>"; };
 		56430A98219AD14300A81CAC /* PatchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PatchManager.swift; path = chirpey/PatchManager.swift; sourceTree = "<group>"; };
 		564AF3B220989E7B0050B541 /* ChirpJamViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = ChirpJamViewController.storyboard; path = chirpey/ChirpJamViewController.storyboard; sourceTree = "<group>"; };
@@ -995,6 +997,7 @@
 			files = (
 				56C88E801DFEFD8200406BF0 /* CloudKit.framework in Frameworks */,
 				798119EB716DF4238044D3D4 /* Pods_microjam.framework in Frameworks */,
+				56405E9C247AAA1800E9F5E6 /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1012,6 +1015,7 @@
 		37B82C17ADD34A6423FC8D08 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				56405E9B247AAA1800E9F5E6 /* AudioToolbox.framework */,
 				56C88E7F1DFEFD8200406BF0 /* CloudKit.framework */,
 				63C4E84624B83BA18A354CA2 /* Pods_microjam.framework */,
 				29CA87DDE5853DCDE258268C /* Pods_microjamTests.framework */,
@@ -2471,11 +2475,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = microjam.entitlements;
+				CURRENT_PROJECT_VERSION = 96;
 				DEVELOPMENT_TEAM = EDH387FRHA;
 				HEADER_SEARCH_PATHS = "$(PODS_ROOT)/**";
 				INFOPLIST_FILE = chirpey/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = au.com.charlesmartin.microjam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "chirpey/chirpey-Bridging-Header.h";
@@ -2494,11 +2500,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = microjam.entitlements;
+				CURRENT_PROJECT_VERSION = 96;
 				DEVELOPMENT_TEAM = EDH387FRHA;
 				HEADER_SEARCH_PATHS = "$(PODS_ROOT)/**";
 				INFOPLIST_FILE = chirpey/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = au.com.charlesmartin.microjam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "chirpey/chirpey-Bridging-Header.h";

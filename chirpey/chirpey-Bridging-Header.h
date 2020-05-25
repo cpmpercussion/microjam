@@ -6,3 +6,4 @@
 #import "PdAudioController.h"
 #import "PdBase.h"
 #import "PdFile.h"
+#import "Audiobus.h"

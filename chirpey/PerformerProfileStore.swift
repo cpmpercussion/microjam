@@ -106,7 +106,7 @@ class PerformerProfileStore : NSObject {
 // Check if UIImage is empty or not.
 public extension UIImage {
     
-    public var hasContent: Bool {
+    var hasContent: Bool {
         return cgImage != nil || ciImage != nil
     }
 
