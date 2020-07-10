@@ -145,7 +145,7 @@ class ChirpPerformance : NSObject {
         
         var image : UIImage? = nil
         if let imageAsset = record.object(forKey: PerfCloudKeys.image) as? CKAsset {
-            image = UIImage(contentsOfFile: imageAsset.fileURL.path)
+            image = UIImage(contentsOfFile: imageAsset.fileURL!.path)
         }
         //else {
         //    PerformanceStore.shared.fetchImageFor(performance: performance_id)

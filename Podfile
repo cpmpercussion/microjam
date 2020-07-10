@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-platform :ios, '10.0'
+platform :ios, '13.0'
 
 def shared_pods
   # Pods for microjam
@@ -10,8 +10,9 @@ def shared_pods
   pod 'DateToolsSwift'
   pod 'DropDown'
   pod 'Avatar'
-  pod  'SwiftRandom'
+  pod 'SwiftRandom'
   pod 'Repeat'
+  pod 'Audiobus'
 end
 
 target 'microjam' do

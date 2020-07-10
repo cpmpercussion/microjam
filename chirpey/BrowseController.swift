@@ -210,7 +210,7 @@ extension BrowseController: FilterViewDelegate {
     
     func didRemove(filterWithCategory category: String, andValue value: String) {
         
-        if let i = filters.index(where: { filter in
+        if let i = filters.firstIndex(where: { filter in
             return filter.value == value
         }) {
             print("Removing filter at index: ", i)

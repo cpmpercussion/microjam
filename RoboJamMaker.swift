@@ -98,14 +98,14 @@ class RobojamMaker: NSObject {
     }
     
     static func chooseOtherInstrument(_ inst: String) -> String {
-        var instChoices = SoundSchemes.keysForNames.keys.filter { $0 != inst } as [String]
+        let instChoices = SoundSchemes.keysForNames.keys.filter { $0 != inst } as [String]
         let choice = instChoices[Int(arc4random_uniform(UInt32(instChoices.count)))]
         print("RoboJam is playing: \(choice)")
         return choice
     }
     
     static func chooseRandomInstrument() -> String {
-        var instChoices = Array(SoundSchemes.keysForNames.keys)
+        let instChoices = Array(SoundSchemes.keysForNames.keys)
         let choice = instChoices[Int(arc4random_uniform(UInt32(instChoices.count)))]
         return choice
     }
