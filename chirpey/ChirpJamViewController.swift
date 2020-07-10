@@ -281,7 +281,9 @@ class ChirpJamViewController: UIViewController {
         print("JamVC: Loaded with:", recorder ?? "nothing")
         
         // TODO: should the recording view be cleared before appear?
-        //clearRecordingView()
+        // Yes because otherwise replies don't work.
+        // TODO: make replies work without clearing the recording view.
+        clearRecordingView()
         
         recorder?.recordingView.openUserSoundScheme() // make sure recording view opens user sounds.
         
@@ -500,6 +502,8 @@ class ChirpJamViewController: UIViewController {
             let finishedPerformance = recorder.recordingView.performance {
             addExtra(performance: finishedPerformance)
             replyto = finishedPerformance.title()
+//            replyParentID = recorder.chirpViews.first?.performance?.performanceID // set reply parent CKRecordID.
+            // can't add perfID because might not be saved yet to iCloud.
             print("JAMVC: Now replying to: \(replyto ?? "nothing")")
             clearRecordingView()
             PerformanceStore.shared.addNew(performance: finishedPerformance) // save anyway.
