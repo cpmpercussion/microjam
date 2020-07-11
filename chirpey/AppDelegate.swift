@@ -29,40 +29,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
         PdBase.subscribe(PdConstants.debugLabel)
         audioController?.isActive = true
         audioController?.print()
-        audiobusController = ABAudiobusController(apiKey: "H4sIAAAAAAAAA2WMWw6CMBQF93K/kUKCMelWrCGlVC3SR257jQ1h7xbDD/F3zsxZQH+CwQy8qWAgN866d9Jq4GCNQj9JCxUQzn1UT33gp7Zu6nMtaTR+oMgFE6y4wWOKwK8LpBw2XxI+Cv9/HXVUaEIy3h2HSMPexuxSAVY6ukuVCDVuqpo27a0x/tp2vVVgxrIItsMo2EtnwbpL08H6BcFIyobmAAAA:CimuS2XdZn6+uXEStGuY1NEQekRdCeHzqoPAnGaCScxxFZGElJI6ECaxOyGPXWQVQGmdz+Gbsw5RZ5YSEWj8n4GiwQTb+1JuGSMFyiKn05rgVqqgkIGBKaA6plf+aUas")
+        // audiobuscontroller setup starts here...
+//        audiobusController = ABAudiobusController(apiKey: "H4sIAAAAAAAAA2WMWw6CMBQF93K/kUKCMelWrCGlVC3SR257jQ1h7xbDD/F3zsxZQH+CwQy8qWAgN866d9Jq4GCNQj9JCxUQzn1UT33gp7Zu6nMtaTR+oMgFE6y4wWOKwK8LpBw2XxI+Cv9/HXVUaEIy3h2HSMPexuxSAVY6ukuVCDVuqpo27a0x/tp2vVVgxrIItsMo2EtnwbpL08H6BcFIyobmAAAA:CimuS2XdZn6+uXEStGuY1NEQekRdCeHzqoPAnGaCScxxFZGElJI6ECaxOyGPXWQVQGmdz+Gbsw5RZ5YSEWj8n4GiwQTb+1JuGSMFyiKn05rgVqqgkIGBKaA6plf+aUas")
         
         // Borrowed from AudioKit
         // https://github.com/AudioKit/AudioKit/blob/master/Examples/iOS/Audiobus/Audiobus.swift
         // Thanks!
-        var myDict: NSDictionary?
-        if let path = Bundle.main.path(forResource: "Info", ofType: "plist") {
-            myDict = NSDictionary(contentsOfFile: path)
-        }
+//        var myDict: NSDictionary?
+//        if let path = Bundle.main.path(forResource: "Info", ofType: "plist") {
+//            myDict = NSDictionary(contentsOfFile: path)
+//        }
 
-        if let dict = myDict {
-            for component in dict["AudioComponents"] as! [[String: AnyObject]] {
-//                let type = fourCC(component["type"] as! String)
-                let subtype = fourCC(component["subtype"] as! String)
-                let name = component["name"] as! String
-                let manufacturer = fourCC(component["manufacturer"] as! String)
-                
-                audiobusController?.addAudioSenderPort(
-                    ABAudioSenderPort(
-                        name: name,
-                        title: name,
-                        audioComponentDescription: AudioComponentDescription(
-                            componentType: kAudioUnitType_RemoteGenerator,
-                            componentSubType: subtype,
-                            componentManufacturer: manufacturer,
-                            componentFlags: 0,
-                            componentFlagsMask: 0
-                        ),
-                        audioUnit: audioController?.audioUnit.audioUnit))
-            }
-            print("AppDelegate: configured audiobus")
-        } else {
-            print("AppDelegate: Failed to configure audiobus.")
-        }
+//        if let dict = myDict {
+//            for component in dict["AudioComponents"] as! [[String: AnyObject]] {
+////                let type = fourCC(component["type"] as! String)
+//                let subtype = fourCC(component["subtype"] as! String)
+//                let name = component["name"] as! String
+//                let manufacturer = fourCC(component["manufacturer"] as! String)
+//
+//                audiobusController?.addAudioSenderPort(
+//                    ABAudioSenderPort(
+//                        name: name,
+//                        title: name,
+//                        audioComponentDescription: AudioComponentDescription(
+//                            componentType: kAudioUnitType_RemoteGenerator,
+//                            componentSubType: subtype,
+//                            componentManufacturer: manufacturer,
+//                            componentFlags: 0,
+//                            componentFlagsMask: 0
+//                        ),
+//                        audioUnit: audioController?.audioUnit.audioUnit))
+//            }
+//            print("AppDelegate: configured audiobus")
+//        } else {
+//            print("AppDelegate: Failed to configure audiobus.")
+//        }
+        // Audiobus setup ends..
     }
     
     // Borrowed from AudioKit: https://github.com/AudioKit/AudioKit/blob/master/AudioKit/Common/Internals/AudioKitHelpers.swift
