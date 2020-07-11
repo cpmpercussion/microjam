@@ -96,6 +96,11 @@ class UserProfile: NSObject {
                         UIApplication.shared.isNetworkActivityIndicatorVisible = false
                         print("UserProfile: iCloud is not available")
                         self.loggedIn = false
+                    @unknown default:
+                        // unknown error for somereason.
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                        print("UserProfile: iCloud is not available")
+                        self.loggedIn = false
                     }
                 }
             }

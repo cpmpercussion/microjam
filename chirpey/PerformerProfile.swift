@@ -141,7 +141,7 @@ extension PerformerProfile {
     }
     
     static func randomJamColour() -> UIColor {
-        return colourFromHue(hue: Float(arc4random()) / 0xFFFFFFFF)
+        return colourFromHue(hue: Float(arc4random()) / 4294967296.0) //4294967296 was 0xFFFFFFFF
     }
     
 }
