@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PdReceiverDelegate {
     let userProfile = UserProfile.shared
     let profileStore = PerformerProfileStore.shared
     var audioController : PdAudioController?
-    var audiobusController: ABAudiobusController?
+    //var audiobusController: ABAudiobusController?
 
     // MARK: Pd Engine Initialisation
     
